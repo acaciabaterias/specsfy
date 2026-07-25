@@ -320,6 +320,7 @@ class ProjectContextContractTests(unittest.TestCase):
             "specsfy/brand",
             "specsfy/skills",
             "specsfy/docs",
+            "specsfy/example",
             "specsfy/specsfy",
         ):
             self.assertIn(repository, modules)

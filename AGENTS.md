@@ -12,6 +12,7 @@ o conjunto em monorepo e não atribui ao pai o ownership dos filhos.
 | `brand/` | `specsfy/brand` | identidade visual e verbal |
 | `skills/` | `specsfy/skills` | metodologia executável e skills |
 | `docs/` | `specsfy/docs` | documentação final para o usuário |
+| `example/` | `specsfy/example` | aplicação interna de validação |
 | `specsfy/` | `specsfy/specsfy` | porta de entrada e visão geral pública |
 
 - Execute `git status`, `git diff`, commits e branches na raiz proprietária.
@@ -21,7 +22,7 @@ o conjunto em monorepo e não atribui ao pai o ownership dos filhos.
   converta a árvore em submódulos sem uma nova decisão normativa.
 - Links dentro da mesma raiz Git são relativos. Links entre repositórios usam
   `https://github.com/specsfy/<repositorio>`.
-- Preserve alterações preexistentes em qualquer uma das cinco worktrees.
+- Preserve alterações preexistentes em qualquer uma das seis worktrees.
 
 ## Fonte da verdade
 
@@ -35,7 +36,7 @@ o conjunto em monorepo e não atribui ao pai o ownership dos filhos.
   ao alterar uma skill.
 - A documentação oficial da metodologia para usuários vive em `docs/`.
 - A aplicação interna de validação e sua documentação operacional vivem em
-  `example/` e pertencem à raiz Git `specsfy/dev`.
+  `example/` e pertencem à raiz Git `specsfy/example`.
 - A visão geral pública vive em `specsfy/`.
 - A identidade vive em `brand/`.
 - Testes, manifests e configurações comprovam o estado implementado em sua raiz
@@ -93,7 +94,7 @@ roteador.
 5. Edite cada arquivo somente na raiz que possui sua responsabilidade.
 6. Execute testes focais na raiz proprietária e regressão no workspace.
 7. Registre a evidência nos testes e na documentação do owner correto.
-8. Revise status e diff das cinco raízes antes de concluir.
+8. Revise status e diff das seis raízes antes de concluir.
 
 Mudança de comportamento reabre os Atos I–III. Mudança de plano reabre os Atos
 II–III. Nenhum gate posterior permanece válido sobre uma entrada alterada.

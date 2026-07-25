@@ -269,7 +269,7 @@ def then_finds_creation_and_maintenance_without_duplication(context) -> None:
     assert operational_heading in context.operational_router_text
 
 
-@given("o workspace orquestrador e os quatro repositórios filhos")
+@given("o workspace orquestrador e os repositórios públicos filhos")
 def given_orchestrator_and_child_repositories(context) -> None:
     context.repository_entrypoints = {
         "dev": ROOT / "README.md",
@@ -315,7 +315,14 @@ def then_each_concern_has_one_owner(context) -> None:
     dependencies = (CONTEXT_ROOT / "architecture" / "dependencies.md").read_text(
         encoding="utf-8"
     )
-    for repository in ("specsfy/dev", "specsfy/brand", "specsfy/skills", "specsfy/docs", "specsfy/specsfy"):
+    for repository in (
+        "specsfy/dev",
+        "specsfy/brand",
+        "specsfy/skills",
+        "specsfy/docs",
+        "specsfy/example",
+        "specsfy/specsfy",
+    ):
         assert repository in modules, f"owner ausente: {repository}"
     assert "https://github.com/specsfy" in dependencies
     assert not (ROOT / ".gitmodules").exists()

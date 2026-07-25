@@ -38,7 +38,7 @@ Feature: Contexto compartilhado do projeto
 
   @US-004 @FR-015 @FR-016 @FR-017 @FR-018 @FR-019 @FR-020 @NFR-002 @NFR-003 @AC-006
   Scenario: Encontrar a fonte correta em cada repositório independente
-    Given o workspace orquestrador e os quatro repositórios filhos
+    Given o workspace orquestrador e os repositórios públicos filhos
     When uma pessoa ou agente consulta suas portas de entrada
     Then cada repositório declara público responsabilidade e fronteira Git
     And a metodologia documentação identidade e visão geral possuem um único owner
