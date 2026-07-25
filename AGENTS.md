@@ -31,7 +31,9 @@ o conjunto em monorepo e não atribui ao pai o ownership dos filhos.
 - O repositório `specsfy/dev` desenvolve e integra a metodologia, mas não é um
   projeto consumidor: não crie `specs/`, `.agents/` ou `.claude/` nesta raiz.
 - Cada projeto que aplica Specsfy mantém sua própria fonte normativa em
-  `specs/<NNNN>-<slug>/spec.md` e a pesquisa indexada sob a mesma pasta.
+  `specs/specs/<NNNN>-<slug>/spec.md` e a pesquisa indexada sob a mesma pasta.
+- Ideias ainda não promovidas pertencem a `specs/backlog/` no projeto
+  consumidor e não autorizam implementação.
 - A metodologia executável vive em `skills/`; siga `skills/AGENTS.md`, publicado
   como
   [`AGENTS.md` de specsfy/skills](https://github.com/specsfy/skills/blob/main/AGENTS.md)

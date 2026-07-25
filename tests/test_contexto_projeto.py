@@ -267,7 +267,7 @@ class ProjectContextContractTests(unittest.TestCase):
         flows = (CONTEXT_ROOT / "flows" / "README.md").read_text(encoding="utf-8")
         self.assertIn("manifests e lockfiles", packages.casefold())
         self.assertIn("schemas e migrations", persistence.casefold())
-        self.assertIn("specs/<NNNN>-<slug>/spec.md", flows)
+        self.assertIn("specs/specs/<NNNN>-<slug>/spec.md", flows)
 
     def test_multi_repository_ownership_and_entrypoints(self) -> None:
         """SPECSFY: FR-015 FR-016 FR-017 FR-018 FR-019 FR-020 AC-006"""
@@ -310,7 +310,7 @@ class ProjectContextContractTests(unittest.TestCase):
             "https://github.com/specsfy/brand",
         ):
             self.assertIn(url, specsfy_readme)
-        self.assertIn("specsfy-base-discuss", skills_readme)
+        self.assertIn("specsfy-base-interview", skills_readme)
         self.assertIn("https://github.com/specsfy/specsfy", docs_readme)
 
         modules = (CONTEXT_ROOT / "architecture" / "modules.md").read_text(
