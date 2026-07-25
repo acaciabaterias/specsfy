@@ -8,7 +8,7 @@ o conjunto em monorepo e não atribui ao pai o ownership dos filhos.
 
 | Caminho | Raiz Git | Ownership |
 | --- | --- | --- |
-| `./` | `specsfy/dev` | orquestração, specs e testes integrados |
+| `./` | `specsfy/dev` | orquestração e testes integrados |
 | `brand/` | `specsfy/brand` | identidade visual e verbal |
 | `skills/` | `specsfy/skills` | metodologia executável e skills |
 | `docs/` | `specsfy/docs` | documentação final para o usuário |
@@ -25,10 +25,10 @@ o conjunto em monorepo e não atribui ao pai o ownership dos filhos.
 
 ## Fonte da verdade
 
-- Cada fatia vertical possui uma única fonte normativa em
-  `specs/<slug>/spec.md` no workspace de desenvolvimento.
-- Pesquisa consultada fica somente em `specs/<slug>/research/` e deve ser
-  indexada na spec.
+- O repositório `specsfy/dev` desenvolve e integra a metodologia, mas não é um
+  projeto consumidor: não crie `specs/`, `.agents/` ou `.claude/` nesta raiz.
+- Cada projeto que aplica Specsfy mantém sua própria fonte normativa em
+  `specs/<NNNN>-<slug>/spec.md` e a pesquisa indexada sob a mesma pasta.
 - A metodologia executável vive em `skills/`; siga `skills/AGENTS.md`, publicado
   como
   [`AGENTS.md` de specsfy/skills](https://github.com/specsfy/skills/blob/main/AGENTS.md)
@@ -59,8 +59,9 @@ normativa paralela.
 
 Use `docs/context/README.md`, publicado como
 [`roteador de contexto`](https://github.com/specsfy/docs)
-como ponto de entrada. Leia a `spec.md` ativa, estas instruções e apenas os
-contextos exigidos pela mudança.
+como ponto de entrada. Leia estas instruções e apenas os contextos exigidos pela
+mudança. Uma spec ativa pertence ao projeto consumidor correspondente, nunca à
+raiz `specsfy/dev`.
 
 | Alteração | Contexto mínimo |
 | --- | --- |
@@ -84,13 +85,14 @@ roteador.
 
 ## Fluxo de uma mudança
 
-1. Identifique a spec e as raízes Git afetadas.
+1. Identifique as raízes Git afetadas e, quando houver projeto consumidor no
+   escopo, a spec pertencente a ele.
 2. Inspecione instruções, contexto, status e diff de cada raiz.
-3. Atualize comportamento, Gherkin, requisitos, tarefas e gates na mesma spec.
-4. Materialize BDD e TDD e observe RED antes da mudança derivada.
+3. Atualize o contrato integrado em BDD/TDD sem criar uma spec no pai.
+4. Observe RED antes da mudança derivada.
 5. Edite cada arquivo somente na raiz que possui sua responsabilidade.
 6. Execute testes focais na raiz proprietária e regressão no workspace.
-7. Registre evidência e avance os checklists conforme cada resultado acontece.
+7. Registre a evidência nos testes e na documentação do owner correto.
 8. Revise status e diff das cinco raízes antes de concluir.
 
 Mudança de comportamento reabre os Atos I–III. Mudança de plano reabre os Atos
@@ -113,24 +115,18 @@ O estado canônico é
 Use `python3 -B` ou `PYTHONDONTWRITEBYTECODE=1` para não criar caches.
 
 ```bash
-python3 -B .agents/skills/specsfy-validate/scripts/validate_spec.py \
-  specs/<slug>/spec.md
-python3 -B .agents/skills/specsfy-tasks/scripts/validate_tasks.py \
-  specs/<slug>/spec.md
-python3 -B .agents/skills/specsfy-tdd-bdd/scripts/check_traceability.py \
-  specs/<slug>/spec.md . --kinds FR,AC,NFR
 python3 -B -m unittest discover -s tests -p 'test_*.py'
 uv run --quiet --with behave behave tests/features --no-capture
-python3 -B .agents/skills/specsfy-validate/scripts/verify_repo.py . \
-  --boundary local
 ```
 
-Valide também cada skill alterada:
+Valide cada repositório filho somente a partir de sua própria raiz. Para uma
+skill alterada:
 
 ```bash
+cd skills
 uv run --quiet --with pyyaml python \
   /home/luizeof/.codex/skills/.system/skill-creator/scripts/quick_validate.py \
-  skills/<nome>
+  <nome>
 ```
 
 ## Critério de entrega
@@ -140,6 +136,6 @@ uv run --quiet --with pyyaml python \
 - links públicos usam a organização `specsfy`;
 - BDD e TDD tiveram RED válido e estão verdes;
 - regressão e rastreabilidade passaram;
+- a raiz não contém `specs/`, `.agents/` ou `.claude/`;
 - nenhum cache, placeholder ou arquivo normativo paralelo foi criado;
-- os cinco itens de cada tarefa e os gates possuem evidência atual;
 - cada repositório alterado foi revisado separadamente.

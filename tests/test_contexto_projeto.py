@@ -267,7 +267,7 @@ class ProjectContextContractTests(unittest.TestCase):
         flows = (CONTEXT_ROOT / "flows" / "README.md").read_text(encoding="utf-8")
         self.assertIn("manifests e lockfiles", packages.casefold())
         self.assertIn("schemas e migrations", persistence.casefold())
-        self.assertIn("specs/<slug>/spec.md", flows)
+        self.assertIn("specs/<NNNN>-<slug>/spec.md", flows)
 
     def test_multi_repository_ownership_and_entrypoints(self) -> None:
         """SPECSFY: FR-015 FR-016 FR-017 FR-018 FR-019 FR-020 AC-006"""
@@ -330,8 +330,33 @@ class ProjectContextContractTests(unittest.TestCase):
             self.assertIn(child, gitignore)
             self.assertTrue((ROOT / child / ".git").exists())
         self.assertFalse((ROOT / ".gitmodules").exists())
-        self.assertEqual((ROOT / "skills").resolve(), (ROOT / ".agents/skills").resolve())
-        self.assertEqual((ROOT / "skills").resolve(), (ROOT / ".claude/skills").resolve())
+        self.assertTrue((ROOT / "skills").is_dir())
+        for local_artifact in (".agents", ".claude", "specs"):
+            self.assertFalse(
+                (ROOT / local_artifact).exists(),
+                f"{local_artifact}/ não pertence à raiz specsfy/dev",
+            )
+
+    def test_parent_does_not_install_or_execute_project_skills(self) -> None:
+        """A raiz dev deve ser operacionalmente independente das skills."""
+        executable_contracts = [
+            ROOT / "AGENTS.md",
+            ROOT / "README.md",
+            *sorted((ROOT / "tests").rglob("*.py")),
+            *sorted((ROOT / ".github" / "workflows").glob("*.yml")),
+            *sorted((ROOT / ".github" / "workflows").glob("*.yaml")),
+        ]
+        forbidden_invocation = re.compile(
+            r"(?:\.agents" + r"/skills|\.claude" + r"/skills|"
+            r"skills/" + r"specsfy-[^/\s]+/scripts/)"
+        )
+        for path in executable_contracts:
+            with self.subTest(path=path.relative_to(ROOT)):
+                text = path.read_text(encoding="utf-8")
+                self.assertIsNone(
+                    forbidden_invocation.search(text),
+                    f"a raiz pai não pode executar skills do projeto: {path}",
+                )
 
 
 if __name__ == "__main__":

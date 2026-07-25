@@ -154,7 +154,7 @@ def then_finds_exact_routes(context) -> None:
 @then("encontra a precedência entre contexto, especificação e fonte executável")
 def then_finds_source_precedence(context) -> None:
     router_text = context.entrypoint_text[context.router]
-    assert "specs/<slug>/spec.md" in router_text
+    assert "specs/<NNNN>-<slug>/spec.md" in router_text
     assert "fontes executáveis" in router_text
     assert "AGENTS.md" in router_text
 
@@ -319,3 +319,21 @@ def then_each_concern_has_one_owner(context) -> None:
         assert repository in modules, f"owner ausente: {repository}"
     assert "https://github.com/specsfy" in dependencies
     assert not (ROOT / ".gitmodules").exists()
+
+
+@then("o pai não instala nem executa as skills do projeto")
+def then_parent_is_independent_from_project_skills(context) -> None:
+    for local_artifact in (".agents", ".claude", "specs"):
+        assert not (ROOT / local_artifact).exists(), local_artifact
+    forbidden = re.compile(
+        r"(?:\.agents" + r"/skills|\.claude" + r"/skills|"
+        r"skills/" + r"specsfy-[^/\s]+/scripts/)"
+    )
+    for path in (
+        ROOT / "AGENTS.md",
+        ROOT / "README.md",
+        *sorted((ROOT / "tests").rglob("*.py")),
+        *sorted((ROOT / ".github" / "workflows").glob("*.yml")),
+        *sorted((ROOT / ".github" / "workflows").glob("*.yaml")),
+    ):
+        assert forbidden.search(path.read_text(encoding="utf-8")) is None, path
