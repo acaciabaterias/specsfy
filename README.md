@@ -6,8 +6,9 @@ local para permitir especificação, testes de contrato, integração e evoluç�
 coordenada.
 
 Este README não é a apresentação pública do método. A porta de entrada para o
-usuário final está em [`specsfy/`](specsfy/) e em
-[`https://github.com/specsfy/specsfy`](https://github.com/specsfy/specsfy).
+usuário final está em
+[`specsfy/specsfy`](https://github.com/specsfy/specsfy), e a documentação oficial
+da metodologia está em [`specsfy/docs`](https://github.com/specsfy/docs).
 
 ## Repositórios
 
@@ -31,6 +32,7 @@ dev/
 ├── README.md
 ├── specs/
 ├── tests/
+├── example/            # aplicação interna; owner Git: specsfy/dev
 ├── .agents/skills ──► skills/
 ├── .claude/skills ──► skills/
 ├── brand/             # Git: specsfy/brand
@@ -41,9 +43,22 @@ dev/
 
 - `specs/<slug>/spec.md` mantém a fonte normativa de cada mudança integrada.
 - `tests/` contém BDD e contratos que podem atravessar os repositórios.
+- `example/` contém a aplicação Laravel usada para exercitar e validar o
+  framework em um produto real; ela continua versionada por `specsfy/dev`.
 - `.agents/skills` e `.claude/skills` expõem localmente o catálogo versionado
   por `skills/`.
 - O pai enxerga os filhos pelo filesystem, mas não versiona seu conteúdo.
+
+## Aplicação de exemplo
+
+[`example/`](example/) é um módulo do repositório `specsfy/dev`, não um sexto
+repositório. Ele demonstra uma aplicação Laravel com autenticação, segurança e
+equipes e serve como ambiente interno para testar o fluxo completo do Specsfy.
+
+Sua instalação, capacidades, arquitetura, dados, rotas e comandos estão em
+[`example/README.md`](example/README.md). Essa documentação acompanha o
+aplicativo; ela não substitui a documentação oficial da metodologia publicada
+por `specsfy/docs`.
 
 ## Preparar o workspace
 
@@ -86,17 +101,22 @@ conteúdo entre owners apenas para produzir um único commit.
 
 ## Onde alterar
 
-- visão geral pública: `specsfy/README.md`;
-- documentação final: [`docs/README.md`](docs/README.md);
+- visão geral pública:
+  [`specsfy/specsfy`](https://github.com/specsfy/specsfy);
+- documentação oficial para usuários: `docs/README.md`, publicada em
+  [`specsfy/docs`](https://github.com/specsfy/docs);
+- aplicação interna de validação e sua documentação: `example/`;
 - metodologia, skills e automação: `skills/`;
 - marca: `brand/`;
 - specs, testes integrados e orquestração: raiz `dev`;
 - decisões transversais: comece pelo
-  [roteador de contexto](docs/context/README.md).
+  `docs/context/README.md`, publicado no repositório
+  [`specsfy/docs`](https://github.com/specsfy/docs).
 
 As regras completas para agentes e contribuições estão em
 [`AGENTS.md`](AGENTS.md). O desenvolvimento da metodologia possui instruções
-adicionais em [`skills/AGENTS.md`](skills/AGENTS.md).
+adicionais em
+[`specsfy/skills`](https://github.com/specsfy/skills/blob/main/AGENTS.md).
 
 ## Validação integrada
 

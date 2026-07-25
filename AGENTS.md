@@ -29,9 +29,13 @@ o conjunto em monorepo e não atribui ao pai o ownership dos filhos.
   `specs/<slug>/spec.md` no workspace de desenvolvimento.
 - Pesquisa consultada fica somente em `specs/<slug>/research/` e deve ser
   indexada na spec.
-- A metodologia executável vive em `skills/`; siga
-  [`skills/AGENTS.md`](skills/AGENTS.md) ao alterar uma skill.
-- A documentação final vive em `docs/`.
+- A metodologia executável vive em `skills/`; siga `skills/AGENTS.md`, publicado
+  como
+  [`AGENTS.md` de specsfy/skills](https://github.com/specsfy/skills/blob/main/AGENTS.md)
+  ao alterar uma skill.
+- A documentação oficial da metodologia para usuários vive em `docs/`.
+- A aplicação interna de validação e sua documentação operacional vivem em
+  `example/` e pertencem à raiz Git `specsfy/dev`.
 - A visão geral pública vive em `specsfy/`.
 - A identidade vive em `brand/`.
 - Testes, manifests e configurações comprovam o estado implementado em sua raiz
@@ -40,10 +44,23 @@ o conjunto em monorepo e não atribui ao pai o ownership dos filhos.
 Não crie `plan.md`, `tasks.md`, `research.md`, `data-model.md` ou outra fonte
 normativa paralela.
 
+## Disciplina documental
+
+- Toda criação ou alteração deve atualizar, na mesma entrega, a documentação
+  aplicável dentro do owner e do escopo corretos.
+- Quando não houver impacto documental material, registre essa avaliação na
+  evidência da tarefa em vez de criar conteúdo artificial.
+- Documentação deriva das fontes executáveis e não transforma README, contexto
+  ou guia em inventário concorrente de manifests, rotas, schemas ou testes.
+- Detalhes internos de `example/` permanecem em `example/README.md`; somente
+  decisões transversais da metodologia pertencem a `docs/`.
+
 ## Contexto compartilhado
 
-Use [`docs/context/README.md`](docs/context/README.md) como roteador. Leia a
-`spec.md` ativa, estas instruções e apenas os contextos exigidos pela mudança.
+Use `docs/context/README.md`, publicado como
+[`roteador de contexto`](https://github.com/specsfy/docs)
+como ponto de entrada. Leia a `spec.md` ativa, estas instruções e apenas os
+contextos exigidos pela mudança.
 
 | Alteração | Contexto mínimo |
 | --- | --- |
