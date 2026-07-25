@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "skills": {
+    "specsfy-discuss": {
+      "source": "specsfy/skills",
+      "sourceType": "github",
+      "skillPath": "specsfy-discuss/SKILL.md",
+      "computedHash": "f93d58eaab6c86a8fc2f50baa581266bf2c7144380ba059c9a52e09cfe935a2b"
+    },
+    "specsfy-implement": {
+      "source": "specsfy/skills",
+      "sourceType": "github",
+      "skillPath": "specsfy-implement/SKILL.md",
+      "computedHash": "fd9a0976fa2b5a8d8080bd67aea592c839ac520c040facce6d04373d82ad75ce"
+    },
+    "specsfy-progress": {
+      "source": "specsfy/skills",
+      "sourceType": "github",
+      "skillPath": "specsfy-progress/SKILL.md",
+      "computedHash": "b7a5016dd7371aeee59acd231b4e993f9993a2a699c74a9c471d9331bac4bb94"
+    },
+    "specsfy-specify": {
+      "source": "specsfy/skills",
+      "sourceType": "github",
+      "skillPath": "specsfy-specify/SKILL.md",
+      "computedHash": "36cf670f29f3f32db5e18b07c525d8bc7fdb98def0fbdf65999e62e5491cda16"
+    },
+    "specsfy-tasks": {
+      "source": "specsfy/skills",
+      "sourceType": "github",
+      "skillPath": "specsfy-tasks/SKILL.md",
+      "computedHash": "c7fb21bf6c6d8095690e813224ce9ad291cdbb7266e0b4fa7cd8ebd13e84b50b"
+    },
+    "specsfy-tdd-bdd": {
+      "source": "specsfy/skills",
+      "sourceType": "github",
+      "skillPath": "specsfy-tdd-bdd/SKILL.md",
+      "computedHash": "f533600c0af228d6f3ba59a1e0167cfa4725408f9caab24462a94c73a41630f2"
+    },
+    "specsfy-validate": {
+      "source": "specsfy/skills",
+      "sourceType": "github",
+      "skillPath": "specsfy-validate/SKILL.md",
+      "computedHash": "6f184cd520ea94a6c0ec8e95d60b99c4580332dd0b060dde1a4220949144c903"
+    }
+  }
+}
