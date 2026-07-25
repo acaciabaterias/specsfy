@@ -16,8 +16,9 @@ SPEC = ROOT / "specs" / "specsfy" / "spec.md"
 MCR_REFERENCE = (
     SKILLS / "specsfy-specify" / "references" / "mcr-10.md"
 )
-AGENT_GUIDE = ROOT / "AGENTS.md"
-README = ROOT / "README.md"
+AGENT_GUIDE = ROOT / "skills" / "AGENTS.md"
+README = ROOT / "specsfy" / "README.md"
+SKILLS_README = ROOT / "skills" / "README.md"
 EXPECTED_SKILLS = {
     "specsfy-discuss",
     "specsfy-specify",
@@ -158,7 +159,11 @@ class SkillContractTests(unittest.TestCase):
     """SPECSFY: US-001 US-002 US-007 US-008 FR-001 FR-002 FR-003 FR-004 FR-005 FR-006 FR-007 FR-008 FR-009 FR-010 FR-011 FR-012 FR-013 FR-014 NFR-002 NFR-003 NFR-004 AC-001 AC-002 AC-007 AC-008"""
 
     def test_exactly_seven_skills_have_valid_core_files(self) -> None:
-        skill_dirs = {path.name for path in SKILLS.iterdir() if path.is_dir()}
+        skill_dirs = {
+            path.name
+            for path in SKILLS.iterdir()
+            if path.is_dir() and (path / "SKILL.md").is_file()
+        }
         self.assertEqual(EXPECTED_SKILLS, skill_dirs)
         for name in sorted(EXPECTED_SKILLS):
             skill = SKILLS / name
@@ -902,15 +907,15 @@ class MCR10ContractTests(unittest.TestCase):
         self.assertTrue(AGENT_GUIDE.is_file())
         text = AGENT_GUIDE.read_text(encoding="utf-8")
         for content in (
-            "Guia de desenvolvimento das skills",
-            "Três atos por fatia vertical",
+            "Guia de desenvolvimento da metodologia Specsfy",
+            "Três atos",
             "MCR-10",
             "skill-creator",
             "BDD",
             "TDD",
             "quick_validate.py",
             "specs/<slug>/spec.md",
-            ".agents/skills/<nome>/",
+            "specsfy-<nome>/",
         ):
             self.assertIn(content, text)
 
@@ -1001,46 +1006,49 @@ class ThreeActContractTests(unittest.TestCase):
 class ReadmeContractTests(unittest.TestCase):
     """SPECSFY: US-011 FR-019 FR-020 FR-021 NFR-005 AC-011"""
 
-    def test_readme_publishes_the_complete_method_and_naming_status(self) -> None:
+    def test_entrypoints_publish_overview_method_and_naming_status(self) -> None:
         self.assertTrue(README.is_file())
-        text = README.read_text(encoding="utf-8")
+        self.assertTrue(SKILLS_README.is_file())
+        overview = README.read_text(encoding="utf-8")
+        methodology = SKILLS_README.read_text(encoding="utf-8")
         for heading in (
             "# Specsfy",
-            "## Proposta",
-            "## Fonte da verdade",
-            "## Os três atos rígidos",
+            "## Os seis compromissos",
+            "## Os três atos",
             "### Ato I — Definir",
             "### Ato II — Projetar e provar",
             "### Ato III — Entregar e validar",
-            "## Máquina de estados e gates",
+            "## A fonte única",
             "## BDD e TDD",
-            "## MCR-10",
-            "## Tarefas e evidências",
-            "## Catálogo atual de skills",
-            "## Nomenclatura recomendada",
-            "## Fluxo completo",
-            "## Estrutura do repositório",
-            "## Como usar",
-            "## Validação",
-            "## Limites e antipadrões",
-            "## Evolução recomendada",
+            "## Rastreabilidade",
+            "## Metodologia executável",
+            "## Ecossistema",
+            "## Começar",
+            "## O que o Specsfy não é",
         ):
-            self.assertIn(heading, text)
+            self.assertIn(heading, overview)
+        for heading in (
+            "# Specsfy Skills",
+            "## Metodologia executável",
+            "## Catálogo",
+            "## Capacidades nativas",
+            "## Nomenclatura recomendada",
+            "## Estrutura",
+            "## Desenvolver",
+            "## Validar",
+            "## Publicação",
+        ):
+            self.assertIn(heading, methodology)
         for contract in (
             "specs/<slug>/spec.md",
             "Draft → Defined → Planned → Implementing → Complete",
             "Definition Gate",
             "Plan Gate",
             "Delivery Gate",
-            "Given/When/Then",
-            "RED → GREEN → REFACTOR",
-            "PREP → EXECUTE → VERIFY → EVIDENCE → IMPROVE",
-            "Proposta ainda não implementada",
-            "specsfy-a<ato>-s<etapa>-<responsabilidade>",
         ):
-            self.assertIn(contract, text)
+            self.assertIn(contract, overview + methodology)
         for skill in EXPECTED_SKILLS:
-            self.assertIn(skill, text)
+            self.assertIn(skill, methodology)
         for proposed in (
             "specsfy-a1-s1-discover",
             "specsfy-a1-s2-specify",
@@ -1051,17 +1059,17 @@ class ReadmeContractTests(unittest.TestCase):
             "specsfy-a3-s2-validate-delivery",
             "specsfy-x-s1-progress",
         ):
-            self.assertIn(proposed, text)
-        self.assertNotRegex(text, r"\b(?:TODO|TBD|FIXME)\b")
+            self.assertIn(proposed, methodology)
+        self.assertIn("Proposta ainda não implementada", methodology)
+        self.assertNotRegex(overview + methodology, r"\b(?:TODO|TBD|FIXME)\b")
 
-    def test_readme_commands_and_local_links_are_usable(self) -> None:
-        self.assertTrue(README.is_file())
-        text = README.read_text(encoding="utf-8")
+    def test_methodology_commands_and_local_links_are_usable(self) -> None:
+        text = SKILLS_README.read_text(encoding="utf-8")
         for command in (
-            "validate_spec.py specs/<slug>/spec.md",
-            "validate_tasks.py specs/<slug>/spec.md",
-            "check_traceability.py specs/<slug>/spec.md .",
-            "progress.py .",
+            "python3 -B -m unittest discover",
+            "behave tests/features",
+            "verify_repo.py",
+            "quick_validate.py",
         ):
             self.assertIn(command, text)
         local_links = re.findall(
@@ -1072,7 +1080,7 @@ class ReadmeContractTests(unittest.TestCase):
         missing = [
             target
             for target in local_links
-            if not (ROOT / target.split("#", 1)[0]).exists()
+            if not (ROOT / "skills" / target.split("#", 1)[0]).exists()
         ]
         self.assertEqual([], missing)
 

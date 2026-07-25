@@ -15,8 +15,9 @@ SPEC = ROOT / "specs" / "specsfy" / "spec.md"
 MCR_REFERENCE = (
     ROOT / ".agents" / "skills" / "specsfy-specify" / "references" / "mcr-10.md"
 )
-AGENT_GUIDE = ROOT / "AGENTS.md"
-README = ROOT / "README.md"
+AGENT_GUIDE = ROOT / "skills" / "AGENTS.md"
+README = ROOT / "specsfy" / "README.md"
+SKILLS_README = ROOT / "skills" / "README.md"
 
 
 def run_script(relative: str, *args: str) -> subprocess.CompletedProcess[str]:
@@ -315,6 +316,11 @@ def when_check(context, check: str) -> None:
         )
     elif check == "readme-guide":
         readme = README.read_text(encoding="utf-8") if README.is_file() else ""
+        skills_readme = (
+            SKILLS_README.read_text(encoding="utf-8")
+            if SKILLS_README.is_file()
+            else ""
+        )
         current_skills = (
             "specsfy-discuss",
             "specsfy-specify",
@@ -336,16 +342,17 @@ def when_check(context, check: str) -> None:
         )
         context.acceptance = (
             README.is_file()
-            and "## Os três atos rígidos" in readme
+            and SKILLS_README.is_file()
+            and "## Os três atos" in readme
             and "Draft → Defined → Planned → Implementing → Complete" in readme
             and all(gate in readme for gate in ("Definition Gate", "Plan Gate", "Delivery Gate"))
-            and all(skill in readme for skill in current_skills)
-            and all(skill in readme for skill in proposed_skills)
-            and "Proposta ainda não implementada" in readme
+            and all(skill in skills_readme for skill in current_skills)
+            and all(skill in skills_readme for skill in proposed_skills)
+            and "Proposta ainda não implementada" in skills_readme
             and "specs/<slug>/spec.md" in readme
-            and "MCR-10" in readme
+            and "MCR-10" in AGENT_GUIDE.read_text(encoding="utf-8")
             and "Gherkin" in readme
-            and "RED → GREEN → REFACTOR" in readme
+            and "RED → GREEN → REFACTOR" in skills_readme
             and "## Créditos" in readme
             and "Promovaweb" in readme
             and "Luiz Eduardo Oliveira Fonseca" in readme
@@ -359,8 +366,9 @@ def when_check(context, check: str) -> None:
         context.detail = {
             "readme_exists": README.is_file(),
             "readme_size": len(readme),
-            "missing_current": [skill for skill in current_skills if skill not in readme],
-            "missing_proposed": [skill for skill in proposed_skills if skill not in readme],
+            "skills_readme_exists": SKILLS_README.is_file(),
+            "missing_current": [skill for skill in current_skills if skill not in skills_readme],
+            "missing_proposed": [skill for skill in proposed_skills if skill not in skills_readme],
         }
     else:
         raise AssertionError(f"Verificação desconhecida: {check}")

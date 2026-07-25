@@ -267,3 +267,55 @@ def then_finds_creation_and_maintenance_without_duplication(context) -> None:
     operational_heading = "## Roteamento por tipo de alteração"
     assert operational_heading not in context.general_guide_text
     assert operational_heading in context.operational_router_text
+
+
+@given("o workspace orquestrador e os quatro repositórios filhos")
+def given_orchestrator_and_child_repositories(context) -> None:
+    context.repository_entrypoints = {
+        "dev": ROOT / "README.md",
+        "brand": ROOT / "brand" / "README.md",
+        "skills": ROOT / "skills" / "README.md",
+        "docs": ROOT / "docs" / "README.md",
+        "specsfy": ROOT / "specsfy" / "README.md",
+    }
+
+
+@when("uma pessoa ou agente consulta suas portas de entrada")
+def when_entrypoints_are_consulted(context) -> None:
+    context.repository_texts = {
+        name: path.read_text(encoding="utf-8") if path.is_file() else ""
+        for name, path in context.repository_entrypoints.items()
+    }
+
+
+@then("cada repositório declara público responsabilidade e fronteira Git")
+def then_each_repository_declares_a_boundary(context) -> None:
+    expected_terms = {
+        "dev": ("orquestrador", "repositórios independentes"),
+        "brand": ("marca", "fonte normativa"),
+        "skills": ("metodologia executável", "repositório independente"),
+        "docs": ("documentação final", "usuário"),
+        "specsfy": ("porta de entrada", "usuário final"),
+    }
+    for name, terms in expected_terms.items():
+        text = context.repository_texts[name].casefold()
+        assert text, f"README ausente para {name}"
+        for term in terms:
+            assert term.casefold() in text, f"{name}/README.md sem {term}"
+    agent_guide = (ROOT / "AGENTS.md").read_text(encoding="utf-8").casefold()
+    assert "fronteiras git" in agent_guide
+    assert "skills/agents.md" in agent_guide
+
+
+@then("a metodologia documentação identidade e visão geral possuem um único owner")
+def then_each_concern_has_one_owner(context) -> None:
+    modules = (CONTEXT_ROOT / "architecture" / "modules.md").read_text(
+        encoding="utf-8"
+    )
+    dependencies = (CONTEXT_ROOT / "architecture" / "dependencies.md").read_text(
+        encoding="utf-8"
+    )
+    for repository in ("specsfy/dev", "specsfy/brand", "specsfy/skills", "specsfy/docs", "specsfy/specsfy"):
+        assert repository in modules, f"owner ausente: {repository}"
+    assert "https://github.com/specsfy" in dependencies
+    assert not (ROOT / ".gitmodules").exists()

@@ -64,7 +64,7 @@ Feature: Executar todo o fluxo SDD a partir de uma única fonte da verdade
     Then a verificação de aceite passa
 
   @US-011 @FR-019 @FR-020 @FR-021 @NFR-005 @AC-011
-  Scenario: Publicar um guia completo sem antecipar a migração de nomes
+  Scenario: Publicar visão geral e metodologia sem misturar seus owners
     Given o repositório Specsfy
     When executo a verificação de aceite "readme-guide"
     Then a verificação de aceite passa

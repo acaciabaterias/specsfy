@@ -155,7 +155,7 @@ def classification(path: Path) -> dict[str, str]:
 
 
 class ProjectContextContractTests(unittest.TestCase):
-    """SPECSFY: US-001 US-002 US-003 FR-001 FR-002 FR-003 FR-004 FR-005 FR-006 FR-007 FR-008 FR-009 FR-010 FR-011 FR-012 FR-013 FR-014 NFR-001 NFR-002 NFR-003 AC-001 AC-002 AC-003 AC-004 AC-005"""
+    """SPECSFY: US-001 US-002 US-003 US-004 FR-001 FR-002 FR-003 FR-004 FR-005 FR-006 FR-007 FR-008 FR-009 FR-010 FR-011 FR-012 FR-013 FR-014 FR-015 FR-016 FR-017 FR-018 FR-019 FR-020 NFR-001 NFR-002 NFR-003 AC-001 AC-002 AC-003 AC-004 AC-005 AC-006"""
 
     def test_minimum_tree_exists_without_preventive_leaf_files(self) -> None:
         observed = {
@@ -268,6 +268,70 @@ class ProjectContextContractTests(unittest.TestCase):
         self.assertIn("manifests e lockfiles", packages.casefold())
         self.assertIn("schemas e migrations", persistence.casefold())
         self.assertIn("specs/<slug>/spec.md", flows)
+
+    def test_multi_repository_ownership_and_entrypoints(self) -> None:
+        """SPECSFY: FR-015 FR-016 FR-017 FR-018 FR-019 FR-020 AC-006"""
+        entrypoints = {
+            "dev": ROOT / "README.md",
+            "brand": ROOT / "brand" / "README.md",
+            "skills": ROOT / "skills" / "README.md",
+            "docs": ROOT / "docs" / "README.md",
+            "specsfy": ROOT / "specsfy" / "README.md",
+        }
+        expected_terms = {
+            "dev": ("orquestrador", "repositórios independentes"),
+            "brand": ("marca", "fonte normativa"),
+            "skills": ("metodologia executável", "repositório independente"),
+            "docs": ("documentação final", "usuário"),
+            "specsfy": ("porta de entrada", "usuário final"),
+        }
+        for name, path in entrypoints.items():
+            with self.subTest(repository=name):
+                self.assertTrue(path.is_file(), f"README ausente: {path}")
+                text = path.read_text(encoding="utf-8").casefold()
+                for term in expected_terms[name]:
+                    self.assertIn(term.casefold(), text)
+
+        root_agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8").casefold()
+        self.assertIn("fronteiras git", root_agents)
+        self.assertIn("skills/agents.md", root_agents)
+        self.assertTrue((ROOT / "skills" / "AGENTS.md").is_file())
+
+        specsfy_readme = entrypoints["specsfy"].read_text(encoding="utf-8")
+        skills_readme = entrypoints["skills"].read_text(encoding="utf-8")
+        docs_readme = entrypoints["docs"].read_text(encoding="utf-8")
+        for url in (
+            "https://github.com/specsfy/docs",
+            "https://github.com/specsfy/skills",
+            "https://github.com/specsfy/brand",
+        ):
+            self.assertIn(url, specsfy_readme)
+        self.assertIn("specsfy-discuss/SKILL.md", skills_readme)
+        self.assertIn("https://github.com/specsfy/specsfy", docs_readme)
+
+        modules = (CONTEXT_ROOT / "architecture" / "modules.md").read_text(
+            encoding="utf-8"
+        )
+        dependencies = (
+            CONTEXT_ROOT / "architecture" / "dependencies.md"
+        ).read_text(encoding="utf-8")
+        for repository in (
+            "specsfy/dev",
+            "specsfy/brand",
+            "specsfy/skills",
+            "specsfy/docs",
+            "specsfy/specsfy",
+        ):
+            self.assertIn(repository, modules)
+        self.assertIn("https://github.com/specsfy", dependencies)
+
+        gitignore = (ROOT / ".gitignore").read_text(encoding="utf-8")
+        for child in ("brand/", "skills/", "docs/", "specsfy/"):
+            self.assertIn(child, gitignore)
+            self.assertTrue((ROOT / child / ".git").exists())
+        self.assertFalse((ROOT / ".gitmodules").exists())
+        self.assertEqual((ROOT / "skills").resolve(), (ROOT / ".agents/skills").resolve())
+        self.assertEqual((ROOT / "skills").resolve(), (ROOT / ".claude/skills").resolve())
 
 
 if __name__ == "__main__":

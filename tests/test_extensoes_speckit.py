@@ -399,7 +399,7 @@ class ExtensionAdaptationTests(unittest.TestCase):
             self.assertNotRegex(text, r"\b(?:pip install|uv add|uv pip)\b")
 
     def test_all_fourteen_suggestions_are_published_in_existing_skills(self) -> None:
-        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        readme = (ROOT / "skills" / "README.md").read_text(encoding="utf-8")
         for name in (
             "Quality Gates",
             "CI Guard",
