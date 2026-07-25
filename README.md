@@ -1,6 +1,6 @@
 # Specsfy Dev
 
-Este é o workspace orquestrador de desenvolvimento do Specsfy. Ele reúne seis
+Este é o workspace orquestrador de desenvolvimento do Specsfy. Ele reúne oito
 repositórios independentes, cada um com sua própria raiz Git, no mesmo layout
 local para permitir especificação, testes de contrato, integração e evolução
 coordenada.
@@ -20,9 +20,11 @@ da metodologia está em [`specsfy/docs`](https://github.com/specsfy/docs).
 | `docs/` | [`specsfy/docs`](https://github.com/specsfy/docs) | documentação final para o usuário |
 | `example/` | [`specsfy/example`](https://github.com/specsfy/example) | aplicação interna de validação |
 | `specsfy/` | [`specsfy/specsfy`](https://github.com/specsfy/specsfy) | porta de entrada e visão geral do projeto |
+| `specialists/` | [`specsfy/specialists`](https://github.com/specsfy/specialists) | skills técnicas opcionais e referências |
+| `cli/` | [`specsfy/cli`](https://github.com/specsfy/cli) | CLI, TUI, instalação e progresso visual |
 
 Cada linha da tabela é uma raiz Git com remoto, branch, histórico e commits
-próprios. Os cinco filhos são ignorados pelo repositório `dev`; não são
+próprios. Os sete filhos são ignorados pelo repositório `dev`; não são
 submódulos e não existem gitlinks entre eles.
 
 ## Como o workspace funciona
@@ -36,14 +38,17 @@ dev/
 ├── brand/             # Git: specsfy/brand
 ├── skills/            # Git: specsfy/skills
 ├── docs/              # Git: specsfy/docs
+├── specialists/       # Git: specsfy/specialists
+├── cli/               # Git: specsfy/cli
 └── specsfy/           # Git: specsfy/specsfy
 ```
 
 - `tests/` contém BDD e contratos que podem atravessar os repositórios.
 - `example/` contém a aplicação Laravel usada para exercitar e validar o
   framework em um produto real; ela é versionada por `specsfy/example`.
-- `skills/` é acessado diretamente como um repositório filho; o pai não instala
-  ou projeta essas skills em `.agents/` ou `.claude/`.
+- `skills/` e `specialists/` são checkouts filhos; o pai não instala ou projeta
+  essas skills em `.agents/` ou `.claude/`.
+- `cli/` é desenvolvido como checkout filho e recusa instalar na raiz pai.
 - O pai enxerga os filhos pelo filesystem, mas não versiona seu conteúdo.
 
 O repositório `dev` não é um projeto consumidor do Specsfy. Por isso, sua raiz
@@ -63,7 +68,7 @@ oficial da metodologia publicada por `specsfy/docs`.
 
 ## Preparar o workspace
 
-Clone o orquestrador e os cinco filhos nos caminhos canônicos:
+Clone o orquestrador e os sete filhos nos caminhos canônicos:
 
 ```bash
 git clone https://github.com/specsfy/dev.git specsfy
@@ -71,6 +76,8 @@ git -C specsfy clone https://github.com/specsfy/brand.git brand
 git -C specsfy clone https://github.com/specsfy/skills.git skills
 git -C specsfy clone https://github.com/specsfy/docs.git docs
 git -C specsfy clone https://github.com/specsfy/example.git example
+git -C specsfy clone https://github.com/specsfy/specialists.git specialists
+git -C specsfy clone https://github.com/specsfy/cli.git cli
 git -C specsfy clone https://github.com/specsfy/specsfy.git specsfy
 ```
 
@@ -83,6 +90,8 @@ git status --short --branch
 git -C skills status --short --branch
 git -C docs status --short --branch
 git -C example status --short --branch
+git -C specialists status --short --branch
+git -C cli status --short --branch
 git -C brand status --short --branch
 git -C specsfy status --short --branch
 ```
@@ -102,6 +111,8 @@ conteúdo entre owners apenas para produzir um único commit.
   [`specsfy/docs`](https://github.com/specsfy/docs);
 - aplicação interna de validação e sua documentação: `example/`;
 - metodologia, skills e automação: `skills/`;
+- especialistas técnicos opcionais: `specialists/`;
+- CLI, TUI e instalação: `cli/`;
 - marca: `brand/`;
 - testes integrados e orquestração: raiz `dev`;
 - specs de produto: repositório do projeto que aplica Specsfy, nunca a raiz

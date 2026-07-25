@@ -275,6 +275,8 @@ def given_orchestrator_and_child_repositories(context) -> None:
         "dev": ROOT / "README.md",
         "brand": ROOT / "brand" / "README.md",
         "skills": ROOT / "skills" / "README.md",
+        "specialists": ROOT / "specialists" / "README.md",
+        "cli": ROOT / "cli" / "README.md",
         "docs": ROOT / "docs" / "README.md",
         "specsfy": ROOT / "specsfy" / "README.md",
     }
@@ -294,6 +296,8 @@ def then_each_repository_declares_a_boundary(context) -> None:
         "dev": ("orquestrador", "repositórios independentes"),
         "brand": ("marca", "fonte normativa"),
         "skills": ("metodologia executável", "repositório independente"),
+        "specialists": ("catálogo oficial", "opcionais"),
+        "cli": ("cli e tui", "progresso"),
         "docs": ("documentação final", "usuário"),
         "specsfy": ("porta de entrada", "usuário final"),
     }
@@ -322,6 +326,8 @@ def then_each_concern_has_one_owner(context) -> None:
         "specsfy/docs",
         "specsfy/example",
         "specsfy/specsfy",
+        "specsfy/specialists",
+        "specsfy/cli",
     ):
         assert repository in modules, f"owner ausente: {repository}"
     assert "https://github.com/specsfy" in dependencies

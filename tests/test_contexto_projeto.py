@@ -275,6 +275,8 @@ class ProjectContextContractTests(unittest.TestCase):
             "dev": ROOT / "README.md",
             "brand": ROOT / "brand" / "README.md",
             "skills": ROOT / "skills" / "README.md",
+            "specialists": ROOT / "specialists" / "README.md",
+            "cli": ROOT / "cli" / "README.md",
             "docs": ROOT / "docs" / "README.md",
             "specsfy": ROOT / "specsfy" / "README.md",
         }
@@ -282,6 +284,8 @@ class ProjectContextContractTests(unittest.TestCase):
             "dev": ("orquestrador", "repositórios independentes"),
             "brand": ("marca", "fonte normativa"),
             "skills": ("metodologia executável", "repositório independente"),
+            "specialists": ("catálogo oficial", "opcionais"),
+            "cli": ("cli e tui", "progresso"),
             "docs": ("documentação final", "usuário"),
             "specsfy": ("porta de entrada", "usuário final"),
         }
@@ -306,7 +310,7 @@ class ProjectContextContractTests(unittest.TestCase):
             "https://github.com/specsfy/brand",
         ):
             self.assertIn(url, specsfy_readme)
-        self.assertIn("specsfy-discuss/SKILL.md", skills_readme)
+        self.assertIn("specsfy-base-discuss", skills_readme)
         self.assertIn("https://github.com/specsfy/specsfy", docs_readme)
 
         modules = (CONTEXT_ROOT / "architecture" / "modules.md").read_text(
@@ -322,12 +326,21 @@ class ProjectContextContractTests(unittest.TestCase):
             "specsfy/docs",
             "specsfy/example",
             "specsfy/specsfy",
+            "specsfy/specialists",
+            "specsfy/cli",
         ):
             self.assertIn(repository, modules)
         self.assertIn("https://github.com/specsfy", dependencies)
 
         gitignore = (ROOT / ".gitignore").read_text(encoding="utf-8")
-        for child in ("brand/", "skills/", "docs/", "specsfy/"):
+        for child in (
+            "brand/",
+            "skills/",
+            "docs/",
+            "specsfy/",
+            "specialists/",
+            "cli/",
+        ):
             self.assertIn(child, gitignore)
             self.assertTrue((ROOT / child / ".git").exists())
         self.assertFalse((ROOT / ".gitmodules").exists())

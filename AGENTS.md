@@ -14,6 +14,8 @@ o conjunto em monorepo e não atribui ao pai o ownership dos filhos.
 | `docs/` | `specsfy/docs` | documentação final para o usuário |
 | `example/` | `specsfy/example` | aplicação interna de validação |
 | `specsfy/` | `specsfy/specsfy` | porta de entrada e visão geral pública |
+| `specialists/` | `specsfy/specialists` | skills técnicas opcionais |
+| `cli/` | `specsfy/cli` | instalação, TUI e progresso visual |
 
 - Execute `git status`, `git diff`, commits e branches na raiz proprietária.
 - Considere mudanças transversais como uma entrega coordenada com commits
@@ -22,7 +24,7 @@ o conjunto em monorepo e não atribui ao pai o ownership dos filhos.
   converta a árvore em submódulos sem uma nova decisão normativa.
 - Links dentro da mesma raiz Git são relativos. Links entre repositórios usam
   `https://github.com/specsfy/<repositorio>`.
-- Preserve alterações preexistentes em qualquer uma das seis worktrees.
+- Preserve alterações preexistentes em qualquer uma das oito worktrees.
 
 ## Fonte da verdade
 
@@ -34,6 +36,9 @@ o conjunto em monorepo e não atribui ao pai o ownership dos filhos.
   como
   [`AGENTS.md` de specsfy/skills](https://github.com/specsfy/skills/blob/main/AGENTS.md)
   ao alterar uma skill.
+- Skills técnicas opcionais vivem em `specialists/`; não as instale nem execute
+  na raiz pai.
+- O CLI e a TUI vivem em `cli/` e recusam esta raiz como projeto consumidor.
 - A documentação oficial da metodologia para usuários vive em `docs/`.
 - A aplicação interna de validação e sua documentação operacional vivem em
   `example/` e pertencem à raiz Git `specsfy/example`.
@@ -94,7 +99,7 @@ roteador.
 5. Edite cada arquivo somente na raiz que possui sua responsabilidade.
 6. Execute testes focais na raiz proprietária e regressão no workspace.
 7. Registre a evidência nos testes e na documentação do owner correto.
-8. Revise status e diff das seis raízes antes de concluir.
+8. Revise status e diff das oito raízes antes de concluir.
 
 Mudança de comportamento reabre os Atos I–III. Mudança de plano reabre os Atos
 II–III. Nenhum gate posterior permanece válido sobre uma entrada alterada.

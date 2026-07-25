@@ -29,6 +29,21 @@ jobs:
         with:
           repository: specsfy/specsfy
           path: specsfy
+      - name: Checkout example
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: specsfy/example
+          path: example
+      - name: Checkout specialists
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: specsfy/specialists
+          path: specialists
+      - name: Checkout CLI
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: specsfy/cli
+          path: cli
       - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version: '3.12.11'
