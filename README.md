@@ -81,6 +81,25 @@ git -C specsfy clone https://github.com/specsfy/cli.git cli
 git -C specsfy clone https://github.com/specsfy/specsfy.git specsfy
 ```
 
+## Instalar o CLI no sistema
+
+Com [`uv`](https://docs.astral.sh/uv/) disponível, instale ou atualize para o
+usuário atual o checkout local de `cli/`:
+
+```bash
+./scripts/install-cli.sh
+```
+
+Para instalar diretamente a versão publicada na `main` de `specsfy/cli`:
+
+```bash
+./scripts/install-cli.sh --github
+```
+
+O script usa `uv tool`, mantendo o CLI em um ambiente isolado. Ele não executa
+`specsfy install`, não instala skills e não cria `.agents/`, `.claude/` ou
+`specs/` na raiz do workspace.
+
 ## Trabalhar com Git
 
 Execute Git na raiz proprietária da mudança:
