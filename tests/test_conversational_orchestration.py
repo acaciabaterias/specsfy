@@ -35,7 +35,8 @@ class ConversationalOrchestrationIntegrationTests(unittest.TestCase):
         self.assertIn("## Conversa contínua entre etapas", docs_readme)
         self.assertIn("avanço", flow)
         self.assertIn("retorno", flow)
-        self.assertIn("confirmação", flow)
+        self.assertIn("retomada", flow)
+        self.assertIn("automaticamente", flow)
         self.assertIn("mesma conversa", flow)
 
     def test_all_base_skills_implement_the_integrated_policy(self) -> None:
@@ -47,11 +48,12 @@ class ConversationalOrchestrationIntegrationTests(unittest.TestCase):
                 normalized = " ".join(content.split())
 
                 self.assertIn("## Orquestrar a conversa", content)
-                self.assertIn("Transição proposta:", content)
+                self.assertIn("Transição automática:", content)
+                self.assertIn("Retomada automática:", normalized)
                 self.assertIn("Pendência detectada:", content)
-                self.assertIn("confirmação", normalized)
+                self.assertIn("sem pedir confirmação", normalized)
+                self.assertIn("carregue imediatamente a skill de destino", normalized)
                 self.assertIn("mesma conversa", normalized)
-                self.assertIn("não a invoque", normalized)
 
 
 if __name__ == "__main__":

@@ -39,24 +39,28 @@ def when_handoff_is_needed(context) -> None:
     assert "Pendência detectada:" in context.framework
 
 
-@then("todas as skills base anunciam a transição e pedem confirmação")
-def then_skills_announce_and_confirm(context) -> None:
+@then("todas as skills base anunciam e executam a transição automaticamente")
+def then_skills_announce_and_execute(context) -> None:
     assert len(context.skills) == 8
     for content in context.skills:
-        assert "Transição proposta:" in content
-        assert "confirmação" in content
+        assert "Transição automática:" in content
+        assert "carregue imediatamente a skill de destino" in " ".join(
+            content.split()
+        )
 
 
-@then("o fluxo documenta avanço, retorno e permanência no ponto seguro")
+@then("o fluxo documenta avanço, retorno e retomada automáticos")
 def then_flow_documents_both_directions(context) -> None:
     normalized = " ".join(context.flow.split())
     assert "avanço" in normalized
     assert "retorno" in normalized
-    assert "ponto seguro" in normalized
+    assert "retomada" in normalized
+    assert "automaticamente" in normalized
 
 
-@then("a confirmação continua a etapa escolhida na mesma conversa")
-def then_confirmation_continues(context) -> None:
+@then("a etapa escolhida continua na mesma conversa sem confirmação")
+def then_automatic_handoff_continues(context) -> None:
     assert "## Orquestração conversacional" in context.skills_readme
     assert "## Conversa contínua entre etapas" in context.docs
     assert "mesma conversa" in " ".join(context.framework.split())
+    assert "sem pedir confirmação" in " ".join(context.framework.split())
