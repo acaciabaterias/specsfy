@@ -180,27 +180,36 @@ def then_examples_cover_the_complete_base_flow(context) -> None:
     for source in (context.public_entrypoint, context.basic_usage):
         for skill in base_flow:
             assert skill in source
-        positions = [source.index(skill) for skill in base_flow]
+        flow_start = source.index("$specsfy-base-backlog")
+        positions = [source.index(skill, flow_start) for skill in base_flow]
         assert positions == sorted(positions)
         assert "A última skill base é `$specsfy-base-progress`" in source
 
 
-@then("os exemplos declaram premissas e evidências plausíveis de ponta a ponta")
-def then_examples_declare_plausible_end_to_end_evidence(context) -> None:
-    plausibility_evidence = (
-        "Premissas verificáveis",
+@then("os exemplos mostram pedido teste implementação e resultado em linguagem simples")
+def then_examples_show_request_test_implementation_and_result(context) -> None:
+    beginner_evidence = (
+        "Veja o Specsfy trabalhando",
         "$specsfy-setup",
-        "app/Models/Order.php",
-        "database/factories/OrderFactory.php",
+        "/boas-vindas?nome=Ana",
+        "Olá, Ana!",
+        "Olá, visitante!",
         "Pest",
-        "tests/Feature/OrderStatusTest.php",
-        "SPECSFY: US-001 FR-001 AC-001",
-        "falha pelo comportamento ausente",
-        "3/3 gates",
+        "tests/Feature/WelcomePageTest.php",
+        "FAIL",
+        "404",
+        "routes/web.php",
+        "resources/views/boas-vindas.blade.php",
+        "$specsfy-base-implement",
+        "PASS",
+        "2 tests",
+        "nenhuma pendência",
     )
     for source in (context.public_entrypoint, context.basic_usage):
-        for evidence in plausibility_evidence:
+        for evidence in beginner_evidence:
             assert evidence in source
+        assert "app/Models/Order.php" not in source
+        assert "database/factories/OrderFactory.php" not in source
         assert source.index("$specsfy-setup") < source.index("$specsfy-base-backlog")
 
 

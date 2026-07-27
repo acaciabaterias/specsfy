@@ -193,26 +193,35 @@ class HubDocumentationIntegrationTests(unittest.TestCase):
             encoding="utf-8"
         )
         for source in (public_entrypoint, basic_usage):
-            plausibility_evidence = (
-                "Premissas verificáveis",
+            beginner_evidence = (
+                "Veja o Specsfy trabalhando",
                 "$specsfy-setup",
-                "app/Models/Order.php",
-                "database/factories/OrderFactory.php",
+                "/boas-vindas?nome=Ana",
+                "Olá, Ana!",
+                "Olá, visitante!",
                 "Pest",
-                "tests/Feature/OrderStatusTest.php",
-                "SPECSFY: US-001 FR-001 AC-001",
-                "falha pelo comportamento ausente",
-                "3/3 gates",
+                "tests/Feature/WelcomePageTest.php",
+                "FAIL",
+                "404",
+                "routes/web.php",
+                "resources/views/boas-vindas.blade.php",
+                "$specsfy-base-implement",
+                "PASS",
+                "2 tests",
+                "nenhuma pendência",
             )
-            for evidence in plausibility_evidence:
+            for evidence in beginner_evidence:
                 self.assertIn(evidence, source)
+            self.assertNotIn("app/Models/Order.php", source)
+            self.assertNotIn("database/factories/OrderFactory.php", source)
             self.assertLess(
                 source.index("$specsfy-setup"),
                 source.index("$specsfy-base-backlog"),
             )
             for skill in base_flow:
                 self.assertIn(skill, source)
-            positions = [source.index(skill) for skill in base_flow]
+            flow_start = source.index("$specsfy-base-backlog")
+            positions = [source.index(skill, flow_start) for skill in base_flow]
             self.assertEqual(sorted(positions), positions)
             self.assertIn(
                 "A última skill base é `$specsfy-base-progress`",
