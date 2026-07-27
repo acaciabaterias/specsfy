@@ -86,6 +86,18 @@ como ponto de entrada. Leia estas instruções e apenas os contextos exigidos pe
 mudança. Uma spec ativa pertence ao projeto consumidor correspondente, nunca à
 raiz `specsfy/dev`.
 
+### ClickUp no hub
+
+Esta regra é local ao workspace orquestrador e não deve ser publicada nos
+repositórios filhos nem nas skills instaladas em projetos consumidores.
+
+- Para ler ou alterar o ClickUp, use o MCP ClickUp como caminho principal.
+- Use `codex_apps.clickup` somente como fallback quando o MCP ClickUp estiver
+  indisponível ou não oferecer a operação necessária.
+- Não repita pelo fallback uma mutação já confirmada. Se a resposta for
+  inconclusiva, consulte o estado remoto antes de tentar a mesma alteração por
+  outra integração.
+
 | Alteração | Contexto mínimo |
 | --- | --- |
 | finalidade ou vocabulário | `docs/context/project.md` e `docs/context/glossary.md` |
