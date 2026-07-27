@@ -12,6 +12,8 @@ sys.path.insert(0, str(ROOT / "cli" / "src"))
 
 from specsfy_cli.progress import scan_specs, summarize_specs
 
+TUI = ROOT / "cli/src/specsfy_cli/tui.py"
+
 
 CANONICAL_SPEC = """# Especificação integrada: Entrega concluída
 
@@ -54,3 +56,35 @@ def then_status_and_gates_are_recognized(context) -> None:
 @then("o resumo contabiliza a spec como concluída")
 def then_summary_counts_completed_spec(context) -> None:
     assert context.summary.completed_specs == 1
+
+
+@given("a implementação da aba Specs do CLI")
+def given_cli_specs_implementation(context) -> None:
+    context.tui = TUI.read_text(encoding="utf-8")
+
+
+@when("o contrato de visualização da spec é inspecionado")
+def when_spec_view_contract_is_inspected(context) -> None:
+    context.specs_markup = context.tui.partition(
+        'with TabPane("Specs", id="tab-specs"):'
+    )[2].partition('with TabPane("Skills", id="tab-skills"):')[0]
+
+
+@then("a tabela preserva gates, tarefas, checklist e progresso")
+def then_specs_table_preserves_progress(context) -> None:
+    assert 'DataTable(id="progress")' in context.specs_markup
+    for column in ("Spec", "Status", "Gates", "Tarefas", "Checklist", "Progresso"):
+        assert f'"{column}"' in context.tui
+
+
+@then("a barra de espaço abre a spec destacada em um modal Markdown")
+def then_space_opens_spec_markdown_modal(context) -> None:
+    assert '"space", "activate_selection"' in context.tui
+    assert "class SpecPreviewModal(ModalScreen" in context.tui
+    assert "Markdown(spec.content" in context.tui
+    assert "self.push_screen(SpecPreviewModal(spec))" in context.tui
+
+
+@then("o modal informa como voltar para a listagem")
+def then_modal_explains_how_to_return(context) -> None:
+    assert "Esc: voltar para a lista de specs" in context.tui

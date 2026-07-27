@@ -1,0 +1,154 @@
+from __future__ import annotations
+
+import json
+import subprocess
+import tempfile
+import unittest
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+SKILL = ROOT / ".agents" / "skills" / "specsfy-hub-documentator"
+CLAUDE_SKILL = ROOT / ".claude" / "skills" / "specsfy-hub-documentator"
+
+
+class HubDocumentationIntegrationTests(unittest.TestCase):
+    def test_skill_uses_codex_and_claude_repository_locations(self) -> None:
+        self.assertTrue((SKILL / "SKILL.md").is_file())
+        self.assertTrue(CLAUDE_SKILL.is_symlink())
+        self.assertEqual(SKILL.resolve(), CLAUDE_SKILL.resolve())
+
+    def test_collector_recognizes_the_current_workspace(self) -> None:
+        repositories = (
+            ROOT,
+            ROOT / "brand",
+            ROOT / "skills",
+            ROOT / "docs",
+            ROOT / "example",
+            ROOT / "specsfy",
+            ROOT / "specialists",
+            ROOT / "cli",
+        )
+        before = {
+            path: subprocess.run(
+                ["git", "-C", str(path), "status", "--short"],
+                text=True,
+                capture_output=True,
+                check=True,
+            ).stdout
+            for path in repositories
+        }
+        result = subprocess.run(
+            [
+                "python3",
+                "-B",
+                str(SKILL / "scripts" / "collect_hub_evidence.py"),
+                "--workspace",
+                str(ROOT),
+            ],
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+
+        self.assertEqual(0, result.returncode, result.stderr)
+        evidence = json.loads(result.stdout)
+        self.assertEqual("specsfy/dev", evidence["workspace"])
+        self.assertEqual(8, len(evidence["repositories"]))
+        for repository in evidence["repositories"]:
+            path = ROOT if repository["path"] == "." else ROOT / repository["path"]
+            expected_changes = subprocess.run(
+                ["git", "-C", str(path), "status", "--short"],
+                text=True,
+                capture_output=True,
+                check=True,
+            ).stdout.splitlines()
+            self.assertEqual(expected_changes, repository["changes"])
+        after = {
+            path: subprocess.run(
+                ["git", "-C", str(path), "status", "--short"],
+                text=True,
+                capture_output=True,
+                check=True,
+            ).stdout
+            for path in repositories
+        }
+        self.assertEqual(before, after)
+
+    def test_collector_refuses_a_directory_outside_the_hub(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            result = subprocess.run(
+                [
+                    "python3",
+                    "-B",
+                    str(SKILL / "scripts" / "collect_hub_evidence.py"),
+                    "--workspace",
+                    directory,
+                ],
+                text=True,
+                capture_output=True,
+                check=False,
+            )
+
+        self.assertNotEqual(0, result.returncode)
+        self.assertIn("não representa o hub Specsfy", result.stderr)
+
+    def test_hub_skill_is_local_and_consumer_documentator_remains_installed(self) -> None:
+        hub = (SKILL / "SKILL.md").read_text(encoding="utf-8")
+        consumer = (
+            ROOT / "skills" / "specsfy-documentator" / "SKILL.md"
+        ).read_text(encoding="utf-8")
+        installer = (
+            ROOT / "cli" / "src" / "specsfy_cli" / "installer.py"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("Somente `docs/`", hub)
+        self.assertIn("workspace orquestrador", hub)
+        self.assertIn("Manter em `docs/`", consumer)
+        self.assertNotIn("specsfy-hub-documentator", installer)
+        self.assertIn('"specsfy-documentator"', installer)
+        self.assertFalse(
+            (ROOT / "skills" / "specsfy-hub-documentator").exists()
+        )
+
+    def test_official_docs_publish_technical_and_user_routes(self) -> None:
+        standard = (
+            SKILL / "references" / "documentation-standard.md"
+        ).read_text(encoding="utf-8")
+        guide = (ROOT / "docs" / "hub-documentation.md").read_text(encoding="utf-8")
+        router = (ROOT / "docs" / "README.md").read_text(encoding="utf-8")
+
+        for heading in ("Documentação técnica", "Guias para usuários"):
+            self.assertIn(heading, standard)
+            self.assertIn(heading, guide)
+        self.assertIn("hub-documentation.md", router)
+
+    def test_hub_skill_publishes_cli_and_framework_installation_guide(self) -> None:
+        skill = (SKILL / "SKILL.md").read_text(encoding="utf-8")
+        standard = (
+            SKILL / "references" / "documentation-standard.md"
+        ).read_text(encoding="utf-8")
+        installation_path = ROOT / "docs" / "installation.md"
+        router = (ROOT / "docs" / "README.md").read_text(encoding="utf-8")
+        cli_guide = (ROOT / "docs" / "cli.md").read_text(encoding="utf-8")
+
+        for source in (skill, standard):
+            self.assertIn("docs/installation.md", source)
+        self.assertTrue(installation_path.is_file())
+
+        installation = installation_path.read_text(encoding="utf-8")
+        for evidence in (
+            "Python 3.11",
+            "uv tool install git+https://github.com/specsfy/cli",
+            "specsfy --version",
+            "specsfy install --project .",
+            ".agents/skills/specsfy-base-*",
+            ".specsfy/Spec.md",
+        ):
+            self.assertIn(evidence, installation)
+        self.assertIn("[Guia de instalação](installation.md)", router)
+        self.assertIn("[guia de instalação](installation.md)", cli_guide)
+
+
+if __name__ == "__main__":
+    unittest.main()

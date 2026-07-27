@@ -334,13 +334,16 @@ def then_each_concern_has_one_owner(context) -> None:
     assert not (ROOT / ".gitmodules").exists()
 
 
-@then("o pai não instala nem executa as skills do projeto")
+@then("o pai mantém só a skill local e não instala as skills do projeto")
 def then_parent_is_independent_from_project_skills(context) -> None:
-    for local_artifact in (".agents", ".claude", "specs"):
-        assert not (ROOT / local_artifact).exists(), local_artifact
+    assert not (ROOT / "specs").exists()
+    codex_skill = ROOT / ".agents" / "skills" / "specsfy-hub-documentator"
+    claude_skill = ROOT / ".claude" / "skills" / "specsfy-hub-documentator"
+    assert (codex_skill / "SKILL.md").is_file()
+    assert claude_skill.is_symlink()
+    assert claude_skill.resolve() == codex_skill.resolve()
     forbidden = re.compile(
-        r"(?:\.agents" + r"/skills|\.claude" + r"/skills|"
-        r"skills/" + r"specsfy-[^/\s]+/scripts/)"
+        r"skills/" + r"specsfy-(?!hub-documentator)[^/\s]+/scripts/"
     )
     for path in (
         ROOT / "AGENTS.md",

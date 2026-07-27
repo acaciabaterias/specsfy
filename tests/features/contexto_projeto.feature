@@ -42,4 +42,4 @@ Feature: Contexto compartilhado do projeto
     When uma pessoa ou agente consulta suas portas de entrada
     Then cada repositório declara público responsabilidade e fronteira Git
     And a metodologia documentação identidade e visão geral possuem um único owner
-    And o pai não instala nem executa as skills do projeto
+    And o pai mantém só a skill local e não instala as skills do projeto

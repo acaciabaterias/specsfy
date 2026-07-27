@@ -31,6 +31,8 @@ submódulos e não existem gitlinks entre eles.
 
 ```text
 dev/
+├── .agents/skills/    # skill local canônica para Codex
+├── .claude/skills/    # exposição da mesma skill para Claude
 ├── AGENTS.md
 ├── README.md
 ├── tests/
@@ -48,12 +50,16 @@ dev/
   framework em um produto real; ela é versionada por `specsfy/example`.
 - `skills/` e `specialists/` são checkouts filhos; o pai não instala ou projeta
   essas skills em `.agents/` ou `.claude/`.
+- `.agents/skills/specsfy-hub-documentator/` é a fonte canônica da skill local
+  do owner `dev`; `.claude/skills/specsfy-hub-documentator` aponta para ela.
+  A skill documenta o próprio hub em `docs/` e nunca integra o catálogo.
 - `cli/` é desenvolvido como checkout filho e recusa instalar na raiz pai.
 - O pai enxerga os filhos pelo filesystem, mas não versiona seu conteúdo.
 
 O repositório `dev` não é um projeto consumidor do Specsfy. Por isso, sua raiz
-não contém `specs/`, `.agents/` ou `.claude/`. Specs são criadas somente nos
-projetos que aplicam a metodologia.
+não contém `specs/` nem skills do framework instalado. As pastas `.agents/` e
+`.claude/` existem somente para descobrir a skill exclusiva do hub. Specs são
+criadas somente nos projetos que aplicam a metodologia.
 
 ## Aplicação de exemplo
 
@@ -97,8 +103,15 @@ Para instalar diretamente a versão publicada na `main` de `specsfy/cli`:
 ```
 
 O script usa `uv tool`, mantendo o CLI em um ambiente isolado. Ele não executa
-`specsfy install`, não instala skills e não cria `.agents/`, `.claude/` ou
-`specs/` na raiz do workspace.
+`specsfy install`, não instala skills consumidoras, não altera `.agents/` ou
+`.claude/` e não cria `specs/` na raiz do workspace.
+
+Depois de uma instalação publicada, o próprio `uv` mantém a origem e atualiza o
+ambiente isolado:
+
+```bash
+uv tool upgrade specsfy-cli
+```
 
 ## Trabalhar com Git
 
@@ -130,6 +143,8 @@ conteúdo entre owners apenas para produzir um único commit.
   [`specsfy/docs`](https://github.com/specsfy/docs);
 - aplicação interna de validação e sua documentação: `example/`;
 - metodologia, skills e automação: `skills/`;
+- documentação local do próprio hub:
+  `.agents/skills/specsfy-hub-documentator/`;
 - especialistas técnicos opcionais: `specialists/`;
 - CLI, TUI e instalação: `cli/`;
 - marca: `brand/`;

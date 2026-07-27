@@ -13,6 +13,10 @@ SCRIPT = ROOT / "scripts/install-cli.sh"
 
 class InstallCliScriptTests(unittest.TestCase):
     def test_installs_local_checkout_from_any_working_directory(self) -> None:
+        codex_skill = ROOT / ".agents" / "skills" / "specsfy-hub-documentator"
+        claude_skill = ROOT / ".claude" / "skills" / "specsfy-hub-documentator"
+        skill_before = (codex_skill / "SKILL.md").read_text(encoding="utf-8")
+        claude_target_before = claude_skill.readlink()
         with tempfile.TemporaryDirectory() as directory:
             temporary = Path(directory)
             fake_path, log = self._fake_uv(temporary)
@@ -36,8 +40,12 @@ class InstallCliScriptTests(unittest.TestCase):
             self.assertIn("tool install --force --reinstall", invocation)
             self.assertIn(str((ROOT / "cli").resolve()), invocation)
             self.assertIn("specsfy 0.4.0", result.stdout)
-            for forbidden in (".agents", ".claude", "specs"):
-                self.assertFalse((ROOT / forbidden).exists())
+            self.assertFalse((ROOT / "specs").exists())
+            self.assertEqual(
+                skill_before,
+                (codex_skill / "SKILL.md").read_text(encoding="utf-8"),
+            )
+            self.assertEqual(claude_target_before, claude_skill.readlink())
 
     def test_can_install_published_cli_from_github(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

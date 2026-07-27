@@ -29,7 +29,16 @@ o conjunto em monorepo e não atribui ao pai o ownership dos filhos.
 ## Fonte da verdade
 
 - O repositório `specsfy/dev` desenvolve e integra a metodologia, mas não é um
-  projeto consumidor: não crie `specs/`, `.agents/` ou `.claude/` nesta raiz.
+  projeto consumidor: não crie `specs/` nesta raiz. `.agents/skills/` e
+  `.claude/skills/` contêm somente a skill local de documentação do hub.
+- A skill local `.agents/skills/specsfy-hub-documentator/` roda somente neste hub,
+  reconcilia as oito raízes e publica documentação oficial no owner `docs/`.
+  `.claude/skills/specsfy-hub-documentator` aponta para essa fonte canônica.
+  Ela não pertence ao catálogo `skills/` nem ao framework instalado pelo CLI.
+- Quando o pedido for documentar o próprio Specsfy ou invocar
+  `$specsfy-hub-documentator`, leia integralmente
+  `.agents/skills/specsfy-hub-documentator/SKILL.md` antes de agir e execute seu
+  coletor a partir desta raiz.
 - Cada projeto que aplica Specsfy mantém sua própria fonte normativa em
   `specs/specs/<NNNN>-<slug>/spec.md` e a pesquisa indexada sob a mesma pasta.
 - Ideias ainda não promovidas pertencem a `specs/backlog/` no projeto
@@ -144,6 +153,7 @@ uv run --quiet --with pyyaml python \
 - links públicos usam a organização `specsfy`;
 - BDD e TDD tiveram RED válido e estão verdes;
 - regressão e rastreabilidade passaram;
-- a raiz não contém `specs/`, `.agents/` ou `.claude/`;
+- a raiz não contém `specs/`, e suas pastas locais de skills contêm somente
+  `specsfy-hub-documentator`;
 - nenhum cache, placeholder ou arquivo normativo paralelo foi criado;
 - cada repositório alterado foi revisado separadamente.

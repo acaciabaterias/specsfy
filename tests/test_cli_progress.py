@@ -39,6 +39,7 @@ class CliProgressContractTests(unittest.TestCase):
             self.assertEqual("Passed", specs[0].plan_gate)
             self.assertEqual("Passed", specs[0].delivery_gate)
             self.assertEqual(3, specs[0].passed_gates)
+            self.assertEqual(CANONICAL_SPEC, specs[0].content)
             self.assertEqual(1, summarize_specs(specs).completed_specs)
 
 

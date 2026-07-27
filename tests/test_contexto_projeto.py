@@ -345,14 +345,15 @@ class ProjectContextContractTests(unittest.TestCase):
             self.assertTrue((ROOT / child / ".git").exists())
         self.assertFalse((ROOT / ".gitmodules").exists())
         self.assertTrue((ROOT / "skills").is_dir())
-        for local_artifact in (".agents", ".claude", "specs"):
-            self.assertFalse(
-                (ROOT / local_artifact).exists(),
-                f"{local_artifact}/ não pertence à raiz specsfy/dev",
-            )
+        self.assertFalse((ROOT / "specs").exists())
+        codex_skill = ROOT / ".agents" / "skills" / "specsfy-hub-documentator"
+        claude_skill = ROOT / ".claude" / "skills" / "specsfy-hub-documentator"
+        self.assertTrue((codex_skill / "SKILL.md").is_file())
+        self.assertTrue(claude_skill.is_symlink())
+        self.assertEqual(codex_skill.resolve(), claude_skill.resolve())
 
-    def test_parent_does_not_install_or_execute_project_skills(self) -> None:
-        """A raiz dev deve ser operacionalmente independente das skills."""
+    def test_parent_keeps_only_its_local_skill(self) -> None:
+        """A raiz dev descobre a skill do hub sem instalar skills consumidoras."""
         executable_contracts = [
             ROOT / "AGENTS.md",
             ROOT / "README.md",
@@ -361,8 +362,7 @@ class ProjectContextContractTests(unittest.TestCase):
             *sorted((ROOT / ".github" / "workflows").glob("*.yaml")),
         ]
         forbidden_invocation = re.compile(
-            r"(?:\.agents" + r"/skills|\.claude" + r"/skills|"
-            r"skills/" + r"specsfy-[^/\s]+/scripts/)"
+            r"skills/" + r"specsfy-(?!hub-documentator)[^/\s]+/scripts/"
         )
         for path in executable_contracts:
             with self.subTest(path=path.relative_to(ROOT)):

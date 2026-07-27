@@ -41,8 +41,9 @@ def then_highlighted_skill_has_details(context) -> None:
 
 @then("a decisão pode ser alternada por teclado ou mouse sem aplicação imediata")
 def then_decision_can_be_toggled(context) -> None:
-    assert '"space", "toggle_skill"' in context.tui
+    assert '"space", "activate_selection"' in context.tui
     assert '"ctrl+e", "toggle_skill"' in context.tui
+    assert "action_activate_selection" in context.tui
     assert "action_toggle_skill" in context.tui
     assert "action_apply_skills" in context.tui
 
