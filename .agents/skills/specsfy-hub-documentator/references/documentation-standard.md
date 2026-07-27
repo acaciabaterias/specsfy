@@ -33,6 +33,7 @@ Mantenha a raiz de `docs/` orientada a tarefas reais.
 | entender e iniciar o método | `docs/README.md` |
 | instalar o CLI e o framework no projeto consumidor | `docs/installation.md` |
 | conduzir a primeira fatia | `docs/basic-usage.md` |
+| atualizar uma spec depois da definição | `docs/update-spec.md` |
 | operar seleção técnica e automação | `docs/advanced-usage.md` |
 | atualizar e operar o CLI/TUI | `docs/cli.md` |
 | aplicar o método em Laravel | `docs/laravel.md` |

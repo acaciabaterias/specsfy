@@ -9,3 +9,4 @@ Feature: Orquestração conversacional integrada
     Then todas as skills base anunciam e executam a transição automaticamente
     And o fluxo documenta avanço, retorno e retomada automáticos
     And a etapa escolhida continua na mesma conversa sem confirmação
+    And mudança tardia usa uma entrada pública e executável

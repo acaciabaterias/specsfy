@@ -245,6 +245,7 @@ def then_public_entrypoint_offers_cli_tips(context) -> None:
 def then_docs_separate_user_journeys(context) -> None:
     for filename in (
         "basic-usage.md",
+        "update-spec.md",
         "advanced-usage.md",
         "repositories.md",
         "credits.md",

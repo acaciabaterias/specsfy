@@ -13,6 +13,7 @@ BASE_SKILLS = (
     "specsfy-base-tasks",
     "specsfy-base-tdd-bdd",
     "specsfy-base-implement",
+    "specsfy-base-update-spec",
     "specsfy-base-progress",
 )
 
@@ -54,6 +55,23 @@ class ConversationalOrchestrationIntegrationTests(unittest.TestCase):
                 self.assertIn("sem pedir confirmação", normalized)
                 self.assertIn("carregue imediatamente a skill de destino", normalized)
                 self.assertIn("mesma conversa", normalized)
+
+    def test_late_change_has_one_public_and_executable_entrypoint(self) -> None:
+        implement = (
+            ROOT / "skills" / "specsfy-base-implement" / "SKILL.md"
+        ).read_text(encoding="utf-8")
+        update = (
+            ROOT / "skills" / "specsfy-base-update-spec" / "SKILL.md"
+        ).read_text(encoding="utf-8")
+        advanced = (ROOT / "docs" / "advanced-usage.md").read_text(
+            encoding="utf-8"
+        )
+        entrypoint = (ROOT / "specsfy" / "README.md").read_text(encoding="utf-8")
+
+        for source in (implement, advanced, entrypoint):
+            self.assertIn("$specsfy-base-update-spec", source)
+        self.assertIn("esqueceu", update)
+        self.assertIn("reabr", update)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,351 @@
+:root {
+  --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, Menlo, monospace;
+
+  --midnight-mirage: #001F3F;
+  --nuit-blanche: #1E488F;
+  --nuit-blanche-tint: rgba(30, 72, 143, 0.08);
+  --picture-book-green: #00804C;
+  --mantis: #74C365;
+  --first-colors-of-spring: #DBE64C;
+  --praxeti-white: #F6F7ED;
+  --paper-elevated: #FFFFFF;
+  --red: #B91C1C;
+
+  --ink: var(--midnight-mirage);
+  --ink-secondary: rgba(0, 31, 63, 0.62);
+  --border: rgba(0, 31, 63, 0.16);
+}
+
+* { box-sizing: border-box; }
+
+@page {
+  size: A4;
+  margin: 24mm 20mm 22mm 20mm;
+}
+
+@page {
+  @bottom-center {
+    content: "Specsfy — Manual de Marca  ·  " counter(page) " / " counter(pages);
+    font-family: var(--mono);
+    font-size: 8.5pt;
+    color: var(--ink-secondary);
+    letter-spacing: 0.03em;
+  }
+}
+
+@page cover {
+  margin: 0;
+  @bottom-center { content: none; }
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--sans);
+  color: var(--ink);
+  font-size: 10.7pt;
+  line-height: 1.6;
+}
+
+/* ---------- Cover ---------- */
+
+.cover {
+  page: cover;
+  page-break-after: always;
+  width: 210mm;
+  height: 297mm;
+  background: var(--midnight-mirage);
+  color: var(--praxeti-white);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 26mm 22mm;
+}
+
+.cover-mark { width: 64px; height: 64px; }
+
+.cover-title { margin-top: 40mm; }
+.cover-title h1 {
+  font-size: 40pt;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 10px;
+}
+.cover-tagline {
+  font-family: var(--mono);
+  font-size: 13pt;
+  color: var(--mantis);
+  letter-spacing: 0.02em;
+  margin: 0 0 18px;
+}
+.cover-desc {
+  max-width: 90mm;
+  font-size: 11.5pt;
+  color: rgba(246, 247, 237, 0.72);
+}
+.cover-meta {
+  font-family: var(--mono);
+  font-size: 9.5pt;
+  color: rgba(246, 247, 237, 0.62);
+  letter-spacing: 0.03em;
+  border-top: 1px solid rgba(246, 247, 237, 0.2);
+  padding-top: 14px;
+}
+.cover-meta div { margin-bottom: 4px; }
+
+/* ---------- TOC ---------- */
+
+#TOC {
+  page-break-after: always;
+  padding-top: 4mm;
+}
+#TOC::before {
+  content: "Sumário";
+  display: block;
+  font-size: 18pt;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+#TOC ul { list-style: none; margin: 0; padding: 0; }
+#TOC > ul > li { margin-bottom: 10px; }
+#TOC ul ul { padding-left: 18px; margin-top: 6px; }
+#TOC a {
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 11.5pt;
+}
+#TOC ul ul a {
+  color: var(--ink-secondary);
+  font-size: 10pt;
+  font-family: var(--mono);
+}
+#TOC a::after {
+  content: leader('.') target-counter(attr(href), page);
+  color: var(--ink-secondary);
+  font-family: var(--mono);
+  font-size: 9pt;
+}
+
+/* ---------- Headings & body ---------- */
+
+h2 {
+  font-size: 19pt;
+  font-weight: 600;
+  color: var(--ink);
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 8px;
+  margin: 0 0 16px;
+  page-break-before: always;
+  page-break-after: avoid;
+}
+body > h2:first-of-type,
+#TOC + h2 { page-break-before: avoid; }
+
+h3 {
+  font-size: 13pt;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 26px 0 10px;
+  page-break-after: avoid;
+}
+h4 {
+  font-family: var(--mono);
+  font-size: 9.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-secondary);
+  margin: 18px 0 8px;
+  page-break-after: avoid;
+}
+
+p { margin: 0 0 10px; orphans: 3; widows: 3; }
+ul, ol { margin: 0 0 12px; padding-left: 20px; }
+li { margin-bottom: 4px; }
+
+a { color: var(--nuit-blanche); }
+
+strong { font-weight: 600; }
+
+blockquote {
+  margin: 14px 0;
+  padding: 4px 0 4px 16px;
+  border-left: 3px solid var(--mantis);
+  color: var(--ink);
+  font-size: 12pt;
+  font-weight: 500;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: var(--nuit-blanche-tint);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+pre {
+  background: rgba(0, 31, 63, 0.045);
+  border-left: 3px solid var(--nuit-blanche);
+  border-radius: 3px;
+  padding: 12px 14px;
+  margin: 12px 0;
+  page-break-inside: avoid;
+  overflow-wrap: break-word;
+}
+pre code {
+  background: none;
+  padding: 0;
+  font-size: 9.3pt;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0 18px;
+  font-size: 9.6pt;
+  page-break-inside: auto;
+}
+th, td {
+  border: 1px solid var(--border);
+  padding: 6px 8px;
+  text-align: left;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+th {
+  background: rgba(0, 31, 63, 0.06);
+  font-family: var(--mono);
+  font-size: 8.6pt;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--ink-secondary);
+}
+tr { page-break-inside: avoid; }
+
+hr { border: none; border-top: 1px solid var(--border); margin: 22px 0; }
+
+/* ---------- Reusable brand components ---------- */
+
+.swatch-grid { display: flex; flex-wrap: wrap; gap: 12px; margin: 14px 0 20px; }
+.swatch {
+  width: 30%;
+  min-width: 130px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--paper-elevated);
+  page-break-inside: avoid;
+}
+.swatch-color { height: 46px; }
+.swatch-meta { padding: 8px 10px; }
+.swatch-token { font-family: var(--mono); font-size: 9.4pt; font-weight: 500; }
+.swatch-hex { font-family: var(--mono); font-size: 8.6pt; color: var(--ink-secondary); margin-top: 1px; }
+.swatch-usage { font-size: 8.6pt; color: var(--ink-secondary); margin-top: 4px; line-height: 1.35; overflow-wrap: anywhere; }
+
+.callout {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--nuit-blanche);
+  border-radius: 4px;
+  padding: 12px 16px;
+  background: var(--paper-elevated);
+  margin: 14px 0;
+  page-break-inside: avoid;
+}
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+
+.dont {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--red);
+  border-radius: 4px;
+  padding: 12px 16px;
+  background: var(--paper-elevated);
+  margin: 14px 0;
+  page-break-inside: avoid;
+}
+.dont p:last-child, .dont ul:last-child { margin-bottom: 0; }
+
+.icon-grid { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0 20px; }
+.icon-card {
+  width: 22%;
+  min-width: 110px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 12px 10px;
+  background: var(--paper-elevated);
+  page-break-inside: avoid;
+}
+.icon-card svg { width: 22px; height: 22px; color: var(--ink); }
+.icon-card .icon-name { font-family: var(--mono); font-size: 8.6pt; font-weight: 500; margin-top: 8px; overflow-wrap: anywhere; }
+.icon-card .icon-desc { font-size: 8pt; color: var(--ink-secondary); margin-top: 2px; line-height: 1.3; overflow-wrap: anywhere; }
+
+.logo-cards { display: flex; gap: 14px; margin: 14px 0 20px; }
+.logo-card {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 22px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  page-break-inside: avoid;
+}
+.logo-card.light { background: #FFFFFF; }
+.logo-card.dark { background: var(--midnight-mirage); }
+.logo-card svg { height: 26px; width: auto; }
+
+.type-sample { margin: 10px 0 20px; }
+.type-row {
+  display: flex;
+  gap: 18px;
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+  align-items: baseline;
+  page-break-inside: avoid;
+}
+.type-row:first-of-type { border-top: none; }
+.type-label {
+  font-family: var(--mono);
+  font-size: 8pt;
+  color: var(--ink-secondary);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  width: 70px;
+  flex-shrink: 0;
+}
+.type-spec { font-family: var(--mono); font-size: 8pt; color: var(--ink-secondary); display: block; margin-top: 4px; }
+.t-display { font-size: 24pt; font-weight: 600; line-height: 1.15; }
+.t-h2-sample { font-size: 16pt; font-weight: 600; }
+.t-body-sample { font-size: 11pt; }
+.t-mono-sample { font-family: var(--mono); font-size: 10pt; background: var(--nuit-blanche-tint); padding: 2px 6px; border-radius: 3px; }
+
+.chip {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 8.6pt;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 3px;
+  color: var(--midnight-mirage);
+}
+.chip.draft { background: var(--first-colors-of-spring); }
+.chip.verified { background: var(--mantis); }
+.chip.red { background: none; border: 1px solid var(--red); color: var(--red); }
+
+.checklist { list-style: none; padding-left: 0; margin: 10px 0 18px; }
+.checklist li {
+  padding-left: 22px;
+  position: relative;
+  margin-bottom: 6px;
+  font-size: 9.8pt;
+}
+.checklist li::before {
+  content: "☐";
+  position: absolute;
+  left: 0;
+  color: var(--ink-secondary);
+  font-size: 11pt;
+}

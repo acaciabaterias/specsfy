@@ -1,5 +1,12 @@
 # Specsfy Dev
 
+<p align="center">
+  <picture>
+    <source srcset="https://github.com/specsfy/brand/raw/main/icons/icon.svg" type="image/svg+xml">
+    <img src="https://github.com/specsfy/brand/raw/main/icons/icon.png" alt="Ícone do framework Specsfy" width="128">
+  </picture>
+</p>
+
 Este é o workspace orquestrador de desenvolvimento do Specsfy. Ele reúne oito
 repositórios independentes, cada um com sua própria raiz Git, no mesmo layout
 local para permitir especificação, testes de contrato, integração e evolução
@@ -74,6 +81,20 @@ Sua instalação, capacidades, arquitetura, dados, rotas e comandos estão em
 [`README.md de specsfy/example`](https://github.com/specsfy/example/blob/main/README.md).
 Essa documentação acompanha o aplicativo; ela não substitui a documentação
 oficial da metodologia publicada por `specsfy/docs`.
+
+## Gerar o manual de marca
+
+O hub mantém o gerador e a folha de estilo do PDF em `.pdf/`; a fonte editorial
+e o artefato publicado pertencem ao repositório `brand/`. Depois de alterar
+`brand/guide/brand-guide.md`, `.pdf/style.css`, o template ou o style guide,
+execute nesta raiz:
+
+```bash
+make brand-guide
+```
+
+O comando publica `brand/Specsfy-Manual-de-Marca.pdf` e não cria uma segunda
+cópia em `brand/guide/`.
 
 ## Preparar o workspace
 

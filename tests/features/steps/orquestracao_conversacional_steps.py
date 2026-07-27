@@ -14,6 +14,7 @@ BASE_SKILLS = (
     "specsfy-base-tasks",
     "specsfy-base-tdd-bdd",
     "specsfy-base-implement",
+    "specsfy-base-update-spec",
     "specsfy-base-progress",
 )
 
@@ -41,7 +42,7 @@ def when_handoff_is_needed(context) -> None:
 
 @then("todas as skills base anunciam e executam a transição automaticamente")
 def then_skills_announce_and_execute(context) -> None:
-    assert len(context.skills) == 8
+    assert len(context.skills) == 9
     for content in context.skills:
         assert "Transição automática:" in content
         assert "carregue imediatamente a skill de destino" in " ".join(
@@ -64,3 +65,17 @@ def then_automatic_handoff_continues(context) -> None:
     assert "## Conversa contínua entre etapas" in context.docs
     assert "mesma conversa" in " ".join(context.framework.split())
     assert "sem pedir confirmação" in " ".join(context.framework.split())
+
+
+@then("mudança tardia usa uma entrada pública e executável")
+def then_late_change_has_one_entrypoint(context) -> None:
+    update = (
+        ROOT / "skills" / "specsfy-base-update-spec" / "SKILL.md"
+    ).read_text(encoding="utf-8")
+    implement = (
+        ROOT / "skills" / "specsfy-base-implement" / "SKILL.md"
+    ).read_text(encoding="utf-8")
+    entrypoint = (ROOT / "specsfy" / "README.md").read_text(encoding="utf-8")
+    for source in (implement, entrypoint):
+        assert "$specsfy-base-update-spec" in source
+    assert "esqueceu" in update

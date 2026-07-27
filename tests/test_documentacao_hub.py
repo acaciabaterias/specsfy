@@ -241,6 +241,14 @@ class HubDocumentationIntegrationTests(unittest.TestCase):
 
         guides = {
             "basic-usage.md": ("specsfy-base-backlog", "Definition Gate"),
+            "update-spec.md": (
+                "specsfy-base-update-spec",
+                "esqueci",
+                "adicionar",
+                "remover",
+                "corrigir",
+                "mudar",
+            ),
             "advanced-usage.md": ("--detected", "--specialist"),
             "repositories.md": (
                 "specsfy/specsfy",
