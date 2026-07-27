@@ -221,6 +221,10 @@ class HubDocumentationIntegrationTests(unittest.TestCase):
                 "Use $specsfy-base-specify para promover specs/backlog/0001-pagina-boas-vindas.md",
                 "**Opção 1 — texto livre**",
                 "**Opção 2 — arquivo de backlog**",
+                "Use $specsfy-base-validate em specs/specs/0001-pagina-boas-vindas/spec.md",
+                "Use $specsfy-base-tasks em specs/specs/0001-pagina-boas-vindas/spec.md",
+                "Use $specsfy-base-tdd-bdd em specs/specs/0001-pagina-boas-vindas/spec.md",
+                "Use $specsfy-base-implement em specs/specs/0001-pagina-boas-vindas/spec.md",
             )
             for evidence in practical_evidence:
                 self.assertIn(evidence, source)

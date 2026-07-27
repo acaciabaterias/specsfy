@@ -215,6 +215,10 @@ def then_examples_show_each_command_and_result_without_source_code(context) -> N
             "Use $specsfy-base-specify para promover specs/backlog/0001-pagina-boas-vindas.md",
             "**Opção 1 — texto livre**",
             "**Opção 2 — arquivo de backlog**",
+            "Use $specsfy-base-validate em specs/specs/0001-pagina-boas-vindas/spec.md",
+            "Use $specsfy-base-tasks em specs/specs/0001-pagina-boas-vindas/spec.md",
+            "Use $specsfy-base-tdd-bdd em specs/specs/0001-pagina-boas-vindas/spec.md",
+            "Use $specsfy-base-implement em specs/specs/0001-pagina-boas-vindas/spec.md",
         ):
             assert evidence in source
         for code in ("<?php", "Route::", "test("):
