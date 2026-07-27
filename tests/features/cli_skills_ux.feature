@@ -1,6 +1,6 @@
 @specsfy @cli @ux
 Feature: Catálogo de skills na TUI
-  Para decidir instalações e remoções sem interpretar uma lista densa
+  Para decidir instalações, remoções e atualizações sem interpretar uma lista densa
   Como pessoa usando o CLI
   Quero comparar skills em uma tabela e inspecionar a decisão antes de aplicá-la
 
@@ -10,3 +10,9 @@ Feature: Catálogo de skills na TUI
     Then as skills aparecem em uma tabela com plano, nome, categoria e estado
     And a skill destacada possui um painel de detalhes e uma ação explícita
     And a decisão pode ser alternada por teclado ou mouse sem aplicação imediata
+
+  Scenario: Atualizar todas as skills Specsfy instaladas
+    Given a implementação da aba Skills do CLI
+    When o contrato de apresentação é inspecionado
+    Then a aba oferece uma ação para atualizar todas as skills instaladas
+    And o CLI oferece a atualização não interativa equivalente
