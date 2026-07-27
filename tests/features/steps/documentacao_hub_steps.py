@@ -209,6 +209,12 @@ def then_examples_show_each_command_and_result_without_source_code(context) -> N
             "Implementação concluída",
             "Complete",
             "nenhuma pendência",
+            "Use $specsfy-base-interview para aprofundar este texto:",
+            "Use $specsfy-base-interview em specs/backlog/0001-pagina-boas-vindas.md",
+            "Use $specsfy-base-specify para criar uma especificação a partir deste texto:",
+            "Use $specsfy-base-specify para promover specs/backlog/0001-pagina-boas-vindas.md",
+            "**Opção 1 — texto livre**",
+            "**Opção 2 — arquivo de backlog**",
         ):
             assert evidence in source
         for code in ("<?php", "Route::", "test("):
