@@ -165,8 +165,17 @@ class HubDocumentationIntegrationTests(unittest.TestCase):
             "specsfy --version",
             "specsfy install --project .",
             "uv tool upgrade specsfy-cli",
+            "specsfy skills update --project .",
             "specsfy-base-backlog",
+            "Ato I — Definir",
+            "Ato II — Projetar e provar",
+            "Ato III — Entregar",
             "specsfy progress --project .",
+            "## Dicas para usar o CLI",
+            "specsfy --help",
+            "specsfy progress --project . --json",
+            "specsfy progress --project . --watch",
+            "Nada é instalado ou removido antes de **Aplicar**",
         ):
             self.assertIn(evidence, public_entrypoint)
 

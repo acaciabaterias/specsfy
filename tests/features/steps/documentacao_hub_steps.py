@@ -152,8 +152,24 @@ def then_public_entrypoint_teaches_the_first_journey(context) -> None:
         "specsfy --version",
         "specsfy install --project .",
         "uv tool upgrade specsfy-cli",
+        "specsfy skills update --project .",
         "specsfy-base-backlog",
+        "Ato I — Definir",
+        "Ato II — Projetar e provar",
+        "Ato III — Entregar",
         "specsfy progress --project .",
+    ):
+        assert evidence in context.public_entrypoint
+
+
+@then("a porta pública oferece dicas operacionais do CLI")
+def then_public_entrypoint_offers_cli_tips(context) -> None:
+    for evidence in (
+        "## Dicas para usar o CLI",
+        "specsfy --help",
+        "specsfy progress --project . --json",
+        "specsfy progress --project . --watch",
+        "Nada é instalado ou removido antes de **Aplicar**",
     ):
         assert evidence in context.public_entrypoint
 

@@ -30,5 +30,6 @@ Feature: Documentação oficial do workspace Specsfy
     Given a fonte da verdade distribuída do Specsfy
     When o contrato documental do hub é inspecionado
     Then a porta pública ensina instalação atualização e primeiro uso
+    And a porta pública oferece dicas operacionais do CLI
     And a documentação separa uso básico uso avançado repositórios e créditos
     And Laravel Astro e Nextjs possuem guias temáticos verificáveis
