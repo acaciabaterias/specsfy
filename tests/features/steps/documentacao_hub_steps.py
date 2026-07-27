@@ -83,6 +83,9 @@ def when_hub_documentation_contract_is_inspected(context) -> None:
     context.installation = ROOT / "docs" / "installation.md"
     context.router = (ROOT / "docs" / "README.md").read_text(encoding="utf-8")
     context.cli_guide = (ROOT / "docs" / "cli.md").read_text(encoding="utf-8")
+    context.public_entrypoint = (
+        ROOT / "specsfy" / "README.md"
+    ).read_text(encoding="utf-8")
 
 
 @then("ele roteia arquitetura módulos dependências stack dados fluxos e testes")
@@ -140,3 +143,46 @@ def then_guide_installs_cli_and_framework(context) -> None:
 def then_routes_point_to_installation(context) -> None:
     assert "[Guia de instalação](installation.md)" in context.router
     assert "[guia de instalação](installation.md)" in context.cli_guide
+
+
+@then("a porta pública ensina instalação atualização e primeiro uso")
+def then_public_entrypoint_teaches_the_first_journey(context) -> None:
+    for evidence in (
+        "uv tool install git+https://github.com/specsfy/cli",
+        "specsfy --version",
+        "specsfy install --project .",
+        "uv tool upgrade specsfy-cli",
+        "specsfy-base-backlog",
+        "specsfy progress --project .",
+    ):
+        assert evidence in context.public_entrypoint
+
+
+@then("a documentação separa uso básico uso avançado repositórios e créditos")
+def then_docs_separate_user_journeys(context) -> None:
+    for filename in (
+        "basic-usage.md",
+        "advanced-usage.md",
+        "repositories.md",
+        "credits.md",
+    ):
+        assert (ROOT / "docs" / filename).is_file()
+        assert f"]({filename})" in context.router
+        assert f"docs/{filename}" in context.standard
+
+
+@then("Laravel Astro e Nextjs possuem guias temáticos verificáveis")
+def then_framework_guides_are_verifiable(context) -> None:
+    expectations = {
+        "laravel.md": ("specsfy-specialist-laravel", "artisan", "composer.json"),
+        "astro.md": ("specsfy-specialist-astro", "astro.config", "package.json"),
+        "nextjs.md": ("specsfy-specialist-nextjs", "next.config", "package.json"),
+    }
+    for filename, evidence in expectations.items():
+        path = ROOT / "docs" / filename
+        assert path.is_file()
+        guide = path.read_text(encoding="utf-8")
+        assert f"]({filename})" in context.router
+        assert f"docs/{filename}" in context.standard
+        for term in evidence:
+            assert term in guide

@@ -32,11 +32,18 @@ Mantenha a raiz de `docs/` orientada a tarefas reais.
 | --- | --- |
 | entender e iniciar o método | `docs/README.md` |
 | instalar o CLI e o framework no projeto consumidor | `docs/installation.md` |
+| conduzir a primeira fatia | `docs/basic-usage.md` |
+| operar seleção técnica e automação | `docs/advanced-usage.md` |
 | atualizar e operar o CLI/TUI | `docs/cli.md` |
+| aplicar o método em Laravel | `docs/laravel.md` |
+| aplicar o método em Astro | `docs/astro.md` |
+| aplicar o método em Next.js | `docs/nextjs.md` |
 | capturar e promover ideias | `docs/backlog.md` |
 | manter contexto do projeto consumidor | `docs/project-context.md` |
 | consultar a documentação do sistema consumidor | `docs/system-documentation.md` |
 | selecionar especialistas e contexto técnico opcional | `docs/specialists.md` |
+| entender os owners do ecossistema | `docs/repositories.md` |
+| consultar autoria e identidade | `docs/credits.md` |
 | manter a documentação do próprio hub | `docs/hub-documentation.md` |
 
 Um guia explica finalidade, pré-condições, sequência observável, resultado,
@@ -47,6 +54,10 @@ O guia `docs/installation.md` deriva a distribuição e os pré-requisitos do
 repositório `specsfy/cli`, e deriva o conjunto do framework dos owners
 `specsfy/cli` e `specsfy/skills`. O guia `docs/cli.md` aponta para essa
 instalação e não mantém uma segunda sequência de bootstrap.
+
+Os guias de stack derivam detecção, escopo e critérios técnicos de
+`specsfy/specialists`; eles não repetem suas referências extensas nem
+substituem a descoberta da versão e das convenções do projeto consumidor.
 
 ## Fontes por repositório
 

@@ -149,6 +149,67 @@ class HubDocumentationIntegrationTests(unittest.TestCase):
         self.assertIn("[Guia de instalação](installation.md)", router)
         self.assertIn("[guia de instalação](installation.md)", cli_guide)
 
+    def test_public_entrypoint_and_thematic_guides_cover_the_user_journey(
+        self,
+    ) -> None:
+        public_entrypoint = (ROOT / "specsfy" / "README.md").read_text(
+            encoding="utf-8"
+        )
+        router = (ROOT / "docs" / "README.md").read_text(encoding="utf-8")
+        standard = (
+            SKILL / "references" / "documentation-standard.md"
+        ).read_text(encoding="utf-8")
+
+        for evidence in (
+            "uv tool install git+https://github.com/specsfy/cli",
+            "specsfy --version",
+            "specsfy install --project .",
+            "uv tool upgrade specsfy-cli",
+            "specsfy-base-backlog",
+            "specsfy progress --project .",
+        ):
+            self.assertIn(evidence, public_entrypoint)
+
+        guides = {
+            "basic-usage.md": ("specsfy-base-backlog", "Definition Gate"),
+            "advanced-usage.md": ("--detected", "--specialist"),
+            "repositories.md": (
+                "specsfy/specsfy",
+                "specsfy/docs",
+                "specsfy/skills",
+                "specsfy/specialists",
+                "specsfy/cli",
+                "specsfy/example",
+                "specsfy/brand",
+                "specsfy/dev",
+            ),
+            "credits.md": ("Promovaweb", "Luiz Eduardo Oliveira Fonseca"),
+            "laravel.md": (
+                "specsfy-specialist-laravel",
+                "artisan",
+                "composer.json",
+            ),
+            "astro.md": (
+                "specsfy-specialist-astro",
+                "astro.config",
+                "package.json",
+            ),
+            "nextjs.md": (
+                "specsfy-specialist-nextjs",
+                "next.config",
+                "package.json",
+            ),
+        }
+        for filename, evidence in guides.items():
+            with self.subTest(guide=filename):
+                path = ROOT / "docs" / filename
+                self.assertTrue(path.is_file())
+                guide = path.read_text(encoding="utf-8")
+                self.assertIn(f"]({filename})", router)
+                self.assertIn(f"docs/{filename}", standard)
+                for term in evidence:
+                    self.assertIn(term, guide)
+
 
 if __name__ == "__main__":
     unittest.main()

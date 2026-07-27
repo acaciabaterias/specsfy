@@ -25,3 +25,10 @@ Feature: Documentação oficial do workspace Specsfy
     Then a skill exige um guia temático de instalação em specsfy docs
     And o guia instala o CLI e o framework no projeto consumidor
     And o portal e o guia operacional do CLI apontam para a instalação
+
+  Scenario: Guiar a jornada pública completa
+    Given a fonte da verdade distribuída do Specsfy
+    When o contrato documental do hub é inspecionado
+    Then a porta pública ensina instalação atualização e primeiro uso
+    And a documentação separa uso básico uso avançado repositórios e créditos
+    And Laravel Astro e Nextjs possuem guias temáticos verificáveis
