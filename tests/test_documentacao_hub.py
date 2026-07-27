@@ -187,6 +187,7 @@ class HubDocumentationIntegrationTests(unittest.TestCase):
             "$specsfy-base-tasks",
             "$specsfy-base-tdd-bdd",
             "$specsfy-base-implement",
+            "$specsfy-base-update-spec",
             "$specsfy-base-progress",
         )
         basic_usage = (ROOT / "docs" / "basic-usage.md").read_text(
@@ -201,7 +202,8 @@ class HubDocumentationIntegrationTests(unittest.TestCase):
                 "### 5. Divida o trabalho — `$specsfy-base-tasks`",
                 "### 6. Prepare a verificação — `$specsfy-base-tdd-bdd`",
                 "### 7. Implemente — `$specsfy-base-implement`",
-                "### 8. Veja o progresso — `$specsfy-base-progress`",
+                "### 8. Altere a especificação — `$specsfy-base-update-spec`",
+                "### 9. Veja o progresso — `$specsfy-base-progress`",
             )
             for evidence in practical_journey:
                 self.assertIn(evidence, source)
@@ -213,6 +215,8 @@ class HubDocumentationIntegrationTests(unittest.TestCase):
                 "2 tarefas preparadas",
                 "Verificação preparada",
                 "Implementação concluída",
+                "Pedido incorporado na especificação 0001-pagina-boas-vindas",
+                "Implementação atualizada",
                 "Complete",
                 "nenhuma pendência",
                 "Use $specsfy-base-interview para aprofundar este texto:",

@@ -175,6 +175,7 @@ def then_examples_cover_the_complete_base_flow(context) -> None:
         "$specsfy-base-tasks",
         "$specsfy-base-tdd-bdd",
         "$specsfy-base-implement",
+        "$specsfy-base-update-spec",
         "$specsfy-base-progress",
     )
     for source in (context.public_entrypoint, context.basic_usage):
@@ -194,7 +195,8 @@ def then_examples_show_each_command_and_result_without_source_code(context) -> N
         "### 5. Divida o trabalho — `$specsfy-base-tasks`",
         "### 6. Prepare a verificação — `$specsfy-base-tdd-bdd`",
         "### 7. Implemente — `$specsfy-base-implement`",
-        "### 8. Veja o progresso — `$specsfy-base-progress`",
+        "### 8. Altere a especificação — `$specsfy-base-update-spec`",
+        "### 9. Veja o progresso — `$specsfy-base-progress`",
     )
     for source in (context.public_entrypoint, context.basic_usage):
         for evidence in practical_journey:
@@ -207,6 +209,8 @@ def then_examples_show_each_command_and_result_without_source_code(context) -> N
             "2 tarefas preparadas",
             "Verificação preparada",
             "Implementação concluída",
+            "Pedido incorporado na especificação 0001-pagina-boas-vindas",
+            "Implementação atualizada",
             "Complete",
             "nenhuma pendência",
             "Use $specsfy-base-interview para aprofundar este texto:",
