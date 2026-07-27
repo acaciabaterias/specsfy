@@ -199,7 +199,7 @@ class HubDocumentationIntegrationTests(unittest.TestCase):
                 "### 3. Crie a especificação — `$specsfy-base-specify`",
                 "### 4. Confira a especificação — `$specsfy-base-validate`",
                 "### 5. Divida o trabalho — `$specsfy-base-tasks`",
-                "### 6. Crie o teste primeiro — `$specsfy-base-tdd-bdd`",
+                "### 6. Prepare a verificação — `$specsfy-base-tdd-bdd`",
                 "### 7. Implemente — `$specsfy-base-implement`",
                 "### 8. Veja o progresso — `$specsfy-base-progress`",
             )
@@ -210,20 +210,16 @@ class HubDocumentationIntegrationTests(unittest.TestCase):
                 "Brief pronto para especificar",
                 "specs/specs/0001-pagina-boas-vindas/spec.md",
                 "READY",
-                "T001",
-                "T002",
-                "tests/Feature/WelcomePageTest.php",
-                "FAIL",
-                "404",
-                "routes/web.php",
-                "resources/views/boas-vindas.blade.php",
-                "PASS",
-                "2 tests",
+                "2 tarefas preparadas",
+                "Verificação preparada",
+                "Implementação concluída",
                 "Complete",
                 "nenhuma pendência",
             )
             for evidence in practical_evidence:
                 self.assertIn(evidence, source)
+            for code in ("<?php", "Route::", "test("):
+                self.assertNotIn(code, source)
             for skill in base_flow:
                 self.assertIn(skill, source)
             positions = [source.index(skill) for skill in base_flow]

@@ -184,15 +184,15 @@ def then_examples_cover_the_complete_base_flow(context) -> None:
         assert positions == sorted(positions)
 
 
-@then("os exemplos mostram pedido teste implementação e resultado em linguagem simples")
-def then_examples_show_request_test_implementation_and_result(context) -> None:
+@then("os exemplos mostram cada comando e seu resultado sem código de implementação")
+def then_examples_show_each_command_and_result_without_source_code(context) -> None:
     practical_journey = (
         "### 1. Guarde a ideia — `$specsfy-base-backlog`",
         "### 2. Tire as dúvidas — `$specsfy-base-interview`",
         "### 3. Crie a especificação — `$specsfy-base-specify`",
         "### 4. Confira a especificação — `$specsfy-base-validate`",
         "### 5. Divida o trabalho — `$specsfy-base-tasks`",
-        "### 6. Crie o teste primeiro — `$specsfy-base-tdd-bdd`",
+        "### 6. Prepare a verificação — `$specsfy-base-tdd-bdd`",
         "### 7. Implemente — `$specsfy-base-implement`",
         "### 8. Veja o progresso — `$specsfy-base-progress`",
     )
@@ -204,19 +204,15 @@ def then_examples_show_request_test_implementation_and_result(context) -> None:
             "Brief pronto para especificar",
             "specs/specs/0001-pagina-boas-vindas/spec.md",
             "READY",
-            "T001",
-            "T002",
-            "tests/Feature/WelcomePageTest.php",
-            "FAIL",
-            "404",
-            "routes/web.php",
-            "resources/views/boas-vindas.blade.php",
-            "PASS",
-            "2 tests",
+            "2 tarefas preparadas",
+            "Verificação preparada",
+            "Implementação concluída",
             "Complete",
             "nenhuma pendência",
         ):
             assert evidence in source
+        for code in ("<?php", "Route::", "test("):
+            assert code not in source
 
 
 @then("a porta pública oferece dicas operacionais do CLI")
