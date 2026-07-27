@@ -31,8 +31,8 @@ submódulos e não existem gitlinks entre eles.
 
 ```text
 dev/
-├── .agents/skills/    # skill local canônica para Codex
-├── .claude/skills/    # exposição da mesma skill para Claude
+├── .agents/skills/    # skills locais canônicas para Codex
+├── .claude/skills/    # exposição das mesmas skills para Claude
 ├── AGENTS.md
 ├── README.md
 ├── tests/
@@ -53,13 +53,16 @@ dev/
 - `.agents/skills/specsfy-hub-documentator/` é a fonte canônica da skill local
   do owner `dev`; `.claude/skills/specsfy-hub-documentator` aponta para ela.
   A skill documenta o próprio hub em `docs/` e nunca integra o catálogo.
+- `.agents/skills/specsfy-release-cli/` automatiza versões estáveis do checkout
+  `cli/`; atualiza seu changelog e artefatos, cria tag e publica as mesmas notas
+  no GitHub Release. `.claude/skills/specsfy-release-cli` aponta para essa fonte.
 - `cli/` é desenvolvido como checkout filho e recusa instalar na raiz pai.
 - O pai enxerga os filhos pelo filesystem, mas não versiona seu conteúdo.
 
 O repositório `dev` não é um projeto consumidor do Specsfy. Por isso, sua raiz
 não contém `specs/` nem skills do framework instalado. As pastas `.agents/` e
-`.claude/` existem somente para descobrir a skill exclusiva do hub. Specs são
-criadas somente nos projetos que aplicam a metodologia.
+`.claude/` existem somente para descobrir as duas skills operacionais exclusivas
+do hub. Specs são criadas somente nos projetos que aplicam a metodologia.
 
 ## Aplicação de exemplo
 
@@ -145,6 +148,8 @@ conteúdo entre owners apenas para produzir um único commit.
 - metodologia, skills e automação: `skills/`;
 - documentação local do próprio hub:
   `.agents/skills/specsfy-hub-documentator/`;
+- release do CLI a partir do hub:
+  `.agents/skills/specsfy-release-cli/`;
 - especialistas técnicos opcionais: `specialists/`;
 - CLI, TUI e instalação: `cli/`;
 - marca: `brand/`;

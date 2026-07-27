@@ -179,6 +179,46 @@ class HubDocumentationIntegrationTests(unittest.TestCase):
         ):
             self.assertIn(evidence, public_entrypoint)
 
+        base_flow = (
+            "$specsfy-base-backlog",
+            "$specsfy-base-interview",
+            "$specsfy-base-specify",
+            "$specsfy-base-validate",
+            "$specsfy-base-tasks",
+            "$specsfy-base-tdd-bdd",
+            "$specsfy-base-implement",
+            "$specsfy-base-progress",
+        )
+        basic_usage = (ROOT / "docs" / "basic-usage.md").read_text(
+            encoding="utf-8"
+        )
+        for source in (public_entrypoint, basic_usage):
+            plausibility_evidence = (
+                "Premissas verificáveis",
+                "$specsfy-setup",
+                "app/Models/Order.php",
+                "database/factories/OrderFactory.php",
+                "Pest",
+                "tests/Feature/OrderStatusTest.php",
+                "SPECSFY: US-001 FR-001 AC-001",
+                "falha pelo comportamento ausente",
+                "3/3 gates",
+            )
+            for evidence in plausibility_evidence:
+                self.assertIn(evidence, source)
+            self.assertLess(
+                source.index("$specsfy-setup"),
+                source.index("$specsfy-base-backlog"),
+            )
+            for skill in base_flow:
+                self.assertIn(skill, source)
+            positions = [source.index(skill) for skill in base_flow]
+            self.assertEqual(sorted(positions), positions)
+            self.assertIn(
+                "A última skill base é `$specsfy-base-progress`",
+                source,
+            )
+
         guides = {
             "basic-usage.md": ("specsfy-base-backlog", "Definition Gate"),
             "advanced-usage.md": ("--detected", "--specialist"),
@@ -218,6 +258,33 @@ class HubDocumentationIntegrationTests(unittest.TestCase):
                 self.assertIn(f"docs/{filename}", standard)
                 for term in evidence:
                     self.assertIn(term, guide)
+
+    def test_cli_guide_publishes_the_provided_tui_screenshots(self) -> None:
+        cli_guide = (ROOT / "docs" / "cli.md").read_text(encoding="utf-8")
+        public_entrypoint = (ROOT / "specsfy" / "README.md").read_text(
+            encoding="utf-8"
+        )
+        screenshots = (
+            ("cli-dash.png", "Dashboard Home"),
+            ("cli-backlogs.png", "Backlogs"),
+            ("cli-specs.png", "Specs"),
+            ("cli-skills.png", "Skills"),
+        )
+
+        for filename, alt_text in screenshots:
+            with self.subTest(screenshot=filename):
+                path = ROOT / "docs" / "screen" / "cli" / filename
+                self.assertTrue(path.is_file())
+                self.assertEqual(b"\x89PNG\r\n\x1a\n", path.read_bytes()[:8])
+                self.assertIn(
+                    f"![{alt_text}](screen/cli/{filename})",
+                    cli_guide,
+                )
+
+        self.assertIn(
+            "https://github.com/specsfy/docs/raw/main/screen/cli/cli-dash.png",
+            public_entrypoint,
+        )
 
 
 if __name__ == "__main__":

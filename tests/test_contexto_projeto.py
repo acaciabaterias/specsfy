@@ -352,8 +352,23 @@ class ProjectContextContractTests(unittest.TestCase):
         self.assertTrue(claude_skill.is_symlink())
         self.assertEqual(codex_skill.resolve(), claude_skill.resolve())
 
-    def test_parent_keeps_only_its_local_skill(self) -> None:
-        """A raiz dev descobre a skill do hub sem instalar skills consumidoras."""
+    def test_parent_keeps_only_its_local_operational_skills(self) -> None:
+        """A raiz dev descobre skills locais sem instalar skills consumidoras."""
+        local_skills = {"specsfy-hub-documentator", "specsfy-release-cli"}
+        self.assertEqual(
+            local_skills,
+            {
+                path.name
+                for path in (ROOT / ".agents" / "skills").iterdir()
+            },
+        )
+        for name in local_skills:
+            codex_skill = ROOT / ".agents" / "skills" / name
+            claude_skill = ROOT / ".claude" / "skills" / name
+            self.assertTrue((codex_skill / "SKILL.md").is_file())
+            self.assertTrue(claude_skill.is_symlink())
+            self.assertEqual(codex_skill.resolve(), claude_skill.resolve())
+
         executable_contracts = [
             ROOT / "AGENTS.md",
             ROOT / "README.md",
@@ -362,7 +377,8 @@ class ProjectContextContractTests(unittest.TestCase):
             *sorted((ROOT / ".github" / "workflows").glob("*.yaml")),
         ]
         forbidden_invocation = re.compile(
-            r"skills/" + r"specsfy-(?!hub-documentator)[^/\s]+/scripts/"
+            r"skills/"
+            + r"specsfy-(?!(?:hub-documentator|release-cli))[^/\s]+/scripts/"
         )
         for path in executable_contracts:
             with self.subTest(path=path.relative_to(ROOT)):

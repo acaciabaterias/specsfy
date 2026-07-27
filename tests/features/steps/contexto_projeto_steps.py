@@ -334,16 +334,22 @@ def then_each_concern_has_one_owner(context) -> None:
     assert not (ROOT / ".gitmodules").exists()
 
 
-@then("o pai mantém só a skill local e não instala as skills do projeto")
+@then("o pai mantém só as skills locais operacionais e não instala as skills do projeto")
 def then_parent_is_independent_from_project_skills(context) -> None:
     assert not (ROOT / "specs").exists()
-    codex_skill = ROOT / ".agents" / "skills" / "specsfy-hub-documentator"
-    claude_skill = ROOT / ".claude" / "skills" / "specsfy-hub-documentator"
-    assert (codex_skill / "SKILL.md").is_file()
-    assert claude_skill.is_symlink()
-    assert claude_skill.resolve() == codex_skill.resolve()
+    local_skills = {"specsfy-hub-documentator", "specsfy-release-cli"}
+    assert {
+        path.name for path in (ROOT / ".agents" / "skills").iterdir()
+    } == local_skills
+    for name in local_skills:
+        codex_skill = ROOT / ".agents" / "skills" / name
+        claude_skill = ROOT / ".claude" / "skills" / name
+        assert (codex_skill / "SKILL.md").is_file()
+        assert claude_skill.is_symlink()
+        assert claude_skill.resolve() == codex_skill.resolve()
     forbidden = re.compile(
-        r"skills/" + r"specsfy-(?!hub-documentator)[^/\s]+/scripts/"
+        r"skills/"
+        + r"specsfy-(?!(?:hub-documentator|release-cli))[^/\s]+/scripts/"
     )
     for path in (
         ROOT / "AGENTS.md",

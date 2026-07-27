@@ -86,6 +86,9 @@ def when_hub_documentation_contract_is_inspected(context) -> None:
     context.public_entrypoint = (
         ROOT / "specsfy" / "README.md"
     ).read_text(encoding="utf-8")
+    context.basic_usage = (
+        ROOT / "docs" / "basic-usage.md"
+    ).read_text(encoding="utf-8")
 
 
 @then("ele roteia arquitetura módulos dependências stack dados fluxos e testes")
@@ -162,6 +165,45 @@ def then_public_entrypoint_teaches_the_first_journey(context) -> None:
         assert evidence in context.public_entrypoint
 
 
+@then("os dois exemplos percorrem todas as skills base até a projeção final")
+def then_examples_cover_the_complete_base_flow(context) -> None:
+    base_flow = (
+        "$specsfy-base-backlog",
+        "$specsfy-base-interview",
+        "$specsfy-base-specify",
+        "$specsfy-base-validate",
+        "$specsfy-base-tasks",
+        "$specsfy-base-tdd-bdd",
+        "$specsfy-base-implement",
+        "$specsfy-base-progress",
+    )
+    for source in (context.public_entrypoint, context.basic_usage):
+        for skill in base_flow:
+            assert skill in source
+        positions = [source.index(skill) for skill in base_flow]
+        assert positions == sorted(positions)
+        assert "A última skill base é `$specsfy-base-progress`" in source
+
+
+@then("os exemplos declaram premissas e evidências plausíveis de ponta a ponta")
+def then_examples_declare_plausible_end_to_end_evidence(context) -> None:
+    plausibility_evidence = (
+        "Premissas verificáveis",
+        "$specsfy-setup",
+        "app/Models/Order.php",
+        "database/factories/OrderFactory.php",
+        "Pest",
+        "tests/Feature/OrderStatusTest.php",
+        "SPECSFY: US-001 FR-001 AC-001",
+        "falha pelo comportamento ausente",
+        "3/3 gates",
+    )
+    for source in (context.public_entrypoint, context.basic_usage):
+        for evidence in plausibility_evidence:
+            assert evidence in source
+        assert source.index("$specsfy-setup") < source.index("$specsfy-base-backlog")
+
+
 @then("a porta pública oferece dicas operacionais do CLI")
 def then_public_entrypoint_offers_cli_tips(context) -> None:
     for evidence in (
@@ -202,3 +244,26 @@ def then_framework_guides_are_verifiable(context) -> None:
         assert f"docs/{filename}" in context.standard
         for term in evidence:
             assert term in guide
+
+
+@then("o guia do CLI incorpora as quatro capturas fornecidas")
+def then_cli_guide_embeds_the_provided_screenshots(context) -> None:
+    screenshots = (
+        ("cli-dash.png", "Dashboard Home"),
+        ("cli-backlogs.png", "Backlogs"),
+        ("cli-specs.png", "Specs"),
+        ("cli-skills.png", "Skills"),
+    )
+    for filename, alt_text in screenshots:
+        path = ROOT / "docs" / "screen" / "cli" / filename
+        assert path.is_file()
+        assert path.read_bytes()[:8] == b"\x89PNG\r\n\x1a\n"
+        assert f"![{alt_text}](screen/cli/{filename})" in context.cli_guide
+
+
+@then("a porta pública apresenta a visão Home do dashboard")
+def then_public_entrypoint_previews_the_dashboard(context) -> None:
+    assert (
+        "https://github.com/specsfy/docs/raw/main/screen/cli/cli-dash.png"
+        in context.public_entrypoint
+    )
