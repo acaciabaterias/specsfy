@@ -180,37 +180,43 @@ def then_examples_cover_the_complete_base_flow(context) -> None:
     for source in (context.public_entrypoint, context.basic_usage):
         for skill in base_flow:
             assert skill in source
-        flow_start = source.index("$specsfy-base-backlog")
-        positions = [source.index(skill, flow_start) for skill in base_flow]
+        positions = [source.index(skill) for skill in base_flow]
         assert positions == sorted(positions)
-        assert "A última skill base é `$specsfy-base-progress`" in source
 
 
 @then("os exemplos mostram pedido teste implementação e resultado em linguagem simples")
 def then_examples_show_request_test_implementation_and_result(context) -> None:
-    beginner_evidence = (
-        "Veja o Specsfy trabalhando",
-        "$specsfy-setup",
-        "/boas-vindas?nome=Ana",
-        "Olá, Ana!",
-        "Olá, visitante!",
-        "Pest",
-        "tests/Feature/WelcomePageTest.php",
-        "FAIL",
-        "404",
-        "routes/web.php",
-        "resources/views/boas-vindas.blade.php",
-        "$specsfy-base-implement",
-        "PASS",
-        "2 tests",
-        "nenhuma pendência",
+    practical_journey = (
+        "### 1. Guarde a ideia — `$specsfy-base-backlog`",
+        "### 2. Tire as dúvidas — `$specsfy-base-interview`",
+        "### 3. Crie a especificação — `$specsfy-base-specify`",
+        "### 4. Confira a especificação — `$specsfy-base-validate`",
+        "### 5. Divida o trabalho — `$specsfy-base-tasks`",
+        "### 6. Crie o teste primeiro — `$specsfy-base-tdd-bdd`",
+        "### 7. Implemente — `$specsfy-base-implement`",
+        "### 8. Veja o progresso — `$specsfy-base-progress`",
     )
     for source in (context.public_entrypoint, context.basic_usage):
-        for evidence in beginner_evidence:
+        for evidence in practical_journey:
             assert evidence in source
-        assert "app/Models/Order.php" not in source
-        assert "database/factories/OrderFactory.php" not in source
-        assert source.index("$specsfy-setup") < source.index("$specsfy-base-backlog")
+        for evidence in (
+            "specs/backlog/0001-pagina-boas-vindas.md",
+            "Brief pronto para especificar",
+            "specs/specs/0001-pagina-boas-vindas/spec.md",
+            "READY",
+            "T001",
+            "T002",
+            "tests/Feature/WelcomePageTest.php",
+            "FAIL",
+            "404",
+            "routes/web.php",
+            "resources/views/boas-vindas.blade.php",
+            "PASS",
+            "2 tests",
+            "Complete",
+            "nenhuma pendência",
+        ):
+            assert evidence in source
 
 
 @then("a porta pública oferece dicas operacionais do CLI")

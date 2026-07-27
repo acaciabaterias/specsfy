@@ -193,40 +193,41 @@ class HubDocumentationIntegrationTests(unittest.TestCase):
             encoding="utf-8"
         )
         for source in (public_entrypoint, basic_usage):
-            beginner_evidence = (
-                "Veja o Specsfy trabalhando",
-                "$specsfy-setup",
-                "/boas-vindas?nome=Ana",
-                "Olá, Ana!",
-                "Olá, visitante!",
-                "Pest",
+            practical_journey = (
+                "### 1. Guarde a ideia — `$specsfy-base-backlog`",
+                "### 2. Tire as dúvidas — `$specsfy-base-interview`",
+                "### 3. Crie a especificação — `$specsfy-base-specify`",
+                "### 4. Confira a especificação — `$specsfy-base-validate`",
+                "### 5. Divida o trabalho — `$specsfy-base-tasks`",
+                "### 6. Crie o teste primeiro — `$specsfy-base-tdd-bdd`",
+                "### 7. Implemente — `$specsfy-base-implement`",
+                "### 8. Veja o progresso — `$specsfy-base-progress`",
+            )
+            for evidence in practical_journey:
+                self.assertIn(evidence, source)
+            practical_evidence = (
+                "specs/backlog/0001-pagina-boas-vindas.md",
+                "Brief pronto para especificar",
+                "specs/specs/0001-pagina-boas-vindas/spec.md",
+                "READY",
+                "T001",
+                "T002",
                 "tests/Feature/WelcomePageTest.php",
                 "FAIL",
                 "404",
                 "routes/web.php",
                 "resources/views/boas-vindas.blade.php",
-                "$specsfy-base-implement",
                 "PASS",
                 "2 tests",
+                "Complete",
                 "nenhuma pendência",
             )
-            for evidence in beginner_evidence:
+            for evidence in practical_evidence:
                 self.assertIn(evidence, source)
-            self.assertNotIn("app/Models/Order.php", source)
-            self.assertNotIn("database/factories/OrderFactory.php", source)
-            self.assertLess(
-                source.index("$specsfy-setup"),
-                source.index("$specsfy-base-backlog"),
-            )
             for skill in base_flow:
                 self.assertIn(skill, source)
-            flow_start = source.index("$specsfy-base-backlog")
-            positions = [source.index(skill, flow_start) for skill in base_flow]
+            positions = [source.index(skill) for skill in base_flow]
             self.assertEqual(sorted(positions), positions)
-            self.assertIn(
-                "A última skill base é `$specsfy-base-progress`",
-                source,
-            )
 
         guides = {
             "basic-usage.md": ("specsfy-base-backlog", "Definition Gate"),
