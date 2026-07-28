@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>$title$</title>
+<style>
+$fontfaces$
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <img class="cover-mark" src="../brand/logo/icon.svg" alt="Logo do Specsfy">
+  <div class="cover-title">
+    <div class="cover-kicker">Specsfy</div>
+    <h1>Guia completo<br>do usuário</h1>
+    <div class="cover-tagline">Specify. Prove. Ship.</div>
+    <div class="cover-desc">Da primeira ideia à entrega comprovada, em uma jornada prática e rastreável.</div>
+  </div>
+  <div class="cover-meta">
+    <div>Edição v$version$</div>
+    <div>Gerado em $date$</div>
+    <div>Fonte editorial: docs/user/</div>
+  </div>
+</div>
+
+$if(toc)$
+<nav id="TOC" role="doc-toc">
+$toc$
+</nav>
+$endif$
+
+<main>
+$body$
+</main>
+
+</body>
+</html>

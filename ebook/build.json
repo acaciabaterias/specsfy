@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "version": "1.1.0",
+  "edition": "v1.1.0",
+  "generated_at": "2026-07-28T12:35:48Z",
+  "source_sha256": "2af0a9a8e6941fb373e78b0be2796906a83448781ff127c6e8d23c811cbd275c",
+  "sources": [
+    ".ebook/build-ebook.sh",
+    ".ebook/epub.css",
+    ".ebook/external-links.lua",
+    ".ebook/metadata.yaml",
+    ".ebook/pdf.css",
+    ".ebook/template.html",
+    "brand/logo/icon.png",
+    "brand/logo/icon.svg",
+    "brand/style-guide.html",
+    "docs/user/README.md",
+    "docs/user/advanced-usage.md",
+    "docs/user/assets/cli/cli-backlogs.png",
+    "docs/user/assets/cli/cli-dash.png",
+    "docs/user/assets/cli/cli-skills.png",
+    "docs/user/assets/cli/cli-specs.png",
+    "docs/user/astro.md",
+    "docs/user/backlog.md",
+    "docs/user/cli.md",
+    "docs/user/credits.md",
+    "docs/user/getting-started.md",
+    "docs/user/ideas.md",
+    "docs/user/installation.md",
+    "docs/user/laravel.md",
+    "docs/user/method.md",
+    "docs/user/nextjs.md",
+    "docs/user/project-context.md",
+    "docs/user/reading-order.txt",
+    "docs/user/skills/README.md",
+    "docs/user/skills/specsfy-base-backlog.md",
+    "docs/user/skills/specsfy-base-idea.md",
+    "docs/user/skills/specsfy-base-implement.md",
+    "docs/user/skills/specsfy-base-interview.md",
+    "docs/user/skills/specsfy-base-progress.md",
+    "docs/user/skills/specsfy-base-specify.md",
+    "docs/user/skills/specsfy-base-tasks.md",
+    "docs/user/skills/specsfy-base-tdd-bdd.md",
+    "docs/user/skills/specsfy-base-update-spec.md",
+    "docs/user/skills/specsfy-base-validate.md",
+    "docs/user/specialists.md",
+    "docs/user/system-documentation.md",
+    "docs/user/update-spec.md",
+    "ebook/VERSION"
+  ],
+  "artifacts": {
+    "pdf": {
+      "file": "Specsfy-Guia-do-Usuario-v1.1.0.pdf",
+      "sha256": "43ca636b98577f309cb7005e5026d685ee98ecf063c9831cd916ecc457426f97"
+    },
+    "epub": {
+      "file": "Specsfy-Guia-do-Usuario-v1.1.0.epub",
+      "sha256": "bd8d70e1946e8d547f2c1c5a2b8e92a6f54e5c070a95ab7b22320236254209db"
+    }
+  }
+}

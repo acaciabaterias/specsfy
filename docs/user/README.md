@@ -12,220 +12,124 @@ requisitos, planos e tarefas por vários arquivos. Você conversa normalmente
 com o agente; as skills organizam o trabalho e mantêm uma única especificação
 como referência.
 
-Este guia é para quem quer **usar** o Specsfy. Você não precisa conhecer a
-implementação do framework, decorar comandos internos nem entender todos os
-termos antes de começar.
+Este guia ensina primeiro a lógica da metodologia, depois prepara o ambiente,
+acompanha a primeira entrega e, por fim, apresenta operação e recursos
+avançados. Você não precisa conhecer a implementação do framework.
 
-## Comece por aqui
+## Leia online ou como ebook
 
-| Quero… | Leia |
-| --- | --- |
-| preparar meu computador | [Instalação](installation.md) |
-| fazer a primeira entrega | [Primeiro projeto](getting-started.md) |
-| entender a Metodologia | [Como o método funciona](method.md) |
-| capturar um texto sem responder perguntas | [Caixa de entrada de ideias](ideas.md) |
-| organizar ideias antes de especificar | [Backlog](backlog.md) |
-| conhecer cada etapa em profundidade | [Skills base](skills/README.md) |
-| usar comandos e a interface visual | [CLI e TUI](cli.md) |
-| registrar stack, regras e banco | [Contexto do projeto](project-context.md) |
-| escolher conhecimento técnico extra | [Especialistas](specialists.md) |
-| gerar documentação da minha aplicação | [Documentação do sistema](system-documentation.md) |
-| corrigir ou mudar um pedido já definido | [Mudanças posteriores](update-spec.md) |
-| usar opções de automação | [Uso avançado](advanced-usage.md) |
-| aplicar em um projeto Laravel | [Laravel](laravel.md) |
-| aplicar em um projeto Astro | [Astro](astro.md) |
-| aplicar em um projeto Next.js | [Next.js](nextjs.md) |
-| conhecer os módulos do monorepo | [Mapa técnico](../develop/modules.md) |
-| consultar autoria e identidade | [Créditos](credits.md) |
+Este mesmo percurso está disponível na edição portátil **v1.1.0**:
 
-## A ideia central
+- [PDF](../../ebook/Specsfy-Guia-do-Usuario-v1.1.0.pdf), para leitura,
+  compartilhamento e impressão;
+- [EPUB](../../ebook/Specsfy-Guia-do-Usuario-v1.1.0.epub), para leitores
+  digitais com fonte e tamanho ajustáveis.
 
-Cada entrega tem um arquivo principal:
+Os dois formatos são reconstruídos a partir destas páginas. A versão vigente e
+os hashes verificáveis ficam na [pasta do ebook](../../ebook/README.md).
 
-```text
-specs/specs/<número>-<nome-curto>/spec.md
-```
+## Percurso pedagógico
 
-Esse arquivo reúne o problema, os requisitos, os exemplos de comportamento, o
-plano técnico, os testes, as tarefas e as evidências. O Specsfy evita criar
-`plan.md`, `tasks.md` ou outros documentos que poderiam ficar diferentes da
-especificação.
+Siga as etapas abaixo na primeira leitura. Depois, use esta página como mapa
+para voltar diretamente ao assunto de que precisar.
 
-Um texto que você só quer preservar pode entrar primeiro na caixa de ideias:
+### 1. Entenda a metodologia
 
-```text
-specs/ideias/<data>-<hora>-<nome-curto>.md
-```
+Comece pela [Metodologia](method.md). Ali você aprende a ideia central: cada
+entrega mantém problema, requisitos, exemplos de comportamento, plano técnico,
+tarefas, testes e evidências em uma única `spec.md`.
 
-Uma ideia escolhida para refinamento pode seguir para o backlog:
+O trabalho acontece em três atos:
 
-```text
-specs/backlog/<número>-<nome-curto>.md
-```
+1. **Ato I — Definir:** entender e validar o que deve ser entregue.
+2. **Ato II — Projetar e provar:** preparar tarefas e obter o RED, a falha
+   esperada antes da implementação.
+3. **Ato III — Entregar e validar:** implementar, obter testes verdes e
+   registrar evidências.
 
-## Uma jornada completa, em linguagem simples
+### 2. Instale o Specsfy
 
-Imagine que você queira adicionar uma página de boas-vindas.
+Com o método entendido, siga a [Instalação](installation.md) para instalar o
+CLI e preparar um projeto consumidor. A instalação cria a estrutura necessária
+para trabalhar com specs, contexto e skills sem transformar este monorepo em
+um projeto consumidor.
 
-### 1. Capture sem perguntas
+### 3. Faça a primeira entrega
 
-```text
-Use $specsfy-base-idea para capturar:
-quero uma página de boas-vindas para pessoas que acabaram de criar a conta.
-```
+Use [Primeiro projeto](getting-started.md) como tutorial guiado. Ele leva de um
+pedido inicial até uma entrega validada sem exigir que você decore cada skill.
 
-O agente preserva e pré-processa o texto em `specs/ideias/`, sem perguntar
-nada. Veja a [caixa de entrada de ideias](ideas.md).
+Se ainda não quiser iniciar a especificação:
 
-### 2. Refine no backlog
+- preserve um texto sem perguntas na [Caixa de entrada de ideias](ideas.md);
+- refine e priorize uma proposta no [Backlog](backlog.md).
 
-```text
-Use $specsfy-base-backlog para guardar esta ideia:
-quero uma página de boas-vindas para pessoas que acabaram de criar a conta.
-```
+### 4. Aprofunde o fluxo base
 
-O agente faz poucas perguntas e cria um item em `specs/backlog/`. Veja
-[como usar o backlog](skills/specsfy-base-backlog.md).
+O índice de [Skills base](skills/README.md) apresenta o fluxo completo. Leia
+cada etapa nesta ordem:
 
-### 3. Tire as dúvidas
+1. [Capturar uma ideia](skills/specsfy-base-idea.md);
+2. [Refinar no backlog](skills/specsfy-base-backlog.md);
+3. [Conduzir a entrevista](skills/specsfy-base-interview.md);
+4. [Criar a especificação](skills/specsfy-base-specify.md);
+5. [Validar a definição](skills/specsfy-base-validate.md);
+6. [Preparar as tarefas](skills/specsfy-base-tasks.md);
+7. [Preparar TDD e BDD](skills/specsfy-base-tdd-bdd.md);
+8. [Implementar](skills/specsfy-base-implement.md);
+9. [Atualizar a especificação](skills/specsfy-base-update-spec.md);
+10. [Consultar o progresso](skills/specsfy-base-progress.md).
 
-```text
-Use $specsfy-base-interview para aprofundar
-specs/backlog/0001-pagina-boas-vindas.md.
-```
+Essas páginas explicam quando usar cada skill, como pedir em linguagem natural,
+o resultado esperado, os erros comuns e o próximo passo.
 
-O agente pergunta uma coisa importante por vez: quem verá a página, qual
-resultado precisa acontecer e quais limites importam. Veja
-[como funciona a entrevista](skills/specsfy-base-interview.md).
+### 5. Opere o projeto no dia a dia
 
-### 4. Crie a especificação
+Depois da primeira entrega, aprofunde somente o que fizer parte da sua rotina:
 
-```text
-Use $specsfy-base-specify para promover
-specs/backlog/0001-pagina-boas-vindas.md.
-```
+- [CLI e TUI](cli.md): comandos, interface visual e acompanhamento;
+- [Contexto do projeto](project-context.md): stack, regras, banco e convenções;
+- [Documentação do sistema](system-documentation.md): documentação técnica
+  derivada da aplicação;
+- [Mudanças posteriores](update-spec.md): como incorporar um novo pedido à
+  mesma especificação.
 
-O resultado fica em
-`specs/specs/0001-pagina-boas-vindas/spec.md`. Veja
-[como montar uma spec](skills/specsfy-base-specify.md).
+### 6. Avance quando precisar
 
-### 5. Confira se está pronta
+Os próximos guias são opcionais e fazem mais sentido depois que o fluxo base já
+estiver familiar:
 
-```text
-Use $specsfy-base-validate em
-specs/specs/0001-pagina-boas-vindas/spec.md.
-```
+- [Especialistas](specialists.md), para conhecimento técnico adicional;
+- [Uso avançado](advanced-usage.md), para automação e integrações;
+- aplicação em projetos [Laravel](laravel.md), [Astro](astro.md) ou
+  [Next.js](nextjs.md);
+- [Mapa técnico](../develop/modules.md), para conhecer os módulos do monorepo;
+- [Créditos](credits.md), para autoria e identidade do projeto.
 
-Se algo estiver ambíguo, o agente volta à pergunta necessária. Quando a
-definição estiver pronta, o `Definition Gate` é aprovado. Veja
-[como validar](skills/specsfy-base-validate.md).
-
-### 6. Divida o trabalho
-
-```text
-Use $specsfy-base-tasks em
-specs/specs/0001-pagina-boas-vindas/spec.md.
-```
-
-As tarefas são pequenas, ordenadas e continuam dentro de `spec.md`. Veja
-[como preparar tarefas](skills/specsfy-base-tasks.md).
-
-### 7. Prepare os testes
-
-```text
-Use $specsfy-base-tdd-bdd em modo prepare para
-specs/specs/0001-pagina-boas-vindas/spec.md.
-```
-
-O agente transforma os exemplos de comportamento em testes executáveis e
-mostra o RED: a falha esperada antes do código existir. Veja
-[como usar TDD e BDD](skills/specsfy-base-tdd-bdd.md).
-
-### 8. Implemente
-
-```text
-Use $specsfy-base-implement para concluir a próxima tarefa pronta de
-specs/specs/0001-pagina-boas-vindas/spec.md.
-```
-
-Cada tarefa passa por RED, GREEN e refatoração. Veja
-[como implementar](skills/specsfy-base-implement.md).
-
-### 9. Incorpore uma mudança
-
-Se você lembrar depois que a página também precisa de um botão:
-
-```text
-Use $specsfy-base-update-spec para adicionar um botão "Começar" à
-specs/specs/0001-pagina-boas-vindas/spec.md.
-```
-
-O agente atualiza a mesma especificação e reabre somente as etapas afetadas.
-Veja [como mudar uma spec](skills/specsfy-base-update-spec.md).
-
-### 10. Veja o progresso
-
-```text
-Use $specsfy-base-progress para mostrar o estado geral do projeto.
-```
-
-O relatório lê as specs, sem criar uma segunda fonte de status. Veja
-[como consultar progresso](skills/specsfy-base-progress.md).
+Se você pretende contribuir ou modificar o próprio framework, continue no
+[guia técnico](../develop/README.md). Ele é um percurso separado do uso em
+projetos consumidores.
 
 ## Conversa contínua entre etapas
 
 Quando uma etapa depende de outra skill, o agente anuncia a transição, resolve
 a pendência e retoma o trabalho na mesma conversa. Você não precisa repetir o
-pedido nem decorar a ordem das skills.
+pedido nem conduzir cada passagem manualmente.
 
-## Os três atos
+## A ideia central em um exemplo
 
-O fluxo completo é dividido em três partes:
+Imagine uma página de boas-vindas. Você pode preservar a ideia, refiná-la no
+backlog e promovê-la até chegar a:
 
-1. **Ato I — Definir:** entender e validar o que deve ser entregue.
-2. **Ato II — Projetar e provar:** planejar tarefas e mostrar testes falhando
-   pela razão certa.
-3. **Ato III — Entregar e validar:** implementar, obter testes verdes e
-   registrar evidências.
-
-Você não precisa conduzir as transições manualmente. Quando uma etapa depende de
-outra skill, o agente anuncia a transição e continua na mesma conversa.
-
-## CLI e interface visual
-
-Depois da [instalação](installation.md), estes comandos cobrem o uso mais comum:
-
-```bash
-specsfy
-specsfy install --project .
-specsfy progress --project .
-specsfy skills list
-specsfy skills detect --project .
-specsfy test --project .
+```text
+specs/specs/0001-pagina-boas-vindas/spec.md
 ```
 
-Executar `specsfy` sem subcomando abre a TUI, uma interface visual no terminal
-com specs, backlog, testes, skills e progresso. O [guia do CLI e da
-TUI](cli.md) explica cada opção.
+Em seguida, o agente valida a definição, organiza tarefas, prepara testes,
+implementa e registra evidências nesse mesmo arquivo. Se depois surgir um
+botão novo, a mudança retorna à mesma `spec.md` e reabre apenas os atos
+afetados. Não são criados `plan.md`, `tasks.md` ou documentos normativos
+paralelos.
 
-## Contexto e conhecimento técnico
-
-O setup cria arquivos para descrever o projeto, a stack, as regras e o banco.
-Isso ajuda agentes a entenderem o sistema sem adivinhar. Veja
-[Contexto do projeto](project-context.md).
-
-As skills base cuidam do método. Quando uma entrega exige conhecimento de
-Laravel, React, segurança, banco ou outro domínio, use uma
-[skill especialista](specialists.md).
-
-Depois da implementação, `specsfy-documentator` pode reconstruir a
-[documentação técnica da sua aplicação](system-documentation.md).
-
-## Próximos passos
-
-1. conclua a [instalação](installation.md);
-2. siga o [primeiro projeto](getting-started.md);
-3. consulte as [páginas das skills base](skills/README.md) quando quiser
-   aprofundar uma etapa;
-4. use o [guia técnico](../develop/README.md) somente se quiser contribuir ou
-   modificar o próprio framework.
+Para começar esse percurso com orientação passo a passo, siga agora
+[a Metodologia](method.md).

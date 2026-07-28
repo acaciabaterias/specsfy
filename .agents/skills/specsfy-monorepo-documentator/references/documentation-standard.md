@@ -21,9 +21,9 @@ adaptar. O leitor não precisa conhecer a implementação do framework.
 | Jornada | Guia |
 | --- | --- |
 | visão geral completa | `docs/user/README.md` |
+| método e conceitos | `docs/user/method.md` |
 | instalação | `docs/user/installation.md` |
 | primeira entrega | `docs/user/getting-started.md` |
-| método e conceitos | `docs/user/method.md` |
 | caixa de entrada sem perguntas | `docs/user/ideas.md` |
 | índice das skills base | `docs/user/skills/README.md` |
 | aprofundamento de cada skill base | `docs/user/skills/specsfy-base-*.md` |
@@ -34,6 +34,11 @@ adaptar. O leitor não precisa conhecer a implementação do framework.
 | especialistas | `docs/user/specialists.md` |
 | automação avançada | `docs/user/advanced-usage.md` |
 | guias por framework | `docs/user/laravel.md`, `astro.md` e `nextjs.md` |
+
+`docs/user/reading-order.txt` é a fonte única da sequência pedagógica usada
+pelo portal e pelo ebook: método, instalação, primeira entrega, fluxo base,
+operação cotidiana e recursos avançados. Uma mudança de percurso atualiza esse
+arquivo e `docs/user/README.md` no mesmo diff.
 
 Cada página de skill base inclui:
 

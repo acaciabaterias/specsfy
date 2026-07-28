@@ -37,8 +37,32 @@ A separação de públicos e os critérios de atualização são normativos no
 
 ## Guias para usuários
 
-Jornadas públicas ficam em `docs/user/`: instalação, primeiro projeto, método,
+Jornadas públicas ficam em `docs/user/`: método, instalação, primeiro projeto,
 uma página por skill base, CLI, contexto persistente e especialistas.
+
+## Ebook do percurso do usuário
+
+`ebook/` publica todo o percurso `docs/user/` em PDF e EPUB, sem criar uma
+segunda fonte editorial. `ebook/VERSION` controla a edição com SemVer e
+`docs/user/reading-order.txt` declara a ordem pedagógica única, compartilhada
+pelo portal e pelo ebook.
+
+Na raiz:
+
+```bash
+make ebook
+make verify-ebook
+```
+
+O build gera os dois artefatos versionados e `ebook/build.json`. O manifesto
+registra o digest recursivo das páginas, imagens e fontes de build, além dos
+hashes do PDF e EPUB. A regressão executa a mesma verificação; portanto, toda
+mudança em `docs/user/` precisa reconstruir o ebook na mesma entrega.
+
+O sistema visual deriva de `brand/`: logo oficial, IBM Plex, preto, branco,
+neutros e estilos de código, tabela e navegação. As fontes do pipeline vivem
+em `.ebook/`; os artefatos publicados e o controle de edição vivem em
+`ebook/`.
 
 ## Evidência e publicação
 
@@ -46,6 +70,7 @@ uma página por skill base, CLI, contexto persistente e especialistas.
 - Use links relativos entre arquivos do monorepo.
 - Publique orientação de uso em `docs/user/` e contexto técnico em
   `docs/develop/`.
+- Após alterar `docs/user/`, ajuste a edição e execute `make ebook`.
 - Execute testes focais dos módulos, a regressão integrada e revise o diff único.
 
 A skill local vive em

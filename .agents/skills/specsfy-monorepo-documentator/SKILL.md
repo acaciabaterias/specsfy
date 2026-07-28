@@ -25,11 +25,15 @@ python3 -B .agents/skills/specsfy-monorepo-documentator/scripts/collect_monorepo
    - documentação para usuários em `docs/user/`;
    - documentação técnica em `docs/develop/`.
    Manter `docs/user/installation.md` como guia canônico de instalação e uma
-   página em `docs/user/skills/` para cada skill base.
+   página em `docs/user/skills/` para cada skill base. Manter a jornada
+   pedagógica única em `docs/user/reading-order.txt`, começando pelo método,
+   seguida de instalação, primeira entrega, fluxo base, operação e uso avançado.
 8. Usar links relativos entre módulos. URLs públicas usam
    `https://github.com/promovaweb/specsfy`.
-9. Executar testes focais dos módulos, regressão integrada e revisar o único
-   status e diff do monorepo.
+9. Após qualquer mudança em `docs/user/`, versionar e reconstruir PDF, EPUB e
+   manifesto com `make ebook`.
+10. Executar testes focais dos módulos, regressão integrada e revisar o único
+    status e diff do monorepo.
 
 ## Política de evidência
 

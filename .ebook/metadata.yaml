@@ -1,0 +1,17 @@
+---
+title: "Specsfy — Guia completo do usuário"
+subtitle: "Da ideia à evidência, sem perder contexto"
+author:
+  - "Specsfy"
+publisher: "Promovaweb"
+lang: "pt-BR"
+rights: "Documentação oficial do projeto Specsfy"
+description: "Edição portátil da documentação oficial para usuários do Specsfy."
+subject:
+  - "especificação executável"
+  - "desenvolvimento de software"
+  - "documentação"
+identifier: "https://github.com/promovaweb/specsfy"
+tagline: "Specify. Prove. Ship."
+# Identidade canônica: brand/logo/icon.svg
+---

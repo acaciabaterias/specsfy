@@ -38,8 +38,11 @@ adequado. Conteúdo temático não pertence diretamente à raiz de `docs/`.
 
 - escreva em linguagem simples e explique cada termo antes de depender dele;
 - use exemplos fáceis de adaptar, com pedido, etapas e resultado esperado;
-- cubra a jornada completa, da instalação ao acompanhamento e à mudança tardia;
+- cubra a jornada completa, do método e da instalação ao acompanhamento e à
+  mudança tardia;
 - mantenha o guia geral em `docs/user/README.md`;
+- mantenha a sequência pedagógica em `docs/user/reading-order.txt`: metodologia,
+  instalação, primeira entrega, fluxo base, operação e uso avançado;
 - mantenha uma página por skill base em `docs/user/skills/`, sincronizada com a
   interface executável correspondente;
 - apresente comportamento público sem expor detalhes internos desnecessários.
@@ -65,6 +68,11 @@ implementarem ou modificarem o framework:
   mesma entrega.
 - Nova skill base ou alteração material de uma skill base: atualize sua página
   de usuário e o contexto técnico aplicável.
+- Qualquer alteração em `docs/user/`, inclusive imagens: atualize a edição em
+  `ebook/VERSION` conforme SemVer e reconstrua PDF, EPUB e `ebook/build.json`
+  com `make ebook`.
+- Mudança na jornada: atualize juntos `docs/user/README.md` e
+  `docs/user/reading-order.txt`; o ebook deve consumir essa mesma ordem.
 - Movimento de arquivo: atualize roteadores, links, imagens, testes e referências
   no mesmo diff.
 
