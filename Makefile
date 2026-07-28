@@ -21,7 +21,9 @@ EBOOK_BUILD_SOURCES := \
 	ebook/VERSION \
 	docs/user/reading-order.txt \
 	.ebook/build-ebook.sh \
+	.ebook/extract-document-metadata.py \
 	.ebook/external-links.lua \
+	.ebook/strip-document-metadata.lua \
 	.ebook/metadata.yaml \
 	.ebook/template.html \
 	.ebook/pdf.css \

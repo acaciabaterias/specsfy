@@ -59,6 +59,15 @@ registra o digest recursivo das páginas, imagens e fontes de build, além dos
 hashes do PDF e EPUB. A regressão executa a mesma verificação; portanto, toda
 mudança em `docs/user/` precisa reconstruir o ebook na mesma entrega.
 
+As tabelas `## Classificação` são metadados das fontes Markdown. O pipeline
+extrai seus campos para `document_metadata` no manifesto e remove somente sua
+representação visual do PDF, do EPUB e de seus sumários.
+
+O pipeline converte links entre páginas de `docs/user/` em navegação entre
+capítulos. Links para destinos que não fazem parte do percurso permanecem como
+texto sem ação no PDF e no EPUB. A verificação rejeita links clicáveis externos
+e destinos internos ausentes, mantendo os dois formatos autocontidos.
+
 O sistema visual deriva de `brand/`: logo oficial, IBM Plex, preto, branco,
 neutros e estilos de código, tabela e navegação. As fontes do pipeline vivem
 em `.ebook/`; os artefatos publicados e o controle de edição vivem em

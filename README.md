@@ -38,6 +38,10 @@ Enquanto o repositório for privado, autentique uma vez com `gh auth login`;
 o CLI reutiliza essa sessão. Em automações, defina `GH_TOKEN` ou
 `GITHUB_TOKEN` com acesso de leitura ao repositório.
 
+O executável versionado está disponível pelo download oficial
+`get.specsfy.dev`. Para instalar em um ambiente isolado e receber atualizações
+gerenciadas pelo `uv`:
+
 ```bash
 uv tool install 'git+https://github.com/promovaweb/specsfy.git#subdirectory=cli'
 specsfy --version

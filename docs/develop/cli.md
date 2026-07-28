@@ -91,8 +91,9 @@ Falha de rede não impede a abertura. Configurações e metadados ficam em
 ## Artefato versionado
 
 `scripts/build-executable.sh` constrói `cli/bin/specsfy` e
-`cli/bin/specsfy.build.json`. O fingerprint usa modos equivalentes aos
-preservados pelo Git para produzir o mesmo resultado localmente e no CI.
+`cli/bin/specsfy.build.json`. O executável é distribuído publicamente por
+`get.specsfy.dev`. O fingerprint usa modos equivalentes aos preservados
+pelo Git para produzir o mesmo resultado localmente e no CI.
 
 Toda mudança em `cli/` reconstrói e versiona esses artefatos.
 

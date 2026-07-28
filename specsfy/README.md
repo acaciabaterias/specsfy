@@ -34,6 +34,10 @@ consumidor e recusa o bootstrap.
 
 ### 1. Instale o CLI
 
+Baixe o executável pela URL oficial
+`get.specsfy.dev`. Para manter a instalação e as atualizações gerenciadas pelo
+`uv`, use:
+
 ```bash
 uv tool install 'git+https://github.com/promovaweb/specsfy.git#subdirectory=cli'
 ```

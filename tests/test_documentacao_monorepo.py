@@ -124,13 +124,29 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
         installation = installation_path.read_text(encoding="utf-8")
         for evidence in (
             "Python 3.11",
-            "uv tool install 'git+https://github.com/promovaweb/specsfy.git#subdirectory=cli'",
+            "get.specsfy.dev",
+            "curl -fL get.specsfy.dev",
             "specsfy --version",
             "specsfy install --project .",
+            "specsfy skills list",
+            "specsfy progress --project .",
+            "## Se algo não funcionar",
             ".agents/skills/specsfy-base-*",
             ".specsfy/Spec.md",
         ):
             self.assertIn(evidence, installation)
+        for unnecessary_setup in (
+            "## Papel",
+            "### Pré-requisitos",
+            "gh auth login",
+            "uv tool install",
+            "promovaweb/specsfy",
+            "## Atualize quando",
+            "## Não use para",
+            "## Fonte da verdade e precedência",
+            ".specsfy/templates/Idea.md",
+        ):
+            self.assertNotIn(unnecessary_setup, installation)
         self.assertIn("[Instalação](installation.md)", router)
         self.assertIn("[guia de instalação](installation.md)", cli_guide)
 
@@ -148,7 +164,7 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
         ).read_text(encoding="utf-8")
 
         for evidence in (
-            "uv tool install 'git+https://github.com/promovaweb/specsfy.git#subdirectory=cli'",
+            "get.specsfy.dev",
             "specsfy --version",
             "specsfy install --project .",
             "uv tool upgrade specsfy-cli",
@@ -276,6 +292,19 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
                 self.assertIn(f"]({filename})", router)
                 for term in evidence:
                     self.assertIn(term, guide)
+
+    def test_public_cli_download_uses_the_canonical_short_url(self) -> None:
+        for relative in (
+            "README.md",
+            "cli/README.md",
+            "specsfy/README.md",
+            "skills/README.md",
+            "docs/user/installation.md",
+        ):
+            with self.subTest(path=relative):
+                content = (ROOT / relative).read_text(encoding="utf-8")
+                self.assertIn("`get.specsfy.dev`", content)
+                self.assertNotIn("https://get.specsfy.dev", content)
 
     def test_cli_guide_publishes_the_provided_tui_screenshots(self) -> None:
         cli_guide = (ROOT / "docs" / "user" / "cli.md").read_text(

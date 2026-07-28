@@ -18,11 +18,11 @@ avançados. Você não precisa conhecer a implementação do framework.
 
 ## Leia online ou como ebook
 
-Este mesmo percurso está disponível na edição portátil **v1.1.0**:
+Este mesmo percurso está disponível na edição portátil **v1.2.0**:
 
-- [PDF](../../ebook/Specsfy-Guia-do-Usuario-v1.1.0.pdf), para leitura,
+- [PDF](../../ebook/Specsfy-Guia-do-Usuario-v1.2.0.pdf), para leitura,
   compartilhamento e impressão;
-- [EPUB](../../ebook/Specsfy-Guia-do-Usuario-v1.1.0.epub), para leitores
+- [EPUB](../../ebook/Specsfy-Guia-do-Usuario-v1.2.0.epub), para leitores
   digitais com fonte e tamanho ajustáveis.
 
 Os dois formatos são reconstruídos a partir destas páginas. A versão vigente e

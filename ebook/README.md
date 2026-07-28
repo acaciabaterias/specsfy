@@ -27,7 +27,14 @@ Specsfy-Guia-do-Usuario-v<versão>.epub
 ```
 
 [`build.json`](build.json) registra a edição, a ordem, o digest das fontes e os
-hashes dos dois arquivos.
+hashes dos dois arquivos. As tabelas `## Classificação` permanecem nas fontes
+Markdown: o build extrai `Natureza`, `Escopo` e `Autoridade` para
+`document_metadata` no manifesto, mas não as exibe no PDF nem no EPUB.
+
+Nos artefatos portáteis, todo link clicável navega dentro do próprio ebook.
+Referências externas continuam visíveis como texto, sem abrir o navegador ou
+retirar a pessoa da leitura. O build também verifica se cada capítulo e âncora
+interna referenciada realmente existe.
 
 ## Gerar
 

@@ -64,10 +64,12 @@ governado pelo GitHub CLI. O Specsfy não a imprime nem a copia para seu cache.
 ## Distribuição e publicação
 
 O pacote instalável é definido por `pyproject.toml`, expõe o comando `specsfy`
-e inclui suas dependências no lockfile. A instalação pública usa
-`uv tool install 'git+https://github.com/promovaweb/specsfy.git#subdirectory=cli'`; a atualização usa
-`uv tool upgrade specsfy-cli`. Uma tag atualizável aponta para o commit cuja
-versão do pacote corresponde ao nome `v<versão>`, verificado pelo CI.
+e inclui suas dependências no lockfile. O download público do executável usa
+`get.specsfy.dev`. A instalação gerenciada usa
+`uv tool install 'git+https://github.com/promovaweb/specsfy.git#subdirectory=cli'`
+e a atualização usa `uv tool upgrade specsfy-cli`. Uma tag atualizável aponta
+para o commit cuja versão do pacote corresponde ao nome `v<versão>`,
+verificado pelo CI.
 
 O zipapp versionado continua sendo artefato de validação do repositório, mas
 não é a unidade instalada nem substituída pelo fluxo gerenciado pelo `uv`.

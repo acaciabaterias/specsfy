@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import posixpath
 import re
 import struct
 import subprocess
@@ -8,6 +9,7 @@ import unittest
 import zipfile
 import xml.etree.ElementTree as ET
 from pathlib import Path
+from urllib.parse import urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -61,6 +63,13 @@ class UserEbookTests(unittest.TestCase):
         self.assertEqual({"pdf", "epub"}, set(manifest["artifacts"]))
         for artifact in manifest["artifacts"].values():
             self.assertRegex(artifact["sha256"], r"^[0-9a-f]{64}$")
+        installation_metadata = manifest["document_metadata"][
+            "docs/user/installation.md"
+        ]
+        self.assertEqual(
+            {"natureza", "escopo", "autoridade"},
+            set(installation_metadata),
+        )
 
     def test_makefile_tracks_recursive_docs_and_exposes_ebook_target(
         self,
@@ -70,6 +79,8 @@ class UserEbookTests(unittest.TestCase):
             ".PHONY: brand-guide ebook verify-ebook",
             "EBOOK_DOC_SOURCES",
             "find docs/user -type f",
+            ".ebook/extract-document-metadata.py",
+            ".ebook/strip-document-metadata.lua",
             "ebook:",
             "./.ebook/build-ebook.sh",
             "verify-ebook:",
@@ -96,6 +107,36 @@ class UserEbookTests(unittest.TestCase):
             "Specify. Prove. Ship.",
         ):
             self.assertIn(evidence, sources)
+
+    def test_reading_formats_omit_document_classification_frontmatter(
+        self,
+    ) -> None:
+        classified_pages = [
+            path
+            for path in (ROOT / "docs" / "user").rglob("*.md")
+            if "## Classificação" in path.read_text(encoding="utf-8")
+        ]
+        self.assertTrue(classified_pages)
+
+        version = (EBOOK_ROOT / "VERSION").read_text(
+            encoding="utf-8"
+        ).strip()
+        stem = EBOOK_ROOT / f"Specsfy-Guia-do-Usuario-v{version}"
+        pdf_text = subprocess.run(
+            ["pdftotext", f"{stem}.pdf", "-"],
+            check=True,
+            text=True,
+            capture_output=True,
+        ).stdout
+        self.assertNotIn("Classificação", pdf_text)
+
+        with zipfile.ZipFile(f"{stem}.epub") as archive:
+            epub_text = "\n".join(
+                archive.read(name).decode("utf-8")
+                for name in archive.namelist()
+                if name.endswith(".xhtml")
+            )
+        self.assertNotIn("Classificação", epub_text)
 
     def test_epub_is_well_formed_and_contains_navigation(self) -> None:
         version = (EBOOK_ROOT / "VERSION").read_text(
@@ -134,6 +175,113 @@ class UserEbookTests(unittest.TestCase):
             )
             self.assertIsNotNone(title)
             self.assertIn(f"v{version}", title.text or "")
+
+    def test_pdf_and_epub_links_stay_inside_the_ebook(self) -> None:
+        version = (EBOOK_ROOT / "VERSION").read_text(
+            encoding="utf-8"
+        ).strip()
+        stem = EBOOK_ROOT / f"Specsfy-Guia-do-Usuario-v{version}"
+
+        pdf_xml = subprocess.run(
+            [
+                "pdftohtml",
+                "-xml",
+                "-hidden",
+                "-i",
+                f"{stem}.pdf",
+                "-stdout",
+            ],
+            check=True,
+            text=True,
+            capture_output=True,
+        ).stdout
+        pdf_document = ET.fromstring(pdf_xml)
+        pdf_pages = {
+            node.attrib["number"]
+            for node in pdf_document.iter()
+            if node.tag == "page" and "number" in node.attrib
+        }
+        pdf_links = [
+            node.attrib["href"]
+            for node in pdf_document.iter()
+            if "href" in node.attrib
+        ]
+        self.assertTrue(pdf_links)
+        for target in pdf_links:
+            with self.subTest(pdf_target=target):
+                parsed = urlsplit(target)
+                self.assertFalse(parsed.scheme)
+                self.assertFalse(parsed.netloc)
+                if parsed.fragment:
+                    self.assertIn(parsed.fragment, pdf_pages)
+
+        with zipfile.ZipFile(f"{stem}.epub") as archive:
+            documents = {}
+            for name in archive.namelist():
+                if name.endswith((".xhtml", ".html")):
+                    documents[name] = ET.fromstring(archive.read(name))
+            ids = {
+                name: {
+                    node.attrib["id"]
+                    for node in document.iter()
+                    if "id" in node.attrib
+                }
+                for name, document in documents.items()
+            }
+            links = [
+                (name, node.attrib["href"])
+                for name, document in documents.items()
+                for node in document.iter()
+                if node.tag.endswith("}a") and "href" in node.attrib
+            ]
+
+        self.assertTrue(links)
+        for source, target in links:
+            with self.subTest(epub_source=source, epub_target=target):
+                parsed = urlsplit(target)
+                self.assertFalse(parsed.scheme)
+                self.assertFalse(parsed.netloc)
+                target_name = source
+                if parsed.path:
+                    target_name = posixpath.normpath(
+                        posixpath.join(
+                            posixpath.dirname(source),
+                            parsed.path,
+                        )
+                    )
+                    self.assertIn(target_name, documents)
+                if parsed.fragment:
+                    self.assertIn(parsed.fragment, ids[target_name])
+
+    def test_method_explains_the_user_journey_and_technical_proofs(
+        self,
+    ) -> None:
+        method = (ROOT / "docs" / "user" / "method.md").read_text(
+            encoding="utf-8"
+        )
+        for heading in (
+            "### Antes dos atos: escolha o destino da ideia",
+            "### Ato I — Definir o que precisa mudar",
+            "### Ato II — Planejar e provar antes de implementar",
+            "### Ato III — Entregar e conferir o resultado",
+        ):
+            self.assertIn(heading, method)
+        for label in (
+            "**Objetivo:**",
+            "**Sua participação:**",
+            "**Prova técnica:**",
+        ):
+            self.assertGreaterEqual(method.count(label), 3)
+        for term in (
+            "Uma **ideia**",
+            "O **backlog**",
+            "A **spec**",
+            "Um **gate**",
+            "BDD",
+            "TDD",
+            "Se o pedido mudar",
+        ):
+            self.assertIn(term, method)
 
 
 if __name__ == "__main__":

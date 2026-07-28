@@ -186,7 +186,9 @@ specsfy-{base-<responsabilidade>|setup|documentator|aux-<responsabilidade>}/
 
 ## Disponibilizar as skills
 
-Instale o catálogo base com o CLI:
+O executável versionado pode ser baixado em
+`get.specsfy.dev`. Para instalar o CLI em um ambiente gerenciado pelo `uv` e
+então materializar o catálogo base:
 
 ```bash
 uv tool install 'git+https://github.com/promovaweb/specsfy.git#subdirectory=cli'

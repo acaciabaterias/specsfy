@@ -15,6 +15,8 @@ EPUB_STYLE="$SCRIPT_DIR/epub.css"
 TEMPLATE="$SCRIPT_DIR/template.html"
 METADATA="$SCRIPT_DIR/metadata.yaml"
 LINK_FILTER="$SCRIPT_DIR/external-links.lua"
+METADATA_FILTER="$SCRIPT_DIR/strip-document-metadata.lua"
+METADATA_EXTRACTOR="$SCRIPT_DIR/extract-document-metadata.py"
 LOGO_SVG="$ROOT/brand/logo/icon.svg"
 LOGO_PNG="$ROOT/brand/logo/icon.png"
 STYLE_GUIDE="$ROOT/brand/style-guide.html"
@@ -45,6 +47,8 @@ required_sources=(
   "$TEMPLATE"
   "$METADATA"
   "$LINK_FILTER"
+  "$METADATA_FILTER"
+  "$METADATA_EXTRACTOR"
   "$SCRIPT_DIR/build-ebook.sh"
   "$LOGO_SVG"
   "$LOGO_PNG"
@@ -137,35 +141,85 @@ PY
     unzip -Z1 "$EPUB_OUT" \
       | grep -E '\.(xhtml|opf|ncx|xml)$'
   )
-  EPUB_OUT="$EPUB_OUT" python3 - <<'PY'
+  PDF_OUT="$PDF_OUT" EPUB_OUT="$EPUB_OUT" python3 - <<'PY'
 import posixpath
+import subprocess
 import xml.etree.ElementTree as ET
 from urllib.parse import urlsplit
 from zipfile import ZipFile
 import os
 
 failures = []
+pdf_document = ET.fromstring(subprocess.run(
+    [
+        "pdftohtml",
+        "-xml",
+        "-hidden",
+        "-i",
+        os.environ["PDF_OUT"],
+        "-stdout",
+    ],
+    check=True,
+    text=True,
+    capture_output=True,
+).stdout)
+pdf_pages = {
+    node.attrib["number"]
+    for node in pdf_document.iter()
+    if node.tag == "page" and "number" in node.attrib
+}
+for node in pdf_document.iter():
+    target = node.attrib.get("href")
+    if not target:
+        continue
+    parsed = urlsplit(target)
+    if parsed.scheme or parsed.netloc:
+        failures.append(f"PDF -> link externo: {target}")
+    elif parsed.fragment and parsed.fragment not in pdf_pages:
+        failures.append(f"PDF -> página interna ausente: {target}")
+
 with ZipFile(os.environ["EPUB_OUT"]) as archive:
     names = set(archive.namelist())
+    documents = {}
     for name in sorted(
         entry for entry in names if entry.endswith((".xhtml", ".html"))
     ):
-        document = ET.fromstring(archive.read(name))
+        documents[name] = ET.fromstring(archive.read(name))
+    document_ids = {
+        name: {
+            node.attrib["id"]
+            for node in document.iter()
+            if "id" in node.attrib
+        }
+        for name, document in documents.items()
+    }
+    for name, document in documents.items():
         for node in document.iter():
             target = node.attrib.get("href") or node.attrib.get("src")
             if not target:
                 continue
             parsed = urlsplit(target)
-            if parsed.scheme or parsed.netloc or not parsed.path:
+            is_clickable = node.tag.endswith("}a")
+            if is_clickable and (parsed.scheme or parsed.netloc):
+                failures.append(f"{name} -> link externo: {target}")
                 continue
-            resolved = posixpath.normpath(
-                posixpath.join(posixpath.dirname(name), parsed.path)
-            )
-            if resolved not in names:
-                failures.append(f"{name} -> {target}")
+            resolved = name
+            if parsed.path:
+                resolved = posixpath.normpath(
+                    posixpath.join(posixpath.dirname(name), parsed.path)
+                )
+                if resolved not in names:
+                    failures.append(f"{name} -> {target}")
+                    continue
+            if (
+                is_clickable
+                and parsed.fragment
+                and parsed.fragment not in document_ids.get(resolved, set())
+            ):
+                failures.append(f"{name} -> âncora ausente: {target}")
 if failures:
     raise SystemExit(
-        "Erro: links locais quebrados no EPUB:\n" + "\n".join(failures)
+        "Erro: navegação inválida nos artefatos:\n" + "\n".join(failures)
     )
 PY
   echo "OK: edição v$VERSION sincronizada com docs/user/."
@@ -182,6 +236,13 @@ for bin in pandoc weasyprint python3 unzip xmllint jq magick fc-match; do
 done
 
 mkdir -p "$BUILD_ROOT"
+
+DOCUMENT_METADATA_JSON="$BUILD_ROOT/document-metadata.json"
+python3 "$METADATA_EXTRACTOR" \
+  --root "$ROOT" \
+  "${page_paths[@]}" > "$DOCUMENT_METADATA_JSON"
+jq -e 'type == "object"' "$DOCUMENT_METADATA_JSON" >/dev/null \
+  || fail "metadados documentais inválidos."
 
 FONT_FACES="$BUILD_ROOT/fontfaces.css"
 awk '
@@ -239,6 +300,7 @@ magick \
     --standalone \
     --embed-resources \
     --file-scope \
+    --lua-filter="$METADATA_FILTER" \
     --lua-filter="$LINK_FILTER" \
     --template="$FILLED_TEMPLATE" \
     --toc \
@@ -264,6 +326,7 @@ weasyprint \
     --to=epub3 \
     --standalone \
     --file-scope \
+    --lua-filter="$METADATA_FILTER" \
     --lua-filter="$LINK_FILTER" \
     --toc \
     --toc-depth=2 \
@@ -287,6 +350,7 @@ sources_json="$(
 )"
 PDF_SHA="$(sha256sum "$PDF_OUT" | cut -d' ' -f1)"
 EPUB_SHA="$(sha256sum "$EPUB_OUT" | cut -d' ' -f1)"
+document_metadata="$(<"$DOCUMENT_METADATA_JSON")"
 
 jq -n \
   --arg version "$VERSION" \
@@ -298,6 +362,7 @@ jq -n \
   --arg epub_file "$(basename "$EPUB_OUT")" \
   --arg epub_sha256 "$EPUB_SHA" \
   --argjson sources "$sources_json" \
+  --argjson document_metadata "$document_metadata" \
   '{
     schema_version: 1,
     version: $version,
@@ -305,6 +370,7 @@ jq -n \
     generated_at: $generated_at,
     source_sha256: $source_sha256,
     sources: $sources,
+    document_metadata: $document_metadata,
     artifacts: {
       pdf: {file: $pdf_file, sha256: $pdf_sha256},
       epub: {file: $epub_file, sha256: $epub_sha256}

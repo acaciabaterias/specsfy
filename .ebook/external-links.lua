@@ -1,21 +1,3 @@
-function Link(link)
-  if link.target:match("^%.%./develop/") then
-    link.target = "https://github.com/promovaweb/specsfy/blob/main/docs/"
-      .. link.target:gsub("^%.%./", "")
-  elseif link.target:match("^%.%./%.%./") then
-    local repository_path = link.target:gsub("^%.%./%.%./", "")
-    local route = "blob"
-    if repository_path:match("/$") then
-      route = "tree"
-    end
-    link.target = "https://github.com/promovaweb/specsfy/"
-      .. route
-      .. "/main/"
-      .. repository_path
-  end
-  return link
-end
-
 local function normalize_brand_assets(text)
   return text:gsub("[%.%/]*brand/logo/", "brand/logo/")
 end
@@ -91,16 +73,22 @@ function Pandoc(document)
     end
   end
   local result = pandoc.Pandoc(blocks, document.meta)
-  local anchors = {}
+  local chapter_anchors = {}
+  local header_anchors = {}
   for _, block in ipairs(result.blocks) do
+    if block.t == "Header" then
+      header_anchors[block.identifier:lower()] = block.identifier
+    end
     if block.t == "Header" and block.level == 1 then
       local source = block.identifier:match("^(.-%.md)__")
       if source then
         source = source:lower()
-        anchors[source] = anchors[source] or block.identifier
+        chapter_anchors[source] =
+          chapter_anchors[source] or block.identifier
         local basename = source:match("([^_]+%.md)$")
         if basename then
-          anchors[basename] = anchors[basename] or block.identifier
+          chapter_anchors[basename] =
+            chapter_anchors[basename] or block.identifier
         end
       end
     end
@@ -109,22 +97,44 @@ function Pandoc(document)
   return result:walk({
     Link = function(link)
       local target = link.target
-      local key = target:match("^#(.+%.md)$")
-      if not key and target:match("%.md$") then
-        key = target
-          :gsub("^%.%./", "")
-          :gsub("/", "__")
-        if not anchors[key] then
-          key = target:match("([^/]+%.md)$")
+      if target:match("^#") then
+        local key = target:match("^#(.+%.md)$")
+        if key and chapter_anchors[key:lower()] then
+          link.target = "#" .. chapter_anchors[key:lower()]
+        end
+        return link
+      end
+
+      local path, fragment = target:match("^([^#]+)#?(.*)$")
+      if path and path:match("%.md$") then
+        path = path:gsub("^%./", "")
+        while path:match("^%.%./") do
+          path = path:gsub("^%.%./", "", 1)
+        end
+        local key = path:gsub("/", "__"):lower()
+        local basename = path:match("([^/]+%.md)$")
+        local chapter = chapter_anchors[key]
+        if not chapter and basename then
+          chapter = chapter_anchors[basename:lower()]
+        end
+        local anchor = chapter
+        if fragment ~= "" then
+          local scoped = key .. "__" .. fragment:lower()
+          anchor = header_anchors[scoped]
+          if not anchor and basename then
+            scoped = basename:lower() .. "__" .. fragment:lower()
+            anchor = header_anchors[scoped]
+          end
+        end
+        if anchor then
+          link.target = "#" .. anchor
+          return link
         end
       end
-      if key then
-        key = key:lower()
-      end
-      if key and anchors[key] then
-        link.target = "#" .. anchors[key]
-      end
-      return link
+
+      -- O ebook é autocontido: referências que não possuem um capítulo
+      -- correspondente continuam legíveis, mas não abrem destinos externos.
+      return link.content
     end
   })
 end

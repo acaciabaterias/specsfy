@@ -141,11 +141,25 @@ def then_skill_requires_installation_guide(context) -> None:
 def then_guide_installs_cli_and_framework(context) -> None:
     installation = context.installation.read_text(encoding="utf-8")
     assert "Python 3.11" in installation
-    assert "uv tool install 'git+https://github.com/promovaweb/specsfy.git#subdirectory=cli'" in installation
+    assert "`get.specsfy.dev`" in installation
+    assert "curl -fL get.specsfy.dev" in installation
+    assert "https://get.specsfy.dev" not in installation
+    assert "## Papel" not in installation
+    assert "### Pré-requisitos" not in installation
+    assert "gh auth login" not in installation
+    assert "uv tool install" not in installation
+    assert "promovaweb/specsfy" not in installation
     assert "specsfy install --project ." in installation
     assert "specsfy --version" in installation
+    assert "specsfy skills list" in installation
+    assert "specsfy progress --project ." in installation
+    assert "## Se algo não funcionar" in installation
     assert ".agents/skills/specsfy-base-*" in installation
     assert ".specsfy/Spec.md" in installation
+    assert "## Atualize quando" not in installation
+    assert "## Não use para" not in installation
+    assert "## Fonte da verdade e precedência" not in installation
+    assert ".specsfy/templates/Idea.md" not in installation
 
 
 @then("o portal e o guia operacional do CLI apontam para a instalação")
@@ -157,7 +171,7 @@ def then_routes_point_to_installation(context) -> None:
 @then("a porta pública ensina instalação atualização e primeiro uso")
 def then_public_entrypoint_teaches_the_first_journey(context) -> None:
     for evidence in (
-        "uv tool install 'git+https://github.com/promovaweb/specsfy.git#subdirectory=cli'",
+        "get.specsfy.dev",
         "specsfy --version",
         "specsfy install --project .",
         "uv tool upgrade specsfy-cli",

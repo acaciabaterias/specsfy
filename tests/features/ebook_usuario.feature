@@ -32,3 +32,21 @@ Feature: Publicar a documentação do usuário como ebook
     When o percurso pedagógico é inspecionado
     Then metodologia instalação primeiro uso fluxo base operação e avançado aparecem nessa ordem
     And o portal e o ebook usam a mesma sequência
+
+  Scenario: Ocultar o frontmatter documental nos formatos de leitura
+    Given páginas do usuário com classificação documental
+    When os formatos de leitura são inspecionados
+    Then o Markdown preserva a classificação
+    And PDF e EPUB omitem o frontmatter de classificação
+
+  Scenario: Manter a navegação dentro do próprio ebook
+    Given os artefatos portáteis do guia
+    When os links do PDF e EPUB são inspecionados
+    Then todos os links clicáveis permanecem dentro do próprio formato
+    And os destinos internos do EPUB existem
+
+  Scenario: Explicar a metodologia sem exigir conhecimento prévio
+    Given o capítulo público da metodologia
+    When a explicação do método é inspecionada
+    Then cada etapa explica objetivo participação do usuário e prova técnica
+    And ideia backlog spec gates BDD TDD e mudança tardia são explicados em linguagem simples

@@ -19,6 +19,12 @@ tecnologias e acompanhar em tempo real o progresso das specs de um projeto.
 - acesso autenticado ao repositório privado: execute `gh auth login` no uso
   interativo ou defina `GH_TOKEN`/`GITHUB_TOKEN` na automação.
 
+## Download oficial
+
+O executável standalone versionado é publicado em
+`get.specsfy.dev`. Coloque o arquivo baixado em um diretório do seu `PATH` e
+preserve a permissão de execução.
+
 ## Instalar com uv
 
 ```bash

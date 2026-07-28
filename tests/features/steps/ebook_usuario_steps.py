@@ -1,7 +1,11 @@
 import json
+import posixpath
 import re
 import subprocess
+import zipfile
+import xml.etree.ElementTree as ET
 from pathlib import Path
+from urllib.parse import urlsplit
 
 from behave import given, then, when
 
@@ -39,6 +43,30 @@ def given_canonical_reading_order(context) -> None:
     context.reading_order_path = (
         ROOT / "docs" / "user" / "reading-order.txt"
     )
+
+
+@given("páginas do usuário com classificação documental")
+def given_classified_user_pages(context) -> None:
+    context.classified_pages = [
+        path
+        for path in (ROOT / "docs" / "user").rglob("*.md")
+        if "## Classificação" in path.read_text(encoding="utf-8")
+    ]
+
+
+@given("os artefatos portáteis do guia")
+def given_portable_guide_artifacts(context) -> None:
+    context.version = (EBOOK_ROOT / "VERSION").read_text(
+        encoding="utf-8"
+    ).strip()
+    context.stem = (
+        EBOOK_ROOT / f"Specsfy-Guia-do-Usuario-v{context.version}"
+    )
+
+
+@given("o capítulo público da metodologia")
+def given_public_method_chapter(context) -> None:
+    context.method_path = ROOT / "docs" / "user" / "method.md"
 
 
 @when("o contrato editorial do ebook é inspecionado")
@@ -86,6 +114,75 @@ def when_pedagogical_path_is_inspected(context) -> None:
     context.build_script = (
         ROOT / ".ebook" / "build-ebook.sh"
     ).read_text(encoding="utf-8")
+
+
+@when("os formatos de leitura são inspecionados")
+def when_reading_formats_are_inspected(context) -> None:
+    context.version = (EBOOK_ROOT / "VERSION").read_text(
+        encoding="utf-8"
+    ).strip()
+    stem = EBOOK_ROOT / f"Specsfy-Guia-do-Usuario-v{context.version}"
+    context.pdf_text = subprocess.run(
+        ["pdftotext", f"{stem}.pdf", "-"],
+        check=True,
+        text=True,
+        capture_output=True,
+    ).stdout
+    with zipfile.ZipFile(f"{stem}.epub") as archive:
+        context.epub_text = "\n".join(
+            archive.read(name).decode("utf-8")
+            for name in archive.namelist()
+            if name.endswith(".xhtml")
+        )
+
+
+@when("os links do PDF e EPUB são inspecionados")
+def when_portable_links_are_inspected(context) -> None:
+    pdf_xml = subprocess.run(
+        [
+            "pdftohtml",
+            "-xml",
+            "-hidden",
+            "-i",
+            f"{context.stem}.pdf",
+            "-stdout",
+        ],
+        check=True,
+        text=True,
+        capture_output=True,
+    ).stdout
+    pdf_document = ET.fromstring(pdf_xml)
+    context.pdf_pages = {
+        node.attrib["number"]
+        for node in pdf_document.iter()
+        if node.tag == "page" and "number" in node.attrib
+    }
+    context.pdf_links = [
+        node.attrib["href"]
+        for node in pdf_document.iter()
+        if "href" in node.attrib
+    ]
+
+    context.epub_links = []
+    context.epub_ids = {}
+    with zipfile.ZipFile(f"{context.stem}.epub") as archive:
+        for name in archive.namelist():
+            if not name.endswith((".xhtml", ".html")):
+                continue
+            document = ET.fromstring(archive.read(name))
+            context.epub_ids[name] = {
+                node.attrib["id"]
+                for node in document.iter()
+                if "id" in node.attrib
+            }
+            for node in document.iter():
+                if node.tag.endswith("}a") and "href" in node.attrib:
+                    context.epub_links.append((name, node.attrib["href"]))
+
+
+@when("a explicação do método é inspecionada")
+def when_method_explanation_is_inspected(context) -> None:
+    context.method = context.method_path.read_text(encoding="utf-8")
 
 
 @then("PDF e EPUB versionados existem na pasta ebook")
@@ -179,3 +276,85 @@ def then_portal_and_ebook_share_sequence(context) -> None:
     for relative in context.reading_order[1:]:
         link = relative.removeprefix("docs/user/")
         assert f"]({link})" in context.user_portal
+
+
+@then("o Markdown preserva a classificação")
+def then_markdown_preserves_classification(context) -> None:
+    assert context.classified_pages
+    assert all(
+        "## Classificação" in path.read_text(encoding="utf-8")
+        for path in context.classified_pages
+    )
+
+
+@then("PDF e EPUB omitem o frontmatter de classificação")
+def then_reading_formats_omit_classification(context) -> None:
+    assert "Classificação" not in context.pdf_text
+    assert "Classificação" not in context.epub_text
+    manifest = json.loads((EBOOK_ROOT / "build.json").read_text(encoding="utf-8"))
+    assert manifest["document_metadata"]["docs/user/installation.md"]
+
+
+@then("todos os links clicáveis permanecem dentro do próprio formato")
+def then_all_links_stay_inside_format(context) -> None:
+    assert context.pdf_links
+    assert context.epub_links
+    for target in context.pdf_links:
+        parsed = urlsplit(target)
+        assert not parsed.scheme and not parsed.netloc, target
+        if parsed.fragment:
+            assert parsed.fragment in context.pdf_pages, target
+    for _, target in context.epub_links:
+        parsed = urlsplit(target)
+        assert not parsed.scheme and not parsed.netloc, target
+
+
+@then("os destinos internos do EPUB existem")
+def then_epub_internal_targets_exist(context) -> None:
+    for source, target in context.epub_links:
+        parsed = urlsplit(target)
+        target_name = source
+        if parsed.path:
+            target_name = posixpath.normpath(
+                posixpath.join(posixpath.dirname(source), parsed.path)
+            )
+            assert target_name in context.epub_ids, (source, target)
+        if parsed.fragment:
+            assert parsed.fragment in context.epub_ids[target_name], (
+                source,
+                target,
+            )
+
+
+@then("cada etapa explica objetivo participação do usuário e prova técnica")
+def then_each_stage_is_explained(context) -> None:
+    for heading in (
+        "### Antes dos atos: escolha o destino da ideia",
+        "### Ato I — Definir o que precisa mudar",
+        "### Ato II — Planejar e provar antes de implementar",
+        "### Ato III — Entregar e conferir o resultado",
+    ):
+        assert heading in context.method
+    for evidence in (
+        "**Objetivo:**",
+        "**Sua participação:**",
+        "**Prova técnica:**",
+    ):
+        assert context.method.count(evidence) >= 3
+
+
+@then(
+    "ideia backlog spec gates BDD TDD e mudança tardia são explicados "
+    "em linguagem simples"
+)
+def then_method_terms_are_explained(context) -> None:
+    for evidence in (
+        "Uma **ideia**",
+        "O **backlog**",
+        "A **spec**",
+        "Um **gate**",
+        "BDD",
+        "TDD",
+        "Se o pedido mudar",
+    ):
+        assert evidence in context.method

@@ -21,6 +21,8 @@ Sem argumentos:
 
 Este script instala somente o CLI. Ele não instala skills e não cria arquivos
 de projeto no monorepo oficial do Specsfy.
+
+Download público do executável: get.specsfy.dev
 EOF
 }
 

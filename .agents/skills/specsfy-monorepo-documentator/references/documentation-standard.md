@@ -17,6 +17,10 @@ pertence a um dos dois percursos.
 `docs/user/` é a documentação do usuário final. Use linguagem simples,
 explique termos antes de usá-los e mostre pedidos e resultados fáceis de
 adaptar. O leitor não precisa conhecer a implementação do framework.
+Comece pela ação que a pessoa quer concluir e pelo resultado que ela deve
+observar. Preserve detalhes técnicos quando ajudarem a executar, verificar,
+resolver falhas ou tomar uma decisão; mova inventários e manutenção interna
+para `docs/develop/`.
 
 | Jornada | Guia |
 | --- | --- |
@@ -35,10 +39,24 @@ adaptar. O leitor não precisa conhecer a implementação do framework.
 | automação avançada | `docs/user/advanced-usage.md` |
 | guias por framework | `docs/user/laravel.md`, `astro.md` e `nextjs.md` |
 
+O download público do CLI usa a URL canônica `get.specsfy.dev`.
+Referências ao GitHub continuam sendo usadas para origem, contribuição e
+detalhes técnicos do monorepo. O guia de instalação começa diretamente pelo
+download do CLI e não exige checkout ou preparação do monorepo.
+
 `docs/user/reading-order.txt` é a fonte única da sequência pedagógica usada
 pelo portal e pelo ebook: método, instalação, primeira entrega, fluxo base,
 operação cotidiana e recursos avançados. Uma mudança de percurso atualiza esse
 arquivo e `docs/user/README.md` no mesmo diff.
+
+As tabelas `## Classificação` são frontmatter documental das fontes Markdown.
+Elas permanecem disponíveis para extração estruturada, mas o pipeline do ebook
+não as exibe no PDF, EPUB ou sumários.
+
+O ebook é uma experiência autocontida. Links entre páginas de `docs/user/`
+viram navegação interna entre capítulos; referências externas permanecem
+legíveis como texto e não abrem destinos fora do PDF ou EPUB. A validação deve
+rejeitar links externos ativos e âncoras internas ausentes.
 
 Cada página de skill base inclui:
 

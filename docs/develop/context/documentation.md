@@ -73,6 +73,10 @@ implementarem ou modificarem o framework:
   com `make ebook`.
 - Mudança na jornada: atualize juntos `docs/user/README.md` e
   `docs/user/reading-order.txt`; o ebook deve consumir essa mesma ordem.
+- Tabelas `## Classificação` permanecem nas fontes Markdown; o ebook pode
+  extrair seus valores, mas não deve exibir o cabeçalho nem a tabela.
+- Links clicáveis do ebook apontam somente para capítulos e âncoras do próprio
+  artefato; referências externas permanecem legíveis, sem ação de navegação.
 - Movimento de arquivo: atualize roteadores, links, imagens, testes e referências
   no mesmo diff.
 
