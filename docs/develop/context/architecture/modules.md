@@ -23,6 +23,7 @@ Consulte antes de criar ou mover arquivos entre módulos.
 | `./` | integração, automação e testes transversais |
 | `brand/` | identidade visual, verbal e ativos normativos |
 | `skills/` | metodologia executável, scripts e referências |
+| `docs/README.md` | roteador dos públicos, sem conteúdo temático próprio |
 | `docs/user/` | documentação oficial para usuários finais |
 | `docs/develop/` | metodologia e contexto técnico para contribuidores |
 | `example/` | aplicação interna e documentação operacional |
@@ -57,6 +58,8 @@ releases do monorepo
 - A raiz não cria `specs/` nem instala skills consumidoras.
 - Skills locais da raiz não entram no catálogo de `skills/`.
 - O documentador local publica nos percursos `docs/user/` e `docs/develop/`.
+- A classificação e sincronização dos dois percursos seguem o
+  [contexto documental](../documentation.md).
 - A release local altera artefatos em `cli/` e publica tag e release no
   monorepo.
 - `example/README.md` documenta o aplicativo; `docs/user/` orienta usuários do

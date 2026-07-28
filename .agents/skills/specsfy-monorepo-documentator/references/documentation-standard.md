@@ -58,6 +58,7 @@ implementam ou modificam o framework.
 | módulos e ownership | `docs/develop/modules.md` |
 | manutenção documental | `docs/develop/documentation.md` |
 | contexto transversal | `docs/develop/context/README.md` |
+| topologia e públicos da documentação | `docs/develop/context/documentation.md` |
 | arquitetura e integrações | `docs/develop/context/architecture/` |
 | direção das dependências | `docs/develop/context/architecture/dependencies.md` |
 | stack, pacotes, convenções e testes | `docs/develop/context/engineering/` |

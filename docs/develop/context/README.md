@@ -53,6 +53,7 @@ apropriada.
 | Finalidade, capacidades ou limites do produto | [project.md](project.md) | a definição transversal do produto mudar |
 | Termo do domínio ou nomenclatura ambígua | [glossary.md](glossary.md) | um termo canônico for criado ou redefinido |
 | Arquitetura, módulos, dependências ou integrações | [architecture/README.md](architecture/README.md) | a organização do contexto arquitetural mudar |
+| Topologia, público ou destino da documentação oficial | [documentation.md](documentation.md) | a separação entre `docs/user/` e `docs/develop/` mudar |
 | Documentação técnica gerada no consumidor | [documentação técnica do sistema](../../user/system-documentation.md) | a topologia ou o ciclo de reconstrução mudar |
 | Stack, pacotes, convenções ou testes | [engineering/README.md](engineering/README.md) | a organização do contexto de engenharia mudar |
 | Persistência, migrations ou privacidade | [data/README.md](data/README.md) | a organização do contexto de dados mudar |

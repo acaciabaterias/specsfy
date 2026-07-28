@@ -1,0 +1,90 @@
+# Topologia e públicos da documentação
+
+## Classificação
+
+| Campo | Valor |
+| --- | --- |
+| Natureza | normativo |
+| Escopo | organização e separação de públicos em `docs/` |
+| Autoridade | destino, linguagem e sincronização da documentação oficial |
+
+## Papel
+
+Definir onde cada tipo de documentação oficial pertence e impedir que conteúdo
+para usuários finais seja misturado com contexto de implementação.
+
+## Como usar
+
+Leia antes de criar, mover ou reclassificar um documento e sempre que uma
+mudança do framework exigir decidir qual percurso atualizar.
+
+## Topologia canônica
+
+Na primeira camada, `docs/` possui exatamente:
+
+```text
+docs/
+├── README.md
+├── user/
+└── develop/
+```
+
+`docs/README.md` apenas apresenta os públicos e encaminha para o percurso
+adequado. Conteúdo temático não pertence diretamente à raiz de `docs/`.
+
+## Percurso do usuário
+
+`docs/user/` orienta quem usa o Specsfy em um projeto consumidor:
+
+- escreva em linguagem simples e explique cada termo antes de depender dele;
+- use exemplos fáceis de adaptar, com pedido, etapas e resultado esperado;
+- cubra a jornada completa, da instalação ao acompanhamento e à mudança tardia;
+- mantenha o guia geral em `docs/user/README.md`;
+- mantenha uma página por skill base em `docs/user/skills/`, sincronizada com a
+  interface executável correspondente;
+- apresente comportamento público sem expor detalhes internos desnecessários.
+
+## Percurso de desenvolvimento
+
+`docs/develop/` fornece contexto técnico para agentes e humanos contribuírem,
+implementarem ou modificarem o framework:
+
+- documente metodologia, arquitetura, ownership, dependências e convenções;
+- explique skills, CLI, testes, validações e fluxo de contribuição;
+- mantenha decisões vigentes em `docs/develop/context/`;
+- preserve motivação histórica em `docs/develop/decisions/`;
+- derive afirmações de código, testes, manifests, configurações ou outra fonte
+  proprietária.
+
+## Regra de atualização
+
+- Mudança apenas na experiência ou interface pública: atualize `docs/user/`.
+- Mudança apenas na implementação, arquitetura ou contribuição: atualize
+  `docs/develop/`.
+- Mudança que afeta o uso e a implementação: atualize ambos os percursos na
+  mesma entrega.
+- Nova skill base ou alteração material de uma skill base: atualize sua página
+  de usuário e o contexto técnico aplicável.
+- Movimento de arquivo: atualize roteadores, links, imagens, testes e referências
+  no mesmo diff.
+
+## Fonte da verdade e precedência
+
+O [`AGENTS.md` da raiz](../../../AGENTS.md) governa o processo de trabalho. Este
+contexto governa a classificação documental. As fontes executáveis de cada
+módulo comprovam o estado implementado; a documentação deriva delas e não as
+substitui.
+
+O [padrão da skill documental](../../../.agents/skills/specsfy-monorepo-documentator/references/documentation-standard.md)
+detalha a reconciliação operacional dos dois percursos.
+
+## Atualize quando
+
+- um público, destino, regra de linguagem ou critério de sincronização mudar;
+- a primeira camada de `docs/` ou a responsabilidade de um percurso mudar.
+
+## Não use para
+
+- documentar uma feature consumidora;
+- copiar inventários de código, rotas, schemas ou manifests;
+- manter planos, tarefas ou pesquisa temporária.

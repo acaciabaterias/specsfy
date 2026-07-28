@@ -123,6 +123,7 @@ class DocumentationAudienceContractTests(unittest.TestCase):
 
         for relative in (
             "context/README.md",
+            "context/documentation.md",
             "context/architecture/modules.md",
             "context/architecture/dependencies.md",
             "context/engineering/testing.md",
@@ -131,6 +132,36 @@ class DocumentationAudienceContractTests(unittest.TestCase):
             "decisions/README.md",
         ):
             self.assertTrue((DEVELOP / relative).is_file(), relative)
+
+    def test_root_agents_and_context_govern_the_two_audiences(self) -> None:
+        agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        context_router = (
+            DEVELOP / "context" / "README.md"
+        ).read_text(encoding="utf-8")
+        context_path = DEVELOP / "context" / "documentation.md"
+
+        self.assertIn("docs/README.md", agents)
+        self.assertIn("apenas o roteador", agents)
+        self.assertIn("conteúdo temático", agents)
+        self.assertIn("docs/user/", agents)
+        self.assertIn("linguagem simples", agents)
+        self.assertIn("docs/develop/", agents)
+        self.assertIn("agentes e humanos", agents)
+        self.assertIn("atualize os dois percursos", agents)
+
+        self.assertTrue(context_path.is_file())
+        self.assertIn("documentation.md", context_router)
+        context = context_path.read_text(encoding="utf-8")
+        for term in (
+            "docs/README.md",
+            "docs/user/",
+            "docs/develop/",
+            "uma página por skill base",
+            "linguagem simples",
+            "agentes e humanos",
+            "ambos os percursos",
+        ):
+            self.assertIn(term, context)
 
 
 if __name__ == "__main__":

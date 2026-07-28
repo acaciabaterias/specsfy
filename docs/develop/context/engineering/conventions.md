@@ -43,6 +43,8 @@ Consulte antes de criar arquivos, escolher nomes ou definir tratamento de erro.
 ## Disciplina documental
 
 - Toda criação ou alteração atualiza a documentação aplicável na mesma entrega.
+- A [topologia documental](../documentation.md) determina público, destino,
+  linguagem e quando os dois percursos precisam mudar juntos.
 - Contextos explicam decisões; não copiam inventários de versões, rotas ou
   schemas.
 - Documentação gerada para consumidores pertence a `<projeto>/docs/`.

@@ -32,6 +32,8 @@ módulo. Um checkout parcial, outro remoto ou um projeto consumidor é recusado.
 
 Decisões transversais ficam em `docs/develop/context/`: finalidade,
 vocabulário, arquitetura, módulos, dependências, stack, dados, fluxos e testes.
+A separação de públicos e os critérios de atualização são normativos no
+[contexto documental](context/documentation.md).
 
 ## Guias para usuários
 

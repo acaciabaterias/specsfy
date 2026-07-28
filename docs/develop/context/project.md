@@ -37,7 +37,8 @@ somente os atos invalidados e retomam o trabalho.
 O projeto é publicado como um único monorepo em
 [`promovaweb/specsfy`](https://github.com/promovaweb/specsfy). Seus módulos
 preservam responsabilidades: `specsfy/` apresenta, `docs/` documenta em dois
-percursos, `skills/`
+percursos governados pelo
+[contexto documental](documentation.md), `skills/`
 implementa a metodologia, `specialists/` oferece contexto opcional, `cli/`
 instala e projeta progresso, `brand/` governa a identidade, a raiz integra e
 `example/` valida.

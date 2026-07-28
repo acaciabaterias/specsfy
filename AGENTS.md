@@ -58,10 +58,21 @@ normativa paralela.
 - Toda criação ou alteração atualiza, na mesma entrega, a documentação aplicável.
 - Documentação deriva das fontes executáveis e não duplica inventários de
   manifests, rotas, schemas ou testes.
-- Guias públicos vivem em `docs/user/`; decisões e contexto técnico vivem em
-  `docs/develop/`.
+- Na primeira camada, `docs/` contém somente `docs/README.md`, `docs/user/` e
+  `docs/develop/`. `docs/README.md` é apenas o roteador entre os dois públicos;
+  não publique conteúdo temático diretamente em `docs/`.
+- `docs/user/` é o percurso do usuário final: use linguagem simples, explique
+  termos, ofereça exemplos fáceis, cubra a jornada completa e mantenha uma
+  página aprofundada para cada skill base.
+- `docs/develop/` é o percurso técnico para agentes e humanos contribuírem,
+  implementarem ou modificarem o framework. Mantenha ali metodologia,
+  arquitetura, decisões, convenções, validações e contexto transversal.
+- Se uma mudança alterar somente a interface pública, atualize `docs/user/`; se
+  alterar somente decisões internas, atualize `docs/develop/`; se afetar uso e
+  implementação, atualize os dois percursos na mesma entrega.
 - Use `docs/develop/context/README.md` como roteador e leia apenas os contextos
-  exigidos.
+  exigidos. A regra completa da topologia documental está em
+  `docs/develop/context/documentation.md`.
 
 ### ClickUp
 
