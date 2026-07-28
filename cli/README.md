@@ -85,6 +85,16 @@ possui seis abas:
   por um painel de detalhes e resumo das alterações pendentes;
 - **Sobre**: versão e finalidade do CLI.
 
+## Capturas de tela
+
+![Dashboard Home](../docs/user/assets/cli/cli-dash.png)
+
+![Backlogs](../docs/user/assets/cli/cli-backlogs.png)
+
+![Specs](../docs/user/assets/cli/cli-specs.png)
+
+![Skills](../docs/user/assets/cli/cli-skills.png)
+
 Alterações em `specs/ideias/*.md`, `specs/backlog/*.md`, `specs/specs/*/spec.md` e no
 `skills-lock.json` são detectadas automaticamente.
 

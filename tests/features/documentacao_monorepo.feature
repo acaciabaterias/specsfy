@@ -40,6 +40,7 @@ Feature: Documentação oficial do monorepo Specsfy
     Given a fonte da verdade distribuída do Specsfy
     When o contrato documental do monorepo é inspecionado
     Then o guia do CLI incorpora as quatro capturas fornecidas
+    And o README do módulo CLI empilha as quatro capturas verticalmente
     And a porta pública apresenta a visão Home do dashboard
 
   Scenario: Separar a documentação por público

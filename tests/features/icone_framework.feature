@@ -8,7 +8,7 @@ Feature: Ícone oficial do framework Specsfy
     Given os novos arquivos SVG e PNG do ícone do framework
     When a adoção visual do workspace é inspecionada
     Then os dois formatos permanecem canônicos no repositório de marca
-    And os oito READMEs exibem o SVG com fallback PNG
+    And os sete READMEs de módulos exibem o SVG com fallback PNG
     And o manual distingue o ícone do framework do logo e dos ícones conceituais
 
   Scenario: Publicar o manual de marca em PDF a partir do Markdown
@@ -17,3 +17,8 @@ Feature: Ícone oficial do framework Specsfy
     Then o PDF canônico fica na raiz do repositório de marca
     And o monorepo possui o gerador e a folha de estilo da marca
     And o comando make brand-guide reconstrói o PDF quando suas fontes mudam
+
+  Scenario: Exibir o logo oficial em toda a documentação
+    Given os READMEs da documentação oficial
+    When a adoção do logo oficial nesses índices é inspecionada
+    Then todos os READMEs encontrados recursivamente exibem os lockups oficiais

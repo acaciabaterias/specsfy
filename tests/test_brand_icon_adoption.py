@@ -11,13 +11,39 @@ REPOSITORIES = (
     ROOT,
     ROOT / "brand",
     ROOT / "skills",
-    ROOT / "docs",
     ROOT / "example",
     ROOT / "specsfy",
     ROOT / "specialists",
     ROOT / "cli",
 )
 class BrandIconAdoptionTests(unittest.TestCase):
+    def test_all_documentation_readmes_use_the_official_theme_aware_logo(
+        self,
+    ) -> None:
+        readmes = sorted((ROOT / "docs").rglob("README.md"))
+        self.assertTrue(readmes)
+
+        for readme_path in readmes:
+            with self.subTest(readme=readme_path.relative_to(ROOT)):
+                depth = len(readme_path.parent.relative_to(ROOT).parts)
+                logo_root = "/".join([".."] * depth + ["brand", "logo"])
+                readme = readme_path.read_text(encoding="utf-8")
+                self.assertIn(
+                    f'media="(prefers-color-scheme: dark)" '
+                    f'srcset="{logo_root}/logo-dark.svg"',
+                    readme,
+                )
+                self.assertIn(
+                    f'media="(prefers-color-scheme: light)" '
+                    f'srcset="{logo_root}/logo-light.svg"',
+                    readme,
+                )
+                self.assertIn(
+                    f'<img src="{logo_root}/logo-light.svg" '
+                    'alt="Logo oficial do Specsfy" width="180">',
+                    readme,
+                )
+
     def test_brand_owns_accessible_vector_and_raster_sources(self) -> None:
         svg_path = ROOT / "brand" / "icons" / "icon.svg"
         png_path = ROOT / "brand" / "icons" / "icon.png"
@@ -37,7 +63,7 @@ class BrandIconAdoptionTests(unittest.TestCase):
         width, height = struct.unpack(">II", png[16:24])
         self.assertEqual((512, 512), (width, height))
 
-    def test_all_repository_readmes_use_svg_with_png_fallback(self) -> None:
+    def test_public_module_readmes_use_svg_with_png_fallback(self) -> None:
         for repository in REPOSITORIES:
             with self.subTest(repository=repository.name):
                 readme = (repository / "README.md").read_text(encoding="utf-8")

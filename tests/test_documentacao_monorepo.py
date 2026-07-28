@@ -281,6 +281,7 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
         cli_guide = (ROOT / "docs" / "user" / "cli.md").read_text(
             encoding="utf-8"
         )
+        cli_readme = (ROOT / "cli" / "README.md").read_text(encoding="utf-8")
         public_entrypoint = (ROOT / "specsfy" / "README.md").read_text(
             encoding="utf-8"
         )
@@ -300,6 +301,12 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
                     f"![{alt_text}](assets/cli/{filename})",
                     cli_guide,
                 )
+
+        stacked_screenshots = "\n\n".join(
+            f"![{alt_text}](../docs/user/assets/cli/{filename})"
+            for filename, alt_text in screenshots
+        )
+        self.assertIn(stacked_screenshots, cli_readme)
 
         self.assertIn(
             "![Dashboard Home do Specsfy](../docs/user/assets/cli/cli-dash.png)",

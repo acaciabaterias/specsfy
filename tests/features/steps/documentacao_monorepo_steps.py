@@ -86,6 +86,9 @@ def when_monorepo_documentation_contract_is_inspected(context) -> None:
     context.cli_guide = (ROOT / "docs" / "user" / "cli.md").read_text(
         encoding="utf-8"
     )
+    context.cli_readme = (ROOT / "cli" / "README.md").read_text(
+        encoding="utf-8"
+    )
     context.public_entrypoint = (
         ROOT / "specsfy" / "README.md"
     ).read_text(encoding="utf-8")
@@ -290,6 +293,21 @@ def then_cli_guide_embeds_the_provided_screenshots(context) -> None:
         assert path.is_file()
         assert path.read_bytes()[:8] == b"\x89PNG\r\n\x1a\n"
         assert f"![{alt_text}](assets/cli/{filename})" in context.cli_guide
+
+
+@then("o README do módulo CLI empilha as quatro capturas verticalmente")
+def then_cli_readme_stacks_screenshots_vertically(context) -> None:
+    screenshots = (
+        ("cli-dash.png", "Dashboard Home"),
+        ("cli-backlogs.png", "Backlogs"),
+        ("cli-specs.png", "Specs"),
+        ("cli-skills.png", "Skills"),
+    )
+    stacked_screenshots = "\n\n".join(
+        f"![{alt_text}](../docs/user/assets/cli/{filename})"
+        for filename, alt_text in screenshots
+    )
+    assert stacked_screenshots in context.cli_readme
 
 
 @then("a porta pública apresenta a visão Home do dashboard")
