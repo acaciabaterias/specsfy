@@ -1,0 +1,6 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gate">
+  <rect fill="currentColor" x="6" y="6" width="2.2" height="21" rx="1.1"/>
+  <rect fill="currentColor" x="23.8" y="6" width="2.2" height="21" rx="1.1"/>
+  <rect fill="currentColor" x="6" y="6" width="20" height="1.8" rx="0.9"/>
+  <path fill="currentColor" transform="translate(11.2,12.5) scale(1.1)" d="M4.5,8.1 L2.4,6 L1.7,6.7 L4.5,9.5 L10.5,3.5 L9.8,2.8 Z"/>
+</svg>

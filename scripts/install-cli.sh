@@ -5,7 +5,7 @@ set -euo pipefail
 readonly SCRIPT_DIRECTORY="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
 readonly WORKSPACE_DIRECTORY="$(cd -- "${SCRIPT_DIRECTORY}/.." && pwd -P)"
 readonly LOCAL_CLI_DIRECTORY="${WORKSPACE_DIRECTORY}/cli"
-readonly GITHUB_CLI_SOURCE="git+https://github.com/specsfy/cli.git"
+readonly GITHUB_CLI_SOURCE="git+https://github.com/promovaweb/specsfy.git#subdirectory=cli"
 
 usage() {
     cat <<'EOF'
@@ -14,13 +14,13 @@ Uso: ./scripts/install-cli.sh [--github]
 Instala ou atualiza o executável specsfy para o usuário atual com uv tool.
 
 Sem argumentos:
-  instala o checkout local disponível em dev/cli.
+  instala o checkout local disponível em cli/.
 
 --github:
-  instala a versão publicada na branch main de specsfy/cli.
+  instala a versão publicada em cli/ na branch main de promovaweb/specsfy.
 
 Este script instala somente o CLI. Ele não instala skills e não cria arquivos
-de projeto no workspace specsfy/dev.
+de projeto no monorepo oficial do Specsfy.
 EOF
 }
 
@@ -61,7 +61,7 @@ if [[ "${cli_source}" == "${LOCAL_CLI_DIRECTORY}" ]]; then
         printf 'erro: checkout do CLI não encontrado em %s\n' \
             "${LOCAL_CLI_DIRECTORY}" >&2
         printf '%s\n' \
-            'Clone https://github.com/specsfy/cli.git nesse caminho ou use --github.' \
+            'Clone https://github.com/promovaweb/specsfy.git ou use --github.' \
             >&2
         exit 1
     fi

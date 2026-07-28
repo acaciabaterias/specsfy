@@ -281,9 +281,9 @@ class ProjectContextContractTests(unittest.TestCase):
             "specsfy": ROOT / "specsfy" / "README.md",
         }
         expected_terms = {
-            "dev": ("orquestrador", "repositórios independentes"),
+            "dev": ("monorepo", "módulos"),
             "brand": ("marca", "fonte normativa"),
-            "skills": ("metodologia executável", "repositório independente"),
+            "skills": ("metodologia executável", "skills"),
             "specialists": ("catálogo oficial", "opcionais"),
             "cli": ("cli e tui", "progresso"),
             "docs": ("documentação final", "usuário"),
@@ -305,13 +305,13 @@ class ProjectContextContractTests(unittest.TestCase):
         skills_readme = entrypoints["skills"].read_text(encoding="utf-8")
         docs_readme = entrypoints["docs"].read_text(encoding="utf-8")
         for url in (
-            "https://github.com/specsfy/docs",
-            "https://github.com/specsfy/skills",
-            "https://github.com/specsfy/brand",
+            "https://github.com/promovaweb/specsfy/tree/main/docs",
+            "https://github.com/promovaweb/specsfy/tree/main/skills",
+            "https://github.com/promovaweb/specsfy/tree/main/brand",
         ):
             self.assertIn(url, specsfy_readme)
         self.assertIn("specsfy-base-interview", skills_readme)
-        self.assertIn("https://github.com/specsfy/specsfy", docs_readme)
+        self.assertIn("https://github.com/promovaweb/specsfy/tree/main/specsfy", docs_readme)
 
         modules = (CONTEXT_ROOT / "architecture" / "modules.md").read_text(
             encoding="utf-8"
@@ -319,21 +319,27 @@ class ProjectContextContractTests(unittest.TestCase):
         dependencies = (
             CONTEXT_ROOT / "architecture" / "dependencies.md"
         ).read_text(encoding="utf-8")
-        for repository in (
-            "specsfy/dev",
-            "specsfy/brand",
-            "specsfy/skills",
-            "specsfy/docs",
-            "specsfy/example",
-            "specsfy/specsfy",
-            "specsfy/specialists",
-            "specsfy/cli",
+        for module in (
+            "promovaweb/specsfy",
+            "brand/",
+            "skills/",
+            "docs/",
+            "example/",
+            "specsfy/",
+            "specialists/",
+            "cli/",
         ):
-            self.assertIn(repository, modules)
-        self.assertIn("https://github.com/specsfy", dependencies)
+            self.assertIn(module, modules)
+        self.assertIn("https://github.com/promovaweb/specsfy", dependencies)
 
-        gitignore = (ROOT / ".gitignore").read_text(encoding="utf-8")
-        for child in (
+        gitignore_path = ROOT / ".gitignore"
+        gitignore = gitignore_path.read_text(encoding="utf-8")
+        ignored_lines = {
+            line.strip()
+            for line in gitignore.splitlines()
+            if line.strip() and not line.lstrip().startswith("#")
+        }
+        for module in (
             "brand/",
             "skills/",
             "docs/",
@@ -341,20 +347,38 @@ class ProjectContextContractTests(unittest.TestCase):
             "specialists/",
             "cli/",
         ):
-            self.assertIn(child, gitignore)
-            self.assertTrue((ROOT / child / ".git").exists())
+            self.assertNotIn(f"/{module}", ignored_lines)
+            self.assertFalse((ROOT / module / ".git").exists())
+        nested_gitignores = []
+        ignored_parts = {".venv", "dist", "node_modules", "vendor"}
+        for module in ("brand", "cli", "docs", "example", "skills", "specialists", "specsfy"):
+            nested_gitignores.extend(
+                path
+                for path in (ROOT / module).rglob(".gitignore")
+                if not ignored_parts.intersection(path.relative_to(ROOT).parts)
+            )
+        self.assertEqual([], nested_gitignores)
+        for pattern in (
+            "/brand/guide/build/",
+            "/cli/.venv/",
+            "/cli/dist/",
+            "/example/vendor/",
+            "/example/node_modules/",
+            "/example/storage/logs/*",
+        ):
+            self.assertIn(pattern, ignored_lines)
         self.assertFalse((ROOT / ".gitmodules").exists())
         self.assertTrue((ROOT / "skills").is_dir())
         self.assertFalse((ROOT / "specs").exists())
-        codex_skill = ROOT / ".agents" / "skills" / "specsfy-hub-documentator"
-        claude_skill = ROOT / ".claude" / "skills" / "specsfy-hub-documentator"
+        codex_skill = ROOT / ".agents" / "skills" / "specsfy-monorepo-documentator"
+        claude_skill = ROOT / ".claude" / "skills" / "specsfy-monorepo-documentator"
         self.assertTrue((codex_skill / "SKILL.md").is_file())
         self.assertTrue(claude_skill.is_symlink())
         self.assertEqual(codex_skill.resolve(), claude_skill.resolve())
 
     def test_parent_keeps_only_its_local_operational_skills(self) -> None:
         """A raiz dev descobre skills locais sem instalar skills consumidoras."""
-        local_skills = {"specsfy-hub-documentator", "specsfy-release-cli"}
+        local_skills = {"specsfy-monorepo-documentator", "specsfy-release-cli"}
         self.assertEqual(
             local_skills,
             {
@@ -378,14 +402,14 @@ class ProjectContextContractTests(unittest.TestCase):
         ]
         forbidden_invocation = re.compile(
             r"skills/"
-            + r"specsfy-(?!(?:hub-documentator|release-cli))[^/\s]+/scripts/"
+            + r"specsfy-(?!(?:monorepo-documentator|release-cli))[^/\s]+/scripts/"
         )
         for path in executable_contracts:
             with self.subTest(path=path.relative_to(ROOT)):
                 text = path.read_text(encoding="utf-8")
                 self.assertIsNone(
                     forbidden_invocation.search(text),
-                    f"a raiz pai não pode executar skills do projeto: {path}",
+                    f"a raiz do monorepo não pode executar skills do projeto: {path}",
                 )
 
 

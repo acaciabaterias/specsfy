@@ -169,27 +169,27 @@ class CliReleaseSkillTests(unittest.TestCase):
 
         for evidence in (
             "git remote get-url origin",
-            "git -C cli status --porcelain",
-            "git -C cli fetch origin main --tags",
-            "git -C cli rev-parse HEAD",
-            "git -C cli rev-parse origin/main",
+            "git status --porcelain",
+            "git fetch origin main --tags",
+            "git rev-parse HEAD",
+            "git rev-parse origin/main",
             "uv sync --locked",
             "python -B -m unittest discover",
             "./scripts/build-executable.sh",
-            "git -C cli tag -a",
-            "git -C cli push --atomic origin main",
+            "git tag -a",
+            "git push --atomic origin main",
             "gh release create",
             "--notes-file",
             "gh release view",
             "release_changelog.py verify",
-            "git -C cli ls-remote origin",
+            "git ls-remote origin",
             "gh run list",
         ):
             self.assertIn(evidence, skill)
 
         self.assertIn("release_changelog.py extract", skill)
         self.assertIn("não recriar", skill)
-        self.assertIn("specsfy/cli", skill)
+        self.assertIn("cli/", skill)
 
     def test_workspace_and_cli_document_the_release_ownership(self) -> None:
         workspace_agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")

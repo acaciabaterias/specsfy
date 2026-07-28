@@ -269,7 +269,7 @@ def then_finds_creation_and_maintenance_without_duplication(context) -> None:
     assert operational_heading in context.operational_router_text
 
 
-@given("o workspace orquestrador e os repositórios públicos filhos")
+@given("o monorepo e seus módulos públicos")
 def given_orchestrator_and_child_repositories(context) -> None:
     context.repository_entrypoints = {
         "dev": ROOT / "README.md",
@@ -290,12 +290,12 @@ def when_entrypoints_are_consulted(context) -> None:
     }
 
 
-@then("cada repositório declara público responsabilidade e fronteira Git")
+@then("cada módulo declara público responsabilidade e ownership")
 def then_each_repository_declares_a_boundary(context) -> None:
     expected_terms = {
-        "dev": ("orquestrador", "repositórios independentes"),
+        "dev": ("monorepo", "módulos"),
         "brand": ("marca", "fonte normativa"),
-        "skills": ("metodologia executável", "repositório independente"),
+        "skills": ("metodologia executável", "skills"),
         "specialists": ("catálogo oficial", "opcionais"),
         "cli": ("cli e tui", "progresso"),
         "docs": ("documentação final", "usuário"),
@@ -311,7 +311,7 @@ def then_each_repository_declares_a_boundary(context) -> None:
     assert "skills/agents.md" in agent_guide
 
 
-@then("a metodologia documentação identidade e visão geral possuem um único owner")
+@then("a metodologia documentação identidade e visão geral possuem módulos próprios")
 def then_each_concern_has_one_owner(context) -> None:
     modules = (CONTEXT_ROOT / "architecture" / "modules.md").read_text(
         encoding="utf-8"
@@ -320,24 +320,49 @@ def then_each_concern_has_one_owner(context) -> None:
         encoding="utf-8"
     )
     for repository in (
-        "specsfy/dev",
-        "specsfy/brand",
-        "specsfy/skills",
-        "specsfy/docs",
-        "specsfy/example",
-        "specsfy/specsfy",
-        "specsfy/specialists",
-        "specsfy/cli",
+        "promovaweb/specsfy",
+        "brand/",
+        "skills/",
+        "docs/",
+        "example/",
+        "specsfy/",
+        "specialists/",
+        "cli/",
     ):
         assert repository in modules, f"owner ausente: {repository}"
-    assert "https://github.com/specsfy" in dependencies
+    assert "https://github.com/promovaweb/specsfy" in dependencies
     assert not (ROOT / ".gitmodules").exists()
 
 
-@then("o pai mantém só as skills locais operacionais e não instala as skills do projeto")
+@then("a raiz centraliza as regras de gitignore de todos os módulos")
+def then_root_centralizes_module_gitignore_rules(context) -> None:
+    root_gitignore = ROOT / ".gitignore"
+    rules = root_gitignore.read_text(encoding="utf-8")
+    for expected in (
+        "/brand/guide/build/",
+        "/cli/.venv/",
+        "/cli/dist/",
+        "/example/vendor/",
+        "/example/node_modules/",
+        "/example/storage/logs/*",
+    ):
+        assert expected in rules
+
+    ignored_parts = {".venv", "dist", "node_modules", "vendor"}
+    nested = []
+    for module in ("brand", "cli", "docs", "example", "skills", "specialists", "specsfy"):
+        nested.extend(
+            candidate
+            for candidate in (ROOT / module).rglob(".gitignore")
+            if not ignored_parts.intersection(candidate.relative_to(ROOT).parts)
+        )
+    assert nested == []
+
+
+@then("a raiz mantém só as skills locais operacionais e não instala as skills do projeto")
 def then_parent_is_independent_from_project_skills(context) -> None:
     assert not (ROOT / "specs").exists()
-    local_skills = {"specsfy-hub-documentator", "specsfy-release-cli"}
+    local_skills = {"specsfy-monorepo-documentator", "specsfy-release-cli"}
     assert {
         path.name for path in (ROOT / ".agents" / "skills").iterdir()
     } == local_skills
@@ -349,7 +374,7 @@ def then_parent_is_independent_from_project_skills(context) -> None:
         assert claude_skill.resolve() == codex_skill.resolve()
     forbidden = re.compile(
         r"skills/"
-        + r"specsfy-(?!(?:hub-documentator|release-cli))[^/\s]+/scripts/"
+        + r"specsfy-(?!(?:monorepo-documentator|release-cli))[^/\s]+/scripts/"
     )
     for path in (
         ROOT / "AGENTS.md",

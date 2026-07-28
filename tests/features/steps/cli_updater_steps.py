@@ -29,7 +29,7 @@ def then_global_data_uses_specsfy_path(context) -> None:
 
 @then("a versão mais recente deriva de tags semânticas do repositório")
 def then_latest_version_comes_from_semantic_tags(context) -> None:
-    assert "/repos/specsfy/cli/tags" in context.updater
+    assert "/repos/promovaweb/specsfy/tags" in context.updater
     assert "SEMANTIC_TAG" in context.updater
 
 

@@ -17,7 +17,7 @@ REPOSITORIES = (
     ROOT / "specialists",
     ROOT / "cli",
 )
-REMOTE_ICON_ROOT = "https://github.com/specsfy/brand/raw/main/icons"
+REMOTE_ICON_ROOT = "https://raw.githubusercontent.com/promovaweb/specsfy/main/brand/icons"
 
 
 class BrandIconAdoptionTests(unittest.TestCase):

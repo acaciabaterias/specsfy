@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "skills": {
+    "specsfy-base-backlog": {
+      "source": "base",
+      "installed_at": "2026-07-25T14:46:05.885047+00:00",
+      "content_sha256": "4bc64b74cd82cb3cc444033e3d7086c7032b8a217af2f8eaf1f74b47f8b9769b",
+      "updated_at": "2026-07-27T16:06:43.318102+00:00"
+    },
+    "specsfy-base-interview": {
+      "source": "base",
+      "installed_at": "2026-07-25T14:46:05.885521+00:00",
+      "content_sha256": "00ef1cbec123f1347d6764d902960b2d23d75c6faa50945e2205d64149891350",
+      "updated_at": "2026-07-27T16:06:43.318478+00:00"
+    },
+    "specsfy-base-specify": {
+      "source": "base",
+      "installed_at": "2026-07-25T14:46:05.886219+00:00",
+      "content_sha256": "4fd915959dcd3aa0da1197166e399544e497089294c2e6d2d9417e15ead49f66",
+      "updated_at": "2026-07-27T16:06:43.319289+00:00"
+    },
+    "specsfy-base-validate": {
+      "source": "base",
+      "installed_at": "2026-07-25T14:46:05.886960+00:00",
+      "content_sha256": "648951df3c9c7702f16862d5893ec5f3b8287a31007bfe0ed4b50abd938c8c6e",
+      "updated_at": "2026-07-27T16:06:43.320109+00:00"
+    },
+    "specsfy-base-tasks": {
+      "source": "base",
+      "installed_at": "2026-07-25T14:46:05.887557+00:00",
+      "content_sha256": "826b4e0d6e5b2bb6cc0a6c2967ec846e360faa184b6dd430b4ec0311ee64e98b",
+      "updated_at": "2026-07-27T16:06:43.320730+00:00"
+    },
+    "specsfy-base-tdd-bdd": {
+      "source": "base",
+      "installed_at": "2026-07-25T14:46:05.888159+00:00",
+      "content_sha256": "dc82f8fbf722b33d5665eed375bd70c57f3e61921a66e00f38b5e9595bd1ad80",
+      "updated_at": "2026-07-27T16:06:43.321296+00:00"
+    },
+    "specsfy-base-implement": {
+      "source": "base",
+      "installed_at": "2026-07-25T14:46:05.888843+00:00",
+      "content_sha256": "18934e12997bb47de3ecfa6f2a67cd2d02ac0907a1da0b608a504caf6bd24e14",
+      "updated_at": "2026-07-27T16:06:43.321976+00:00"
+    },
+    "specsfy-base-progress": {
+      "source": "base",
+      "installed_at": "2026-07-25T14:46:05.889408+00:00",
+      "content_sha256": "883ad98e6dcf7f667b66ad0e9ed89c24eb00186777956a94e218dc944c78d94b",
+      "updated_at": "2026-07-27T16:06:43.322535+00:00"
+    },
+    "specsfy-specialist-laravel": {
+      "source": "specialists",
+      "installed_at": "2026-07-25T14:46:27.733870+00:00",
+      "content_sha256": "7f64cf29bcd6e719aeb1360e601f3b1934151832d19f3792c44853dd16c17ec4"
+    },
+    "specsfy-specialist-shadcn-ui": {
+      "source": "specialists",
+      "installed_at": "2026-07-25T14:46:27.734625+00:00",
+      "content_sha256": "7cb88fbf230b55a94b8d7cb4b6d023e9b4f6172ccecbc053d5d3e54ef715ce61"
+    },
+    "specsfy-specialist-application-security": {
+      "source": "specialists",
+      "installed_at": "2026-07-26T00:42:43.809204+00:00",
+      "content_sha256": "313c0ec53e33bf35662f5e6c3ae9ee2f88894fdffe7fc82f861783f65ef4e8e4"
+    },
+    "specsfy-specialist-code-review": {
+      "source": "specialists",
+      "installed_at": "2026-07-26T00:42:43.809777+00:00",
+      "content_sha256": "6fa261abdba7a3069e2f5109b07eb9cfe87286aa4374ce7ede7a2b6f70ef3473"
+    },
+    "specsfy-specialist-debugging": {
+      "source": "specialists",
+      "installed_at": "2026-07-26T00:42:43.810305+00:00",
+      "content_sha256": "9153b0078ad32bb888109949fc27aeefa06aeb163dc5c8edcfdbbb69e20812d1"
+    },
+    "specsfy-specialist-docker-swarm": {
+      "source": "specialists",
+      "installed_at": "2026-07-26T00:42:43.810742+00:00",
+      "content_sha256": "2ce0574e3e8d62b4424134aa5b2e4e149414b4e82012341709650b8e70b7f2da"
+    },
+    "specsfy-specialist-domain-modeling": {
+      "source": "specialists",
+      "installed_at": "2026-07-26T00:42:43.811117+00:00",
+      "content_sha256": "cb03aa33e656141584e1c1d5c9e8c4880f1707605af60ca9d7531728b57e52a2"
+    },
+    "specsfy-specialist-merge-conflict-resolution": {
+      "source": "specialists",
+      "installed_at": "2026-07-26T00:42:43.811497+00:00",
+      "content_sha256": "077f676d3c881de651886d015ea28962ff4478b7e93b89c52fd66ea7fe19323e"
+    },
+    "specsfy-specialist-performance-engineering": {
+      "source": "specialists",
+      "installed_at": "2026-07-26T00:42:43.812223+00:00",
+      "content_sha256": "f2cb72e719549de8e29e1ba54d2e2dcf625831745dc4200c7ee66be529bfb755"
+    },
+    "specsfy-specialist-postgres": {
+      "source": "specialists",
+      "installed_at": "2026-07-26T00:42:43.812767+00:00",
+      "content_sha256": "4118ffaecbd2dab3fd959d92943803ac10c5c18d2f84e72e887d15eef71a55bc"
+    },
+    "specsfy-specialist-prototyping": {
+      "source": "specialists",
+      "installed_at": "2026-07-26T00:42:43.813253+00:00",
+      "content_sha256": "4562ff7a7fa05c2b4504e6b9919d8628ab963cf6607eb6c81170bef46b227617"
+    },
+    "specsfy-specialist-redis": {
+      "source": "specialists",
+      "installed_at": "2026-07-26T00:42:43.813779+00:00",
+      "content_sha256": "474523e23070d248a930e3cc12b1422ed2da708a434715e8081b3aec7a0577cc"
+    },
+    "specsfy-specialist-software-architecture": {
+      "source": "specialists",
+      "installed_at": "2026-07-26T00:42:43.814430+00:00",
+      "content_sha256": "9d2b00b8a9d7156214d9f9009aa95cef27fecf75cfc09fc6cf16821056eeca04"
+    },
+    "specsfy-specialist-technical-research": {
+      "source": "specialists",
+      "installed_at": "2026-07-26T00:42:43.815044+00:00",
+      "content_sha256": "46b0a781d08bfe7ad0617264c1a66c788431ecb441ac87c2f53eabba7205f6c0"
+    },
+    "specsfy-specialist-ui-design": {
+      "source": "specialists",
+      "installed_at": "2026-07-26T00:42:43.815797+00:00",
+      "content_sha256": "a4ea619dc706a918b09906e5401af89654d25e9fa4b7c612006fcf548089e644"
+    },
+    "specsfy-specialist-ux-design": {
+      "source": "specialists",
+      "installed_at": "2026-07-26T00:42:43.816330+00:00",
+      "content_sha256": "ff1289e93b9afaa2014dfbdca459a61206e4aa07799754d5a04c66b4bbfff103"
+    },
+    "specsfy-specialist-web-accessibility": {
+      "source": "specialists",
+      "installed_at": "2026-07-26T00:42:43.816684+00:00",
+      "content_sha256": "cfc1bf49d487b58eefd90c0310f9bf397b8965e47203d131e081fa2585f52438"
+    },
+    "specsfy-specialist-web-api-design": {
+      "source": "specialists",
+      "installed_at": "2026-07-26T00:42:43.817203+00:00",
+      "content_sha256": "2995c79a7cc24ddb83fd6fa4d86935b7ff0e119dc1f4ecd44c5dc438175dfafd"
+    },
+    "specsfy-setup": {
+      "source": "base",
+      "installed_at": "2026-07-27T16:06:43.315970+00:00",
+      "content_sha256": "320631e454c4b5e3c90f3c8d2051973efe0e7325fce208ce8fa6614e3545e629"
+    },
+    "specsfy-aux-stack": {
+      "source": "base",
+      "installed_at": "2026-07-27T16:06:43.316311+00:00",
+      "content_sha256": "77c67dab42444bc2c8e350c11dbe15dff624df0a0eef659fcdff6631880e99b8"
+    },
+    "specsfy-aux-rules": {
+      "source": "base",
+      "installed_at": "2026-07-27T16:06:43.316617+00:00",
+      "content_sha256": "669492b4e502c7fa8fd2627866d330d44b452897b43033a05da568ecf467d500"
+    },
+    "specsfy-aux-database": {
+      "source": "base",
+      "installed_at": "2026-07-27T16:06:43.316945+00:00",
+      "content_sha256": "8d390d50f9d7eee0b549a841c793f72087aa8ed20b8427e006bfd5eb5e52648e"
+    },
+    "specsfy-documentator": {
+      "source": "base",
+      "installed_at": "2026-07-27T16:06:43.317488+00:00",
+      "content_sha256": "85cdf7009bcc4af1b8135659ff63be05fad0aa31fcd292a5e75fb48f7c7644b4"
+    }
+  },
+  "framework": {
+    "source": "base",
+    "spec_sha256": "2146d7cc819118111b1c33a50bca3908c9ad5d8fffcc19d7e924af78d1dda85b",
+    "template_sha256": "b8c9711d228e542178cd3777359b06e03facf49b6ebd9917fd09d3e644e0c51a",
+    "example_sha256": "b5b551623716755e18f877662054b3f3f2b32e1334c1b68aab905cf81dc7b294",
+    "agents_sha256": "634b366f0935a04b7abbab8890b035f3f3ce13499549e0b22d3edf02994f1232",
+    "claude_sha256": "ddd02f4166dbe49fce5e0444bd0ab9fac8dabbf47fd9d38c1539a56efc8bec28"
+  }
+}

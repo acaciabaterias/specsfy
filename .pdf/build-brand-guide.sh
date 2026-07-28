@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Gera o manual de marca publicado em brand/ a partir das fontes coordenadas
-# pelo hub specsfy/dev.
+# pelo monorepo promovaweb/specsfy.
 
 set -euo pipefail
 

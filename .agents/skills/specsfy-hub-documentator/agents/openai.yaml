@@ -1,6 +1,0 @@
-interface:
-  display_name: "Specsfy Hub Documentator"
-  short_description: "Documenta apenas o hub e seus guias oficiais"
-  default_prompt: "Use $specsfy-hub-documentator para reconciliar o hub e atualizar a documentação técnica e os guias oficiais em specsfy/docs."
-policy:
-  allow_implicit_invocation: false

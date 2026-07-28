@@ -28,17 +28,17 @@ class DocumentationBoundaryTest(unittest.TestCase):
         }
 
         self.assertIn("example/", texts["workspace"])
-        self.assertIn("specsfy/example", texts["workspace"])
+        self.assertIn("example/", texts["workspace"])
         self.assertIn("documentação oficial", texts["project"])
         self.assertIn("usuários", texts["project"])
         for name in ("architecture", "modules", "dependencies"):
             self.assertIn(
-                "specsfy/example",
+                "example/",
                 texts[name],
-                f"{name} não referencia specsfy/example",
+                f"{name} não referencia example/",
             )
         self.assertIn("aplicação interna", texts["architecture"])
-        self.assertIn("specsfy/example", texts["modules"])
+        self.assertIn("example/", texts["modules"])
         for name in ("stack", "testing", "persistence"):
             self.assertIn("example/", texts[name], f"{name} não referencia example/")
 

@@ -13,8 +13,8 @@ SCRIPT = ROOT / "scripts/install-cli.sh"
 
 class InstallCliScriptTests(unittest.TestCase):
     def test_installs_local_checkout_from_any_working_directory(self) -> None:
-        codex_skill = ROOT / ".agents" / "skills" / "specsfy-hub-documentator"
-        claude_skill = ROOT / ".claude" / "skills" / "specsfy-hub-documentator"
+        codex_skill = ROOT / ".agents" / "skills" / "specsfy-monorepo-documentator"
+        claude_skill = ROOT / ".claude" / "skills" / "specsfy-monorepo-documentator"
         skill_before = (codex_skill / "SKILL.md").read_text(encoding="utf-8")
         claude_target_before = claude_skill.readlink()
         with tempfile.TemporaryDirectory() as directory:
@@ -67,7 +67,7 @@ class InstallCliScriptTests(unittest.TestCase):
 
             self.assertEqual(0, result.returncode, result.stderr)
             self.assertIn(
-                "git+https://github.com/specsfy/cli.git",
+                "git+https://github.com/promovaweb/specsfy.git#subdirectory=cli",
                 log.read_text(encoding="utf-8"),
             )
 

@@ -46,12 +46,12 @@ def when_release_flow_is_inspected(context) -> None:
     ).read_text(encoding="utf-8")
 
 
-@then("ele valida o hub a main sincronizada e a worktree limpa")
+@then("ele valida o monorepo a main sincronizada e a worktree limpa")
 def then_validates_hub_branch_and_worktree(context) -> None:
     for evidence in (
         "git remote get-url origin",
-        "git -C cli status --porcelain",
-        "git -C cli rev-parse origin/main",
+        "git status --porcelain",
+        "git rev-parse origin/main",
     ):
         assert evidence in context.release_skill
 
@@ -60,15 +60,15 @@ def then_validates_hub_branch_and_worktree(context) -> None:
 def then_tests_and_build_precede_commit(context) -> None:
     build = context.release_skill.index("./scripts/build-executable.sh")
     tests = context.release_skill.index("python -B -m unittest discover")
-    commit = context.release_skill.index('git -C cli commit -m')
+    commit = context.release_skill.index('git commit -m')
     assert build < commit
     assert tests < commit
 
 
 @then("ele cria e envia a tag semântica no commit de release")
 def then_creates_and_pushes_release_tag(context) -> None:
-    assert "git -C cli tag -a vX.Y.Z" in context.release_skill
-    assert "git -C cli push --atomic origin main vX.Y.Z" in context.release_skill
+    assert "git tag -a vX.Y.Z" in context.release_skill
+    assert "git push --atomic origin main vX.Y.Z" in context.release_skill
 
 
 @then("ele publica o GitHub Release com a seção exata do changelog")

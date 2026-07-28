@@ -1,5 +1,5 @@
 @cli-release
-Feature: Publicar versões do Specsfy CLI a partir do dev hub
+Feature: Publicar versões do Specsfy CLI a partir do monorepo
   Para manter tag, pacote, changelog e GitHub Release coerentes
   Como pessoa mantenedora do Specsfy
   Quero uma skill local que publique uma versão do CLI de forma verificável
@@ -14,7 +14,7 @@ Feature: Publicar versões do Specsfy CLI a partir do dev hub
   Scenario: Publicar commit tag e GitHub Release
     Given a skill local de release do CLI
     When o fluxo de publicação é inspecionado
-    Then ele valida o hub a main sincronizada e a worktree limpa
+    Then ele valida o monorepo a main sincronizada e a worktree limpa
     And ele executa testes e reconstrói o executável antes do commit
     And ele cria e envia a tag semântica no commit de release
     And ele publica o GitHub Release com a seção exata do changelog

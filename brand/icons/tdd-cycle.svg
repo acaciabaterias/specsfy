@@ -1,0 +1,7 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ciclo TDD RED para GREEN">
+  <!-- Ícone de cor fixa (exceção documentada em icons.md): metade RED, metade GREEN -->
+  <path fill="#B91C1C" d="M6,16 A10,10 0 0 1 26,16 Z"/>
+  <path fill="#00804C" d="M26,16 A10,10 0 0 1 6,16 Z"/>
+  <polygon fill="#B91C1C" points="26,16 22.5,13.3 22.5,18.7"/>
+  <polygon fill="#00804C" points="6,16 9.5,13.3 9.5,18.7"/>
+</svg>

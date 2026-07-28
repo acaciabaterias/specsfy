@@ -14,7 +14,7 @@ REPOSITORIES = (
     ROOT / "specialists",
     ROOT / "cli",
 )
-REMOTE_ICON_ROOT = "https://github.com/specsfy/brand/raw/main/icons"
+REMOTE_ICON_ROOT = "https://raw.githubusercontent.com/promovaweb/specsfy/main/brand/icons"
 
 
 @given("os novos arquivos SVG e PNG do ícone do framework")
@@ -94,8 +94,8 @@ def then_canonical_pdf_is_at_brand_root(context) -> None:
     ).exists()
 
 
-@then("o hub possui o gerador e a folha de estilo da marca")
-def then_hub_owns_generator_and_brand_stylesheet(context) -> None:
+@then("o monorepo possui o gerador e a folha de estilo da marca")
+def then_monorepo_owns_generator_and_brand_stylesheet(context) -> None:
     assert not (context.brand_root / "Makefile").exists()
     assert not (context.brand_root / "guide" / "build.sh").exists()
     assert 'OUT_PDF="$BRAND_ROOT/Specsfy-Manual-de-Marca.pdf"' in (

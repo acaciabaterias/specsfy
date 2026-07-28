@@ -37,9 +37,10 @@ Feature: Contexto compartilhado do projeto
     And encontra critérios de criação e manutenção sem duplicar o roteador
 
   @US-004 @FR-015 @FR-016 @FR-017 @FR-018 @FR-019 @FR-020 @NFR-002 @NFR-003 @AC-006
-  Scenario: Encontrar a fonte correta em cada repositório independente
-    Given o workspace orquestrador e os repositórios públicos filhos
+  Scenario: Encontrar a fonte correta em cada módulo
+    Given o monorepo e seus módulos públicos
     When uma pessoa ou agente consulta suas portas de entrada
-    Then cada repositório declara público responsabilidade e fronteira Git
-    And a metodologia documentação identidade e visão geral possuem um único owner
-    And o pai mantém só as skills locais operacionais e não instala as skills do projeto
+    Then cada módulo declara público responsabilidade e ownership
+    And a metodologia documentação identidade e visão geral possuem módulos próprios
+    And a raiz centraliza as regras de gitignore de todos os módulos
+    And a raiz mantém só as skills locais operacionais e não instala as skills do projeto

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>$title$</title>
+<style>
+$fontfaces$
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <svg class="cover-mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Símbolo Specsfy">
+    <path fill="#F6F7ED" fill-rule="evenodd" d="M7,3 L19,3 L25,9 L25,27 L7,27 Z M19,3 L25,9 L19,9 Z"/>
+    <circle fill="#74C365" cx="16.5" cy="19" r="7"/>
+    <path fill="#001F3F" transform="translate(11.3,14) scale(0.72)" d="M4.5,8.1 L2.4,6 L1.7,6.7 L4.5,9.5 L10.5,3.5 L9.8,2.8 Z"/>
+    <rect fill="#F6F7ED" x="10.5" y="28.5" width="2.4" height="3" rx="1.2"/>
+    <rect fill="#F6F7ED" x="15.3" y="28.5" width="2.4" height="3" rx="1.2"/>
+    <rect fill="#F6F7ED" x="20.1" y="28.5" width="2.4" height="3" rx="1.2"/>
+  </svg>
+  <div class="cover-title">
+    <h1>Specsfy</h1>
+    <div class="cover-tagline">Especifique. Prove. Entregue.</div>
+    <div class="cover-desc">Manual de marca: posicionamento, voz e tom, cor, tipografia, logo, ícones e acessibilidade.</div>
+  </div>
+  <div class="cover-meta">
+    <div>$title$</div>
+    <div>Gerado em $date$</div>
+    <div>Fonte: brand/guide/brand-guide.md · .pdf/style.css</div>
+  </div>
+</div>
+
+$if(toc)$
+<nav id="TOC" role="doc-toc">
+$toc$
+</nav>
+$endif$
+
+$body$
+
+</body>
+</html>

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Specsfy: Implementar"
+  short_description: "Executa e atualiza checklists da spec"
+  default_prompt: "Use $specsfy-base-implement para executar o próximo item do checklist em specs/specs/<NNNN>-<slug>/spec.md com BDD, TDD e evidência. Orquestre transições automáticas com anúncio, execução e retomada na mesma conversa."

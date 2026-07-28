@@ -1,0 +1,71 @@
+/**
+ * Specsfy — Design tokens de cor
+ * Fonte normativa: brand/colors/palette.md
+ * Camada 1 (primitivos): as seis cores nomeadas do moodboard — nunca mudam.
+ * Camada 2 (semânticos): papéis que trocam entre modo claro/escuro.
+ * Ao alterar um hex, atualize palette.md, tokens.css e tokens.json juntos.
+ */
+
+:root {
+  /* Primitivos — paleta nomeada (fixos, não variam por tema) */
+  --specsfy-midnight-mirage: #001F3F;
+  --specsfy-nuit-blanche: #1E488F;
+  --specsfy-picture-book-green: #00804C;
+  --specsfy-mantis: #74C365;
+  --specsfy-first-colors-of-spring: #DBE64C;
+  --specsfy-praxeti-white: #F6F7ED;
+
+  /* Funcional — fora da paleta nomeada, exclusivo do estado RED.
+     #B91C1C (não #DC2626) porque é o vermelho mais claro que ainda passa
+     4.5:1 sobre Praxeti White — ver ../accessibility.md */
+  --specsfy-red: #B91C1C;
+
+  /* Semânticos — modo claro (padrão) */
+  --specsfy-paper: var(--specsfy-praxeti-white);
+  --specsfy-paper-elevated: #FFFFFF;
+  --specsfy-ink: var(--specsfy-midnight-mirage);
+  --specsfy-ink-secondary: rgba(0, 31, 63, 0.62);
+  --specsfy-border: rgba(0, 31, 63, 0.14);
+  --specsfy-link: var(--specsfy-nuit-blanche);
+  --specsfy-verified: var(--specsfy-picture-book-green);
+  --specsfy-verified-tint: var(--specsfy-mantis);
+  --specsfy-draft: var(--specsfy-first-colors-of-spring);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --specsfy-paper: var(--specsfy-midnight-mirage);
+    --specsfy-paper-elevated: #06274F;
+    --specsfy-ink: var(--specsfy-praxeti-white);
+    --specsfy-ink-secondary: rgba(246, 247, 237, 0.65);
+    --specsfy-border: rgba(246, 247, 237, 0.16);
+    --specsfy-link: #5F7DAB;
+    --specsfy-verified: var(--specsfy-mantis);
+    --specsfy-verified-tint: rgba(0, 128, 76, 0.22);
+    --specsfy-red: #F87171;
+  }
+}
+
+:root[data-theme="dark"] {
+  --specsfy-paper: var(--specsfy-midnight-mirage);
+  --specsfy-paper-elevated: #06274F;
+  --specsfy-ink: var(--specsfy-praxeti-white);
+  --specsfy-ink-secondary: rgba(246, 247, 237, 0.65);
+  --specsfy-border: rgba(246, 247, 237, 0.16);
+  --specsfy-link: #5F7DAB;
+  --specsfy-verified: var(--specsfy-mantis);
+  --specsfy-verified-tint: rgba(0, 128, 76, 0.22);
+  --specsfy-red: #F87171;
+}
+
+:root[data-theme="light"] {
+  --specsfy-paper: var(--specsfy-praxeti-white);
+  --specsfy-paper-elevated: #FFFFFF;
+  --specsfy-ink: var(--specsfy-midnight-mirage);
+  --specsfy-ink-secondary: rgba(0, 31, 63, 0.62);
+  --specsfy-border: rgba(0, 31, 63, 0.14);
+  --specsfy-link: var(--specsfy-nuit-blanche);
+  --specsfy-verified: var(--specsfy-picture-book-green);
+  --specsfy-verified-tint: var(--specsfy-mantis);
+  --specsfy-red: #B91C1C;
+}

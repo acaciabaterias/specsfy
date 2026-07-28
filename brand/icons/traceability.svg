@@ -1,0 +1,13 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Rastreabilidade">
+  <g fill="currentColor">
+    <rect x="-5.75" y="-1" width="11.51" height="2.2" rx="1.1" transform="translate(7.85,17) rotate(-60.3)"/>
+    <rect x="-5.78" y="-1" width="11.56" height="2.2" rx="1.1" transform="translate(13.6,17) rotate(59.9)"/>
+    <rect x="-5.75" y="-1" width="11.51" height="2.2" rx="1.1" transform="translate(19.35,17) rotate(-60.3)"/>
+    <rect x="-5.78" y="-1" width="11.56" height="2.2" rx="1.1" transform="translate(25.1,17) rotate(59.9)"/>
+    <circle cx="5" cy="22" r="2.6"/>
+    <circle cx="10.7" cy="12" r="2.6"/>
+    <circle cx="16.5" cy="22" r="2.6"/>
+    <circle cx="22.2" cy="12" r="2.6"/>
+    <circle cx="28" cy="22" r="2.6"/>
+  </g>
+</svg>

@@ -1,0 +1,215 @@
+# Guia de desenvolvimento da metodologia Specsfy
+
+Este `AGENTS.md` governa o módulo `skills/`. Ele contém a metodologia
+executável, as nove skills base, o setup, o documentador e as três skills auxiliares. Seus testes e fixtures pertencem a este
+módulo. A raiz do monorepo não instala nem executa estas skills.
+
+Leia também [`Spec.md`](Spec.md), contrato central do framework publicado pelo
+CLI nos projetos consumidores.
+
+<!-- specsfy:framework:start -->
+## Framework Specsfy
+
+Leia e siga integralmente `{{SPECSFY_SPEC_PATH}}` antes de trabalhar com
+backlogs, entrevistas, especificações, tarefas, testes ou implementação. Esse
+arquivo contém o fluxo, os caminhos canônicos e os gates do framework.
+
+- Preserve as instruções próprias deste projeto.
+- Leia `PROJECT.md`, `.specsfy/STACK.md`, `.specsfy/RULES.md` e
+  `.specsfy/DATABASE.md` como contexto persistente antes de planejar mudanças.
+- Execute `$specsfy-setup` quando algum desses arquivos estiver ausente.
+- Execute o monitor de contexto no início, após cada tarefa e antes de concluir
+  a entrega; resolva todo resultado `PENDING`.
+- Use as skills `specsfy-aux-*` para manter stack, regras e banco sem apagar
+  conteúdo humano.
+- Execute `$specsfy-documentator` depois de cada implementação para reconstruir
+  a documentação técnica completa em `docs/`.
+- Use `specs/backlog/` para ideias ainda não promovidas.
+- Use `specs/specs/<NNNN>-<slug>/spec.md` como fonte normativa de cada fatia.
+- Não crie `plan.md`, `tasks.md`, `research.md` ou outra fonte normativa
+  paralela.
+<!-- specsfy:framework:end -->
+
+## Fonte da verdade
+
+- Specs e research existem somente nos projetos consumidores que aplicam a
+  metodologia. Testes desta raiz usam diretórios temporários, nunca o workspace
+  pai.
+- Mecanismos base vivem somente em
+  `specsfy-base-<responsabilidade>/` nesta raiz.
+- Contexto técnico opcional pertence a
+  [`specialists/`](https://github.com/promovaweb/specsfy/tree/main/specialists).
+- Código, testes e documentos publicados por uma skill são artefatos derivados;
+  requisitos, tarefas, gates e evidências permanecem na spec.
+
+Não crie `plan.md`, `tasks.md`, `research.md`, `data-model.md` ou outra fonte
+normativa paralela.
+
+## Fronteira com os demais módulos
+
+| Conteúdo | Owner |
+| --- | --- |
+| metodologia, skills, scripts, referências e assets | `skills/` |
+| testes, fixtures e validação das skills | `skills/` |
+| orquestração e testes autônomos do workspace | `promovaweb/specsfy` |
+| documentação final para o usuário | `docs/` |
+| visão geral pública | `specsfy/` |
+| identidade visual e verbal | `brand/` |
+| especialistas técnicos opcionais | `specialists/` |
+| CLI, TUI e instalação | `cli/` |
+
+Links entre módulos usam caminhos relativos; links públicos usam
+`https://github.com/promovaweb/specsfy`. Commits transversais podem incluir os
+módulos necessários para manter o monorepo coerente.
+
+## Três atos
+
+Antes do Ato I, `specsfy-base-backlog` pode registrar uma ideia em
+`specs/backlog/`. Esse registro não é gate nem autorização para implementar.
+
+### Ato I — Definir
+
+Descobrir problema, finalidade, atores, linguagem, regras, limites e efeitos.
+Aplicar BDD como descoberta e escrever Gherkin. O ato termina sem dúvida P1 e
+com `Definition Gate: Passed`.
+
+Skills: `specsfy-base-interview`, `specsfy-base-specify` e `specsfy-base-validate`.
+
+### Ato II — Projetar e provar
+
+Definir plano técnico, dados, contratos, riscos, rollback e tarefas. Usar o BDD
+da spec para escrever TDD e observar RED antes de alterar a implementação. O ato termina com
+`Plan Gate: Passed`.
+
+Skills: `specsfy-base-tasks` e `specsfy-base-tdd-bdd` no modo `prepare`.
+
+### Ato III — Entregar e validar
+
+Executar cada tarefa no ciclo `RED → GREEN → REFACTOR`, rodar aceite, regressão
+e rastreabilidade e registrar evidência. O ato termina com
+`Delivery Gate: Passed` e `Status: Complete`.
+
+Skills: `specsfy-base-implement`, `specsfy-base-tdd-bdd`,
+`specsfy-base-update-spec`, `specsfy-documentator` e
+`specsfy-base-progress`.
+
+Mudança de comportamento reabre os Atos I–III. Mudança de plano reabre os Atos
+II–III.
+
+O estado canônico é:
+
+```text
+Draft → Defined → Planned → Implementing → Complete
+```
+
+## Responsabilidade das skills
+
+| Skill | Responsabilidade | Não deve fazer |
+| --- | --- | --- |
+| `specsfy-base-backlog` | clarear superficialmente e registrar ideias | criar spec, tarefas ou código |
+| `specsfy-base-interview` | descobrir intenção e decisões | escrever arquivos por padrão |
+| `specsfy-base-specify` | consolidar `spec.md` e research | implementar ou criar backlog externo |
+| `specsfy-base-validate` | auditar prontidão da definição | decidir requisitos |
+| `specsfy-base-tdd-bdd` | usar BDD da spec para criar TDD e provar RED/GREEN | executar Gherkin ou inventar comportamento |
+| `specsfy-base-tasks` | manter tarefas nas seções 14–15 | criar `tasks.md` ou código |
+| `specsfy-base-implement` | executar tarefa pronta e registrar evidência | trabalhar sem TDD RED |
+| `specsfy-base-update-spec` | incorporar pedido tardio e reabrir somente os atos afetados | criar nova spec ou implementar a mudança |
+| `specsfy-base-progress` | projetar estado global sem escrita | alterar gates ou checkboxes |
+| `specsfy-setup` | garantir contexto persistente e blocos do framework | sobrescrever arquivos de contexto existentes |
+| `specsfy-documentator` | reconstruir `docs/` a partir do código existente | inventar decisões, relações ou URLs |
+| `specsfy-aux-stack` | mapear stack com evidência executável | copiar toda a árvore de dependências |
+| `specsfy-aux-rules` | registrar regras confirmadas | inventar ou decidir regras |
+| `specsfy-aux-database` | manter mapa tabular da persistência | copiar dados, segredos ou substituir schemas |
+
+Se duas skills puderem responder ao mesmo gatilho, ajuste `description` e os
+limites antes de publicar.
+
+## Estrutura de uma skill
+
+```text
+specsfy-base-<nome>/
+├── SKILL.md
+├── agents/
+│   └── openai.yaml
+├── scripts/
+├── references/
+└── assets/
+```
+
+- `SKILL.md` tem frontmatter com `name` e `description`, menos de 500 linhas e
+  instruções imperativas.
+- `agents/openai.yaml` contém prompt padrão que menciona `$<nome>`.
+- Detalhes extensos ficam em referências de um nível com gatilho de leitura.
+- Scripts usam Python 3 e biblioteca padrão, retornam códigos úteis e não fazem
+  rede, instalação global ou ação destrutiva por padrão.
+- Assets são templates ou materiais usados na saída, nunca uma segunda fonte.
+
+## Criar ou alterar uma skill
+
+1. Escreva o cenário BDD e o teste TDD de contrato nesta raiz.
+2. Use specs somente como fixtures temporárias quando o comportamento exigir.
+3. Execute ambos e registre RED causado pelo comportamento ausente.
+4. Para skill nova, inicialize nesta raiz:
+
+```bash
+python3 /home/luizeof/.codex/skills/.system/skill-creator/scripts/init_skill.py \
+  <nome> --path .
+```
+
+5. Faça a menor alteração que satisfaz o contrato.
+6. Execute testes focais, refatore e repita a regressão desta raiz.
+7. Registre a evidência no contrato e na documentação afetada.
+8. Valide a skill e a fronteira Git.
+
+Não existe implementação pequena demais para TDD orientado pelo BDD da spec. Ajuste a profundidade do
+teste ao risco, mas não pule RED.
+
+## MCR-10
+
+`specsfy-base-interview` e `specsfy-base-specify` usam a referência canônica
+`specsfy-base-specify/references/mcr-10.md`.
+
+Antes de perguntar:
+
+1. preserve a formulação original;
+2. distinga pedido literal e finalidade;
+3. identifique termos ambíguos, equivalentes e derivados;
+4. analise silenciosamente as dez categorias aplicáveis;
+5. separe declaração, inferência, hipótese, decisão, conflito e aberto;
+6. selecione uma lacuna P1 por vez.
+
+As categorias são lentes adaptativas, não um questionário. Finalidade, evidência,
+risco, privacidade, observabilidade e reversibilidade são preocupações
+adicionais do método.
+
+## Validação
+
+No diretório `skills/`:
+
+```bash
+uv run --quiet --with pyyaml python \
+  /home/luizeof/.codex/skills/.system/skill-creator/scripts/quick_validate.py \
+  specsfy-base-<nome>
+```
+
+Ainda nesta raiz:
+
+```bash
+python3 -B -m unittest discover -s tests -p 'test_*.py'
+```
+
+Os arquivos em `tests/features/` preservam BDD como referência e não são
+executados. A prova automatizada pertence aos testes unitários derivados.
+
+Use `python3 -B` ou `PYTHONDONTWRITEBYTECODE=1` para não criar caches.
+
+## Critério de publicação
+
+- frontmatter e metadata válidos;
+- gatilhos positivos e limites negativos claros;
+- referências com origem, data e distinção entre fonte e adaptação;
+- ausência de placeholders, caches e links quebrados;
+- RED válido nos testes TDD informados pelo BDD, com GREEN atual;
+- regressão completa e rastreabilidade aprovadas;
+- tarefas e cinco itens de checklist concluídos;
+- nenhum arquivo pertencente a outro repositório no diff.
