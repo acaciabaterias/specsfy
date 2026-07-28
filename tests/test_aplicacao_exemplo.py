@@ -14,13 +14,13 @@ class DocumentationBoundaryTest(unittest.TestCase):
     def test_documentation_authority_and_example_owner_are_explicit(self) -> None:
         sources = {
             "workspace": ROOT / "README.md",
-            "project": DOCS_ROOT / "context" / "project.md",
-            "architecture": DOCS_ROOT / "context" / "architecture" / "README.md",
-            "modules": DOCS_ROOT / "context" / "architecture" / "modules.md",
-            "dependencies": DOCS_ROOT / "context" / "architecture" / "dependencies.md",
-            "stack": DOCS_ROOT / "context" / "engineering" / "stack.md",
-            "testing": DOCS_ROOT / "context" / "engineering" / "testing.md",
-            "persistence": DOCS_ROOT / "context" / "data" / "persistence.md",
+            "project": DOCS_ROOT / "develop" / "context" / "project.md",
+            "architecture": DOCS_ROOT / "develop" / "context" / "architecture" / "README.md",
+            "modules": DOCS_ROOT / "develop" / "context" / "architecture" / "modules.md",
+            "dependencies": DOCS_ROOT / "develop" / "context" / "architecture" / "dependencies.md",
+            "stack": DOCS_ROOT / "develop" / "context" / "engineering" / "stack.md",
+            "testing": DOCS_ROOT / "develop" / "context" / "engineering" / "testing.md",
+            "persistence": DOCS_ROOT / "develop" / "context" / "data" / "persistence.md",
         }
         texts = {
             name: path.read_text(encoding="utf-8").casefold()
@@ -45,7 +45,7 @@ class DocumentationBoundaryTest(unittest.TestCase):
     def test_every_change_requires_documentation(self) -> None:
         agent_guide = (ROOT / "AGENTS.md").read_text(encoding="utf-8").casefold()
         conventions = (
-            DOCS_ROOT / "context" / "engineering" / "conventions.md"
+            DOCS_ROOT / "develop" / "context" / "engineering" / "conventions.md"
         ).read_text(encoding="utf-8").casefold()
 
         for text, source in (

@@ -46,8 +46,9 @@ specsfy install --project .
 ```
 
 O CLI instala a metodologia de `skills/` e, sob demanda, especialistas de
-`specialists/`. Veja o [guia de instalação](docs/installation.md), o
-[primeiro uso](docs/basic-usage.md) e o [guia do CLI](docs/cli.md).
+`specialists/`. Veja o [guia de instalação](docs/user/installation.md), o
+[primeiro uso](docs/user/getting-started.md) e o
+[guia do CLI](docs/user/cli.md).
 O portal completo está em [`docs/README.md`](docs/README.md).
 
 Para desenvolver a partir do checkout:

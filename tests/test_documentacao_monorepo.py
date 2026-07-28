@@ -94,25 +94,31 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
         standard = (
             SKILL / "references" / "documentation-standard.md"
         ).read_text(encoding="utf-8")
-        guide = (ROOT / "docs" / "monorepo-documentation.md").read_text(encoding="utf-8")
+        guide = (ROOT / "docs" / "develop" / "documentation.md").read_text(
+            encoding="utf-8"
+        )
         router = (ROOT / "docs" / "README.md").read_text(encoding="utf-8")
 
-        for heading in ("Documentação técnica", "Guias para usuários"):
-            self.assertIn(heading, standard)
-            self.assertIn(heading, guide)
-        self.assertIn("monorepo-documentation.md", router)
+        for route in ("docs/user/", "docs/develop/"):
+            self.assertIn(route, standard)
+            self.assertIn(route, guide)
+        self.assertIn("develop/README.md", router)
 
     def test_monorepo_skill_publishes_cli_and_framework_installation_guide(self) -> None:
         skill = (SKILL / "SKILL.md").read_text(encoding="utf-8")
         standard = (
             SKILL / "references" / "documentation-standard.md"
         ).read_text(encoding="utf-8")
-        installation_path = ROOT / "docs" / "installation.md"
-        router = (ROOT / "docs" / "README.md").read_text(encoding="utf-8")
-        cli_guide = (ROOT / "docs" / "cli.md").read_text(encoding="utf-8")
+        installation_path = ROOT / "docs" / "user" / "installation.md"
+        router = (ROOT / "docs" / "user" / "README.md").read_text(
+            encoding="utf-8"
+        )
+        cli_guide = (ROOT / "docs" / "user" / "cli.md").read_text(
+            encoding="utf-8"
+        )
 
         for source in (skill, standard):
-            self.assertIn("docs/installation.md", source)
+            self.assertIn("docs/user/installation.md", source)
         self.assertTrue(installation_path.is_file())
 
         installation = installation_path.read_text(encoding="utf-8")
@@ -125,7 +131,7 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
             ".specsfy/Spec.md",
         ):
             self.assertIn(evidence, installation)
-        self.assertIn("[Guia de instalação](installation.md)", router)
+        self.assertIn("[Instalação](installation.md)", router)
         self.assertIn("[guia de instalação](installation.md)", cli_guide)
 
     def test_public_entrypoint_and_thematic_guides_cover_the_user_journey(
@@ -134,7 +140,9 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
         public_entrypoint = (ROOT / "specsfy" / "README.md").read_text(
             encoding="utf-8"
         )
-        router = (ROOT / "docs" / "README.md").read_text(encoding="utf-8")
+        router = (ROOT / "docs" / "user" / "README.md").read_text(
+            encoding="utf-8"
+        )
         standard = (
             SKILL / "references" / "documentation-standard.md"
         ).read_text(encoding="utf-8")
@@ -169,7 +177,7 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
             "$specsfy-base-update-spec",
             "$specsfy-base-progress",
         )
-        basic_usage = (ROOT / "docs" / "basic-usage.md").read_text(
+        basic_usage = (ROOT / "docs" / "user" / "getting-started.md").read_text(
             encoding="utf-8"
         )
         for source in (public_entrypoint, basic_usage):
@@ -219,7 +227,7 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
             self.assertEqual(sorted(positions), positions)
 
         guides = {
-            "basic-usage.md": ("specsfy-base-backlog", "Definition Gate"),
+            "getting-started.md": ("specsfy-base-backlog", "Definition Gate"),
             "update-spec.md": (
                 "specsfy-base-update-spec",
                 "esqueci",
@@ -229,7 +237,7 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
                 "mudar",
             ),
             "advanced-usage.md": ("--detected", "--specialist"),
-            "repositories.md": (
+            "../develop/modules.md": (
                 "specsfy/",
                 "docs/",
                 "skills/",
@@ -258,16 +266,17 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
         }
         for filename, evidence in guides.items():
             with self.subTest(guide=filename):
-                path = ROOT / "docs" / filename
+                path = ROOT / "docs" / "user" / filename
                 self.assertTrue(path.is_file())
                 guide = path.read_text(encoding="utf-8")
                 self.assertIn(f"]({filename})", router)
-                self.assertIn(f"docs/{filename}", standard)
                 for term in evidence:
                     self.assertIn(term, guide)
 
     def test_cli_guide_publishes_the_provided_tui_screenshots(self) -> None:
-        cli_guide = (ROOT / "docs" / "cli.md").read_text(encoding="utf-8")
+        cli_guide = (ROOT / "docs" / "user" / "cli.md").read_text(
+            encoding="utf-8"
+        )
         public_entrypoint = (ROOT / "specsfy" / "README.md").read_text(
             encoding="utf-8"
         )
@@ -280,16 +289,16 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
 
         for filename, alt_text in screenshots:
             with self.subTest(screenshot=filename):
-                path = ROOT / "docs" / "screen" / "cli" / filename
+                path = ROOT / "docs" / "user" / "assets" / "cli" / filename
                 self.assertTrue(path.is_file())
                 self.assertEqual(b"\x89PNG\r\n\x1a\n", path.read_bytes()[:8])
                 self.assertIn(
-                    f"![{alt_text}](screen/cli/{filename})",
+                    f"![{alt_text}](assets/cli/{filename})",
                     cli_guide,
                 )
 
         self.assertIn(
-            "![Dashboard Home do Specsfy](../docs/screen/cli/cli-dash.png)",
+            "![Dashboard Home do Specsfy](../docs/user/assets/cli/cli-dash.png)",
             public_entrypoint,
         )
 

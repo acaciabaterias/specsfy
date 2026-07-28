@@ -26,7 +26,7 @@ class AuxiliaryContextIntegrationTests(unittest.TestCase):
         installer = (
             ROOT / "cli/src/specsfy_cli/installer.py"
         ).read_text(encoding="utf-8")
-        guide = (ROOT / "docs/project-context.md").read_text(encoding="utf-8")
+        guide = (ROOT / "docs/user/project-context.md").read_text(encoding="utf-8")
         framework = (SKILLS / "Spec.md").read_text(encoding="utf-8")
         for name in EXPECTED:
             self.assertIn(f'"{name}"', installer)

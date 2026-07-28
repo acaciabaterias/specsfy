@@ -42,7 +42,7 @@ def then_release_notes_match_changelog(context) -> None:
 @when("o fluxo de publicação é inspecionado")
 def when_release_flow_is_inspected(context) -> None:
     context.release_flow = (
-        ROOT / "docs" / "context" / "flows" / "cli-release.md"
+        ROOT / "docs" / "develop" / "context" / "flows" / "cli-release.md"
     ).read_text(encoding="utf-8")
 
 

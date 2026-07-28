@@ -8,7 +8,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS_ROOT = ROOT / "docs"
-CONTEXT_ROOT = DOCS_ROOT / "context"
+DEVELOP_ROOT = DOCS_ROOT / "develop"
+CONTEXT_ROOT = DEVELOP_ROOT / "context"
 COMMON_HEADINGS = (
     "## Classificação",
     "## Papel",
@@ -19,65 +20,63 @@ COMMON_HEADINGS = (
 )
 CLASSIFICATION_FIELDS = ("Natureza", "Escopo", "Autoridade")
 CLASSIFICATION_VALUES = {"índice", "normativo", "descritivo", "histórico"}
-GENERAL_GUIDE_HEADINGS = (
-    "## Como a documentação está organizada",
-    "## Como navegar",
-    "## Autoridade das fontes",
-    "## Onde registrar cada informação",
-    "## Quando criar um documento",
-    "## Como manter a documentação",
-)
 MINIMUM_PATHS = {
     "docs/README.md",
-    "docs/context/README.md",
-    "docs/context/project.md",
-    "docs/context/glossary.md",
-    "docs/context/architecture/README.md",
-    "docs/context/architecture/modules.md",
-    "docs/context/architecture/dependencies.md",
-    "docs/context/engineering/README.md",
-    "docs/context/engineering/stack.md",
-    "docs/context/engineering/packages.md",
-    "docs/context/engineering/conventions.md",
-    "docs/context/engineering/testing.md",
-    "docs/context/data/README.md",
-    "docs/context/data/persistence.md",
-    "docs/context/data/privacy.md",
-    "docs/context/flows/README.md",
-    "docs/decisions/README.md",
+    "docs/user/README.md",
+    "docs/user/skills/README.md",
+    "docs/develop/README.md",
+    "docs/develop/methodology.md",
+    "docs/develop/contributing.md",
+    "docs/develop/skills.md",
+    "docs/develop/cli.md",
+    "docs/develop/context/README.md",
+    "docs/develop/context/project.md",
+    "docs/develop/context/glossary.md",
+    "docs/develop/context/architecture/README.md",
+    "docs/develop/context/architecture/modules.md",
+    "docs/develop/context/architecture/dependencies.md",
+    "docs/develop/context/engineering/README.md",
+    "docs/develop/context/engineering/stack.md",
+    "docs/develop/context/engineering/packages.md",
+    "docs/develop/context/engineering/conventions.md",
+    "docs/develop/context/engineering/testing.md",
+    "docs/develop/context/data/README.md",
+    "docs/develop/context/data/persistence.md",
+    "docs/develop/context/data/privacy.md",
+    "docs/develop/context/flows/README.md",
+    "docs/develop/decisions/README.md",
 }
 REQUIRED_CONTENT_HEADINGS = {
-    "docs/README.md": ("## Mapa da documentação", *GENERAL_GUIDE_HEADINGS),
-    "docs/context/README.md": (
+    "docs/develop/context/README.md": (
         "## Roteamento por tipo de alteração",
         "## Precedência das fontes",
     ),
-    "docs/context/project.md": (
+    "docs/develop/context/project.md": (
         "## Problema e finalidade",
         "## Limites normativos",
     ),
-    "docs/context/glossary.md": (
+    "docs/develop/context/glossary.md": (
         "## Termos canônicos",
         "## Regras de vocabulário",
     ),
-    "docs/context/architecture/README.md": (
+    "docs/develop/context/architecture/README.md": (
         "## Roteamento de arquitetura",
         "## Visão arquitetural",
         "## Integrações",
         "## Invariantes transversais",
     ),
-    "docs/context/engineering/README.md": (
+    "docs/develop/context/engineering/README.md": (
         "## Roteamento de engenharia",
     ),
-    "docs/context/data/README.md": (
+    "docs/develop/context/data/README.md": (
         "## Roteamento de dados",
         "## Migrations",
     ),
-    "docs/context/flows/README.md": (
+    "docs/develop/context/flows/README.md": (
         "## Fluxos transversais",
         "## Contrato de um fluxo",
     ),
-    "docs/decisions/README.md": (
+    "docs/develop/decisions/README.md": (
         "## Índice de decisões",
         "## Ciclo de vida de um ADR",
         "## Formato de um ADR",
@@ -166,7 +165,13 @@ class ProjectContextContractTests(unittest.TestCase):
             self.assertFalse(path.exists(), f"arquivo preventivo: {path}")
 
     def test_every_document_declares_contract_classification_and_specific_role(self) -> None:
-        for path in sorted(documentation_files()):
+        technical_contracts = {
+            path.resolve()
+            for root in (CONTEXT_ROOT, DEVELOP_ROOT / "decisions")
+            for path in root.rglob("*.md")
+            if path.is_file()
+        }
+        for path in sorted(technical_contracts):
             relative = path.relative_to(ROOT).as_posix()
             text = path.read_text(encoding="utf-8")
             with self.subTest(path=relative):
@@ -214,21 +219,23 @@ class ProjectContextContractTests(unittest.TestCase):
     def test_agent_routes_are_exact_and_human_readme_only_presents(self) -> None:
         agent_guide = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("docs/context/README.md", agent_guide)
+        self.assertIn("docs/develop/context/README.md", agent_guide)
         self.assertIn("docs/README.md", readme)
-        broad_routes = re.findall(r"`(docs/context/(?:architecture|engineering|data)/)`", agent_guide)
+        broad_routes = re.findall(
+            r"`(docs/develop/context/(?:architecture|engineering|data)/)`",
+            agent_guide,
+        )
         self.assertEqual([], broad_routes)
         self.assertIn("apresentação", readme.casefold())
         project = (CONTEXT_ROOT / "project.md").read_text(encoding="utf-8")
         self.assertIn("## Limites normativos", project)
         self.assertNotIn("## Capacidades", project)
 
-    def test_docs_readme_is_general_guide_without_operational_routing(self) -> None:
+    def test_docs_readme_routes_the_two_audiences_without_operational_detail(self) -> None:
         guide = (DOCS_ROOT / "README.md").read_text(encoding="utf-8")
         router = (CONTEXT_ROOT / "README.md").read_text(encoding="utf-8")
-        for heading in GENERAL_GUIDE_HEADINGS:
-            self.assertIn(heading, guide)
-        self.assertIn("](context/README.md)", guide)
+        self.assertIn("](user/README.md)", guide)
+        self.assertIn("](develop/README.md)", guide)
         operational_heading = "## Roteamento por tipo de alteração"
         self.assertNotIn(operational_heading, guide)
         self.assertIn(operational_heading, router)
@@ -251,8 +258,8 @@ class ProjectContextContractTests(unittest.TestCase):
                     self.assertNotIn(marker, text)
 
     def test_every_adr_is_listed_in_decision_index(self) -> None:
-        index = (DOCS_ROOT / "decisions" / "README.md").read_text(encoding="utf-8")
-        adrs = sorted((DOCS_ROOT / "decisions").glob("ADR-*.md"))
+        index = (DEVELOP_ROOT / "decisions" / "README.md").read_text(encoding="utf-8")
+        adrs = sorted((DEVELOP_ROOT / "decisions").glob("ADR-*.md"))
         for adr in adrs:
             with self.subTest(adr=adr.name):
                 self.assertIn(adr.name, index)
@@ -286,7 +293,7 @@ class ProjectContextContractTests(unittest.TestCase):
             "skills": ("metodologia executável", "skills"),
             "specialists": ("catálogo oficial", "opcionais"),
             "cli": ("cli e tui", "progresso"),
-            "docs": ("documentação final", "usuário"),
+            "docs": ("documentação", "usuário", "develop"),
             "specsfy": ("porta de entrada", "usuário final"),
         }
         for name, path in entrypoints.items():
@@ -311,7 +318,8 @@ class ProjectContextContractTests(unittest.TestCase):
         ):
             self.assertIn(link, specsfy_readme)
         self.assertIn("specsfy-base-interview", skills_readme)
-        self.assertIn("../specsfy/", docs_readme)
+        self.assertIn("user/README.md", docs_readme)
+        self.assertIn("develop/README.md", docs_readme)
 
         modules = (CONTEXT_ROOT / "architecture" / "modules.md").read_text(
             encoding="utf-8"

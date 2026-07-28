@@ -25,9 +25,11 @@ def given_integrated_sources(context) -> None:
     context.skills_readme = (ROOT / "skills" / "README.md").read_text(
         encoding="utf-8"
     )
-    context.docs = (ROOT / "docs" / "README.md").read_text(encoding="utf-8")
+    context.docs = (
+        ROOT / "docs" / "user" / "README.md"
+    ).read_text(encoding="utf-8")
     context.flow = (
-        ROOT / "docs" / "context" / "flows" / "README.md"
+        ROOT / "docs" / "develop" / "context" / "flows" / "README.md"
     ).read_text(encoding="utf-8")
     context.skills = [
         (ROOT / "skills" / name / "SKILL.md").read_text(encoding="utf-8")

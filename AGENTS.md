@@ -15,7 +15,8 @@ independentes.
 | `./` | integração, automação e testes transversais |
 | `brand/` | identidade visual e verbal |
 | `skills/` | metodologia executável e skills base |
-| `docs/` | documentação oficial para usuários e contexto transversal |
+| `docs/user/` | documentação simples e completa para usuários finais |
+| `docs/develop/` | metodologia e contexto técnico para agentes e contribuidores |
 | `example/` | aplicação interna de validação |
 | `specsfy/` | visão geral pública detalhada |
 | `specialists/` | skills técnicas opcionais |
@@ -57,9 +58,10 @@ normativa paralela.
 - Toda criação ou alteração atualiza, na mesma entrega, a documentação aplicável.
 - Documentação deriva das fontes executáveis e não duplica inventários de
   manifests, rotas, schemas ou testes.
-- Decisões transversais vivem em `docs/context/`; guias públicos vivem em
-  `docs/`.
-- Use `docs/context/README.md` como roteador e leia apenas os contextos exigidos.
+- Guias públicos vivem em `docs/user/`; decisões e contexto técnico vivem em
+  `docs/develop/`.
+- Use `docs/develop/context/README.md` como roteador e leia apenas os contextos
+  exigidos.
 
 ### ClickUp
 

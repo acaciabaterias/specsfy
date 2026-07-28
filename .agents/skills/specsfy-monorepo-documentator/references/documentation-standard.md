@@ -1,48 +1,72 @@
 # Padrão da documentação oficial
 
-O módulo `docs/` publica dois percursos complementares do monorepo Specsfy.
-Eles cobrem arquitetura, módulos, dependências, stack, dados, fluxos, testes,
-instalação, método, CLI, contexto, especialistas e documentação do sistema.
+O módulo `docs/` possui exatamente dois percursos canônicos:
 
-## Documentação técnica
+```text
+docs/
+├── README.md
+├── user/
+└── develop/
+```
 
-Use `docs/context/README.md` como roteador.
+`docs/README.md` apenas apresenta e roteia os públicos. Conteúdo temático
+pertence a um dos dois percursos.
 
-| Assunto | Owner documental |
-| --- | --- |
-| finalidade, capacidades e limites | `docs/context/project.md` |
-| vocabulário | `docs/context/glossary.md` |
-| arquitetura e integrações | `docs/context/architecture/README.md` |
-| módulos e ownership | `docs/context/architecture/modules.md` |
-| dependências entre componentes | `docs/context/architecture/dependencies.md` |
-| stack, pacotes, convenções e testes | `docs/context/engineering/` |
-| persistência, migrations e privacidade | `docs/context/data/` |
-| fluxos entre três ou mais componentes | `docs/context/flows/` |
-| motivação histórica | `docs/decisions/` |
+## User
 
-## Guias para usuários
+`docs/user/` é a documentação do usuário final. Use linguagem simples,
+explique termos antes de usá-los e mostre pedidos e resultados fáceis de
+adaptar. O leitor não precisa conhecer a implementação do framework.
 
 | Jornada | Guia |
 | --- | --- |
-| entender e iniciar o método | `docs/README.md` |
-| instalar o CLI e o framework | `docs/installation.md` |
-| conduzir a primeira fatia | `docs/basic-usage.md` |
-| atualizar uma spec | `docs/update-spec.md` |
-| operar seleção técnica | `docs/advanced-usage.md` |
-| atualizar e operar o CLI/TUI | `docs/cli.md` |
-| aplicar em Laravel | `docs/laravel.md` |
-| aplicar em Astro | `docs/astro.md` |
-| aplicar em Next.js | `docs/nextjs.md` |
-| capturar e promover ideias | `docs/backlog.md` |
-| manter contexto consumidor | `docs/project-context.md` |
-| consultar documentação gerada | `docs/system-documentation.md` |
-| selecionar especialistas | `docs/specialists.md` |
-| entender os módulos | `docs/repositories.md` |
-| consultar autoria e identidade | `docs/credits.md` |
-| manter a documentação oficial | `docs/monorepo-documentation.md` |
+| visão geral completa | `docs/user/README.md` |
+| instalação | `docs/user/installation.md` |
+| primeira entrega | `docs/user/getting-started.md` |
+| método e conceitos | `docs/user/method.md` |
+| índice das skills base | `docs/user/skills/README.md` |
+| aprofundamento de cada skill base | `docs/user/skills/specsfy-base-*.md` |
+| CLI e TUI | `docs/user/cli.md` |
+| mudança posterior | `docs/user/update-spec.md` |
+| contexto persistente | `docs/user/project-context.md` |
+| documentação do sistema gerada | `docs/user/system-documentation.md` |
+| especialistas | `docs/user/specialists.md` |
+| automação avançada | `docs/user/advanced-usage.md` |
+| guias por framework | `docs/user/laravel.md`, `astro.md` e `nextjs.md` |
 
-O guia de instalação deriva sua interface de `cli/` e o framework de `skills/`.
-Os guias técnicos derivam a descoberta de `specialists/`.
+Cada página de skill base inclui:
+
+- quando usar e quando não usar;
+- como pedir em linguagem natural;
+- exemplo passo a passo;
+- resultado esperado;
+- erros comuns;
+- próximo passo.
+
+## Develop
+
+`docs/develop/` é a documentação técnica para agentes e humanos que contribuem,
+implementam ou modificam o framework.
+
+| Assunto | Owner documental |
+| --- | --- |
+| portal técnico | `docs/develop/README.md` |
+| estados, atos, gates e rastreabilidade | `docs/develop/methodology.md` |
+| fluxo de contribuição e validação | `docs/develop/contributing.md` |
+| arquitetura das skills | `docs/develop/skills.md` |
+| arquitetura do CLI | `docs/develop/cli.md` |
+| módulos e ownership | `docs/develop/modules.md` |
+| manutenção documental | `docs/develop/documentation.md` |
+| contexto transversal | `docs/develop/context/README.md` |
+| arquitetura e integrações | `docs/develop/context/architecture/` |
+| direção das dependências | `docs/develop/context/architecture/dependencies.md` |
+| stack, pacotes, convenções e testes | `docs/develop/context/engineering/` |
+| persistência, dados e privacidade | `docs/develop/context/data/` |
+| fluxos entre módulos | `docs/develop/context/flows/` |
+| motivação histórica | `docs/develop/decisions/` |
+
+O percurso técnico explica relações e decisões sem copiar inventários extensos
+de manifests, rotas, schemas ou testes.
 
 ## Fontes por módulo
 
@@ -51,17 +75,18 @@ Os guias técnicos derivam a descoberta de `specialists/`.
 | raiz | `AGENTS.md`, automação e contratos integrados |
 | `brand/` | identidade e diretrizes |
 | `skills/` | `SKILL.md`, scripts, referências e testes |
-| `docs/` | contexto transversal e guias |
+| `docs/` | os dois percursos oficiais |
 | `example/` | aplicação e documentação operacional |
-| `specsfy/` | tutorial público detalhado |
+| `specsfy/` | apresentação pública |
 | `specialists/` | catálogo, skills e testes |
 | `cli/` | código, manifests, testes e interface pública |
 
 ## Reconciliação
 
-1. Identificar os módulos afetados.
-2. Ler instruções e evidências nesses módulos.
-3. Atualizar contexto técnico quando uma decisão transversal mudou.
-4. Atualizar guia quando uma jornada pública mudou.
-5. Atualizar ambos quando arquitetura e uso mudaram.
-6. Validar links, testes e o status único do monorepo.
+1. identifique a afirmação e seu owner executável;
+2. leia as instruções e evidências do módulo;
+3. atualize `user/` quando a jornada pública mudar;
+4. atualize `develop/` quando arquitetura, contribuição ou decisões mudarem;
+5. atualize ambos quando a mudança afetar uso e implementação;
+6. mantenha uma página por skill base sincronizada com o `SKILL.md`;
+7. valide links, imagens, topologia, testes e status Git.

@@ -14,11 +14,11 @@ especificação única, executável e rastreável. Esta é a porta de entrada pa
 usuário final: instale o CLI, prepare um projeto e conduza a primeira fatia de
 trabalho pelo passo a passo abaixo.
 
-![Dashboard Home do Specsfy](../docs/screen/cli/cli-dash.png)
+![Dashboard Home do Specsfy](../docs/user/assets/cli/cli-dash.png)
 
 A TUI transforma specs, tarefas, checklists e gates em uma visão operacional.
 Veja as demais telas e comandos no
-[guia do CLI](../docs/cli.md).
+[guia do CLI](../docs/user/cli.md).
 
 ## O que você precisa
 
@@ -305,9 +305,9 @@ descarta a customização protegida.
 O framework base é independente de linguagem. Especialistas acrescentam
 critérios técnicos sem alterar os três atos:
 
-- [Laravel](../docs/laravel.md);
-- [Astro](../docs/astro.md);
-- [Next.js](../docs/nextjs.md).
+- [Laravel](../docs/user/laravel.md);
+- [Astro](../docs/user/astro.md);
+- [Next.js](../docs/user/nextjs.md).
 
 Você pode instalar recomendações detectadas:
 
@@ -326,12 +326,12 @@ instala automaticamente.
 
 ## Próximos guias
 
-- [Instalação completa](../docs/installation.md)
-- [Uso básico](../docs/basic-usage.md)
-- [Atualizar uma especificação](../docs/update-spec.md)
-- [Uso avançado](../docs/advanced-usage.md)
-- [CLI, TUI e atualização](../docs/cli.md)
-- [Mapa dos módulos](../docs/repositories.md)
+- [Instalação completa](../docs/user/installation.md)
+- [Uso básico](../docs/user/getting-started.md)
+- [Atualizar uma especificação](../docs/user/update-spec.md)
+- [Uso avançado](../docs/user/advanced-usage.md)
+- [CLI, TUI e atualização](../docs/user/cli.md)
+- [Mapa dos módulos](../docs/develop/modules.md)
 - [Documentação completa](../docs/)
 
 ## O que o Specsfy garante
@@ -367,7 +367,7 @@ contrato é tornar decisões e conclusão rastreáveis.
 | [`promovaweb/specsfy`](https://github.com/promovaweb/specsfy) | orquestração e testes integrados |
 
 Veja responsabilidades, públicos e limites no
-[guia dos módulos](../docs/repositories.md).
+[guia dos módulos](../docs/develop/modules.md).
 
 ## Créditos
 
@@ -375,4 +375,4 @@ Specsfy é um projeto da [Promovaweb](https://promovaweb.com), mantido por
 **Luiz Eduardo Oliveira Fonseca** e pela comunidade.
 
 Contato: [contato@promovaweb.com](mailto:contato@promovaweb.com).
-Consulte os [créditos completos](../docs/credits.md).
+Consulte os [créditos completos](../docs/user/credits.md).

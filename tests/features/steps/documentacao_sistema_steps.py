@@ -20,7 +20,7 @@ def when_documentator_contract_is_inspected(context) -> None:
         ROOT / "cli/src/specsfy_cli/installer.py"
     ).read_text(encoding="utf-8")
     context.guide = (
-        ROOT / "docs/system-documentation.md"
+        ROOT / "docs/user/system-documentation.md"
     ).read_text(encoding="utf-8")
 
 

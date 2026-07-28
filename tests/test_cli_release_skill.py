@@ -197,13 +197,13 @@ class CliReleaseSkillTests(unittest.TestCase):
         cli_agents = (ROOT / "cli" / "AGENTS.md").read_text(encoding="utf-8")
         cli_readme = (ROOT / "cli" / "README.md").read_text(encoding="utf-8")
         modules = (
-            ROOT / "docs" / "context" / "architecture" / "modules.md"
+            ROOT / "docs" / "develop" / "context" / "architecture" / "modules.md"
         ).read_text(encoding="utf-8")
         dependencies = (
-            ROOT / "docs" / "context" / "architecture" / "dependencies.md"
+            ROOT / "docs" / "develop" / "context" / "architecture" / "dependencies.md"
         ).read_text(encoding="utf-8")
         flow = (
-            ROOT / "docs" / "context" / "flows" / "cli-release.md"
+            ROOT / "docs" / "develop" / "context" / "flows" / "cli-release.md"
         ).read_text(encoding="utf-8")
 
         for source in (workspace_agents, workspace_readme, modules):

@@ -1,6 +1,6 @@
 ---
 name: specsfy-monorepo-documentator
-description: Manter a documentação oficial do próprio projeto Specsfy no monorepo promovaweb/specsfy. Use somente na raiz oficial quando o pedido for documentar o Specsfy, reconciliar mudanças transversais, revisar docs/context/ ou atualizar guias em docs/. Não use em projetos consumidores; para reconstruir a documentação de uma aplicação, use specsfy-documentator.
+description: Manter a documentação oficial do próprio projeto Specsfy no monorepo promovaweb/specsfy. Use somente na raiz oficial quando o pedido for documentar o Specsfy, reconciliar mudanças transversais, revisar docs/develop/context/ ou atualizar guias em docs/user/. Não use em projetos consumidores; para reconstruir a documentação de uma aplicação, use specsfy-documentator.
 ---
 
 # Documentar o monorepo Specsfy
@@ -15,15 +15,17 @@ python3 -B .agents/skills/specsfy-monorepo-documentator/scripts/collect_monorepo
 2. Interromper se o coletor informar que o diretório não representa o monorepo
    oficial.
 3. Ler integralmente o `AGENTS.md` da raiz e as instruções dos módulos afetados.
-4. Ler `docs/context/README.md` e apenas os contextos roteados pela mudança.
+4. Ler `docs/develop/context/README.md` e apenas os contextos roteados pela
+   mudança.
 5. Ler [o padrão documental](references/documentation-standard.md) antes de
    editar topologia, classificação ou percurso de leitura.
 6. Comparar cada afirmação com código, teste, manifest, configuração, schema,
    documentação operacional ou contexto normativo do módulo responsável.
 7. Atualizar ambos os percursos quando a mudança alcançar arquitetura e uso:
-   - documentação técnica transversal em `docs/context/`;
-   - guias para usuários em `docs/`.
-   Manter `docs/installation.md` como guia canônico de instalação.
+   - documentação para usuários em `docs/user/`;
+   - documentação técnica em `docs/develop/`.
+   Manter `docs/user/installation.md` como guia canônico de instalação e uma
+   página em `docs/user/skills/` para cada skill base.
 8. Usar links relativos entre módulos. URLs públicas usam
    `https://github.com/promovaweb/specsfy`.
 9. Executar testes focais dos módulos, regressão integrada e revisar o único

@@ -26,7 +26,7 @@ def when_minimum_policy_is_inspected(context) -> None:
         context.skills / "templates/Spec.md"
     ).read_text(encoding="utf-8")
     context.testing = (
-        context.docs / "context/engineering/testing.md"
+        context.docs / "develop/context/engineering/testing.md"
     ).read_text(encoding="utf-8")
 
 

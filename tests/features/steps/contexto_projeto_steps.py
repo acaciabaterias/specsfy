@@ -9,7 +9,8 @@ from behave import given, then, when
 
 ROOT = Path(__file__).resolve().parents[3]
 DOCS_ROOT = ROOT / "docs"
-CONTEXT_ROOT = DOCS_ROOT / "context"
+DEVELOP_ROOT = DOCS_ROOT / "develop"
+CONTEXT_ROOT = DEVELOP_ROOT / "context"
 COMMON_HEADINGS = (
     "## Classificação",
     "## Papel",
@@ -29,6 +30,15 @@ HEADING = re.compile(r"^#{1,6}\s+(.+?)\s*#*\s*$", re.MULTILINE)
 
 def markdown_files() -> set[Path]:
     return {path.resolve() for path in DOCS_ROOT.rglob("*.md") if path.is_file()}
+
+
+def context_contract_files() -> set[Path]:
+    return {
+        path.resolve()
+        for root in (CONTEXT_ROOT, DEVELOP_ROOT / "decisions")
+        for path in root.rglob("*.md")
+        if path.is_file()
+    }
 
 
 def split_target(raw: str) -> tuple[str, str]:
@@ -76,7 +86,7 @@ def given_repository_and_contract(context) -> None:
 
 @when("a biblioteca de contexto é inspecionada")
 def when_context_library_is_inspected(context) -> None:
-    context.context_files = sorted(markdown_files())
+    context.context_files = sorted(context_contract_files())
 
 
 @then("cada documento explica seu papel, classificação e regras de uso")
@@ -134,12 +144,12 @@ def then_finds_exact_routes(context) -> None:
     agent_text = context.entrypoint_text[context.agent_guide]
     human_text = context.entrypoint_text[context.human_guide]
     router_text = context.entrypoint_text[context.router]
-    assert "docs/context/README.md" in agent_text
+    assert "docs/develop/context/README.md" in agent_text
     assert "docs/README.md" in human_text
     for broad_route in (
-        "`docs/context/architecture/`",
-        "`docs/context/engineering/`",
-        "`docs/context/data/`",
+        "`docs/develop/context/architecture/`",
+        "`docs/develop/context/engineering/`",
+        "`docs/develop/context/data/`",
     ):
         assert broad_route not in agent_text, f"rota ampla encontrada: {broad_route}"
     for index in context.domain_indexes:
@@ -170,7 +180,7 @@ def when_contract_traverses_docs(context) -> None:
     context.reached = reachable_documents(context.portal)
     context.adr_files = {
         path.resolve()
-        for path in (DOCS_ROOT / "decisions").glob("ADR-*.md")
+        for path in (DEVELOP_ROOT / "decisions").glob("ADR-*.md")
         if path.is_file()
     }
 
@@ -191,7 +201,7 @@ def then_every_target_and_adr_exists(context) -> None:
             assert destination.exists(), f"destino ausente: {path} -> {destination}"
             if anchor:
                 assert anchor in heading_anchors(destination)
-    decision_index = (DOCS_ROOT / "decisions" / "README.md").read_text(
+    decision_index = (DEVELOP_ROOT / "decisions" / "README.md").read_text(
         encoding="utf-8"
     )
     for adr in context.adr_files:
@@ -247,23 +257,14 @@ def when_person_consults_how_to_document(context) -> None:
 
 @then("encontra organização, autoridades e destinos para cada informação")
 def then_finds_organization_authorities_and_destinations(context) -> None:
-    for heading in (
-        "## Como a documentação está organizada",
-        "## Como navegar",
-        "## Autoridade das fontes",
-        "## Onde registrar cada informação",
-    ):
-        assert heading in context.general_guide_text, f"seção ausente: {heading}"
+    assert "](user/README.md)" in context.general_guide_text
+    assert "](develop/README.md)" in context.general_guide_text
+    assert "## Fonte da verdade" in context.general_guide_text
 
 
 @then("encontra critérios de criação e manutenção sem duplicar o roteador")
 def then_finds_creation_and_maintenance_without_duplication(context) -> None:
-    for heading in (
-        "## Quando criar um documento",
-        "## Como manter a documentação",
-    ):
-        assert heading in context.general_guide_text, f"seção ausente: {heading}"
-    assert "](context/README.md)" in context.general_guide_text
+    assert "docs/develop/context/" in context.general_guide_text
     operational_heading = "## Roteamento por tipo de alteração"
     assert operational_heading not in context.general_guide_text
     assert operational_heading in context.operational_router_text
@@ -298,7 +299,7 @@ def then_each_repository_declares_a_boundary(context) -> None:
         "skills": ("metodologia executável", "skills"),
         "specialists": ("catálogo oficial", "opcionais"),
         "cli": ("cli e tui", "progresso"),
-        "docs": ("documentação final", "usuário"),
+        "docs": ("documentação", "usuário", "develop"),
         "specsfy": ("porta de entrada", "usuário final"),
     }
     for name, terms in expected_terms.items():

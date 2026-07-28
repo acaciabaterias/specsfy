@@ -33,7 +33,9 @@ class SystemDocumentationIntegrationTests(unittest.TestCase):
             / "scripts"
             / "build_documentation.py"
         ).read_text(encoding="utf-8")
-        guide = (ROOT / "docs/system-documentation.md").read_text(encoding="utf-8")
+        guide = (ROOT / "docs/user/system-documentation.md").read_text(
+            encoding="utf-8"
+        )
 
         for term in (
             "arquitetura",

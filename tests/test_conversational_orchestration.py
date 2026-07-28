@@ -26,8 +26,12 @@ class ConversationalOrchestrationIntegrationTests(unittest.TestCase):
         skills_readme = (ROOT / "skills" / "README.md").read_text(
             encoding="utf-8"
         )
-        docs_readme = (ROOT / "docs" / "README.md").read_text(encoding="utf-8")
-        flow = (ROOT / "docs" / "context" / "flows" / "README.md").read_text(
+        docs_readme = (ROOT / "docs" / "user" / "README.md").read_text(
+            encoding="utf-8"
+        )
+        flow = (
+            ROOT / "docs" / "develop" / "context" / "flows" / "README.md"
+        ).read_text(
             encoding="utf-8"
         )
 
@@ -63,7 +67,7 @@ class ConversationalOrchestrationIntegrationTests(unittest.TestCase):
         update = (
             ROOT / "skills" / "specsfy-base-update-spec" / "SKILL.md"
         ).read_text(encoding="utf-8")
-        advanced = (ROOT / "docs" / "advanced-usage.md").read_text(
+        advanced = (ROOT / "docs" / "user" / "advanced-usage.md").read_text(
             encoding="utf-8"
         )
         entrypoint = (ROOT / "specsfy" / "README.md").read_text(encoding="utf-8")

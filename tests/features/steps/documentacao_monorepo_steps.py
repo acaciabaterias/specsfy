@@ -77,16 +77,20 @@ def when_monorepo_documentation_contract_is_inspected(context) -> None:
         skill_root / "references" / "documentation-standard.md"
     ).read_text(encoding="utf-8")
     context.guide = (
-        ROOT / "docs" / "monorepo-documentation.md"
+        ROOT / "docs" / "develop" / "documentation.md"
     ).read_text(encoding="utf-8")
-    context.installation = ROOT / "docs" / "installation.md"
-    context.router = (ROOT / "docs" / "README.md").read_text(encoding="utf-8")
-    context.cli_guide = (ROOT / "docs" / "cli.md").read_text(encoding="utf-8")
+    context.installation = ROOT / "docs" / "user" / "installation.md"
+    context.router = (ROOT / "docs" / "user" / "README.md").read_text(
+        encoding="utf-8"
+    )
+    context.cli_guide = (ROOT / "docs" / "user" / "cli.md").read_text(
+        encoding="utf-8"
+    )
     context.public_entrypoint = (
         ROOT / "specsfy" / "README.md"
     ).read_text(encoding="utf-8")
     context.basic_usage = (
-        ROOT / "docs" / "basic-usage.md"
+        ROOT / "docs" / "user" / "getting-started.md"
     ).read_text(encoding="utf-8")
 
 
@@ -126,7 +130,7 @@ def then_official_docs_explain_monorepo_skill(context) -> None:
 @then("a skill exige um guia temático de instalação em specsfy docs")
 def then_skill_requires_installation_guide(context) -> None:
     for source in (context.skill, context.standard):
-        assert "docs/installation.md" in source
+        assert "docs/user/installation.md" in source
     assert context.installation.is_file()
 
 
@@ -143,7 +147,7 @@ def then_guide_installs_cli_and_framework(context) -> None:
 
 @then("o portal e o guia operacional do CLI apontam para a instalação")
 def then_routes_point_to_installation(context) -> None:
-    assert "[Guia de instalação](installation.md)" in context.router
+    assert "[Instalação](installation.md)" in context.router
     assert "[guia de instalação](installation.md)" in context.cli_guide
 
 
@@ -243,15 +247,14 @@ def then_public_entrypoint_offers_cli_tips(context) -> None:
 @then("a documentação separa uso básico uso avançado repositórios e créditos")
 def then_docs_separate_user_journeys(context) -> None:
     for filename in (
-        "basic-usage.md",
+        "getting-started.md",
         "update-spec.md",
         "advanced-usage.md",
-        "repositories.md",
+        "../develop/modules.md",
         "credits.md",
     ):
-        assert (ROOT / "docs" / filename).is_file()
+        assert (ROOT / "docs" / "user" / filename).is_file()
         assert f"]({filename})" in context.router
-        assert f"docs/{filename}" in context.standard
 
 
 @then("Laravel Astro e Nextjs possuem guias temáticos verificáveis")
@@ -262,11 +265,10 @@ def then_framework_guides_are_verifiable(context) -> None:
         "nextjs.md": ("specsfy-specialist-nextjs", "next.config", "package.json"),
     }
     for filename, evidence in expectations.items():
-        path = ROOT / "docs" / filename
+        path = ROOT / "docs" / "user" / filename
         assert path.is_file()
         guide = path.read_text(encoding="utf-8")
         assert f"]({filename})" in context.router
-        assert f"docs/{filename}" in context.standard
         for term in evidence:
             assert term in guide
 
@@ -280,14 +282,89 @@ def then_cli_guide_embeds_the_provided_screenshots(context) -> None:
         ("cli-skills.png", "Skills"),
     )
     for filename, alt_text in screenshots:
-        path = ROOT / "docs" / "screen" / "cli" / filename
+        path = ROOT / "docs" / "user" / "assets" / "cli" / filename
         assert path.is_file()
         assert path.read_bytes()[:8] == b"\x89PNG\r\n\x1a\n"
-        assert f"![{alt_text}](screen/cli/{filename})" in context.cli_guide
+        assert f"![{alt_text}](assets/cli/{filename})" in context.cli_guide
 
 
 @then("a porta pública apresenta a visão Home do dashboard")
 def then_public_entrypoint_previews_the_dashboard(context) -> None:
-    assert "![Dashboard Home do Specsfy](../docs/screen/cli/cli-dash.png)" in (
+    assert "![Dashboard Home do Specsfy](../docs/user/assets/cli/cli-dash.png)" in (
         context.public_entrypoint
     )
+
+
+@when("a nova topologia documental é inspecionada")
+def when_new_documentation_topology_is_inspected(context) -> None:
+    context.docs = ROOT / "docs"
+    context.user_docs = context.docs / "user"
+    context.develop_docs = context.docs / "develop"
+    context.user_portal = (context.user_docs / "README.md").read_text(
+        encoding="utf-8"
+    )
+    context.develop_portal = (context.develop_docs / "README.md").read_text(
+        encoding="utf-8"
+    )
+
+
+@then("docs possui somente os percursos user e develop")
+def then_docs_has_only_user_and_develop(context) -> None:
+    directories = {
+        path.name for path in context.docs.iterdir() if path.is_dir()
+    }
+    assert directories == {"user", "develop"}
+
+
+@then("o percurso user oferece um guia geral simples para toda a jornada")
+def then_user_route_has_complete_simple_guide(context) -> None:
+    for term in (
+        "Instalação",
+        "Primeiro projeto",
+        "Metodologia",
+        "CLI e TUI",
+        "Skills base",
+        "Especialistas",
+        "Documentação do sistema",
+    ):
+        assert term in context.user_portal
+
+
+@then("cada skill base possui uma página de uso aprofundada com exemplo")
+def then_each_base_skill_has_an_in_depth_page(context) -> None:
+    skills = (
+        "specsfy-base-backlog",
+        "specsfy-base-interview",
+        "specsfy-base-specify",
+        "specsfy-base-validate",
+        "specsfy-base-tasks",
+        "specsfy-base-tdd-bdd",
+        "specsfy-base-implement",
+        "specsfy-base-update-spec",
+        "specsfy-base-progress",
+    )
+    for skill in skills:
+        path = context.user_docs / "skills" / f"{skill}.md"
+        assert path.is_file()
+        page = path.read_text(encoding="utf-8")
+        assert "## Exemplo passo a passo" in page
+        assert "## O que esperar" in page
+
+
+@then("o percurso develop explica metodologia arquitetura skills CLI e contribuição")
+def then_develop_route_explains_framework_internals(context) -> None:
+    for filename in (
+        "methodology.md",
+        "contributing.md",
+        "skills.md",
+        "cli.md",
+    ):
+        assert (context.develop_docs / filename).is_file()
+        assert f"]({filename})" in context.develop_portal
+    assert (context.develop_docs / "context" / "architecture" / "README.md").is_file()
+
+
+@then("agentes e humanos encontram contexto técnico e validações no mesmo portal")
+def then_agents_and_humans_share_technical_context(context) -> None:
+    for term in ("agentes", "humanos", "contexto", "testes", "contribuir"):
+        assert term in context.develop_portal.casefold()

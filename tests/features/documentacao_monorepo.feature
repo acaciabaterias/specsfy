@@ -41,3 +41,16 @@ Feature: Documentação oficial do monorepo Specsfy
     When o contrato documental do monorepo é inspecionado
     Then o guia do CLI incorpora as quatro capturas fornecidas
     And a porta pública apresenta a visão Home do dashboard
+
+  Scenario: Separar a documentação por público
+    Given a fonte da verdade distribuída do Specsfy
+    When a nova topologia documental é inspecionada
+    Then docs possui somente os percursos user e develop
+    And o percurso user oferece um guia geral simples para toda a jornada
+    And cada skill base possui uma página de uso aprofundada com exemplo
+
+  Scenario: Orientar quem modifica o framework
+    Given a fonte da verdade distribuída do Specsfy
+    When a nova topologia documental é inspecionada
+    Then o percurso develop explica metodologia arquitetura skills CLI e contribuição
+    And agentes e humanos encontram contexto técnico e validações no mesmo portal

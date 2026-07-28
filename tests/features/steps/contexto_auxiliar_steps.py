@@ -50,7 +50,9 @@ def then_consumer_receives_canonical_paths(context) -> None:
         ".specsfy/DATABASE.md",
     ):
         assert path in context.framework
-    guide = (context.docs / "project-context.md").read_text(encoding="utf-8")
+    guide = (
+        context.docs / "user" / "project-context.md"
+    ).read_text(encoding="utf-8")
     assert "$specsfy-setup" in guide
 
 

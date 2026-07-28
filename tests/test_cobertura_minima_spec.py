@@ -97,7 +97,7 @@ class MinimumCoverageIntegrationTests(unittest.TestCase):
         template = (SKILLS / "templates/Spec.md").read_text(encoding="utf-8")
         framework = (SKILLS / "Spec.md").read_text(encoding="utf-8")
         testing = (
-            ROOT / "docs/context/engineering/testing.md"
+            ROOT / "docs/develop/context/engineering/testing.md"
         ).read_text(encoding="utf-8")
 
         for acceptance_id in ("AC-001", "AC-002", "AC-003"):
