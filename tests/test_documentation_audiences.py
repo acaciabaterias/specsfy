@@ -9,6 +9,7 @@ DOCS = ROOT / "docs"
 USER = DOCS / "user"
 DEVELOP = DOCS / "develop"
 BASE_SKILLS = (
+    "specsfy-base-idea",
     "specsfy-base-backlog",
     "specsfy-base-interview",
     "specsfy-base-specify",
@@ -35,6 +36,7 @@ class DocumentationAudienceContractTests(unittest.TestCase):
             "Instalação": "installation.md",
             "Primeiro projeto": "getting-started.md",
             "Metodologia": "method.md",
+            "Caixa de entrada": "ideas.md",
             "CLI e TUI": "cli.md",
             "Contexto do projeto": "project-context.md",
             "Especialistas": "specialists.md",

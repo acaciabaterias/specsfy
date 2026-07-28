@@ -22,7 +22,8 @@ Para conduzir a primeira fatia depois do bootstrap, siga o
 [guia do primeiro projeto](getting-started.md). Para seleção técnica, automação e
 reabertura de gates, consulte o [uso avançado](advanced-usage.md).
 
-Ao criar uma especificação, `specsfy-base-specify` renderiza o template
+Os templates de ideia, backlog, spec, tarefas e contexto persistente ficam centralizados em
+`.specsfy/templates/`. Ao criar uma especificação, `specsfy-base-specify` renderiza o template
 instalado em `specs/specs/<NNNN>-<slug>/spec.md`. O arquivo de exemplo demonstra
 os três atos e as 18 seções para agentes, testes e diagnóstico do CLI, mas não é
 fonte normativa de uma feature. O cabeçalho renderizado é uma tabela Markdown

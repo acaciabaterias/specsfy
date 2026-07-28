@@ -41,7 +41,8 @@ fonte normativa antes de alterar usos.
 | Termo | Definição operacional | Não confundir com |
 | --- | --- | --- |
 | Fatia vertical | Entrega demonstrável com problema, aceite, testes, tarefas e evidência próprios | camada técnica |
-| Backlog | Item priorizável em `specs/backlog/<NNNN>-<slug>.md` que captura e amadurece uma necessidade antes da promoção | spec ou tarefa |
+| Ideia capturada | Input preservado e pré-processado sem perguntas em `specs/ideias/<data-hora>-<slug>.md` | backlog, requisito ou autorização |
+| Backlog | Item priorizável em `specs/backlog/<NNNN>-<slug>.md` que amadurece uma necessidade antes da promoção | captura bruta, spec ou tarefa |
 | Interview | Conversa adaptativa que aprofunda ideia, backlog ou spec e prepara o handoff | captura superficial ou especificação |
 | Spec | `specs/specs/<NNNN>-<slug>/spec.md`, fonte normativa única de uma fatia; somente o diretório é numerado | documento de contexto |
 | Atualização de spec | incorporação explícita de pedido surgido depois do Definition Gate, com análise de impacto e reabertura seletiva dos atos | nova spec ou edição silenciosa de código |

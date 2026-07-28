@@ -153,6 +153,7 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
             "specsfy install --project .",
             "uv tool upgrade specsfy-cli",
             "specsfy skills update --project .",
+            "specsfy-base-idea",
             "specsfy-base-backlog",
             "Ato I — Definir",
             "Ato II — Projetar e provar",
@@ -167,6 +168,7 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
             self.assertIn(evidence, public_entrypoint)
 
         base_flow = (
+            "$specsfy-base-idea",
             "$specsfy-base-backlog",
             "$specsfy-base-interview",
             "$specsfy-base-specify",
@@ -182,19 +184,21 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
         )
         for source in (public_entrypoint, basic_usage):
             practical_journey = (
-                "### 1. Guarde a ideia — `$specsfy-base-backlog`",
-                "### 2. Tire as dúvidas — `$specsfy-base-interview`",
-                "### 3. Crie a especificação — `$specsfy-base-specify`",
-                "### 4. Confira a especificação — `$specsfy-base-validate`",
-                "### 5. Divida o trabalho — `$specsfy-base-tasks`",
-                "### 6. Prepare a verificação — `$specsfy-base-tdd-bdd`",
-                "### 7. Implemente — `$specsfy-base-implement`",
-                "### 8. Altere a especificação — `$specsfy-base-update-spec`",
-                "### 9. Veja o progresso — `$specsfy-base-progress`",
+                "### 1. Capture a ideia — `$specsfy-base-idea`",
+                "### 2. Refine no backlog — `$specsfy-base-backlog`",
+                "### 3. Tire as dúvidas — `$specsfy-base-interview`",
+                "### 4. Crie a especificação — `$specsfy-base-specify`",
+                "### 5. Confira a especificação — `$specsfy-base-validate`",
+                "### 6. Divida o trabalho — `$specsfy-base-tasks`",
+                "### 7. Prepare a verificação — `$specsfy-base-tdd-bdd`",
+                "### 8. Implemente — `$specsfy-base-implement`",
+                "### 9. Altere a especificação — `$specsfy-base-update-spec`",
+                "### 10. Veja o progresso — `$specsfy-base-progress`",
             )
             for evidence in practical_journey:
                 self.assertIn(evidence, source)
             practical_evidence = (
+                "specs/ideias/2026-07-28-143205-pagina-boas-vindas.md",
                 "specs/backlog/0001-pagina-boas-vindas.md",
                 "Brief pronto para especificar",
                 "specs/specs/0001-pagina-boas-vindas/spec.md",
@@ -227,7 +231,7 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
             self.assertEqual(sorted(positions), positions)
 
         guides = {
-            "getting-started.md": ("specsfy-base-backlog", "Definition Gate"),
+            "getting-started.md": ("specsfy-base-idea", "Definition Gate"),
             "update-spec.md": (
                 "specsfy-base-update-spec",
                 "esqueci",

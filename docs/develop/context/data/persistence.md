@@ -41,7 +41,8 @@ transversais. A spec da fatia governa cada mudança.
 O Specsfy não possui banco de dados de runtime. O estado normativo é Markdown
 versionado no Git:
 
-- backlog preserva ideias ainda não promovidas;
+- `specs/ideias/` preserva inputs timestampados e sua análise inicial;
+- backlog preserva itens escolhidos para refinamento ainda não promovidos;
 - specs mantêm decisões e progresso por fatia;
 - research preserva evidência consultada;
 - código e testes são artefatos derivados;
@@ -63,8 +64,10 @@ schema; o arquivo de banco local é ignorado pelo Git e nunca é fonte normativa
 ## Propriedade e isolamento
 
 - Cada spec pertence a um único slug.
+- Cada captura possui data, hora, slug e hash do input original; colisões nunca
+  sobrescrevem o arquivo anterior.
 - Cada backlog possui ID próprio e mantém a formulação original da ideia.
-- Backlog e spec usam sequências independentes.
+- Capturas usam timestamp; backlog e spec usam sequências independentes.
 - Research pertence à spec do mesmo diretório.
 - Uma skill possui seus mecanismos reutilizáveis.
 - Evidência de uma fatia não valida automaticamente outra fatia.

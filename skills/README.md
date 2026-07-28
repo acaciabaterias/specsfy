@@ -19,9 +19,9 @@ está em [`docs/`](../docs/).
 
 Este módulo possui:
 
-- as instruções operacionais das nove skills base, do setup, do documentador e
+- as instruções operacionais das dez skills base, do setup, do documentador e
   das três auxiliares;
-- o template rígido `Specsfy/2.0` em `templates/Spec.md`;
+- os templates de ideia, backlog, spec e tarefas em `templates/`;
 - um documento preenchido e não normativo em `examples/Spec.md`;
 - o MCR-10 e referências dos gates;
 - scripts de validação, rastreabilidade, evidência e progresso;
@@ -40,7 +40,8 @@ por [`cli/`](../cli/).
 O fluxo preservado pelas skills é:
 
 ```text
-capturar ideia no backlog
+capturar imediatamente em specs/ideias
+  → refinar no backlog
   → entrevistar
   → especificar
   → validar definição
@@ -86,6 +87,7 @@ publicação ou ação destrutiva, que continuam exigindo autorização específ
 
 | Skill | Responsabilidade | Limite principal |
 | --- | --- | --- |
+| [`specsfy-base-idea`](specsfy-base-idea/SKILL.md) | preservar e pré-processar o input sem perguntas | não refina, promove ou implementa |
 | [`specsfy-base-backlog`](specsfy-base-backlog/SKILL.md) | pesquisar, conversar e registrar ideias minimamente completas | não cria especificações |
 | [`specsfy-base-interview`](specsfy-base-interview/SKILL.md) | descobrir intenção com MCR-10 | não escreve arquivos por padrão |
 | [`specsfy-base-specify`](specsfy-base-specify/SKILL.md) | promover decisões para `spec.md` e research | não implementa nem captura ideia vaga |
@@ -159,7 +161,8 @@ e não recebe nenhuma categoria.
 
 ```text
 templates/
-└── Spec.md        # fonte canônica copiada para projetos consumidores
+├── Idea.md, Backlog.md, Spec.md e Tasks.md
+└── Project.md, Stack.md, Rules.md e Database.md
 examples/
 └── Spec.md        # fixture preenchida para agentes, CLI e testes
 specsfy-{base-<responsabilidade>|setup|documentator|aux-<responsabilidade>}/
@@ -178,7 +181,7 @@ specsfy-{base-<responsabilidade>|setup|documentator|aux-<responsabilidade>}/
 - Referências extensas vivem a um nível da skill e possuem gatilho explícito de
   leitura.
 - Uma regra normativa possui uma única fonte; outros arquivos apontam para ela.
-- O CLI publica template e exemplo sob `.specsfy/`; somente uma spec criada a
+- O CLI publica os templates e o exemplo sob `.specsfy/`; somente uma spec criada a
   partir do template se torna normativa para uma feature.
 
 ## Disponibilizar as skills
@@ -236,7 +239,7 @@ python3 -B specsfy-base-validate/scripts/verify_repo.py . \
   --boundary local
 ```
 
-O verificador exige as nove skills base. Os contratos do catálogo também
+O verificador exige as dez skills base. Os contratos do catálogo também
 validam o setup, o documentador e as três auxiliares; especialistas instalados
 são validados sem limitar o tamanho total do catálogo.
 

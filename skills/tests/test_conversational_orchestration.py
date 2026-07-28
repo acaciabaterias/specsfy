@@ -6,6 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_SKILLS = (
+    "specsfy-base-idea",
     "specsfy-base-backlog",
     "specsfy-base-interview",
     "specsfy-base-specify",
@@ -33,7 +34,7 @@ class ConversationalOrchestrationTests(unittest.TestCase):
         self.assertIn("retorno", normalized)
 
     def test_every_base_skill_can_be_loaded_by_an_automatic_handoff(self) -> None:
-        for name in BASE_SKILLS:
+        for name in BASE_SKILLS[1:]:
             with self.subTest(skill=name):
                 skill = (ROOT / name / "SKILL.md").read_text(encoding="utf-8")
                 metadata = (
@@ -105,6 +106,7 @@ class ConversationalOrchestrationTests(unittest.TestCase):
         }
 
         expected_routes = {
+            "specsfy-base-idea": "$specsfy-base-backlog",
             "specsfy-base-backlog": "$specsfy-base-interview",
             "specsfy-base-interview": "$specsfy-base-specify",
             "specsfy-base-specify": "$specsfy-base-validate",

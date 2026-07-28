@@ -10,7 +10,7 @@ from behave import given, then, when
 ROOT = Path(__file__).resolve().parents[3]
 
 
-@given("um projeto com nove skills base e dois especialistas válidos")
+@given("um projeto com dez skills base e dois especialistas válidos")
 def given_base_and_specialist_catalog(context) -> None:
     context.test = ROOT / "tests/test_verify_repo.py"
     assert context.test.is_file()

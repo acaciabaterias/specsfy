@@ -7,6 +7,7 @@ from behave import given, then, when
 
 ROOT = Path(__file__).resolve().parents[3]
 BASE_SKILLS = (
+    "specsfy-base-idea",
     "specsfy-base-backlog",
     "specsfy-base-interview",
     "specsfy-base-specify",
@@ -33,7 +34,7 @@ def given_integrated_sources(context) -> None:
     ).read_text(encoding="utf-8")
     context.skills = [
         (ROOT / "skills" / name / "SKILL.md").read_text(encoding="utf-8")
-        for name in BASE_SKILLS
+        for name in BASE_SKILLS[1:]
     ]
 
 
@@ -42,7 +43,7 @@ def when_handoff_is_needed(context) -> None:
     assert "Pendência detectada:" in context.framework
 
 
-@then("todas as skills base anunciam e executam a transição automaticamente")
+@then("as skills posteriores à captura anunciam e executam a transição automaticamente")
 def then_skills_announce_and_execute(context) -> None:
     assert len(context.skills) == 9
     for content in context.skills:

@@ -1,11 +1,20 @@
 # Skills base
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="../../../brand/logo/logo-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="../../../brand/logo/logo-light.svg">
+    <img src="../../../brand/logo/logo-light.svg" alt="Logo do Specsfy" width="180">
+  </picture>
+</p>
+
 As skills base dividem o método em responsabilidades pequenas. Você pode pedir
 uma delas pelo nome ou simplesmente explicar o que quer; o agente seleciona e
 encadeia as etapas necessárias.
 
 | Etapa | Skill | Resultado principal |
 | --- | --- | --- |
+| capturar sem perguntas | [`specsfy-base-idea`](specsfy-base-idea.md) | arquivo em `specs/ideias/` |
 | guardar uma ideia | [`specsfy-base-backlog`](specsfy-base-backlog.md) | item em `specs/backlog/` |
 | aprofundar decisões | [`specsfy-base-interview`](specsfy-base-interview.md) | brief na conversa |
 | criar a fonte única | [`specsfy-base-specify`](specsfy-base-specify.md) | `spec.md` |
@@ -18,7 +27,8 @@ encadeia as etapas necessárias.
 
 ## Como escolher
 
-- A ideia ainda está vaga? Comece pelo backlog.
+- Quer apenas guardar o texto agora? Comece pela captura de ideia.
+- Quer refinar uma captura vaga? Use o backlog.
 - Você quer decidir detalhes antes de criar uma spec? Use a entrevista.
 - A entrega está clara, mas ainda não possui `spec.md`? Use specify.
 - Quer saber se a definição está pronta? Use validate.

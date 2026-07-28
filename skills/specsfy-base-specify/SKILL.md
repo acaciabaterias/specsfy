@@ -1,6 +1,6 @@
 ---
 name: specsfy-base-specify
-description: "Use quando o usuário pede para promover um backlog entrevistado, criar, iniciar ou consolidar uma especificação nova ou ainda em Draft em `spec.md`. Use também quando uma transição automática exigir criar ou completar a fonte normativa inicial. Inicializa specs em `specs/specs/` e aplica o MCR-10; para mudar uma spec que já obteve Definition Gate use specsfy-base-update-spec, para ideia superficial use specsfy-base-backlog, para aprofundamento conversacional use specsfy-base-interview e para revisão sem edição use specsfy-base-validate."
+description: "Use quando o usuário pede para promover uma ideia ou backlog já entrevistado, criar, iniciar ou consolidar uma especificação nova ou ainda em Draft em `spec.md`. Use também quando uma transição automática exigir criar ou completar a fonte normativa inicial. Inicializa specs em `specs/specs/` e aplica o MCR-10; para mudar spec aprovada use specsfy-base-update-spec, para captura sem perguntas use specsfy-base-idea, para refinamento leve use specsfy-base-backlog, para aprofundamento use specsfy-base-interview e para revisão sem edição use specsfy-base-validate."
 ---
 
 # Montar a especificação única
@@ -41,9 +41,9 @@ python3 -B <diretório-da-skill>/scripts/iniciar_spec.py \
    fallback; no projeto consumidor, template ausente exige `specsfy install`.
 4. Ao atualizar, use o caminho da spec existente fornecido ou descoberto sob a
    raiz atual; não execute o inicializador novamente.
-5. Leia o item de backlog de origem, o brief da entrevista, o pedido atual, a
-   spec nesse caminho, seu `research/` e arquivos do repositório que revelem
-   restrições reais.
+5. Leia a captura de origem em `specs/ideias/`, o item de backlog, o brief da
+   entrevista, o pedido atual, a spec nesse caminho, seu `research/` e arquivos
+   do repositório que revelem restrições reais.
 6. Se não houver informação suficiente para identificar problema, ator e
    resultado, faça uma pergunta bloqueante antes de preencher o modelo.
 7. Leia `references/mcr-10.md` ao receber relato, história, transcrição ou
@@ -74,6 +74,9 @@ python3 -B <diretório-da-skill>/scripts/iniciar_spec.py \
 - Ao promover `specs/backlog/<NNNN>-<slug>.md`, registre esse caminho na spec e
   atualize o item para `Status: Promoted` com o caminho da spec criada. O backlog
   preserva proveniência, mas deixa de governar o comportamento.
+- Ao derivar diretamente de `specs/ideias/<data-hora>-<slug>.md`, registre o
+  caminho na spec e preserve a captura sem alteração. A análise inicial é
+  contexto, não requisito confirmado.
 - Preserve o cabeçalho como uma tabela Markdown de duas colunas, `Campo` e
   `Valor`; não converta seus metadados em linhas `**Campo**: valor`.
 - Na tabela, declare `ID` como `SPEC-NNNN` e `Slug` como

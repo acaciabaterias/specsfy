@@ -1,5 +1,13 @@
 # Guia completo do usuário
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="../../brand/logo/logo-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="../../brand/logo/logo-light.svg">
+    <img src="../../brand/logo/logo-light.svg" alt="Logo do Specsfy" width="180">
+  </picture>
+</p>
+
 O Specsfy ajuda você a transformar uma ideia em software testado sem espalhar
 requisitos, planos e tarefas por vários arquivos. Você conversa normalmente
 com o agente; as skills organizam o trabalho e mantêm uma única especificação
@@ -16,6 +24,7 @@ termos antes de começar.
 | preparar meu computador | [Instalação](installation.md) |
 | fazer a primeira entrega | [Primeiro projeto](getting-started.md) |
 | entender a Metodologia | [Como o método funciona](method.md) |
+| capturar um texto sem responder perguntas | [Caixa de entrada de ideias](ideas.md) |
 | organizar ideias antes de especificar | [Backlog](backlog.md) |
 | conhecer cada etapa em profundidade | [Skills base](skills/README.md) |
 | usar comandos e a interface visual | [CLI e TUI](cli.md) |
@@ -43,7 +52,13 @@ plano técnico, os testes, as tarefas e as evidências. O Specsfy evita criar
 `plan.md`, `tasks.md` ou outros documentos que poderiam ficar diferentes da
 especificação.
 
-Uma ideia que ainda não está pronta pode ficar no backlog:
+Um texto que você só quer preservar pode entrar primeiro na caixa de ideias:
+
+```text
+specs/ideias/<data>-<hora>-<nome-curto>.md
+```
+
+Uma ideia escolhida para refinamento pode seguir para o backlog:
 
 ```text
 specs/backlog/<número>-<nome-curto>.md
@@ -53,7 +68,17 @@ specs/backlog/<número>-<nome-curto>.md
 
 Imagine que você queira adicionar uma página de boas-vindas.
 
-### 1. Guarde a ideia
+### 1. Capture sem perguntas
+
+```text
+Use $specsfy-base-idea para capturar:
+quero uma página de boas-vindas para pessoas que acabaram de criar a conta.
+```
+
+O agente preserva e pré-processa o texto em `specs/ideias/`, sem perguntar
+nada. Veja a [caixa de entrada de ideias](ideas.md).
+
+### 2. Refine no backlog
 
 ```text
 Use $specsfy-base-backlog para guardar esta ideia:
@@ -63,7 +88,7 @@ quero uma página de boas-vindas para pessoas que acabaram de criar a conta.
 O agente faz poucas perguntas e cria um item em `specs/backlog/`. Veja
 [como usar o backlog](skills/specsfy-base-backlog.md).
 
-### 2. Tire as dúvidas
+### 3. Tire as dúvidas
 
 ```text
 Use $specsfy-base-interview para aprofundar
@@ -74,7 +99,7 @@ O agente pergunta uma coisa importante por vez: quem verá a página, qual
 resultado precisa acontecer e quais limites importam. Veja
 [como funciona a entrevista](skills/specsfy-base-interview.md).
 
-### 3. Crie a especificação
+### 4. Crie a especificação
 
 ```text
 Use $specsfy-base-specify para promover
@@ -85,7 +110,7 @@ O resultado fica em
 `specs/specs/0001-pagina-boas-vindas/spec.md`. Veja
 [como montar uma spec](skills/specsfy-base-specify.md).
 
-### 4. Confira se está pronta
+### 5. Confira se está pronta
 
 ```text
 Use $specsfy-base-validate em
@@ -96,7 +121,7 @@ Se algo estiver ambíguo, o agente volta à pergunta necessária. Quando a
 definição estiver pronta, o `Definition Gate` é aprovado. Veja
 [como validar](skills/specsfy-base-validate.md).
 
-### 5. Divida o trabalho
+### 6. Divida o trabalho
 
 ```text
 Use $specsfy-base-tasks em
@@ -106,7 +131,7 @@ specs/specs/0001-pagina-boas-vindas/spec.md.
 As tarefas são pequenas, ordenadas e continuam dentro de `spec.md`. Veja
 [como preparar tarefas](skills/specsfy-base-tasks.md).
 
-### 6. Prepare os testes
+### 7. Prepare os testes
 
 ```text
 Use $specsfy-base-tdd-bdd em modo prepare para
@@ -117,7 +142,7 @@ O agente transforma os exemplos de comportamento em testes executáveis e
 mostra o RED: a falha esperada antes do código existir. Veja
 [como usar TDD e BDD](skills/specsfy-base-tdd-bdd.md).
 
-### 7. Implemente
+### 8. Implemente
 
 ```text
 Use $specsfy-base-implement para concluir a próxima tarefa pronta de
@@ -127,7 +152,7 @@ specs/specs/0001-pagina-boas-vindas/spec.md.
 Cada tarefa passa por RED, GREEN e refatoração. Veja
 [como implementar](skills/specsfy-base-implement.md).
 
-### 8. Incorpore uma mudança
+### 9. Incorpore uma mudança
 
 Se você lembrar depois que a página também precisa de um botão:
 
@@ -139,7 +164,7 @@ specs/specs/0001-pagina-boas-vindas/spec.md.
 O agente atualiza a mesma especificação e reabre somente as etapas afetadas.
 Veja [como mudar uma spec](skills/specsfy-base-update-spec.md).
 
-### 9. Veja o progresso
+### 10. Veja o progresso
 
 ```text
 Use $specsfy-base-progress para mostrar o estado geral do projeto.

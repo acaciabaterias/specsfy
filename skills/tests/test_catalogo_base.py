@@ -7,6 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_SKILLS = {
+    "specsfy-base-idea",
     "specsfy-base-backlog",
     "specsfy-base-interview",
     "specsfy-base-specify",

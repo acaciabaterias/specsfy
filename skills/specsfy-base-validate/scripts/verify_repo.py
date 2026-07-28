@@ -450,8 +450,8 @@ def skill_check(root: Path) -> dict[str, object]:
             errors.append(f"{name}: frontmatter inválido")
         if len(text.splitlines()) >= 500:
             errors.append(f"{name}: SKILL.md possui 500 linhas ou mais")
-    if len(base_names) != 9:
-        errors.append(f"catálogo base esperado=9 observado={len(base_names)}")
+    if len(base_names) != 10:
+        errors.append(f"catálogo base esperado=10 observado={len(base_names)}")
     if len(auxiliary_names) != 3:
         errors.append(
             f"catálogo auxiliar esperado=3 observado={len(auxiliary_names)}"

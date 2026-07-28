@@ -38,10 +38,16 @@ Sem subcomando, a aplicação abre a TUI.
 
 `SkillInstaller` valida que o destino é um projeto consumidor, obtém `skills/`
 do monorepo e instala o conjunto `FRAMEWORK_SKILLS`. Esse conjunto inclui setup,
-três auxiliares, documentador e nove skills base.
+três auxiliares, documentador e dez skills base.
 
 Conteúdo gerenciado recebe fingerprints. Se a cópia local divergir do último
 fingerprint registrado, atualização e remoção recusam a operação sem `--force`.
+
+O instalador publica `Idea.md`, `Backlog.md`, `Spec.md`, `Tasks.md`,
+`Project.md`, `Stack.md`, `Rules.md` e `Database.md` em
+`.specsfy/templates/`. Cada template possui digest próprio; assim, uma
+customização local em qualquer um deles bloqueia somente uma substituição
+explicitamente forçada.
 
 ## Catálogo
 

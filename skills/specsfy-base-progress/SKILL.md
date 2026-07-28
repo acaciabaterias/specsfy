@@ -85,10 +85,11 @@ estimativa como uso real.
 8. Se uma spec existente exigir mudança de comportamento ou plano, anuncie a
    pendência e carregue automaticamente `$specsfy-base-update-spec`. Retome a
    projeção depois que a atualização percorrer os atos invalidados.
-9. Se nenhuma spec existir, preserve o código 2, anuncie a pendência e carregue
-   automaticamente `$specsfy-base-specify` para esclarecer e, quando houver
-   intenção já declarada, criar `specs/specs/<NNNN>-<slug>/spec.md` na mesma
-   conversa.
+9. Se nenhuma spec existir, preserve o código 2. Capturas em `specs/ideias/` e
+   itens em `specs/backlog/` não contam como progresso normativo. Quando o
+   pedido também exigir avançar uma captura existente, anuncie a pendência e
+   carregue `$specsfy-base-backlog` ou `$specsfy-base-interview`; quando já
+   houver intenção e definição suficientes, carregue `$specsfy-base-specify`.
 
 ## Preservar a fonte
 

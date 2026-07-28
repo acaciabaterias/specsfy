@@ -30,7 +30,9 @@ O Specsfy reduz a distância entre intenção, comportamento aceito, testes,
 tarefas, implementação e evidência. Ele evita que planos e checklists paralelos
 divirjam da especificação da fatia.
 
-Ideias abertas podem permanecer no backlog antes da decisão de criar uma spec.
+Inputs podem permanecer em `specs/ideias/` como capturas sem entrevista. Ideias
+escolhidas para refinamento podem permanecer no backlog antes da decisão de
+criar uma spec.
 Pedidos posteriores à definição atualizam explicitamente a mesma spec, reabrem
 somente os atos invalidados e retomam o trabalho.
 

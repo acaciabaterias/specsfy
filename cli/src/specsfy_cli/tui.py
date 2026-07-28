@@ -42,6 +42,7 @@ from .testing import TestRun, stream_project_tests
 
 
 BASE_DESCRIPTIONS = {
+    "specsfy-base-idea": "Captura e pré-processa ideias sem fazer perguntas.",
     "specsfy-base-backlog": "Ideias, descoberta inicial e backlog priorizado.",
     "specsfy-base-interview": "Entrevista arquitetural para reduzir ambiguidades.",
     "specsfy-base-specify": "Criação e evolução da especificação normativa.",

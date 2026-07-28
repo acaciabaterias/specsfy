@@ -1,0 +1,4 @@
+interface:
+  display_name: "Capturar ideia"
+  short_description: "Salva e pré-processa uma ideia sem perguntas"
+  default_prompt: "Use $specsfy-base-idea para capturar este texto imediatamente, sem perguntas, em specs/ideias/."

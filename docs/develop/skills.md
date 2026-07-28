@@ -57,11 +57,13 @@ Conteúdo extenso, padrões externos e matrizes de decisão ficam em
 Scripts automatizam transformações determinísticas. Eles retornam códigos úteis,
 não instalam globalmente e não realizam ações destrutivas por padrão.
 
-Assets são templates ou materiais de saída, nunca uma segunda fonte normativa.
+Templates de documentos gerenciados vivem em `skills/templates/` e são
+publicados juntos em `.specsfy/templates/`. Assets internos permanecem
+materiais de saída específicos de uma skill, nunca uma segunda fonte normativa.
 
 ## Handoff
 
-Toda skill base participa da orquestração:
+As skills base participam da orquestração:
 
 ```text
 Pendência detectada → Transição automática → execução da skill de destino
@@ -72,10 +74,14 @@ O handoff é usado quando a responsabilidade muda. A skill de origem não execut
 silenciosamente o trabalho da vizinha. A skill de destino relê a spec e valida
 suas próprias pré-condições.
 
+`specsfy-base-idea` é a exceção de entrada: ela salva antes de qualquer
+handoff, não pergunta e apenas sugere a próxima etapa. Essa fronteira impede que
+uma anotação simples se transforme em entrevista implícita.
+
 ## Relação das skills base
 
 ```text
-backlog → interview → specify → validate
+idea → backlog → interview → specify → validate
        → tasks → tdd-bdd → implement → progress
                          ↑
                     update-spec
@@ -94,6 +100,10 @@ leitura. `documentator` atua depois de mudanças implementadas no consumidor.
 - preserva conteúdo local alterado sem `--force`;
 - mescla blocos gerenciados em `AGENTS.md` e `CLAUDE.md`;
 - recusa a raiz oficial como consumidor.
+
+Os arquivos `Idea.md`, `Backlog.md`, `Spec.md`, `Tasks.md`, `Project.md`,
+`Stack.md`, `Rules.md` e `Database.md` são gerenciados individualmente, com
+fingerprints próprios e proteção contra sobrescrita local.
 
 ## Alterar uma skill
 

@@ -16,7 +16,8 @@ from pathlib import Path
 FILE_PATTERN = re.compile(r"^(?P<number>\d{4})-.*\.md$")
 SLUG_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 MAX_NUMBER = 9999
-MODEL_PATH = Path(__file__).resolve().parent.parent / "assets" / "backlog.md"
+MODEL_PATH = Path(".specsfy/templates/Backlog.md")
+SOURCE_MODEL_PATH = Path(__file__).resolve().parents[2] / "templates" / "Backlog.md"
 
 
 class InitializationError(ValueError):
@@ -87,6 +88,7 @@ def next_number(backlog_directory: Path) -> int:
 
 def render_model(
     *,
+    root: Path,
     number: int,
     title: str,
     idea: str,
@@ -95,9 +97,13 @@ def render_model(
     result: str,
     context: str,
 ) -> str:
-    if not MODEL_PATH.is_file():
-        raise InitializationError(f"modelo não encontrado: {MODEL_PATH}")
-    content = MODEL_PATH.read_text(encoding="utf-8")
+    installed_model = root / MODEL_PATH
+    model_path = installed_model if installed_model.is_file() else SOURCE_MODEL_PATH
+    if not model_path.is_file():
+        raise InitializationError(
+            f"modelo não encontrado: {installed_model}; reinstale o framework"
+        )
+    content = model_path.read_text(encoding="utf-8")
     replacements = {
         "{{BACKLOG_ID}}": f"BACKLOG-{number:04d}",
         "{{BACKLOG_NAME}}": title,
@@ -146,6 +152,7 @@ def initialize_backlog(
         temporary = backlog_directory / f".{destination.name}.tmp"
         temporary.write_text(
             render_model(
+                root=root,
                 number=number,
                 title=title,
                 idea=idea,

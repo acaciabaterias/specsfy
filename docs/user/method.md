@@ -31,10 +31,11 @@ descobrir qual documento está atualizado.
 Uma ideia pode passar por três estados fáceis de reconhecer:
 
 ```text
-ideia no backlog → spec definida → código entregue
+ideia capturada → ideia no backlog → spec definida → código entregue
 ```
 
-O backlog serve para algo ainda aberto. A spec serve para uma entrega escolhida.
+`specs/ideias/` recebe o texto sem perguntas. O backlog serve para algo ainda
+aberto que será refinado. A spec serve para uma entrega escolhida.
 O código só começa quando definição, plano e testes estão prontos.
 
 ## Os três atos
@@ -113,17 +114,18 @@ fluxo.
 
 ## Skills base
 
-As nove skills formam a jornada principal:
+As dez skills formam a jornada principal:
 
-1. [`specsfy-base-backlog`](skills/specsfy-base-backlog.md);
-2. [`specsfy-base-interview`](skills/specsfy-base-interview.md);
-3. [`specsfy-base-specify`](skills/specsfy-base-specify.md);
-4. [`specsfy-base-validate`](skills/specsfy-base-validate.md);
-5. [`specsfy-base-tasks`](skills/specsfy-base-tasks.md);
-6. [`specsfy-base-tdd-bdd`](skills/specsfy-base-tdd-bdd.md);
-7. [`specsfy-base-implement`](skills/specsfy-base-implement.md);
-8. [`specsfy-base-update-spec`](skills/specsfy-base-update-spec.md);
-9. [`specsfy-base-progress`](skills/specsfy-base-progress.md).
+1. [`specsfy-base-idea`](skills/specsfy-base-idea.md);
+2. [`specsfy-base-backlog`](skills/specsfy-base-backlog.md);
+3. [`specsfy-base-interview`](skills/specsfy-base-interview.md);
+4. [`specsfy-base-specify`](skills/specsfy-base-specify.md);
+5. [`specsfy-base-validate`](skills/specsfy-base-validate.md);
+6. [`specsfy-base-tasks`](skills/specsfy-base-tasks.md);
+7. [`specsfy-base-tdd-bdd`](skills/specsfy-base-tdd-bdd.md);
+8. [`specsfy-base-implement`](skills/specsfy-base-implement.md);
+9. [`specsfy-base-update-spec`](skills/specsfy-base-update-spec.md);
+10. [`specsfy-base-progress`](skills/specsfy-base-progress.md).
 
 As transições são automáticas. Você pode começar com uma intenção comum, como
 “implemente esta melhoria”; o agente verifica as etapas necessárias antes de

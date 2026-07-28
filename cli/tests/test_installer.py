@@ -17,10 +17,18 @@ from specsfy_cli.installer import (
 
 def write_template_files(source: Path) -> None:
     (source / "templates").mkdir(exist_ok=True)
-    (source / "templates/Spec.md").write_text(
-        "# {{SPEC_NAME}}\n",
-        encoding="utf-8",
-    )
+    templates = {
+        "Idea.md": "# Ideia: {{IDEA_NAME}}\n",
+        "Backlog.md": "# Backlog: {{BACKLOG_NAME}}\n",
+        "Spec.md": "# {{SPEC_NAME}}\n",
+        "Tasks.md": "## 14. Tarefas\n",
+        "Project.md": "# Projeto {{STACK_LABEL}}\n{{STACK_GUIDANCE}}\n",
+        "Stack.md": "# Stack\n{{STACK_ROWS}}\n",
+        "Rules.md": "# Regras {{STACK_LABEL}}\n{{STACK_GUIDANCE}}\n",
+        "Database.md": "# Banco {{STACK_LABEL}}\n{{STACK_GUIDANCE}}\n",
+    }
+    for name, content in templates.items():
+        (source / "templates" / name).write_text(content, encoding="utf-8")
     (source / "examples").mkdir(exist_ok=True)
     (source / "examples/Spec.md").write_text(
         "# Exemplo completo\n",
@@ -405,6 +413,13 @@ class InstallerTests(unittest.TestCase):
                     project / "CLAUDE.md",
                     project / ".specsfy/Spec.md",
                     project / ".specsfy/templates/Spec.md",
+                    project / ".specsfy/templates/Idea.md",
+                    project / ".specsfy/templates/Backlog.md",
+                    project / ".specsfy/templates/Tasks.md",
+                    project / ".specsfy/templates/Project.md",
+                    project / ".specsfy/templates/Stack.md",
+                    project / ".specsfy/templates/Rules.md",
+                    project / ".specsfy/templates/Database.md",
                     project / ".specsfy/examples/Spec.md",
                     project / ".specsfy/skills-lock.json",
                 )
@@ -413,7 +428,7 @@ class InstallerTests(unittest.TestCase):
                 }
                 repeated = installer.install_base_from_checkout(source)
 
-            self.assertEqual(6, len(changed))
+            self.assertEqual(13, len(changed))
             self.assertEqual([], repeated)
             self.assertEqual(
                 state_after_first,
@@ -429,6 +444,20 @@ class InstallerTests(unittest.TestCase):
             self.assertEqual(
                 "# {{SPEC_NAME}}\n",
                 (project / ".specsfy/templates/Spec.md").read_text(encoding="utf-8"),
+            )
+            self.assertEqual(
+                "# Ideia: {{IDEA_NAME}}\n",
+                (project / ".specsfy/templates/Idea.md").read_text(encoding="utf-8"),
+            )
+            self.assertEqual(
+                "# Backlog: {{BACKLOG_NAME}}\n",
+                (project / ".specsfy/templates/Backlog.md").read_text(
+                    encoding="utf-8"
+                ),
+            )
+            self.assertEqual(
+                "## 14. Tarefas\n",
+                (project / ".specsfy/templates/Tasks.md").read_text(encoding="utf-8"),
             )
             self.assertEqual(
                 "# Exemplo completo\n",

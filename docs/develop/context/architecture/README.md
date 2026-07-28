@@ -1,5 +1,13 @@
 # Arquitetura do Specsfy
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="../../../../brand/logo/logo-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="../../../../brand/logo/logo-light.svg">
+    <img src="../../../../brand/logo/logo-light.svg" alt="Logo do Specsfy" width="180">
+  </picture>
+</p>
+
 ## Classificação
 
 | Campo | Valor |
@@ -44,7 +52,7 @@ example/ (validação) ───► contratos do framework
 Dentro da metodologia:
 
 ```text
-ideia → backlog → interview → spec única → gates → tarefas
+input → ideia capturada → backlog → interview → spec única → gates → tarefas
       → BDD/TDD RED → entrega → evidência
                          ↑ update-spec ← pedido tardio
 ```
@@ -67,6 +75,7 @@ repositório e baixa `skills/` e `specialists/` do mesmo checkout.
 ## Invariantes transversais
 
 - Cada fatia possui uma única `spec.md` normativa.
+- Captura e backlog são entradas não normativas e preservam proveniência.
 - Backlog não autoriza implementação.
 - Gates comprovados controlam os três atos.
 - BDD e TDD precedem mudança de produção.

@@ -1,5 +1,13 @@
 # Fluxos transversais
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="../../../../brand/logo/logo-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="../../../../brand/logo/logo-light.svg">
+    <img src="../../../../brand/logo/logo-light.svg" alt="Logo do Specsfy" width="180">
+  </picture>
+</p>
+
 ## Classificação
 
 | Campo | Valor |
@@ -49,16 +57,16 @@ projeto, não uma feature independente.
 Antes dos três atos, o fluxo de entrada é:
 
 ```text
-ideia → backlog → interview → spec
+input → ideia capturada → backlog → interview → spec
 ```
 
-Backlog e entrevista preparam a decisão; somente a spec governa comportamento,
-gates, tarefas e evidência.
+Captura preserva sem perguntar; backlog e entrevista preparam a decisão.
+Somente a spec governa comportamento, gates, tarefas e evidência.
 
 Durante os três atos, as etapas são bidirecionais:
 
 ```text
-backlog ↔ interview → specify ↔ validate → tasks ↔ tdd-bdd → implement → documentator ↔ progress
+idea → backlog ↔ interview → specify ↔ validate → tasks ↔ tdd-bdd → implement → documentator ↔ progress
                          ↑       ↑            ↑
                          └──── update-spec ───┘
 ```
@@ -67,6 +75,8 @@ Cada skill resolve pendências pertencentes ao próprio escopo. Quando o estado
 exigir outra responsabilidade, ela anuncia origem, destino, motivo e resultado
 esperado e carrega automaticamente a skill responsável na mesma conversa, sem
 pedir confirmação. O mesmo protocolo governa avanço, retorno e retomada.
+`idea` conclui a gravação antes de qualquer transição e não faz perguntas; ela
+apenas oferece backlog ou entrevista como próximo passo opcional.
 Depois de cada tarefa de código, `implement` entrega o estado observado a
 `documentator`, que reconstrói `<projeto>/docs/` antes de a tarefa ou o gate
 final ser concluído. A pessoa também pode acionar `documentator` diretamente,

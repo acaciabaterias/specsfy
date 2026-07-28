@@ -24,6 +24,7 @@ adaptar. O leitor não precisa conhecer a implementação do framework.
 | instalação | `docs/user/installation.md` |
 | primeira entrega | `docs/user/getting-started.md` |
 | método e conceitos | `docs/user/method.md` |
+| caixa de entrada sem perguntas | `docs/user/ideas.md` |
 | índice das skills base | `docs/user/skills/README.md` |
 | aprofundamento de cada skill base | `docs/user/skills/specsfy-base-*.md` |
 | CLI e TUI | `docs/user/cli.md` |

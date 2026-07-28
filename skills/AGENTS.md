@@ -1,7 +1,7 @@
 # Guia de desenvolvimento da metodologia Specsfy
 
 Este `AGENTS.md` governa o módulo `skills/`. Ele contém a metodologia
-executável, as nove skills base, o setup, o documentador e as três skills auxiliares. Seus testes e fixtures pertencem a este
+executável, as dez skills base, o setup, o documentador e as três skills auxiliares. Seus testes e fixtures pertencem a este
 módulo. A raiz do monorepo não instala nem executa estas skills.
 
 Leia também [`Spec.md`](Spec.md), contrato central do framework publicado pelo
@@ -24,7 +24,8 @@ arquivo contém o fluxo, os caminhos canônicos e os gates do framework.
   conteúdo humano.
 - Execute `$specsfy-documentator` depois de cada implementação para reconstruir
   a documentação técnica completa em `docs/`.
-- Use `specs/backlog/` para ideias ainda não promovidas.
+- Use `specs/ideias/` para capturas imediatas ainda não refinadas.
+- Use `specs/backlog/` para itens refináveis ainda não promovidos.
 - Use `specs/specs/<NNNN>-<slug>/spec.md` como fonte normativa de cada fatia.
 - Não crie `plan.md`, `tasks.md`, `research.md` ou outra fonte normativa
   paralela.
@@ -64,8 +65,10 @@ módulos necessários para manter o monorepo coerente.
 
 ## Três atos
 
-Antes do Ato I, `specsfy-base-backlog` pode registrar uma ideia em
-`specs/backlog/`. Esse registro não é gate nem autorização para implementar.
+Antes do Ato I, `specsfy-base-idea` captura sem perguntas em `specs/ideias/` e
+`specsfy-base-backlog` pode transformar uma captura em item refinável em
+`specs/backlog/`. Nenhum desses registros é gate ou autorização para
+implementar.
 
 ### Ato I — Definir
 
@@ -106,6 +109,7 @@ Draft → Defined → Planned → Implementing → Complete
 
 | Skill | Responsabilidade | Não deve fazer |
 | --- | --- | --- |
+| `specsfy-base-idea` | preservar e pré-processar imediatamente um input | perguntar, criar backlog, spec, tarefas ou código |
 | `specsfy-base-backlog` | clarear superficialmente e registrar ideias | criar spec, tarefas ou código |
 | `specsfy-base-interview` | descobrir intenção e decisões | escrever arquivos por padrão |
 | `specsfy-base-specify` | consolidar `spec.md` e research | implementar ou criar backlog externo |

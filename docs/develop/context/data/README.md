@@ -1,5 +1,13 @@
 # Contexto de dados
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="../../../../brand/logo/logo-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="../../../../brand/logo/logo-light.svg">
+    <img src="../../../../brand/logo/logo-light.svg" alt="Logo do Specsfy" width="180">
+  </picture>
+</p>
+
 ## Classificação
 
 | Campo | Valor |

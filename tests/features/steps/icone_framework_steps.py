@@ -8,7 +8,6 @@ REPOSITORIES = (
     ROOT,
     ROOT / "brand",
     ROOT / "skills",
-    ROOT / "docs",
     ROOT / "example",
     ROOT / "specsfy",
     ROOT / "specialists",
@@ -51,7 +50,7 @@ def then_both_formats_are_canonical(context) -> None:
     assert context.png.read_bytes().startswith(b"\x89PNG\r\n\x1a\n")
 
 
-@then("os oito READMEs exibem o SVG com fallback PNG")
+@then("os sete READMEs de módulos exibem o SVG com fallback PNG")
 def then_readmes_display_both_formats(context) -> None:
     for repository, readme in context.readmes.items():
         icon_root = (
@@ -125,3 +124,36 @@ def then_make_command_rebuilds_pdf_from_sources(context) -> None:
     assert "make brand-guide" in (
         ROOT / "README.md"
     ).read_text(encoding="utf-8")
+
+
+@given("os READMEs da documentação oficial")
+def given_official_documentation_readmes(context) -> None:
+    context.docs_readmes = sorted((ROOT / "docs").rglob("README.md"))
+
+
+@when("a adoção do logo nesses índices é inspecionada")
+def when_documentation_logo_adoption_is_inspected(context) -> None:
+    context.docs_readme_contents = {
+        path: path.read_text(encoding="utf-8")
+        for path in context.docs_readmes
+    }
+
+
+@then("os dez READMEs exibem o logo completo adaptado ao tema")
+def then_all_documentation_readmes_display_the_logo(context) -> None:
+    assert len(context.docs_readme_contents) == 10
+    for path, content in context.docs_readme_contents.items():
+        depth = len(path.parent.relative_to(ROOT).parts)
+        logo_root = "/".join([".."] * depth + ["brand", "logo"])
+        assert (
+            f'media="(prefers-color-scheme: dark)" '
+            f'srcset="{logo_root}/logo-dark.svg"'
+        ) in content
+        assert (
+            f'media="(prefers-color-scheme: light)" '
+            f'srcset="{logo_root}/logo-light.svg"'
+        ) in content
+        assert (
+            f'<img src="{logo_root}/logo-light.svg" '
+            'alt="Logo do Specsfy" width="180">'
+        ) in content

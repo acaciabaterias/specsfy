@@ -72,13 +72,15 @@ specsfy install --project .
 
 O comando instala e reconcilia:
 
-- as nove skills `.agents/skills/specsfy-base-*`, incluindo
+- as dez skills `.agents/skills/specsfy-base-*`, incluindo
   `specsfy-base-update-spec`;
 - `.agents/skills/specsfy-setup`;
 - `.agents/skills/specsfy-documentator`;
 - as três skills `.agents/skills/specsfy-aux-*`;
 - `.specsfy/Spec.md`, com as regras centrais do framework;
-- `.specsfy/templates/Spec.md` e `.specsfy/examples/Spec.md`;
+- `.specsfy/templates/Idea.md`, `Backlog.md`, `Spec.md`, `Tasks.md`,
+  `Project.md`, `Stack.md`, `Rules.md` e `Database.md`;
+- `.specsfy/examples/Spec.md`;
 - blocos gerenciados em `AGENTS.md` e `CLAUDE.md`;
 - os registros `skills-lock.json` e `.specsfy/skills-lock.json`.
 

@@ -85,7 +85,7 @@ possui seis abas:
   por um painel de detalhes e resumo das alterações pendentes;
 - **Sobre**: versão e finalidade do CLI.
 
-Alterações em `specs/backlog/*.md`, `specs/specs/*/spec.md` e no
+Alterações em `specs/ideias/*.md`, `specs/backlog/*.md`, `specs/specs/*/spec.md` e no
 `skills-lock.json` são detectadas automaticamente.
 
 Em projetos Laravel com Pest, `specsfy test --project .` detecta `artisan` e
@@ -95,11 +95,13 @@ mostra status, runner, comando, duração e resumo em uma subaba; a outra exibe
 cada teste e falha. Relatórios Pest estruturados são convertidos em linhas
 legíveis com arquivo, linha e mensagem.
 
-O bootstrap instala as nove skills base, incluindo
+O bootstrap instala as dez skills base, incluindo `specsfy-base-idea` e
 `specsfy-base-update-spec` para pedidos surgidos depois da definição,
 `specsfy-setup`,
 `specsfy-documentator` e as três skills `specsfy-aux-*`, publica as regras em
-`.specsfy/Spec.md`, o template em `.specsfy/templates/Spec.md`, um exemplo em
+`.specsfy/Spec.md`, os templates `Idea.md`, `Backlog.md`, `Spec.md`, `Tasks.md`,
+`Project.md`, `Stack.md`, `Rules.md` e `Database.md` em
+`.specsfy/templates/`, um exemplo em
 `.specsfy/examples/Spec.md` e mescla blocos gerenciados em `AGENTS.md` e
 `CLAUDE.md`, preservando as instruções do usuário. Instalações repetidas são
 idempotentes. O lock registra fingerprints: versões intactas podem ser
@@ -167,8 +169,9 @@ reconstrói os artefatos versionados, cria a tag anotada `v<versão>` no mesmo
 commit e usa exatamente a seção promovida como corpo do GitHub Release. O CI
 valida o build e a correspondência da tag.
 
-Novas specs usam `specs/specs/<NNNN>-<slug>/spec.md`; ideias ainda superficiais
-ficam em `specs/backlog/<NNNN>-<slug>.md`. O dashboard mantém leitura do layout
+Novas specs usam `specs/specs/<NNNN>-<slug>/spec.md`; capturas imediatas ficam
+em `specs/ideias/<data-hora>-<slug>.md` e itens refináveis em
+`specs/backlog/<NNNN>-<slug>.md`. O dashboard mantém leitura do layout
 legado. A skill de especificação renderiza cada arquivo novo a partir do
 template instalado. O CLI recusa instalação na raiz do monorepo oficial.
 

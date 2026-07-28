@@ -1,6 +1,6 @@
 ---
 name: specsfy-base-interview
-description: "Use quando o usuário quer ser entrevistado para aprofundar uma ideia, um item em `specs/backlog/` ou uma spec existente antes de criar ou revisar a especificação. Use também quando uma transição automática pedir descoberta ou decisão material. Aplica o MCR-10 por perguntas adaptativas e produz um brief de handoff; para captura superficial use specsfy-base-backlog, e não use para escrever spec.md, gerar tarefas, testar ou implementar."
+description: "Use quando o usuário quer ser entrevistado para aprofundar uma captura em `specs/ideias/`, uma ideia, um item em `specs/backlog/` ou uma spec existente antes de criar ou revisar a especificação. Use também quando uma transição automática pedir descoberta ou decisão material. Aplica o MCR-10 por perguntas adaptativas e produz um brief; para captura imediata sem perguntas use specsfy-base-idea, para refinamento leve use specsfy-base-backlog, e não use para escrever spec.md, tarefas, testes ou implementação."
 ---
 
 # Entrevistar para a especificação
@@ -25,7 +25,8 @@ exigindo autorização específica.
 
 ## Preparar
 
-1. Leia o pedido e, quando existir, o item indicado em
+1. Leia o pedido e, quando existir, a captura indicada em
+   `specs/ideias/<data-hora>-<slug>.md`, o item em
    `specs/backlog/<NNNN>-<slug>.md` ou a spec em
    `specs/specs/<NNNN>-<slug>/spec.md`. Se houver mais de um candidato e o
    usuário não indicar qual aprofundar, pergunte.

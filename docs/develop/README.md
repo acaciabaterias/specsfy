@@ -1,5 +1,13 @@
 # Guia de desenvolvimento do Specsfy
 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="../../brand/logo/logo-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="../../brand/logo/logo-light.svg">
+    <img src="../../brand/logo/logo-light.svg" alt="Logo do Specsfy" width="180">
+  </picture>
+</p>
+
 Este percurso explica como o framework funciona por dentro e como modificá-lo
 sem romper a metodologia. Ele é destinado a agentes e humanos que contribuem
 com skills, CLI, documentação, especialistas, identidade ou testes.
@@ -12,6 +20,7 @@ Para aprender a usar o produto em um projeto consumidor, siga o
 | Preciso entender… | Documento |
 | --- | --- |
 | atos, gates, estados e fonte normativa | [Metodologia](methodology.md) |
+| captura sem perguntas e templates centrais | [Skills](skills.md) |
 | como preparar e entregar uma contribuição | [Contribuir](contributing.md) |
 | contrato, estrutura e orquestração das skills | [Skills](skills.md) |
 | instalação, catálogo, TUI, progresso e updater | [CLI](cli.md) |

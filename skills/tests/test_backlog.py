@@ -10,7 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "specsfy-base-backlog/scripts/iniciar_backlog.py"
 SKILL = ROOT / "specsfy-base-backlog/SKILL.md"
-TEMPLATE = ROOT / "specsfy-base-backlog/assets/backlog.md"
+TEMPLATE = ROOT / "templates/Backlog.md"
 
 
 class BacklogTests(unittest.TestCase):

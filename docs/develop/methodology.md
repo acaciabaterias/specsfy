@@ -35,6 +35,16 @@ spec e nos testes.
 
 ## Ato I — Definir
 
+Antes do Ato I, a entrada possui duas camadas não normativas:
+
+```text
+input → specs/ideias/ → specs/backlog/
+```
+
+`specsfy-base-idea` preserva e pré-processa sem perguntas. O backlog adiciona
+refinamento dialogado. Ambas mantêm proveniência, mas somente `spec.md` governa
+o comportamento.
+
 Responsabilidades:
 
 - descobrir finalidade, atores, linguagem e limites;
@@ -46,6 +56,7 @@ Responsabilidades:
 Skills principais:
 
 ```text
+specsfy-base-idea
 specsfy-base-backlog
 specsfy-base-interview
 specsfy-base-specify

@@ -6,6 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_SKILLS = (
+    "specsfy-base-idea",
     "specsfy-base-backlog",
     "specsfy-base-interview",
     "specsfy-base-specify",
@@ -45,7 +46,7 @@ class ConversationalOrchestrationIntegrationTests(unittest.TestCase):
         self.assertIn("mesma conversa", flow)
 
     def test_all_base_skills_implement_the_integrated_policy(self) -> None:
-        for name in BASE_SKILLS:
+        for name in BASE_SKILLS[1:]:
             with self.subTest(skill=name):
                 content = (
                     ROOT / "skills" / name / "SKILL.md"

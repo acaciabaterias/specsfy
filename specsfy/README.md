@@ -61,7 +61,8 @@ specsfy install --project .
 
 O comando instala as skills base, setup, documentação e contexto auxiliar em
 `.agents/skills/`, publica o contrato em `.specsfy/Spec.md` e reconcilia blocos
-gerenciados em `AGENTS.md` e `CLAUDE.md`. Ele não cria uma spec de produto.
+gerenciados em `AGENTS.md` e `CLAUDE.md`. Os templates ficam juntos em
+`.specsfy/templates/`. Ele não cria uma spec de produto.
 
 ### 4. Verifique o projeto
 
@@ -76,9 +77,25 @@ consegue ler o projeto; a primeira spec nasce no fluxo de uso.
 ## Veja o Specsfy trabalhando
 
 Vamos criar uma página de boas-vindas em um projeto Laravel que já usa Pest.
-Este exemplo mostra os nove comandos base, do começo ao fim.
+Este exemplo mostra os dez comandos base, do começo ao fim.
 
-### 1. Guarde a ideia — `$specsfy-base-backlog`
+### 1. Capture a ideia — `$specsfy-base-idea`
+
+Envie:
+
+```text
+Use $specsfy-base-idea para capturar:
+criar uma página /boas-vindas que cumprimente a pessoa pelo nome.
+```
+
+Sem fazer perguntas, o agente cria algo como:
+
+```text
+Ideia capturada em
+specs/ideias/2026-07-28-143205-pagina-boas-vindas.md
+```
+
+### 2. Refine no backlog — `$specsfy-base-backlog`
 
 Envie:
 
@@ -93,7 +110,7 @@ Você verá algo assim:
 Ideia registrada em specs/backlog/0001-pagina-boas-vindas.md
 ```
 
-### 2. Tire as dúvidas — `$specsfy-base-interview`
+### 3. Tire as dúvidas — `$specsfy-base-interview`
 
 **Opção 1 — texto livre**
 
@@ -117,7 +134,7 @@ Você: Olá, visitante!
 Brief pronto para especificar.
 ```
 
-### 3. Crie a especificação — `$specsfy-base-specify`
+### 4. Crie a especificação — `$specsfy-base-specify`
 
 **Opção 1 — texto livre**
 
@@ -142,7 +159,7 @@ specs/specs/0001-pagina-boas-vindas/spec.md
 Ela registra dois resultados esperados: com `?nome=Ana`, mostrar `Olá, Ana!`;
 sem nome, mostrar `Olá, visitante!`.
 
-### 4. Confira a especificação — `$specsfy-base-validate`
+### 5. Confira a especificação — `$specsfy-base-validate`
 
 Envie:
 
@@ -159,7 +176,7 @@ Definition Gate: Passed
 
 `READY` significa que a ideia está clara o bastante para virar trabalho.
 
-### 5. Divida o trabalho — `$specsfy-base-tasks`
+### 6. Divida o trabalho — `$specsfy-base-tasks`
 
 Envie:
 
@@ -173,7 +190,7 @@ Resultado:
 2 tarefas preparadas.
 ```
 
-### 6. Prepare a verificação — `$specsfy-base-tdd-bdd`
+### 7. Prepare a verificação — `$specsfy-base-tdd-bdd`
 
 Envie:
 
@@ -188,7 +205,7 @@ Resultado:
 Verificação preparada.
 ```
 
-### 7. Implemente — `$specsfy-base-implement`
+### 8. Implemente — `$specsfy-base-implement`
 
 Envie:
 
@@ -204,7 +221,7 @@ Página /boas-vindas criada.
 Verificação aprovada.
 ```
 
-### 8. Altere a especificação — `$specsfy-base-update-spec`
+### 9. Altere a especificação — `$specsfy-base-update-spec`
 
 Depois de implementar, imagine que você lembrou de uma regra:
 
@@ -224,7 +241,7 @@ Implementação atualizada.
 
 A mudança continua na mesma spec e volta apenas às etapas necessárias.
 
-### 9. Veja o progresso — `$specsfy-base-progress`
+### 10. Veja o progresso — `$specsfy-base-progress`
 
 Envie:
 

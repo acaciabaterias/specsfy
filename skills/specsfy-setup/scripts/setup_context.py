@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 
 
@@ -125,112 +126,68 @@ def framework_blocks() -> tuple[str, str]:
     return agents, claude
 
 
-def project_template(label: str, guidance: str) -> str:
-    return f"""# Projeto
-
-## História e motivação
-
-Descreva a origem do projeto, o problema que motivou sua criação e sua evolução.
-
-## Finalidade
-
-Explique para que o sistema serve e qual resultado entrega.
-
-## Pessoas e contexto de uso
-
-Registre quem usa o sistema e em quais situações.
-
-## Capacidades principais
-
-Liste as capacidades estáveis sem transformar esta descrição em inventário de
-rotas, schemas ou tarefas.
-
-## Limites
-
-Explique o que o sistema deliberadamente não faz.
-
-## Contexto técnico
-
-Modelo inicial sugerido a partir de: **{label}**. Detalhes verificáveis ficam em
-`.specsfy/STACK.md` e `.specsfy/DATABASE.md`.
-
-{guidance}
-"""
+PROJECT_TEMPLATE_PATH = Path(".specsfy/templates/Project.md")
+STACK_TEMPLATE_PATH = Path(".specsfy/templates/Stack.md")
+RULES_TEMPLATE_PATH = Path(".specsfy/templates/Rules.md")
+DATABASE_TEMPLATE_PATH = Path(".specsfy/templates/Database.md")
+SOURCE_TEMPLATES = Path(__file__).resolve().parents[2] / "templates"
 
 
-def stack_template(rows: list[tuple[str, str, str]]) -> str:
+def render_template(
+    project: Path,
+    installed_path: Path,
+    replacements: dict[str, str],
+) -> str:
+    installed = project / installed_path
+    source = SOURCE_TEMPLATES / installed_path.name
+    template = installed if installed.is_file() else source
+    if not template.is_file():
+        raise FileNotFoundError(
+            f"template não encontrado: {installed}; execute `specsfy install`"
+        )
+    content = template.read_text(encoding="utf-8")
+    for token, value in replacements.items():
+        if token not in content:
+            raise ValueError(f"token obrigatório ausente em {template}: {token}")
+        content = content.replace(token, value)
+    unresolved = sorted(set(re.findall(r"\{\{[A-Z0-9_]+\}\}", content)))
+    if unresolved:
+        raise ValueError(
+            f"tokens não preenchidos em {template}: {', '.join(unresolved)}"
+        )
+    return content
+
+
+def project_template(project: Path, label: str, guidance: str) -> str:
+    return render_template(
+        project,
+        PROJECT_TEMPLATE_PATH,
+        {"{{STACK_LABEL}}": label, "{{STACK_GUIDANCE}}": guidance},
+    )
+
+
+def stack_template(project: Path, rows: list[tuple[str, str, str]]) -> str:
     rendered = rows or [
         ("Framework", "A confirmar", "Nenhum manifest reconhecido"),
     ]
     table = "\n".join(f"| {kind} | {technology} | {source} |" for kind, technology, source in rendered)
-    return f"""# Stack do sistema
-
-Documente tecnologias estruturais e a evidência executável que confirma cada
-uma. Preserve decisões humanas nas seções livres deste arquivo.
-
-## Inventário detectado
-
-<!-- specsfy:stack:start -->
-| Camada | Tecnologia | Evidência |
-| --- | --- | --- |
-{table}
-<!-- specsfy:stack:end -->
-
-## Decisões e observações do projeto
-
-Acrescente aqui escolhas, restrições e contexto que não podem ser inferidos dos
-manifests.
-"""
+    return render_template(project, STACK_TEMPLATE_PATH, {"{{STACK_ROWS}}": table})
 
 
-def rules_template(label: str, guidance: str) -> str:
-    return f"""# Regras do sistema
-
-Estas regras complementam as instruções dos agentes sem substituir specs ou
-critérios de aceite. Modelo inicial sugerido para **{label}**.
-
-{guidance}
-
-## Arquitetura
-
-## Código e qualidade
-
-## Testes
-
-## Segurança e privacidade
-
-## Operação
-
-## Regras específicas do projeto
-"""
+def rules_template(project: Path, label: str, guidance: str) -> str:
+    return render_template(
+        project,
+        RULES_TEMPLATE_PATH,
+        {"{{STACK_LABEL}}": label, "{{STACK_GUIDANCE}}": guidance},
+    )
 
 
-def database_template(label: str, guidance: str) -> str:
-    return f"""# Banco de dados
-
-Mapa de persistência do sistema. Modelo inicial sugerido para **{label}**.
-
-{guidance}
-
-## Fontes de dados
-
-<!-- specsfy:database:start -->
-| Fonte | Tecnologia | Configuração segura | Evidência |
-| --- | --- | --- | --- |
-| Principal | A confirmar | Nome de variável, nunca o valor | A confirmar |
-
-## Estruturas
-
-| Estrutura | Tipo | Campos | Relações | Fonte |
-| --- | --- | --- | --- | --- |
-| A confirmar | A confirmar | A confirmar | A confirmar | A confirmar |
-<!-- specsfy:database:end -->
-
-## Decisões, ownership e retenção
-
-Registre finalidade, ownership, classificação, retenção, constraints e decisões
-que não estejam explícitas nos schemas.
-"""
+def database_template(project: Path, label: str, guidance: str) -> str:
+    return render_template(
+        project,
+        DATABASE_TEMPLATE_PATH,
+        {"{{STACK_LABEL}}": label, "{{STACK_GUIDANCE}}": guidance},
+    )
 
 
 def main() -> int:
@@ -243,10 +200,12 @@ def main() -> int:
     label = stack_label(rows)
     guidance = model_guidance(rows)
     targets = {
-        project / "PROJECT.md": project_template(label, guidance),
-        project / ".specsfy" / "STACK.md": stack_template(rows),
-        project / ".specsfy" / "RULES.md": rules_template(label, guidance),
-        project / ".specsfy" / "DATABASE.md": database_template(label, guidance),
+        project / "PROJECT.md": project_template(project, label, guidance),
+        project / ".specsfy" / "STACK.md": stack_template(project, rows),
+        project / ".specsfy" / "RULES.md": rules_template(project, label, guidance),
+        project / ".specsfy" / "DATABASE.md": database_template(
+            project, label, guidance
+        ),
     }
     changed = [path for path, content in targets.items() if write_if_missing(path, content)]
     agents_block, claude_block = framework_blocks()

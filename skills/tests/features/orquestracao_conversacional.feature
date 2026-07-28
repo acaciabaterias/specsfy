@@ -17,7 +17,7 @@ Feature: Orquestração conversacional das etapas
     And após a correção retoma automaticamente a etapa que detectou a pendência
 
   Scenario: Rotear a cadeia principal e os retornos críticos
-    Given as nove skills base instaladas
+    Given as dez skills base instaladas
     When o estado canônico exige outra responsabilidade
     Then a cadeia principal chama backlog, interview, specify, validate, tasks, tdd-bdd, implement e progress
     And mudança tardia chama update-spec automaticamente

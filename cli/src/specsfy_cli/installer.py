@@ -20,6 +20,7 @@ MONOREPO_REPOSITORY = "https://github.com/promovaweb/specsfy.git"
 BASE_DIRECTORY = "skills"
 SPECIALISTS_DIRECTORY = "specialists"
 BASE_SKILLS = (
+    "specsfy-base-idea",
     "specsfy-base-backlog",
     "specsfy-base-interview",
     "specsfy-base-specify",
@@ -49,7 +50,17 @@ FRAMEWORK_START = "<!-- specsfy:framework:start -->"
 FRAMEWORK_END = "<!-- specsfy:framework:end -->"
 SPEC_PATH_TOKEN = "{{SPECSFY_SPEC_PATH}}"
 CONSUMER_SPEC_PATH = ".specsfy/Spec.md"
-CONSUMER_TEMPLATE_PATH = ".specsfy/templates/Spec.md"
+CONSUMER_TEMPLATE_DIRECTORY = ".specsfy/templates"
+FRAMEWORK_TEMPLATE_NAMES = (
+    "Idea.md",
+    "Backlog.md",
+    "Spec.md",
+    "Tasks.md",
+    "Project.md",
+    "Stack.md",
+    "Rules.md",
+    "Database.md",
+)
 CONSUMER_EXAMPLE_PATH = ".specsfy/examples/Spec.md"
 
 
@@ -148,10 +159,17 @@ class SkillInstaller:
 
     def install_framework_from_checkout(self, checkout: Path) -> list[Path]:
         source_spec = checkout / "Spec.md"
-        source_template = checkout / "templates" / "Spec.md"
+        source_templates = {
+            name: checkout / "templates" / name
+            for name in FRAMEWORK_TEMPLATE_NAMES
+        }
         source_example = checkout / "examples" / "Spec.md"
         source_agents = checkout / "AGENTS.md"
-        for structural_file in (source_spec, source_template, source_example):
+        for structural_file in (
+            source_spec,
+            *source_templates.values(),
+            source_example,
+        ):
             if not structural_file.is_file():
                 raise ValueError(
                     f"arquivo estrutural ausente na origem: {structural_file}"
@@ -160,7 +178,10 @@ class SkillInstaller:
             raise ValueError(f"arquivo estrutural ausente na origem: {source_agents}")
 
         spec_content = source_spec.read_text(encoding="utf-8")
-        template_content = source_template.read_text(encoding="utf-8")
+        template_contents = {
+            name: path.read_text(encoding="utf-8")
+            for name, path in source_templates.items()
+        }
         example_content = source_example.read_text(encoding="utf-8")
         agents_block = _extract_source_block(source_agents).replace(
             SPEC_PATH_TOKEN,
@@ -172,27 +193,17 @@ class SkillInstaller:
         lock = self._read_lock()
         previous = lock.get("framework", {})
         spec_target = self.project / CONSUMER_SPEC_PATH
-        template_target = self.project / CONSUMER_TEMPLATE_PATH
         example_target = self.project / CONSUMER_EXAMPLE_PATH
         agents_target = self.project / "AGENTS.md"
         claude_target = self.project / "CLAUDE.md"
 
-        plans = (
+        plans = [
             (
                 spec_target,
                 _plan_managed_file(
                     spec_target,
                     spec_content,
                     recorded_digest=previous.get("spec_sha256"),
-                    force=self.force,
-                ),
-            ),
-            (
-                template_target,
-                _plan_managed_file(
-                    template_target,
-                    template_content,
-                    recorded_digest=previous.get("template_sha256"),
                     force=self.force,
                 ),
             ),
@@ -223,7 +234,24 @@ class SkillInstaller:
                     force=self.force,
                 ),
             ),
-        )
+        ]
+        previous_template_digests = previous.get("templates_sha256", {})
+        for name, content in template_contents.items():
+            target = self.project / CONSUMER_TEMPLATE_DIRECTORY / name
+            recorded_digest = previous_template_digests.get(name)
+            if name == "Spec.md" and recorded_digest is None:
+                recorded_digest = previous.get("template_sha256")
+            plans.append(
+                (
+                    target,
+                    _plan_managed_file(
+                        target,
+                        content,
+                        recorded_digest=recorded_digest,
+                        force=self.force,
+                    ),
+                )
+            )
         changed: list[Path] = []
         for target, planned_content in plans:
             if planned_content is None:
@@ -234,7 +262,11 @@ class SkillInstaller:
         framework_record = {
             "source": "base",
             "spec_sha256": _content_digest(spec_content),
-            "template_sha256": _content_digest(template_content),
+            "template_sha256": _content_digest(template_contents["Spec.md"]),
+            "templates_sha256": {
+                name: _content_digest(content)
+                for name, content in template_contents.items()
+            },
             "example_sha256": _content_digest(example_content),
             "agents_sha256": _content_digest(agents_block),
             "claude_sha256": _content_digest(claude_block),

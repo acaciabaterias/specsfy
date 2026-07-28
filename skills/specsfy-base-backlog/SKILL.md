@@ -1,6 +1,6 @@
 ---
 name: specsfy-base-backlog
-description: "Use quando o usuário apresenta uma ideia vaga, oportunidade, problema ainda superficial, pedido para anotar algo para depois ou quer conversar levemente antes de decidir se vale especificar. Use também quando uma transição automática retornar à captura de uma ideia. Detecta lacunas e ambiguidades, faz perguntas adaptativas até obter uma captura mínima e cria ou atualiza um item em `specs/backlog/`; não use para entrevista profunda, criação de `spec.md`, requisitos formais, tarefas, testes ou implementação."
+description: "Use quando o usuário quer refinar, organizar ou priorizar uma captura em `specs/ideias/`, apresenta uma oportunidade ou problema para conversar antes de especificar, ou quando uma transição automática pedir backlog. Detecta lacunas e ambiguidades, faz perguntas adaptativas até obter um item mínimo e cria ou atualiza `specs/backlog/`. Para apenas salvar um input sem perguntas use specsfy-base-idea; não use para entrevista profunda, criação de `spec.md`, tarefas, testes ou implementação."
 ---
 
 # Registrar uma ideia no backlog
@@ -29,6 +29,7 @@ exigindo autorização específica.
 1. Extraia termos derivados do pedido do usuário, incluindo nomes do domínio e
    equivalentes evidentes já usados na conversa.
 2. Antes de criar o item, pesquise esses termos em:
+   - `specs/ideias/*.md`;
    - `specs/backlog/*.md`;
    - `specs/specs/*/spec.md`;
    - `docs/**/*.md`.
@@ -53,8 +54,9 @@ termos, o problema, a pessoa, o resultado ou o contexto.
 
 ## Garantir a captura mínima
 
-1. Preserve a formulação original e separe o que o usuário declarou do que foi
-   inferido ou continua em aberto.
+1. Preserve a formulação original recebida na conversa ou em
+   `specs/ideias/<data-hora>-<slug>.md` e separe o que o usuário declarou do que
+   foi inferido ou continua em aberto.
 2. Confirme se a conversa já esclareceu estes itens essenciais:
    - problema percebido;
    - pessoa afetada ou beneficiada;
@@ -80,7 +82,9 @@ refinamento posterior.
    de escrever.
 2. Se existir um item correspondente, atualize-o sem mudar seu ID e preserve a
    formulação anterior da ideia.
-3. Se for uma ideia nova e a captura mínima estiver clara, execute:
+3. Se a origem for `specs/ideias/`, registre esse caminho em
+   `Referências relacionadas`; não altere nem apague a captura.
+4. Se for uma ideia nova e a captura mínima estiver clara, execute:
 
 ```bash
 python3 -B <diretório-da-skill>/scripts/iniciar_backlog.py \
@@ -93,7 +97,8 @@ python3 -B <diretório-da-skill>/scripts/iniciar_backlog.py \
   [--slug <slug>] [--root <raiz>]
 ```
 
-4. Use o caminho absoluto impresso pelo script. Não crie uma spec nesta etapa.
+5. Use o caminho absoluto impresso pelo script. O script consome o template
+   central `.specsfy/templates/Backlog.md`. Não crie uma spec nesta etapa.
 
 ## Conversar no nível de ideia
 

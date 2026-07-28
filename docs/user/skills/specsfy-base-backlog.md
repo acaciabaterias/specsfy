@@ -1,13 +1,14 @@
 # Guardar uma ideia com `specsfy-base-backlog`
 
-Esta skill preserva uma ideia sem exigir todas as respostas agora. Ela conversa
+Esta skill refina uma ideia sem exigir todas as respostas agora. Ela conversa
 de forma leve, procura itens parecidos e cria ou atualiza um arquivo em
 `specs/backlog/`.
 
 ## Quando usar
 
-Use quando você disser “anote isso para depois”, trouxer um problema ainda
-vago ou quiser avaliar uma oportunidade antes de criar uma especificação.
+Use quando quiser organizar uma captura em `specs/ideias/`, trouxer um problema
+ainda vago ou quiser avaliar uma oportunidade antes de criar uma especificação.
+Para apenas salvar sem perguntas, use `specsfy-base-idea`.
 
 Não use para planejar tarefas, escrever testes ou iniciar código.
 
@@ -30,10 +31,11 @@ Ainda não decidimos quais idiomas serão oferecidos.
 ## Exemplo passo a passo
 
 1. Você apresenta a ideia.
-2. O agente procura itens semelhantes em `specs/backlog/` e nas specs.
-3. Ele pergunta somente o necessário para diferenciar a ideia.
-4. Você responde: “o problema afeta e-mails e a interface”.
-5. A skill cria:
+2. O agente também pode ler a origem em `specs/ideias/`.
+3. Ele procura itens semelhantes em `specs/backlog/` e nas specs.
+4. Ele pergunta somente o necessário para diferenciar a ideia.
+5. Você responde: “o problema afeta e-mails e a interface”.
+6. A skill cria o item com `.specsfy/templates/Backlog.md`:
 
 ```text
 specs/backlog/0003-idioma-da-interface.md

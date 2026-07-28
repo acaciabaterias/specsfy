@@ -8,6 +8,8 @@ substitui `specs/specs/<NNNN>-<slug>/spec.md`.
 
 ```text
 specs/
+├── ideias/
+│   └── <AAAA-MM-DD-HHMMSS>-<slug>.md
 ├── backlog/
 │   └── <NNNN>-<slug>.md
 └── specs/
@@ -16,7 +18,8 @@ specs/
         └── research/
 ```
 
-- `specs/backlog/` preserva ideias antes da decisão de especificá-las.
+- `specs/ideias/` preserva inputs imediatamente, sem perguntas nem promoção.
+- `specs/backlog/` organiza ideias escolhidas para refinamento.
 - `specs/specs/<NNNN>-<slug>/spec.md` é a única fonte normativa de uma fatia.
 - `research/` armazena apenas evidência consultada e indexada pela spec.
 - O cabeçalho de `spec.md` é uma tabela Markdown de duas colunas, `Campo` e
@@ -54,26 +57,27 @@ specs/
 ## Fluxo
 
 ```text
-ideia → backlog → interview → spec → validate → tasks → TDD/BDD → implement → documentator → progress
+input → ideia → backlog → interview → spec → validate → tasks → TDD/BDD → implement → documentator → progress
                                       ↑ update-spec ← mudança tardia
 ```
 
-1. Use `specsfy-base-backlog` para buscar material relacionado, esclarecer por
-   perguntas adaptativas o problema, a pessoa, o resultado e o contexto
-   mínimos e então registrar uma ideia.
-2. Use `specsfy-base-interview` para aprofundar uma ideia, backlog ou spec por
+1. Use `specsfy-base-idea` para preservar e pré-processar o texto em
+   `specs/ideias/`, sem fazer perguntas.
+2. Use `specsfy-base-backlog` para buscar material relacionado e esclarecer o
+   mínimo necessário quando a pessoa decidir refinar uma captura.
+3. Use `specsfy-base-interview` para aprofundar uma ideia, backlog ou spec por
    perguntas adaptativas.
-3. Use `specsfy-base-specify` para criar e consolidar a spec normativa inicial.
-4. Use `specsfy-base-validate` para comprovar a definição.
-5. Use `specsfy-base-tasks` e `specsfy-base-tdd-bdd` para planejar, derivar
+4. Use `specsfy-base-specify` para criar e consolidar a spec normativa inicial.
+5. Use `specsfy-base-validate` para comprovar a definição.
+6. Use `specsfy-base-tasks` e `specsfy-base-tdd-bdd` para planejar, derivar
    testes TDD do BDD de referência e observar RED válido.
-6. Use `specsfy-base-implement` para entregar em RED → GREEN → REFACTOR.
-7. Use `specsfy-base-update-spec` quando a pessoa quiser adicionar, remover,
+7. Use `specsfy-base-implement` para entregar em RED → GREEN → REFACTOR.
+8. Use `specsfy-base-update-spec` quando a pessoa quiser adicionar, remover,
    corrigir ou mudar algo depois de a spec já ter sido definida. A skill
    incorpora o pedido na fonte normativa e reabre somente os atos afetados.
-8. Use `specsfy-documentator` para reconstruir `docs/` a partir do sistema
+9. Use `specsfy-documentator` para reconstruir `docs/` a partir do sistema
    existente após cada implementação ou por acionamento livre.
-9. Use `specsfy-base-progress` somente para projetar o estado existente.
+10. Use `specsfy-base-progress` somente para projetar o estado existente.
 
 Um backlog não autoriza implementação. Uma entrevista não cria uma segunda
 fonte normativa. A promoção para spec exige intenção explícita do usuário.

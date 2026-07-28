@@ -47,7 +47,7 @@ python3 -B .agents/skills/specsfy-setup/scripts/monitor_context.py \
 
 ## Gerar
 
-Use `assets/tasks-section.md` como contrato. Substitua somente o conteúdo das seções `14. Tarefas` e `15. Ordem de execução` em `<raiz>/specs/specs/<NNNN>-<slug>/spec.md`; preserve todas as outras seções.
+Use `.specsfy/templates/Tasks.md` como contrato. Substitua somente o conteúdo das seções `14. Tarefas` e `15. Ordem de execução` em `<raiz>/specs/specs/<NNNN>-<slug>/spec.md`; preserve todas as outras seções.
 
 - Se a spec estiver `Planned` ou `Implementing`, anuncie a pendência, reabra o
   Ato II e defina `Status: Defined`, `Plan Gate: Pending` e
@@ -80,7 +80,7 @@ Use `assets/tasks-section.md` como contrato. Substitua somente o conteúdo das s
 - Quando uma convenção virar regra confirmada, crie tarefa `[DOC]` para
   `.specsfy/RULES.md`.
 - Dê a cada tarefa um resultado único, caminho exato e critério verificável.
-- Anexe a cada tarefa, exatamente nesta ordem, os itens `PREP`, `EXECUTE`, `VERIFY`, `EVIDENCE` e `IMPROVE` definidos em `assets/tasks-section.md`.
+- Anexe a cada tarefa, exatamente nesta ordem, os itens `PREP`, `EXECUTE`, `VERIFY`, `EVIDENCE` e `IMPROVE` definidos em `.specsfy/templates/Tasks.md`.
 - Escreva os itens como resultados específicos da tarefa, não como frases genéricas copiadas.
 - Mantenha pai e itens abertos ao gerar tarefas; a skill de implementação atualiza um item imediatamente após sua evidência.
 - O item `IMPROVE` deve registrar uma melhoria concreta aplicada ou declarar que nenhuma foi necessária com justificativa.

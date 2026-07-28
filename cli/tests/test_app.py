@@ -279,7 +279,7 @@ class TuiTests(unittest.IsolatedAsyncioTestCase):
                 )
                 self.assertEqual(1, len(app.query("#apply-skills")))
                 skill_table = app.query_one("#skills-table", DataTable)
-                self.assertEqual(15, skill_table.row_count)
+                self.assertEqual(16, skill_table.row_count)
                 self.assertEqual(0, len(app.query("#skills-list")))
                 self.assertEqual(
                     ["Manter", "React", "Frontend", "Instalada"],
@@ -345,7 +345,7 @@ class TuiTests(unittest.IsolatedAsyncioTestCase):
                 self.assertNotEqual("skills-search", app.focused.id)
                 app.query_one("#skills-search", Input).value = "specsfy-base-"
                 await pilot.pause()
-                self.assertEqual(9, skill_table.row_count)
+                self.assertEqual(10, skill_table.row_count)
                 app.query_one("#skills-search", Input).value = "backlog"
                 await pilot.pause()
                 self.assertEqual(1, skill_table.row_count)

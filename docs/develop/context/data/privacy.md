@@ -45,6 +45,11 @@ transversal mínima do repositório.
 | Sensível | credenciais, dados pessoais, segredos | não incluir em specs, research, logs ou fixtures reais |
 | Operacional local | preferência e cache de atualização do CLI | restringir ao usuário e não incluir conteúdo de projeto |
 
+Capturas em `specs/ideias/` são conteúdo interno versionado e preservam o input
+integral. A skill faz triagem silenciosa de segredos evidentes antes da escrita;
+ao detectar credencial, token, chave privada ou dado pessoal sensível, não
+persiste o arquivo e não copia o valor para logs ou mensagens.
+
 ## Retenção e exclusão
 
 - O Git preserva histórico; não versionar material que exija expurgo comum.

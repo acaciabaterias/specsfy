@@ -43,7 +43,8 @@ independentes.
   `.agents/skills/specsfy-release-cli/SKILL.md`. A tag e o GitHub Release
   pertencem ao monorepo; os artefatos versionados do pacote ficam em `cli/`.
 - Projetos consumidores mantêm sua fonte normativa em
-  `specs/specs/<NNNN>-<slug>/spec.md`; ideias ainda não promovidas ficam em
+  `specs/specs/<NNNN>-<slug>/spec.md`; capturas imediatas ficam em
+  `specs/ideias/` e itens escolhidos para refinamento ficam em
   `specs/backlog/`.
 - A metodologia vive em `skills/`; siga também `skills/AGENTS.md`.
 - Especialistas vivem em `specialists/`; não os instale na raiz do monorepo.

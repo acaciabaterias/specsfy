@@ -101,7 +101,7 @@ O digest cobre comandos, limites e os arquivos da política. Não aceite um gate
 que passa em apenas uma fronteira, excede limites ou trunca diagnóstico sem
 marcar `truncated`.
 
-O contrato do catálogo exige as nove skills `specsfy-base-*`, `specsfy-setup`,
+O contrato do catálogo exige as dez skills `specsfy-base-*`, `specsfy-setup`,
 `specsfy-documentator` e
 as três `specsfy-aux-*`; também valida cada `specsfy-specialist-*` instalada,
 sem impor um total máximo de especialistas.

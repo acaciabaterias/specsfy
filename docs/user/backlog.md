@@ -10,8 +10,8 @@
 
 ## Papel
 
-Explicar como transformar necessidades ainda abertas em um backlog organizado,
-priorizado e verificável, antes de promovê-las ao rigor de uma especificação.
+Explicar como transformar capturas e necessidades ainda abertas em um backlog
+organizado, priorizado e verificável antes da promoção.
 
 ## Como usar
 
@@ -34,12 +34,15 @@ promover um item para spec. Execute as skills pelos nomes indicados no fluxo.
 
 Os arquivos do projeto preservam o estado; as skills em `skills/`
 governam o comportamento executável. Depois da promoção, a spec prevalece sobre
-o backlog para comportamento, gates, tarefas e evidência.
+o backlog para comportamento, gates, tarefas e evidência. Para preservar sem
+perguntas, use a [caixa de entrada de ideias](ideas.md).
 
 ## Estrutura
 
 ```text
 specs/
+├── ideias/
+│   └── 2026-07-28-143205-ideia.md
 ├── backlog/
 │   └── 0001-ideia.md
 └── specs/
@@ -186,7 +189,7 @@ do escopo. “Criar uma tela de login” não cobre esse comportamento.
 ## Fluxo
 
 ```text
-ideia → backlog → interview → spec
+input → ideia capturada → backlog → interview → spec
 ```
 
 1. Use `$specsfy-base-backlog` quando a ideia ainda for geral. A skill pesquisa
@@ -201,7 +204,8 @@ ideia → backlog → interview → spec
 4. Depois da promoção, mantenha o backlog como proveniência, marque-o
    `Promoted` e registre o caminho da spec.
 
-Ao concluir, a skill anuncia e executa automaticamente o avanço ou retorno; a conversa continua sem repetir comandos nem autorizar implementação.
+Ao concluir, a skill anuncia e executa automaticamente o avanço ou retorno; a
+conversa continua sem repetir comandos nem autorizar implementação.
 
 Backlog e spec possuem sequências independentes. `BACKLOG-0004` pode originar
 `SPEC-0002`; identidade não implica prioridade.
@@ -248,3 +252,8 @@ O contrato executável pertence às skills
 [`specsfy-base-interview`](../../skills/specsfy-base-interview/)
 e
 [`specsfy-base-specify`](../../skills/specsfy-base-specify/).
+
+## Justificativa de tamanho
+
+O guia reúne estrutura, refinamento, priorização e promoção porque essas
+decisões precisam ser comparadas no mesmo percurso público.

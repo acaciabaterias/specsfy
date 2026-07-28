@@ -159,6 +159,7 @@ def then_public_entrypoint_teaches_the_first_journey(context) -> None:
         "specsfy install --project .",
         "uv tool upgrade specsfy-cli",
         "specsfy skills update --project .",
+        "specsfy-base-idea",
         "specsfy-base-backlog",
         "Ato I — Definir",
         "Ato II — Projetar e provar",
@@ -171,6 +172,7 @@ def then_public_entrypoint_teaches_the_first_journey(context) -> None:
 @then("os dois exemplos percorrem todas as skills base até a projeção final")
 def then_examples_cover_the_complete_base_flow(context) -> None:
     base_flow = (
+        "$specsfy-base-idea",
         "$specsfy-base-backlog",
         "$specsfy-base-interview",
         "$specsfy-base-specify",
@@ -191,20 +193,22 @@ def then_examples_cover_the_complete_base_flow(context) -> None:
 @then("os exemplos mostram cada comando e seu resultado sem código de implementação")
 def then_examples_show_each_command_and_result_without_source_code(context) -> None:
     practical_journey = (
-        "### 1. Guarde a ideia — `$specsfy-base-backlog`",
-        "### 2. Tire as dúvidas — `$specsfy-base-interview`",
-        "### 3. Crie a especificação — `$specsfy-base-specify`",
-        "### 4. Confira a especificação — `$specsfy-base-validate`",
-        "### 5. Divida o trabalho — `$specsfy-base-tasks`",
-        "### 6. Prepare a verificação — `$specsfy-base-tdd-bdd`",
-        "### 7. Implemente — `$specsfy-base-implement`",
-        "### 8. Altere a especificação — `$specsfy-base-update-spec`",
-        "### 9. Veja o progresso — `$specsfy-base-progress`",
+        "### 1. Capture a ideia — `$specsfy-base-idea`",
+        "### 2. Refine no backlog — `$specsfy-base-backlog`",
+        "### 3. Tire as dúvidas — `$specsfy-base-interview`",
+        "### 4. Crie a especificação — `$specsfy-base-specify`",
+        "### 5. Confira a especificação — `$specsfy-base-validate`",
+        "### 6. Divida o trabalho — `$specsfy-base-tasks`",
+        "### 7. Prepare a verificação — `$specsfy-base-tdd-bdd`",
+        "### 8. Implemente — `$specsfy-base-implement`",
+        "### 9. Altere a especificação — `$specsfy-base-update-spec`",
+        "### 10. Veja o progresso — `$specsfy-base-progress`",
     )
     for source in (context.public_entrypoint, context.basic_usage):
         for evidence in practical_journey:
             assert evidence in source
         for evidence in (
+            "specs/ideias/2026-07-28-143205-pagina-boas-vindas.md",
             "specs/backlog/0001-pagina-boas-vindas.md",
             "Brief pronto para especificar",
             "specs/specs/0001-pagina-boas-vindas/spec.md",
@@ -333,6 +337,7 @@ def then_user_route_has_complete_simple_guide(context) -> None:
 @then("cada skill base possui uma página de uso aprofundada com exemplo")
 def then_each_base_skill_has_an_in_depth_page(context) -> None:
     skills = (
+        "specsfy-base-idea",
         "specsfy-base-backlog",
         "specsfy-base-interview",
         "specsfy-base-specify",

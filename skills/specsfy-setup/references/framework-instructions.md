@@ -23,7 +23,8 @@ arquivo contém o fluxo, os caminhos canônicos e os gates do framework.
   conteúdo humano.
 - Execute `$specsfy-documentator` depois de cada implementação para reconstruir
   a documentação técnica completa em `docs/`.
-- Use `specs/backlog/` para ideias ainda não promovidas.
+- Use `specs/ideias/` para capturas imediatas ainda não refinadas.
+- Use `specs/backlog/` para itens refináveis ainda não promovidos.
 - Use `specs/specs/<NNNN>-<slug>/spec.md` como fonte normativa de cada fatia.
 - Não crie `plan.md`, `tasks.md`, `research.md` ou outra fonte normativa
   paralela.

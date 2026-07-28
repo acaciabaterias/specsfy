@@ -28,7 +28,7 @@ cli/ ──instala──────────────► skills/ + specia
 cli/ ──consulta catálogo/tags autenticados──► GitHub + cache local
 
 AGENTS.md ──orienta──► skills ──executam──► spec.md
-ideia ─► backlog ─► interview ─► spec.md
+input ─► ideia capturada ─► backlog ─► interview ─► spec.md
 spec.md ─► tarefas + testes ─► entrega
 pedido tardio ─► update-spec ─► spec.md
 implement ─► documentator ─► <projeto>/docs/

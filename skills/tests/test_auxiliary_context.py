@@ -24,6 +24,13 @@ def run_script(script: Path, *arguments: str) -> subprocess.CompletedProcess[str
 
 
 class AuxiliaryContextTests(unittest.TestCase):
+    def test_setup_renders_all_context_files_from_central_templates(self) -> None:
+        setup = SETUP.read_text(encoding="utf-8")
+        for name in ("Project.md", "Stack.md", "Rules.md", "Database.md"):
+            with self.subTest(template=name):
+                self.assertTrue((ROOT / "templates" / name).is_file())
+                self.assertIn(f'Path(".specsfy/templates/{name}")', setup)
+
     def test_monitor_requires_stack_and_database_docs_in_same_change(self) -> None:
         paths = [
             "package.json",

@@ -10,7 +10,7 @@
 
 ## Papel
 
-Conduzir uma ideia do backlog até uma entrega comprovada, mantendo uma única
+Conduzir um texto capturado até uma entrega comprovada, mantendo uma única
 fonte normativa e sem exigir que a pessoa memorize toda a sequência de skills.
 
 ## Como usar
@@ -24,13 +24,34 @@ fonte normativa e sem exigir que a pessoa memorize toda a sequência de skills.
 ## Veja o Specsfy trabalhando
 
 Vamos criar uma página de boas-vindas em um projeto Laravel que já usa Pest.
-Os nove comandos abaixo mostram a jornada completa.
+Os dez comandos abaixo mostram a jornada completa.
 
-### 1. Guarde a ideia — `$specsfy-base-backlog`
+### 1. Capture a ideia — `$specsfy-base-idea`
+
+```text
+Use $specsfy-base-idea para capturar:
+criar uma página /boas-vindas que cumprimente a pessoa pelo nome.
+```
+
+Resultado, sem perguntas:
+
+```text
+Ideia capturada em
+specs/ideias/2026-07-28-143205-pagina-boas-vindas.md
+```
+
+### 2. Refine no backlog — `$specsfy-base-backlog`
 
 ```text
 Use $specsfy-base-backlog para guardar esta ideia:
 criar uma página /boas-vindas que cumprimente a pessoa pelo nome.
+```
+
+Também pode usar a captura:
+
+```text
+Use $specsfy-base-backlog para refinar
+specs/ideias/2026-07-28-143205-pagina-boas-vindas.md
 ```
 
 Resultado:
@@ -39,7 +60,7 @@ Resultado:
 Ideia registrada em specs/backlog/0001-pagina-boas-vindas.md
 ```
 
-### 2. Tire as dúvidas — `$specsfy-base-interview`
+### 3. Tire as dúvidas — `$specsfy-base-interview`
 
 **Opção 1 — texto livre**
 
@@ -63,7 +84,7 @@ Você: Olá, visitante!
 Brief pronto para especificar.
 ```
 
-### 3. Crie a especificação — `$specsfy-base-specify`
+### 4. Crie a especificação — `$specsfy-base-specify`
 
 **Opção 1 — texto livre**
 
@@ -86,7 +107,7 @@ specs/specs/0001-pagina-boas-vindas/spec.md
 3 cenários BDD cobrem a feature, sua história e seus requisitos.
 ```
 
-### 4. Confira a especificação — `$specsfy-base-validate`
+### 5. Confira a especificação — `$specsfy-base-validate`
 
 ```text
 Use $specsfy-base-validate em specs/specs/0001-pagina-boas-vindas/spec.md
@@ -101,7 +122,7 @@ Definition Gate: Passed
 
 `READY` significa que o pedido está claro o bastante para seguir.
 
-### 5. Divida o trabalho — `$specsfy-base-tasks`
+### 6. Divida o trabalho — `$specsfy-base-tasks`
 
 ```text
 Use $specsfy-base-tasks em specs/specs/0001-pagina-boas-vindas/spec.md
@@ -113,7 +134,7 @@ Resultado:
 2 tarefas preparadas.
 ```
 
-### 6. Prepare a verificação — `$specsfy-base-tdd-bdd`
+### 7. Prepare a verificação — `$specsfy-base-tdd-bdd`
 
 ```text
 Use $specsfy-base-tdd-bdd em specs/specs/0001-pagina-boas-vindas/spec.md
@@ -130,7 +151,7 @@ RED observado antes da implementação.
 O mínimo de três usa contextos diferentes — por exemplo, caminho feliz,
 variação crítica e falha material — sem duplicar o mesmo exemplo.
 
-### 7. Implemente — `$specsfy-base-implement`
+### 8. Implemente — `$specsfy-base-implement`
 
 ```text
 Use $specsfy-base-implement em specs/specs/0001-pagina-boas-vindas/spec.md
@@ -144,7 +165,7 @@ Página /boas-vindas criada.
 Verificação aprovada.
 ```
 
-### 8. Altere a especificação — `$specsfy-base-update-spec`
+### 9. Altere a especificação — `$specsfy-base-update-spec`
 
 Depois de implementar, imagine que você lembrou de uma regra:
 
@@ -164,7 +185,7 @@ Implementação atualizada.
 
 A mudança continua na mesma spec e volta apenas às etapas necessárias.
 
-### 9. Veja o progresso — `$specsfy-base-progress`
+### 10. Veja o progresso — `$specsfy-base-progress`
 
 ```text
 Use $specsfy-base-progress para mostrar o resultado final.
@@ -184,7 +205,7 @@ specsfy progress --project . --json
 specsfy tui --project .
 ```
 
-Ao autorizar a jornada completa, você não precisa enviar os nove comandos
+Ao autorizar a jornada completa, você não precisa enviar os dez comandos
 manualmente: cada skill pode chamar a próxima e continuar na mesma conversa.
 O passo a passo separado serve para aprender, inspecionar ou retomar qualquer
 etapa.

@@ -41,6 +41,9 @@ preservado. A referência publicável das diretrizes vive em
 | `.specsfy/RULES.md` | regras explícitas confirmadas | `$specsfy-aux-rules` |
 | `.specsfy/DATABASE.md` | fontes, tabelas, campos, relações e migrations | `$specsfy-aux-database` |
 
+Os quatro modelos ficam em `.specsfy/templates/Project.md`, `Stack.md`,
+`Rules.md` e `Database.md`, junto dos demais templates do framework.
+
 Execute `$specsfy-aux-stack` após alterar frameworks, runtimes, ferramentas
 estruturais ou persistência. Execute `$specsfy-aux-database` sempre que criar ou
 alterar banco, schema, tabela, coleção, model persistente, campo, relação,

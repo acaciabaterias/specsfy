@@ -30,7 +30,7 @@ class VerifyRepositoryTests(unittest.TestCase):
     def test_skill_check_accepts_base_catalog_with_specialists(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
-            for number in range(9):
+            for number in range(10):
                 self.create_skill(root, f"specsfy-base-example-{number}")
             for number in range(2):
                 self.create_skill(root, f"specsfy-specialist-example-{number}")
@@ -43,7 +43,7 @@ class VerifyRepositoryTests(unittest.TestCase):
 
             self.assertEqual("passed", result["status"])
             self.assertEqual(
-                "16 skills válidas (9 base, 3 auxiliares, 1 setup, "
+                "17 skills válidas (10 base, 3 auxiliares, 1 setup, "
                 "1 documentador, "
                 "2 especialistas)",
                 result["detail"],
@@ -53,7 +53,7 @@ class VerifyRepositoryTests(unittest.TestCase):
         result = VERIFY_REPO.skill_check(ROOT)
 
         self.assertEqual("passed", result["status"])
-        self.assertIn("9 base", result["detail"])
+        self.assertIn("10 base", result["detail"])
         self.assertIn("3 auxiliares", result["detail"])
         self.assertIn("1 setup", result["detail"])
         self.assertIn("1 documentador", result["detail"])
