@@ -1,89 +1,62 @@
-# Ícones — Specsfy
+# Ícones conceituais — Specsfy
 
-## Ícone do framework
+O logo oficial vive exclusivamente em [`../logo/`](../logo/LOGO.md). Sua
+geometria de três camadas e símbolo de código não pertence a este conjunto e
+não deve ser copiada como ícone conceitual.
 
-`icon.svg` e `icon.png` são as duas representações canônicas do ícone do
-framework Specsfy. O símbolo mostra três placas empilhadas, com a placa superior
-marcada por um par de chevrons e uma barra de código.
+## Relação com o logo
 
-| Arquivo | Uso |
-|---|---|
-| [`icon.svg`](icon.svg) | Fonte vetorial preferencial para README, documentação, interfaces e materiais escaláveis. |
-| [`icon.png`](icon.png) | Fallback raster RGBA de 512×512 para consumidores que não aceitam SVG. |
+O logo usa uma prancheta 512 × 512, combina traços e preenchimento e identifica
+a marca inteira. Os ícones abaixo usam grid 32 × 32 e identificam conceitos
+específicos do método. Logo e ícones compartilham:
 
-Use o SVG como primeira opção e o PNG como fallback do mesmo conteúdo, sempre
-com texto alternativo `Ícone do framework Specsfy`. Esses arquivos identificam
-o framework e seus repositórios; não substituem os lockups institucionais de
-`../logo/` e não entram na contagem dos ícones conceituais abaixo. Não altere
-cores, geometria ou proporção em uma cópia local: referencie a versão publicada
-por `brand/`.
+- construção direta e técnica;
+- formas geométricas;
+- cantos e terminações controlados;
+- ausência de gradiente, sombra e decoração.
 
-## Ícones conceituais
-
-Conjunto conceitual de 8 ícones que representam os elementos centrais do
-método. Feitos para documentação, apresentações e futuras interfaces — não
-para substituir o símbolo da marca (`../logo/mark.svg`), que é único e não
-deve ser remixado.
+Eles não são intercambiáveis. O logo sempre preserva as três camadas e o
+símbolo de código; um ícone conceitual nunca substitui essa assinatura.
 
 ## Especificação técnica
 
 - Grid: `viewBox 0 0 32 32`.
-- Estilo: **flat** — formas sólidas preenchidas (`fill`), sem `stroke`. Sem
-  gradiente, sombra ou efeito 3D.
-- Cantos levemente arredondados nas barras/hastes (`rx` pequeno); demais
-  contornos retos e geométricos.
-- Detalhes internos (linhas de texto, moldura de checkbox, corte do canto
-  dobrado) são recortes vazados no preenchimento — via `fill-rule="evenodd"`
-  — não formas desenhadas por cima. Isso mantém cada ícone como uma única
-  cor sólida (mais o fundo aparecendo através do vazado), verdadeiramente
-  flat/monocromático.
-- Cor: a maioria usa `fill="currentColor"` — herdam a cor do texto ao redor
-  via CSS (`color: var(--specsfy-ink)` etc). **Duas exceções documentadas**,
-  porque a cor faz parte do significado, não é decoração:
-  - `tdd-cycle.svg` — metade vermelha (`#B91C1C`), metade verde (Picture Book
-    Green `#00804C`). Representa literalmente o ciclo RED → GREEN; recolorir
-    destrói o significado. (Vermelho é `#B91C1C`, não o `#DC2626` mais comum
-    — é o tom que passa 4.5:1 sobre Praxeti White, ver `../accessibility.md`.)
-  - `evidence.svg` e `task.svg` (checkmarks internos) — o restante do ícone é
-    um anel/moldura vazada (não um disco sólido), para que o checkmark sempre
-    apareça contra o fundo da página, não contra uma forma preenchida. O
-    checkmark é sempre Picture Book Green `#00804C` em fundo claro, igual à
-    regra do logo. Em superfícies escuras, troque para Mantis `#74C365`
-    (mesma regra do logo).
-
-**Lacuna conhecida:** ao contrário do logo (que tem arquivos `logo-light.svg`/
-`logo-dark.svg` separados), `evidence.svg` e `task.svg` só existem como um
-único arquivo com `#00804C` fixo — não há uma variante `-dark` pronta. Picture
-Book Green sobre Midnight Mirage cai para **3.3:1**, abaixo do mínimo de
-acessibilidade (ver `../accessibility.md`). Hoje isso é aceitável porque o uso
-predominante é documentação sobre fundo claro; qualquer uso real sobre fundo
-escuro deve recolorir o checkmark manualmente para Mantis `#74C365` antes de
-publicar — não usar o arquivo como está. O mesmo vale para `tdd-cycle.svg`,
-que já documenta essa exceção separadamente (ver `../accessibility.md`).
+- Estilo: flat, sem sombra, volume ou gradiente.
+- Cor neutra: `currentColor` nos ícones que não representam estado.
+- Estado: vermelho, verde e amarelo seguem
+  [`colors/palette.md`](../colors/palette.md).
+- Cantos e pontas permanecem arredondados quando o arquivo canônico os define.
+- Não misture esta família com outra biblioteca na mesma peça sem justificar a
+  diferença de linguagem.
 
 ## Inventário
 
 | Arquivo | Representa | Onde usar |
-|---|---|---|
-| `spec.svg` | O `spec.md`, fonte única de verdade | Cabeçalho de seções sobre especificação, links para specs |
-| `gherkin.svg` | BDD / cenários Gherkin (Given-When-Then) | Documentação de aceite, exemplos de `.feature` |
-| `tdd-cycle.svg` | O ciclo RED → GREEN do TDD | Explicações do Ato II, badges de status de teste |
-| `gate.svg` | Um gate (Definition/Plan/Delivery) | Indicar checkpoints, "Gate: Passed" |
-| `evidence.svg` | Evidência registrada/verificada | Seções de evidência, changelogs de verificação |
-| `task.svg` | Tarefas e o ciclo READY→RED→GREEN→VERIFIED→DONE | Backlogs, listas de tarefas |
-| `acts.svg` | Os três Atos rígidos em progressão | Diagramas de processo, onboarding |
-| `traceability.svg` | IDs ligando história→requisito→cenário→teste→tarefa | Matriz de rastreabilidade, explicações de IDs |
+| --- | --- | --- |
+| [`spec.svg`](spec.svg) | `spec.md`, fonte normativa | especificações e requisitos |
+| [`gherkin.svg`](gherkin.svg) | BDD e Given-When-Then | cenários e critérios de aceite |
+| [`tdd-cycle.svg`](tdd-cycle.svg) | ciclo `RED → GREEN` | testes e Ato II |
+| [`gate.svg`](gate.svg) | Definition, Plan ou Delivery Gate | checkpoints |
+| [`evidence.svg`](evidence.svg) | evidência verificada | conclusão e rastreabilidade |
+| [`task.svg`](task.svg) | tarefa do método | planejamento e execução |
+| [`acts.svg`](acts.svg) | três Atos | visão geral do processo |
+| [`traceability.svg`](traceability.svg) | cadeia de IDs | matrizes e relações |
+
+## Cores funcionais
+
+`tdd-cycle.svg` usa vermelho e verde porque esses estados fazem parte do
+conceito. Em interface, acompanhe-o de texto `RED`/`GREEN`.
+
+Os checkmarks de `evidence.svg` e `task.svg` devem acompanhar o token
+`verified`: `#047857` em fundo claro e `#6EE7B7` em fundo escuro. Os arquivos
+existentes podem exigir adaptação controlada antes do uso em tema escuro; nunca
+trate a cor como decoração.
 
 ## Não fazer
 
-- Não usar dois ícones diferentes para o mesmo conceito no mesmo documento.
-- Não colorir `spec.svg`, `gherkin.svg`, `gate.svg`, `task.svg`, `acts.svg`
-  ou `traceability.svg` com verde/vermelho/First Colors of Spring — eles são
-  neutros (`currentColor`, tipicamente Midnight Mirage ou Praxeti White).
-- Não redesenhar os checkmarks internos em cor diferente de Picture Book
-  Green (claro) / Mantis (escuro).
-- Não misturar este conjunto com ícones de bibliotecas externas (Feather,
-  Lucide, Font Awesome) na mesma peça — o estilo flat e o grid não batem
-  com conjuntos de traço/outline.
-- Não adicionar `stroke`/contorno às formas preenchidas — o conjunto é
-  monocromático por preenchimento, não por linha.
+- Não usar dois ícones para o mesmo conceito na mesma peça.
+- Não recolorir ícone neutro com uma cor funcional sem significado.
+- Não remover detalhes para simular um favicon.
+- Não anexar um ícone conceitual ao nome Specsfy como se fosse wordmark.
+- Não redesenhar o logo dentro desta pasta.
+- Não copiar `logo/icon.svg` ou `logo/icon.png` para `icons/`.

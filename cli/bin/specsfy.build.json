@@ -2,6 +2,6 @@
   "schema_version": 2,
   "format": "python-zipapp",
   "version": "0.6.0",
-  "source_sha256": "bc14739aa81f3b3097e686da4e2843737954357b675088ee2b147003aeed5248",
-  "binary_sha256": "a2e07b1165b177414f6441b336e43a6c97b33e2c68dc868db583f14288f4d759"
+  "source_sha256": "77660065d03544f210d4dfd79becfe3074f4728e827e4ea9a3beb071084ddb06",
+  "binary_sha256": "82d5aa0c7f0bc705fa6ee7d2a8c8b4bc3130d223525b1d07fba19dd2c41df68f"
 }

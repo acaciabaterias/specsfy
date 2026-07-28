@@ -34,7 +34,8 @@ prosa: um termo, uma grafia, sempre.
 ```
 fix: corrige contraste do vermelho semântico (RED) para AA
 
-DC2626 dava 4.47:1 sobre Praxeti White, abaixo do mínimo de texto.
+Use Blocked `#B91C1C` sobre White: o par alcança 6.47:1 e supera o mínimo
+de contraste para texto normal.
 Troca para B91C1C (6.0:1). Ver brand/accessibility.md.
 ```
 Direto, técnico, sem "melhorias" vagas — diz o número, diz a causa.

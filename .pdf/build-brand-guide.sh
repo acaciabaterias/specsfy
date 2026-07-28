@@ -10,6 +10,9 @@ BRAND_ROOT="$HUB_ROOT/brand"
 MD_SOURCE="$BRAND_ROOT/guide/brand-guide.md"
 TEMPLATE="$BRAND_ROOT/guide/template.html"
 STYLE_GUIDE="$BRAND_ROOT/style-guide.html"
+LOGO_MANUAL="$BRAND_ROOT/logo/LOGO.md"
+LOGO_SVG="$BRAND_ROOT/logo/icon.svg"
+LOGO_PNG="$BRAND_ROOT/logo/icon.png"
 PDF_STYLE="$HUB_ROOT/.pdf/style.css"
 BUILD_DIR="$HUB_ROOT/.pdf/build"
 OUT_HTML="$BUILD_DIR/brand-guide.html"
@@ -24,7 +27,7 @@ for bin in pandoc weasyprint; do
   fi
 done
 
-for source in "$MD_SOURCE" "$TEMPLATE" "$STYLE_GUIDE" "$PDF_STYLE"; do
+for source in "$MD_SOURCE" "$TEMPLATE" "$STYLE_GUIDE" "$LOGO_MANUAL" "$LOGO_SVG" "$LOGO_PNG" "$PDF_STYLE"; do
   if [ ! -f "$source" ]; then
     echo "Erro: fonte obrigatória ausente: $source" >&2
     exit 1

@@ -1,103 +1,104 @@
 import os
+import struct
 import subprocess
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 from behave import given, then, when
 
 
 ROOT = Path(__file__).resolve().parents[3]
-@given("os novos arquivos SVG e PNG do ícone do framework")
-def given_framework_icon_files(context) -> None:
-    context.svg = ROOT / "brand" / "icons" / "icon.svg"
-    context.png = ROOT / "brand" / "icons" / "icon.png"
+BRAND_ROOT = ROOT / "brand"
+LOGO_ROOT = BRAND_ROOT / "logo"
+REMOVED_ASSETS = (
+    "logo-light.svg",
+    "logo-dark.svg",
+    "mark.svg",
+    "favicon.svg",
+    "logo/logo.md",
+)
 
 
-@when("a adoção visual do workspace é inspecionada")
-def when_visual_adoption_is_inspected(context) -> None:
+@given("os novos arquivos SVG e PNG do logo")
+def given_new_logo_files(context) -> None:
+    context.svg_path = LOGO_ROOT / "icon.svg"
+    context.png_path = LOGO_ROOT / "icon.png"
+
+
+@when("a construção vetorial é inspecionada")
+def when_vector_construction_is_inspected(context) -> None:
+    context.svg_root = ET.parse(context.svg_path).getroot()
+    context.png = context.png_path.read_bytes()
+
+
+@then("o logo preserva as três camadas e o símbolo de código")
+def then_logo_preserves_layers_and_code(context) -> None:
+    assert context.svg_root.attrib["viewBox"] == "0 0 512 512"
+    layer_ids = {
+        child.attrib.get("id")
+        for child in context.svg_root
+        if child.tag.endswith("g")
+    }
+    assert layer_ids == {
+        "layer-bottom",
+        "layer-middle",
+        "layer-top",
+        "layer-code-left",
+        "layer-code-slash",
+        "layer-code-right",
+    }
+
+
+@then("o PNG preserva a prancheta quadrada de 512 pixels")
+def then_png_preserves_square_canvas(context) -> None:
+    assert context.png.startswith(b"\x89PNG\r\n\x1a\n")
+    assert struct.unpack(">II", context.png[16:24]) == (512, 512)
+
+
+@given("o manual normativo LOGO.md")
+def given_normative_logo_manual(context) -> None:
+    context.logo_manual_path = LOGO_ROOT / "LOGO.md"
+
+
+@when("o contrato de identidade visual é inspecionado")
+def when_visual_identity_contract_is_inspected(context) -> None:
+    context.logo_manual = context.logo_manual_path.read_text(encoding="utf-8")
     context.brand_sources = tuple(
-        (ROOT / "brand" / path).read_text(encoding="utf-8")
-        for path in (
+        (BRAND_ROOT / relative_path).read_text(encoding="utf-8")
+        for relative_path in (
             "README.md",
             "guidelines.md",
-            "logo/logo.md",
-            "icons/icons.md",
             "checklist.md",
             "guide/brand-guide.md",
             "style-guide.html",
+            "icons/icons.md",
         )
     )
 
 
-@then("os dois formatos permanecem canônicos no repositório de marca")
-def then_both_formats_are_canonical(context) -> None:
-    assert context.svg.is_file()
-    assert context.png.is_file()
-    svg = context.svg.read_text(encoding="utf-8")
-    assert 'viewBox="0 0 512 512"' in svg
-    assert "Ícone do framework Specsfy" in svg
-    assert "três placas empilhadas" in svg
-    assert context.png.read_bytes().startswith(b"\x89PNG\r\n\x1a\n")
-
-
-@then("o manual distingue o ícone do framework do logo e dos ícones conceituais")
-def then_manual_distinguishes_visual_assets(context) -> None:
-    for source in context.brand_sources:
-        assert "ícone do framework" in source.lower()
-        assert "icon.svg" in source
-        assert "icon.png" in source
-
-
-@given("a fonte Markdown do guia completo de marca")
-def given_complete_brand_guide_source(context) -> None:
-    context.brand_root = ROOT / "brand"
-    context.guide_source = context.brand_root / "guide" / "brand-guide.md"
-
-
-@when("o contrato de build do manual é inspecionado")
-def when_brand_guide_build_contract_is_inspected(context) -> None:
-    context.makefile = (ROOT / "Makefile").read_text(encoding="utf-8")
-    context.build_script = (ROOT / ".pdf" / "build-brand-guide.sh").read_text(
-        encoding="utf-8"
-    )
-    context.pdf_style = (ROOT / ".pdf" / "style.css").read_text(encoding="utf-8")
-
-
-@then("o PDF canônico fica na raiz do repositório de marca")
-def then_canonical_pdf_is_at_brand_root(context) -> None:
-    assert (context.brand_root / "Specsfy-Manual-de-Marca.pdf").is_file()
-    assert not (
-        context.brand_root / "guide" / "Specsfy-Manual-de-Marca.pdf"
-    ).exists()
-
-
-@then("o monorepo possui o gerador e a folha de estilo da marca")
-def then_monorepo_owns_generator_and_brand_stylesheet(context) -> None:
-    assert not (context.brand_root / "Makefile").exists()
-    assert not (context.brand_root / "guide" / "build.sh").exists()
-    assert 'OUT_PDF="$BRAND_ROOT/Specsfy-Manual-de-Marca.pdf"' in (
-        context.build_script
-    )
-    assert ".pdf/style.css" in context.build_script
-    for evidence in (
-        "@page",
-        "--midnight-mirage: #001F3F",
-        "--praxeti-white: #F6F7ED",
-        "--mantis: #74C365",
-        "IBM Plex Sans",
-        "IBM Plex Mono",
+@then(
+    "construção cores proteção redução fundos e acessibilidade estão definidos"
+)
+def then_complete_logo_rules_are_defined(context) -> None:
+    for section in (
+        "## Construção",
+        "## Cores",
+        "## Área de proteção",
+        "## Tamanho mínimo",
+        "## Fundos",
+        "## Acessibilidade",
+        "## Usos incorretos",
     ):
-        assert evidence in context.pdf_style
+        assert section in context.logo_manual
 
 
-@then("o comando make brand-guide reconstrói o PDF quando suas fontes mudam")
-def then_make_command_rebuilds_pdf_from_sources(context) -> None:
-    assert "brand-guide:" in context.makefile
-    assert "brand/guide/brand-guide.md" in context.makefile
-    assert ".pdf/build-brand-guide.sh" in context.makefile
-    assert ".pdf/style.css" in context.makefile
-    assert "make brand-guide" in (
-        ROOT / "README.md"
-    ).read_text(encoding="utf-8")
+@then("os guias de marca não descrevem os ativos removidos")
+def then_brand_guides_do_not_describe_removed_assets(context) -> None:
+    for source in context.brand_sources:
+        assert "três camadas" in source.lower()
+        assert "símbolo de código" in source.lower()
+        for removed_asset in REMOVED_ASSETS:
+            assert removed_asset not in source
 
 
 @given("os READMEs versionados encontrados recursivamente")
@@ -116,32 +117,68 @@ def given_tracked_readmes_recursively(context) -> None:
     )
 
 
-@when("a adoção do logo oficial nesses arquivos é inspecionada")
-def when_official_readme_logo_adoption_is_inspected(context) -> None:
+@when("a adoção do novo logo nesses arquivos é inspecionada")
+def when_new_logo_adoption_is_inspected(context) -> None:
     context.readme_contents = {
         path: path.read_text(encoding="utf-8")
         for path in context.readmes
     }
 
 
-@then(
-    "todos os READMEs encontrados recursivamente exibem os lockups oficiais"
-)
-def then_all_documentation_readmes_display_official_logo(context) -> None:
+@then("todos os READMEs usam o SVG canônico com fallback PNG")
+def then_all_readmes_use_canonical_logo(context) -> None:
     assert context.readme_contents
     for path, content in context.readme_contents.items():
         logo_root = Path(
-            os.path.relpath(ROOT / "brand" / "logo", start=path.parent)
+            os.path.relpath(LOGO_ROOT, start=path.parent)
         ).as_posix()
         assert (
-            f'media="(prefers-color-scheme: dark)" '
-            f'srcset="{logo_root}/logo-dark.svg"'
+            f'<source srcset="{logo_root}/icon.svg" '
+            'type="image/svg+xml">'
         ) in content
         assert (
-            f'media="(prefers-color-scheme: light)" '
-            f'srcset="{logo_root}/logo-light.svg"'
+            f'<img src="{logo_root}/icon.png" '
+            'alt="Logo do Specsfy" width="128">'
         ) in content
-        assert (
-            f'<img src="{logo_root}/logo-light.svg" '
-            'alt="Logo oficial do Specsfy" width="180">'
-        ) in content
+
+
+@given("a fonte Markdown do guia completo de marca")
+def given_complete_brand_guide_source(context) -> None:
+    context.guide_source = BRAND_ROOT / "guide" / "brand-guide.md"
+
+
+@when("o contrato de build do manual é inspecionado")
+def when_brand_guide_build_contract_is_inspected(context) -> None:
+    context.makefile = (ROOT / "Makefile").read_text(encoding="utf-8")
+    context.build_script = (ROOT / ".pdf" / "build-brand-guide.sh").read_text(
+        encoding="utf-8"
+    )
+
+
+@then("o PDF canônico fica na raiz do repositório de marca")
+def then_canonical_pdf_is_at_brand_root(context) -> None:
+    assert (BRAND_ROOT / "Specsfy-Manual-de-Marca.pdf").is_file()
+    assert not (
+        BRAND_ROOT / "guide" / "Specsfy-Manual-de-Marca.pdf"
+    ).exists()
+
+
+@then("o build rastreia LOGO.md SVG PNG HTML Markdown e CSS")
+def then_build_tracks_all_brand_sources(context) -> None:
+    for dependency in (
+        "brand/logo/LOGO.md",
+        "brand/logo/icon.svg",
+        "brand/logo/icon.png",
+        "brand/guide/brand-guide.md",
+        "brand/guide/template.html",
+        "brand/style-guide.html",
+        ".pdf/build-brand-guide.sh",
+        ".pdf/style.css",
+    ):
+        assert dependency in context.makefile
+    for required_source in (
+        "$BRAND_ROOT/logo/LOGO.md",
+        "$BRAND_ROOT/logo/icon.svg",
+        "$BRAND_ROOT/logo/icon.png",
+    ):
+        assert required_source in context.build_script

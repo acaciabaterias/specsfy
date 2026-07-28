@@ -46,72 +46,72 @@
     --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
     --mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, Menlo, monospace;
 
-    /* Whiteprint (light) — formas Midnight Mirage sobre papel Praxeti White */
-    --bg: #F6F7ED;
+    /* Whiteprint (light) — formas Black sobre papel White */
+    --bg: #FFFFFF;
     --bg-elevated: #FFFFFF;
     --grid-line: rgba(0, 31, 63, 0.09);
-    --ink: #001F3F;
+    --ink: #000000;
     --ink-secondary: rgba(0, 31, 63, 0.62);
     --border: rgba(0, 31, 63, 0.16);
-    --accent: #001F3F;
-    --accent-2: #1E488F;
+    --accent: #000000;
+    --accent-2: #1D4ED8;
     --accent-tint: rgba(30, 72, 143, 0.10);
-    --verified: #00804C;
+    --verified: #047857;
     --verified-bg: rgba(116, 195, 101, 0.28);
-    --draft: #DBE64C;
+    --draft: #FCD34D;
     --red: #B91C1C;
-    --cover-bg: #001F3F;
+    --cover-bg: #000000;
     --cover-grid: rgba(246, 247, 237, 0.07);
-    --cover-ink: #F6F7ED;
+    --cover-ink: #FFFFFF;
     --cover-ink-secondary: rgba(246, 247, 237, 0.68);
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      /* Blueprint (dark) — formas Praxeti White sobre Midnight Mirage */
-      --bg: #001F3F;
-      --bg-elevated: #06274F;
+      /* Blueprint (dark) — formas White sobre Black */
+      --bg: #000000;
+      --bg-elevated: #171717;
       --grid-line: rgba(246, 247, 237, 0.06);
-      --ink: #F6F7ED;
+      --ink: #FFFFFF;
       --ink-secondary: rgba(246, 247, 237, 0.65);
       --border: rgba(246, 247, 237, 0.16);
-      --accent: #5F7DAB;
-      --accent-2: #5F7DAB;
+      --accent: #93C5FD;
+      --accent-2: #93C5FD;
       --accent-tint: rgba(95, 125, 171, 0.16);
-      --verified: #74C365;
+      --verified: #6EE7B7;
       --verified-bg: rgba(0, 128, 76, 0.24);
-      --draft: #DBE64C;
+      --draft: #FCD34D;
       --red: #F87171;
     }
   }
   :root[data-theme="dark"] {
-    --bg: #001F3F;
-    --bg-elevated: #06274F;
+    --bg: #000000;
+    --bg-elevated: #171717;
     --grid-line: rgba(246, 247, 237, 0.06);
-    --ink: #F6F7ED;
+    --ink: #FFFFFF;
     --ink-secondary: rgba(246, 247, 237, 0.65);
     --border: rgba(246, 247, 237, 0.16);
-    --accent: #5F7DAB;
-    --accent-2: #5F7DAB;
+    --accent: #93C5FD;
+    --accent-2: #93C5FD;
     --accent-tint: rgba(95, 125, 171, 0.16);
-    --verified: #74C365;
+    --verified: #6EE7B7;
     --verified-bg: rgba(0, 128, 76, 0.24);
-    --draft: #DBE64C;
+    --draft: #FCD34D;
     --red: #F87171;
   }
   :root[data-theme="light"] {
-    --bg: #F6F7ED;
+    --bg: #FFFFFF;
     --bg-elevated: #FFFFFF;
     --grid-line: rgba(0, 31, 63, 0.09);
-    --ink: #001F3F;
+    --ink: #000000;
     --ink-secondary: rgba(0, 31, 63, 0.62);
     --border: rgba(0, 31, 63, 0.16);
-    --accent: #001F3F;
-    --accent-2: #1E488F;
+    --accent: #000000;
+    --accent-2: #1D4ED8;
     --accent-tint: rgba(30, 72, 143, 0.10);
-    --verified: #00804C;
+    --verified: #047857;
     --verified-bg: rgba(116, 195, 101, 0.28);
-    --draft: #DBE64C;
+    --draft: #FCD34D;
     --red: #B91C1C;
   }
 
@@ -160,14 +160,20 @@
     padding: 72px 28px 0;
   }
   .cover-inner { max-width: 920px; margin: 0 auto; }
-  .cover-mark { width: 76px; height: 76px; margin-bottom: 28px; }
+  .cover-mark {
+    width: 96px;
+    height: 96px;
+    margin-bottom: 28px;
+    padding: 10px;
+    background: #FFFFFF;
+  }
   .cover h1 { font-size: clamp(40px, 6vw, 64px); letter-spacing: -0.01em; color: var(--cover-ink); }
   .cover-tagline {
     font-family: var(--mono);
     font-size: 13px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #74C365;
+    color: #6EE7B7;
     margin: 18px 0 22px;
   }
   .cover-desc { max-width: 56ch; color: var(--cover-ink-secondary); font-size: 17px; }
@@ -247,7 +253,7 @@
   .logo-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
   .logo-card { border: 1px solid var(--border); border-radius: 4px; padding: 40px 28px; display: flex; align-items: center; justify-content: center; }
   .logo-card.light { background: #FFFFFF; }
-  .logo-card.dark { background: #001F3F; }
+  .logo-card.dark { background: #000000; }
   .logo-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 32px; }
   .symbol-card { border: 1px solid var(--border); border-radius: 4px; padding: 28px; text-align: center; background:
       linear-gradient(var(--grid-line) 1px, transparent 1px) 0 0 / 100% 16px,
@@ -299,14 +305,7 @@
 
 <header class="cover">
   <div class="cover-inner">
-    <svg class="cover-mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path fill="var(--cover-ink)" fill-rule="evenodd" d="M7,3 L19,3 L25,9 L25,27 L7,27 Z M19,3 L25,9 L19,9 Z"/>
-      <circle fill="#74C365" cx="16.5" cy="19" r="7"/>
-      <path fill="var(--cover-bg)" transform="translate(11.3,14) scale(0.72)" d="M4.5,8.1 L2.4,6 L1.7,6.7 L4.5,9.5 L10.5,3.5 L9.8,2.8 Z"/>
-      <rect fill="var(--cover-ink)" x="10.5" y="28.5" width="2.4" height="3" rx="1.2"/>
-      <rect fill="var(--cover-ink)" x="15.3" y="28.5" width="2.4" height="3" rx="1.2"/>
-      <rect fill="var(--cover-ink)" x="20.1" y="28.5" width="2.4" height="3" rx="1.2"/>
-    </svg>
+    <img class="cover-mark" src="logo/icon.svg" alt="">
     <h1>Specsfy</h1>
     <p class="cover-tagline">Especifique. Prove. Entregue.</p>
     <p class="cover-desc">Metodologia para escrever software a partir de uma especificação única, executável e rastreável — definida, projetada e entregue em três atos com gates que só passam mediante evidência.</p>
@@ -335,48 +334,48 @@
     <div class="sheet-head">
       <span class="eyebrow">Sheet 01 · Cor</span>
       <h2>Seis nomes, uma regra: verde é prova.</h2>
-      <p class="sheet-intro">Picture Book Green e Mantis só aparecem quando algo foi verificado — gate aprovado, teste GREEN, evidência registrada. First Colors of Spring sinaliza <code>Draft</code>/<code>Implementing</code>, sempre em chip, nunca como texto. Vermelho é a única cor fora da paleta nomeada — reservada ao estado <code>RED</code>.</p>
+      <p class="sheet-intro">Verified e Verified Dark só aparecem quando algo foi verificado — gate aprovado, teste GREEN, evidência registrada. Draft sinaliza <code>Draft</code>/<code>Implementing</code>, sempre em chip, nunca como texto. Vermelho é a única cor fora da paleta nomeada — reservada ao estado <code>RED</code>.</p>
     </div>
 
     <div class="swatch-group">
-      <h3>Primária — Midnight Mirage &amp; Nuit Blanche</h3>
+      <h3>Primária — Black &amp; Link</h3>
       <div class="swatch-grid">
-        <div class="swatch"><div class="swatch-color" style="background:#001F3F"></div><div class="swatch-meta"><div class="swatch-token">Midnight Mirage</div><div class="swatch-hex">#001F3F</div><div class="swatch-usage">Marca, logo, títulos, texto principal</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#1E488F"></div><div class="swatch-meta"><div class="swatch-token">Nuit Blanche</div><div class="swatch-hex">#1E488F</div><div class="swatch-usage">Links, elementos interativos</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#000000"></div><div class="swatch-meta"><div class="swatch-token">Black</div><div class="swatch-hex">#000000</div><div class="swatch-usage">Marca, logo, títulos, texto principal</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#1D4ED8"></div><div class="swatch-meta"><div class="swatch-token">Link</div><div class="swatch-hex">#1D4ED8</div><div class="swatch-usage">Links, elementos interativos</div></div></div>
       </div>
     </div>
 
     <div class="swatch-group">
       <h3>Verificação — verde</h3>
       <div class="swatch-grid">
-        <div class="swatch"><div class="swatch-color" style="background:#00804C"></div><div class="swatch-meta"><div class="swatch-token">Picture Book Green</div><div class="swatch-hex">#00804C</div><div class="swatch-usage">Gate Passed, GREEN, evidência — fundos claros</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#74C365"></div><div class="swatch-meta"><div class="swatch-token">Mantis</div><div class="swatch-hex">#74C365</div><div class="swatch-usage">Verificação em fundos escuros; tint de badge</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#047857"></div><div class="swatch-meta"><div class="swatch-token">Verified</div><div class="swatch-hex">#047857</div><div class="swatch-usage">Gate Passed, GREEN, evidência — fundos claros</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#6EE7B7"></div><div class="swatch-meta"><div class="swatch-token">Verified Dark</div><div class="swatch-hex">#6EE7B7</div><div class="swatch-usage">Verificação em fundos escuros; tint de badge</div></div></div>
       </div>
     </div>
 
     <div class="swatch-group">
       <h3>Sinalização &amp; funcional</h3>
       <div class="swatch-grid">
-        <div class="swatch"><div class="swatch-color" style="background:#DBE64C"></div><div class="swatch-meta"><div class="swatch-token">First Colors of Spring</div><div class="swatch-hex">#DBE64C</div><div class="swatch-usage">Chip de Draft/Implementing — nunca cor de texto</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#FCD34D"></div><div class="swatch-meta"><div class="swatch-token">Draft</div><div class="swatch-hex">#FCD34D</div><div class="swatch-usage">Chip de Draft/Implementing — nunca cor de texto</div></div></div>
         <div class="swatch"><div class="swatch-color" style="background:#B91C1C"></div><div class="swatch-meta"><div class="swatch-token">Vermelho (funcional)</div><div class="swatch-hex">#B91C1C</div><div class="swatch-usage">Exclusivo do estado RED — fora da paleta nomeada</div><span class="restricted">Uso restrito</span></div></div>
       </div>
     </div>
 
     <div class="swatch-group">
-      <h3>Papel — Praxeti White</h3>
+      <h3>Papel — White</h3>
       <div class="swatch-grid">
-        <div class="swatch"><div class="swatch-color" style="background:#F6F7ED;border-bottom:1px solid var(--border)"></div><div class="swatch-meta"><div class="swatch-token">Praxeti White</div><div class="swatch-hex">#F6F7ED</div><div class="swatch-usage">Fundo padrão claro; texto no modo escuro</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#FFFFFF;border-bottom:1px solid var(--border)"></div><div class="swatch-meta"><div class="swatch-token">Branco puro</div><div class="swatch-hex">#FFFFFF</div><div class="swatch-usage">Cards elevados sobre Praxeti White</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#FFFFFF;border-bottom:1px solid var(--border)"></div><div class="swatch-meta"><div class="swatch-token">White</div><div class="swatch-hex">#FFFFFF</div><div class="swatch-usage">Fundo padrão claro; texto no modo escuro</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#FFFFFF;border-bottom:1px solid var(--border)"></div><div class="swatch-meta"><div class="swatch-token">Branco puro</div><div class="swatch-hex">#FFFFFF</div><div class="swatch-usage">Cards elevados sobre White</div></div></div>
       </div>
     </div>
 
     <div class="callout">
       <h4>Pares de contraste aprovados</h4>
       <ul>
-        <li><strong>Midnight Mirage</strong> sobre <strong>Praxeti White</strong> — texto de corpo, modo claro</li>
-        <li><strong>Praxeti White</strong> sobre <strong>Midnight Mirage</strong> — texto de corpo, modo escuro</li>
-        <li><strong>Midnight Mirage</strong> sobre <strong>First Colors of Spring</strong> ou <strong>Mantis</strong> — texto de chip/badge</li>
-        <li><strong>Nuit Blanche</strong> sobre <strong>Praxeti White</strong> — links e texto interativo curto</li>
+        <li><strong>Black</strong> sobre <strong>White</strong> — texto de corpo, modo claro</li>
+        <li><strong>White</strong> sobre <strong>Black</strong> — texto de corpo, modo escuro</li>
+        <li><strong>Black</strong> sobre <strong>Draft</strong> ou <strong>Verified Dark</strong> — texto de chip/badge</li>
+        <li><strong>Link</strong> sobre <strong>White</strong> — links e texto interativo curto</li>
       </ul>
     </div>
   </section>
@@ -404,81 +403,20 @@
   <section class="sheet" id="logo">
     <div class="sheet-head">
       <span class="eyebrow">Sheet 03 · Logo</span>
-      <h2>Documento + prova + três atos</h2>
-      <p class="sheet-intro">O símbolo combina três ideias em uma forma: o <strong>spec.md</strong> (documento com canto dobrado), o <strong>checkmark verde</strong> (nada avança sem evidência) e <strong>três marcas</strong> na base (os três Atos rígidos).</p>
+      <h2>Três camadas + código executável</h2>
+      <p class="sheet-intro">O logo oficial reúne <strong>três camadas</strong>, que representam os três Atos e seus Gates, e um <strong>símbolo de código</strong> <code>&lt;/&gt;</code>, que representa especificação executável e software.</p>
     </div>
-
     <div class="logo-cards">
-      <div class="logo-card light"><svg width="180" height="40" viewBox="0 0 180 40" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Specsfy">
-  <!-- Símbolo (ver mark.svg para a versão isolada) -->
-  <g transform="translate(0,4)">
-    <path fill="#001F3F" fill-rule="evenodd" d="M7,3 L19,3 L25,9 L25,27 L7,27 Z M19,3 L25,9 L19,9 Z"/>
-    <circle fill="#00804C" cx="16.5" cy="19" r="7"/>
-    <path fill="#F6F7ED" transform="translate(11.3,14) scale(0.72)" d="M4.5,8.1 L2.4,6 L1.7,6.7 L4.5,9.5 L10.5,3.5 L9.8,2.8 Z"/>
-    <rect fill="#001F3F" x="10.5" y="28.5" width="2.4" height="3" rx="1.2"/>
-    <rect fill="#001F3F" x="15.3" y="28.5" width="2.4" height="3" rx="1.2"/>
-    <rect fill="#001F3F" x="20.1" y="28.5" width="2.4" height="3" rx="1.2"/>
-  </g>
-
-  <!-- Wordmark -->
-  <text x="40" y="28" font-family="IBM Plex Sans, Inter, -apple-system, Segoe UI, Roboto, sans-serif" font-weight="600" font-size="26" fill="#001F3F" letter-spacing="0.2">Specsfy</text>
-</svg>
-</div>
-      <div class="logo-card dark"><svg width="180" height="40" viewBox="0 0 180 40" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Specsfy">
-  <!-- Variante para fundos escuros (Midnight Mirage #001F3F ou preto) -->
-  <g transform="translate(0,4)">
-    <path fill="#F6F7ED" fill-rule="evenodd" d="M7,3 L19,3 L25,9 L25,27 L7,27 Z M19,3 L25,9 L19,9 Z"/>
-    <circle fill="#74C365" cx="16.5" cy="19" r="7"/>
-    <path fill="#001F3F" transform="translate(11.3,14) scale(0.72)" d="M4.5,8.1 L2.4,6 L1.7,6.7 L4.5,9.5 L10.5,3.5 L9.8,2.8 Z"/>
-    <rect fill="#F6F7ED" x="10.5" y="28.5" width="2.4" height="3" rx="1.2"/>
-    <rect fill="#F6F7ED" x="15.3" y="28.5" width="2.4" height="3" rx="1.2"/>
-    <rect fill="#F6F7ED" x="20.1" y="28.5" width="2.4" height="3" rx="1.2"/>
-  </g>
-
-  <!-- Wordmark -->
-  <text x="40" y="28" font-family="IBM Plex Sans, Inter, -apple-system, Segoe UI, Roboto, sans-serif" font-weight="600" font-size="26" fill="#F6F7ED" letter-spacing="0.2">Specsfy</text>
-</svg>
-</div>
+      <div class="logo-card light"><picture><source srcset="logo/icon.svg" type="image/svg+xml"><img src="logo/icon.png" alt="Logo do Specsfy" width="128" height="128"></picture></div>
     </div>
-
-    <div class="logo-row">
-      <div class="symbol-card"><svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Símbolo Specsfy: documento de especificação com checkmark de verificação e três marcas dos Atos">
-  <!-- Documento (spec.md) com canto dobrado -->
-  <path fill="#001F3F" fill-rule="evenodd" d="M7,3 L19,3 L25,9 L25,27 L7,27 Z M19,3 L25,9 L19,9 Z"/>
-
-  <!-- Checkmark de verificação (evidência), em badge -->
-  <circle fill="#00804C" cx="16.5" cy="19" r="7"/>
-  <path fill="#F6F7ED" transform="translate(11.3,14) scale(0.72)" d="M4.5,8.1 L2.4,6 L1.7,6.7 L4.5,9.5 L10.5,3.5 L9.8,2.8 Z"/>
-
-  <!-- Três marcas: os três Atos / gates -->
-  <rect fill="#001F3F" x="10.5" y="28.5" width="2.4" height="3" rx="1.2"/>
-  <rect fill="#001F3F" x="15.3" y="28.5" width="2.4" height="3" rx="1.2"/>
-  <rect fill="#001F3F" x="20.1" y="28.5" width="2.4" height="3" rx="1.2"/>
-</svg>
-<div class="cap">mark.svg — símbolo isolado</div></div>
-      <div class="symbol-card"><svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Favicon Specsfy">
-  <rect width="32" height="32" rx="7" fill="#001F3F"/>
-  <path fill="#F6F7ED" fill-rule="evenodd" d="M9,6 L19,6 L24,11 L24,26 L9,26 Z M19,6 L24,11 L19,11 Z"/>
-  <path fill="#00804C" transform="translate(9.2,11.7) scale(1.35)" d="M4.5,8.1 L2.4,6 L1.7,6.7 L4.5,9.5 L10.5,3.5 L9.8,2.8 Z"/>
-</svg>
-<div class="cap">favicon.svg — fundo sólido, tamanhos pequenos</div></div>
-    </div>
-
     <div class="facts">
-      <div><span class="fact-label">Clear space</span><div class="fact-value">Metade da altura do símbolo, livre de qualquer elemento</div></div>
-      <div><span class="fact-label">Tamanho mín. — lockup</span><div class="fact-value">96px de largura</div></div>
-      <div><span class="fact-label">Tamanho mín. — símbolo</span><div class="fact-value">20px de altura (abaixo disso, use favicon.svg)</div></div>
+      <div><span class="fact-label">Arquivos canônicos</span><div class="fact-value">icon.svg e icon.png</div></div>
+      <div><span class="fact-label">Clear space</span><div class="fact-value">1x = 36 unidades, cerca de 7%</div></div>
+      <div><span class="fact-label">Tamanho mínimo</span><div class="fact-value">32 px digital · 8 mm impressão</div></div>
     </div>
-
-    <div class="dont">
-      <h4>Não fazer</h4>
-      <ul>
-        <li>Usar qualquer verde fora de Picture Book Green (claro) / Mantis (escuro) no badge do checkmark</li>
-        <li>Usar o símbolo sem o checkmark — sem ele, perde o significado, não só o visual</li>
-        <li>Distorcer, inclinar, espelhar ou adicionar sombra/brilho ao símbolo</li>
-        <li>Redigitar "Specsfy" em outra fonte em vez de usar os arquivos fornecidos</li>
-      </ul>
-    </div>
+    <div class="callout"><h4>Fundos</h4><ul><li>Use diretamente sobre branco ou fundo muito claro.</li><li>Em fundo escuro, colorido ou fotográfico, aplique placa branca com toda a área de proteção.</li><li>Não use filtro de inversão.</li></ul></div>
+    <div class="dont"><h4>Não fazer</h4><ul><li>Não recolorir, inverter, distorcer, girar, cortar ou aplicar efeitos.</li><li>Não remover ou reordenar as três camadas.</li><li>Não redesenhar o símbolo de código.</li><li>Não criar wordmark, lockup ou variante paralela.</li></ul></div>
+    <p>Regras completas: <code>logo/LOGO.md</code>.</p>
   </section>
 
   <section class="sheet" id="icones">
@@ -487,14 +425,7 @@
       <h2>Vocabulário visual do método</h2>
       <p class="sheet-intro">O ícone do framework identifica o ecossistema; os oito ícones conceituais formam o vocabulário visual do método.</p>
     </div>
-    <div class="symbol-card" style="margin-bottom:24px">
-      <picture>
-        <source srcset="icons/icon.svg" type="image/svg+xml">
-        <img src="icons/icon.png" alt="Ícone do framework Specsfy" width="128" height="128">
-      </picture>
-      <div class="cap"><strong>Ícone do framework</strong> — <code>icon.svg</code> preferencial, <code>icon.png</code> como fallback raster. Não substitui o logo institucional nem integra a família conceitual.</div>
-    </div>
-    <p class="sheet-intro">Os oito ícones conceituais usam o mesmo grid (32×32) e estilo flat, com formas preenchidas e sem traço. A cor é neutra (<code>currentColor</code>) exceto onde o significado exige verde ou vermelho fixos — ciclo TDD e checkmarks de evidência.</p>
+    <p class="sheet-intro">O logo oficial vive em <code>logo/icon.svg</code>, com fallback <code>logo/icon.png</code>. Ícones de interface não são variantes dele. Os oito ícones conceituais usam o mesmo grid (32×32) e estilo flat, com formas preenchidas e sem traço. A cor é neutra (<code>currentColor</code>) exceto onde o significado exige verde ou vermelho fixos — ciclo TDD e checkmarks de evidência.</p>
     <div class="icon-grid">
       <div class="icon-card"><svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Spec">
   <path fill="currentColor" fill-rule="evenodd" d="M8,4 L18,4 L24,10 L24,28 L8,28 Z M18,4 L24,10 L18,10 Z M11,14 H21 V16 H11 Z M11,18 H21 V20 H11 Z M11,22 H17 V24 H11 Z"/>
@@ -512,9 +443,9 @@
       <div class="icon-card"><svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ciclo TDD RED para GREEN">
   <!-- Ícone de cor fixa (exceção documentada em icons.md): metade RED, metade GREEN -->
   <path fill="#B91C1C" d="M6,16 A10,10 0 0 1 26,16 Z"/>
-  <path fill="#00804C" d="M26,16 A10,10 0 0 1 6,16 Z"/>
+  <path fill="#047857" d="M26,16 A10,10 0 0 1 6,16 Z"/>
   <polygon fill="#B91C1C" points="26,16 22.5,13.3 22.5,18.7"/>
-  <polygon fill="#00804C" points="6,16 9.5,13.3 9.5,18.7"/>
+  <polygon fill="#047857" points="6,16 9.5,13.3 9.5,18.7"/>
 </svg>
 <div class="icon-name">tdd-cycle.svg</div><div class="icon-desc">Ciclo RED → GREEN do TDD</div></div>
       <div class="icon-card"><svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gate">
@@ -527,12 +458,12 @@
       <div class="icon-card"><svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Evidência">
   <path fill="currentColor" fill-rule="evenodd" d="M13,5 A8,8 0 1 1 12.999,5 Z M13,7.4 A5.6,5.6 0 1 0 13.001,7.4 Z"/>
   <rect fill="currentColor" x="17.3" y="18.3" width="2.6" height="11" rx="1.3" transform="rotate(45 18.6 23.8)"/>
-  <path fill="#00804C" transform="translate(8.4,8.4) scale(0.78)" d="M4.5,8.1 L2.4,6 L1.7,6.7 L4.5,9.5 L10.5,3.5 L9.8,2.8 Z"/>
+  <path fill="#047857" transform="translate(8.4,8.4) scale(0.78)" d="M4.5,8.1 L2.4,6 L1.7,6.7 L4.5,9.5 L10.5,3.5 L9.8,2.8 Z"/>
 </svg>
 <div class="icon-name">evidence.svg</div><div class="icon-desc">Evidência registrada e verificada</div></div>
       <div class="icon-card"><svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tarefa">
   <path fill="currentColor" fill-rule="evenodd" d="M6,7.4 L11.6,7.4 A1.4,1.4 0 0 1 13,8.8 L13,10.6 A1.4,1.4 0 0 1 11.6,12 L6,12 A1.4,1.4 0 0 1 4.6,10.6 L4.6,8.8 A1.4,1.4 0 0 1 6,7.4 Z M6.55,8.7 L11.05,8.7 A0.7,0.7 0 0 1 11.75,9.4 L11.75,10 A0.7,0.7 0 0 1 11.05,10.7 L6.55,10.7 A0.7,0.7 0 0 1 5.85,10 L5.85,9.4 A0.7,0.7 0 0 1 6.55,8.7 Z"/>
-  <path fill="#00804C" transform="translate(6.9,8.05) scale(0.24)" d="M4.5,8.1 L2.4,6 L1.7,6.7 L4.5,9.5 L10.5,3.5 L9.8,2.8 Z"/>
+  <path fill="#047857" transform="translate(6.9,8.05) scale(0.24)" d="M4.5,8.1 L2.4,6 L1.7,6.7 L4.5,9.5 L10.5,3.5 L9.8,2.8 Z"/>
   <rect fill="currentColor" x="16" y="8" width="11" height="2" rx="1"/>
 
   <path fill="currentColor" opacity="0.4" fill-rule="evenodd" d="M6,15.4 L11.6,15.4 A1.4,1.4 0 0 1 13,16.8 L13,18.6 A1.4,1.4 0 0 1 11.6,20 L6,20 A1.4,1.4 0 0 1 4.6,18.6 L4.6,16.8 A1.4,1.4 0 0 1 6,15.4 Z M6.55,16.7 L11.05,16.7 A0.7,0.7 0 0 1 11.75,17.4 L11.75,18 A0.7,0.7 0 0 1 11.05,18.7 L6.55,18.7 A0.7,0.7 0 0 1 5.85,18 L5.85,17.4 A0.7,0.7 0 0 1 6.55,16.7 Z"/>

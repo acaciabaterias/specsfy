@@ -1,78 +1,70 @@
 # Paleta de cores — Specsfy
 
-A paleta é composta por seis cores nomeadas (extraídas do moodboard de
-referência da marca) mais uma cor funcional que não pertence à identidade
-visual, mas ao próprio vocabulário do método.
+O novo logo estabelece uma identidade primária **monocromática**. Preto e
+branco constroem a marca; cores adicionais existem somente para função de
+interface e nunca recolorem o logo.
 
-A lógica semântica original do Specsfy continua valendo: **verde só aparece
-quando algo foi verificado** (gate aprovado, teste `GREEN`, evidência
-registrada) — nunca como decoração. O que muda aqui são os tons exatos.
-
-## Cores primitivas (paleta nomeada)
-
-| Nome | Hex | Papel na marca |
-|---|---|---|
-| **Midnight Mirage** | `#001F3F` | Cor primária. Logo, títulos, texto principal, fundo do modo escuro. |
-| **Nuit Blanche** | `#1E488F` | Cor secundária. Links, elementos interativos, acentos de destaque. |
-| **Picture Book Green** | `#00804C` | Verde de verificação — gate `Passed`, teste `GREEN`, evidência, em fundos claros. |
-| **Mantis** | `#74C365` | Verde de verificação em fundos escuros; tint de fundo para badges "Verified" em fundos claros. |
-| **First Colors of Spring** | `#DBE64C` | Sinalização de `Draft`/`Implementing` (substitui o âmbar do sistema anterior). Uso em chips/badges, nunca em texto corrido. |
-| **Praxeti White** | `#F6F7ED` | Papel. Fundo padrão em modo claro, texto principal em modo escuro. |
-
-## Cor funcional (fora da paleta nomeada)
+## Cores de identidade
 
 | Token | Hex | Uso |
-|---|---|---|
-| `red-600` | `#B91C1C` (modo claro) / `#F87171` (modo escuro) | Exclusivamente para representar o estado `RED` do TDD/BDD — teste falhando por design, antes do código. Não faz parte do moodboard; é vermelho universal de status, mantido por convenção de acessibilidade (vermelho = falha é reconhecido independente de marca). `#B91C1C` (não o `#DC2626` mais comum) porque é o tom mais próximo que ainda passa 4.5:1 sobre Praxeti White — ver `accessibility.md`. |
-| `paper-elevated` | `#FFFFFF` (modo claro) / `#06274F` (modo escuro) | Fundo de superfícies elevadas (cards, popovers) sobre `paper`. Não é uma sétima cor de acento — é um degrau de neutro acima/abaixo de Praxeti White e Midnight Mirage, usado só para dar profundidade a superfícies empilhadas, nunca como cor de texto, ícone, badge ou destaque. `style-guide.html` já usa este token (`--bg-elevated`); ele estava implementado sem estar documentado aqui — corrigido nesta revisão. |
+| --- | --- | --- |
+| **Black** | `#000000` | três camadas do logo, títulos e texto principal em superfícies claras |
+| **White** | `#FFFFFF` | símbolo de código do logo, fundo seguro e texto principal em superfícies escuras |
 
-## Regra de ouro (inalterada)
+Esses dois valores são imutáveis no ativo canônico. O logo não acompanha o
+tema da interface: em fundo escuro, use uma placa branca.
 
-> Verde só aparece quando algo foi provado. First Colors of Spring só aparece
-> em chips de estado "em andamento". Vermelho só aparece no estado `RED`.
-> Nenhuma dessas três é decoração.
+## Neutros de interface
 
-## Tokens semânticos
+| Token | Claro | Escuro | Uso |
+| --- | --- | --- | --- |
+| `paper` | White `#FFFFFF` | Graphite `#171717` | fundo de página |
+| `paper-elevated` | Fog `#F5F5F5` | `#262626` | cards e superfícies elevadas |
+| `ink` | Black `#000000` | White `#FFFFFF` | texto principal |
+| `ink-secondary` | Gray `#737373` | Gray `#A3A3A3` | texto secundário |
+| `border` | `#D4D4D4` | `#404040` | divisores, grades e bordas |
 
-Os tokens semânticos mudam de valor entre modo claro e escuro; os tokens
-primitivos (tabela acima) **nunca mudam** — são as cores nomeadas fixas.
+Graphite, Fog e os cinzas são neutros operacionais. Não substituem o preto e o
+branco do logo.
 
-| Token semântico | Modo claro | Modo escuro | Papel |
-|---|---|---|---|
-| `paper` | Praxeti White `#F6F7ED` | Midnight Mirage `#001F3F` | Fundo de página |
-| `ink` | Midnight Mirage `#001F3F` | Praxeti White `#F6F7ED` | Texto principal, logo |
-| `ink-secondary` | Midnight Mirage 62% opacidade | Praxeti White 65% opacidade | Texto secundário, legendas |
-| `border` | Midnight Mirage 14% opacidade | Praxeti White 16% opacidade | Bordas, grades |
-| `link` | Nuit Blanche `#1E488F` | Nuit Blanche clareado ~`#5F7DAB` | Links, interativos |
-| `verified` | Picture Book Green `#00804C` | Mantis `#74C365` | Gate Passed, GREEN, evidência |
-| `verified-tint` | Mantis `#74C365` (fundo de badge) | Picture Book Green 22% opacidade | Fundo de badges "Verified" |
-| `draft` | First Colors of Spring `#DBE64C` (chip) | First Colors of Spring `#DBE64C` (chip) | Badge de Draft/Implementing — chip mantém o mesmo tom nos dois modos, com texto `Midnight Mirage` sempre por cima |
-| `red` | `#B91C1C` | `#F87171` | Estado RED (ver cor funcional) |
-| `paper-elevated` | `#FFFFFF` | Midnight Mirage 14% mais claro `#06274F` | Fundo de cards/superfícies elevadas sobre `paper` — nunca cor de texto ou de destaque |
+## Cores funcionais
 
-Por que `verified` troca de Picture Book Green para Mantis no modo escuro:
-Picture Book Green sobre o fundo Midnight Mirage do modo escuro cai abaixo de
-contraste legível (verde escuro sobre azul-marinho quase preto). Mantis, mais
-claro, resolve isso sem inventar uma cor fora da paleta nomeada.
+| Estado | Claro | Escuro | Regra |
+| --- | --- | --- | --- |
+| `link` | `#1D4ED8` | `#93C5FD` | links e foco; sempre com sublinhado ou outro sinal além da cor |
+| `verified` | `#047857` | `#6EE7B7` | `Passed`, `GREEN`, `VERIFIED` e evidência confirmada |
+| `draft` | `#92400E` | `#FCD34D` | `Draft`, `Planned` e trabalho em andamento |
+| `red` | `#B91C1C` | `#FCA5A5` | estado `RED`, falha e bloqueio |
 
-## Pares de contraste aprovados (WCAG AA, texto normal)
+Cores funcionais comunicam estado. Não são cores da assinatura institucional e
+não entram em `brand/logo/icon.svg`.
 
-- `ink` (Midnight Mirage) sobre `paper` (Praxeti White) — texto de corpo padrão, modo claro. **15.3:1**
-- `ink` (Praxeti White) sobre `paper` (Midnight Mirage) — texto de corpo padrão, modo escuro. **15.3:1**
-- Midnight Mirage sobre First Colors of Spring ou Mantis — texto de badges/chips (nunca o inverso: essas duas cores claras não servem como cor de texto). **12.2:1 / 7.7:1**
-- Nuit Blanche sobre Praxeti White — links e texto curto interativo. **8.2:1**
-- `red-600` (`#B91C1C`) sobre Praxeti White — texto/label do estado RED. **6.0:1**
+## Contrastes aprovados
 
-Nunca escreva parágrafos longos em Nuit Blanche, Picture Book Green, Mantis
-ou First Colors of Spring — são cores de acento e chip, não de leitura
-longa. Razões completas e todos os pares calculados (incluindo os que
-falham e por quê) estão em [`../accessibility.md`](../accessibility.md).
+| Par | Contraste |
+| --- | --- |
+| Black `#000000` / White `#FFFFFF` | **21.00:1** |
+| Graphite `#171717` / White `#FFFFFF` | **17.93:1** |
+| Gray `#737373` / White `#FFFFFF` | **4.74:1** |
+| Gray `#A3A3A3` / Graphite `#171717` | **7.11:1** |
+| Link `#1D4ED8` / White | **6.70:1** |
+| Link `#93C5FD` / Graphite | **9.94:1** |
+| Verified `#047857` / White | **5.48:1** |
+| Verified `#6EE7B7` / Graphite | **11.76:1** |
+| Draft `#92400E` / White | **7.09:1** |
+| Draft `#FCD34D` / Graphite | **12.43:1** |
+| RED `#B91C1C` / White | **6.47:1** |
+| RED `#FCA5A5` / Graphite | **9.45:1** |
 
-## Não fazer
+## Regra de uso
 
-- Não usar First Colors of Spring como cor de texto — é clara demais; use
-  apenas como fundo de chip com texto Midnight Mirage por cima.
-- Não usar Mantis nem Picture Book Green fora do sentido "verificado".
-- Não introduzir um sétimo tom de acento além dos seis nomeados + vermelho
-  funcional.
-- Não usar gradientes entre as cores da paleta.
+- Use preto e branco para reconhecimento de marca e hierarquia principal.
+- Use no máximo uma cor funcional dominante por bloco.
+- Combine estado com texto, ícone ou posição; cor sozinha não é evidência.
+- Não use cor funcional como decoração.
+- Não aplique gradiente, textura ou transparência ao logo.
+- Não crie nomes promocionais para os neutros: os tokens descrevem função.
+
+As implementações normativas ficam em
+[`tokens.css`](tokens.css) e [`tokens.json`](tokens.json). Atualize os três
+arquivos juntos.

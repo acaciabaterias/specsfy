@@ -1,23 +1,28 @@
-@icone-framework
-Feature: Ícone oficial do framework Specsfy
-  Para reconhecer o framework de forma consistente em todo o ecossistema
-  Como equipe responsável pela identidade do Specsfy
-  Quero publicar os formatos vetorial e raster a partir do owner de marca
+@logo-specsfy
+Feature: Sistema oficial de logo do Specsfy
+  Para manter uma identidade única em todo o monorepo
+  Como equipe responsável pela marca
+  Quero derivar o guia completo do novo símbolo em camadas
 
-  Scenario: Manter o ícone canônico disponível
-    Given os novos arquivos SVG e PNG do ícone do framework
-    When a adoção visual do workspace é inspecionada
-    Then os dois formatos permanecem canônicos no repositório de marca
-    And o manual distingue o ícone do framework do logo e dos ícones conceituais
+  Scenario: Publicar o novo logo canônico
+    Given os novos arquivos SVG e PNG do logo
+    When a construção vetorial é inspecionada
+    Then o logo preserva as três camadas e o símbolo de código
+    And o PNG preserva a prancheta quadrada de 512 pixels
 
-  Scenario: Publicar o manual de marca em PDF a partir do Markdown
+  Scenario: Documentar todas as regras do logo
+    Given o manual normativo LOGO.md
+    When o contrato de identidade visual é inspecionado
+    Then construção cores proteção redução fundos e acessibilidade estão definidos
+    And os guias de marca não descrevem os ativos removidos
+
+  Scenario: Exibir o logo em todos os READMEs do monorepo
+    Given os READMEs versionados encontrados recursivamente
+    When a adoção do novo logo nesses arquivos é inspecionada
+    Then todos os READMEs usam o SVG canônico com fallback PNG
+
+  Scenario: Publicar o manual de marca em PDF a partir das novas fontes
     Given a fonte Markdown do guia completo de marca
     When o contrato de build do manual é inspecionado
     Then o PDF canônico fica na raiz do repositório de marca
-    And o monorepo possui o gerador e a folha de estilo da marca
-    And o comando make brand-guide reconstrói o PDF quando suas fontes mudam
-
-  Scenario: Exibir o logo oficial em todos os READMEs do monorepo
-    Given os READMEs versionados encontrados recursivamente
-    When a adoção do logo oficial nesses arquivos é inspecionada
-    Then todos os READMEs encontrados recursivamente exibem os lockups oficiais
+    And o build rastreia LOGO.md SVG PNG HTML Markdown e CSS
