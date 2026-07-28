@@ -1,18 +1,11 @@
+import os
+import subprocess
 from pathlib import Path
 
 from behave import given, then, when
 
 
 ROOT = Path(__file__).resolve().parents[3]
-REPOSITORIES = (
-    ROOT,
-    ROOT / "brand",
-    ROOT / "skills",
-    ROOT / "example",
-    ROOT / "specsfy",
-    ROOT / "specialists",
-    ROOT / "cli",
-)
 @given("os novos arquivos SVG e PNG do ícone do framework")
 def given_framework_icon_files(context) -> None:
     context.svg = ROOT / "brand" / "icons" / "icon.svg"
@@ -21,10 +14,6 @@ def given_framework_icon_files(context) -> None:
 
 @when("a adoção visual do workspace é inspecionada")
 def when_visual_adoption_is_inspected(context) -> None:
-    context.readmes = {
-        repository: (repository / "README.md").read_text(encoding="utf-8")
-        for repository in REPOSITORIES
-    }
     context.brand_sources = tuple(
         (ROOT / "brand" / path).read_text(encoding="utf-8")
         for path in (
@@ -48,21 +37,6 @@ def then_both_formats_are_canonical(context) -> None:
     assert "Ícone do framework Specsfy" in svg
     assert "três placas empilhadas" in svg
     assert context.png.read_bytes().startswith(b"\x89PNG\r\n\x1a\n")
-
-
-@then("os sete READMEs de módulos exibem o SVG com fallback PNG")
-def then_readmes_display_both_formats(context) -> None:
-    for repository, readme in context.readmes.items():
-        icon_root = (
-            "brand/icons"
-            if repository == ROOT
-            else "icons"
-            if repository == ROOT / "brand"
-            else "../brand/icons"
-        )
-        assert f'{icon_root}/icon.svg' in readme
-        assert f'{icon_root}/icon.png' in readme
-        assert 'alt="Ícone do framework Specsfy"' in readme
 
 
 @then("o manual distingue o ícone do framework do logo e dos ícones conceituais")
@@ -126,16 +100,27 @@ def then_make_command_rebuilds_pdf_from_sources(context) -> None:
     ).read_text(encoding="utf-8")
 
 
-@given("os READMEs da documentação oficial")
-def given_official_documentation_readmes(context) -> None:
-    context.docs_readmes = sorted((ROOT / "docs").rglob("README.md"))
+@given("os READMEs versionados encontrados recursivamente")
+def given_tracked_readmes_recursively(context) -> None:
+    tracked_files = subprocess.run(
+        ["git", "ls-files", "-z"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.split("\0")
+    context.readmes = sorted(
+        ROOT / relative_path
+        for relative_path in tracked_files
+        if Path(relative_path).name == "README.md"
+    )
 
 
-@when("a adoção do logo oficial nesses índices é inspecionada")
-def when_official_documentation_logo_adoption_is_inspected(context) -> None:
-    context.docs_readme_contents = {
+@when("a adoção do logo oficial nesses arquivos é inspecionada")
+def when_official_readme_logo_adoption_is_inspected(context) -> None:
+    context.readme_contents = {
         path: path.read_text(encoding="utf-8")
-        for path in context.docs_readmes
+        for path in context.readmes
     }
 
 
@@ -143,10 +128,11 @@ def when_official_documentation_logo_adoption_is_inspected(context) -> None:
     "todos os READMEs encontrados recursivamente exibem os lockups oficiais"
 )
 def then_all_documentation_readmes_display_official_logo(context) -> None:
-    assert context.docs_readme_contents
-    for path, content in context.docs_readme_contents.items():
-        depth = len(path.parent.relative_to(ROOT).parts)
-        logo_root = "/".join([".."] * depth + ["brand", "logo"])
+    assert context.readme_contents
+    for path, content in context.readme_contents.items():
+        logo_root = Path(
+            os.path.relpath(ROOT / "brand" / "logo", start=path.parent)
+        ).as_posix()
         assert (
             f'media="(prefers-color-scheme: dark)" '
             f'srcset="{logo_root}/logo-dark.svg"'

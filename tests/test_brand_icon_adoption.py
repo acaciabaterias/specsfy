@@ -1,32 +1,40 @@
 from __future__ import annotations
 
+import os
 import struct
+import subprocess
 import unittest
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-REPOSITORIES = (
-    ROOT,
-    ROOT / "brand",
-    ROOT / "skills",
-    ROOT / "example",
-    ROOT / "specsfy",
-    ROOT / "specialists",
-    ROOT / "cli",
-)
 class BrandIconAdoptionTests(unittest.TestCase):
-    def test_all_documentation_readmes_use_the_official_theme_aware_logo(
+    def test_all_tracked_readmes_use_the_official_theme_aware_logo(
         self,
     ) -> None:
-        readmes = sorted((ROOT / "docs").rglob("README.md"))
+        tracked_files = subprocess.run(
+            ["git", "ls-files", "-z"],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.split("\0")
+        readmes = sorted(
+            ROOT / relative_path
+            for relative_path in tracked_files
+            if Path(relative_path).name == "README.md"
+        )
         self.assertTrue(readmes)
 
         for readme_path in readmes:
             with self.subTest(readme=readme_path.relative_to(ROOT)):
-                depth = len(readme_path.parent.relative_to(ROOT).parts)
-                logo_root = "/".join([".."] * depth + ["brand", "logo"])
+                logo_root = Path(
+                    os.path.relpath(
+                        ROOT / "brand" / "logo",
+                        start=readme_path.parent,
+                    )
+                ).as_posix()
                 readme = readme_path.read_text(encoding="utf-8")
                 self.assertIn(
                     f'media="(prefers-color-scheme: dark)" '
@@ -62,21 +70,6 @@ class BrandIconAdoptionTests(unittest.TestCase):
         self.assertEqual(b"\x89PNG\r\n\x1a\n", png[:8])
         width, height = struct.unpack(">II", png[16:24])
         self.assertEqual((512, 512), (width, height))
-
-    def test_public_module_readmes_use_svg_with_png_fallback(self) -> None:
-        for repository in REPOSITORIES:
-            with self.subTest(repository=repository.name):
-                readme = (repository / "README.md").read_text(encoding="utf-8")
-                icon_root = (
-                    "brand/icons"
-                    if repository == ROOT
-                    else "icons"
-                    if repository == ROOT / "brand"
-                    else "../brand/icons"
-                )
-                self.assertIn(f"{icon_root}/icon.svg", readme)
-                self.assertIn(f"{icon_root}/icon.png", readme)
-                self.assertIn('alt="Ícone do framework Specsfy"', readme)
 
     def test_brand_sources_define_the_framework_icon_role_and_formats(self) -> None:
         for relative_path in (

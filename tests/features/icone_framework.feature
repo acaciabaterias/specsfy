@@ -4,11 +4,10 @@ Feature: Ícone oficial do framework Specsfy
   Como equipe responsável pela identidade do Specsfy
   Quero publicar os formatos vetorial e raster a partir do owner de marca
 
-  Scenario: Distribuir o ícone canônico pelos módulos públicos
+  Scenario: Manter o ícone canônico disponível
     Given os novos arquivos SVG e PNG do ícone do framework
     When a adoção visual do workspace é inspecionada
     Then os dois formatos permanecem canônicos no repositório de marca
-    And os sete READMEs de módulos exibem o SVG com fallback PNG
     And o manual distingue o ícone do framework do logo e dos ícones conceituais
 
   Scenario: Publicar o manual de marca em PDF a partir do Markdown
@@ -18,7 +17,7 @@ Feature: Ícone oficial do framework Specsfy
     And o monorepo possui o gerador e a folha de estilo da marca
     And o comando make brand-guide reconstrói o PDF quando suas fontes mudam
 
-  Scenario: Exibir o logo oficial em toda a documentação
-    Given os READMEs da documentação oficial
-    When a adoção do logo oficial nesses índices é inspecionada
+  Scenario: Exibir o logo oficial em todos os READMEs do monorepo
+    Given os READMEs versionados encontrados recursivamente
+    When a adoção do logo oficial nesses arquivos é inspecionada
     Then todos os READMEs encontrados recursivamente exibem os lockups oficiais

@@ -2,8 +2,9 @@
 
 <p align="center">
   <picture>
-    <source srcset="icons/icon.svg" type="image/svg+xml">
-    <img src="icons/icon.png" alt="Ícone do framework Specsfy" width="128">
+    <source media="(prefers-color-scheme: dark)" srcset="logo/logo-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="logo/logo-light.svg">
+    <img src="logo/logo-light.svg" alt="Logo oficial do Specsfy" width="180">
   </picture>
 </p>
 
