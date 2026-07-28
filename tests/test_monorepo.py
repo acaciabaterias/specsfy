@@ -103,10 +103,9 @@ class MonorepoContractTest(unittest.TestCase):
         self.assertIn("https://github.com/promovaweb/specsfy.git", installer)
         self.assertIn('BASE_DIRECTORY = "skills"', installer)
         self.assertIn('SPECIALISTS_DIRECTORY = "specialists"', installer)
-        self.assertIn(
-            "raw.githubusercontent.com/promovaweb/specsfy/main/specialists/catalog.json",
-            catalog,
-        )
+        self.assertIn("api.github.com/repos/promovaweb/specsfy/", catalog)
+        self.assertIn("contents/specialists/catalog.json?ref=main", catalog)
+        self.assertIn("application/vnd.github.raw+json", catalog)
         self.assertIn(
             "api.github.com/repos/promovaweb/specsfy/tags",
             updater,

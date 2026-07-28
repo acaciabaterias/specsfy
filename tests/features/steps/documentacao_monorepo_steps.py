@@ -288,7 +288,6 @@ def then_cli_guide_embeds_the_provided_screenshots(context) -> None:
 
 @then("a porta pública apresenta a visão Home do dashboard")
 def then_public_entrypoint_previews_the_dashboard(context) -> None:
-    assert (
-        "https://raw.githubusercontent.com/promovaweb/specsfy/main/docs/screen/cli/cli-dash.png"
-        in context.public_entrypoint
+    assert "![Dashboard Home do Specsfy](../docs/screen/cli/cli-dash.png)" in (
+        context.public_entrypoint
     )

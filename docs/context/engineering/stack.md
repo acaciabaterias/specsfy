@@ -67,7 +67,7 @@ não transforma PHP, JavaScript ou seu runtime em dependências do Specsfy.
 | Área | Responsabilidade | Fonte executável |
 | --- | --- | --- |
 | Python, argparse, subprocess e urllib | comandos, instalação, projeção, runners e detecção de versões | `cli/` |
-| Textual | interface terminal, streaming e resultados de testes | `cli//pyproject.toml` e lockfile |
+| Textual | interface terminal, streaming e resultados de testes | `cli/pyproject.toml` e lockfile |
 | uv | instalação e atualização isoladas do CLI | manifest, lockfile e comandos publicados |
 | Markdown/YAML | instruções e metadata das skills | `skills/` e `specialists/` |
 | JSON | catálogo detectável e lock de instalação | `specialists/catalog.json` e lock do consumidor |

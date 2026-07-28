@@ -1,6 +1,6 @@
 # Especialistas para especificação
 
-Use o catálogo em https://github.com/promovaweb/specsfy/tree/main/specialists para aprofundar:
+Use o catálogo de especialistas distribuído pelo CLI para aprofundar:
 
 - dados: `specsfy-specialist-postgres`, `-supabase` e `-redis`;
 - segurança e APIs: `-application-security` e `-web-api-design`;

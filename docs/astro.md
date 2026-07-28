@@ -84,6 +84,6 @@ no runtime alvo.
 ## Fonte da verdade e precedência
 
 A skill pertence a
-[`specialists/`](https://github.com/promovaweb/specsfy/tree/main/specialists/specsfy-specialist-astro).
+[`specsfy-specialist-astro`](../specialists/specsfy-specialist-astro/).
 Versão, adapter, scripts e integrações pertencem aos manifests, lockfiles e
 configuração do projeto consumidor.

@@ -14,9 +14,6 @@ REPOSITORIES = (
     ROOT / "specialists",
     ROOT / "cli",
 )
-REMOTE_ICON_ROOT = "https://raw.githubusercontent.com/promovaweb/specsfy/main/brand/icons"
-
-
 @given("os novos arquivos SVG e PNG do ícone do framework")
 def given_framework_icon_files(context) -> None:
     context.svg = ROOT / "brand" / "icons" / "icon.svg"
@@ -57,7 +54,13 @@ def then_both_formats_are_canonical(context) -> None:
 @then("os oito READMEs exibem o SVG com fallback PNG")
 def then_readmes_display_both_formats(context) -> None:
     for repository, readme in context.readmes.items():
-        icon_root = "icons" if repository == ROOT / "brand" else REMOTE_ICON_ROOT
+        icon_root = (
+            "brand/icons"
+            if repository == ROOT
+            else "icons"
+            if repository == ROOT / "brand"
+            else "../brand/icons"
+        )
         assert f'{icon_root}/icon.svg' in readme
         assert f'{icon_root}/icon.png' in readme
         assert 'alt="Ícone do framework Specsfy"' in readme

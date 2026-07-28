@@ -2,18 +2,18 @@
 
 <p align="center">
   <picture>
-    <source srcset="https://raw.githubusercontent.com/promovaweb/specsfy/main/brand/icons/icon.svg" type="image/svg+xml">
-    <img src="https://raw.githubusercontent.com/promovaweb/specsfy/main/brand/icons/icon.png" alt="Ícone do framework Specsfy" width="128">
+    <source srcset="../brand/icons/icon.svg" type="image/svg+xml">
+    <img src="../brand/icons/icon.png" alt="Ícone do framework Specsfy" width="128">
   </picture>
 </p>
 
 O módulo `docs/` publica a documentação final do Specsfy para o usuário.
 
 A porta de entrada e a visão geral do projeto estão em
-[`specsfy/`](https://github.com/promovaweb/specsfy/tree/main/specsfy). A metodologia base
-está em [`skills/`](https://github.com/promovaweb/specsfy/tree/main/skills); especialistas
+[`specsfy/`](../specsfy/). A metodologia base
+está em [`skills/`](../skills/); especialistas
 opcionais estão em
-[`specialists/`](https://github.com/promovaweb/specsfy/tree/main/specialists).
+[`specialists/`](../specialists/).
 
 ## Classificação
 
@@ -36,7 +36,7 @@ por pessoas mantenedoras e agentes. O diretório
 ## Como usar
 
 Para conhecer o projeto, comece pela
-[visão geral](https://github.com/promovaweb/specsfy/tree/main/specsfy). Para aplicar ou manter o
+[visão geral](../specsfy/). Para aplicar ou manter o
 método:
 
 1. use este portal para localizar a documentação;
@@ -44,7 +44,7 @@ método:
    arquitetura, engenharia, dados ou vocabulário;
 3. consulte o [índice de decisões](decisions/README.md) para entender a
    motivação histórica de uma escolha;
-4. abra o [catálogo de skills](https://github.com/promovaweb/specsfy/tree/main/skills) para executar
+4. abra o [catálogo de skills](../skills/) para executar
    a metodologia;
 5. siga o [Guia de instalação](installation.md) para instalar o CLI e o
    framework;
@@ -103,10 +103,10 @@ O módulo `docs/` governa a documentação final. As demais autoridades são:
 
 - comportamento de uma fatia: `specs/specs/<NNNN>-<slug>/spec.md` no projeto que aplica o
   método;
-- metodologia executável: [`skills/`](https://github.com/promovaweb/specsfy/tree/main/skills);
+- metodologia executável: [`skills/`](../skills/);
 - visão geral pública:
-  [`specsfy/`](https://github.com/promovaweb/specsfy/tree/main/specsfy);
-- identidade: [`brand/`](https://github.com/promovaweb/specsfy/tree/main/brand);
+  [`specsfy/`](../specsfy/);
+- identidade: [`brand/`](../brand/);
 - orquestração e testes integrados:
   [`promovaweb/specsfy`](https://github.com/promovaweb/specsfy);
 - contexto vigente: documento específico em [`context/`](context/README.md);
@@ -150,13 +150,13 @@ executável em seus repositórios proprietários.
 
 ## Como navegar
 
-1. Comece pela [visão geral do Specsfy](https://github.com/promovaweb/specsfy/tree/main/specsfy).
+1. Comece pela [visão geral do Specsfy](../specsfy/).
 2. Use este portal para escolher a classe de documentação.
 3. Consulte o [roteador operacional](context/README.md) para selecionar somente
    os contextos exigidos pela sua dúvida.
 4. Siga links adicionais apenas quando o documento selecionado declarar uma
    dependência real.
-5. Volte ao [módulo de skills](https://github.com/promovaweb/specsfy/tree/main/skills) para
+5. Volte ao [módulo de skills](../skills/) para
    executar ou inspecionar a metodologia.
 
 ## Autoridade das fontes
@@ -215,8 +215,8 @@ Crie um arquivo somente quando:
 
 | Necessidade | Destino |
 | --- | --- |
-| conhecer o projeto | [Visão geral](https://github.com/promovaweb/specsfy/tree/main/specsfy) |
-| aplicar a metodologia | [Skills](https://github.com/promovaweb/specsfy/tree/main/skills) |
+| conhecer o projeto | [Visão geral](../specsfy/) |
+| aplicar a metodologia | [Skills](../skills/) |
 | registrar e amadurecer uma ideia | [Backlog](backlog.md) |
 | instalar o CLI e o framework | [Guia de instalação](installation.md) |
 | entregar a primeira fatia | [Uso básico](basic-usage.md) |
@@ -234,5 +234,5 @@ Crie um arquivo somente quando:
 | consultar autoria e identidade | [Créditos](credits.md) |
 | selecionar contexto técnico | [Contexto do projeto](context/README.md) |
 | consultar decisões históricas | [Decisões](decisions/README.md) |
-| usar a identidade oficial | [Marca](https://github.com/promovaweb/specsfy/tree/main/brand) |
+| usar a identidade oficial | [Marca](../brand/) |
 | contribuir com a integração | [Monorepo](https://github.com/promovaweb/specsfy) |

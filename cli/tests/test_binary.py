@@ -4,6 +4,7 @@ import hashlib
 import json
 import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -17,6 +18,37 @@ FINGERPRINT_SCRIPT = ROOT / "scripts/source_fingerprint.py"
 
 
 class BinaryArtifactTests(unittest.TestCase):
+    def test_source_fingerprint_ignores_permissions_not_tracked_by_git(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / "source.py"
+            source.write_text("value = 1\n", encoding="utf-8")
+            source.chmod(0o644)
+            regular = subprocess.run(
+                [sys.executable, "-B", str(FINGERPRINT_SCRIPT), str(root)],
+                text=True,
+                capture_output=True,
+                check=True,
+            ).stdout.strip()
+
+            source.chmod(0o664)
+            group_writable = subprocess.run(
+                [sys.executable, "-B", str(FINGERPRINT_SCRIPT), str(root)],
+                text=True,
+                capture_output=True,
+                check=True,
+            ).stdout.strip()
+            source.chmod(0o755)
+            executable = subprocess.run(
+                [sys.executable, "-B", str(FINGERPRINT_SCRIPT), str(root)],
+                text=True,
+                capture_output=True,
+                check=True,
+            ).stdout.strip()
+
+        self.assertEqual(regular, group_writable)
+        self.assertNotEqual(regular, executable)
+
     def test_binary_matches_the_current_cli_source(self) -> None:
         self.assertTrue(BINARY.is_file(), f"execute scripts/build-executable.sh")
         self.assertTrue(BINARY.stat().st_mode & 0o111)

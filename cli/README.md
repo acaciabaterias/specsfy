@@ -2,8 +2,8 @@
 
 <p align="center">
   <picture>
-    <source srcset="https://raw.githubusercontent.com/promovaweb/specsfy/main/brand/icons/icon.svg" type="image/svg+xml">
-    <img src="https://raw.githubusercontent.com/promovaweb/specsfy/main/brand/icons/icon.png" alt="Ícone do framework Specsfy" width="128">
+    <source srcset="../brand/icons/icon.svg" type="image/svg+xml">
+    <img src="../brand/icons/icon.png" alt="Ícone do framework Specsfy" width="128">
   </picture>
 </p>
 
@@ -15,7 +15,9 @@ tecnologias e acompanhar em tempo real o progresso das specs de um projeto.
 - Python 3.11 ou superior para instalação via `uv`;
 - `skills`, do projeto
   [`vercel-labs/skills`](https://github.com/vercel-labs/skills), ou `npx`
-  disponível para executá-lo sob demanda.
+  disponível para executá-lo sob demanda;
+- acesso autenticado ao repositório privado: execute `gh auth login` no uso
+  interativo ou defina `GH_TOKEN`/`GITHUB_TOKEN` na automação.
 
 ## Instalar com uv
 
@@ -30,6 +32,10 @@ mesma origem e as mesmas opções da instalação:
 ```bash
 uv tool upgrade specsfy-cli
 ```
+
+O catálogo e a verificação de versões usam a API do GitHub. O CLI procura,
+nesta ordem, `GH_TOKEN`, `GITHUB_TOKEN` e a sessão retornada por
+`gh auth token`; as credenciais não são gravadas pelo Specsfy.
 
 Para trocar a origem ou uma restrição de versão, execute novamente
 `uv tool install` com o novo requisito.
@@ -202,4 +208,4 @@ alternam o plano entre instalar, manter, remover e ignorar; na aba Specs, abrem
 o modal da linha destacada. `Esc` retorna, e o mouse opera abas, linhas e
 botões. Nada é instalado ou removido antes de `Aplicar`.
 
-A documentação completa está em https://github.com/promovaweb/specsfy/tree/main/docs.
+A documentação completa está em [`docs/`](../docs/).

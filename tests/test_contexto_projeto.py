@@ -304,14 +304,14 @@ class ProjectContextContractTests(unittest.TestCase):
         specsfy_readme = entrypoints["specsfy"].read_text(encoding="utf-8")
         skills_readme = entrypoints["skills"].read_text(encoding="utf-8")
         docs_readme = entrypoints["docs"].read_text(encoding="utf-8")
-        for url in (
-            "https://github.com/promovaweb/specsfy/tree/main/docs",
-            "https://github.com/promovaweb/specsfy/tree/main/skills",
-            "https://github.com/promovaweb/specsfy/tree/main/brand",
+        for link in (
+            "../docs/",
+            "../skills/",
+            "../brand/",
         ):
-            self.assertIn(url, specsfy_readme)
+            self.assertIn(link, specsfy_readme)
         self.assertIn("specsfy-base-interview", skills_readme)
-        self.assertIn("https://github.com/promovaweb/specsfy/tree/main/specsfy", docs_readme)
+        self.assertIn("../specsfy/", docs_readme)
 
         modules = (CONTEXT_ROOT / "architecture" / "modules.md").read_text(
             encoding="utf-8"

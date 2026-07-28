@@ -23,6 +23,11 @@ em um projeto que aplicará a metodologia.
   disponível para o fallback usado pelo CLI;
 - um projeto consumidor no qual você possa criar ou atualizar arquivos.
 
+O monorepo é privado. Antes de instalar, execute `gh auth login` e confirme com
+`gh auth status`. Em CI, defina `GH_TOKEN` ou `GITHUB_TOKEN` com acesso de
+leitura. O CLI reutiliza a mesma credencial para consultar catálogo e versões,
+sem persistir o token.
+
 Não execute o bootstrap na raiz oficial `promovaweb/specsfy`. O CLI reconhece
 essa raiz e recusa a instalação para que o monorepo não seja convertido em projeto
 consumidor.
@@ -109,7 +114,7 @@ acionados no projeto consumidor.
   segurança.
 - Veja o [uso avançado](advanced-usage.md) para detecção e seleção explícita de
   especialistas.
-- Use o [catálogo da metodologia](https://github.com/promovaweb/specsfy/tree/main/skills) para
+- Use o [catálogo da metodologia](../skills/) para
   conhecer as responsabilidades das skills.
 
 ## Atualize quando
@@ -129,7 +134,7 @@ acionados no projeto consumidor.
 ## Fonte da verdade e precedência
 
 A distribuição, o bootstrap e as proteções executáveis pertencem a
-[`cli/`](https://github.com/promovaweb/specsfy/tree/main/cli). A metodologia e as skills
+[`cli/`](../cli/). A metodologia e as skills
 instaladas pertencem a
-[`skills/`](https://github.com/promovaweb/specsfy/tree/main/skills). Este guia explica a
+[`skills/`](../skills/). Este guia explica a
 jornada pública sem substituir essas fontes.

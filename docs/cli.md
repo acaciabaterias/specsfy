@@ -56,7 +56,7 @@ specsfy skills update --project .
 
 Ao abrir `specsfy` ou `specsfy tui` em um terminal interativo, o CLI verifica
 as tags semânticas estáveis de
-[`cli/`](https://github.com/promovaweb/specsfy/tree/main/cli). O cache e as configurações
+[`cli/`](../cli/). O cache e as configurações
 globais ficam em `~/.specsfy/cli.json`, com permissão restrita ao usuário e
 intervalo padrão de 24 horas entre consultas.
 
@@ -71,6 +71,11 @@ consulta, de `cache`, que registra horário, tag, versão, commit, ETag e erro
 recente. Chaves desconhecidas são preservadas. Indisponibilidade de rede,
 resposta inválida ou falha de escrita não bloqueiam a aplicação; o aviso é
 adiado e o fluxo normal continua.
+
+Como o monorepo é privado, catálogo e tags são consultados com `GH_TOKEN`,
+`GITHUB_TOKEN` ou, na ausência dessas variáveis, com a sessão de
+`gh auth token`. Execute `gh auth login` antes do primeiro uso. O token não é
+copiado para `~/.specsfy/cli.json`.
 
 A mesma atualização pode ser iniciada diretamente, sem abrir a TUI:
 
@@ -254,9 +259,9 @@ capacidade operacional permanece em seção própria para leitura localizada.
 ## Fonte da verdade e precedência
 
 O comportamento executável vive em
-[`cli/`](https://github.com/promovaweb/specsfy/tree/main/cli). As skills base pertencem a
-[`skills/`](https://github.com/promovaweb/specsfy/tree/main/skills), os especialistas a
-[`specialists/`](https://github.com/promovaweb/specsfy/tree/main/specialists) e cada spec ao
+[`cli/`](../cli/). As skills base pertencem a
+[`skills/`](../skills/), os especialistas a
+[`specialists/`](../specialists/) e cada spec ao
 projeto consumidor.
 
 ## Segurança e reversibilidade

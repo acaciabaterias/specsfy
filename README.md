@@ -2,8 +2,8 @@
 
 <p align="center">
   <picture>
-    <source srcset="https://raw.githubusercontent.com/promovaweb/specsfy/main/brand/icons/icon.svg" type="image/svg+xml">
-    <img src="https://raw.githubusercontent.com/promovaweb/specsfy/main/brand/icons/icon.png" alt="Ícone do framework Specsfy" width="160">
+    <source srcset="brand/icons/icon.svg" type="image/svg+xml">
+    <img src="brand/icons/icon.png" alt="Ícone do framework Specsfy" width="160">
   </picture>
 </p>
 
@@ -34,6 +34,9 @@ releases Git.
 
 Requer Python 3.11+, [`uv`](https://docs.astral.sh/uv/) e o comando
 [`skills`](https://github.com/vercel-labs/skills) ou `npx`.
+Enquanto o repositório for privado, autentique uma vez com `gh auth login`;
+o CLI reutiliza essa sessão. Em automações, defina `GH_TOKEN` ou
+`GITHUB_TOKEN` com acesso de leitura ao repositório.
 
 ```bash
 uv tool install 'git+https://github.com/promovaweb/specsfy.git#subdirectory=cli'

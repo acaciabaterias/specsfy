@@ -34,7 +34,7 @@ selecionado indicar uma dependência real.
 
 ## Fonte da verdade e precedência
 
-O [`AGENTS.md` do workspace](https://github.com/promovaweb/specsfy/blob/main/AGENTS.md)
+O [`AGENTS.md` do workspace](../../AGENTS.md)
 governa como o trabalho integrado é executado. `specs/specs/<NNNN>-<slug>/spec.md` governa o
 comportamento da fatia. Estes contextos governam decisões transversais dentro do
 escopo declarado. Código, testes, manifests, configurações, schemas e migrations

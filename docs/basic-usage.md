@@ -224,6 +224,6 @@ foi validada, a página foi implementada e o progresso mostra `Complete`.
 ## Fonte da verdade e precedência
 
 A metodologia executável pertence a
-[`skills/`](https://github.com/promovaweb/specsfy/tree/main/skills). A fonte normativa de
+[`skills/`](../skills/). A fonte normativa de
 cada fatia pertence ao projeto consumidor em
 `specs/specs/<NNNN>-<slug>/spec.md`.

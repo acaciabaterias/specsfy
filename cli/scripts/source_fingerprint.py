@@ -31,7 +31,12 @@ def source_fingerprint(root: Path) -> str:
             continue
         digest.update(relative.as_posix().encode())
         digest.update(b"\0")
-        digest.update(f"{path.lstat().st_mode & 0o777:o}".encode())
+        # O Git preserva somente a distinção entre arquivo comum e executável.
+        # Bits de escrita de grupo/usuário variam entre worktrees e runners.
+        git_mode = b"120000" if path.is_symlink() else (
+            b"100755" if path.lstat().st_mode & 0o111 else b"100644"
+        )
+        digest.update(git_mode)
         digest.update(b"\0")
         if path.is_symlink():
             digest.update(path.readlink().as_posix().encode())

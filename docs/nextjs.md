@@ -84,6 +84,6 @@ provadas por testes e build na versão e no router realmente usados.
 ## Fonte da verdade e precedência
 
 A skill pertence a
-[`specialists/`](https://github.com/promovaweb/specsfy/tree/main/specialists/specsfy-specialist-nextjs).
+[`specsfy-specialist-nextjs`](../specialists/specsfy-specialist-nextjs/).
 Router, versão, runtime e scripts são comprovados por código, `package.json`,
 lockfile e configuração do projeto consumidor.

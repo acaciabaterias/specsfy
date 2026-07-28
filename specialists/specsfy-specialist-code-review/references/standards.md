@@ -76,4 +76,4 @@ Feedback de estilo/preferência usa o mesmo formato, mas rotulado como `nit`
 - Google Engineering Practices (como enviar um CL para revisão): https://google.github.io/eng-practices/review/developer/
 - OWASP Code Review Guide: https://owasp.org/www-project-code-review-guide/
 - Conventional Comments (rótulos de comentário): https://conventionalcomments.org/
-- SEI CERT Coding Standards (critérios objetivos de correção por linguagem): https://wiki.sei.cmu.edu/confluence/display/seccode
+- SEI CERT Coding Standards (critérios objetivos de correção por linguagem): https://cmu-sei.github.io/secure-coding-standards/

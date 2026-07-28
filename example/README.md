@@ -2,8 +2,8 @@
 
 <p align="center">
   <picture>
-    <source srcset="https://raw.githubusercontent.com/promovaweb/specsfy/main/brand/icons/icon.svg" type="image/svg+xml">
-    <img src="https://raw.githubusercontent.com/promovaweb/specsfy/main/brand/icons/icon.png" alt="Ícone do framework Specsfy" width="128">
+    <source srcset="../brand/icons/icon.svg" type="image/svg+xml">
+    <img src="../brand/icons/icon.png" alt="Ícone do framework Specsfy" width="128">
   </picture>
 </p>
 
@@ -12,7 +12,7 @@ contratos e práticas do Specsfy em um produto real. Ela pertence ao repositóri
 `example/`; não é a documentação oficial da metodologia.
 
 A documentação oficial para usuários é publicada em
-[`docs/`](https://github.com/promovaweb/specsfy/tree/main/docs).
+[`docs/`](../docs/).
 
 ## Papel no Specsfy
 

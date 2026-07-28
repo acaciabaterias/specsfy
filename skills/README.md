@@ -2,8 +2,8 @@
 
 <p align="center">
   <picture>
-    <source srcset="https://raw.githubusercontent.com/promovaweb/specsfy/main/brand/icons/icon.svg" type="image/svg+xml">
-    <img src="https://raw.githubusercontent.com/promovaweb/specsfy/main/brand/icons/icon.png" alt="Ícone do framework Specsfy" width="128">
+    <source srcset="../brand/icons/icon.svg" type="image/svg+xml">
+    <img src="../brand/icons/icon.png" alt="Ícone do framework Specsfy" width="128">
   </picture>
 </p>
 
@@ -12,8 +12,8 @@ Specsfy: skills, scripts determinísticos, referências, assets e metadata para
 agentes.
 
 A visão geral para o usuário final está em
-[`specsfy/`](https://github.com/promovaweb/specsfy/tree/main/specsfy). A documentação de uso
-está em [`docs/`](https://github.com/promovaweb/specsfy/tree/main/docs).
+[`specsfy/`](../specsfy/). A documentação de uso
+está em [`docs/`](../docs/).
 
 ## Responsabilidade
 
@@ -30,10 +30,10 @@ Este módulo possui:
 
 Specs pertencem a cada projeto consumidor. A raiz do monorepo
 [`promovaweb/specsfy`](https://github.com/promovaweb/specsfy) não instala nem executa este
-catálogo. A identidade pertence a [`brand/`](https://github.com/promovaweb/specsfy/tree/main/brand).
+catálogo. A identidade pertence a [`brand/`](../brand/).
 Conhecimento técnico opcional pertence a
-[`specialists/`](https://github.com/promovaweb/specsfy/tree/main/specialists) e é instalado
-por [`cli/`](https://github.com/promovaweb/specsfy/tree/main/cli).
+[`specialists/`](../specialists/) e é instalado
+por [`cli/`](../cli/).
 
 ## Metodologia executável
 

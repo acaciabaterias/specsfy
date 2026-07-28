@@ -1,6 +1,6 @@
 # Especialistas sob demanda
 
-Especialistas vivem em https://github.com/promovaweb/specsfy/tree/main/specialists e usam o prefixo
+Especialistas vivem no catálogo distribuído pelo CLI e usam o prefixo
 `specsfy-specialist-`. Proponha somente os necessários à decisão:
 
 - stack detectada: Laravel, Supabase, Postgres, Redis, Docker/Swarm, Ansible,

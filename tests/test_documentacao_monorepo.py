@@ -289,7 +289,7 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
                 )
 
         self.assertIn(
-            "https://raw.githubusercontent.com/promovaweb/specsfy/main/docs/screen/cli/cli-dash.png",
+            "![Dashboard Home do Specsfy](../docs/screen/cli/cli-dash.png)",
             public_entrypoint,
         )
 

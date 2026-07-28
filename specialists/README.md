@@ -2,8 +2,8 @@
 
 <p align="center">
   <picture>
-    <source srcset="https://raw.githubusercontent.com/promovaweb/specsfy/main/brand/icons/icon.svg" type="image/svg+xml">
-    <img src="https://raw.githubusercontent.com/promovaweb/specsfy/main/brand/icons/icon.png" alt="Ícone do framework Specsfy" width="128">
+    <source srcset="../brand/icons/icon.svg" type="image/svg+xml">
+    <img src="../brand/icons/icon.png" alt="Ícone do framework Specsfy" width="128">
   </picture>
 </p>
 
@@ -27,7 +27,7 @@ declarada no catálogo automaticamente.
 O catálogo cobre a stack Promovaweb, design de interfaces, qualidade,
 arquitetura, operação e disciplinas de engenharia. A referência completa de
 instalação e uso pertence à
-[`documentação do Specsfy`](https://github.com/promovaweb/specsfy/tree/main/docs).
+[`documentação do Specsfy`](../docs/).
 
 Nenhuma skill deste módulo é instalada ou executada pela raiz do
 [`promovaweb/specsfy`](https://github.com/promovaweb/specsfy).

@@ -32,7 +32,7 @@ manifests, sugere um modelo apropriado e garante esta estrutura:
 Ela também reserva blocos delimitados para as diretrizes do Specsfy em
 `AGENTS.md` e `CLAUDE.md`. Conteúdo fora desses blocos pertence ao usuário e é
 preservado. A referência publicável das diretrizes vive em
-[`specsfy-setup`](https://github.com/promovaweb/specsfy/tree/main/skills/specsfy-setup).
+[`specsfy-setup`](../skills/specsfy-setup/).
 
 | Arquivo | Conteúdo | Skill mantenedora |
 | --- | --- | --- |

@@ -58,5 +58,7 @@ transversal mínima do repositório.
 - Fixtures usam dados sintéticos.
 - Mensagens de erro expõem regra e caminho, não conteúdo sensível.
 - Saída JSON obedece às mesmas restrições da saída humana.
-- `~/.specsfy/cli.json` guarda somente configurações e metadados públicos de tags,
-  usa permissão `0600` e não recebe credenciais, telemetria ou fontes do projeto.
+- `~/.specsfy/cli.json` guarda somente configurações e metadados de tags, usa
+  permissão `0600` e não recebe credenciais, telemetria ou fontes do projeto.
+- A autenticação da API vem de `GH_TOKEN`, `GITHUB_TOKEN` ou da sessão do
+  GitHub CLI e permanece fora dos arquivos administrados pelo Specsfy.

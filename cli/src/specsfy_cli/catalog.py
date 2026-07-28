@@ -2,13 +2,19 @@ from __future__ import annotations
 
 import json
 import os
+import urllib.error
 import urllib.request
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from .github import api_headers
 
-DEFAULT_CATALOG_URL = "https://raw.githubusercontent.com/promovaweb/specsfy/main/specialists/catalog.json"
+
+DEFAULT_CATALOG_URL = (
+    "https://api.github.com/repos/promovaweb/specsfy/"
+    "contents/specialists/catalog.json?ref=main"
+)
 
 
 @dataclass(frozen=True)
@@ -57,10 +63,21 @@ class Catalog:
             return cls.from_path(Path(override).expanduser().resolve())
         request = urllib.request.Request(
             url or DEFAULT_CATALOG_URL,
-            headers={"User-Agent": "specsfy-cli"},
+            headers=api_headers(
+                "specsfy-cli",
+                accept="application/vnd.github.raw+json",
+            ),
         )
-        with urllib.request.urlopen(request, timeout=20) as response:
-            return cls.from_payload(json.load(response))
+        try:
+            with urllib.request.urlopen(request, timeout=20) as response:
+                return cls.from_payload(json.load(response))
+        except urllib.error.HTTPError as error:
+            if error.code in {401, 403, 404}:
+                raise RuntimeError(
+                    "catálogo de especialistas indisponível; autentique o GitHub "
+                    "com `gh auth login` ou defina GH_TOKEN"
+                ) from error
+            raise
 
     def require(self, name: str) -> CatalogEntry:
         if not name.startswith("specsfy-specialist-"):

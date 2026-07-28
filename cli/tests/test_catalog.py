@@ -1,14 +1,56 @@
 from __future__ import annotations
 
+import io
 import json
 import tempfile
 import unittest
+import urllib.error
 from pathlib import Path
+from unittest.mock import patch
 
-from specsfy_cli.catalog import Catalog, CatalogEntry
+from specsfy_cli.catalog import DEFAULT_CATALOG_URL, Catalog, CatalogEntry
 
 
 class CatalogTests(unittest.TestCase):
+    def test_fetches_private_catalog_with_github_authentication(self) -> None:
+        response = io.BytesIO(
+            json.dumps({"schema_version": 1, "skills": []}).encode()
+        )
+
+        with (
+            patch.dict("os.environ", {"GH_TOKEN": "secret"}, clear=True),
+            patch("urllib.request.urlopen", return_value=response) as opener,
+        ):
+            catalog = Catalog.fetch()
+
+        self.assertEqual([], catalog.entries)
+        request = opener.call_args.args[0]
+        self.assertEqual(DEFAULT_CATALOG_URL, request.full_url)
+        self.assertEqual("Bearer secret", request.get_header("Authorization"))
+        self.assertEqual(
+            "application/vnd.github.raw+json",
+            request.get_header("Accept"),
+        )
+
+    def test_explains_how_to_authenticate_when_private_catalog_is_hidden(
+        self,
+    ) -> None:
+        error = urllib.error.HTTPError(
+            DEFAULT_CATALOG_URL,
+            404,
+            "Not Found",
+            {},
+            None,
+        )
+        self.addCleanup(error.close)
+        with (
+            patch.dict("os.environ", {}, clear=True),
+            patch("specsfy_cli.github.shutil.which", return_value=None),
+            patch("urllib.request.urlopen", side_effect=error),
+            self.assertRaisesRegex(RuntimeError, "gh auth login"),
+        ):
+            Catalog.fetch()
+
     def test_loads_and_detects_file_and_dependency_markers(self) -> None:
         entries = {
             "schema_version": 1,

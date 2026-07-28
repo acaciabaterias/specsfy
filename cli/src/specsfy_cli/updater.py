@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any, TextIO
 
 from . import __version__
+from .github import api_headers
 
 
 TAGS_API_URL = "https://api.github.com/repos/promovaweb/specsfy/tags?per_page=100"
@@ -100,11 +101,7 @@ def check_for_update(
         return _cached_update(current_version, cache)
 
     open_url = opener or urllib.request.urlopen
-    headers = {
-        "Accept": "application/vnd.github+json",
-        "User-Agent": f"specsfy-cli/{current_version}",
-        "X-GitHub-Api-Version": "2022-11-28",
-    }
+    headers = api_headers(f"specsfy-cli/{current_version}")
     etag = cache.get("etag")
     if isinstance(etag, str) and etag:
         headers["If-None-Match"] = etag

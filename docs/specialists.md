@@ -52,7 +52,7 @@ automaticamente.
 ## Fonte da verdade e precedência
 
 Diretórios, `SKILL.md`, referências, metadata e `catalog.json` vivem em
-[`specialists/`](https://github.com/promovaweb/specsfy/tree/main/specialists). Esta página
+[`specialists/`](../specialists/). Esta página
 orienta usuários sem duplicar o conteúdo operacional de cada skill.
 
 ## Catálogo por domínio

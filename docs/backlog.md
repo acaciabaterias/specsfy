@@ -244,7 +244,7 @@ desenvolvimento.
 ## Implementação executável
 
 O contrato executável pertence às skills
-[`specsfy-base-backlog`](https://github.com/promovaweb/specsfy/tree/main/skills/specsfy-base-backlog),
-[`specsfy-base-interview`](https://github.com/promovaweb/specsfy/tree/main/skills/specsfy-base-interview)
+[`specsfy-base-backlog`](../skills/specsfy-base-backlog/),
+[`specsfy-base-interview`](../skills/specsfy-base-interview/)
 e
-[`specsfy-base-specify`](https://github.com/promovaweb/specsfy/tree/main/skills/specsfy-base-specify).
+[`specsfy-base-specify`](../skills/specsfy-base-specify/).

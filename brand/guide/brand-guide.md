@@ -222,7 +222,7 @@ independentes de modo claro/escuro.
 `red-600` não faz parte do moodboard: é vermelho universal de status,
 mantido por convenção de acessibilidade. `#B91C1C` (não o `#DC2626` mais
 comum) porque é o tom mais próximo que ainda passa 4.5:1 sobre Praxeti
-White — ver [Acessibilidade](#acessibilidade). `paper-elevated` não é
+White — ver [Acessibilidade](#8-acessibilidade). `paper-elevated` não é
 uma sétima cor de acento: é um degrau de neutro para dar profundidade a
 cards/superfícies empilhadas, nunca cor de texto, ícone, badge ou destaque.
 
@@ -514,7 +514,7 @@ para o checkmark sempre aparecer contra o fundo da página).
 único com Picture Book Green fixo — não há variante `-dark`. Sobre Midnight
 Mirage esse verde cai para 3.3:1, abaixo do mínimo de acessibilidade; quem
 usar esses ícones sobre fundo escuro deve recolorir o checkmark para Mantis
-manualmente antes de publicar. Ver [Acessibilidade](#acessibilidade).
+manualmente antes de publicar. Ver [Acessibilidade](#8-acessibilidade).
 
 ### Não fazer (ícones)
 
@@ -527,6 +527,8 @@ manualmente antes de publicar. Ver [Acessibilidade](#acessibilidade).
   peça — o estilo flat e o grid não batem com conjuntos de traço/outline.
 
 </div>
+
+<a id="8-acessibilidade"></a>
 
 ## 8. Acessibilidade
 

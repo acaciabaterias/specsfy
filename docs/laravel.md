@@ -95,6 +95,6 @@ consideram os riscos Laravel observados no projeto e na versão instalada.
 ## Fonte da verdade e precedência
 
 A skill e seus padrões pertencem a
-[`specialists/`](https://github.com/promovaweb/specsfy/tree/main/specialists/specsfy-specialist-laravel).
+[`specsfy-specialist-laravel`](../specialists/specsfy-specialist-laravel/).
 O estado do projeto é comprovado por código, `composer.json`, `composer.lock`,
 testes e configuração locais.

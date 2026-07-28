@@ -93,5 +93,5 @@ depois de existir novo RED válido e os gates necessários voltarem a `Passed`.
 ## Fonte da verdade e precedência
 
 A execução pertence a
-[`skills/`](https://github.com/promovaweb/specsfy/tree/main/skills/specsfy-base-update-spec).
+[`specsfy-base-update-spec`](../skills/specsfy-base-update-spec/).
 A spec atualizada permanece como única fonte normativa no projeto consumidor.

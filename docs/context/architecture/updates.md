@@ -40,7 +40,8 @@ ao `uv`; o cache apenas reduz consultas e nunca autoriza uma instalação.
 ## Fluxo
 
 1. Ao abrir a TUI interativa, o CLI lê ou cria `~/.specsfy/cli.json`.
-2. Se o intervalo venceu, consulta as tags de `cli/` com timeout curto.
+2. Se o intervalo venceu, obtém credencial de `GH_TOKEN`, `GITHUB_TOKEN` ou
+   `gh auth token` e consulta as tags de `cli/` com timeout curto.
 3. Considera somente tags estáveis `vMAJOR.MINOR.PATCH` e registra o SHA
    apontado como evidência da consulta.
 4. Se a versão for superior, pede consentimento no terminal.
@@ -56,6 +57,9 @@ O JSON global tem permissão `0600`, preserva chaves desconhecidas e separa
 configurações de dados efêmeros. Ele pode guardar habilitação, intervalo,
 horário, ETag, tag, versão, commit e erro recente. Não guarda credenciais,
 telemetria nem conteúdo do projeto.
+
+A credencial existe somente no ambiente do processo ou no armazenamento
+governado pelo GitHub CLI. O Specsfy não a imprime nem a copia para seu cache.
 
 ## Distribuição e publicação
 

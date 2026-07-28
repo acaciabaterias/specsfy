@@ -38,7 +38,7 @@ arquivo contém o fluxo, os caminhos canônicos e os gates do framework.
 - Mecanismos base vivem somente em
   `specsfy-base-<responsabilidade>/` nesta raiz.
 - Contexto técnico opcional pertence a
-  [`specialists/`](https://github.com/promovaweb/specsfy/tree/main/specialists).
+  [`specialists/`](../specialists/).
 - Código, testes e documentos publicados por uma skill são artefatos derivados;
   requisitos, tarefas, gates e evidências permanecem na spec.
 

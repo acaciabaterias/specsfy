@@ -69,17 +69,22 @@ class UpdaterTests(unittest.TestCase):
                     headers={"ETag": '"tags-v1"'},
                 )
 
-            update = check_for_update(
-                "0.6.0",
-                cache_path=path,
-                now=1000,
-                opener=open_url,
-            )
+            with patch.dict("os.environ", {"GH_TOKEN": "private-token"}, clear=True):
+                update = check_for_update(
+                    "0.6.0",
+                    cache_path=path,
+                    now=1000,
+                    opener=open_url,
+                )
 
             self.assertEqual("0.8.0", update.latest_version)
             self.assertEqual("v0.8.0", update.tag)
             self.assertEqual("8" * 40, update.commit_sha)
             self.assertEqual(1, len(calls))
+            self.assertEqual(
+                "Bearer private-token",
+                calls[0][0].get_header("Authorization"),
+            )
             cache = json.loads(path.read_text(encoding="utf-8"))
             self.assertEqual("v0.8.0", cache["cache"]["latest_tag"])
             self.assertEqual('"tags-v1"', cache["cache"]["etag"])

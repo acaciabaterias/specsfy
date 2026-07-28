@@ -1,6 +1,6 @@
 # Diretrizes publicáveis do framework
 
-- Fonte: [`skills/AGENTS.md` do monorepo](https://github.com/promovaweb/specsfy/blob/main/skills/AGENTS.md), bloco
+- Fonte canônica: `skills/AGENTS.md` do monorepo `promovaweb/specsfy`, bloco
   `specsfy:framework`.
 - Observado em: 2026-07-27.
 - Adaptação: nenhuma; o conteúdo delimitado abaixo deve permanecer idêntico à

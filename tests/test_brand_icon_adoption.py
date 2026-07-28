@@ -17,9 +17,6 @@ REPOSITORIES = (
     ROOT / "specialists",
     ROOT / "cli",
 )
-REMOTE_ICON_ROOT = "https://raw.githubusercontent.com/promovaweb/specsfy/main/brand/icons"
-
-
 class BrandIconAdoptionTests(unittest.TestCase):
     def test_brand_owns_accessible_vector_and_raster_sources(self) -> None:
         svg_path = ROOT / "brand" / "icons" / "icon.svg"
@@ -45,9 +42,11 @@ class BrandIconAdoptionTests(unittest.TestCase):
             with self.subTest(repository=repository.name):
                 readme = (repository / "README.md").read_text(encoding="utf-8")
                 icon_root = (
-                    "icons"
+                    "brand/icons"
+                    if repository == ROOT
+                    else "icons"
                     if repository == ROOT / "brand"
-                    else REMOTE_ICON_ROOT
+                    else "../brand/icons"
                 )
                 self.assertIn(f"{icon_root}/icon.svg", readme)
                 self.assertIn(f"{icon_root}/icon.png", readme)

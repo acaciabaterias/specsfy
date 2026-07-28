@@ -2,7 +2,7 @@
 
 Use tags, arquivos e texto da próxima tarefa para propor no máximo os
 especialistas diretamente relacionados. O catálogo está em
-https://github.com/promovaweb/specsfy/tree/main/specialists.
+o catálogo de especialistas distribuído pelo CLI.
 
 ```bash
 specsfy skills add specsfy-specialist-<nome>

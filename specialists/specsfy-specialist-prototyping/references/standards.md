@@ -50,4 +50,4 @@ relatório em si pode ser descartado junto com o código.
 - GOV.UK Service Manual — Making prototypes: https://www.gov.uk/service-manual/design/making-prototypes
 - W3C WAI — Planning and Managing: https://www.w3.org/WAI/planning/
 - Martin Fowler — Technical Debt (custo de herdar código de protótipo): https://martinfowler.com/bliki/TechnicalDebt.html
-- Martin Fowler — Spike (origem do termo em Extreme Programming): https://martinfowler.com/bliki/Spike.html
+- Scaled Agile Framework — Spikes: https://framework.scaledagile.com/spikes

@@ -36,7 +36,7 @@ ficar desatualizada.
 ## Identidade
 
 Logos, cores, tipografia, voz, acessibilidade e regras de aplicação pertencem
-ao repositório [`brand/`](https://github.com/promovaweb/specsfy/tree/main/brand). Use os
+ao diretório [`brand/`](../brand/). Use os
 ativos e orientações desse owner ao apresentar o projeto.
 
 ## Componentes relacionados

@@ -2,8 +2,8 @@
 
 <p align="center">
   <picture>
-    <source srcset="https://raw.githubusercontent.com/promovaweb/specsfy/main/brand/icons/icon.svg" type="image/svg+xml">
-    <img src="https://raw.githubusercontent.com/promovaweb/specsfy/main/brand/icons/icon.png" alt="Ícone do framework Specsfy" width="160">
+    <source srcset="../brand/icons/icon.svg" type="image/svg+xml">
+    <img src="../brand/icons/icon.png" alt="Ícone do framework Specsfy" width="160">
   </picture>
 </p>
 
@@ -14,11 +14,11 @@ especificação única, executável e rastreável. Esta é a porta de entrada pa
 usuário final: instale o CLI, prepare um projeto e conduza a primeira fatia de
 trabalho pelo passo a passo abaixo.
 
-![Dashboard Home do Specsfy](https://raw.githubusercontent.com/promovaweb/specsfy/main/docs/screen/cli/cli-dash.png)
+![Dashboard Home do Specsfy](../docs/screen/cli/cli-dash.png)
 
 A TUI transforma specs, tarefas, checklists e gates em uma visão operacional.
 Veja as demais telas e comandos no
-[guia do CLI](https://github.com/promovaweb/specsfy/blob/main/docs/cli.md).
+[guia do CLI](../docs/cli.md).
 
 ## O que você precisa
 
@@ -305,9 +305,9 @@ descarta a customização protegida.
 O framework base é independente de linguagem. Especialistas acrescentam
 critérios técnicos sem alterar os três atos:
 
-- [Laravel](https://github.com/promovaweb/specsfy/blob/main/docs/laravel.md);
-- [Astro](https://github.com/promovaweb/specsfy/blob/main/docs/astro.md);
-- [Next.js](https://github.com/promovaweb/specsfy/blob/main/docs/nextjs.md).
+- [Laravel](../docs/laravel.md);
+- [Astro](../docs/astro.md);
+- [Next.js](../docs/nextjs.md).
 
 Você pode instalar recomendações detectadas:
 
@@ -326,13 +326,13 @@ instala automaticamente.
 
 ## Próximos guias
 
-- [Instalação completa](https://github.com/promovaweb/specsfy/blob/main/docs/installation.md)
-- [Uso básico](https://github.com/promovaweb/specsfy/blob/main/docs/basic-usage.md)
-- [Atualizar uma especificação](https://github.com/promovaweb/specsfy/blob/main/docs/update-spec.md)
-- [Uso avançado](https://github.com/promovaweb/specsfy/blob/main/docs/advanced-usage.md)
-- [CLI, TUI e atualização](https://github.com/promovaweb/specsfy/blob/main/docs/cli.md)
-- [Mapa dos módulos](https://github.com/promovaweb/specsfy/blob/main/docs/repositories.md)
-- [Documentação completa](https://github.com/promovaweb/specsfy/tree/main/docs)
+- [Instalação completa](../docs/installation.md)
+- [Uso básico](../docs/basic-usage.md)
+- [Atualizar uma especificação](../docs/update-spec.md)
+- [Uso avançado](../docs/advanced-usage.md)
+- [CLI, TUI e atualização](../docs/cli.md)
+- [Mapa dos módulos](../docs/repositories.md)
+- [Documentação completa](../docs/)
 
 ## O que o Specsfy garante
 
@@ -357,17 +357,17 @@ contrato é tornar decisões e conclusão rastreáveis.
 
 | Repositório | Responsabilidade |
 | --- | --- |
-| [`specsfy/`](https://github.com/promovaweb/specsfy/tree/main/specsfy) | porta de entrada pública |
-| [`docs/`](https://github.com/promovaweb/specsfy/tree/main/docs) | documentação oficial para usuários |
-| [`skills/`](https://github.com/promovaweb/specsfy/tree/main/skills) | metodologia executável |
-| [`specialists/`](https://github.com/promovaweb/specsfy/tree/main/specialists) | conhecimento técnico opcional |
-| [`cli/`](https://github.com/promovaweb/specsfy/tree/main/cli) | instalação, CLI, TUI e progresso |
-| [`example/`](https://github.com/promovaweb/specsfy/tree/main/example) | aplicação interna de validação |
-| [`brand/`](https://github.com/promovaweb/specsfy/tree/main/brand) | identidade visual e verbal |
+| [`specsfy/`](./) | porta de entrada pública |
+| [`docs/`](../docs/) | documentação oficial para usuários |
+| [`skills/`](../skills/) | metodologia executável |
+| [`specialists/`](../specialists/) | conhecimento técnico opcional |
+| [`cli/`](../cli/) | instalação, CLI, TUI e progresso |
+| [`example/`](../example/) | aplicação interna de validação |
+| [`brand/`](../brand/) | identidade visual e verbal |
 | [`promovaweb/specsfy`](https://github.com/promovaweb/specsfy) | orquestração e testes integrados |
 
 Veja responsabilidades, públicos e limites no
-[guia dos módulos](https://github.com/promovaweb/specsfy/blob/main/docs/repositories.md).
+[guia dos módulos](../docs/repositories.md).
 
 ## Créditos
 
@@ -375,4 +375,4 @@ Specsfy é um projeto da [Promovaweb](https://promovaweb.com), mantido por
 **Luiz Eduardo Oliveira Fonseca** e pela comunidade.
 
 Contato: [contato@promovaweb.com](mailto:contato@promovaweb.com).
-Consulte os [créditos completos](https://github.com/promovaweb/specsfy/blob/main/docs/credits.md).
+Consulte os [créditos completos](../docs/credits.md).

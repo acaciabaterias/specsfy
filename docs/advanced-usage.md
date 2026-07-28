@@ -135,6 +135,6 @@ automação somente de leitura e gates coerentes com a versão atual da entrada.
 ## Fonte da verdade e precedência
 
 Comandos e proteções pertencem a
-[`cli/`](https://github.com/promovaweb/specsfy/tree/main/cli), o método base a
-[`skills/`](https://github.com/promovaweb/specsfy/tree/main/skills) e o catálogo opcional a
-[`specialists/`](https://github.com/promovaweb/specsfy/tree/main/specialists).
+[`cli/`](../cli/), o método base a
+[`skills/`](../skills/) e o catálogo opcional a
+[`specialists/`](../specialists/).
