@@ -1,93 +1,100 @@
 # Fluxo de Conversa
 
-Use este roteiro para ajudar o usuario a criar uma interface sem transformar a conversa em formulario longo.
+Use este roteiro para ajudar o usuário a criar uma interface sem transformar a
+conversa em um formulário longo.
 
 ## 1. Identificar a tela
 
 Determine a categoria principal:
 
-- landing/public page;
-- dashboard/app autenticado;
-- formulario ou fluxo de coleta;
+- página pública ou de apresentação;
+- painel ou aplicativo autenticado;
+- formulário ou fluxo de coleta;
 - tabela/lista/dados;
-- artigo/conteudo;
+- artigo ou conteúdo;
 - componente isolado.
 
-Se o usuario ja colou um snippet, pule perguntas de descoberta e classifique o componente.
+Se o usuário já colou um trecho de código, pule as perguntas de descoberta e
+classifique o componente.
 
 ## 2. Definir objetivo
 
-Pergunta util:
+Pergunta útil:
 
-> Qual e a acao principal que esta tela precisa gerar?
+> Qual é a ação principal que esta tela precisa gerar?
 
 Exemplos:
 
-- capturar lead;
+- capturar uma oportunidade;
 - vender plano;
 - explicar produto;
-- mostrar metricas;
-- permitir edicao;
+- mostrar métricas;
+- permitir edição;
 - conduzir contato;
-- navegar para conteudo.
+- navegar para conteúdo.
 
-## 3. Definir usuario e densidade
+## 3. Definir usuário e densidade
 
-Pergunta util:
+Pergunta útil:
 
-> Essa interface e para visitante publico, cliente logado, operador interno ou admin?
+> Essa interface é para visitante público, cliente autenticado, operador interno
+> ou administrador?
 
 Use a resposta para decidir:
 
-- publico/marketing -> mais narrativa, prova visual, CTA;
-- app interno -> mais densidade, filtros, estados, navegacao clara;
-- admin -> tabelas, badges, acoes por linha, confirmacoes;
-- onboarding/formulario -> etapas, validacao, progresso, feedback.
+- público ou marketing → mais narrativa, prova visual e CTA;
+- aplicativo interno → mais densidade, filtros, estados e navegação clara;
+- administração → tabelas, selos, ações por linha e confirmações;
+- integração inicial ou formulário → etapas, validação, progresso e feedback.
 
-## 4. Escolher composicao
+## 4. Escolher composição
 
 Abra [composition-map.md](composition-map.md) e defina a hierarquia com
 `$specsfy-specialist-ui-design`.
 
-Escolha uma sequencia inicial e comunique de forma simples:
+Escolha uma sequência inicial e comunique de forma simples:
 
 ```text
-Vou montar como: hero -> beneficios -> prova social -> FAQ -> footer.
+Vou montar assim: destaque principal → benefícios → prova social → FAQ → rodapé.
 ```
 
 Ou:
 
+<!-- markdownlint-disable MD013 -->
+
 ```text
-Vou montar como: app shell -> filtros -> tabela -> detalhes -> dialogs de acao.
+Vou montar assim: estrutura do aplicativo → filtros → tabela → detalhes → diálogos de ação.
 ```
 
-## 5. Escolher referencias
+<!-- markdownlint-enable MD013 -->
+
+## 5. Escolher referências
 
 Abra [catalog.md](catalog.md), liste apenas a família necessária e leia somente
-os assets escolhidos.
+os exemplos escolhidos.
 
-Evite carregar todas as referencias de uma skill grande.
+Evite carregar todas as referências de uma skill grande.
 
 ## 6. Implementar por incrementos
 
 Ordem sugerida:
 
 1. estrutura de layout;
-2. secoes/componentes principais;
+2. seções e componentes principais;
 3. dados e estados;
-4. acoes e feedback;
-5. responsividade e dark mode;
+4. ações e feedback;
+5. responsividade e modo escuro;
 6. acessibilidade;
-7. validacao.
+7. validação.
 
-## 7. Pedir confirmacao apenas quando necessario
+## 7. Pedir confirmação apenas quando necessário
 
-Nao pergunte sobre detalhes cosmeticos se o projeto ja indica padrao.
+Não pergunte sobre detalhes cosméticos se o projeto já indica um padrão.
 
 Pergunte quando houver risco de retrabalho alto:
 
-- escolher entre dashboard e landing;
-- escolher framework/rota de destino;
-- decidir se instala dependencia;
-- substituir design system existente;
+- escolher entre painel e página de apresentação;
+- escolher o framework ou a rota de destino;
+- decidir se instala uma dependência;
+- substituir o design system existente;
 - introduzir biblioteca nova.

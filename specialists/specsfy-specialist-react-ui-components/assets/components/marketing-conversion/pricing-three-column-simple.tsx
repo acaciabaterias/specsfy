@@ -2,40 +2,40 @@ import { CheckCircleIcon } from '@heroicons/react/20/solid'
 
 const tiers = [
   {
-    name: 'Basic',
+    name: 'Básico',
     id: 'tier-basic',
     href: '#',
     price: { monthly: '$19', annually: '$15' },
-    description: 'Everything necessary to get started.',
-    features: ['5 products', 'Up to 1,000 subscribers', 'Basic analytics', '48-hour support response time'],
+    description: 'Tudo o que é necessário para começar.',
+    features: ['5 produtos', 'Até 1.000 assinantes', 'Análises básicas', 'Resposta do suporte em até 48 horas'],
   },
   {
-    name: 'Essential',
+    name: 'Essencial',
     id: 'tier-essential',
     href: '#',
     price: { monthly: '$49', annually: '$39' },
-    description: 'Everything in Basic, plus essential tools for growing your business.',
+    description: 'Tudo do Básico, além de ferramentas essenciais para expandir sua empresa.',
     features: [
-      '25 products',
-      'Up to 10,000 subscribers',
-      'Advanced analytics',
-      '24-hour support response time',
-      'Marketing automations',
+      '25 produtos',
+      'Até 10.000 assinantes',
+      'Análises avançadas',
+      'Resposta do suporte em até 24 horas',
+      'Automações de marketing',
     ],
   },
   {
-    name: 'Growth',
+    name: 'Crescimento',
     id: 'tier-growth',
     href: '#',
     price: { monthly: '$99', annually: '$79' },
-    description: 'Everything in Essential, plus collaboration tools and deeper insights.',
+    description: 'Tudo do Essencial, além de colaboração e análises aprofundadas.',
     features: [
-      'Unlimited products',
-      'Unlimited subscribers',
-      'Advanced analytics',
-      '1-hour, dedicated support response time',
-      'Marketing automations',
-      'Custom reporting tools',
+      'Produtos ilimitados',
+      'Assinantes ilimitados',
+      'Análises avançadas',
+      'Resposta do suporte dedicado em até 1 hora',
+      'Automações de marketing',
+      'Ferramentas personalizadas de relatórios',
     ],
   },
 ]
@@ -45,14 +45,14 @@ export default function Example() {
     <div className="bg-white py-24 sm:py-32 dark:bg-gray-900">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-4xl sm:text-center">
-          <h2 className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">Pricing</h2>
+          <h2 className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">Preços</h2>
           <p className="mt-2 text-5xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-6xl sm:text-balance dark:text-white">
-            Pricing that grows with you
+            Preços que crescem com você
           </p>
         </div>
         <p className="mx-auto mt-6 max-w-2xl text-lg font-medium text-pretty text-gray-600 sm:text-center sm:text-xl/8 dark:text-gray-400">
-          Choose an affordable plan that's packed with the best features for engaging your audience, creating customer
-          loyalty, and driving sales.
+          Escolha um plano acessível com recursos para engajar seu público e criar relacionamentos com clientes
+          relacionamentos e aumentar as vendas.
         </p>
         <div className="mt-20 flow-root">
           <div className="isolate -mt-16 grid max-w-sm grid-cols-1 gap-y-16 divide-y divide-gray-100 sm:mx-auto lg:-mx-8 lg:mt-0 lg:max-w-none lg:grid-cols-3 lg:divide-x lg:divide-y-0 xl:-mx-4 dark:divide-white/10">
@@ -65,17 +65,17 @@ export default function Example() {
                   <span className="text-5xl font-semibold tracking-tight text-gray-900 dark:text-white">
                     {tier.price.monthly}
                   </span>
-                  <span className="text-sm/6 font-semibold text-gray-600 dark:text-gray-400">/month</span>
+                  <span className="text-sm/6 font-semibold text-gray-600 dark:text-gray-400">/mês</span>
                 </p>
                 <p className="mt-3 text-sm/6 text-gray-500 dark:text-gray-400">
-                  {tier.price.annually} per month if paid annually
+                  {tier.price.annually} por mês if paid annually
                 </p>
                 <a
                   href={tier.href}
                   aria-describedby={tier.id}
                   className="mt-10 block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:shadow-none dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-400"
                 >
-                  Buy plan
+                  Comprar plano
                 </a>
                 <p className="mt-10 text-sm/6 font-semibold text-gray-900 dark:text-white">{tier.description}</p>
                 <ul role="list" className="mt-6 space-y-3 text-sm/6 text-gray-600 dark:text-gray-300">

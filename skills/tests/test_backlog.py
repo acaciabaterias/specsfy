@@ -8,8 +8,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = ROOT / "specsfy-base-backlog/scripts/iniciar_backlog.py"
-SKILL = ROOT / "specsfy-base-backlog/SKILL.md"
+SCRIPT = ROOT / "specsfy-02-backlog/scripts/iniciar_backlog.py"
+SKILL = ROOT / "specsfy-02-backlog/SKILL.md"
 TEMPLATE = ROOT / "templates/Backlog.md"
 
 
@@ -22,7 +22,7 @@ class BacklogTests(unittest.TestCase):
         self.assertIn("problema percebido", skill)
         self.assertIn("pessoa afetada ou beneficiada", skill)
         self.assertIn("resultado ou valor esperado", skill)
-        self.assertIn("contexto suficiente para distinguir a ideia", skill)
+        self.assertIn("contexto suficiente para distinguir a entrada", skill)
         self.assertIn("uma pergunta por vez", skill)
         self.assertIn("Reavalie as lacunas depois de cada resposta", skill)
         self.assertIn(
@@ -194,6 +194,57 @@ class BacklogTests(unittest.TestCase):
 
             self.assertEqual(0, result.returncode, result.stderr)
             self.assertTrue((backlog / "0004-proxima-ideia.md").is_file())
+
+    def test_prefers_custom_template_over_installed_default(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory)
+            templates = project / ".specsfy/templates"
+            custom = templates / "custom"
+            custom.mkdir(parents=True)
+            (templates / "Backlog.md").write_text(
+                TEMPLATE.read_text(encoding="utf-8").replace(
+                    "# Backlog:",
+                    "# Template padrão:",
+                ),
+                encoding="utf-8",
+            )
+            (custom / "Backlog.md").write_text(
+                TEMPLATE.read_text(encoding="utf-8").replace(
+                    "# Backlog:",
+                    "# Template customizado:",
+                ),
+                encoding="utf-8",
+            )
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    str(SCRIPT),
+                    "--title",
+                    "Precedência customizada",
+                    "--idea",
+                    "Usar um template customizado.",
+                    "--problem",
+                    "O template padrão não representa o projeto.",
+                    "--person",
+                    "Equipe do projeto.",
+                    "--result",
+                    "Aplicar a estrutura local.",
+                    "--context",
+                    "Durante a criação do backlog.",
+                    "--root",
+                    str(project),
+                ],
+                text=True,
+                capture_output=True,
+                check=False,
+            )
+
+            self.assertEqual(0, result.returncode, result.stderr)
+            content = Path(result.stdout.strip()).read_text(encoding="utf-8")
+            self.assertIn("# Template customizado:", content)
+            self.assertNotIn("# Template padrão:", content)
 
 
 if __name__ == "__main__":

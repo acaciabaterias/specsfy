@@ -88,16 +88,44 @@ Como [ator], quero [capacidade], para [valor].
 
 #### AC-001 — [comportamento]
 
-**Cobre**: US-001, FR-001
+**Cobre**: US-001, FR-001, NFR-001
 
 ```gherkin
-@US-001 @FR-001 @AC-001
+@US-001 @FR-001 @NFR-001 @AC-001
 Feature: [capacidade observável]
 
-  Scenario: [resultado aceito]
+  Scenario: [caminho feliz aceito]
     Given [estado inicial]
     When [ação]
     Then [resultado observável]
+```
+
+#### AC-002 — [regra ou variação crítica]
+
+**Cobre**: US-001, FR-001, NFR-001
+
+```gherkin
+@US-001 @FR-001 @NFR-001 @AC-002
+Feature: [capacidade observável]
+
+  Scenario: [regra ou variação crítica]
+    Given [contexto alternativo]
+    When [ação]
+    Then [regra observável]
+```
+
+#### AC-003 — [falha ou limite material]
+
+**Cobre**: US-001, FR-001, NFR-001
+
+```gherkin
+@US-001 @FR-001 @NFR-001 @AC-003
+Feature: [capacidade observável]
+
+  Scenario: [falha ou limite material]
+    Given [condição de falha ou limite]
+    When [ação]
+    Then [tratamento observável]
 ```
 
 ### 7. Requisitos
@@ -210,21 +238,27 @@ tests/
 
 | IDs | BDD de referência | Teste TDD informado pelo BDD | RED observado | GREEN observado | Refactor/regressão |
 | --- | --- | --- | --- | --- | --- |
-| FR-001, AC-001 | [AC-001 na seção 6] | [tests/Feature/RecursoTest.php com marcador `SPECSFY`] | Pending | Pending | Pending |
+| US-001, FR-001, NFR-001, AC-001 | [AC-001 na seção 6] | [caso 1 em tests/Feature/RecursoTest.php com marcador próprio `SPECSFY:`] | Pending | Pending | Pending |
+| US-001, FR-001, NFR-001, AC-002 | [AC-002 na seção 6] | [caso 2 em tests/Feature/RecursoTest.php com marcador próprio `SPECSFY:`] | Pending | Pending | Pending |
+| US-001, FR-001, NFR-001, AC-003 | [AC-003 na seção 6] | [caso 3 em tests/Feature/RecursoTest.php com marcador próprio `SPECSFY:`] | Pending | Pending | Pending |
 
 ### 12. Plano de testes e rastreabilidade
 
 | Requisito | Cenário BDD | Nível | Arquivo/comando esperado | Evidência |
 | --- | --- | --- | --- | --- |
 | FR-001 | AC-001 | Unidade | [tests/arquivo] | Pending |
-| NFR-001 | [AC ou método] | [nível] | [comando] | Pending |
+| FR-001 | AC-002 | [nível] | [tests/arquivo] | Pending |
+| FR-001 | AC-003 | [nível] | [tests/arquivo] | Pending |
+| NFR-001 | AC-001 | [nível] | [comando] | Pending |
+| NFR-001 | AC-002 | [nível] | [comando] | Pending |
+| NFR-001 | AC-003 | [nível] | [comando] | Pending |
 
 ### 13. Validações
 
 #### Gate do Ato I — Definição
 
 - **Resultado**: Pending
-- **Comando**: `python3 .agents/skills/specsfy-base-validate/scripts/validate_spec.py specs/specs/{{SPEC_NUMBER}}-{{SPEC_SLUG}}/spec.md`
+- **Comando**: `python3 .agents/skills/specsfy-04-validate/scripts/validate_spec.py specs/specs/{{SPEC_NUMBER}}-{{SPEC_SLUG}}/spec.md`
 - **Achados**: [Pending.]
 - Findings especializados, quando aplicáveis, seguem `FIND-PROD|ARCH|SEC-NNN`,
   severidade `P1|P2|P3`, estado `Open|Resolved|Accepted`, refs e evidência.
@@ -232,13 +266,13 @@ tests/
 #### Gate do Ato II — Plano
 
 - **Resultado**: Pending
-- **Comando**: `python3 .agents/skills/specsfy-base-tasks/scripts/validate_tasks.py specs/specs/{{SPEC_NUMBER}}-{{SPEC_SLUG}}/spec.md`
+- **Comando**: `python3 .agents/skills/specsfy-05-tasks/scripts/validate_tasks.py specs/specs/{{SPEC_NUMBER}}-{{SPEC_SLUG}}/spec.md`
 - **Achados**: [Pending.]
 
 #### Gate do Ato III — Entrega
 
 - **Resultado**: Pending
-- **Comando**: `python3 .agents/skills/specsfy-base-tdd-bdd/scripts/check_traceability.py specs/specs/{{SPEC_NUMBER}}-{{SPEC_SLUG}}/spec.md .`
+- **Comando**: `python3 .agents/skills/specsfy-06-tdd-bdd/scripts/check_traceability.py specs/specs/{{SPEC_NUMBER}}-{{SPEC_SLUG}}/spec.md .`
 - **Achados**: [Pending.]
 
 ### 14. Tarefas
@@ -258,9 +292,23 @@ Cada tarefa possui exatamente este checklist, atualizado durante a execução:
 
 #### Fase 1 — RED TDD informado pelo BDD
 
-- [ ] T001 [TEST] [TDD] [US-001] Derivar do BDD da spec um teste Pest falhando em tests/Feature/RecursoTest.php — Refs: FR-001, AC-001 — Depends: none
+- [ ] T001 [TEST] [TDD] [US-001] Derivar do AC-001 um caso Pest falhando em tests/Feature/RecursoTest.php — Refs: US-001, FR-001, NFR-001, AC-001 — Depends: none
   - [ ] **PREP**: Ler o Gherkin da spec e confirmar regra, IDs e nível de teste.
-  - [ ] **EXECUTE**: Escrever o menor teste TDD com marcador `SPECSFY`, sem criar ou executar `.feature`.
+  - [ ] **EXECUTE**: Escrever o caso TDD com marcador próprio `SPECSFY:`, sem criar ou executar `.feature`.
+  - [ ] **VERIFY**: Observar RED válido.
+  - [ ] **EVIDENCE**: Registrar comando e causa do RED.
+  - [ ] **IMPROVE**: Revisar a cobertura e registrar aprendizado.
+
+- [ ] T002 [TEST] [TDD] [US-001] Derivar do AC-002 um caso Pest falhando em tests/Feature/RecursoTest.php — Refs: US-001, FR-001, NFR-001, AC-002 — Depends: none
+  - [ ] **PREP**: Ler o Gherkin da spec e confirmar regra, IDs e nível de teste.
+  - [ ] **EXECUTE**: Escrever o caso TDD com marcador próprio `SPECSFY:`, sem criar ou executar `.feature`.
+  - [ ] **VERIFY**: Observar RED válido.
+  - [ ] **EVIDENCE**: Registrar comando e causa do RED.
+  - [ ] **IMPROVE**: Revisar a cobertura e registrar aprendizado.
+
+- [ ] T003 [TEST] [TDD] [US-001] Derivar do AC-003 um caso Pest falhando em tests/Feature/RecursoTest.php — Refs: US-001, FR-001, NFR-001, AC-003 — Depends: none
+  - [ ] **PREP**: Ler o Gherkin da spec e confirmar regra, IDs e nível de teste.
+  - [ ] **EXECUTE**: Escrever o caso TDD com marcador próprio `SPECSFY:`, sem criar ou executar `.feature`.
   - [ ] **VERIFY**: Observar RED válido.
   - [ ] **EVIDENCE**: Registrar comando e causa do RED.
   - [ ] **IMPROVE**: Revisar a cobertura e registrar aprendizado.
@@ -270,19 +318,19 @@ Cada tarefa possui exatamente este checklist, atualizado durante a execução:
 **Objetivo**: [valor entregue].
 **Teste independente**: [comando e resultado].
 
-- [ ] T002 [CODE] [US-001] Implementar comportamento em app/Services/RecursoService.php — Refs: FR-001, AC-001 — Depends: T001
+- [ ] T004 [CODE] [US-001] Implementar comportamento em app/Services/RecursoService.php — Refs: US-001, FR-001, NFR-001, AC-001, AC-002, AC-003 — Depends: T001, T002, T003
   - [ ] **PREP**: Confirmar RED TDD e dependências.
   - [ ] **EXECUTE**: Implementar a menor mudança.
   - [ ] **VERIFY**: Executar testes focais e regressão.
   - [ ] **EVIDENCE**: Registrar GREEN e arquivos alterados.
   - [ ] **IMPROVE**: Aplicar melhoria de processo ou justificar nenhuma.
-  <!-- specsfy:evidence {"task":"T002","refs":["FR-001","AC-001"],"files":["app/Services/RecursoService.php"],"commands":[{"run":"comando focal","exit":0}]} -->
+  <!-- specsfy:evidence {"task":"T004","refs":["US-001","FR-001","NFR-001","AC-001","AC-002","AC-003"],"files":["app/Services/RecursoService.php"],"commands":[{"run":"comando focal","exit":0}]} -->
 
 **Checkpoint**: [como demonstrar a história isoladamente].
 
 #### Fase final — Qualidade
 
-- [ ] T003 [TEST] Executar regressão e rastreabilidade em tests/Feature/RecursoTest.php — Refs: FR-001, AC-001, NFR-001 — Depends: T002
+- [ ] T005 [TEST] Executar regressão e rastreabilidade em tests/Feature/RecursoTest.php — Refs: US-001, FR-001, NFR-001, AC-001, AC-002, AC-003 — Depends: T004
   - [ ] **PREP**: Identificar suites, checks e gates.
   - [ ] **EXECUTE**: Executar regressão e rastreabilidade.
   - [ ] **VERIFY**: Confirmar ausência de gaps.
@@ -291,7 +339,7 @@ Cada tarefa possui exatamente este checklist, atualizado durante a execução:
 
 ### 15. Ordem de execução
 
-- Caminho crítico: T001 → T002 → T003.
+- Caminho crítico: T001/T002/T003 → T004 → T005.
 - Tarefas paralelas: [IDs e motivo, ou “Nenhuma”.]
 - Estratégia de MVP: [menor conjunto de histórias entregável].
 

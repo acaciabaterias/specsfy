@@ -20,7 +20,7 @@ citações longas de spec, use itálico de IBM Plex Sans — não introduza seri
 ## Por que monoespaçada é parte da marca, não um detalhe técnico
 
 O método já usa monoespaço implicitamente sempre que cita `US-01`, `RQ-04`,
-`Gate: Passed`, `spec.md`, nomes de skill como `specsfy-base-validate`. Tratar isso
+`Gate: Passed`, `spec.md`, nomes de skill como `specsfy-04-validate`. Tratar isso
 como tipografia de marca (não como "formatação de markdown") reforça a ideia
 central: **rastreabilidade é literal, não estilística**. Sempre que um ID,
 estado, caminho de arquivo ou comando aparecer em uma peça de marca, use

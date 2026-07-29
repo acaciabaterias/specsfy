@@ -2,24 +2,24 @@ import { LifebuoyIcon, NewspaperIcon, PhoneIcon } from '@heroicons/react/24/outl
 
 const supportLinks = [
   {
-    name: 'Sales',
+    name: 'Vendas',
     href: '#',
     description:
-      'Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet purus dui laoreet diam sed lacus, fames.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     icon: PhoneIcon,
   },
   {
-    name: 'Technical Support',
+    name: 'Suporte Técnico',
     href: '#',
     description:
-      'Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet purus dui laoreet diam sed lacus, fames.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     icon: LifebuoyIcon,
   },
   {
-    name: 'Media Inquiries',
+    name: 'Contato para Imprensa',
     href: '#',
     description:
-      'Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet purus dui laoreet diam sed lacus, fames.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     icon: NewspaperIcon,
   },
 ]
@@ -37,17 +37,16 @@ export default function Example() {
           <div aria-hidden="true" className="absolute inset-0 bg-gray-800 mix-blend-multiply" />
         </div>
         <div className="relative mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
-          <h1 className="text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl">Support</h1>
+          <h1 className="text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl">Suporte</h1>
           <p className="mt-6 max-w-3xl text-xl text-gray-300">
-            Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet purus dui
-            laoreet diam sed lacus, fames. Dui, amet, nec sit pulvinar.
+            Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
           </p>
         </div>
       </div>
 
       <section aria-labelledby="contact-heading" className="relative z-10 mx-auto -mt-32 max-w-7xl px-6 pb-32 lg:px-8">
         <h2 id="contact-heading" className="sr-only">
-          Contact us
+          Fale conosco
         </h2>
         <div className="grid grid-cols-1 gap-y-20 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-0">
           {supportLinks.map((link) => (
@@ -61,7 +60,7 @@ export default function Example() {
               </div>
               <div className="rounded-br-2xl rounded-bl-2xl bg-gray-50 p-6 md:px-8">
                 <a href={link.href} className="text-base font-medium text-indigo-700 hover:text-indigo-600">
-                  Contact us<span aria-hidden="true"> &rarr;</span>
+                  Fale conosco<span aria-hidden="true"> &rarr;</span>
                 </a>
               </div>
             </div>

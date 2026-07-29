@@ -2,27 +2,27 @@ import { ChatBubbleOvalLeftEllipsisIcon, HeartIcon, PencilSquareIcon, TrashIcon 
 
 const features = [
   {
-    name: 'Spam report',
+    name: 'Relatório de spam',
     description:
-      'Autem reprehenderit aut debitis ut. Officiis harum omnis placeat blanditiis delectus sint vel et voluptatum.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     icon: TrashIcon,
   },
   {
-    name: 'Compose in markdown',
+    name: 'Escrever em Markdown',
     description:
-      'Illum et aut inventore. Ut et dignissimos quasi. Omnis saepe dolorum. Hic autem fugiat. Voluptatem officiis necessitatibus.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     icon: PencilSquareIcon,
   },
   {
-    name: 'Email commenting',
+    name: 'Comentários por e-mail',
     description:
-      'Commodi quam quo. In quasi mollitia optio voluptate et est reiciendis. Ut et sunt id officiis vitae perspiciatis.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     icon: ChatBubbleOvalLeftEllipsisIcon,
   },
   {
-    name: 'Customer connections',
+    name: 'Conexões com clientes',
     description:
-      'Deserunt corrupti praesentium quo vel cupiditate est occaecati ad. Aperiam libero modi similique iure praesentium facilis.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     icon: HeartIcon,
   },
 ]
@@ -33,7 +33,7 @@ export default function Example() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-5">
           <h2 className="col-span-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
-            Stay on top of customer support
+            Mantenha o atendimento ao cliente sob controle
           </h2>
           <dl className="col-span-3 grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2">
             {features.map((feature) => (

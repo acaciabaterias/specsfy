@@ -17,63 +17,63 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 const solutions = [
   {
-    name: 'Analytics',
-    description: 'Get a better understanding of where your traffic is coming from.',
+    name: 'Análises',
+    description: 'Entenda melhor de onde vem o seu tráfego.',
     href: '#',
     icon: ChartBarIcon,
   },
   {
-    name: 'Engagement',
-    description: 'Speak directly to your customers in a more meaningful way.',
+    name: 'Engajamento',
+    description: 'Converse diretamente com seus clientes de forma mais relevante.',
     href: '#',
     icon: CursorArrowRaysIcon,
   },
-  { name: 'Security', description: 'Your customers data will be safe and secure.', href: '#', icon: ShieldCheckIcon },
+  { name: 'Segurança', description: 'Os dados dos seus clientes permanecerão protegidos.', href: '#', icon: ShieldCheckIcon },
   {
-    name: 'Integrations',
-    description: "Connect with third-party tools that you're already using.",
+    name: 'Integrações',
+    description: "Conecte as ferramentas de terceiros que você já usa.",
     href: '#',
     icon: Squares2X2Icon,
   },
   {
-    name: 'Automations',
-    description: 'Build strategic funnels that will drive your customers to convert',
+    name: 'Automações',
+    description: 'Crie funis estratégicos que ajudem seus clientes a converter',
     href: '#',
     icon: ArrowPathIcon,
   },
 ]
 
 const callsToAction = [
-  { name: 'Watch Demo', href: '#', icon: PlayIcon },
-  { name: 'Contact Sales', href: '#', icon: PhoneIcon },
+  { name: 'Assistir à Demonstração', href: '#', icon: PlayIcon },
+  { name: 'Falar com Vendas', href: '#', icon: PhoneIcon },
 ]
 
 const resources = [
   {
-    name: 'Help Center',
-    description: 'Get all of your questions answered in our forums or contact support.',
+    name: 'Central de Ajuda',
+    description: 'Encontre respostas nos fóruns ou fale com o suporte.',
     href: '#',
     icon: LifebuoyIcon,
   },
   {
-    name: 'Guides',
-    description: 'Learn how to maximize our platform to get the most out of it.',
+    name: 'Guias',
+    description: 'Aprenda a aproveitar ao máximo a plataforma.',
     href: '#',
     icon: BookmarkSquareIcon,
   },
   {
-    name: 'Events',
-    description: 'See what meet-ups and other events we might be planning near you.',
+    name: 'Eventos',
+    description: 'Veja encontros e outros eventos planejados perto de você.',
     href: '#',
     icon: CalendarIcon,
   },
-  { name: 'Security', description: 'Understand how we take your privacy seriously.', href: '#', icon: ShieldCheckIcon },
+  { name: 'Segurança', description: 'Entenda como protegemos sua privacidade.', href: '#', icon: ShieldCheckIcon },
 ]
 
 const recentPosts = [
-  { id: 1, name: 'Boost your conversion rate', href: '#' },
-  { id: 2, name: 'How to use search engine optimization to drive traffic to your site', href: '#' },
-  { id: 3, name: 'Improve your customer experience', href: '#' },
+  { id: 1, name: 'Aumente sua taxa de conversão', href: '#' },
+  { id: 2, name: 'Como usar SEO para atrair tráfego ao seu site', href: '#' },
+  { id: 3, name: 'Melhore a experiência dos seus clientes', href: '#' },
 ]
 
 export default function Example() {
@@ -83,15 +83,15 @@ export default function Example() {
         <div className="flex items-center justify-between border-b-2 border-gray-100 py-6 dark:border-white/10 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <a href="#">
-              <span className="sr-only">Your Company</span>
+              <span className="sr-only">Sua Empresa</span>
               <img
                 alt=""
-                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+                src="https://tailwindcss.com/mais-assets/img/logos/mark.svg?color=indigo&shade=600"
                 className="h-8 w-auto dark:hidden sm:h-10"
               />
               <img
                 alt=""
-                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
+                src="https://tailwindcss.com/mais-assets/img/logos/mark.svg?color=indigo&shade=500"
                 className="hidden h-8 w-auto dark:block sm:h-10"
               />
             </a>
@@ -99,14 +99,14 @@ export default function Example() {
           <div className="-my-2 -mr-2 md:hidden">
             <PopoverButton className="relative inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:ring-inset focus:outline-hidden dark:bg-gray-900 dark:hover:bg-white/5 dark:hover:text-gray-300">
               <span className="absolute -inset-0.5" />
-              <span className="sr-only">Open menu</span>
+              <span className="sr-only">Abrir menu</span>
               <Bars3Icon aria-hidden="true" className="size-6" />
             </PopoverButton>
           </div>
           <PopoverGroup as="nav" className="hidden space-x-10 md:flex">
             <Popover className="relative">
               <PopoverButton className="group inline-flex items-center rounded-md bg-white text-base font-medium text-gray-500 hover:text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden data-open:text-gray-900 dark:bg-gray-900 dark:text-gray-300 dark:hover:text-white dark:data-open:text-white">
-                <span>Solutions</span>
+                <span>Soluções</span>
                 <ChevronDownIcon
                   aria-hidden="true"
                   className="ml-2 size-5 text-gray-400 group-hover:text-gray-500 group-data-open:text-gray-600 group-data-open:group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300 dark:group-data-open:text-gray-300"
@@ -151,15 +151,15 @@ export default function Example() {
             </Popover>
 
             <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
-              Pricing
+              Preços
             </a>
             <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
-              Docs
+              Documentação
             </a>
 
             <Popover className="relative">
               <PopoverButton className="group inline-flex items-center rounded-md bg-white text-base font-medium text-gray-500 hover:text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden data-open:text-gray-900 dark:bg-gray-900 dark:text-gray-300 dark:hover:text-white dark:data-open:text-white">
-                <span>More</span>
+                <span>Mais</span>
                 <ChevronDownIcon
                   aria-hidden="true"
                   className="ml-2 size-5 text-gray-400 group-hover:text-gray-500 group-data-open:text-gray-600 group-data-open:group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300 dark:group-data-open:text-gray-300"
@@ -188,7 +188,7 @@ export default function Example() {
                   </div>
                   <div className="bg-gray-50 px-5 py-5 dark:bg-gray-800/50 sm:px-8 sm:py-8">
                     <div>
-                      <h3 className="text-base font-medium text-gray-500 dark:text-gray-400">Recent Posts</h3>
+                      <h3 className="text-base font-medium text-gray-500 dark:text-gray-400">Publicações recentes</h3>
                       <ul role="list" className="mt-4 space-y-4">
                         {recentPosts.map((post) => (
                           <li key={post.id} className="truncate text-base">
@@ -201,7 +201,7 @@ export default function Example() {
                     </div>
                     <div className="mt-5 text-sm">
                       <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300">
-                        View all posts
+                        Ver todos os posts
                         <span aria-hidden="true"> &rarr;</span>
                       </a>
                     </div>
@@ -212,13 +212,13 @@ export default function Example() {
           </PopoverGroup>
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
             <a href="#" className="text-base font-medium whitespace-nowrap text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
-              Sign in
+              Entrar
             </a>
             <a
               href="#"
               className="ml-8 inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium whitespace-nowrap text-white shadow-xs hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400"
             >
-              Sign up
+              Criar conta
             </a>
           </div>
         </div>
@@ -233,20 +233,20 @@ export default function Example() {
             <div className="flex items-center justify-between">
               <div>
                 <img
-                  alt="Your Company"
-                  src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+                  alt="Sua Empresa"
+                  src="https://tailwindcss.com/mais-assets/img/logos/mark.svg?color=indigo&shade=600"
                   className="h-8 w-auto dark:hidden"
                 />
                 <img
-                  alt="Your Company"
-                  src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
+                  alt="Sua Empresa"
+                  src="https://tailwindcss.com/mais-assets/img/logos/mark.svg?color=indigo&shade=500"
                   className="hidden h-8 w-auto dark:block"
                 />
               </div>
               <div className="-mr-2">
                 <PopoverButton className="relative inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:ring-inset focus:outline-hidden dark:bg-gray-900 dark:hover:bg-white/5 dark:hover:text-gray-300">
                   <span className="absolute -inset-0.5" />
-                  <span className="sr-only">Close menu</span>
+                  <span className="sr-only">Fechar menu</span>
                   <XMarkIcon aria-hidden="true" className="size-6" />
                 </PopoverButton>
               </div>
@@ -269,11 +269,11 @@ export default function Example() {
           <div className="space-y-6 px-5 py-6">
             <div className="grid grid-cols-2 gap-x-8 gap-y-4">
               <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700 dark:text-white dark:hover:text-gray-300">
-                Pricing
+                Preços
               </a>
 
               <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700 dark:text-white dark:hover:text-gray-300">
-                Docs
+                Documentação
               </a>
               {resources.map((item) => (
                 <a
@@ -290,12 +290,12 @@ export default function Example() {
                 href="#"
                 className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-xs hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400"
               >
-                Sign up
+                Criar conta
               </a>
               <p className="mt-6 text-center text-base font-medium text-gray-500 dark:text-gray-400">
-                Existing customer?{' '}
+                Já é cliente?{' '}
                 <a href="#" className="text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300">
-                  Sign in
+                  Entrar
                 </a>
               </p>
             </div>

@@ -4,11 +4,10 @@ export default function Example() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
           <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
-            We approach work as a place to make the world better
+            Encaramos o trabalho como uma forma de tornar o mundo melhor
           </h2>
           <p className="mt-6 text-base/7 text-gray-600 dark:text-gray-300">
-            Diam nunc lacus lacus aliquam turpis enim. Eget hac velit est euismod lacus. Est non placerat nam arcu. Cras
-            purus nibh cursus sit eu in id. Integer vel nibh.
+            Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
           </p>
         </div>
         <div className="mx-auto mt-16 flex max-w-2xl flex-col gap-8 lg:mx-0 lg:mt-20 lg:max-w-none lg:flex-row lg:items-end">
@@ -16,30 +15,30 @@ export default function Example() {
             <p className="flex-none text-3xl font-bold tracking-tight text-gray-900 dark:text-white">250k</p>
             <div className="sm:w-80 sm:shrink lg:w-auto lg:flex-none">
               <p className="text-lg font-semibold tracking-tight text-gray-900 dark:text-white">
-                Users on the platform
+                Usuários na plataforma
               </p>
               <p className="mt-2 text-base/7 text-gray-600 dark:text-gray-300">
-                Vel labore deleniti veniam consequuntur sunt nobis.
+                Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
               </p>
             </div>
           </div>
           <div className="flex flex-col-reverse justify-between gap-x-16 gap-y-8 rounded-2xl bg-gray-900 p-8 sm:flex-row-reverse sm:items-end lg:w-full lg:max-w-sm lg:flex-auto lg:flex-col lg:items-start lg:gap-y-44 dark:bg-gray-700 dark:inset-ring dark:inset-ring-white/10">
-            <p className="flex-none text-3xl font-bold tracking-tight text-white">$8.9 billion</p>
+            <p className="flex-none text-3xl font-bold tracking-tight text-white">US$ 8,9 bilhões</p>
             <div className="sm:w-80 sm:shrink lg:w-auto lg:flex-none">
               <p className="text-lg font-semibold tracking-tight text-white">
-                We're proud that our customers have made over $8 billion in total revenue.
+                Temos orgulho de nossos clientes terem gerado mais de US$ 8 bilhões em receita total.
               </p>
               <p className="mt-2 text-base/7 text-gray-400 dark:text-gray-300">
-                Eu duis porta aliquam ornare. Elementum eget magna egestas.
+                Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
               </p>
             </div>
           </div>
           <div className="flex flex-col-reverse justify-between gap-x-16 gap-y-8 rounded-2xl bg-indigo-600 p-8 sm:w-11/12 sm:max-w-xl sm:flex-row-reverse sm:items-end lg:w-full lg:max-w-none lg:flex-auto lg:flex-col lg:items-start lg:gap-y-28 dark:inset-ring dark:inset-ring-white/10">
             <p className="flex-none text-3xl font-bold tracking-tight text-white">401,093</p>
             <div className="sm:w-80 sm:shrink lg:w-auto lg:flex-none">
-              <p className="text-lg font-semibold tracking-tight text-white">Transactions this year</p>
+              <p className="text-lg font-semibold tracking-tight text-white">Transações neste ano</p>
               <p className="mt-2 text-base/7 text-indigo-200 dark:text-indigo-100">
-                Eu duis porta aliquam ornare. Elementum eget magna egestas. Eu duis porta aliquam ornare.
+                Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
               </p>
             </div>
           </div>

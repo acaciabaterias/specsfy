@@ -1,11 +1,11 @@
 const posts = [
   {
-    title: 'Boost your conversion rate',
+    title: 'Aumente sua taxa de conversão',
     href: '#',
-    category: { name: 'Article', href: '#', color: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-500/15 dark:text-indigo-300' },
+    category: { name: 'Artigo', href: '#', color: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-500/15 dark:text-indigo-300' },
     description:
-      'Nullam risus blandit ac aliquam justo ipsum. Quam mauris volutpat massa dictumst amet. Sapien tortor lacus arcu.',
-    date: 'Mar 16, 2020',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
+    date: '16 mar. 2020',
     datetime: '2020-03-16',
     author: {
       name: 'Paul York',
@@ -16,12 +16,12 @@ const posts = [
     readingTime: '6 min',
   },
   {
-    title: 'How to use search engine optimization to drive sales',
+    title: 'Como usar SEO para aumentar as vendas',
     href: '#',
-    category: { name: 'Video', href: '#', color: 'bg-pink-100 text-pink-800 dark:bg-pink-500/15 dark:text-pink-300' },
+    category: { name: 'Vídeo', href: '#', color: 'bg-pink-100 text-pink-800 dark:bg-pink-500/15 dark:text-pink-300' },
     description:
-      'Nullam risus blandit ac aliquam justo ipsum. Quam mauris volutpat massa dictumst amet. Sapien tortor lacus arcu.',
-    date: 'Mar 10, 2020',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
+    date: '10 mar. 2020',
     datetime: '2020-03-10',
     author: {
       name: 'Dessie Ryan',
@@ -32,11 +32,11 @@ const posts = [
     readingTime: '4 min',
   },
   {
-    title: 'Improve your customer experience',
+    title: 'Melhore a experiência dos seus clientes',
     href: '#',
-    category: { name: 'Case Study', href: '#', color: 'bg-green-100 text-green-800 dark:bg-green-500/15 dark:text-green-300' },
-    description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab iure iusto fugiat commodi sequi.',
-    date: 'Feb 12, 2020',
+    category: { name: 'Estudo de caso', href: '#', color: 'bg-green-100 text-green-800 dark:bg-green-500/15 dark:text-green-300' },
+    description: 'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
+    date: '12 fev. 2020',
     datetime: '2020-02-12',
     author: {
       name: 'Easer Collins',
@@ -58,11 +58,10 @@ export default function Example() {
       <div className="relative mx-auto max-w-lg divide-y-2 divide-gray-200 dark:divide-gray-800 lg:max-w-7xl">
         <div>
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
-            Recent publications
+            Publicações recentes
           </h2>
           <p className="mt-3 text-xl text-gray-500 dark:text-gray-400 sm:mt-4">
-            Nullam risus blandit ac aliquam justo ipsum. Quam mauris volutpat massa dictumst amet. Sapien tortor lacus
-            arcu.
+            Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
           </p>
         </div>
         <div className="mt-12 grid gap-16 pt-12 lg:grid-cols-3 lg:gap-x-5 lg:gap-y-12">

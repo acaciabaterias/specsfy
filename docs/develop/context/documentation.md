@@ -36,15 +36,15 @@ adequado. Conteúdo temático não pertence diretamente à raiz de `docs/`.
 
 `docs/user/` orienta quem usa o Specsfy em um projeto consumidor:
 
-- escreva em linguagem simples e explique cada termo antes de depender dele;
-- use exemplos fáceis de adaptar, com pedido, etapas e resultado esperado;
+- escreva em linguagem simples e explique cada termo antes de depender dele.
+- use exemplos fáceis de adaptar, com pedido, etapas e resultado esperado.
 - cubra a jornada completa, do método e da instalação ao acompanhamento e à
-  mudança tardia;
-- mantenha o guia geral em `docs/user/README.md`;
+  mudança tardia.
+- mantenha o guia geral em `docs/user/README.md`.
 - mantenha a sequência pedagógica em `docs/user/reading-order.txt`: metodologia,
-  instalação, primeira entrega, fluxo base, operação e uso avançado;
+  instalação, primeira entrega, fluxo base, operação e uso avançado.
 - mantenha uma página por skill base em `docs/user/skills/`, sincronizada com a
-  interface executável correspondente;
+  interface executável correspondente.
 - apresente comportamento público sem expor detalhes internos desnecessários.
 
 ## Percurso de desenvolvimento
@@ -52,10 +52,10 @@ adequado. Conteúdo temático não pertence diretamente à raiz de `docs/`.
 `docs/develop/` fornece contexto técnico para agentes e humanos contribuírem,
 implementarem ou modificarem o framework:
 
-- documente metodologia, arquitetura, ownership, dependências e convenções;
-- explique skills, CLI, testes, validações e fluxo de contribuição;
-- mantenha decisões vigentes em `docs/develop/context/`;
-- preserve motivação histórica em `docs/develop/decisions/`;
+- documente metodologia, arquitetura, ownership, dependências e convenções.
+- explique skills, CLI, testes, validações e fluxo de contribuição.
+- mantenha decisões vigentes em `docs/develop/context/`.
+- preserve motivação histórica em `docs/develop/decisions/`.
 - derive afirmações de código, testes, manifests, configurações ou outra fonte
   proprietária.
 
@@ -71,12 +71,15 @@ implementarem ou modificarem o framework:
 - Qualquer alteração em `docs/user/`, inclusive imagens: atualize a edição em
   `ebook/VERSION` conforme SemVer e reconstrua PDF, EPUB e `ebook/build.json`
   com `make ebook`.
+- O build conserva somente as cinco edições SemVer mais recentes em `ebook/`.
+  A retenção remove apenas PDF e EPUB com o nome canônico e ocorre depois da
+  verificação da edição vigente.
 - Mudança na jornada: atualize juntos `docs/user/README.md` e
-  `docs/user/reading-order.txt`; o ebook deve consumir essa mesma ordem.
-- Tabelas `## Classificação` permanecem nas fontes Markdown; o ebook pode
+  `docs/user/reading-order.txt`. O ebook deve consumir essa mesma ordem.
+- Tabelas `## Classificação` permanecem nas fontes Markdown. O ebook pode
   extrair seus valores, mas não deve exibir o cabeçalho nem a tabela.
 - Links clicáveis do ebook apontam somente para capítulos e âncoras do próprio
-  artefato; referências externas permanecem legíveis, sem ação de navegação.
+  artefato. Referências externas permanecem legíveis, sem ação de navegação.
 - Movimento de arquivo: atualize roteadores, links, imagens, testes e referências
   no mesmo diff.
 
@@ -84,7 +87,7 @@ implementarem ou modificarem o framework:
 
 O [`AGENTS.md` da raiz](../../../AGENTS.md) governa o processo de trabalho. Este
 contexto governa a classificação documental. As fontes executáveis de cada
-módulo comprovam o estado implementado; a documentação deriva delas e não as
+módulo comprovam o estado implementado. A documentação deriva delas e não as
 substitui.
 
 O [padrão da skill documental](../../../.agents/skills/specsfy-monorepo-documentator/references/documentation-standard.md)
@@ -92,11 +95,11 @@ detalha a reconciliação operacional dos dois percursos.
 
 ## Atualize quando
 
-- um público, destino, regra de linguagem ou critério de sincronização mudar;
+- um público, destino, regra de linguagem ou critério de sincronização mudar.
 - a primeira camada de `docs/` ou a responsabilidade de um percurso mudar.
 
 ## Não use para
 
-- documentar uma feature consumidora;
-- copiar inventários de código, rotas, schemas ou manifests;
+- documentar uma feature consumidora.
+- copiar inventários de código, rotas, schemas ou manifests.
 - manter planos, tarefas ou pesquisa temporária.

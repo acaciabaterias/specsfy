@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-VALIDATE_DIR = ROOT / "specsfy-base-validate" / "scripts"
+VALIDATE_DIR = ROOT / "specsfy-04-validate" / "scripts"
 sys.path.insert(0, str(VALIDATE_DIR))
 VALIDATE_SPEC_FILE = VALIDATE_DIR / "validate_spec.py"
 VALIDATE_SPEC_MODULE = importlib.util.spec_from_file_location(
@@ -20,7 +20,7 @@ assert VALIDATE_SPEC_MODULE is not None and VALIDATE_SPEC_MODULE.loader is not N
 VALIDATE_SPEC = importlib.util.module_from_spec(VALIDATE_SPEC_MODULE)
 VALIDATE_SPEC_MODULE.loader.exec_module(VALIDATE_SPEC)
 
-TRACE = ROOT / "specsfy-base-tdd-bdd" / "scripts" / "check_traceability.py"
+TRACE = ROOT / "specsfy-06-tdd-bdd" / "scripts" / "check_traceability.py"
 
 
 def acceptance(ac_id: str, covers: str) -> str:

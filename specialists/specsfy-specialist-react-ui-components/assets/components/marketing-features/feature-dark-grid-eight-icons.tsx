@@ -11,43 +11,43 @@ import {
 
 const features = [
   {
-    name: 'Unlimited Inboxes',
-    description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
+    name: 'Caixas de entrada ilimitadas',
+    description: 'Uma solução simples para organizar informações e acelerar o trabalho da equipe.',
     icon: InboxIcon,
   },
   {
-    name: 'Manage Team Members',
-    description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
+    name: 'Gerenciar integrantes da equipe',
+    description: 'Uma solução simples para organizar informações e acelerar o trabalho da equipe.',
     icon: UsersIcon,
   },
   {
-    name: 'Spam Report',
-    description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
+    name: 'Relatório de spam',
+    description: 'Uma solução simples para organizar informações e acelerar o trabalho da equipe.',
     icon: TrashIcon,
   },
   {
-    name: 'Compose in Markdown',
-    description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
+    name: 'Escrever em Markdown',
+    description: 'Uma solução simples para organizar informações e acelerar o trabalho da equipe.',
     icon: PencilSquareIcon,
   },
   {
-    name: 'Team Reporting',
-    description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
+    name: 'Relatórios da equipe',
+    description: 'Uma solução simples para organizar informações e acelerar o trabalho da equipe.',
     icon: DocumentChartBarIcon,
   },
   {
-    name: 'Saved Replies',
-    description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
+    name: 'Respostas salvas',
+    description: 'Uma solução simples para organizar informações e acelerar o trabalho da equipe.',
     icon: ArrowUturnLeftIcon,
   },
   {
-    name: 'Email Commenting',
-    description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
+    name: 'Comentários por e-mail',
+    description: 'Uma solução simples para organizar informações e acelerar o trabalho da equipe.',
     icon: ChatBubbleLeftEllipsisIcon,
   },
   {
-    name: 'Connect with Customers',
-    description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
+    name: 'Conectar-se com clientes',
+    description: 'Uma solução simples para organizar informações e acelerar o trabalho da equipe.',
     icon: HeartIcon,
   },
 ]
@@ -56,10 +56,9 @@ export default function Example() {
   return (
     <div className="bg-indigo-700">
       <div className="mx-auto max-w-4xl px-6 py-24 sm:py-32 lg:max-w-7xl lg:px-8 lg:py-40">
-        <h2 className="text-4xl font-bold tracking-tight text-white">Inbox support built for efficiency.</h2>
+        <h2 className="text-4xl font-bold tracking-tight text-white">Caixa de entrada de suporte criada para eficiência.</h2>
         <p className="mt-6 max-w-3xl text-lg/8 text-indigo-200">
-          Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis. Blandit aliquam
-          sit nisl euismod mattis in.
+          Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
         </p>
         <div className="mt-20 grid grid-cols-1 gap-16 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-16">
           {features.map((feature) => (

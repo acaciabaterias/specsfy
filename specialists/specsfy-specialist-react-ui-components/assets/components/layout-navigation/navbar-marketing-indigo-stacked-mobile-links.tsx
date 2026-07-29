@@ -1,21 +1,21 @@
 const navigation = [
-  { name: 'Solutions', href: '#' },
-  { name: 'Pricing', href: '#' },
-  { name: 'Docs', href: '#' },
-  { name: 'Company', href: '#' },
+  { name: 'Soluções', href: '#' },
+  { name: 'Preços', href: '#' },
+  { name: 'Documentação', href: '#' },
+  { name: 'Empresa', href: '#' },
 ]
 
 export default function Example() {
   return (
     <header className="bg-indigo-600">
-      <nav aria-label="Top" className="mx-auto max-w-7xl px-6 lg:px-8">
+      <nav aria-label="Início" className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex w-full items-center justify-between border-b border-indigo-500 py-6 lg:border-none">
           <div className="flex items-center">
             <a href="#">
-              <span className="sr-only">Your Company</span>
+              <span className="sr-only">Sua Empresa</span>
               <img
                 alt=""
-                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=white"
+                src="https://tailwindcss.com/mais-assets/img/logos/mark.svg?color=white"
                 className="h-10 w-auto"
               />
             </a>
@@ -32,13 +32,13 @@ export default function Example() {
               href="#"
               className="inline-block rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-base font-medium text-white hover:bg-indigo-500/75"
             >
-              Sign in
+              Entrar
             </a>
             <a
               href="#"
               className="inline-block rounded-md border border-transparent bg-white px-4 py-2 text-base font-medium text-indigo-600 hover:bg-indigo-50"
             >
-              Sign up
+              Criar conta
             </a>
           </div>
         </div>

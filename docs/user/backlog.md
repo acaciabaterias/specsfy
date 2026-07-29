@@ -1,47 +1,19 @@
-# Backlog de requisitos e promoção de ideias
+# Refinar ideias no backlog
 
-## Classificação
+O backlog recebe uma ideia que merece conversa, mas ainda não está pronta para
+virar especificação. Nele, você esclarece o problema, o público afetado e o
+efeito esperado sem definir arquitetura, tarefas ou código nessa etapa.
 
-| Campo | Valor |
-| --- | --- |
-| Natureza | normativo |
-| Escopo | captura, organização, refinamento, priorização e promoção de ideias |
-| Autoridade | uso público de `specsfy-base-backlog` e `specsfy-base-interview` |
-
-## Papel
-
-Explicar como transformar capturas e necessidades ainda abertas em um backlog
-organizado, priorizado e verificável antes da promoção.
-
-## Como usar
-
-Consulte ao registrar uma ideia, escolher entre backlog e entrevista ou
-promover um item para spec. Execute as skills pelos nomes indicados no fluxo.
-
-## Atualize quando
-
-- a estrutura de backlog ou specs mudar;
-- uma skill assumir outra etapa do fluxo;
-- estados ou critérios de promoção mudarem.
-
-## Não use para
-
-- substituir os requisitos formais e gates da spec promovida;
-- substituir a spec promovida;
-- autorizar implementação diretamente do backlog.
-
-## Fonte da verdade e precedência
-
-Os arquivos do projeto preservam o estado; as skills em `skills/`
-governam o comportamento executável. Depois da promoção, a spec prevalece sobre
-o backlog para comportamento, gates, tarefas e evidência. Para preservar sem
-perguntas, use a [caixa de entrada de ideias](ideas.md).
+Para apenas guardar um texto sem responder perguntas, use a
+[Inbox](inbox.md). Depois que uma entrada for promovida, a
+`spec.md` passa a governar o comportamento, os gates, as tarefas e as
+evidências da entrega.
 
 ## Estrutura
 
 ```text
 specs/
-├── ideias/
+├── inbox/
 │   └── 2026-07-28-143205-ideia.md
 ├── backlog/
 │   └── 0001-ideia.md
@@ -51,9 +23,9 @@ specs/
         └── research/
 ```
 
-O item de backlog começa leve, mas pode amadurecer até produto,
-desenvolvimento e testes compreenderem o comportamento esperado. Ele não contém
-tarefas ou gates e nunca autoriza implementação diretamente.
+O item começa leve e amadurece até produto, desenvolvimento e testes
+compreenderem o comportamento esperado. Ele não contém tarefas ou gates e nunca
+autoriza implementação diretamente.
 
 ## Organização do backlog
 
@@ -72,8 +44,8 @@ Histórias e requisitos representam entregas menores e verificáveis. Regras,
 itens técnicos e melhorias também pertencem ao backlog quando tornam o
 comportamento ou sua operação possível.
 
-Nem toda ideia precisa nascer com a hierarquia completa. Use `A esclarecer` no
-lugar de inventar uma relação.
+Nem toda ideia precisa começar com a hierarquia completa. Use `A esclarecer`
+no lugar de inventar uma relação.
 
 ## Anatomia de um item
 
@@ -91,32 +63,34 @@ Logo abaixo do título, mantenha as metainformações em uma tabela, não em lis
 | Criado em | data ISO |
 | Spec promovida | Nenhuma |
 
-Um item bem refinado pode conter:
+Conforme a conversa avança, o item pode registrar estas informações sem
+preencher campos que ainda não foram esclarecidos:
 
-- título, tipo e prioridade;
-- produto, épico e funcionalidade;
-- contexto do problema;
-- objetivo ou história do usuário;
-- comportamento esperado;
-- regras de negócio;
-- critérios de aceitação;
-- segurança, privacidade, desempenho, volume e auditoria;
-- dependências;
-- situações de erro e exceções;
+- título, tipo e prioridade.
+- produto, épico e funcionalidade.
+- contexto do problema.
+- objetivo ou história do usuário.
+- comportamento esperado.
+- regras de negócio.
+- condições de aceite.
+- segurança, privacidade, desempenho, volume e auditoria.
+- dependências.
+- situações de erro e exceções.
 - dentro e fora de escopo.
 
-A profundidade é adaptativa. Uma alteração simples exige menos detalhes;
-autenticação, pagamentos, permissões, privacidade e processamento assíncrono
-exigem análise cuidadosa. O melhor item não é o mais longo: é o que reduz
-ambiguidade e permite verificar a entrega.
+A profundidade é adaptativa. Uma alteração simples exige menos detalhes,
+enquanto autenticação, pagamentos, permissões, privacidade e processamento
+assíncrono exigem análise cuidadosa. O melhor item não é o mais longo, mas
+aquele que reduz a ambiguidade e permite verificar a entrega.
 
 ### Captura mínima e conversa
 
-Antes de escrever, `$specsfy-base-backlog` reaproveita o pedido e confirma:
+Ao receber a ideia, `$specsfy-02-backlog` reaproveita a descrição original e
+confirma:
 
-- problema percebido;
-- pessoa afetada ou beneficiada;
-- resultado ou valor esperado;
+- problema percebido.
+- pessoa afetada ou beneficiada.
+- resultado ou valor esperado.
 - contexto suficiente para distinguir a ideia.
 
 Se algo estiver ausente, vago, contraditório ou ambíguo, a skill pergunta uma
@@ -124,54 +98,57 @@ lacuna relevante por vez e reavalia após cada resposta. Ela não usa questioná
 fixo, não repete o que já foi explicado e não persiste placeholders nesses
 campos. Se a pessoa não souber responder, explicita a lacuna sem inventar.
 
-Esse é o mínimo de captura, não uma entrevista profunda. Hierarquia, prioridade,
+Esse é o mínimo de captura, não um refinamento profundo. Hierarquia, prioridade,
 regras detalhadas, aceite e solução técnica podem ser refinados depois.
 
 ### Duplicatas e referências
 
-Antes de criar, a skill pesquisa termos do pedido em `specs/backlog/*.md`,
+Antes de criar, a skill pesquisa termos da ideia em `specs/backlog/*.md`,
 `specs/specs/*/spec.md` e `docs/**/*.md`. Ela separa possível duplicata de
 backlog relacionado, spec relacionada ou documentação útil.
 
 Uma possível duplicata exige confirmar se o item existente será atualizado ou
-se há uma diferença real. Fontes úteis ficam em `Referências relacionadas` com
-caminho e relação, sem substituir a intenção declarada pelo usuário.
+se há uma diferença real. Fontes úteis ficam em `Referências relacionadas`,
+com o caminho e o tipo de relação. Elas não substituem o que você declarou.
 
 ## Padrões recorrentes
 
-| Capacidade | Questões que o backlog deve tornar objetivas |
+| Capacidade | Informações que o backlog deve tornar objetivas |
 | --- | --- |
-| Autenticação | estado da conta, tentativas, sessão, mensagens seguras, credenciais e autorização |
-| Notificações | propriedade, contagem, evento de leitura, ações individual/em lote e isolamento |
-| Permissões | perfil, operação, organização, alvo, invariantes, validação no servidor e auditoria |
-| PIX/pagamentos | fluxo, estados, idempotência, webhook, falhas externas e dados sensíveis |
-| Exportação | filtros, autorização, volume, fila, expiração, fuso horário e dados sensíveis |
+| Autenticação | cadastro, tentativas, sessão, mensagens e autorização |
+| Notificações | propriedade, leitura, ações em lote e isolamento |
+| Permissões | perfil, operação, alvo, validação e auditoria |
+| PIX/pagamentos | estados, idempotência, webhook e dados sensíveis |
+| Exportação | filtros, autorização, volume, fila e expiração |
 
 Use a representação que reduz ambiguidade. Fluxos numerados ajudam em
-integrações; matrizes ajudam em permissões; cenários ajudam a demonstrar
-resultados e erros.
+integrações, matrizes ajudam em permissões e cenários demonstram resultados e
+erros.
 
 Um requisito funcional descreve o que o sistema faz. Um requisito não
 funcional define condições mensuráveis de qualidade e operação. Troque “o
 sistema deve ser rápido” por um limite de latência, volume e ambiente
 verificáveis.
 
-## Priorização
+## Ordenar o backlog
 
-Mantenha o backlog realmente ordenado. Compare:
+Mantenha o backlog realmente ordenado para que a próxima oportunidade fique
+visível sem depender da memória da equipe. Compare os itens pelos fatores
+abaixo:
 
-1. valor para usuário e negócio;
-2. risco de segurança, privacidade e operação;
-3. dependências e entregas desbloqueadas;
-4. urgência;
-5. esforço;
-6. incerteza.
+1. valor para a pessoa e para o negócio.
+2. exposição de segurança, privacidade e operação.
+3. dependências e entregas desbloqueadas.
+4. urgência.
+5. esforço.
+6. pontos ainda desconhecidos.
 
-Prioridade é relativa; classificar tudo como alta não cria uma ordem.
+Prioridade é relativa. Classificar tudo como alta não cria uma ordem.
 Autenticação e autorização podem preceder melhorias visuais, assim como uma
 infraestrutura de notificações pode preceder os eventos que dependem dela.
 
-Exemplo de visão ordenada:
+A tabela abaixo mostra como uma ordem real diferencia o que deve ser retomado
+primeiro do que pode esperar:
 
 | Ordem | Prioridade | Tipo | Item | Objetivo |
 | --- | --- | --- | --- | --- |
@@ -182,33 +159,35 @@ Exemplo de visão ordenada:
 | 5 | Baixa | Melhoria | Preferências de notificação | Escolher canais |
 
 Cada linha aponta para um item próprio. Por exemplo, “realizar login” deve
-esclarecer conta ativa, comparação de e-mail, proteção da senha, tentativas
+esclarecer cadastro ativo, comparação de e-mail, proteção da senha, tentativas
 inválidas, sessão, permissões, resultados de sucesso e falha e o que ficou fora
 do escopo. “Criar uma tela de login” não cobre esse comportamento.
 
 ## Fluxo
 
 ```text
-input → ideia capturada → backlog → interview → spec
+input → inbox → backlog → spec
 ```
 
-1. Use `$specsfy-base-backlog` quando a ideia ainda for geral. A skill pesquisa
+1. Use `$specsfy-02-backlog` quando a entrada ainda for geral. A skill pesquisa
    material relacionado, conversa até a captura mínima ficar clara e produz
    `specs/backlog/<NNNN>-<slug>.md`. A mesma skill pode organizar, priorizar e
    refinar o item progressivamente.
-2. Use `$specsfy-base-interview` para aprofundar uma ideia, um backlog ou uma
-   spec. A entrevista faz uma pergunta relevante por vez e produz um brief.
-3. Use `$specsfy-base-specify` somente quando houver intenção explícita de
-   promover o material. A fonte normativa nasce em
+2. A mesma skill faz uma pergunta relevante por vez e produz um brief quando
+   houver decisões materiais abertas.
+3. Use `$specsfy-03-specify` somente quando houver intenção explícita de
+   promover o material. A fonte normativa é criada em
    `specs/specs/<NNNN>-<slug>/spec.md`.
 4. Depois da promoção, mantenha o backlog como proveniência, marque-o
    `Promoted` e registre o caminho da spec.
 
-Ao concluir, a skill anuncia e executa automaticamente o avanço ou retorno; a
-conversa continua sem repetir comandos nem autorizar implementação.
+Ao concluir, a skill informa qual etapa assumirá o trabalho e executa
+automaticamente o avanço ou o retorno. A conversa mostra o nome da skill, o
+motivo da troca e o resultado esperado. Você acompanha essa transição sem
+repetir comandos, e nenhuma troca autoriza implementação.
 
 Backlog e spec possuem sequências independentes. `BACKLOG-0004` pode originar
-`SPEC-0002`; identidade não implica prioridade.
+`SPEC-0002`, mas os números não precisam coincidir e não indicam prioridade.
 
 ## Estados do backlog
 
@@ -216,26 +195,27 @@ Backlog e spec possuem sequências independentes. `BACKLOG-0004` pode originar
 | --- | --- |
 | `Captured` | ideia preservada com contexto mínimo |
 | `Refining` | conversa ou pesquisa leve em andamento |
-| `Ready for interview` | contexto suficiente para aprofundamento estruturado |
+| `Ready for specification` | contexto suficiente para criar a especificação |
 | `Promoted` | spec derivada criada e referenciada |
 
 ## Quando está refinado
 
-Antes do handoff, a equipe deve conseguir responder:
+O item está pronto para especificação quando a equipe consegue responder às
+perguntas abaixo sem consultar suposições fora do arquivo:
 
-- Qual problema será resolvido e quem será beneficiado?
+- Qual problema será resolvido e qual público será beneficiado?
 - Qual evento inicia o comportamento e qual resultado será produzido?
-- Quem pode executar a operação?
+- Qual papel pode executar a operação?
 - Quais regras, erros e exceções precisam ser respeitados?
 - Como verificar objetivamente o resultado?
 - Há implicações de segurança, privacidade, desempenho ou volume?
 - O que ficou fora da entrega?
-- Quais dependências ou decisões continuam pendentes?
+- Quais dependências ou definições continuam pendentes?
 
-O agente identifica lacunas e pergunta uma por vez. Decisões que alteram
+O agente identifica lacunas e pergunta uma por vez. Definições que alteram
 segurança, escopo, arquitetura ou experiência não são inventadas
-silenciosamente. Esse diagnóstico prepara entrevista e spec; ainda não autoriza
-desenvolvimento.
+silenciosamente. Esse diagnóstico prepara a spec, mas ainda não
+autoriza desenvolvimento.
 
 ## Limites
 
@@ -245,15 +225,9 @@ desenvolvimento.
 - Não promover automaticamente uma ideia.
 - Não tratar o backlog como fonte normativa depois da promoção.
 
-## Implementação executável
+## Próximo passo
 
-O contrato executável pertence às skills
-[`specsfy-base-backlog`](../../skills/specsfy-base-backlog/),
-[`specsfy-base-interview`](../../skills/specsfy-base-interview/)
-e
-[`specsfy-base-specify`](../../skills/specsfy-base-specify/).
-
-## Justificativa de tamanho
-
-O guia reúne estrutura, refinamento, priorização e promoção porque essas
-decisões precisam ser comparadas no mesmo percurso público.
+Quando o item estiver claro o bastante para uma conversa aprofundada, use
+[`specsfy-02-backlog`](skills/specsfy-02-backlog.md). A promoção para
+`spec.md` só acontece depois de refinamento suficiente e de uma instrução
+explícita para criar a especificação.

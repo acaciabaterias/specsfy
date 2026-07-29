@@ -2,19 +2,19 @@ import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/2
 
 const features = [
   {
-    name: 'Push to deploy.',
+    name: 'Envio para deploy.',
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+      'Conteúdo de exemplo para demonstrar hierarquia, ritmo e legibilidade.',
     icon: CloudArrowUpIcon,
   },
   {
-    name: 'SSL certificates.',
-    description: 'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
+    name: 'Certificados SSL.',
+    description: 'Centralize as informações essenciais e avance com mais clareza em cada etapa.',
     icon: LockClosedIcon,
   },
   {
-    name: 'Database backups.',
-    description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
+    name: 'Backups do banco de dados.',
+    description: 'Uma solução simples para organizar informações e acelerar o trabalho da equipe.',
     icon: ServerIcon,
   },
 ]
@@ -26,13 +26,12 @@ export default function Example() {
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
           <div className="lg:ml-auto lg:pt-4 lg:pl-4">
             <div className="lg:max-w-lg">
-              <h2 className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">Deploy faster</h2>
+              <h2 className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">Faça deploy mais rápido</h2>
               <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
-                A better workflow
+                Um fluxo de trabalho melhor
               </p>
               <p className="mt-6 text-lg/8 text-gray-600 dark:text-gray-300">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque,
-                iste dolor cupiditate blanditiis ratione.
+                Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
               </p>
               <dl className="mt-10 max-w-xl space-y-8 text-base/7 text-gray-600 lg:max-w-none dark:text-gray-400">
                 {features.map((feature) => (
@@ -52,15 +51,15 @@ export default function Example() {
           </div>
           <div className="flex items-start justify-end lg:order-first">
             <img
-              alt="Product screenshot"
-              src="https://tailwindcss.com/plus-assets/img/component-images/project-app-screenshot.png"
+              alt="Captura de tela do produto"
+              src="https://tailwindcss.com/mais-assets/img/component-images/project-app-screenshot.png"
               width={2432}
               height={1442}
               className="w-3xl max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-228 dark:hidden dark:ring-white/10"
             />
             <img
-              alt="Product screenshot"
-              src="https://tailwindcss.com/plus-assets/img/component-images/dark-project-app-screenshot.png"
+              alt="Captura de tela do produto"
+              src="https://tailwindcss.com/mais-assets/img/component-images/dark-project-app-screenshot.png"
               width={2432}
               height={1442}
               className="w-3xl max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 not-dark:hidden sm:w-228 dark:ring-white/10"

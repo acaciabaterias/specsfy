@@ -5,10 +5,10 @@ export default function Example() {
     <div className="bg-gray-100">
       <div className="mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-8">
         <div className="relative bg-white shadow-xl">
-          <h2 className="sr-only">Contact us</h2>
+          <h2 className="sr-only">Fale conosco</h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-3">
-            {/* Contact information */}
+            {/* Informações de contato */}
             <div className="relative overflow-hidden bg-indigo-700 px-6 py-10 sm:px-10 xl:p-12">
               <div aria-hidden="true" className="pointer-events-none absolute inset-0 sm:hidden">
                 <svg
@@ -103,21 +103,20 @@ export default function Example() {
                   </defs>
                 </svg>
               </div>
-              <h3 className="text-lg font-medium text-white">Contact information</h3>
+              <h3 className="text-lg font-medium text-white">Informações de contato</h3>
               <p className="mt-6 max-w-3xl text-base text-indigo-50">
-                Nullam risus blandit ac aliquam justo ipsum. Quam mauris volutpat massa dictumst amet. Sapien tortor
-                lacus arcu.
+                Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
               </p>
               <dl className="mt-8 space-y-6">
                 <dt>
-                  <span className="sr-only">Phone number</span>
+                  <span className="sr-only">Telefone</span>
                 </dt>
                 <dd className="flex text-base text-indigo-50">
                   <PhoneIcon aria-hidden="true" className="size-6 shrink-0 text-indigo-200" />
                   <span className="ml-3">+1 (555) 123-4567</span>
                 </dd>
                 <dt>
-                  <span className="sr-only">Email</span>
+                  <span className="sr-only">E-mail</span>
                 </dt>
                 <dd className="flex text-base text-indigo-50">
                   <EnvelopeIcon aria-hidden="true" className="size-6 shrink-0 text-indigo-200" />
@@ -160,13 +159,13 @@ export default function Example() {
               </ul>
             </div>
 
-            {/* Contact form */}
+            {/* Formulário de contato */}
             <div className="px-6 py-10 sm:px-10 lg:col-span-2 xl:p-12">
-              <h3 className="text-lg font-medium text-gray-900">Send us a message</h3>
+              <h3 className="text-lg font-medium text-gray-900">Envie uma mensagem</h3>
               <form action="#" method="POST" className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
                 <div>
                   <label htmlFor="first-name" className="block text-sm font-medium text-gray-900">
-                    First name
+                    Nome
                   </label>
                   <div className="mt-1">
                     <input
@@ -180,7 +179,7 @@ export default function Example() {
                 </div>
                 <div>
                   <label htmlFor="last-name" className="block text-sm font-medium text-gray-900">
-                    Last name
+                    Sobrenome
                   </label>
                   <div className="mt-1">
                     <input
@@ -194,7 +193,7 @@ export default function Example() {
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-900">
-                    Email
+                    E-mail
                   </label>
                   <div className="mt-1">
                     <input
@@ -209,10 +208,10 @@ export default function Example() {
                 <div>
                   <div className="flex justify-between">
                     <label htmlFor="phone" className="block text-sm font-medium text-gray-900">
-                      Phone
+                      Telefone
                     </label>
                     <span id="phone-optional" className="text-sm text-gray-500">
-                      Optional
+                      Opcional
                     </span>
                   </div>
                   <div className="mt-1">
@@ -228,7 +227,7 @@ export default function Example() {
                 </div>
                 <div className="sm:col-span-2">
                   <label htmlFor="subject" className="block text-sm font-medium text-gray-900">
-                    Subject
+                    Assunto
                   </label>
                   <div className="mt-1">
                     <input
@@ -242,10 +241,10 @@ export default function Example() {
                 <div className="sm:col-span-2">
                   <div className="flex justify-between">
                     <label htmlFor="message" className="block text-sm font-medium text-gray-900">
-                      Message
+                      Mensagem
                     </label>
                     <span id="message-max" className="text-sm text-gray-500">
-                      Max. 500 characters
+                      Máximo de 500 caracteres
                     </span>
                   </div>
                   <div className="mt-1">
@@ -264,7 +263,7 @@ export default function Example() {
                     type="submit"
                     className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-xs hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden sm:w-auto"
                   >
-                    Submit
+                    Enviar
                   </button>
                 </div>
               </form>

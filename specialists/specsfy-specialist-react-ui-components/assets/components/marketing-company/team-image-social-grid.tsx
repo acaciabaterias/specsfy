@@ -1,7 +1,7 @@
 const people = [
   {
     name: 'Lindsay Walton',
-    role: 'Front-end Developer',
+    role: 'Desenvolvedor front-end',
     imageUrl:
       'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
     xUrl: '#',
@@ -17,7 +17,7 @@ const people = [
   },
   {
     name: 'Tom Cook',
-    role: 'Director of Product',
+    role: 'Diretor de Produto',
     imageUrl:
       'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
     xUrl: '#',
@@ -33,7 +33,7 @@ const people = [
   },
   {
     name: 'Leonard Krasner',
-    role: 'Senior Designer',
+    role: 'Designer Sênior',
     imageUrl:
       'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
     xUrl: '#',
@@ -41,7 +41,7 @@ const people = [
   },
   {
     name: 'Floyd Miles',
-    role: 'Principal Designer',
+    role: 'Designer Principal',
     imageUrl:
       'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
     xUrl: '#',
@@ -82,11 +82,10 @@ export default function Example() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
           <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
-            Our team
+            Nossa equipe
           </h2>
           <p className="mt-6 text-lg/8 text-gray-600 dark:text-gray-400">
-            We're a dynamic group of individuals who are passionate about what we do and dedicated to delivering the
-            best results for our clients.
+            Somos uma equipe dinâmica, comprometida com nosso trabalho e com os melhores resultados para nossos clientes.
           </p>
         </div>
         <ul

@@ -44,26 +44,25 @@ export default function Example() {
             <div className="relative">
               <div className="sm:text-center">
                 <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                  Get notified when we&apos;re launching.
+                  Receba um aviso quando fizermos o lançamento.
                 </h2>
                 <p className="mx-auto mt-6 max-w-2xl text-lg text-indigo-200">
-                  Sagittis scelerisque nulla cursus in enim consectetur quam. Dictum urna sed consectetur neque
-                  tristique pellentesque.
+                  Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
                 </p>
               </div>
               <form action="#" className="mx-auto mt-12 flex max-w-lg gap-3 max-lg:flex-col">
                 <input
                   id="cta-email"
                   type="email"
-                  placeholder="Enter your email"
-                  aria-label="Email address"
+                  placeholder="Digite seu e-mail"
+                  aria-label="Endereço de e-mail"
                   className="block flex-1 rounded-md px-5 py-3 placeholder-gray-500 outline-hidden focus:outline-2 focus:outline-offset-2 focus:outline-white"
                 />
                 <button
                   type="submit"
                   className="block rounded-md border border-transparent bg-indigo-500 px-5 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-400 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600 focus:outline-hidden sm:px-10"
                 >
-                  Notify me
+                  Avise-me
                 </button>
               </form>
             </div>

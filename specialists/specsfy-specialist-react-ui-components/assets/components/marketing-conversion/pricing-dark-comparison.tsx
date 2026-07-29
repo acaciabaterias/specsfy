@@ -6,67 +6,67 @@ function classNames(...classes) {
 
 const tiers = [
   {
-    name: 'Starter',
+    name: 'Inicial',
     id: 'tier-starter',
     href: '#',
     featured: false,
-    description: 'Everything you need to get started.',
+    description: 'Tudo o que você precisa para começar.',
     price: { monthly: '$19', annually: '$199' },
-    highlights: ['Custom domains', 'Edge content delivery', 'Advanced analytics'],
+    highlights: ['Domínios personalizados', 'Entrega de conteúdo na borda', 'Análises avançadas'],
   },
   {
-    name: 'Scale',
+    name: 'Escala',
     id: 'tier-scale',
     href: '#',
     featured: true,
-    description: 'Added flexibility at scale.',
+    description: 'Mais flexibilidade em grande escala.',
     price: { monthly: '$99', annually: '$999' },
     highlights: [
-      'Custom domains',
-      'Edge content delivery',
-      'Advanced analytics',
-      'Quarterly workshops',
-      'Single sign-on (SSO)',
-      'Priority phone support',
+      'Domínios personalizados',
+      'Entrega de conteúdo na borda',
+      'Análises avançadas',
+      'Workshops trimestrais',
+      'Login único (SSO)',
+      'Suporte telefônico prioritário',
     ],
   },
   {
-    name: 'Growth',
+    name: 'Crescimento',
     id: 'tier-growth',
     href: '#',
     featured: false,
-    description: 'All the extras for your growing team.',
+    description: 'Recursos adicionais para sua equipe em crescimento.',
     price: { monthly: '$49', annually: '$499' },
-    highlights: ['Custom domains', 'Edge content delivery', 'Advanced analytics', 'Quarterly workshops'],
+    highlights: ['Domínios personalizados', 'Entrega de conteúdo na borda', 'Análises avançadas', 'Workshops trimestrais'],
   },
 ]
 
 const sections = [
   {
-    name: 'Features',
+    name: 'Recursos',
     features: [
-      { name: 'Edge content delivery', tiers: { Starter: true, Growth: true, Scale: true } },
-      { name: 'Custom domains', tiers: { Starter: '1', Growth: '3', Scale: 'Unlimited' } },
-      { name: 'Team members', tiers: { Starter: '3', Growth: '20', Scale: 'Unlimited' } },
-      { name: 'Single sign-on (SSO)', tiers: { Starter: false, Growth: false, Scale: true } },
+      { name: 'Entrega de conteúdo na borda', tiers: { Inicial: true, Crescimento: true, Escala: true } },
+      { name: 'Domínios personalizados', tiers: { Inicial: '1', Crescimento: '3', Escala: 'Ilimitado' } },
+      { name: 'Integrantes da equipe', tiers: { Inicial: '3', Crescimento: '20', Escala: 'Ilimitado' } },
+      { name: 'Login único (SSO)', tiers: { Inicial: false, Crescimento: false, Escala: true } },
     ],
   },
   {
-    name: 'Reporting',
+    name: 'Relatórios',
     features: [
-      { name: 'Advanced analytics', tiers: { Starter: true, Growth: true, Scale: true } },
-      { name: 'Basic reports', tiers: { Starter: false, Growth: true, Scale: true } },
-      { name: 'Professional reports', tiers: { Starter: false, Growth: false, Scale: true } },
-      { name: 'Custom report builder', tiers: { Starter: false, Growth: false, Scale: true } },
+      { name: 'Análises avançadas', tiers: { Inicial: true, Crescimento: true, Escala: true } },
+      { name: 'Relatórios básicos', tiers: { Inicial: false, Crescimento: true, Escala: true } },
+      { name: 'Relatórios profissionais', tiers: { Inicial: false, Crescimento: false, Escala: true } },
+      { name: 'Criador de relatórios personalizados', tiers: { Inicial: false, Crescimento: false, Escala: true } },
     ],
   },
   {
-    name: 'Support',
+    name: 'Suporte',
     features: [
-      { name: '24/7 online support', tiers: { Starter: true, Growth: true, Scale: true } },
-      { name: 'Quarterly workshops', tiers: { Starter: false, Growth: true, Scale: true } },
-      { name: 'Priority phone support', tiers: { Starter: false, Growth: false, Scale: true } },
-      { name: '1:1 onboarding tour', tiers: { Starter: false, Growth: false, Scale: true } },
+      { name: 'Suporte online 24/7', tiers: { Inicial: true, Crescimento: true, Escala: true } },
+      { name: 'Workshops trimestrais', tiers: { Inicial: false, Crescimento: true, Escala: true } },
+      { name: 'Suporte telefônico prioritário', tiers: { Inicial: false, Crescimento: false, Escala: true } },
+      { name: 'Integração individual', tiers: { Inicial: false, Crescimento: false, Escala: true } },
     ],
   },
 ]
@@ -78,14 +78,14 @@ export default function Example() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="relative z-10">
             <h2 className="mx-auto max-w-4xl text-center text-5xl font-semibold tracking-tight text-balance text-white sm:text-6xl">
-              Pricing that grows with you
+              Preços que crescem com você
             </h2>
             <p className="mx-auto mt-6 max-w-2xl text-center text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">
-              Choose an affordable plan that's packed with the best features for engaging your audience, creating
-              customer loyalty, and driving sales.
+              Escolha um plano acessível com recursos para engajar seu público e criar
+              relacionamentos com clientes e aumentar as vendas.
             </p>
             <div className="mt-16 flex justify-center">
-              <fieldset aria-label="Payment frequency">
+              <fieldset aria-label="Frequência de pagamento">
                 <div className="grid grid-cols-2 gap-x-1 rounded-full bg-white/5 p-1 text-center text-xs/5 font-semibold text-white">
                   <label className="group relative rounded-full px-2.5 py-1 has-checked:bg-indigo-500">
                     <input
@@ -95,7 +95,7 @@ export default function Example() {
                       type="radio"
                       className="absolute inset-0 appearance-none rounded-full"
                     />
-                    <span className="text-white">Monthly</span>
+                    <span className="text-white">Mensalmente</span>
                   </label>
                   <label className="group relative rounded-full px-2.5 py-1 has-checked:bg-indigo-500">
                     <input
@@ -104,7 +104,7 @@ export default function Example() {
                       type="radio"
                       className="absolute inset-0 appearance-none rounded-full"
                     />
-                    <span className="text-white">Annually</span>
+                    <span className="text-white">Anualmente</span>
                   </label>
                 </div>
               </fieldset>
@@ -159,10 +159,10 @@ export default function Example() {
                           USD
                         </p>
                         <p className="text-gray-400 group-not-has-[[name=frequency][value=monthly]:checked]/tiers:hidden group-data-featured/tier:text-gray-500 dark:group-data-featured/tier:text-gray-400">
-                          Billed monthly
+                          Cobrado mensalmente
                         </p>
                         <p className="text-gray-400 group-not-has-[[name=frequency][value=annually]:checked]/tiers:hidden group-data-featured/tier:text-gray-500 dark:group-data-featured/tier:text-gray-400">
-                          Billed annually
+                          Cobrado anualmente
                         </p>
                       </div>
                     </div>
@@ -173,7 +173,7 @@ export default function Example() {
                       aria-describedby={`tier-${tier.id}`}
                       className="w-full rounded-md bg-white/10 px-3 py-2 text-center text-sm/6 font-semibold text-white not-group-data-featured:inset-ring not-group-data-featured:inset-ring-white/5 group-data-featured/tier:bg-indigo-600 group-data-featured/tier:shadow-xs hover:bg-white/20 group-data-featured/tier:hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/75 group-data-featured/tier:focus-visible:outline-indigo-600 dark:group-data-featured/tier:bg-indigo-500 dark:group-data-featured/tier:shadow-none dark:group-data-featured/tier:hover:bg-indigo-400 dark:group-data-featured/tier:focus-visible:outline-indigo-500"
                     >
-                      Buy this plan
+                      Comprar este plano
                     </button>
                   </div>
                   <div className="mt-8 flow-root sm:mt-10">
@@ -202,7 +202,7 @@ export default function Example() {
         <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
           <section aria-labelledby="mobile-comparison-heading" className="lg:hidden">
             <h2 id="mobile-comparison-heading" className="sr-only">
-              Feature comparison
+              Comparação de recursos
             </h2>
             <div className="mx-auto max-w-2xl space-y-16">
               {tiers.map((tier) => (
@@ -272,7 +272,7 @@ export default function Example() {
                                           />
                                         )}
                                         <span className="sr-only">
-                                          {feature.tiers[tier.name] === true ? 'Yes' : 'No'}
+                                          {feature.tiers[tier.name] === true ? 'Sim' : 'Não'}
                                         </span>
                                       </>
                                     )}
@@ -300,7 +300,7 @@ export default function Example() {
           </section>
           <section aria-labelledby="comparison-heading" className="hidden lg:block">
             <h2 id="comparison-heading" className="sr-only">
-              Feature comparison
+              Comparação de recursos
             </h2>
             <div className="grid grid-cols-4 gap-x-8 border-t border-gray-900/10 before:block dark:border-white/10">
               {tiers.map((tier) => (
@@ -341,7 +341,7 @@ export default function Example() {
                       <thead>
                         <tr className="text-left">
                           <th scope="col">
-                            <span className="sr-only">Feature</span>
+                            <span className="sr-only">Recurso</span>
                           </th>
                           {tiers.map((tier) => (
                             <th key={tier.id} scope="col">
@@ -390,7 +390,7 @@ export default function Example() {
                                         />
                                       )}
                                       <span className="sr-only">
-                                        {feature.tiers[tier.name] === true ? 'Yes' : 'No'}
+                                        {feature.tiers[tier.name] === true ? 'Sim' : 'Não'}
                                       </span>
                                     </>
                                   )}

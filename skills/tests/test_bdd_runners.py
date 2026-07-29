@@ -9,8 +9,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-TRACE = ROOT / "specsfy-base-tdd-bdd/scripts/check_traceability.py"
-TASKS = ROOT / "specsfy-base-tasks/scripts/validate_tasks.py"
+TRACE = ROOT / "specsfy-06-tdd-bdd/scripts/check_traceability.py"
+TASKS = ROOT / "specsfy-05-tasks/scripts/validate_tasks.py"
 TASKS_SPEC = importlib.util.spec_from_file_location("validate_tasks_bdd", TASKS)
 assert TASKS_SPEC is not None and TASKS_SPEC.loader is not None
 VALIDATE_TASKS = importlib.util.module_from_spec(TASKS_SPEC)

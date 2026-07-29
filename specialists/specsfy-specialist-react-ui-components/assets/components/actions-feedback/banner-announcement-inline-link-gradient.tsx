@@ -33,12 +33,12 @@ export default function Example() {
           href="#"
           className="font-semibold whitespace-nowrap text-gray-900 hover:text-gray-700 dark:text-white dark:hover:text-gray-300"
         >
-          Get your ticket&nbsp;<span aria-hidden="true">&rarr;</span>
+          Garanta seu ingresso&nbsp;<span aria-hidden="true">&rarr;</span>
         </a>
       </p>
       <div className="flex flex-1 justify-end">
         <button type="button" className="-m-3 p-3 focus-visible:-outline-offset-4">
-          <span className="sr-only">Dismiss</span>
+          <span className="sr-only">Dispensar</span>
           <XMarkIcon aria-hidden="true" className="size-5 text-gray-900 dark:text-gray-100" />
         </button>
       </div>

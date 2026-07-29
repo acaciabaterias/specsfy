@@ -173,15 +173,15 @@ def classify_files(project: Path, files: list[Path]) -> dict[str, list[Path]]:
     groups = {
         "Controllers": [],
         "Models": [],
-        "Services": [],
+        "Serviços": [],
         "Jobs": [],
         "Policies": [],
-        "Routes and APIs": [],
+        "Rotas e APIs": [],
         "Views": [],
-        "Pages": [],
-        "Components": [],
-        "Tests": [],
-        "Other source": [],
+        "Páginas": [],
+        "Componentes": [],
+        "Testes": [],
+        "Outras fontes": [],
     }
     for path in files:
         rel = relative(path, project)
@@ -189,27 +189,27 @@ def classify_files(project: Path, files: list[Path]) -> dict[str, list[Path]]:
         parts = {part.casefold() for part in PurePosixPath(rel).parts}
         target: str | None = None
         if "tests" in parts or "test" in parts or re.search(r"\.(test|spec)\.", folded):
-            target = "Tests"
+            target = "Testes"
         elif "controllers" in parts:
             target = "Controllers"
         elif "models" in parts or "entities" in parts:
             target = "Models"
         elif "services" in parts:
-            target = "Services"
+            target = "Serviços"
         elif "jobs" in parts:
             target = "Jobs"
         elif "policies" in parts:
             target = "Policies"
         elif rel.startswith("routes/") or "/api/" in folded or path.name.startswith("route."):
-            target = "Routes and APIs"
+            target = "Rotas e APIs"
         elif ".blade.php" in folded or "views" in parts:
             target = "Views"
         elif "pages" in parts or path.name.startswith(("page.", "layout.")):
-            target = "Pages"
+            target = "Páginas"
         elif "components" in parts:
-            target = "Components"
+            target = "Componentes"
         elif has_code_suffix(path):
-            target = "Other source"
+            target = "Outras fontes"
         if target:
             groups[target].append(path)
     return groups
@@ -617,7 +617,7 @@ def render_architecture(
     entity_items: list[Entity],
 ) -> str:
     class_names = []
-    for category in ("Controllers", "Models", "Services", "Components"):
+    for category in ("Controllers", "Models", "Serviços", "Componentes"):
         class_names.extend(symbol_name(path) for path in groups[category][:20])
     class_lines = [f"  class {mermaid_id(name)}" for name in dict.fromkeys(class_names)]
     if not class_lines:
@@ -677,7 +677,7 @@ inventadas.
 {table(("Área", "Leitura recomendada"), (
     ("Controllers e APIs", "Entradas HTTP, validação e orquestração"),
     ("Models e entidades", "Estado persistente, relações e invariantes"),
-    ("Services e jobs", "Casos de uso, integrações e processamento assíncrono"),
+    ("Serviços e jobs", "Casos de uso, integrações e processamento assíncrono"),
     ("Views, páginas e componentes", "Apresentação e interação"),
 ))}
 """
@@ -707,7 +707,7 @@ def render_database(entity_items: list[Entity]) -> str:
         diagram_lines.append("  }")
         for related in item.relations:
             diagram_lines.append(
-                f"  {mermaid_id(related).upper()} ||--o{{ {entity_id} : relates"
+                f"  {mermaid_id(related).upper()} ||--o{{ {entity_id} : relaciona"
             )
     return f"""## Mapa de persistência
 
@@ -808,8 +808,8 @@ def render_testing(
 def render_frontend(groups: dict[str, list[Path]], project: Path, files: list[Path]) -> str:
     frontend_paths = [
         *groups["Views"],
-        *groups["Pages"],
-        *groups["Components"],
+        *groups["Páginas"],
+        *groups["Componentes"],
     ]
     tailwind_files = [
         path
@@ -834,7 +834,7 @@ def render_frontend(groups: dict[str, list[Path]], project: Path, files: list[Pa
 
 {table(("Tipo", "Nome", "Fonte"), (
     (
-        "View" if path in groups["Views"] else "Página" if path in groups["Pages"] else "Componente",
+        "View" if path in groups["Views"] else "Página" if path in groups["Páginas"] else "Componente",
         symbol_name(path),
         f"`{relative(path, project)}`",
     )
@@ -957,9 +957,9 @@ def build_documents(project: Path) -> dict[str, str]:
     package_items = packages(project)
     route_items = routes(project, files)
     runner, commands = test_runner(project)
-    test_files = groups["Tests"]
+    test_files = groups["Testes"]
     stats = {
-        "code": sum(len(paths) for name, paths in groups.items() if name != "Tests"),
+        "code": sum(len(paths) for name, paths in groups.items() if name != "Testes"),
         "tests": len(test_files),
         "entities": len(entity_items),
         "packages": len(package_items),

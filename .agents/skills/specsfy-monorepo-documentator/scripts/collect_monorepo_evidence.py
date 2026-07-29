@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Collect safe, read-only evidence from the official Specsfy monorepo."""
+"""Coleta evidências seguras e somente leitura do monorepo oficial Specsfy."""
 
 from __future__ import annotations
 
@@ -26,7 +26,7 @@ SOURCE_CANDIDATES = (
 
 
 class MonorepoError(RuntimeError):
-    """Raised when the selected workspace is not the official monorepo."""
+    """Indica que o workspace selecionado não é o monorepo oficial."""
 
 
 def git(root: Path, *arguments: str) -> str:

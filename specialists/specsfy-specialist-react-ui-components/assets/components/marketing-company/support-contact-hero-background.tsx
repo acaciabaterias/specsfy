@@ -10,10 +10,9 @@ export default function Example() {
         <div aria-hidden="true" className="absolute inset-0 bg-indigo-800 mix-blend-multiply" />
       </div>
       <div className="relative mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
-        <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">Get in touch</h1>
+        <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">Entre em contato</h1>
         <p className="mt-6 max-w-3xl text-xl text-indigo-100">
-          Mattis amet hendrerit dolor, quisque lorem pharetra. Pellentesque lacus nisi urna, arcu sociis eu. Orci vel
-          lectus nisl eget eget ut consectetur. Sit justo viverra non adipisicing elit distinctio.
+          Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
         </p>
       </div>
     </div>

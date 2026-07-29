@@ -3,19 +3,23 @@
 Os 231 arquivos em `assets/components/` são exemplos TSX copiáveis. Escolha pela
 intenção da interface e abra somente os candidatos relevantes.
 
-| Família | Conteúdo |
-| --- | --- |
-| `actions-feedback/` | botões, menus, dialogs, alerts e banners |
-| `data-display/` | tabelas, listas de descrição, avatares e badges |
-| `forms/` | inputs, textareas, selects, comboboxes, radios e switches |
-| `hero/` | primeiras dobras públicas e variações com navegação |
-| `layout-navigation/` | shells, sidebars, navbars, autenticação, paginação e footers |
-| `marketing-company/` | team, careers, offices, contact e support-contact |
-| `marketing-content/` | blog, FAQ, press, about e conteúdo editorial |
-| `marketing-conversion/` | CTA, newsletter, pricing e planos |
-| `marketing-features/` | features, screenshots, workflows e support discovery |
-| `marketing-proof/` | testimonials, logo clouds e stats |
-| `typography/` | headings, texto, links e divisores |
+<!-- markdownlint-disable MD013 -->
+
+| Família                 | Conteúdo                                                                            |
+| ----------------------- | ----------------------------------------------------------------------------------- |
+| `actions-feedback/`     | botões, menus, diálogos, alertas e banners                                          |
+| `data-display/`         | tabelas, listas de descrição, avatares e selos                                      |
+| `forms/`                | entradas, áreas de texto, seleções, caixas de combinação, opções e interruptores    |
+| `hero/`                 | primeiras dobras públicas e variações com navegação                                 |
+| `layout-navigation/`    | estruturas, barras laterais, barras de navegação, autenticação, paginação e rodapés |
+| `marketing-company/`    | equipe, carreiras, escritórios, contato e suporte                                   |
+| `marketing-content/`    | blog, FAQ, imprensa, apresentação e conteúdo editorial                              |
+| `marketing-conversion/` | CTA, newsletter, preços e planos                                                    |
+| `marketing-features/`   | recursos, capturas de tela, fluxos e descoberta de suporte                          |
+| `marketing-proof/`      | depoimentos, conjuntos de logos e estatísticas                                      |
+| `typography/`           | títulos, texto, links e divisores                                                   |
+
+<!-- markdownlint-enable MD013 -->
 
 ## Descoberta
 

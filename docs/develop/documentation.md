@@ -6,7 +6,7 @@
 | --- | --- |
 | Natureza | descritivo |
 | Escopo | manutenção da documentação do próprio Specsfy |
-| Autoridade | fluxo da skill local; fontes executáveis prevalecem |
+| Autoridade | fluxo da skill local e fontes executáveis prevalecem |
 
 ## Papel
 
@@ -19,10 +19,13 @@ Acione `$specsfy-monorepo-documentator` somente na raiz de
 [`promovaweb/specsfy`](https://github.com/promovaweb/specsfy). A skill confirma
 o remoto e a raiz Git única antes de coletar evidências:
 
+<!-- markdownlint-disable MD013 -->
 ```bash
-python3 -B .agents/skills/specsfy-monorepo-documentator/scripts/collect_monorepo_evidence.py \
+python3 -B \
+  .agents/skills/specsfy-monorepo-documentator/scripts/collect_monorepo_evidence.py \
   --workspace .
 ```
+<!-- markdownlint-enable MD013 -->
 
 O coletor é somente leitura. Ele registra remoto, branch, commit, estado Git,
 quantidade de arquivos rastreados e fontes estruturais disponíveis em cada
@@ -47,6 +50,11 @@ segunda fonte editorial. `ebook/VERSION` controla a edição com SemVer e
 `docs/user/reading-order.txt` declara a ordem pedagógica única, compartilhada
 pelo portal e pelo ebook.
 
+Todo o texto do ebook e do PDF é escrito em Português do Brasil. O pipeline
+exige `lang: "pt-BR"` nos metadados e `lang="pt-BR"` no template HTML; termos
+técnicos em inglês permanecem somente quando forem a forma usada pelo
+ecossistema.
+
 Na raiz:
 
 ```bash
@@ -56,8 +64,10 @@ make verify-ebook
 
 O build gera os dois artefatos versionados e `ebook/build.json`. O manifesto
 registra o digest recursivo das páginas, imagens e fontes de build, além dos
-hashes do PDF e EPUB. A regressão executa a mesma verificação; portanto, toda
-mudança em `docs/user/` precisa reconstruir o ebook na mesma entrega.
+hashes do PDF e EPUB. Depois de validar a edição vigente, o pipeline conserva
+as cinco versões SemVer mais recentes e remove PDF e EPUB das anteriores. A
+regressão executa a mesma verificação. Portanto, toda mudança em `docs/user/`
+precisa reconstruir o ebook na mesma entrega.
 
 As tabelas `## Classificação` são metadados das fontes Markdown. O pipeline
 extrai seus campos para `document_metadata` no manifesto e remove somente sua
@@ -70,7 +80,7 @@ e destinos internos ausentes, mantendo os dois formatos autocontidos.
 
 O sistema visual deriva de `brand/`: logo oficial, IBM Plex, preto, branco,
 neutros e estilos de código, tabela e navegação. As fontes do pipeline vivem
-em `.ebook/`; os artefatos publicados e o controle de edição vivem em
+em `.ebook/`. Os artefatos publicados e o controle de edição vivem em
 `ebook/`.
 
 ## Evidência e publicação
@@ -98,11 +108,11 @@ cria uma tag no commit do monorepo e publica a seção correspondente do
 
 ## Não use para
 
-- documentar uma aplicação consumidora;
+- documentar uma aplicação consumidora.
 - substituir specs ou fontes executáveis.
 
 ## Fonte da verdade e precedência
 
-Fontes executáveis de cada módulo prevalecem;
+Fontes executáveis de cada módulo prevalecem.
 `docs/develop/context/` governa decisões transversais e `docs/user/` explica
 interfaces públicas.

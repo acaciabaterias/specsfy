@@ -1,12 +1,12 @@
 import { CheckCircleIcon } from '@heroicons/react/20/solid'
 
 const benefits = [
-  'Competitive salaries',
-  'Flexible work hours',
-  '30 days of paid vacation',
-  'Annual team retreats',
-  'Benefits for you and your family',
-  'A great work environment',
+  'Salários competitivos',
+  'Horário de trabalho flexível',
+  '30 dias de férias remuneradas',
+  'Encontros anuais da equipe',
+  'Benefícios para você e sua família',
+  'Um ótimo ambiente de trabalho',
 ]
 
 export default function Example() {
@@ -22,11 +22,10 @@ export default function Example() {
             />
             <div className="w-full flex-auto">
               <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-950 sm:text-5xl dark:text-white">
-                Join our team
+                Faça parte da nossa equipe
               </h2>
               <p className="mt-6 text-lg/8 text-pretty text-gray-600 dark:text-gray-400">
-                Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in
-                accusamus quisquam.
+                Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
               </p>
               <ul
                 role="list"
@@ -47,7 +46,7 @@ export default function Example() {
                   href="#"
                   className="text-sm/6 font-semibold text-indigo-600 hover:text-indigo-300 dark:text-indigo-400 dark:hover:text-indigo-300"
                 >
-                  See our job postings
+                  Ver nossas vagas
                   <span aria-hidden="true">&rarr;</span>
                 </a>
               </div>

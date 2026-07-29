@@ -21,21 +21,21 @@ prompt inicial, o intervalo de consulta ou a forma de publicação.
 
 ## Atualize quando
 
-- a API, o repositório ou o formato de tag mudar;
-- o nome do pacote ou mecanismo de atualização mudar;
+- a API, o repositório ou o formato de tag mudar.
+- o nome do pacote ou mecanismo de atualização mudar.
 - dados globais, timeout, consentimento ou fallback mudar.
 
 ## Não use para
 
-- atualizar skills ou dependências do projeto consumidor;
-- instalar versão sem consentimento explícito;
+- atualizar skills ou dependências do projeto consumidor.
+- instalar versão sem consentimento explícito.
 - guardar token, conteúdo de projeto ou dado pessoal no cache.
 
 ## Fonte da verdade e precedência
 
 O código e os testes de `cli/` implementam esta política. Tags selecionam
-versões publicadas; o ambiente, a origem e a resolução da ferramenta pertencem
-ao `uv`; o cache apenas reduz consultas e nunca autoriza uma instalação.
+versões publicadas. O ambiente, a origem e a resolução da ferramenta pertencem
+ao `uv`. O cache apenas reduz consultas e nunca autoriza uma instalação.
 
 ## Fluxo
 
@@ -45,7 +45,7 @@ ao `uv`; o cache apenas reduz consultas e nunca autoriza uma instalação.
 3. Considera somente tags estáveis `vMAJOR.MINOR.PATCH` e registra o SHA
    apontado como evidência da consulta.
 4. Se a versão for superior, pede consentimento no terminal.
-5. Ao aceitar, executa `uv tool upgrade specsfy-cli`; o `uv` preserva a origem,
+5. Ao aceitar, executa `uv tool upgrade specsfy-cli`. O `uv` preserva a origem,
    as opções e as restrições registradas na instalação.
 6. Depois que o `uv` conclui, o CLI encerra para que a próxima abertura use o
    ambiente atualizado.

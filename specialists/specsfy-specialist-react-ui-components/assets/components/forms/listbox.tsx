@@ -26,17 +26,17 @@ export function Listbox<T>({
         aria-label={ariaLabel}
         className={clsx([
           className,
-          // Basic layout
+          // Layout básico
           'group relative block w-full',
-          // Background color + shadow applied to inset pseudo element, so shadow blends with border in light mode
+          // Cor de fundo e sombra aplicadas ao pseudoelemento interno para integrar a sombra à borda no modo claro
           'before:absolute before:inset-px before:rounded-[calc(var(--radius-lg)-1px)] before:bg-white before:shadow-sm',
-          // Background color is moved to control and shadow is removed in dark mode so hide `before` pseudo
+          // No modo escuro, a cor de fundo passa ao controle e a sombra é removida; por isso, o pseudoelemento `before` fica oculto
           'dark:before:hidden',
-          // Hide default focus styles
+          // Oculta os estilos de foco padrão
           'focus:outline-hidden',
-          // Focus ring
+          // Anel de foco
           'after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:ring-transparent after:ring-inset data-focus:after:ring-2 data-focus:after:ring-blue-500',
-          // Disabled state
+          // Estado desabilitado
           'data-disabled:opacity-50 data-disabled:before:bg-zinc-950/5 data-disabled:before:shadow-none',
         ])}
       >
@@ -45,21 +45,21 @@ export function Listbox<T>({
           options={options}
           placeholder={placeholder && <span className="block truncate text-zinc-500">{placeholder}</span>}
           className={clsx([
-            // Basic layout
+            // Layout básico
             'relative block w-full appearance-none rounded-lg py-[calc(--spacing(2.5)-1px)] sm:py-[calc(--spacing(1.5)-1px)]',
-            // Set minimum height for when no value is selected
+            // Define a altura mínima quando nenhum valor está selecionado
             'min-h-11 sm:min-h-9',
-            // Horizontal padding
+            // Espaçamento horizontal
             'pr-[calc(--spacing(7)-1px)] pl-[calc(--spacing(3.5)-1px)] sm:pl-[calc(--spacing(3)-1px)]',
-            // Typography
+            // Tipografia
             'text-left text-base/6 text-zinc-950 placeholder:text-zinc-500 sm:text-sm/6 dark:text-white forced-colors:text-[CanvasText]',
-            // Border
+            // Borda
             'border border-zinc-950/10 group-data-active:border-zinc-950/20 group-data-hover:border-zinc-950/20 dark:border-white/10 dark:group-data-active:border-white/20 dark:group-data-hover:border-white/20',
-            // Background color
+            // Cor de fundo
             'bg-transparent dark:bg-white/5',
-            // Invalid state
+            // Estado inválido
             'group-data-invalid:border-red-500 group-data-hover:group-data-invalid:border-red-500 dark:group-data-invalid:border-red-600 dark:data-hover:group-data-invalid:border-red-600',
-            // Disabled state
+            // Estado desabilitado
             'group-data-disabled:border-zinc-950/20 group-data-disabled:opacity-100 dark:group-data-disabled:border-white/15 dark:group-data-disabled:bg-white/2.5 dark:group-data-disabled:data-hover:border-white/15',
           ])}
         />
@@ -79,19 +79,19 @@ export function Listbox<T>({
         transition
         anchor="selection start"
         className={clsx(
-          // Anchor positioning
+          // Posicionamento da âncora
           '[--anchor-offset:-1.625rem] [--anchor-padding:--spacing(4)] sm:[--anchor-offset:-1.375rem]',
-          // Base styles
+          // Estilos base
           'isolate w-max min-w-[calc(var(--button-width)+1.75rem)] scroll-py-1 rounded-xl p-1 select-none',
-          // Invisible border that is only visible in `forced-colors` mode for accessibility purposes
+          // Borda invisível, exibida apenas no modo `forced-colors` para acessibilidade
           'outline outline-transparent focus:outline-hidden',
-          // Handle scrolling when menu won't fit in viewport
+          // Controla a rolagem quando o menu não cabe na viewport
           'overflow-y-scroll overscroll-contain',
-          // Popover background
+          // Fundo do popover
           'bg-white/75 backdrop-blur-xl dark:bg-zinc-800/75',
-          // Shadows
+          // Sombras
           'shadow-lg ring-1 ring-zinc-950/10 dark:ring-white/10 dark:ring-inset',
-          // Transitions
+          // Transições
           'transition-opacity duration-100 ease-in data-closed:data-leave:opacity-0 data-transition:pointer-events-none'
         )}
       >
@@ -112,11 +112,11 @@ export function ListboxOption<T>({
   let sharedClasses = clsx(
     // Base
     'flex min-w-0 items-center',
-    // Icons
+    // Ícones
     '*:data-[slot=icon]:size-5 *:data-[slot=icon]:shrink-0 sm:*:data-[slot=icon]:size-4',
     '*:data-[slot=icon]:text-zinc-500 group-data-focus/option:*:data-[slot=icon]:text-white dark:*:data-[slot=icon]:text-zinc-400',
     'forced-colors:*:data-[slot=icon]:text-[CanvasText] forced-colors:group-data-focus/option:*:data-[slot=icon]:text-[Canvas]',
-    // Avatars
+    // Avatares
     '*:data-[slot=avatar]:-mx-0.5 *:data-[slot=avatar]:size-6 sm:*:data-[slot=avatar]:size-5'
   )
 
@@ -130,15 +130,15 @@ export function ListboxOption<T>({
         return (
           <div
             className={clsx(
-              // Basic layout
+              // Layout básico
               'group/option grid cursor-default grid-cols-[--spacing(5)_1fr] items-baseline gap-x-2 rounded-lg py-2.5 pr-3.5 pl-2 sm:grid-cols-[--spacing(4)_1fr] sm:py-1.5 sm:pr-3 sm:pl-1.5',
-              // Typography
+              // Tipografia
               'text-base/6 text-zinc-950 sm:text-sm/6 dark:text-white forced-colors:text-[CanvasText]',
-              // Focus
+              // Foco
               'outline-hidden data-focus:bg-blue-500 data-focus:text-white',
-              // Forced colors mode
+              // Modo de cores forçadas
               'forced-color-adjust-none forced-colors:data-focus:bg-[Highlight] forced-colors:data-focus:text-[HighlightText]',
-              // Disabled
+              // Desabilitado
               'data-disabled:opacity-50'
             )}
           >

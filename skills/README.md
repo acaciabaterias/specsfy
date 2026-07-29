@@ -1,11 +1,13 @@
 # Specsfy Skills
 
+<!-- markdownlint-disable MD033 -->
 <p align="center">
   <picture>
     <source srcset="../brand/logo/icon.svg" type="image/svg+xml">
     <img src="../brand/logo/icon.png" alt="Logo do Specsfy" width="128">
   </picture>
 </p>
+<!-- markdownlint-enable MD033 -->
 
 Este módulo do monorepo mantém a metodologia executável do
 Specsfy: skills, scripts determinísticos, referências, assets e metadata para
@@ -19,18 +21,18 @@ está em [`docs/`](../docs/).
 
 Este módulo possui:
 
-- as instruções operacionais das dez skills base, do setup, do documentador e
-  das três auxiliares;
-- os templates de ideia, backlog, spec e tarefas em `templates/`;
-- um documento preenchido e não normativo em `examples/Spec.md`;
-- o MCR-10 e referências dos gates;
-- scripts de validação, rastreabilidade, evidência e progresso;
-- metadata de descoberta em `agents/openai.yaml`;
+- as instruções operacionais das nove skills base, do setup, do documentador e
+  das três auxiliares.
+- os templates de ideia, backlog, spec e tarefas em `templates/`.
+- um documento preenchido e não normativo em `examples/Spec.md`.
+- o MCR-10 e referências dos gates.
+- scripts de validação, rastreabilidade, evidência e progresso.
+- metadata de descoberta em `agents/openai.yaml`.
 - BDD, testes e fixtures que validam as próprias skills.
 
 Specs pertencem a cada projeto consumidor. A raiz do monorepo
-[`promovaweb/specsfy`](https://github.com/promovaweb/specsfy) não instala nem executa este
-catálogo. A identidade pertence a [`brand/`](../brand/).
+[`promovaweb/specsfy`](https://github.com/promovaweb/specsfy) não instala nem
+executa este catálogo. A identidade pertence a [`brand/`](../brand/).
 Conhecimento técnico opcional pertence a
 [`specialists/`](../specialists/) e é instalado
 por [`cli/`](../cli/).
@@ -40,9 +42,9 @@ por [`cli/`](../cli/).
 O fluxo preservado pelas skills é:
 
 ```text
-capturar imediatamente em specs/ideias
+capturar imediatamente em specs/inbox
   → refinar no backlog
-  → entrevistar
+  → refinar
   → especificar
   → validar definição
   → planejar tarefas
@@ -69,34 +71,38 @@ compatível com o ato correspondente.
 As skills fazem handoff dentro da mesma conversa. Quando uma responsabilidade
 termina ou encontra uma pendência de outra etapa, a skill atual:
 
-1. anuncia `Pendência detectada` quando houver trabalho bloqueante;
-2. apresenta `Transição automática`, com origem, destino, motivo e resultado;
+1. anuncia `Pendência detectada` quando houver trabalho bloqueante.
+2. apresenta `Transição automática`, com origem, destino, motivo e resultado.
 3. carrega imediatamente a skill responsável sem pedir confirmação nem exigir
-   que a pessoa repita o comando;
-4. preserva o contexto e resolve a pendência na mesma conversa;
+   que a pessoa repita o comando.
+4. preserva o contexto e resolve a pendência na mesma conversa.
 5. apresenta `Retomada automática` e retorna à etapa de origem quando a correção
    terminar.
 
 O protocolo também vale para retornos. Pedido tardio entra por
-`specsfy-base-update-spec`; mudança de comportamento reabre definição e
+`specsfy-update-spec`. Mudança de comportamento reabre definição e
 validação, mudança de plano retorna às tarefas e ausência de teste ou RED chama
 TDD/BDD. O handoff é automático, mas não autoriza instalação, deploy,
 publicação ou ação destrutiva, que continuam exigindo autorização específica.
+
+Toda decisão material ausente é tratada por `specsfy-02-backlog`. A skill
+reanalisa o contexto depois de cada resposta e pergunta novamente enquanto
+existir lacuna aplicável, sem limite máximo. A partir da 11ª pergunta, oferece
+`avançar`; a saída preserva as lacunas em Draft e não aprova o Definition Gate.
 
 ## Catálogo
 
 | Skill | Responsabilidade | Limite principal |
 | --- | --- | --- |
-| [`specsfy-base-idea`](specsfy-base-idea/SKILL.md) | preservar e pré-processar o input sem perguntas | não refina, promove ou implementa |
-| [`specsfy-base-backlog`](specsfy-base-backlog/SKILL.md) | pesquisar, conversar e registrar ideias minimamente completas | não cria especificações |
-| [`specsfy-base-interview`](specsfy-base-interview/SKILL.md) | descobrir intenção com MCR-10 | não escreve arquivos por padrão |
-| [`specsfy-base-specify`](specsfy-base-specify/SKILL.md) | promover decisões para `spec.md` e research | não implementa nem captura ideia vaga |
-| [`specsfy-base-validate`](specsfy-base-validate/SKILL.md) | auditar o Definition Gate | não decide requisitos |
-| [`specsfy-base-tasks`](specsfy-base-tasks/SKILL.md) | manter tarefas nas seções 14–15 | não cria `tasks.md` nem código |
-| [`specsfy-base-tdd-bdd`](specsfy-base-tdd-bdd/SKILL.md) | usar o BDD da spec para criar TDD e provar RED/GREEN | não executa Gherkin nem inventa comportamento |
-| [`specsfy-base-implement`](specsfy-base-implement/SKILL.md) | executar tarefas prontas e evidenciar | não trabalha sem RED |
-| [`specsfy-base-update-spec`](specsfy-base-update-spec/SKILL.md) | incorporar pedido tardio e reabrir somente os atos afetados | não cria nova spec nem implementa |
-| [`specsfy-base-progress`](specsfy-base-progress/SKILL.md) | projetar o estado global | não altera gates ou checkboxes |
+| [`specsfy-01-inbox`](specsfy-01-inbox/SKILL.md) | preservar e pré-processar o input sem perguntas | não refina, promove ou implementa |
+| [`specsfy-02-backlog`](specsfy-02-backlog/SKILL.md) | refinar entradas, registrar backlog e fechar lacunas em ciclo adaptativo com MCR-10 | não cria especificações |
+| [`specsfy-03-specify`](specsfy-03-specify/SKILL.md) | promover decisões para `spec.md` e research | não implementa nem captura ideia vaga |
+| [`specsfy-04-validate`](specsfy-04-validate/SKILL.md) | auditar o Definition Gate | não decide requisitos |
+| [`specsfy-05-tasks`](specsfy-05-tasks/SKILL.md) | manter tarefas nas seções 14–15 | não cria `tasks.md` nem código |
+| [`specsfy-06-tdd-bdd`](specsfy-06-tdd-bdd/SKILL.md) | usar o BDD da spec para criar TDD e provar RED/GREEN | não executa Gherkin nem inventa comportamento |
+| [`specsfy-07-implement`](specsfy-07-implement/SKILL.md) | executar tarefas prontas e evidenciar | não trabalha sem RED |
+| [`specsfy-update-spec`](specsfy-update-spec/SKILL.md) | incorporar pedido tardio e reabrir somente os atos afetados | não cria nova spec nem implementa |
+| [`specsfy-progress`](specsfy-progress/SKILL.md) | projetar o estado global | não altera gates ou checkboxes |
 | [`specsfy-setup`](specsfy-setup/SKILL.md) | detectar o stack, criar contexto ausente e reconciliar blocos de agentes | não sobrescreve arquivos de contexto existentes |
 | [`specsfy-documentator`](specsfy-documentator/SKILL.md) | reconstruir documentação completa do sistema existente em `docs/` | não inventa decisões, relações ou referências |
 | [`specsfy-aux-stack`](specsfy-aux-stack/SKILL.md) | manter `.specsfy/STACK.md` a partir de evidência executável | não inventa nem copia toda dependência |
@@ -110,8 +116,8 @@ conteúdo fora dos blocos gerenciados em `AGENTS.md` e `CLAUDE.md`.
 
 Durante planejamento, implementação e projeção de progresso,
 `specsfy-setup/scripts/monitor_context.py` classifica mudanças staged, unstaged
-e untracked. Alterações estruturais exigem `STACK.md`; alterações de
-persistência exigem `DATABASE.md`; código de aplicação exige revisão de
+e untracked. Alterações estruturais exigem `STACK.md`. Alterações de
+persistência exigem `DATABASE.md`. Código de aplicação exige revisão de
 `PROJECT.md`. A ausência de impacto material é registrada na evidência da
 tarefa, nunca presumida silenciosamente.
 
@@ -126,22 +132,22 @@ frontend, pacotes, integrações e decisões dentro dos blocos gerenciados de
 As skills incorporam capacidades inspiradas em extensões de specification
 development sem instalar outro runtime ou criar fontes paralelas:
 
-| Capacidade | Owner |
+| Capacidade | Responsável |
 | --- | --- |
-| Quality Gates | `specsfy-base-validate` |
-| CI Guard | `specsfy-base-validate` |
-| Verify Tasks | `specsfy-base-implement` |
-| Spec Trace | `specsfy-base-tdd-bdd` |
-| Spec Reference Loader | `specsfy-base-specify` |
-| Research Harness | `specsfy-base-specify` |
-| What-if | `specsfy-base-update-spec` |
-| Spec Changelog | `specsfy-base-update-spec` |
-| Spec Critique | `specsfy-base-validate` |
-| Architecture Guard | `specsfy-base-validate` |
-| Security Review | `specsfy-base-validate` |
-| QA Testing | `specsfy-base-tdd-bdd` |
-| Token Consumption Analyzer | `specsfy-base-progress` |
-| PR Bridge | `specsfy-base-implement` |
+| Gates de qualidade | `specsfy-04-validate` |
+| Proteção de CI | `specsfy-04-validate` |
+| Verificação de tarefas | `specsfy-07-implement` |
+| Rastreabilidade da spec | `specsfy-06-tdd-bdd` |
+| Carregamento de referências da spec | `specsfy-03-specify` |
+| Estrutura de pesquisa | `specsfy-03-specify` |
+| Análise de cenários hipotéticos | `specsfy-update-spec` |
+| Changelog da spec | `specsfy-update-spec` |
+| Crítica da spec | `specsfy-04-validate` |
+| Proteção arquitetural | `specsfy-04-validate` |
+| Revisão de segurança | `specsfy-04-validate` |
+| Testes de qualidade | `specsfy-06-tdd-bdd` |
+| Análise de consumo de tokens | `specsfy-progress` |
+| Integração com PR | `specsfy-07-implement` |
 
 ## Especialistas sob demanda
 
@@ -161,7 +167,7 @@ e não recebe nenhuma categoria.
 
 ```text
 templates/
-├── Idea.md, Backlog.md, Spec.md e Tasks.md
+├── Inbox.md, Backlog.md, Spec.md e Tasks.md
 └── Project.md, Stack.md, Rules.md e Database.md
 examples/
 └── Spec.md        # fixture preenchida para agentes, CLI e testes
@@ -180,9 +186,9 @@ specsfy-{base-<responsabilidade>|setup|documentator|aux-<responsabilidade>}/
   padrão.
 - Referências extensas vivem a um nível da skill e possuem gatilho explícito de
   leitura.
-- Uma regra normativa possui uma única fonte; outros arquivos apontam para ela.
-- O CLI publica os templates e o exemplo sob `.specsfy/`; somente uma spec criada a
-  partir do template se torna normativa para uma feature.
+- Uma regra normativa possui uma única fonte. Outros arquivos apontam para ela.
+- O CLI publica os templates e o exemplo sob `.specsfy/`. Somente uma spec
+  criada a partir do template se torna normativa para uma feature.
 
 ## Disponibilizar as skills
 
@@ -220,7 +226,7 @@ criar ou executar testes e sugere Vitest como padrão. O Gherkin permanece
 somente na `spec.md` como referência: agentes derivam testes executáveis dele,
 sem criar ou executar `.feature`. A decisão Node é materializada no script
 `test:tdd`. Cada feature, história e requisito recebe no mínimo três cenários
-BDD distintos e três casos TDD executáveis; cada caso TDD possui seu próprio
+BDD distintos e três casos TDD executáveis. Cada caso TDD possui seu próprio
 marcador `SPECSFY:`.
 
 ## Validar
@@ -230,29 +236,29 @@ Valide cada skill alterada:
 ```bash
 uv run --quiet --with pyyaml python \
   /home/luizeof/.codex/skills/.system/skill-creator/scripts/quick_validate.py \
-  specsfy-base-<nome>
+  specsfy-<NN>-<nome>
 ```
 
 Execute os contratos das skills a partir desta raiz:
 
 ```bash
 python3 -B -m unittest discover -s tests -p 'test_*.py'
-python3 -B specsfy-base-validate/scripts/verify_repo.py . \
+python3 -B specsfy-04-validate/scripts/verify_repo.py . \
   --boundary local
 ```
 
-O verificador exige as dez skills base. Os contratos do catálogo também
-validam o setup, o documentador e as três auxiliares; especialistas instalados
+O verificador exige as nove skills base. Os contratos do catálogo também
+validam o setup, o documentador e as três auxiliares. Especialistas instalados
 são validados sem limitar o tamanho total do catálogo.
 
 ## Publicação
 
 Antes de publicar:
 
-- frontmatter e metadata são válidos;
-- gatilhos positivos e limites negativos estão claros;
-- não existem placeholders, caches ou links locais quebrados;
-- os testes TDD informados pelo BDD tiveram RED válido e estão verdes;
-- requisitos, testes, tarefas e evidências estão rastreáveis;
-- a regressão do workspace passou;
+- frontmatter e metadata são válidos.
+- gatilhos positivos e limites negativos estão claros.
+- não existem placeholders, caches ou links locais quebrados.
+- os testes TDD informados pelo BDD tiveram RED válido e estão verdes.
+- requisitos, testes, tarefas e evidências estão rastreáveis.
+- a regressão do workspace passou.
 - o diff integrado mantém este módulo e seus consumidores coerentes.

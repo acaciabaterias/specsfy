@@ -1,11 +1,13 @@
 # Specsfy
 
+<!-- markdownlint-disable MD033 -->
 <p align="center">
   <picture>
     <source srcset="../brand/logo/icon.svg" type="image/svg+xml">
     <img src="../brand/logo/icon.png" alt="Logo do Specsfy" width="128">
   </picture>
 </p>
+<!-- markdownlint-enable MD033 -->
 
 > Especifique. Prove. Entregue.
 
@@ -22,13 +24,14 @@ Veja as demais telas e comandos no
 
 ## O que você precisa
 
-- Python 3.11 ou superior;
-- [`uv`](https://docs.astral.sh/uv/) disponível no terminal;
-- o comando [`skills`](https://github.com/vercel-labs/skills) ou `npx`;
+- Python 3.11 ou superior.
+- [`uv`](https://docs.astral.sh/uv/) disponível no terminal.
+- o comando [`skills`](https://github.com/vercel-labs/skills) ou `npx`.
 - um projeto existente ou recém-criado no qual o Specsfy será aplicado.
 
-O monorepo [`promovaweb/specsfy`](https://github.com/promovaweb/specsfy) não é um projeto
-consumidor e recusa o bootstrap.
+O monorepo
+[`promovaweb/specsfy`](https://github.com/promovaweb/specsfy) não é um
+projeto consumidor e recusa o bootstrap.
 
 ## Instalação passo a passo
 
@@ -66,7 +69,9 @@ specsfy install --project .
 O comando instala as skills base, setup, documentação e contexto auxiliar em
 `.agents/skills/`, publica o contrato em `.specsfy/Spec.md` e reconcilia blocos
 gerenciados em `AGENTS.md` e `CLAUDE.md`. Os templates ficam juntos em
-`.specsfy/templates/`. Ele não cria uma spec de produto.
+`.specsfy/templates/`. Personalizações homônimas ficam em
+`.specsfy/templates/custom/`, têm precedência e não são sobrescritas pelo CLI.
+Ele não cria uma spec de produto.
 
 ### 4. Verifique o projeto
 
@@ -76,60 +81,61 @@ specsfy progress --project .
 ```
 
 Uma instalação nova ainda pode mostrar zero specs. Isso confirma que o CLI
-consegue ler o projeto; a primeira spec nasce no fluxo de uso.
+consegue ler o projeto. A primeira spec é criada durante o fluxo de uso.
 
 ## Veja o Specsfy trabalhando
 
 Vamos criar uma página de boas-vindas em um projeto Laravel que já usa Pest.
-Este exemplo mostra os dez comandos base, do começo ao fim.
+Este exemplo mostra as nove skills base, do começo ao fim.
 
-### 1. Capture a ideia — `$specsfy-base-idea`
+### 1. Capture uma entrada — `$specsfy-01-inbox`
 
 Envie:
 
 ```text
-Use $specsfy-base-idea para capturar:
+Use $specsfy-01-inbox para capturar:
 criar uma página /boas-vindas que cumprimente a pessoa pelo nome.
 ```
 
 Sem fazer perguntas, o agente cria algo como:
 
 ```text
-Ideia capturada em
-specs/ideias/2026-07-28-143205-pagina-boas-vindas.md
+Entrada capturada em
+specs/inbox/2026-07-28-143205-pagina-boas-vindas.md
 ```
 
-### 2. Refine no backlog — `$specsfy-base-backlog`
+### 2. Refine no backlog — `$specsfy-02-backlog`
 
 Envie:
 
 ```text
-Use $specsfy-base-backlog para guardar esta ideia:
+Use $specsfy-02-backlog para refinar esta entrada:
 criar uma página /boas-vindas que cumprimente a pessoa pelo nome.
 ```
 
 Você verá algo assim:
 
 ```text
-Ideia registrada em specs/backlog/0001-pagina-boas-vindas.md
+Backlog registrado em specs/backlog/0001-pagina-boas-vindas.md
 ```
 
-### 3. Tire as dúvidas — `$specsfy-base-interview`
-
-**Opção 1 — texto livre**
+#### Refinar a partir de texto livre
 
 ```text
-Use $specsfy-base-interview para aprofundar este texto:
+Use $specsfy-02-backlog para aprofundar este texto:
 quero uma página /boas-vindas que cumprimente a pessoa pelo nome.
 ```
 
-**Opção 2 — arquivo de backlog**
+#### Refinar a partir do backlog
 
 ```text
-Use $specsfy-base-interview em specs/backlog/0001-pagina-boas-vindas.md
+Use $specsfy-02-backlog em specs/backlog/0001-pagina-boas-vindas.md
 ```
 
-O agente faz somente as perguntas necessárias. Neste exemplo:
+O agente reavalia cada resposta e continua enquanto houver lacunas aplicáveis,
+sem um limite máximo de perguntas. A partir da 11ª pergunta, também oferece
+`avançar`; essa saída encerra o refinamento do backlog atual, mas mantém a definição
+pendente. Neste exemplo:
 
 ```text
 Agente: O que deve aparecer quando nenhum nome for informado?
@@ -138,19 +144,20 @@ Você: Olá, visitante!
 Brief pronto para especificar.
 ```
 
-### 4. Crie a especificação — `$specsfy-base-specify`
+### 3. Crie a especificação — `$specsfy-03-specify`
 
-**Opção 1 — texto livre**
+#### Especificar a partir de texto livre
 
 ```text
-Use $specsfy-base-specify para criar uma especificação a partir deste texto:
-a página /boas-vindas mostra Olá e o nome informado; sem nome, usa visitante.
+Use $specsfy-03-specify para criar uma especificação a partir deste texto:
+a página /boas-vindas mostra Olá e o nome informado.
+Sem nome, usa visitante.
 ```
 
-**Opção 2 — arquivo de backlog**
+#### Especificar a partir do backlog
 
 ```text
-Use $specsfy-base-specify para promover specs/backlog/0001-pagina-boas-vindas.md
+Use $specsfy-03-specify para promover specs/backlog/0001-pagina-boas-vindas.md
 ```
 
 Resultado:
@@ -160,15 +167,15 @@ Especificação criada em
 specs/specs/0001-pagina-boas-vindas/spec.md
 ```
 
-Ela registra dois resultados esperados: com `?nome=Ana`, mostrar `Olá, Ana!`;
-sem nome, mostrar `Olá, visitante!`.
+Ela registra dois resultados esperados: com `?nome=Ana`, mostrar `Olá, Ana!`.
+Sem nome, mostrar `Olá, visitante!`.
 
-### 5. Confira a especificação — `$specsfy-base-validate`
+### 4. Confira a especificação — `$specsfy-04-validate`
 
 Envie:
 
 ```text
-Use $specsfy-base-validate em specs/specs/0001-pagina-boas-vindas/spec.md
+Use $specsfy-04-validate em specs/specs/0001-pagina-boas-vindas/spec.md
 ```
 
 Resultado:
@@ -180,12 +187,12 @@ Definition Gate: Passed
 
 `READY` significa que a ideia está clara o bastante para virar trabalho.
 
-### 6. Divida o trabalho — `$specsfy-base-tasks`
+### 5. Divida o trabalho — `$specsfy-05-tasks`
 
 Envie:
 
 ```text
-Use $specsfy-base-tasks em specs/specs/0001-pagina-boas-vindas/spec.md
+Use $specsfy-05-tasks em specs/specs/0001-pagina-boas-vindas/spec.md
 ```
 
 Resultado:
@@ -194,12 +201,12 @@ Resultado:
 2 tarefas preparadas.
 ```
 
-### 7. Prepare a verificação — `$specsfy-base-tdd-bdd`
+### 6. Prepare a verificação — `$specsfy-06-tdd-bdd`
 
 Envie:
 
 ```text
-Use $specsfy-base-tdd-bdd em specs/specs/0001-pagina-boas-vindas/spec.md
+Use $specsfy-06-tdd-bdd em specs/specs/0001-pagina-boas-vindas/spec.md
 para preparar a verificação.
 ```
 
@@ -209,12 +216,12 @@ Resultado:
 Verificação preparada.
 ```
 
-### 8. Implemente — `$specsfy-base-implement`
+### 7. Implemente — `$specsfy-07-implement`
 
 Envie:
 
 ```text
-Use $specsfy-base-implement em specs/specs/0001-pagina-boas-vindas/spec.md
+Use $specsfy-07-implement em specs/specs/0001-pagina-boas-vindas/spec.md
 ```
 
 Resultado:
@@ -225,12 +232,12 @@ Página /boas-vindas criada.
 Verificação aprovada.
 ```
 
-### 9. Altere a especificação — `$specsfy-base-update-spec`
+### 8. Altere a especificação — `$specsfy-update-spec`
 
 Depois de implementar, imagine que você lembrou de uma regra:
 
 ```text
-Use $specsfy-base-update-spec em
+Use $specsfy-update-spec em
 specs/specs/0001-pagina-boas-vindas/spec.md:
 o nome deve ter no máximo 80 caracteres.
 ```
@@ -245,12 +252,12 @@ Implementação atualizada.
 
 A mudança continua na mesma spec e volta apenas às etapas necessárias.
 
-### 10. Veja o progresso — `$specsfy-base-progress`
+### 9. Veja o progresso — `$specsfy-progress`
 
 Envie:
 
 ```text
-Use $specsfy-base-progress para mostrar o resultado final.
+Use $specsfy-progress para mostrar o resultado final.
 ```
 
 Resultado:
@@ -286,7 +293,7 @@ Depois, atualize as skills Specsfy instaladas no projeto:
 specsfy skills update --project .
 ```
 
-Alterações locais em conteúdo gerenciado são preservadas e bloqueiam a
+Alterações locais em conteúdo gerenciado são preservadas e impedem a
 substituição. Revise o conflito antes de decidir por `--force`, pois essa opção
 descarta a customização protegida.
 
@@ -324,10 +331,10 @@ descarta a customização protegida.
 ## Uso por stack
 
 O framework base é independente de linguagem. Especialistas acrescentam
-critérios técnicos sem alterar os três atos:
+orientação técnica sem alterar os três atos:
 
-- [Laravel](../docs/user/laravel.md);
-- [Astro](../docs/user/astro.md);
+- [Laravel](../docs/user/laravel.md).
+- [Astro](../docs/user/astro.md).
 - [Next.js](../docs/user/nextjs.md).
 
 Você pode instalar recomendações detectadas:
@@ -342,7 +349,7 @@ Ou escolher uma explicitamente:
 specsfy skills add specsfy-specialist-laravel --project .
 ```
 
-Instalar especialista é uma ação explícita; uma recomendação do agente não o
+Instalar especialista é uma ação explícita. Uma recomendação do agente não o
 instala automaticamente.
 
 ## Próximos guias
@@ -352,7 +359,7 @@ instala automaticamente.
 - [Atualizar uma especificação](../docs/user/update-spec.md)
 - [Uso avançado](../docs/user/advanced-usage.md)
 - [CLI, TUI e atualização](../docs/user/cli.md)
-- [Mapa dos módulos](../docs/develop/modules.md)
+- [Módulos do monorepo](../docs/develop/modules.md)
 - [Documentação completa](../docs/)
 
 ## O que o Specsfy garante
@@ -363,7 +370,7 @@ Cada fatia atravessa:
 Draft → Defined → Planned → Implementing → Complete
 ```
 
-Os mesmos IDs conectam histórias, requisitos, critérios de aceite, testes,
+Os mesmos IDs conectam histórias, requisitos, condições de aceite, testes,
 tarefas e evidências:
 
 ```text
@@ -371,7 +378,7 @@ US → FR/NFR → AC → teste BDD/TDD → tarefa → evidência
 ```
 
 O Specsfy não substitui julgamento de produto, pesquisa, segurança ou
-engenharia. Ele também não impõe arquitetura nem gerenciador de projetos; seu
+engenharia. Ele também não impõe arquitetura nem gerenciador de projetos. Seu
 contrato é tornar decisões e conclusão rastreáveis.
 
 ## Ecossistema
@@ -394,6 +401,20 @@ Veja responsabilidades, públicos e limites no
 
 Specsfy é um projeto da [Promovaweb](https://promovaweb.com), mantido por
 **Luiz Eduardo Oliveira Fonseca** e pela comunidade.
+
+### Inspirações e fontes
+
+O projeto reconhece o
+[GitHub Spec Kit](https://github.github.com/spec-kit/), o
+[OpenSpec](https://openspec.dev/) e o livro
+[*Categorias*, de Aristóteles](https://classics.mit.edu/Aristotle/categories.html)
+como inspirações. Eles contribuíram, respectivamente, para o estudo de fluxos
+de specification-driven development, acordos leves entre pessoas e agentes e
+classificação explícita de objetos, atributos, relações e estados.
+
+Essas referências não são dependências do Specsfy nem indicam equivalência
+entre os métodos. O contrato executável do projeto permanece nas skills, nos
+templates, nos validadores e nos testes deste repositório.
 
 Contato: [contato@promovaweb.com](mailto:contato@promovaweb.com).
 Consulte os [créditos completos](../docs/user/credits.md).

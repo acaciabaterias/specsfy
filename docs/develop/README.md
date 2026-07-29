@@ -1,11 +1,13 @@
 # Guia de desenvolvimento do Specsfy
 
+<!-- markdownlint-disable MD033 -->
 <p align="center">
   <picture>
     <source srcset="../../brand/logo/icon.svg" type="image/svg+xml">
     <img src="../../brand/logo/icon.png" alt="Logo do Specsfy" width="128">
   </picture>
 </p>
+<!-- markdownlint-enable MD033 -->
 
 Este percurso explica como o framework funciona por dentro e como modificá-lo
 sem romper a metodologia. Ele é destinado a agentes e humanos que contribuem
@@ -30,13 +32,13 @@ Para aprender a usar o produto em um projeto consumidor, siga o
 
 ## Para agentes
 
-1. leia o `AGENTS.md` da raiz e do módulo afetado;
+1. leia o `AGENTS.md` da raiz e do módulo afetado.
 2. use o [roteador de contexto](context/README.md) para carregar somente as
-   decisões relevantes;
+   decisões relevantes.
 3. trate código, testes, manifests e schemas como evidência do estado
-   implementado;
-4. preserve `spec.md` como fonte normativa em projetos consumidores;
-5. observe RED antes de mudar o comportamento;
+   implementado.
+4. preserve `spec.md` como fonte normativa em projetos consumidores.
+5. observe RED antes de mudar o comportamento.
 6. atualize documentação e testes no mesmo diff.
 
 ## Para humanos
@@ -50,10 +52,10 @@ execução e regressão.
 
 O diretório [`context/`](context/README.md) contém unidades normativas pequenas:
 
-- arquitetura, módulos, dependências e integrações;
-- stack, pacotes, convenções e testes;
-- persistência, privacidade e retenção;
-- fluxos que atravessam módulos;
+- arquitetura, módulos, dependências e integrações.
+- stack, pacotes, convenções e testes.
+- persistência, privacidade e retenção.
+- fluxos que atravessam módulos.
 - glossário e finalidade do produto.
 
 Esses documentos fornecem contexto para contribuir, implementar ou modificar o

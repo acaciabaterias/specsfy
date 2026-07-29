@@ -1,22 +1,22 @@
 const faqs = [
   {
-    question: 'How do you make holy water?',
+    question: 'Como se faz água benta?',
     answer:
-      'You boil the hell out of it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.',
+      'Ferva até ficar pronta.',
   },
   {
-    question: "What's the best thing about Switzerland?",
+    question: "Qual é a melhor coisa sobre a Suíça?",
     answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      "Não sei, mas a bandeira é um grande diferencial.",
   },
   {
-    question: 'What do you call someone with no body and no nose?',
-    answer: 'Nobody knows. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.',
+    question: 'Como se chama alguém sem corpo e sem nariz?',
+    answer: 'Ninguém sabe.',
   },
   {
-    question: 'Why do you never see elephants hiding in trees?',
+    question: 'Por que nunca vemos elefantes escondidos em árvores?',
     answer:
-      "Because they're so good at it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      "Porque eles são muito bons nisso.",
   },
 ]
 
@@ -27,15 +27,15 @@ export default function Example() {
         <div className="lg:grid lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-5">
             <h2 className="text-3xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-4xl dark:text-white">
-              Frequently asked questions
+              Perguntas frequentes
             </h2>
             <p className="mt-4 text-base/7 text-pretty text-gray-600 dark:text-gray-400">
-              Can't find the answer you're looking for? Reach out to our{' '}
+              Não encontrou a resposta que procura? Fale com nosso{' '}
               <a
                 href="#"
                 className="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
               >
-                customer support
+                atendimento ao cliente
               </a>{' '}
               team.
             </p>

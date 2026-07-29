@@ -1,11 +1,13 @@
 # Contexto de dados
 
+<!-- markdownlint-disable MD033 -->
 <p align="center">
   <picture>
     <source srcset="../../../../brand/logo/icon.svg" type="image/svg+xml">
     <img src="../../../../brand/logo/icon.png" alt="Logo do Specsfy" width="128">
   </picture>
 </p>
+<!-- markdownlint-enable MD033 -->
 
 ## Classificação
 
@@ -27,19 +29,19 @@ projeto não possuir mecanismo ou política independente de evolução de schema
 
 ## Atualize quando
 
-- uma folha de dados for criada, consolidada ou removida;
-- um armazenamento ou classe de dados nova surgir;
+- uma folha de dados for criada, consolidada ou removida.
+- um armazenamento ou classe de dados nova surgir.
 - migrations adquirirem implementação ou política independente.
 
 ## Não use para
 
-- reproduzir schemas, tabelas ou campos;
-- armazenar SQL de uma feature;
+- reproduzir schemas, tabelas ou campos.
+- armazenar SQL de uma feature.
 - declarar retenção específica sem spec.
 
 ## Fonte da verdade e precedência
 
-Este índice governa o roteamento. As folhas governam políticas transversais;
+Este índice governa o roteamento. As folhas governam políticas transversais.
 schemas e migrations são fontes executáveis, e cada mudança pertence à spec da
 fatia.
 

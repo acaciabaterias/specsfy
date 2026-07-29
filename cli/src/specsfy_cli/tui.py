@@ -42,16 +42,15 @@ from .testing import TestRun, stream_project_tests
 
 
 BASE_DESCRIPTIONS = {
-    "specsfy-base-idea": "Captura e pré-processa ideias sem fazer perguntas.",
-    "specsfy-base-backlog": "Ideias, descoberta inicial e backlog priorizado.",
-    "specsfy-base-interview": "Entrevista arquitetural para reduzir ambiguidades.",
-    "specsfy-base-specify": "Criação e evolução da especificação normativa.",
-    "specsfy-base-validate": "Revisão de qualidade, riscos e gates.",
-    "specsfy-base-tasks": "Decomposição rastreável do trabalho.",
-    "specsfy-base-tdd-bdd": "BDD, TDD e rastreabilidade dos requisitos.",
-    "specsfy-base-implement": "Execução disciplinada e evidências da entrega.",
-    "specsfy-base-update-spec": "Atualiza pedidos tardios e reabre os gates afetados.",
-    "specsfy-base-progress": "Leitura e acompanhamento do progresso.",
+    "specsfy-01-inbox": "Captura e pré-processa entradas sem fazer perguntas.",
+    "specsfy-02-backlog": "Refina entradas, reduz ambiguidades e prioriza o backlog.",
+    "specsfy-03-specify": "Criação e evolução da especificação normativa.",
+    "specsfy-04-validate": "Revisão de qualidade, riscos e gates.",
+    "specsfy-05-tasks": "Decomposição rastreável do trabalho.",
+    "specsfy-06-tdd-bdd": "BDD, TDD e rastreabilidade dos requisitos.",
+    "specsfy-07-implement": "Execução disciplinada e evidências da entrega.",
+    "specsfy-update-spec": "Atualiza pedidos tardios e reabre os gates afetados.",
+    "specsfy-progress": "Leitura e acompanhamento do progresso.",
     "specsfy-setup": "Prepara e reconcilia o contexto persistente do projeto.",
     "specsfy-aux-stack": "Mapeia e mantém o stack técnico observado.",
     "specsfy-aux-rules": "Ajuda a registrar regras explícitas sem apagar as atuais.",
@@ -165,7 +164,7 @@ class SpecPreviewModal(ModalScreen[None]):
 
 class SpecsfyApp(App):
     TITLE = "Specsfy"
-    SUB_TITLE = "Dashboard de specs e skills"
+    SUB_TITLE = "Painel de specs e skills"
     ENABLE_COMMAND_PALETTE = False
     BINDINGS = [
         Binding("ctrl+q", "quit", "Sair", priority=True),
@@ -1275,20 +1274,32 @@ def _skill_options(
 
 def _is_specsfy_skill(name: str) -> bool:
     return (
-        name == "specsfy-setup"
+        name in FRAMEWORK_SKILLS
         or name in DOCUMENTATION_SKILLS
         or name.startswith("specsfy-aux-")
-        or name.startswith("specsfy-base-")
         or name.startswith("specsfy-specialist-")
     )
 
 
 def _friendly_skill_name(name: str) -> str:
+    base_names = {
+        "specsfy-01-inbox": "01 · Inbox",
+        "specsfy-02-backlog": "02 · Backlog",
+        "specsfy-03-specify": "03 · Especificar",
+        "specsfy-04-validate": "04 · Validar",
+        "specsfy-05-tasks": "05 · Tarefas",
+        "specsfy-06-tdd-bdd": "06 · TDD orientado por BDD",
+        "specsfy-07-implement": "07 · Implementar",
+        "specsfy-update-spec": "Atualizar especificação",
+        "specsfy-progress": "Progresso",
+    }
+    if name in base_names:
+        return base_names[name]
     if name == "specsfy-setup":
         return "Setup"
     if name in DOCUMENTATION_SKILLS:
         return "Documentator"
-    for prefix in ("specsfy-aux-", "specsfy-base-", "specsfy-specialist-"):
+    for prefix in ("specsfy-aux-", "specsfy-specialist-"):
         if name.startswith(prefix):
             return name.removeprefix(prefix).replace("-", " ").title()
     return name.replace("-", " ").title()

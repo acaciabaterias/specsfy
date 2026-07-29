@@ -19,7 +19,7 @@ instalação/progresso. Skills pertencem a `skills/` e
   Backlogs usa lista e preview Markdown em duas colunas; a aba Skills usa
   busca, filtros, catálogo tabular, plano de alteração e painel de detalhes,
   exibindo e gerenciando exclusivamente `specsfy-setup`,
-  `specsfy-documentator`, skills `specsfy-base-*`, `specsfy-aux-*` e
+  `specsfy-documentator`, skills base, `specsfy-aux-*` e
   `specsfy-specialist-*`.
 - Todo botão visível declara no próprio rótulo um atalho global `Ctrl+letra`.
 - Toda a interface permanece navegável por setas, Tab/Shift+Tab, Esc, atalhos

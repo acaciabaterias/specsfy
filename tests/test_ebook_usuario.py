@@ -5,6 +5,7 @@ import posixpath
 import re
 import struct
 import subprocess
+import tempfile
 import unittest
 import zipfile
 import xml.etree.ElementTree as ET
@@ -18,6 +19,90 @@ PIPELINE_ROOT = ROOT / ".ebook"
 
 
 class UserEbookTests(unittest.TestCase):
+    def test_portable_guide_requires_brazilian_portuguese(self) -> None:
+        metadata = (PIPELINE_ROOT / "metadata.yaml").read_text(encoding="utf-8")
+        template = (PIPELINE_ROOT / "template.html").read_text(encoding="utf-8")
+        build = (PIPELINE_ROOT / "build-ebook.sh").read_text(encoding="utf-8")
+        readme = (EBOOK_ROOT / "README.md").read_text(encoding="utf-8")
+
+        self.assertIn('lang: "pt-BR"', metadata)
+        self.assertIn('<html lang="pt-BR">', template)
+        self.assertIn("Português do Brasil", readme)
+        self.assertIn("deve declarar lang:", build)
+        self.assertIn('deve declarar lang="pt-BR"', build)
+
+    def test_retention_keeps_only_the_five_latest_editions(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            ebook_root = Path(directory)
+            for version in (
+                "1.0.0",
+                "1.1.0",
+                "1.2.0",
+                "2.0.0",
+                "2.0.1",
+                "2.1.0",
+            ):
+                stem = f"Specsfy-Guia-do-Usuario-v{version}"
+                (ebook_root / f"{stem}.pdf").write_bytes(b"pdf")
+                (ebook_root / f"{stem}.epub").write_bytes(b"epub")
+            unrelated = ebook_root / "README.md"
+            unrelated.write_text("preservar", encoding="utf-8")
+
+            prune = subprocess.run(
+                [
+                    "python3",
+                    str(PIPELINE_ROOT / "prune-editions.py"),
+                    "--ebook-root",
+                    str(ebook_root),
+                    "--keep",
+                    "5",
+                ],
+                cwd=ROOT,
+                text=True,
+                capture_output=True,
+            )
+
+            self.assertEqual(0, prune.returncode, prune.stderr)
+            self.assertFalse(
+                (
+                    ebook_root
+                    / "Specsfy-Guia-do-Usuario-v1.0.0.pdf"
+                ).exists()
+            )
+            self.assertFalse(
+                (
+                    ebook_root
+                    / "Specsfy-Guia-do-Usuario-v1.0.0.epub"
+                ).exists()
+            )
+            self.assertEqual(
+                10,
+                len(
+                    list(
+                        ebook_root.glob(
+                            "Specsfy-Guia-do-Usuario-v*.*"
+                        )
+                    )
+                ),
+            )
+            self.assertEqual(
+                "preservar",
+                unrelated.read_text(encoding="utf-8"),
+            )
+
+    def test_build_applies_retention_after_integrity_check(self) -> None:
+        build = (PIPELINE_ROOT / "build-ebook.sh").read_text(
+            encoding="utf-8"
+        )
+        retention_call = (
+            'check_manifest\n'
+            'python3 "$RETENTION_SCRIPT" \\\n'
+            '  --ebook-root "$EBOOK_ROOT" \\\n'
+            '  --keep 5 \\\n'
+            '  --protect-version "$VERSION"'
+        )
+        self.assertIn(retention_call, build)
+
     def test_semver_controls_versioned_pdf_and_epub(self) -> None:
         version = (EBOOK_ROOT / "VERSION").read_text(
             encoding="utf-8"
@@ -80,6 +165,7 @@ class UserEbookTests(unittest.TestCase):
             "EBOOK_DOC_SOURCES",
             "find docs/user -type f",
             ".ebook/extract-document-metadata.py",
+            ".ebook/prune-editions.py",
             ".ebook/strip-document-metadata.lua",
             "ebook:",
             "./.ebook/build-ebook.sh",
@@ -104,7 +190,7 @@ class UserEbookTests(unittest.TestCase):
             "IBM Plex Mono",
             "#000000",
             "#FFFFFF",
-            "Specify. Prove. Ship.",
+            "Especifique. Comprove. Entregue.",
         ):
             self.assertIn(evidence, sources)
 
@@ -260,9 +346,9 @@ class UserEbookTests(unittest.TestCase):
             encoding="utf-8"
         )
         for heading in (
-            "### Antes dos atos: escolha o destino da ideia",
+            "### Escolha o destino da ideia",
             "### Ato I — Definir o que precisa mudar",
-            "### Ato II — Planejar e provar antes de implementar",
+            "### Ato II — Planejar e preparar o RED",
             "### Ato III — Entregar e conferir o resultado",
         ):
             self.assertIn(heading, method)
@@ -279,7 +365,7 @@ class UserEbookTests(unittest.TestCase):
             "Um **gate**",
             "BDD",
             "TDD",
-            "Se o pedido mudar",
+            "Se a necessidade mudar",
         ):
             self.assertIn(term, method)
 

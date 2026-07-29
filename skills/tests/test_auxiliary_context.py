@@ -168,9 +168,9 @@ class AuxiliaryContextTests(unittest.TestCase):
 
     def test_delivery_skill_enforces_context_monitor_handoffs(self) -> None:
         workflow_skills = (
-            ROOT / "specsfy-base-tasks" / "SKILL.md",
-            ROOT / "specsfy-base-implement" / "SKILL.md",
-            ROOT / "specsfy-base-progress" / "SKILL.md",
+            ROOT / "specsfy-05-tasks" / "SKILL.md",
+            ROOT / "specsfy-07-implement" / "SKILL.md",
+            ROOT / "specsfy-progress" / "SKILL.md",
         )
         framework = (ROOT / "Spec.md").read_text(encoding="utf-8")
         for path in workflow_skills:
@@ -266,6 +266,26 @@ class AuxiliaryContextTests(unittest.TestCase):
                     state,
                     {path: path.read_text(encoding="utf-8") for path in state},
                 )
+
+    def test_setup_prefers_custom_context_template(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory)
+            custom = project / ".specsfy/templates/custom"
+            custom.mkdir(parents=True)
+            source = (ROOT / "templates/Project.md").read_text(encoding="utf-8")
+            (custom / "Project.md").write_text(
+                source.replace(
+                    "# Projeto",
+                    "# Contexto customizado do projeto",
+                ),
+                encoding="utf-8",
+            )
+
+            result = run_script(SETUP, "--project", str(project))
+
+            self.assertEqual(0, result.returncode, result.stderr)
+            project_context = (project / "PROJECT.md").read_text(encoding="utf-8")
+            self.assertIn("# Contexto customizado do projeto", project_context)
 
     def test_setup_reference_matches_publishable_agents_block(self) -> None:
         reference = (

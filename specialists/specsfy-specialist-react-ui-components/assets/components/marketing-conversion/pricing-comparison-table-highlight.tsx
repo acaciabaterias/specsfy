@@ -2,37 +2,37 @@ import { Fragment } from 'react'
 import { CheckIcon, MinusIcon } from '@heroicons/react/20/solid'
 
 const tiers = [
-  { name: 'Starter', id: 'tier-starter', href: '#', priceMonthly: '$19', mostPopular: false },
-  { name: 'Growth', id: 'tier-growth', href: '#', priceMonthly: '$49', mostPopular: true },
-  { name: 'Scale', id: 'tier-scale', href: '#', priceMonthly: '$99', mostPopular: false },
+  { name: 'Inicial', id: 'tier-starter', href: '#', priceMensalmente: '$19', mostPopular: false },
+  { name: 'Crescimento', id: 'tier-growth', href: '#', priceMensalmente: '$49', mostPopular: true },
+  { name: 'Escala', id: 'tier-scale', href: '#', priceMensalmente: '$99', mostPopular: false },
 ]
 
 const sections = [
   {
-    name: 'Features',
+    name: 'Recursos',
     features: [
-      { name: 'Edge content delivery', tiers: { Starter: true, Growth: true, Scale: true } },
-      { name: 'Custom domains', tiers: { Starter: '1', Growth: '3', Scale: 'Unlimited' } },
-      { name: 'Team members', tiers: { Starter: '3', Growth: '20', Scale: 'Unlimited' } },
-      { name: 'Single sign-on (SSO)', tiers: { Starter: false, Growth: false, Scale: true } },
+      { name: 'Entrega de conteúdo na borda', tiers: { Inicial: true, Crescimento: true, Escala: true } },
+      { name: 'Domínios personalizados', tiers: { Inicial: '1', Crescimento: '3', Escala: 'Ilimitado' } },
+      { name: 'Integrantes da equipe', tiers: { Inicial: '3', Crescimento: '20', Escala: 'Ilimitado' } },
+      { name: 'Login único (SSO)', tiers: { Inicial: false, Crescimento: false, Escala: true } },
     ],
   },
   {
-    name: 'Reporting',
+    name: 'Relatórios',
     features: [
-      { name: 'Advanced analytics', tiers: { Starter: true, Growth: true, Scale: true } },
-      { name: 'Basic reports', tiers: { Starter: false, Growth: true, Scale: true } },
-      { name: 'Professional reports', tiers: { Starter: false, Growth: false, Scale: true } },
-      { name: 'Custom report builder', tiers: { Starter: false, Growth: false, Scale: true } },
+      { name: 'Análises avançadas', tiers: { Inicial: true, Crescimento: true, Escala: true } },
+      { name: 'Relatórios básicos', tiers: { Inicial: false, Crescimento: true, Escala: true } },
+      { name: 'Relatórios profissionais', tiers: { Inicial: false, Crescimento: false, Escala: true } },
+      { name: 'Criador de relatórios personalizados', tiers: { Inicial: false, Crescimento: false, Escala: true } },
     ],
   },
   {
-    name: 'Support',
+    name: 'Suporte',
     features: [
-      { name: '24/7 online support', tiers: { Starter: true, Growth: true, Scale: true } },
-      { name: 'Quarterly workshops', tiers: { Starter: false, Growth: true, Scale: true } },
-      { name: 'Priority phone support', tiers: { Starter: false, Growth: false, Scale: true } },
-      { name: '1:1 onboarding tour', tiers: { Starter: false, Growth: false, Scale: true } },
+      { name: 'Suporte online 24/7', tiers: { Inicial: true, Crescimento: true, Escala: true } },
+      { name: 'Workshops trimestrais', tiers: { Inicial: false, Crescimento: true, Escala: true } },
+      { name: 'Suporte telefônico prioritário', tiers: { Inicial: false, Crescimento: false, Escala: true } },
+      { name: 'Integração individual', tiers: { Inicial: false, Crescimento: false, Escala: true } },
     ],
   },
 ]
@@ -46,14 +46,14 @@ export default function Example() {
     <div className="bg-white py-24 sm:py-32 dark:bg-gray-900">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
-          <h2 className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">Pricing</h2>
+          <h2 className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">Preços</h2>
           <p className="mt-2 text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-6xl dark:text-white">
-            Pricing that grows with you
+            Preços que crescem com você
           </p>
         </div>
         <p className="mx-auto mt-6 max-w-2xl text-center text-lg font-medium text-pretty text-gray-600 sm:text-xl/8 dark:text-gray-400">
-          Choose an affordable plan that's packed with the best features for engaging your audience, creating customer
-          loyalty, and driving sales.
+          Escolha um plano acessível com recursos para engajar seu público e criar relacionamentos com clientes
+          relacionamentos e aumentar as vendas.
         </p>
         <div className="mx-auto mt-12 max-w-md space-y-8 sm:mt-16 lg:hidden">
           {tiers.map((tier) => (
@@ -70,8 +70,8 @@ export default function Example() {
                 {tier.name}
               </h3>
               <p className="mt-2 flex items-baseline gap-x-1 text-gray-900 dark:text-white">
-                <span className="text-4xl font-semibold">{tier.priceMonthly}</span>
-                <span className="text-sm font-semibold">/month</span>
+                <span className="text-4xl font-semibold">{tier.priceMensalmente}</span>
+                <span className="text-sm font-semibold">/mês</span>
               </p>
               <a
                 href={tier.href}
@@ -83,7 +83,7 @@ export default function Example() {
                   'mt-8 block rounded-md px-3 py-2 text-center text-sm/6 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:focus-visible:outline-indigo-500',
                 )}
               >
-                Buy plan
+                Comprar plano
               </a>
               <ul role="list" className="mt-10 space-y-4 text-sm/6 text-gray-900 dark:text-gray-200">
                 {sections.map((section) => (
@@ -128,7 +128,7 @@ export default function Example() {
               </div>
             ) : null}
             <table className="w-full table-fixed border-separate border-spacing-x-8 text-left">
-              <caption className="sr-only">Pricing plan comparison</caption>
+              <caption className="sr-only">Comparação de planos</caption>
               <colgroup>
                 <col className="w-1/4" />
                 <col className="w-1/4" />
@@ -148,13 +148,13 @@ export default function Example() {
               <tbody>
                 <tr>
                   <th scope="row">
-                    <span className="sr-only">Price</span>
+                    <span className="sr-only">Preço</span>
                   </th>
                   {tiers.map((tier) => (
                     <td key={tier.id} className="px-6 pt-2 xl:px-8">
                       <div className="flex items-baseline gap-x-1 text-gray-900 dark:text-white">
-                        <span className="text-4xl font-semibold">{tier.priceMonthly}</span>
-                        <span className="text-sm/6 font-semibold">/month</span>
+                        <span className="text-4xl font-semibold">{tier.priceMensalmente}</span>
+                        <span className="text-sm/6 font-semibold">/mês</span>
                       </div>
                       <a
                         href={tier.href}
@@ -165,7 +165,7 @@ export default function Example() {
                           'mt-8 block rounded-md px-3 py-2 text-center text-sm/6 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:focus-visible:outline-indigo-500',
                         )}
                       >
-                        Buy plan
+                        Comprar plano
                       </a>
                     </td>
                   ))}
@@ -211,7 +211,7 @@ export default function Example() {
                                   />
                                 )}
                                 <span className="sr-only">
-                                  {feature.tiers[tier.name] === true ? 'Included' : 'Not included'} in {tier.name}
+                                  {feature.tiers[tier.name] === true ? 'Incluído' : 'Não incluído'} em {tier.name}
                                 </span>
                               </>
                             )}

@@ -10,8 +10,8 @@ from behave import given, then, when
 
 
 ROOT = Path(__file__).resolve().parents[3]
-SCRIPT = ROOT / "specsfy-base-backlog/scripts/iniciar_backlog.py"
-SKILL = ROOT / "specsfy-base-backlog/SKILL.md"
+SCRIPT = ROOT / "specsfy-02-backlog/scripts/iniciar_backlog.py"
+SKILL = ROOT / "specsfy-02-backlog/SKILL.md"
 
 
 @given("um projeto consumidor vazio para backlog")
@@ -21,7 +21,7 @@ def given_empty_project(context) -> None:
 
 
 @when('o agente registra a ideia "{title}"')
-def when_capture_idea(context, title: str) -> None:
+def when_capture_backlog_entry(context, title: str) -> None:
     context.result = subprocess.run(
         [
             sys.executable,
@@ -100,7 +100,7 @@ def then_only_persists_complete_minimum(context) -> None:
         "problema percebido",
         "pessoa afetada ou beneficiada",
         "resultado ou valor esperado",
-        "contexto suficiente para distinguir a ideia",
+        "contexto suficiente para distinguir a entrada",
         "Não crie nem atualize o arquivo enquanto algum item essencial",
     )
     for phrase in expected:

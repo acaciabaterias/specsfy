@@ -1,13 +1,13 @@
 import { CheckIcon } from '@heroicons/react/24/outline'
 
-const hobbyFeatures = ['Pariatur quod similique', 'Sapiente libero doloribus', 'Vel ipsa esse repudiandae']
-const scaleFeatures = ['Pariatur quod similique', 'Sapiente libero doloribus', 'Vel ipsa esse repudiandae']
+const hobbyFeatures = ['Resultados consistentes', 'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.', 'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.']
+const scaleFeatures = ['Resultados consistentes', 'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.', 'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.']
 const growthFeatures = [
-  'Quia rem est sed impedit magnam',
-  'Dolorem vero ratione voluptates',
-  'Qui sed ab doloribus voluptatem dolore',
-  'Laborum commodi molestiae id et fugiat',
-  'Nam ut ipsa nesciunt culpa modi dolor',
+  'Recursos essenciais para começar',
+  'Ferramentas para organizar o trabalho',
+  'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
+  'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
+  'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
 ]
 
 export default function Example() {
@@ -15,13 +15,12 @@ export default function Example() {
     <div className="bg-gray-900">
       <div className="px-6 pt-12 lg:px-8 lg:pt-20">
         <div className="text-center">
-          <h2 className="text-xl/6 font-semibold text-gray-300">Pricing</h2>
+          <h2 className="text-xl/6 font-semibold text-gray-300">Preços</h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
-            The right price for you, whoever you are
+            O preço certo para você, seja qual for o seu perfil
           </p>
           <p className="mx-auto mt-3 max-w-4xl text-xl text-gray-300 sm:mt-5 sm:text-2xl">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit numquam eligendi quos odit doloribus
-            molestiae voluptatum.
+            Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
           </p>
         </div>
       </div>
@@ -37,14 +36,14 @@ export default function Example() {
                     <div className="bg-white px-6 py-10">
                       <div>
                         <h3 id="tier-hobby" className="text-center text-2xl font-medium text-gray-900">
-                          Hobby
+                          Iniciante
                         </h3>
                         <div className="mt-4 flex items-center justify-center">
                           <span className="flex items-start px-3 text-6xl tracking-tight text-gray-900">
                             <span className="mt-2 mr-2 text-4xl font-medium tracking-tight">$</span>
                             <span className="font-bold">79</span>
                           </span>
-                          <span className="text-xl font-medium text-gray-500">/month</span>
+                          <span className="text-xl font-medium text-gray-500">/mês</span>
                         </div>
                       </div>
                     </div>
@@ -66,7 +65,7 @@ export default function Example() {
                             aria-describedby="tier-hobby"
                             className="block w-full rounded-lg border border-transparent bg-white px-6 py-3 text-center text-base font-medium text-indigo-600 hover:bg-gray-50"
                           >
-                            Start your trial
+                            Iniciar teste
                           </a>
                         </div>
                       </div>
@@ -83,7 +82,7 @@ export default function Example() {
                   <div className="absolute inset-x-0 top-0 translate-y-px transform">
                     <div className="flex -translate-y-1/2 transform justify-center">
                       <span className="inline-flex rounded-full bg-indigo-600 px-4 py-1 text-base font-semibold text-white">
-                        Most popular
+                        Mais popular
                       </span>
                     </div>
                   </div>
@@ -93,14 +92,14 @@ export default function Example() {
                         id="tier-growth"
                         className="text-center text-3xl font-semibold tracking-tight text-gray-900 sm:-mx-6"
                       >
-                        Growth
+                        Crescimento
                       </h3>
                       <div className="mt-4 flex items-center justify-center">
                         <span className="flex items-start px-3 text-6xl tracking-tight text-gray-900">
                           <span className="mt-2 mr-2 text-4xl font-medium tracking-tight">$</span>
                           <span className="font-bold">149</span>
                         </span>
-                        <span className="text-2xl font-medium text-gray-500">/month</span>
+                        <span className="text-2xl font-medium text-gray-500">/mês</span>
                       </div>
                     </div>
                   </div>
@@ -122,7 +121,7 @@ export default function Example() {
                           aria-describedby="tier-growth"
                           className="block w-full rounded-lg border border-transparent bg-indigo-600 px-6 py-4 text-center text-xl/6 font-medium text-white hover:bg-indigo-700"
                         >
-                          Start your trial
+                          Iniciar teste
                         </a>
                       </div>
                     </div>
@@ -135,14 +134,14 @@ export default function Example() {
                     <div className="bg-white px-6 py-10">
                       <div>
                         <h3 id="tier-scale" className="text-center text-2xl font-medium text-gray-900">
-                          Scale
+                          Escala
                         </h3>
                         <div className="mt-4 flex items-center justify-center">
                           <span className="flex items-start px-3 text-6xl tracking-tight text-gray-900">
                             <span className="mt-2 mr-2 text-4xl font-medium tracking-tight">$</span>
                             <span className="font-bold">349</span>
                           </span>
-                          <span className="text-xl font-medium text-gray-500">/month</span>
+                          <span className="text-xl font-medium text-gray-500">/mês</span>
                         </div>
                       </div>
                     </div>
@@ -164,7 +163,7 @@ export default function Example() {
                             aria-describedby="tier-scale"
                             className="block w-full rounded-lg border border-transparent bg-white px-6 py-3 text-center text-base font-medium text-indigo-600 hover:bg-gray-50"
                           >
-                            Start your trial
+                            Iniciar teste
                           </a>
                         </div>
                       </div>

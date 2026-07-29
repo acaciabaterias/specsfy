@@ -27,15 +27,15 @@ export default function Example() {
       </svg>
       <div className="mx-auto max-w-xl lg:max-w-4xl">
         <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
-          Let&apos;s talk about your project
+          Vamos conversar sobre o seu projeto
         </h2>
-        <p className="mt-2 text-lg/8 text-gray-600 dark:text-gray-400">We help companies and individuals build out their brand guidelines.</p>
+        <p className="mt-2 text-lg/8 text-gray-600 dark:text-gray-400">Ajudamos empresas e pessoas a desenvolver suas diretrizes de marca.</p>
         <div className="mt-16 flex flex-col gap-16 sm:gap-y-20 lg:flex-row">
           <form action="#" method="POST" className="lg:flex-auto">
             <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
               <div>
                 <label htmlFor="first-name" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                  First name
+                  Nome
                 </label>
                 <div className="mt-2.5">
                   <input
@@ -49,7 +49,7 @@ export default function Example() {
               </div>
               <div>
                 <label htmlFor="last-name" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                  Last name
+                  Sobrenome
                 </label>
                 <div className="mt-2.5">
                   <input
@@ -63,7 +63,7 @@ export default function Example() {
               </div>
               <div>
                 <label htmlFor="budget" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                  Budget
+                  Orçamento
                 </label>
                 <div className="mt-2.5">
                   <input
@@ -76,7 +76,7 @@ export default function Example() {
               </div>
               <div>
                 <label htmlFor="website" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                  Website
+                  Site
                 </label>
                 <div className="mt-2.5">
                   <input
@@ -89,7 +89,7 @@ export default function Example() {
               </div>
               <div className="sm:col-span-2">
                 <label htmlFor="message" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                  Message
+                  Mensagem
                 </label>
                 <div className="mt-2.5">
                   <textarea
@@ -107,13 +107,13 @@ export default function Example() {
                 type="submit"
                 className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
               >
-                Let&apos;s talk
+                Vamos conversar
               </button>
             </div>
             <p className="mt-4 text-sm/6 text-gray-500 dark:text-gray-400">
-              By submitting this form, I agree to the{' '}
+              Ao enviar este formulário, concordo com a{' '}
               <a href="#" className="font-semibold whitespace-nowrap text-indigo-600 dark:text-indigo-400">
-                privacy policy
+                política de privacidade
               </a>
               .
             </p>
@@ -121,19 +121,18 @@ export default function Example() {
           <div className="lg:mt-6 lg:w-80 lg:flex-none">
             <img
               alt=""
-              src="https://tailwindcss.com/plus-assets/img/logos/workcation-logo-indigo-600.svg"
+              src="https://tailwindcss.com/mais-assets/img/logos/workcation-logo-indigo-600.svg"
               className="h-12 w-auto dark:hidden"
             />
             <img
               alt=""
-              src="https://tailwindcss.com/plus-assets/img/logos/workcation-logo-indigo-500.svg"
+              src="https://tailwindcss.com/mais-assets/img/logos/workcation-logo-indigo-500.svg"
               className="h-12 w-auto not-dark:hidden"
             />
             <figure className="mt-10">
               <blockquote className="text-lg/8 font-semibold text-gray-900 dark:text-white">
                 <p>
-                  “Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo expedita voluptas culpa sapiente alias
-                  molestiae. Numquam corrupti in laborum sed rerum et corporis.”
+                  Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
                 </p>
               </blockquote>
               <figcaption className="mt-10 flex gap-x-6">
@@ -144,7 +143,7 @@ export default function Example() {
                 />
                 <div>
                   <div className="text-base font-semibold text-gray-900 dark:text-white">Brenna Goyette</div>
-                  <div className="text-sm/6 text-gray-600 dark:text-gray-400">CEO of Workcation</div>
+                  <div className="text-sm/6 text-gray-600 dark:text-gray-400">CEO da Workcation</div>
                 </div>
               </figcaption>
             </figure>

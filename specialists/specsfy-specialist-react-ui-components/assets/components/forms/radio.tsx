@@ -11,9 +11,9 @@ export function RadioGroup({
       {...props}
       className={clsx(
         className,
-        // Basic groups
+        // Grupos básicos
         'space-y-3 **:data-[slot=label]:font-normal',
-        // With descriptions
+        // Com descrições
         'has-data-[slot=description]:space-y-6 has-data-[slot=description]:**:data-[slot=label]:font-medium'
       )}
     />
@@ -30,15 +30,15 @@ export function RadioField({
       {...props}
       className={clsx(
         className,
-        // Base layout
+        // Layout base
         'grid grid-cols-[1.125rem_1fr] gap-x-4 gap-y-1 sm:grid-cols-[1rem_1fr]',
-        // Control layout
+        // Layout do controle
         '*:data-[slot=control]:col-start-1 *:data-[slot=control]:row-start-1 *:data-[slot=control]:mt-0.75 sm:*:data-[slot=control]:mt-1',
-        // Label layout
+        // Layout do rótulo
         '*:data-[slot=label]:col-start-2 *:data-[slot=label]:row-start-1',
-        // Description layout
+        // Layout da descrição
         '*:data-[slot=description]:col-start-2 *:data-[slot=description]:row-start-2',
-        // With description
+        // Com descrição
         'has-data-[slot=description]:**:data-[slot=label]:font-medium'
       )}
     />
@@ -46,29 +46,29 @@ export function RadioField({
 }
 
 const base = [
-  // Basic layout
+  // Layout básico
   'relative isolate flex size-4.75 shrink-0 rounded-full sm:size-4.25',
-  // Background color + shadow applied to inset pseudo element, so shadow blends with border in light mode
+  // Cor de fundo e sombra aplicadas ao pseudoelemento interno para integrar a sombra à borda no modo claro
   'before:absolute before:inset-0 before:-z-10 before:rounded-full before:bg-white before:shadow-sm',
-  // Background color when checked
+  // Cor de fundo quando marcado
   'group-data-checked:before:bg-(--radio-checked-bg)',
-  // Background color is moved to control and shadow is removed in dark mode so hide `before` pseudo
+  // No modo escuro, a cor de fundo passa ao controle e a sombra é removida; por isso, o pseudoelemento `before` fica oculto
   'dark:before:hidden',
-  // Background color applied to control in dark mode
+  // Cor de fundo aplicada ao controle no modo escuro
   'dark:bg-white/5 dark:group-data-checked:bg-(--radio-checked-bg)',
-  // Border
+  // Borda
   'border border-zinc-950/15 group-data-checked:border-transparent group-data-hover:group-data-checked:border-transparent group-data-hover:border-zinc-950/30 group-data-checked:bg-(--radio-checked-border)',
   'dark:border-white/15 dark:group-data-checked:border-white/5 dark:group-data-hover:group-data-checked:border-white/5 dark:group-data-hover:border-white/30',
-  // Inner highlight shadow
+  // Sombra de realce interna
   'after:absolute after:inset-0 after:rounded-full after:shadow-[inset_0_1px_--theme(--color-white/15%)]',
   'dark:after:-inset-px dark:after:hidden dark:after:rounded-full dark:group-data-checked:after:block',
-  // Indicator color (light mode)
+  // Cor do indicador (modo claro)
   '[--radio-indicator:transparent] group-data-checked:[--radio-indicator:var(--radio-checked-indicator)] group-data-hover:group-data-checked:[--radio-indicator:var(--radio-checked-indicator)] group-data-hover:[--radio-indicator:var(--color-zinc-900)]/10',
-  // Indicator color (dark mode)
+  // Cor do indicador (modo escuro)
   'dark:group-data-hover:group-data-checked:[--radio-indicator:var(--radio-checked-indicator)] dark:group-data-hover:[--radio-indicator:var(--color-zinc-700)]',
-  // Focus ring
+  // Anel de foco
   'group-data-focus:outline group-data-focus:outline-2 group-data-focus:outline-offset-2 group-data-focus:outline-blue-500',
-  // Disabled state
+  // Estado desabilitado
   'group-data-disabled:opacity-50',
   'group-data-disabled:border-zinc-950/25 group-data-disabled:bg-zinc-950/5 group-data-disabled:[--radio-checked-indicator:var(--color-zinc-950)]/50 group-data-disabled:before:bg-transparent',
   'dark:group-data-disabled:border-white/20 dark:group-data-disabled:bg-white/2.5 dark:group-data-disabled:[--radio-checked-indicator:var(--color-white)]/50 dark:group-data-checked:group-data-disabled:after:hidden',
@@ -132,7 +132,7 @@ export function Radio({
         <span
           className={clsx(
             'size-full rounded-full border-[4.5px] border-transparent bg-(--radio-indicator) bg-clip-padding',
-            // Forced colors mode
+            // Modo de cores forçadas
             'forced-colors:border-[Canvas] forced-colors:group-data-checked:border-[Highlight]'
           )}
         />

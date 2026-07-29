@@ -2,33 +2,33 @@ import { CloudArrowUpIcon, CogIcon, LockClosedIcon, ArrowPathIcon, ShieldCheckIc
 
 const features = [
   {
-    name: 'Push to Deploy',
-    description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
+    name: 'Envio para deploy',
+    description: 'Uma solução simples para organizar informações e acelerar o trabalho da equipe.',
     icon: CloudArrowUpIcon,
   },
   {
-    name: 'SSL Certificates',
-    description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
+    name: 'Certificados SSL',
+    description: 'Uma solução simples para organizar informações e acelerar o trabalho da equipe.',
     icon: LockClosedIcon,
   },
   {
-    name: 'Simple Queues',
-    description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
+    name: 'Filas simples',
+    description: 'Uma solução simples para organizar informações e acelerar o trabalho da equipe.',
     icon: ArrowPathIcon,
   },
   {
-    name: 'Advanced Security',
-    description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
+    name: 'Segurança avançada',
+    description: 'Uma solução simples para organizar informações e acelerar o trabalho da equipe.',
     icon: ShieldCheckIcon,
   },
   {
-    name: 'Powerful API',
-    description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
+    name: 'API poderosa',
+    description: 'Uma solução simples para organizar informações e acelerar o trabalho da equipe.',
     icon: CogIcon,
   },
   {
-    name: 'Database Backups',
-    description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
+    name: 'Backups do banco de dados',
+    description: 'Uma solução simples para organizar informações e acelerar o trabalho da equipe.',
     icon: ServerIcon,
   },
 ]
@@ -37,13 +37,12 @@ export default function Example() {
   return (
     <div className="relative bg-white py-24 sm:py-32 lg:py-40">
       <div className="mx-auto max-w-md px-6 text-center sm:max-w-3xl lg:max-w-7xl lg:px-8">
-        <h2 className="text-lg font-semibold text-indigo-600">Deploy faster</h2>
+        <h2 className="text-lg font-semibold text-indigo-600">Faça deploy mais rápido</h2>
         <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          Everything you need to deploy your app
+          Tudo o que você precisa para fazer deploy da aplicação
         </p>
         <p className="mx-auto mt-5 max-w-prose text-xl text-gray-500">
-          Phasellus lorem quam molestie id quisque diam aenean nulla in. Accumsan in quis quis nunc, ullamcorper
-          malesuada. Eleifend condimentum id viverra nulla.
+          Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
         </p>
         <div className="mt-20">
           <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">

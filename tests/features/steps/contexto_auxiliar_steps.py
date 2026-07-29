@@ -88,9 +88,9 @@ def when_monitored_paths_change(context) -> None:
     context.workflow_skills = {
         name: (SKILLS / name / "SKILL.md").read_text(encoding="utf-8")
         for name in (
-            "specsfy-base-tasks",
-            "specsfy-base-implement",
-            "specsfy-base-progress",
+            "specsfy-05-tasks",
+            "specsfy-07-implement",
+            "specsfy-progress",
         )
     }
 

@@ -17,7 +17,7 @@ Use esta página durante produção. O contrato completo vive em
 - Posicionamento: especificação executável que conecta intenção, decisão,
   implementação e evidência.
 - Promessa: do pedido à prova, sem perder contexto.
-- Tagline: `Specify. Prove. Ship.`
+- Tagline: `Especifique. Comprove. Entregue.`
 - Personalidade: precisa, estruturada, pragmática, auditável e sóbria.
 
 ## Logo

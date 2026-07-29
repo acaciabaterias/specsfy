@@ -1,11 +1,13 @@
 # Contexto do projeto
 
+<!-- markdownlint-disable MD033 -->
 <p align="center">
   <picture>
     <source srcset="../../../brand/logo/icon.svg" type="image/svg+xml">
     <img src="../../../brand/logo/icon.png" alt="Logo do Specsfy" width="128">
   </picture>
 </p>
+<!-- markdownlint-enable MD033 -->
 
 ## Classificação
 
@@ -29,23 +31,23 @@ selecionado indicar uma dependência real.
 
 ## Atualize quando
 
-- um contexto for criado, movido, dividido ou removido;
-- os gatilhos de leitura ou atualização mudarem;
+- um contexto for criado, movido, dividido ou removido.
+- os gatilhos de leitura ou atualização mudarem.
 - a precedência entre fontes precisar ser esclarecida.
 
 ## Não use para
 
-- resumir todos os documentos desta árvore;
-- registrar comportamento de uma feature;
+- resumir todos os documentos desta árvore.
+- registrar comportamento de uma feature.
 - manter histórico de decisões arquiteturais.
 
 ## Fonte da verdade e precedência
 
-O [`AGENTS.md` do workspace](../../../AGENTS.md)
-governa como o trabalho integrado é executado. `specs/specs/<NNNN>-<slug>/spec.md` governa o
-comportamento da fatia. Estes contextos governam decisões transversais dentro do
-escopo declarado. Código, testes, manifests, configurações, schemas e migrations
-são fontes executáveis do estado implementado.
+O [`AGENTS.md` do workspace](../../../AGENTS.md) governa como o trabalho
+integrado é executado. `specs/specs/<NNNN>-<slug>/spec.md` governa o
+comportamento da fatia. Estes contextos governam decisões transversais dentro
+do escopo declarado. Código, testes, manifests, configurações, schemas e
+migrations são fontes executáveis do estado implementado.
 [ADRs](../decisions/README.md) explicam o histórico, mas não substituem o
 contexto vigente.
 

@@ -10,7 +10,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = ROOT / "specsfy-base-specify/scripts/iniciar_spec.py"
+SCRIPT = ROOT / "specsfy-03-specify/scripts/iniciar_spec.py"
 MODEL = ROOT / "templates/Spec.md"
 
 
@@ -230,6 +230,37 @@ class InitializationTests(unittest.TestCase):
             content = Path(created.stdout.strip()).read_text(encoding="utf-8")
             self.assertIn("template instalado", content)
             self.assertIn("| ID | SPEC-0001 |", content)
+
+    def test_prefers_custom_template_over_installed_default(self) -> None:
+        """SPECSFY: FR-003 AC-001"""
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            templates = root / ".specsfy" / "templates"
+            custom = templates / "custom"
+            custom.mkdir(parents=True)
+            default_content = MODEL.read_text(encoding="utf-8").replace(
+                "# Especificação integrada:",
+                "# Template padrão:",
+            )
+            custom_content = MODEL.read_text(encoding="utf-8").replace(
+                "# Especificação integrada:",
+                "# Template customizado:",
+            )
+            (templates / "Spec.md").write_text(
+                default_content,
+                encoding="utf-8",
+            )
+            (custom / "Spec.md").write_text(
+                custom_content,
+                encoding="utf-8",
+            )
+
+            created = run_initializer(root, "Precedência customizada")
+
+            self.assertEqual(0, created.returncode, created.stderr)
+            content = Path(created.stdout.strip()).read_text(encoding="utf-8")
+            self.assertIn("# Template customizado:", content)
+            self.assertNotIn("# Template padrão:", content)
 
 
 if __name__ == "__main__":

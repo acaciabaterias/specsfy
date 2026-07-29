@@ -131,6 +131,7 @@ STACK_TEMPLATE_PATH = Path(".specsfy/templates/Stack.md")
 RULES_TEMPLATE_PATH = Path(".specsfy/templates/Rules.md")
 DATABASE_TEMPLATE_PATH = Path(".specsfy/templates/Database.md")
 SOURCE_TEMPLATES = Path(__file__).resolve().parents[2] / "templates"
+CUSTOM_TEMPLATES = Path(".specsfy/templates/custom")
 
 
 def render_template(
@@ -139,9 +140,17 @@ def render_template(
     replacements: dict[str, str],
 ) -> str:
     installed = project / installed_path
+    custom = project / CUSTOM_TEMPLATES / installed_path.name
     source = SOURCE_TEMPLATES / installed_path.name
-    template = installed if installed.is_file() else source
-    if not template.is_file():
+    template = next(
+        (
+            candidate
+            for candidate in (custom, installed, source)
+            if candidate.is_file()
+        ),
+        None,
+    )
+    if template is None:
         raise FileNotFoundError(
             f"template não encontrado: {installed}; execute `specsfy install`"
         )

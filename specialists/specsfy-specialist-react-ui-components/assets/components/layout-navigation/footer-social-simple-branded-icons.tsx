@@ -79,7 +79,7 @@ export default function Example() {
           ))}
         </div>
         <p className="mt-8 text-center text-sm/6 text-gray-600 md:order-1 md:mt-0 dark:text-gray-400">
-          &copy; 2024 Your Company, Inc. All rights reserved.
+          &copy; 2024 Sua Empresa, Inc. Todos os direitos reservados.
         </p>
       </div>
     </footer>

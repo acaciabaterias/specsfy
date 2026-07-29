@@ -29,21 +29,21 @@ export function DropdownMenu({
       anchor={anchor}
       className={clsx(
         className,
-        // Anchor positioning
+        // Posicionamento da âncora
         '[--anchor-gap:--spacing(2)] [--anchor-padding:--spacing(1)] data-[anchor~=end]:[--anchor-offset:6px] data-[anchor~=start]:[--anchor-offset:-6px] sm:data-[anchor~=end]:[--anchor-offset:4px] sm:data-[anchor~=start]:[--anchor-offset:-4px]',
-        // Base styles
+        // Estilos base
         'isolate w-max rounded-xl p-1',
-        // Invisible border that is only visible in `forced-colors` mode for accessibility purposes
+        // Borda invisível, exibida apenas no modo `forced-colors` para acessibilidade
         'outline outline-transparent focus:outline-hidden',
-        // Handle scrolling when menu won't fit in viewport
+        // Controla a rolagem quando o menu não cabe na viewport
         'overflow-y-auto',
-        // Popover background
+        // Fundo do popover
         'bg-white/75 backdrop-blur-xl dark:bg-zinc-800/75',
-        // Shadows
+        // Sombras
         'shadow-lg ring-1 ring-zinc-950/10 dark:ring-white/10 dark:ring-inset',
-        // Define grid at the menu level if subgrid is supported
+        // Define o grid no nível do menu quando houver suporte a subgrid
         'supports-[grid-template-columns:subgrid]:grid supports-[grid-template-columns:subgrid]:grid-cols-[auto_1fr_1.5rem_0.5rem_auto]',
-        // Transitions
+        // Transições
         'transition data-leave:duration-100 data-leave:ease-in data-closed:data-leave:opacity-0'
       )}
     />
@@ -59,19 +59,19 @@ export function DropdownItem({
 )) {
   let classes = clsx(
     className,
-    // Base styles
+    // Estilos base
     'group cursor-default rounded-lg px-3.5 py-2.5 focus:outline-hidden sm:px-3 sm:py-1.5',
-    // Text styles
+    // Estilos de texto
     'text-left text-base/6 text-zinc-950 sm:text-sm/6 dark:text-white forced-colors:text-[CanvasText]',
-    // Focus
+    // Foco
     'data-focus:bg-blue-500 data-focus:text-white',
-    // Disabled state
+    // Estado desabilitado
     'data-disabled:opacity-50',
-    // Forced colors mode
+    // Modo de cores forçadas
     'forced-color-adjust-none forced-colors:data-focus:bg-[Highlight] forced-colors:data-focus:text-[HighlightText] forced-colors:data-focus:*:data-[slot=icon]:text-[HighlightText]',
-    // Use subgrid when available but fallback to an explicit grid layout if not
+    // Usa subgrid quando disponível; caso contrário, aplica um grid explícito
     'col-span-full grid grid-cols-[auto_1fr_1.5rem_0.5rem_auto] items-center supports-[grid-template-columns:subgrid]:grid-cols-subgrid',
-    // Icons
+    // Ícones
     '*:data-[slot=icon]:col-start-1 *:data-[slot=icon]:row-start-1 *:data-[slot=icon]:mr-2.5 *:data-[slot=icon]:-ml-0.5 *:data-[slot=icon]:size-5 sm:*:data-[slot=icon]:mr-2 sm:*:data-[slot=icon]:size-4',
     '*:data-[slot=icon]:text-zinc-500 data-focus:*:data-[slot=icon]:text-white dark:*:data-[slot=icon]:text-zinc-400 dark:data-focus:*:data-[slot=icon]:text-white',
     // Avatar
@@ -98,7 +98,7 @@ export function DropdownSection({
       {...props}
       className={clsx(
         className,
-        // Define grid at the section level instead of the item level if subgrid is supported
+        // Define o grid no nível da seção, não do item, quando houver suporte a subgrid
         'col-span-full supports-[grid-template-columns:subgrid]:grid supports-[grid-template-columns:subgrid]:grid-cols-[auto_1fr_1.5rem_0.5rem_auto]'
       )}
     />
@@ -171,7 +171,7 @@ export function DropdownShortcut({
           key={index}
           className={clsx([
             'min-w-[2ch] text-center font-sans text-zinc-400 capitalize group-data-focus:text-white forced-colors:group-data-focus:text-[HighlightText]',
-            // Make sure key names that are longer than one character (like "Tab") have extra space
+            // Garante espaço adicional para nomes de tecla com mais de um caractere, como "Tab"
             index > 0 && char.length > 1 && 'pl-1',
           ])}
         >

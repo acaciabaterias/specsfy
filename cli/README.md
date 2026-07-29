@@ -1,21 +1,23 @@
 # Specsfy CLI
 
+<!-- markdownlint-disable MD033 -->
 <p align="center">
   <picture>
     <source srcset="../brand/logo/icon.svg" type="image/svg+xml">
     <img src="../brand/logo/icon.png" alt="Logo do Specsfy" width="128">
   </picture>
 </p>
+<!-- markdownlint-enable MD033 -->
 
 CLI e TUI para instalar e atualizar skills do Specsfy com segurança, detectar
 tecnologias e acompanhar em tempo real o progresso das specs de um projeto.
 
 ## Pré-requisitos
 
-- Python 3.11 ou superior para instalação via `uv`;
+- Python 3.11 ou superior para instalação via `uv`.
 - `skills`, do projeto
   [`vercel-labs/skills`](https://github.com/vercel-labs/skills), ou `npx`
-  disponível para executá-lo sob demanda;
+  disponível para executá-lo sob demanda.
 - acesso autenticado ao repositório privado: execute `gh auth login` no uso
   interativo ou defina `GH_TOKEN`/`GITHUB_TOKEN` na automação.
 
@@ -41,7 +43,7 @@ uv tool upgrade specsfy-cli
 
 O catálogo e a verificação de versões usam a API do GitHub. O CLI procura,
 nesta ordem, `GH_TOKEN`, `GITHUB_TOKEN` e a sessão retornada por
-`gh auth token`; as credenciais não são gravadas pelo Specsfy.
+`gh auth token`. As credenciais não são gravadas pelo Specsfy.
 
 Para trocar a origem ou uma restrição de versão, execute novamente
 `uv tool install` com o novo requisito.
@@ -79,16 +81,16 @@ specsfy skills add specsfy-specialist-react-ui-components --project .
 Sem subcomando, `specsfy` abre o dashboard TUI no diretório atual. A interface
 possui seis abas:
 
-- **Home**: totais de specs, tarefas, checklists e progresso global;
+- **Home**: totais de specs, tarefas, checklists e progresso global.
 - **Backlogs**: lista navegável à esquerda e preview Markdown formatado à
-  direita;
-- **Specs**: tabela detalhada com gates e progresso de cada especificação;
+  direita.
+- **Specs**: tabela detalhada com gates e progresso de cada especificação.
   destaque uma linha e pressione `Espaço` para abrir a spec completa em um
-  modal Markdown rolável, retornando à listagem com `Esc`;
+  modal Markdown rolável, retornando à listagem com `Esc`.
 - **Testes**: executa o Pest do projeto e separa o resultado entre as subabas
-  **Resumo** e **Testes**, mantendo a saída detalhada rolável;
+  **Resumo** e **Testes**, mantendo a saída detalhada rolável.
 - **Skills**: catálogo tabular com plano, nome, categoria e estado, acompanhado
-  por um painel de detalhes e resumo das alterações pendentes;
+  por um painel de detalhes e resumo das alterações pendentes.
 - **Sobre**: versão e finalidade do CLI.
 
 ## Capturas de tela
@@ -101,28 +103,32 @@ possui seis abas:
 
 ![Skills](../docs/user/assets/cli/cli-skills.png)
 
-Alterações em `specs/ideias/*.md`, `specs/backlog/*.md`, `specs/specs/*/spec.md` e no
-`skills-lock.json` são detectadas automaticamente.
+Alterações em `specs/inbox/*.md`, `specs/backlog/*.md`,
+`specs/specs/*/spec.md` e no `skills-lock.json` são detectadas
+automaticamente.
 
 Em projetos Laravel com Pest, `specsfy test --project .` detecta `artisan` e
 `pestphp/pest`, executa `php artisan test` a partir da raiz selecionada,
 transmite a saída e devolve o mesmo exit code. Na TUI, `Executar testes ^X`
-mostra status, runner, comando, duração e resumo em uma subaba; a outra exibe
+mostra status, runner, comando, duração e resumo em uma subaba. A outra exibe
 cada teste e falha. Relatórios Pest estruturados são convertidos em linhas
 legíveis com arquivo, linha e mensagem.
 
-O bootstrap instala as dez skills base, incluindo `specsfy-base-idea` e
-`specsfy-base-update-spec` para pedidos surgidos depois da definição,
+O bootstrap instala as nove skills base, incluindo `specsfy-01-inbox` e
+`specsfy-update-spec` para pedidos surgidos depois da definição,
 `specsfy-setup`,
 `specsfy-documentator` e as três skills `specsfy-aux-*`, publica as regras em
-`.specsfy/Spec.md`, os templates `Idea.md`, `Backlog.md`, `Spec.md`, `Tasks.md`,
+`.specsfy/Spec.md`, os templates `Inbox.md`, `Backlog.md`, `Spec.md`, `Tasks.md`,
 `Project.md`, `Stack.md`, `Rules.md` e `Database.md` em
-`.specsfy/templates/`, um exemplo em
+`.specsfy/templates/`, cria o diretório não gerenciado
+`.specsfy/templates/custom/`, publica um exemplo em
 `.specsfy/examples/Spec.md` e mescla blocos gerenciados em `AGENTS.md` e
 `CLAUDE.md`, preservando as instruções do usuário. Instalações repetidas são
 idempotentes. O lock registra fingerprints: versões intactas podem ser
 atualizadas, mas conteúdo gerenciado customizado localmente só é substituído ou
-removido com `--force`.
+removido com `--force`. Arquivos em `.specsfy/templates/custom/` sempre têm
+precedência sobre os homônimos gerenciados e nunca são alterados, nem com
+`--force`.
 
 A materialização das skills é delegada ao comando oficial:
 
@@ -147,7 +153,7 @@ não existe em um projeto consumidor, o CLI cria o lock vazio compatível:
 ```
 
 O gerenciador lista exclusivamente `specsfy-setup`, `specsfy-documentator` e
-skills `specsfy-base-*`, `specsfy-aux-*` e `specsfy-specialist-*`. Skills externas
+skills do catálogo base, `specsfy-aux-*` e `specsfy-specialist-*`. Skills externas
 presentes no mesmo lock não aparecem na interface e nunca são removidas ou
 alteradas. O `.specsfy/skills-lock.json`
 mantém os fingerprints usados pelo Specsfy para impedir que uma atualização
@@ -155,7 +161,7 @@ descarte alterações locais.
 
 Na aba Skills, o botão `Atualizar ^R` baixa as origens atuais e atualiza de uma
 vez todas as skills Specsfy instaladas. O comando equivalente é
-`specsfy skills update --project .`; customizações locais continuam protegidas e
+`specsfy skills update --project .`. Customizações locais continuam protegidas e
 só podem ser substituídas explicitamente com `--force` no comando.
 
 ## Atualização do CLI gerenciada pelo uv
@@ -169,13 +175,13 @@ Quando existe versão mais recente, o CLI mostra as versões atual e disponível
 pergunta antes de atualizar. Uma resposta negativa abre a aplicação normalmente.
 Uma resposta positiva delega a atualização ao comando
 `uv tool upgrade specsfy-cli`, que gerencia o ambiente isolado e preserva a
-origem registrada durante a instalação. O processo então fecha; abra `specsfy`
+origem registrada durante a instalação. O processo então fecha. Abra `specsfy`
 novamente para iniciar a versão instalada.
 
 O arquivo global usa permissão `0600`, preserva chaves desconhecidas e separa:
 
-- `settings.check_updates_on_startup`;
-- `settings.check_interval_seconds`;
+- `settings.check_updates_on_startup`.
+- `settings.check_interval_seconds`.
 - `cache.last_checked_at`, tag, versão, commit, ETag e eventual erro recente.
 
 Para publicar uma versão atualizável a partir do workspace de desenvolvimento,
@@ -185,8 +191,8 @@ reconstrói os artefatos versionados, cria a tag anotada `v<versão>` no mesmo
 commit e usa exatamente a seção promovida como corpo do GitHub Release. O CI
 valida o build e a correspondência da tag.
 
-Novas specs usam `specs/specs/<NNNN>-<slug>/spec.md`; capturas imediatas ficam
-em `specs/ideias/<data-hora>-<slug>.md` e itens refináveis em
+Novas specs usam `specs/specs/<NNNN>-<slug>/spec.md`. Capturas imediatas ficam
+em `specs/inbox/<data-hora>-<slug>.md` e itens refináveis em
 `specs/backlog/<NNNN>-<slug>.md`. O dashboard mantém leitura do layout
 legado. A skill de especificação renderiza cada arquivo novo a partir do
 template instalado. O CLI recusa instalação na raiz do monorepo oficial.
@@ -205,25 +211,25 @@ falha quando o artefato não corresponde ao estado atual.
 
 ## Atalhos da TUI
 
-- `Ctrl+Q`: sair;
-- `Ctrl+U`: atualizar;
-- `Ctrl+D`: detectar recomendações;
-- `Ctrl+B`: selecionar todas as skills do framework;
-- `Ctrl+E`: alternar o plano da skill destacada;
-- `Ctrl+M` / `Ctrl+L`: marcar ou limpar os itens visíveis;
-- `Ctrl+A`: aplicar;
-- `Ctrl+R`: atualizar todas as skills Specsfy instaladas;
-- `Ctrl+T`, `Ctrl+I`, `Ctrl+C`: filtros Todas, Instaladas e Recomendadas;
+- `Ctrl+Q`: sair.
+- `Ctrl+U`: atualizar.
+- `Ctrl+D`: detectar recomendações.
+- `Ctrl+B`: selecionar todas as skills do framework.
+- `Ctrl+E`: alternar o plano da skill destacada.
+- `Ctrl+M` / `Ctrl+L`: marcar ou limpar os itens visíveis.
+- `Ctrl+A`: aplicar.
+- `Ctrl+R`: atualizar todas as skills Specsfy instaladas.
+- `Ctrl+T`, `Ctrl+I`, `Ctrl+C`: filtros Todas, Instaladas e Recomendadas.
 - `Ctrl+H`, `Ctrl+G`, `Ctrl+S`, `Ctrl+K`, `Ctrl+O`: Home, Backlogs, Specs,
   Skills e Sobre.
-- `Ctrl+J`: abre Testes;
-- `Ctrl+X`: executa os testes do projeto;
-- `Espaço`: abre a spec destacada ou alterna a skill destacada, conforme a aba;
+- `Ctrl+J`: abre Testes.
+- `Ctrl+X`: executa os testes do projeto.
+- `Espaço`: abre a spec destacada ou alterna a skill destacada, conforme a aba.
 - `Esc`: fecha o modal da spec ou volta para Home.
 
 Cada botão mostra seu atalho no próprio rótulo. `Tab` e `Shift+Tab` percorrem
 os controles e as setas navegam as tabelas. Na aba Skills, `Enter` ou `Espaço`
-alternam o plano entre instalar, manter, remover e ignorar; na aba Specs, abrem
+alternam o plano entre instalar, manter, remover e ignorar. Na aba Specs, abrem
 o modal da linha destacada. `Esc` retorna, e o mouse opera abas, linhas e
 botões. Nada é instalado ou removido antes de `Aplicar`.
 

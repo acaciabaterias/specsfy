@@ -1,6 +1,41 @@
 {
   "version": 1,
   "skills": {
+    "specsfy-01-inbox": {
+      "source": "../skills",
+      "sourceType": "local",
+      "computedHash": "f41fbad49bc830db279f9b7abb72c31954d4e59cee9e465878dbb6ed7d9ed9cb"
+    },
+    "specsfy-02-backlog": {
+      "source": "../skills",
+      "sourceType": "local",
+      "computedHash": "50274d84b24a84e34e4da4763f8d50999b09362167d4645b0d9abf49403767ae"
+    },
+    "specsfy-03-specify": {
+      "source": "../skills",
+      "sourceType": "local",
+      "computedHash": "364470d88950110d7bc40081873430035bf93df9adc40a1317cb7247181be3f0"
+    },
+    "specsfy-04-validate": {
+      "source": "../skills",
+      "sourceType": "local",
+      "computedHash": "e0a65ee7f8fbf1051c550ebcf8b9346e14a28b176ac7a9c44da6c930f49fdf18"
+    },
+    "specsfy-05-tasks": {
+      "source": "../skills",
+      "sourceType": "local",
+      "computedHash": "48b616f340ccbeca38965b278664ace7005610b2aac6d2b778fbde9f621f1421"
+    },
+    "specsfy-06-tdd-bdd": {
+      "source": "../skills",
+      "sourceType": "local",
+      "computedHash": "42f167e5eefa737b4618794eb57839a58a029df84145257c9ed7b221e967cddc"
+    },
+    "specsfy-07-implement": {
+      "source": "../skills",
+      "sourceType": "local",
+      "computedHash": "572f9ac002f4b0e2d93f7e9514d941986f3ab8a366869703a7f84583fd7e57b2"
+    },
     "specsfy-aux-database": {
       "source": "/tmp/specsfy-install-0x3pl8j6/checkout",
       "sourceType": "local",
@@ -16,50 +51,15 @@
       "sourceType": "local",
       "computedHash": "e0d53c75725643ba7edf59076e29e5b66c8e827f956f81331845ae1862d14366"
     },
-    "specsfy-base-backlog": {
-      "source": "/tmp/specsfy-install-0x3pl8j6/checkout",
-      "sourceType": "local",
-      "computedHash": "79d273dcad7edf0b7062cd6f84ee522e2bfd9bb8ea150abc35ff01e941502f24"
-    },
-    "specsfy-base-implement": {
-      "source": "/tmp/specsfy-install-0x3pl8j6/checkout",
-      "sourceType": "local",
-      "computedHash": "5339958dab58bf7364e14c7cb997d4eb5203220cca77cf86fa77299180fe25fa"
-    },
-    "specsfy-base-interview": {
-      "source": "/tmp/specsfy-install-0x3pl8j6/checkout",
-      "sourceType": "local",
-      "computedHash": "4c498186f8c1add5c3d41df87faf5b2eeef2a54248d3ee88a0d0939fa7558462"
-    },
-    "specsfy-base-progress": {
-      "source": "/tmp/specsfy-install-0x3pl8j6/checkout",
-      "sourceType": "local",
-      "computedHash": "a3791bcf6e6d6864ffa3a39c053d154b0b6c2e945761ad2ca1f8e6b15290ac41"
-    },
-    "specsfy-base-specify": {
-      "source": "/tmp/specsfy-install-0x3pl8j6/checkout",
-      "sourceType": "local",
-      "computedHash": "b96901b4b489404190d215e482c260243e3b9ce1b238d6f3c0a462f31d738601"
-    },
-    "specsfy-base-tasks": {
-      "source": "/tmp/specsfy-install-0x3pl8j6/checkout",
-      "sourceType": "local",
-      "computedHash": "40245d9ef02ed5994ec05369113163f4f5a521aa8e295e11b8bb1d5e4b668552"
-    },
-    "specsfy-base-tdd-bdd": {
-      "source": "/tmp/specsfy-install-0x3pl8j6/checkout",
-      "sourceType": "local",
-      "computedHash": "db6ea6b9dfd98589c0242f7f8d3db5ccbddee31e3d1ba8fe27e208a0592a9c77"
-    },
-    "specsfy-base-validate": {
-      "source": "/tmp/specsfy-install-0x3pl8j6/checkout",
-      "sourceType": "local",
-      "computedHash": "9bbb1199b65e0ab89e1bd972043a2203ba3dd9834519964e42fefddcdb194e08"
-    },
     "specsfy-documentator": {
       "source": "/tmp/specsfy-install-0x3pl8j6/checkout",
       "sourceType": "local",
       "computedHash": "61cb5c6d77e23092746b7c040b53dfffad5c09f40a5fe67b4ca4f2d44c127e8c"
+    },
+    "specsfy-progress": {
+      "source": "../skills",
+      "sourceType": "local",
+      "computedHash": "a481c06029d238b3f4d10d2cc9e4e3b7acd8e6ae9d47006cce062a9666280f19"
     },
     "specsfy-setup": {
       "source": "/tmp/specsfy-install-0x3pl8j6/checkout",
@@ -155,6 +155,11 @@
       "source": "/tmp/specsfy-install-t1w0alfe/checkout",
       "sourceType": "local",
       "computedHash": "7e6fea6f6114c257e441425bd32fb32079bbd4deb311b6643d634ad2c2ba3ac8"
+    },
+    "specsfy-update-spec": {
+      "source": "../skills",
+      "sourceType": "local",
+      "computedHash": "1488f91a5df53bab29660f0cf628f6b800a2d7c5fa4c2e63007c2c26c0c6fce7"
     }
   }
 }

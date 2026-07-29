@@ -1,22 +1,36 @@
 # Ebook do guia do usuário
 
+<!-- markdownlint-disable MD033 -->
 <p align="center">
   <picture>
     <source srcset="../brand/logo/icon.svg" type="image/svg+xml">
     <img src="../brand/logo/icon.png" alt="Logo do Specsfy" width="128">
   </picture>
 </p>
+<!-- markdownlint-enable MD033 -->
 
 Esta pasta publica o conteúdo completo de `docs/user/` em PDF e EPUB. Os
-arquivos Markdown continuam sendo a única fonte editorial; não edite os
+arquivos Markdown continuam sendo a única fonte editorial. Não edite os
 artefatos gerados.
+
+## Idioma obrigatório
+
+Todo o conteúdo editorial do ebook e do PDF do Specsfy deve ser escrito em
+Português do Brasil. Termos técnicos em inglês podem ser preservados quando
+forem a forma adotada pelo ecossistema, mas títulos, explicações, exemplos,
+mensagens e metadados de leitura devem usar `pt-BR`.
+
+O build recusa a publicação quando `.ebook/metadata.yaml` não declara
+`lang: "pt-BR"` ou quando o template HTML não usa `lang="pt-BR"`. A revisão
+editorial das páginas em `docs/user/` continua responsável por garantir o
+idioma do texto antes de `make ebook`.
 
 ## Edição vigente
 
 A versão está em [`VERSION`](VERSION) e segue SemVer:
 
-- `PATCH`: correção de texto, link, exemplo ou apresentação;
-- `MINOR`: nova página, novo percurso ou ampliação material;
+- `PATCH`: correção de texto, link, exemplo ou apresentação.
+- `MINOR`: nova página, novo percurso ou ampliação material.
 - `MAJOR`: reorganização incompatível da jornada ou do contrato editorial.
 
 Os artefatos vigentes usam o padrão:
@@ -25,6 +39,11 @@ Os artefatos vigentes usam o padrão:
 Specsfy-Guia-do-Usuario-v<versão>.pdf
 Specsfy-Guia-do-Usuario-v<versão>.epub
 ```
+
+Cada execução bem-sucedida mantém somente as cinco edições SemVer mais
+recentes. PDF e EPUB de versões mais antigas são removidos juntos. A limpeza
+considera exclusivamente arquivos que seguem o padrão acima e preserva
+README, manifesto, fontes e qualquer outro arquivo do diretório.
 
 [`build.json`](build.json) registra a edição, a ordem, o digest das fontes e os
 hashes dos dois arquivos. As tabelas `## Classificação` permanecem nas fontes
@@ -52,12 +71,16 @@ demais arquivos desse percurso entram automaticamente no digest.
 
 Toda alteração em `docs/user/`, inclusive imagens, exige:
 
-1. ajustar `VERSION` conforme o impacto editorial;
+1. ajustar `VERSION` conforme o impacto editorial.
 2. atualizar
    [`docs/user/reading-order.txt`](../docs/user/reading-order.txt) se uma
-   página foi criada, movida ou removida;
-3. executar `make ebook`;
+   página foi criada, movida ou removida.
+3. executar `make ebook`.
 4. executar `make verify-ebook`.
 
 A regressão da raiz também executa a verificação. Ela falha se o digest das
 fontes ou os hashes do PDF e EPUB não coincidirem com `build.json`.
+
+O script de retenção é executado somente depois que a edição vigente passa
+pela verificação de integridade. Se `VERSION` não estiver entre as cinco
+versões SemVer mais recentes encontradas, o build interrompe a limpeza.

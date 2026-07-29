@@ -1,11 +1,11 @@
 const navigation = {
   main: [
-    { name: 'About', href: '#' },
+    { name: 'Sobre', href: '#' },
     { name: 'Blog', href: '#' },
-    { name: 'Jobs', href: '#' },
-    { name: 'Press', href: '#' },
-    { name: 'Accessibility', href: '#' },
-    { name: 'Partners', href: '#' },
+    { name: 'Vagas', href: '#' },
+    { name: 'Imprensa', href: '#' },
+    { name: 'Acessibilidade', href: '#' },
+    { name: 'Parceiros', href: '#' },
   ],
   social: [
     { name: 'Facebook', href: '#', icon: SocialIcon },
@@ -28,7 +28,7 @@ export default function Example() {
   return (
     <footer className="bg-white dark:bg-gray-900">
       <div className="mx-auto max-w-7xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
-        <nav aria-label="Footer" className="-mb-6 flex flex-wrap justify-center gap-x-12 gap-y-3 text-sm/6">
+        <nav aria-label="Rodapé" className="-mb-6 flex flex-wrap justify-center gap-x-12 gap-y-3 text-sm/6">
           {navigation.main.map((item) => (
             <a
               key={item.name}
@@ -52,7 +52,7 @@ export default function Example() {
           ))}
         </div>
         <p className="mt-10 text-center text-sm/6 text-gray-600 dark:text-gray-400">
-          &copy; 2024 Your Company, Inc. All rights reserved.
+          &copy; 2024 Sua Empresa, Inc. Todos os direitos reservados.
         </p>
       </div>
     </footer>

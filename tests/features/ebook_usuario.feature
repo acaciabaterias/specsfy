@@ -16,6 +16,12 @@ Feature: Publicar a documentação do usuário como ebook
     Then a edição usa uma versão SemVer válida
     And os metadados dos artefatos usam a mesma versão
 
+  Scenario: Manter somente as cinco edições mais recentes
+    Given seis edições portáteis em um diretório temporário
+    When a retenção do ebook é executada
+    Then somente as cinco versões SemVer mais recentes permanecem
+    And arquivos que não representam edições são preservados
+
   Scenario: Exigir rebuild após qualquer mudança nos docs do usuário
     Given o manifesto verificável do ebook
     When a integridade das fontes e dos artefatos é calculada

@@ -14,7 +14,7 @@ class SystemDocumentationIntegrationTests(unittest.TestCase):
             ROOT / "cli/src/specsfy_cli/installer.py"
         ).read_text(encoding="utf-8")
         implementation = (
-            SKILLS / "specsfy-base-implement/SKILL.md"
+            SKILLS / "specsfy-07-implement/SKILL.md"
         ).read_text(encoding="utf-8")
         framework = (SKILLS / "Spec.md").read_text(encoding="utf-8")
 

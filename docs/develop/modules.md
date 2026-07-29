@@ -46,7 +46,7 @@ projeto consumidor, nunca neste monorepo.
 
 ## Não use para
 
-- inventariar arquivos;
+- inventariar arquivos.
 - criar fronteiras Git internas.
 
 ## Fonte da verdade e precedência

@@ -90,16 +90,44 @@ próximo trabalho sem abrir cada documento.
 
 #### AC-001 — Consolidar checklists
 
-**Cobre**: US-001, FR-001
+**Cobre**: US-001, FR-001, NFR-001
 
 ```gherkin
-@US-001 @FR-001 @AC-001
+@US-001 @FR-001 @NFR-001 @AC-001
 Feature: Progresso consolidado
 
   Scenario: Spec com itens concluídos e pendentes
     Given uma spec com duas checklists concluídas e duas pendentes
     When o painel calcula seu progresso
     Then ele informa cinquenta por cento
+```
+
+#### AC-002 — Consolidar spec sem checklists
+
+**Cobre**: US-001, FR-001, NFR-001
+
+```gherkin
+@US-001 @FR-001 @NFR-001 @AC-002
+Feature: Progresso consolidado
+
+  Scenario: Spec ainda sem itens rastreáveis
+    Given uma spec sem checklists
+    When o painel calcula seu progresso
+    Then ele informa zero itens sem modificar a spec
+```
+
+#### AC-003 — Rejeitar spec ilegível
+
+**Cobre**: US-001, FR-001, NFR-001
+
+```gherkin
+@US-001 @FR-001 @NFR-001 @AC-003
+Feature: Progresso consolidado
+
+  Scenario: Arquivo da spec não pode ser lido
+    Given uma spec cujo conteúdo não pode ser lido
+    When o painel tenta calcular seu progresso
+    Then ele informa o erro sem modificar o arquivo
 ```
 
 ### 7. Requisitos
@@ -202,7 +230,7 @@ tests/
 
 - **Unidade**: contagem e percentual.
 - **Integração/contrato**: descoberta da estrutura canônica.
-- **BDD/aceite**: Gherkin AC-001 como referência para o teste derivado.
+- **BDD/aceite**: Gherkin AC-001, AC-002 e AC-003 como referência para os testes derivados.
 - **E2E**: inicialização do dashboard com a fixture.
 - **Verificação manual**: legibilidade do terminal.
 
@@ -210,14 +238,20 @@ tests/
 
 | IDs | BDD de referência | Teste TDD informado pelo BDD | RED observado | GREEN observado | Refactor/regressão |
 | --- | --- | --- | --- | --- | --- |
-| FR-001, AC-001 | AC-001 na seção 6 | tests/test_progress.py com `SPECSFY` | Pending | Pending | Pending |
+| US-001, FR-001, NFR-001, AC-001 | AC-001 na seção 6 | caso de percentual em tests/test_progress.py com `SPECSFY:` próprio | Pending | Pending | Pending |
+| US-001, FR-001, NFR-001, AC-002 | AC-002 na seção 6 | caso vazio em tests/test_progress.py com `SPECSFY:` próprio | Pending | Pending | Pending |
+| US-001, FR-001, NFR-001, AC-003 | AC-003 na seção 6 | caso ilegível em tests/test_progress.py com `SPECSFY:` próprio | Pending | Pending | Pending |
 
 ### 12. Plano de testes e rastreabilidade
 
 | Requisito | Cenário BDD | Nível | Arquivo/comando esperado | Evidência |
 | --- | --- | --- | --- | --- |
 | FR-001 | AC-001 | Unidade | `python3 -B -m unittest tests.test_progress` | Pending |
+| FR-001 | AC-002 | Unidade | `python3 -B -m unittest tests.test_progress` | Pending |
+| FR-001 | AC-003 | Integração | `python3 -B -m unittest tests.test_progress` | Pending |
 | NFR-001 | AC-001 | Integração | comparar checksum antes e depois | Pending |
+| NFR-001 | AC-002 | Integração | comparar checksum antes e depois | Pending |
+| NFR-001 | AC-003 | Integração | comparar checksum antes e depois | Pending |
 
 ### 13. Validações
 
@@ -241,14 +275,28 @@ tests/
 
 ### 14. Tarefas
 
-- [ ] T001 [TEST] [US-001] Materializar o teste de contagem em tests/test_progress.py — Refs: FR-001, AC-001 — Depends: none
+- [ ] T001 [TEST] [TDD] [US-001] Materializar o caso de percentual em tests/test_progress.py — Refs: US-001, FR-001, NFR-001, AC-001 — Depends: none
   - [ ] **PREP**: Confirmar fixture, IDs e baseline.
-  - [ ] **EXECUTE**: Escrever o teste de contagem.
+  - [ ] **EXECUTE**: Escrever o caso com marcador `SPECSFY:` próprio.
   - [ ] **VERIFY**: Observar RED válido.
   - [ ] **EVIDENCE**: Registrar comando e causa do RED.
   - [ ] **IMPROVE**: Revisar a clareza da fixture.
 
-- [ ] T002 [CODE] [US-001] Implementar a contagem em src/specsfy_cli/progress.py — Refs: FR-001, AC-001, NFR-001 — Depends: T001
+- [ ] T002 [TEST] [TDD] [US-001] Materializar o caso vazio em tests/test_progress.py — Refs: US-001, FR-001, NFR-001, AC-002 — Depends: none
+  - [ ] **PREP**: Confirmar fixture, IDs e baseline.
+  - [ ] **EXECUTE**: Escrever o caso com marcador `SPECSFY:` próprio.
+  - [ ] **VERIFY**: Observar RED válido.
+  - [ ] **EVIDENCE**: Registrar comando e causa do RED.
+  - [ ] **IMPROVE**: Revisar a clareza da fixture.
+
+- [ ] T003 [TEST] [TDD] [US-001] Materializar o caso ilegível em tests/test_progress.py — Refs: US-001, FR-001, NFR-001, AC-003 — Depends: none
+  - [ ] **PREP**: Confirmar fixture, IDs e baseline.
+  - [ ] **EXECUTE**: Escrever o caso com marcador `SPECSFY:` próprio.
+  - [ ] **VERIFY**: Observar RED válido.
+  - [ ] **EVIDENCE**: Registrar comando e causa do RED.
+  - [ ] **IMPROVE**: Revisar a clareza da fixture.
+
+- [ ] T004 [CODE] [US-001] Implementar a contagem em src/specsfy_cli/progress.py — Refs: US-001, FR-001, NFR-001, AC-001, AC-002, AC-003 — Depends: T001, T002, T003
   - [ ] **PREP**: Confirmar RED e contrato somente leitura.
   - [ ] **EXECUTE**: Implementar a menor mudança.
   - [ ] **VERIFY**: Executar teste focal e regressão.
@@ -257,7 +305,7 @@ tests/
 
 ### 15. Ordem de execução
 
-- Caminho crítico: T001 → T002.
+- Caminho crítico: T001/T002/T003 → T004.
 - Tarefas paralelas: Nenhuma.
 - Estratégia de MVP: calcular e exibir o percentual de uma spec.
 

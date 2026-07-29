@@ -22,17 +22,17 @@ na raiz única.
 ## 2. Carregue o menor contexto
 
 Use [`context/README.md`](context/README.md). Leia arquitetura somente quando a
-mudança altera componentes ou dependências; leia dados quando houver
-persistência ou privacidade; leia engenharia para stack, pacotes, convenções ou
+mudança altera componentes ou dependências. Leia dados quando houver
+persistência ou privacidade. Leia engenharia para stack, pacotes, convenções ou
 testes.
 
 ## 3. Defina o contrato observável
 
 Para mudança de comportamento:
 
-1. descreva o cenário BDD;
-2. derive um teste TDD;
-3. execute o teste antes da implementação;
+1. descreva o cenário BDD.
+2. derive um teste TDD.
+3. execute o teste antes da implementação.
 4. confirme um RED causado pelo comportamento ausente.
 
 Uma falha de import, ambiente ou fixture não é RED válido.
@@ -44,8 +44,8 @@ o diff. Se o contrato atravessar módulos, altere todos no mesmo commit.
 
 Exemplos:
 
-- novo campo de spec: template, validador, skills consumidoras e docs;
-- novo comando: parser, implementação, testes, README do CLI e guia do usuário;
+- novo campo de spec: template, validador, skills consumidoras e docs.
+- novo comando: parser, implementação, testes, README do CLI e guia do usuário.
 - nova regra de skill: `SKILL.md`, teste focal, metadata e referência aplicável.
 
 ## 5. Obtenha GREEN e refatore
@@ -83,9 +83,9 @@ uv run --quiet --with behave behave tests/features --no-capture
 
 ## 6. Atualize documentação
 
-- mudanças de uso atualizam `docs/user/`;
-- decisões e arquitetura atualizam `docs/develop/`;
-- mudanças que afetam ambos atualizam os dois percursos;
+- mudanças de uso atualizam `docs/user/`.
+- decisões e arquitetura atualizam `docs/develop/`.
+- mudanças que afetam ambos atualizam os dois percursos.
 - detalhes internos de `example/` permanecem em `example/README.md`.
 
 Não copie inventários extensos de manifests, rotas ou schemas para a
@@ -106,10 +106,10 @@ Revise `git diff --check`, links, imagens, status e artefatos derivados.
 
 Uma entrega pronta informa:
 
-- o comportamento alterado;
-- o RED observado;
-- os comandos verdes;
-- documentação atualizada;
+- o comportamento alterado.
+- o RED observado.
+- os comandos verdes.
+- documentação atualizada.
 - riscos ou limites restantes.
 
 Commits e push exigem escopo explícito. Release do CLI usa a skill local

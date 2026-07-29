@@ -22,6 +22,7 @@ EBOOK_BUILD_SOURCES := \
 	docs/user/reading-order.txt \
 	.ebook/build-ebook.sh \
 	.ebook/extract-document-metadata.py \
+	.ebook/prune-editions.py \
 	.ebook/external-links.lua \
 	.ebook/strip-document-metadata.lua \
 	.ebook/metadata.yaml \

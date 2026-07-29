@@ -1,59 +1,59 @@
 const people = [
   {
     name: 'Leslie Alexander',
-    role: 'Co-Founder / CEO',
+    role: 'Cofundador e CEO',
     imageUrl:
       'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-    location: 'Toronto, Canada',
+    location: 'Toronto, Canadá',
   },
   {
     name: 'Michael Foster',
-    role: 'Co-Founder / CTO',
+    role: 'Cofundador e CTO',
     imageUrl:
       'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-    location: 'Glasgow, Scotland',
+    location: 'Glasgow, Escócia',
   },
   {
     name: 'Dries Vincent',
-    role: 'Business Relations',
+    role: 'Relações Comerciais',
     imageUrl:
       'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-    location: 'Niagara Falls, Canada',
+    location: 'Cataratas do Niágara, Canadá',
   },
   {
     name: 'Lindsay Walton',
-    role: 'Front-end Developer',
+    role: 'Desenvolvedor front-end',
     imageUrl:
       'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-    location: 'London, England',
+    location: 'Londres, Inglaterra',
   },
   {
     name: 'Courtney Henry',
     role: 'Designer',
     imageUrl:
       'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-    location: 'Toronto, Canada',
+    location: 'Toronto, Canadá',
   },
   {
     name: 'Tom Cook',
-    role: 'Director of Product',
+    role: 'Diretor de Produto',
     imageUrl:
       'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-    location: 'Toronto, Canada',
+    location: 'Toronto, Canadá',
   },
   {
     name: 'Whitney Francis',
     role: 'Copywriter',
     imageUrl:
       'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-    location: 'Toronto, Canada',
+    location: 'Toronto, Canadá',
   },
   {
     name: 'Leonard Krasner',
-    role: 'Senior Designer',
+    role: 'Designer Sênior',
     imageUrl:
       'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-    location: 'Toronto, Canada',
+    location: 'Toronto, Canadá',
   },
 ]
 
@@ -63,11 +63,10 @@ export default function Example() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
           <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
-            Our team
+            Nossa equipe
           </h2>
           <p className="mt-6 text-lg/8 text-gray-600 dark:text-gray-400">
-            We're a dynamic group of individuals who are passionate about what we do and dedicated to delivering the
-            best results for our clients.
+            Somos uma equipe dinâmica, comprometida com nosso trabalho e com os melhores resultados para nossos clientes.
           </p>
         </div>
         <ul

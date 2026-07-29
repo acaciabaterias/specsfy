@@ -20,16 +20,15 @@ MONOREPO_REPOSITORY = "https://github.com/promovaweb/specsfy.git"
 BASE_DIRECTORY = "skills"
 SPECIALISTS_DIRECTORY = "specialists"
 BASE_SKILLS = (
-    "specsfy-base-idea",
-    "specsfy-base-backlog",
-    "specsfy-base-interview",
-    "specsfy-base-specify",
-    "specsfy-base-validate",
-    "specsfy-base-tasks",
-    "specsfy-base-tdd-bdd",
-    "specsfy-base-implement",
-    "specsfy-base-update-spec",
-    "specsfy-base-progress",
+    "specsfy-01-inbox",
+    "specsfy-02-backlog",
+    "specsfy-03-specify",
+    "specsfy-04-validate",
+    "specsfy-05-tasks",
+    "specsfy-06-tdd-bdd",
+    "specsfy-07-implement",
+    "specsfy-update-spec",
+    "specsfy-progress",
 )
 AUXILIARY_SKILLS = (
     "specsfy-aux-stack",
@@ -44,15 +43,26 @@ FRAMEWORK_SKILLS = (
     *BASE_SKILLS,
 )
 RENAMED_BASE_SKILLS = {
-    "specsfy-base-discuss": "specsfy-base-interview",
+    "specsfy-base-idea": "specsfy-01-inbox",
+    "specsfy-base-backlog": "specsfy-02-backlog",
+    "specsfy-base-interview": "specsfy-02-backlog",
+    "specsfy-base-specify": "specsfy-03-specify",
+    "specsfy-base-validate": "specsfy-04-validate",
+    "specsfy-base-tasks": "specsfy-05-tasks",
+    "specsfy-base-tdd-bdd": "specsfy-06-tdd-bdd",
+    "specsfy-base-implement": "specsfy-07-implement",
+    "specsfy-base-update-spec": "specsfy-update-spec",
+    "specsfy-base-progress": "specsfy-progress",
+    "specsfy-base-discuss": "specsfy-02-backlog",
 }
 FRAMEWORK_START = "<!-- specsfy:framework:start -->"
 FRAMEWORK_END = "<!-- specsfy:framework:end -->"
 SPEC_PATH_TOKEN = "{{SPECSFY_SPEC_PATH}}"
 CONSUMER_SPEC_PATH = ".specsfy/Spec.md"
 CONSUMER_TEMPLATE_DIRECTORY = ".specsfy/templates"
+CONSUMER_CUSTOM_TEMPLATE_DIRECTORY = ".specsfy/templates/custom"
 FRAMEWORK_TEMPLATE_NAMES = (
-    "Idea.md",
+    "Inbox.md",
     "Backlog.md",
     "Spec.md",
     "Tasks.md",
@@ -148,6 +158,15 @@ class SkillInstaller:
         if not targets:
             return []
         lock = self._read_lock()
+        official_names = installed_skill_names(self.project)
+        registered_names = [
+            name for name, _ in targets if name in official_names
+        ]
+        if registered_names:
+            _remove_with_skills_cli(
+                names=registered_names,
+                project=self.project,
+            )
         removed: list[Path] = []
         for name, target in targets:
             if target.exists():
@@ -258,6 +277,10 @@ class SkillInstaller:
                 continue
             _write_text_atomic(target, planned_content)
             changed.append(target)
+        (self.project / CONSUMER_CUSTOM_TEMPLATE_DIRECTORY).mkdir(
+            parents=True,
+            exist_ok=True,
+        )
 
         framework_record = {
             "source": "base",
@@ -393,7 +416,8 @@ class SkillInstaller:
         targets: list[tuple[str, Path]] = []
         for name in names:
             if not (
-                name.startswith("specsfy-base-")
+                name in FRAMEWORK_SKILLS
+                or name in RENAMED_BASE_SKILLS
                 or name.startswith("specsfy-aux-")
                 or name == "specsfy-setup"
                 or name in DOCUMENTATION_SKILLS

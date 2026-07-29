@@ -5,38 +5,38 @@ const tiers = [
     name: 'Freelancer',
     id: 'tier-freelancer',
     href: '#',
-    priceMonthly: '$19',
-    description: 'The essentials to provide your best work for clients.',
-    features: ['5 products', 'Up to 1,000 subscribers', 'Basic analytics', '48-hour support response time'],
+    priceMensalmente: '$19',
+    description: 'O essencial para entregar seu melhor trabalho aos clientes.',
+    features: ['5 produtos', 'Até 1.000 assinantes', 'Análises básicas', 'Resposta do suporte em até 48 horas'],
     mostPopular: false,
   },
   {
     name: 'Startup',
     id: 'tier-startup',
     href: '#',
-    priceMonthly: '$49',
-    description: 'A plan that scales with your rapidly growing business.',
+    priceMensalmente: '$49',
+    description: 'Um plano que acompanha o crescimento acelerado da sua empresa.',
     features: [
-      '25 products',
-      'Up to 10,000 subscribers',
-      'Advanced analytics',
-      '24-hour support response time',
-      'Marketing automations',
+      '25 produtos',
+      'Até 10.000 assinantes',
+      'Análises avançadas',
+      'Resposta do suporte em até 24 horas',
+      'Automações de marketing',
     ],
     mostPopular: true,
   },
   {
-    name: 'Enterprise',
+    name: 'Empresas',
     id: 'tier-enterprise',
     href: '#',
-    priceMonthly: '$99',
-    description: 'Dedicated support and infrastructure for your company.',
+    priceMensalmente: '$99',
+    description: 'Suporte e infraestrutura dedicados para sua empresa.',
     features: [
-      'Unlimited products',
-      'Unlimited subscribers',
-      'Advanced analytics',
-      '1-hour, dedicated support response time',
-      'Marketing automations',
+      'Produtos ilimitados',
+      'Assinantes ilimitados',
+      'Análises avançadas',
+      'Resposta do suporte dedicado em até 1 hora',
+      'Automações de marketing',
     ],
     mostPopular: false,
   },
@@ -51,14 +51,14 @@ export default function Example() {
     <div className="bg-white py-24 sm:py-32 dark:bg-gray-900">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
-          <h2 className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">Pricing</h2>
+          <h2 className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">Preços</h2>
           <p className="mt-2 text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-6xl dark:text-white">
-            Pricing that grows with you
+            Preços que crescem com você
           </p>
         </div>
         <p className="mx-auto mt-6 max-w-2xl text-center text-lg font-medium text-pretty text-gray-600 sm:text-xl/8 dark:text-gray-400">
-          Choose an affordable plan that's packed with the best features for engaging your audience, creating customer
-          loyalty, and driving sales.
+          Escolha um plano acessível com recursos para engajar seu público e criar relacionamentos com clientes
+          relacionamentos e aumentar as vendas.
         </p>
         <div className="isolate mx-auto mt-16 grid max-w-md grid-cols-1 gap-y-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
           {tiers.map((tier, tierIdx) => (
@@ -84,16 +84,16 @@ export default function Example() {
                   </h3>
                   {tier.mostPopular ? (
                     <p className="rounded-full bg-indigo-600/10 px-2.5 py-1 text-xs/5 font-semibold text-indigo-600 dark:bg-indigo-400/10 dark:text-indigo-400">
-                      Most popular
+                      Mais popular
                     </p>
                   ) : null}
                 </div>
                 <p className="mt-4 text-sm/6 text-gray-600 dark:text-gray-300">{tier.description}</p>
                 <p className="mt-6 flex items-baseline gap-x-1">
                   <span className="text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                    {tier.priceMonthly}
+                    {tier.priceMensalmente}
                   </span>
-                  <span className="text-sm/6 font-semibold text-gray-600 dark:text-gray-400">/month</span>
+                  <span className="text-sm/6 font-semibold text-gray-600 dark:text-gray-400">/mês</span>
                 </p>
                 <ul role="list" className="mt-8 space-y-3 text-sm/6 text-gray-600 dark:text-gray-300">
                   {tier.features.map((feature) => (
@@ -117,7 +117,7 @@ export default function Example() {
                   'mt-8 block rounded-md px-3 py-2 text-center text-sm/6 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:focus-visible:outline-indigo-500',
                 )}
               >
-                Buy plan
+                Comprar plano
               </a>
             </div>
           ))}

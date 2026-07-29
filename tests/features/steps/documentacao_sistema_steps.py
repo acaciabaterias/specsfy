@@ -54,7 +54,7 @@ def then_official_docs_explain_projection(context) -> None:
 @given("o fluxo de implementação e monitoramento do Specsfy")
 def given_implementation_and_monitoring(context) -> None:
     context.implementation = (
-        ROOT / "skills" / "specsfy-base-implement" / "SKILL.md"
+        ROOT / "skills" / "specsfy-07-implement" / "SKILL.md"
     ).read_text(encoding="utf-8")
     context.monitor = (
         ROOT / "skills" / "specsfy-setup" / "scripts" / "monitor_context.py"

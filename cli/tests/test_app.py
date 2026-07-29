@@ -29,9 +29,9 @@ from specsfy_cli.tui import BASE_DESCRIPTIONS, SpecPreviewModal, SpecsfyApp
 
 class ApplicationTests(unittest.TestCase):
     def test_framework_exposes_the_update_spec_skill(self) -> None:
-        self.assertIn("specsfy-base-update-spec", BASE_SKILLS)
-        self.assertIn("specsfy-base-update-spec", FRAMEWORK_SKILLS)
-        self.assertIn("specsfy-base-update-spec", BASE_DESCRIPTIONS)
+        self.assertIn("specsfy-update-spec", BASE_SKILLS)
+        self.assertIn("specsfy-update-spec", FRAMEWORK_SKILLS)
+        self.assertIn("specsfy-update-spec", BASE_DESCRIPTIONS)
 
     def test_parser_exposes_framework_skills_progress_and_tui(self) -> None:
         parser = build_parser()
@@ -156,7 +156,7 @@ class ApplicationTests(unittest.TestCase):
     def test_skills_update_updates_every_installed_specsfy_skill(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             project = Path(directory)
-            changed = project / ".agents/skills/specsfy-base-backlog"
+            changed = project / ".agents/skills/specsfy-02-backlog"
             installer = Mock()
             installer.update_all.return_value = [changed]
             output = io.StringIO()
@@ -279,7 +279,7 @@ class TuiTests(unittest.IsolatedAsyncioTestCase):
                 )
                 self.assertEqual(1, len(app.query("#apply-skills")))
                 skill_table = app.query_one("#skills-table", DataTable)
-                self.assertEqual(16, skill_table.row_count)
+                self.assertEqual(15, skill_table.row_count)
                 self.assertEqual(0, len(app.query("#skills-list")))
                 self.assertEqual(
                     ["Manter", "React", "Frontend", "Instalada"],
@@ -290,9 +290,9 @@ class TuiTests(unittest.IsolatedAsyncioTestCase):
                 )
                 self.assertIn("specsfy-specialist-react", app._selected_skills)
                 self.assertNotIn("external-skill", app._selected_skills)
-                self.assertNotIn("specsfy-base-backlog", app._selected_skills)
+                self.assertNotIn("specsfy-02-backlog", app._selected_skills)
                 self.assertIn(
-                    "Ideias, descoberta inicial",
+                    "Captura e pré-processa entradas",
                     str(app.query_one("#skill-detail", Static).render()),
                 )
                 skill_table.move_cursor(
@@ -343,9 +343,9 @@ class TuiTests(unittest.IsolatedAsyncioTestCase):
                 self.assertEqual("skills-search", app.focused.id)
                 await pilot.press("tab")
                 self.assertNotEqual("skills-search", app.focused.id)
-                app.query_one("#skills-search", Input).value = "specsfy-base-"
+                app.query_one("#skills-search", Input).value = "specsfy-0"
                 await pilot.pause()
-                self.assertEqual(10, skill_table.row_count)
+                self.assertEqual(7, skill_table.row_count)
                 app.query_one("#skills-search", Input).value = "backlog"
                 await pilot.pause()
                 self.assertEqual(1, skill_table.row_count)
@@ -544,7 +544,7 @@ class TuiTests(unittest.IsolatedAsyncioTestCase):
             app = SpecsfyApp(project, catalog=Catalog([]))
             installer = Mock()
             installer.update_all.return_value = [
-                project / ".agents/skills/specsfy-base-backlog"
+                project / ".agents/skills/specsfy-02-backlog"
             ]
 
             async with app.run_test() as pilot:
@@ -606,7 +606,7 @@ class TuiTests(unittest.IsolatedAsyncioTestCase):
                 second.write_text(
                     "# Backlog: Segundo\n\n"
                     "**ID**: BACKLOG-0002\n"
-                    "**Status**: Ready for interview\n\n"
+                    "**Status**: Ready for specification\n\n"
                     "Conteúdo atualizado em tempo real.",
                     encoding="utf-8",
                 )

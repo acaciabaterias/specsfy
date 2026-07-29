@@ -2,27 +2,27 @@ import { CheckIcon } from '@heroicons/react/20/solid'
 
 const tiers = [
   {
-    name: 'Hobby',
+    name: 'Pessoal',
     id: 'tier-hobby',
     href: '#',
-    priceMonthly: '$29',
-    description: "The perfect plan if you're just getting started with our product.",
-    features: ['25 products', 'Up to 10,000 subscribers', 'Advanced analytics', '24-hour support response time'],
+    priceMensalmente: '$29',
+    description: "O plano ideal para começar a usar nosso produto.",
+    features: ['25 produtos', 'Até 10.000 assinantes', 'Análises avançadas', 'Resposta do suporte em até 24 horas'],
     featured: false,
   },
   {
-    name: 'Enterprise',
+    name: 'Empresas',
     id: 'tier-enterprise',
     href: '#',
-    priceMonthly: '$99',
-    description: 'Dedicated support and infrastructure for your company.',
+    priceMensalmente: '$99',
+    description: 'Suporte e infraestrutura dedicados para sua empresa.',
     features: [
-      'Unlimited products',
-      'Unlimited subscribers',
-      'Advanced analytics',
-      'Dedicated support representative',
-      'Marketing automations',
-      'Custom integrations',
+      'Produtos ilimitados',
+      'Assinantes ilimitados',
+      'Análises avançadas',
+      'Representante de suporte dedicado',
+      'Automações de marketing',
+      'Integrações personalizadas',
     ],
     featured: true,
   },
@@ -45,14 +45,14 @@ export default function Example() {
         />
       </div>
       <div className="mx-auto max-w-4xl text-center">
-        <h2 className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">Pricing</h2>
+        <h2 className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">Preços</h2>
         <p className="mt-2 text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-6xl dark:text-white">
-          Choose the right plan for you
+          Escolha o plano certo para você
         </p>
       </div>
       <p className="mx-auto mt-6 max-w-2xl text-center text-lg font-medium text-pretty text-gray-600 sm:text-xl/8 dark:text-gray-400">
-        Choose an affordable plan that's packed with the best features for engaging your audience, creating customer
-        loyalty, and driving sales.
+        Escolha um plano acessível com recursos para engajar seu público e criar relacionamentos com clientes
+        relacionamentos e aumentar as vendas.
       </p>
       <div className="mx-auto mt-16 grid max-w-lg grid-cols-1 items-center gap-y-6 sm:mt-20 sm:gap-y-0 lg:max-w-4xl lg:grid-cols-2">
         {tiers.map((tier, tierIdx) => (
@@ -86,7 +86,7 @@ export default function Example() {
                   'text-5xl font-semibold tracking-tight',
                 )}
               >
-                {tier.priceMonthly}
+                {tier.priceMensalmente}
               </span>
               <span
                 className={classNames(
@@ -94,7 +94,7 @@ export default function Example() {
                   'text-base',
                 )}
               >
-                /month
+                /mês
               </span>
             </p>
             <p
@@ -135,7 +135,7 @@ export default function Example() {
                 'mt-8 block rounded-md px-3.5 py-2.5 text-center text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 sm:mt-10',
               )}
             >
-              Get started today
+              Começar hoje
             </a>
           </div>
         ))}

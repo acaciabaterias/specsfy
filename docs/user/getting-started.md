@@ -1,4 +1,4 @@
-# Uso básico do Specsfy
+# Primeiro projeto com o Specsfy
 
 ## Classificação
 
@@ -8,196 +8,226 @@
 | Escopo | primeira fatia de trabalho em um projeto consumidor |
 | Autoridade | metodologia executável de `skills/` |
 
-## Papel
+## O que você vai construir
 
-Conduzir um texto capturado até uma entrega comprovada, mantendo uma única
-fonte normativa e sem exigir que a pessoa memorize toda a sequência de skills.
+Este tutorial acompanha uma página de boas-vindas em um projeto Laravel que já
+usa Pest. A rota recebe um nome e mostra uma saudação. Quando o nome não for
+informado, a página usa `visitante`.
 
-## Como usar
+Você verá como uma ideia chega à implementação sem dividir a fonte normativa
+entre `plan.md`, `tasks.md` e outros arquivos. O exemplo mostra cada skill
+separadamente para facilitar a consulta, embora o agente consiga fazer as
+transições na mesma conversa.
 
-### Pré-condições
+O tutorial depende de três condições verificáveis. Confirme a instalação, abra
+o agente na raiz do projeto consumidor e rode a suíte Pest existente:
 
-- CLI e framework instalados conforme o [guia de instalação](installation.md);
-- agente aberto na raiz do projeto consumidor;
-- uma ideia de produto ou mudança que possa ser descrita em linguagem comum.
+- o CLI e o framework foram instalados conforme o
+  [guia de instalação](installation.md).
+- o agente está aberto na raiz do projeto consumidor.
+- o repositório possui um runner Pest funcional.
 
-## Veja o Specsfy trabalhando
+## Capture uma entrada
 
-Vamos criar uma página de boas-vindas em um projeto Laravel que já usa Pest.
-Os dez comandos abaixo mostram a jornada completa.
-
-### 1. Capture a ideia — `$specsfy-base-idea`
-
-```text
-Use $specsfy-base-idea para capturar:
-criar uma página /boas-vindas que cumprimente a pessoa pelo nome.
-```
-
-Resultado, sem perguntas:
+Use `$specsfy-01-inbox` para guardar a formulação original em
+`specs/inbox/`. A captura não inicia perguntas nem altera o código:
 
 ```text
-Ideia capturada em
-specs/ideias/2026-07-28-143205-pagina-boas-vindas.md
+Use $specsfy-01-inbox para capturar:
+criar uma página /boas-vindas que cumprimente o visitante pelo nome.
 ```
 
-### 2. Refine no backlog — `$specsfy-base-backlog`
+A skill grava um arquivo com data, horário e slug em `specs/inbox/`. O relato
+deve apontar um caminho semelhante a este:
 
 ```text
-Use $specsfy-base-backlog para guardar esta ideia:
-criar uma página /boas-vindas que cumprimente a pessoa pelo nome.
+specs/inbox/2026-07-28-143205-pagina-boas-vindas.md
 ```
 
-Também pode usar a captura:
+Essa captura preserva o texto recebido e registra inferências separadamente.
+Ela ainda não cria backlog, spec, tarefas ou código.
+
+## Refine a proposta no backlog
+
+Quando a ideia merecer refinamento, envie o arquivo para
+`$specsfy-02-backlog`. A skill lê a captura preservada, procura relações e
+cria um item numerado:
 
 ```text
-Use $specsfy-base-backlog para refinar
-specs/ideias/2026-07-28-143205-pagina-boas-vindas.md
+Use $specsfy-02-backlog para refinar
+specs/inbox/2026-07-28-143205-pagina-boas-vindas.md
 ```
 
-Resultado:
+Você também pode fornecer o texto diretamente. A skill procura material
+relacionado, esclarece somente o necessário para o backlog e grava um item
+numerado:
 
 ```text
-Ideia registrada em specs/backlog/0001-pagina-boas-vindas.md
+specs/backlog/0001-pagina-boas-vindas.md
 ```
 
-### 3. Tire as dúvidas — `$specsfy-base-interview`
+O backlog organiza uma possibilidade de entrega, mas não autoriza alteração no
+código. Essa separação permite comparar e priorizar ideias antes de criar uma
+especificação normativa.
 
-**Opção 1 — texto livre**
+Use `$specsfy-02-backlog` para aprofundar o item. A conversa pergunta uma
+lacuna aplicável por vez e retorna um brief:
 
 ```text
-Use $specsfy-base-interview para aprofundar este texto:
-quero uma página /boas-vindas que cumprimente a pessoa pelo nome.
+Use $specsfy-02-backlog em
+specs/backlog/0001-pagina-boas-vindas.md
 ```
 
-**Opção 2 — arquivo de backlog**
-
-```text
-Use $specsfy-base-interview em specs/backlog/0001-pagina-boas-vindas.md
-```
-
-O agente pergunta somente o que realmente falta:
+O agente reaproveita o conteúdo existente e pergunta uma lacuna relevante por
+vez. Neste exemplo, a resposta padrão muda o comportamento visível da página:
 
 ```text
 Agente: O que deve aparecer quando nenhum nome for informado?
 Você: Olá, visitante!
-
-Brief pronto para especificar.
 ```
 
-### 4. Crie a especificação — `$specsfy-base-specify`
+O refinamento do backlog produz um brief na conversa. Por padrão, ele não cria
+uma segunda fonte normativa nem modifica o backlog.
 
-**Opção 1 — texto livre**
+## Crie a especificação única
+
+Depois de resolver as dúvidas materiais, promova o backlog com
+`$specsfy-03-specify`:
 
 ```text
-Use $specsfy-base-specify para criar uma especificação a partir deste texto:
-a página /boas-vindas mostra Olá e o nome informado; sem nome, usa visitante.
+Use $specsfy-03-specify para promover
+specs/backlog/0001-pagina-boas-vindas.md
 ```
 
-**Opção 2 — arquivo de backlog**
+A skill cria o diretório numerado e mantém a fonte normativa neste caminho:
 
 ```text
-Use $specsfy-base-specify para promover specs/backlog/0001-pagina-boas-vindas.md
-```
-
-Resultado:
-
-```text
-Especificação criada em
 specs/specs/0001-pagina-boas-vindas/spec.md
-3 cenários BDD cobrem a feature, sua história e seus requisitos.
 ```
 
-### 5. Confira a especificação — `$specsfy-base-validate`
+Abra esse arquivo e confira se o problema, as pessoas afetadas, os requisitos,
+os limites e os cenários BDD representam a conversa. O Gherkin permanece na
+spec como referência legível. O Specsfy não cria uma suíte `.feature`
+separada.
+
+## Comprove a definição
+
+Use `$specsfy-04-validate` para auditar a spec. A skill informa a localização
+de cada falha e só aprova o Definition Gate quando a definição estiver
+completa:
 
 ```text
-Use $specsfy-base-validate em specs/specs/0001-pagina-boas-vindas/spec.md
+Use $specsfy-04-validate em
+specs/specs/0001-pagina-boas-vindas/spec.md
 ```
 
-Resultado:
+Uma definição pronta termina a validação com estes dois sinais:
 
 ```text
 READY
 Definition Gate: Passed
 ```
 
-`READY` significa que o pedido está claro o bastante para seguir.
+`READY` confirma que a spec possui as informações necessárias para planejar. O
+estado ainda não afirma que a página existe. Se houver contradição ou uma
+escolha importante em aberto, a validação retorna à skill responsável antes de
+aprovar o gate.
 
-### 6. Divida o trabalho — `$specsfy-base-tasks`
+## Organize as tarefas
+
+Use `$specsfy-05-tasks` para manter o plano e as tarefas dentro da mesma
+`spec.md`. O arquivo deve mostrar os requisitos cobertos e a dependência entre
+o teste em RED e cada tarefa de produção:
 
 ```text
-Use $specsfy-base-tasks em specs/specs/0001-pagina-boas-vindas/spec.md
+Use $specsfy-05-tasks em
+specs/specs/0001-pagina-boas-vindas/spec.md
 ```
 
-Resultado:
+A skill separa testes, código, documentação e trabalho operacional, registra
+dependências e liga cada tarefa aos requisitos correspondentes. Ela não cria
+`tasks.md` nem altera o código de produção.
+
+## Prove que o teste detecta a ausência da página
+
+Use `$specsfy-06-tdd-bdd` no modo de preparação:
 
 ```text
-2 tarefas preparadas.
+Use $specsfy-06-tdd-bdd em
+specs/specs/0001-pagina-boas-vindas/spec.md para preparar o TDD.
 ```
 
-### 7. Prepare a verificação — `$specsfy-base-tdd-bdd`
+Como o projeto do exemplo usa PHP, a skill cria testes Pest derivados dos
+cenários BDD. Cada caso executável recebe seu marcador `SPECSFY:` junto à
+definição. A feature inteira e cada história ou requisito aplicável precisam
+ter, no mínimo, três casos distintos: caminho feliz, variação importante e
+falha ou limite material.
+
+Execute o teste focal e confirme o RED pelo motivo esperado. Uma rota ausente
+prova que o teste detecta o comportamento ainda não implementado. Erro de
+sintaxe, fixture quebrada ou dependência ausente precisa ser corrigido antes
+de o RED ser aceito. Depois que as tarefas e seus predecessores TDD estiverem
+coerentes, o `Plan Gate` pode chegar a `Passed`.
+
+## Implemente e valide
+
+Com os gates de definição e plano aprovados, use
+`$specsfy-07-implement`:
 
 ```text
-Use $specsfy-base-tdd-bdd em specs/specs/0001-pagina-boas-vindas/spec.md
-para preparar a verificação.
+Use $specsfy-07-implement em
+specs/specs/0001-pagina-boas-vindas/spec.md
 ```
 
-Resultado:
+A implementação percorre cada tarefa em `RED → GREEN → REFACTOR`. Para uma
+tarefa de código, a skill exige um predecessor TDD com RED registrado, cria a
+menor mudança capaz de deixar o teste verde e executa a regressão aplicável.
+Os comandos, os resultados e os IDs cobertos entram como evidência na spec.
+
+Depois de cada tarefa de código, o agente chama `$specsfy-documentator`. Essa
+skill reconstrói a documentação técnica em `docs/` a partir do sistema
+existente e executa o modo `--check`. O fluxo só retoma a implementação quando
+a documentação representar o código atual.
+
+No fechamento, a implementação verifica aceite, regressão, rastreabilidade,
+documentação e Definition of Done. Uma entrega comprovada termina com:
 
 ```text
-Verificação preparada: 3 casos TDD com marcadores SPECSFY: próprios.
-RED observado antes da implementação.
+Delivery Gate: Passed
+Status: Complete
 ```
 
-O mínimo de três usa contextos diferentes — por exemplo, caminho feliz,
-variação crítica e falha material — sem duplicar o mesmo exemplo.
+## Incorpore uma mudança posterior
 
-### 8. Implemente — `$specsfy-base-implement`
-
-```text
-Use $specsfy-base-implement em specs/specs/0001-pagina-boas-vindas/spec.md
-```
-
-Resultado:
+Imagine que, depois da primeira entrega, o nome precise aceitar no máximo 80
+caracteres. Use `$specsfy-update-spec` na spec existente:
 
 ```text
-Implementação concluída.
-Página /boas-vindas criada.
-Verificação aprovada.
-```
-
-### 9. Altere a especificação — `$specsfy-base-update-spec`
-
-Depois de implementar, imagine que você lembrou de uma regra:
-
-```text
-Use $specsfy-base-update-spec em
+Use $specsfy-update-spec em
 specs/specs/0001-pagina-boas-vindas/spec.md:
 o nome deve ter no máximo 80 caracteres.
 ```
 
-Resultado:
+Essa skill preserva a nova instrução, atualiza a `spec.md` e invalida somente
+as provas afetadas. Como o limite muda comportamento, o fluxo reabre desde o
+Ato I, percorre validação, tarefas e TDD/BDD, e só então retoma
+`$specsfy-07-implement`. A skill de atualização não altera código de
+produção automaticamente.
+
+Uma alteração restrita ao plano técnico reabre os Atos II e III. Uma correção
+editorial comprovadamente sem mudança de significado preserva os gates. Em
+todos os casos, o histórico continua na mesma spec.
+
+## Consulte o estado final
+
+Use `$specsfy-progress` para projetar o estado sem editar arquivos:
 
 ```text
-Pedido incorporado na especificação 0001-pagina-boas-vindas.
-Etapas afetadas retomadas automaticamente.
-Implementação atualizada.
+Use $specsfy-progress para mostrar o resultado final.
 ```
 
-A mudança continua na mesma spec e volta apenas às etapas necessárias.
-
-### 10. Veja o progresso — `$specsfy-base-progress`
-
-```text
-Use $specsfy-base-progress para mostrar o resultado final.
-```
-
-Resultado:
-
-```text
-Complete · 3/3 etapas · nenhuma pendência
-```
-
-Você pode conferir a mesma entrega pelo CLI:
+O relatório mostra specs, gates, tarefas, checklists, pendências e o próximo
+trabalho disponível. Você também pode consultar o mesmo estado pelo CLI:
 
 ```bash
 specsfy progress --project .
@@ -205,46 +235,32 @@ specsfy progress --project . --json
 specsfy tui --project .
 ```
 
-Ao autorizar a jornada completa, você não precisa enviar os dez comandos
-manualmente: cada skill pode chamar a próxima e continuar na mesma conversa.
-O passo a passo separado serve para aprender, inspecionar ou retomar qualquer
-etapa.
+Uma entrega pronta deve aparecer como `Complete`, com os três gates aprovados
+e sem pendência documental. Capturas em `specs/inbox/` e itens em
+`specs/backlog/` não entram nesse cálculo.
 
-## Resultado esperado
+## Continue na mesma conversa
 
-Ao final, a ideia está registrada, as dúvidas foram resolvidas, a especificação
-foi validada, a página foi implementada e o progresso mostra `Complete`.
+Você não precisa enviar cada exemplo deste tutorial manualmente. Ao autorizar a
+jornada completa, uma skill anuncia o handoff, carrega a próxima
+responsabilidade e retoma a etapa anterior quando necessário. A transição
+automática não amplia permissões para deploy, publicação, instalação de
+especialista ou ação destrutiva.
 
-## Limites
+Agora aprofunde os [comandos do CLI e da TUI](cli.md), consulte as
+[informações permanentes do projeto](project-context.md) ou conheça o
+[uso avançado](advanced-usage.md).
 
-- `specsfy-base-update-spec` faz mudança de comportamento reabrir os Atos I–III;
-- `specsfy-base-update-spec` faz mudança de plano reabrir os Atos II–III;
-- backlog não autoriza implementação;
-- não crie `plan.md`, `tasks.md`, `research.md` ou `data-model.md`;
-- deploy, publicação, instalação e ações destrutivas mantêm autorização própria.
+## Justificativa de tamanho
 
-## Próximos passos
+O tutorial acompanha uma única entrega desde a captura até o estado `Complete`.
+Manter o exemplo em uma página permite conferir como cada arquivo e gate é
+produzido pelo resultado da etapa anterior.
 
-- [Uso avançado](advanced-usage.md)
-- [CLI e TUI](cli.md)
-- [Contexto persistente do projeto](project-context.md)
-- [Documentação técnica do sistema](system-documentation.md)
+## Manutenção deste guia
 
-## Atualize quando
-
-- a sequência dos atos ou a responsabilidade de uma skill base mudar;
-- os gates, estados ou caminhos canônicos mudarem;
-- a primeira jornada do usuário ganhar ou perder uma etapa.
-
-## Não use para
-
-- definir comandos avançados do CLI;
-- reproduzir o contrato completo de cada skill;
-- registrar requisitos ou evidências de um projeto consumidor.
-
-## Fonte da verdade e precedência
-
-A metodologia executável pertence a
-[`skills/`](../../skills/). A fonte normativa de
-cada fatia pertence ao projeto consumidor em
-`specs/specs/<NNNN>-<slug>/spec.md`.
+Atualize esta página quando a sequência dos atos, a responsabilidade de uma
+skill base, os gates, os estados ou os caminhos canônicos mudarem. Use a
+metodologia executável em [`skills/`](../../skills/) como fonte e preserve
+`specs/specs/<NNNN>-<slug>/spec.md` como a única fonte normativa de cada
+fatia no projeto consumidor.

@@ -1,11 +1,11 @@
 const featuredTestimonial = {
-  body: 'Integer id nunc sit semper purus. Bibendum at lacus ut arcu blandit montes vitae auctor libero. Hac condimentum dignissim nibh vulputate ut nunc. Amet nibh orci mi venenatis blandit vel et proin. Non hendrerit in vel ac diam.',
+  body: 'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
   author: {
     name: 'Brenna Goyette',
     handle: 'brennagoyette',
     imageUrl:
       'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=1024&h=1024&q=80',
-    logoUrl: 'https://tailwindcss.com/plus-assets/img/logos/savvycal-logo-gray-900.svg',
+    logoUrl: 'https://tailwindcss.com/mais-assets/img/logos/savvycal-logo-gray-900.svg',
   },
 }
 
@@ -13,7 +13,7 @@ const testimonials = [
   [
     [
       {
-        body: 'Laborum quis quam. Dolorum et ut quod quia. Voluptas numquam delectus nihil. Aut enim doloremque et ipsam.',
+        body: 'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
         author: {
           name: 'Leslie Alexander',
           handle: 'lesliealexander',
@@ -22,7 +22,7 @@ const testimonials = [
         },
       },
       {
-        body: 'Quia dolorem qui et. Atque quo aliquid sit eos officia. Dolores similique laboriosam quaerat cupiditate.',
+        body: 'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
         author: {
           name: 'Michael Foster',
           handle: 'michaelfoster',
@@ -31,7 +31,7 @@ const testimonials = [
         },
       },
       {
-        body: 'Consequatur ut atque. Itaque nostrum molestiae id veniam eos cumque. Ut quia eum fugit laborum autem inventore ut voluptate.',
+        body: 'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
         author: {
           name: 'Dries Vincent',
           handle: 'driesvincent',
@@ -42,7 +42,7 @@ const testimonials = [
     ],
     [
       {
-        body: 'Aut reprehenderit voluptatem eum asperiores beatae id. Iure molestiae ipsam ut officia rem nulla blanditiis.',
+        body: 'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
         author: {
           name: 'Lindsay Walton',
           handle: 'lindsaywalton',
@@ -51,7 +51,7 @@ const testimonials = [
         },
       },
       {
-        body: 'Nam nesciunt dolorem dolor asperiores cum. Incidunt molestiae quis deleniti vitae ut in earum delectus iusto.',
+        body: 'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
         author: {
           name: 'Courtney Henry',
           handle: 'courtneyhenry',
@@ -64,7 +64,7 @@ const testimonials = [
   [
     [
       {
-        body: 'Voluptas quos itaque ipsam in voluptatem est. Iste eos blanditiis repudiandae. Earum deserunt enim molestiae ipsum perferendis recusandae saepe corrupti.',
+        body: 'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
         author: {
           name: 'Tom Cook',
           handle: 'tomcook',
@@ -73,7 +73,7 @@ const testimonials = [
         },
       },
       {
-        body: 'Aliquid dolore praesentium ratione. Cumque ea officia repellendus laboriosam. Vitae quod id explicabo non sunt.',
+        body: 'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
         author: {
           name: 'Whitney Francis',
           handle: 'whitneyfrancis',
@@ -84,7 +84,7 @@ const testimonials = [
     ],
     [
       {
-        body: 'Molestias ea earum quos nostrum doloremque sed. Quaerat quasi aut velit incidunt excepturi rerum voluptatem minus harum.',
+        body: 'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
         author: {
           name: 'Leonard Krasner',
           handle: 'leonardkrasner',
@@ -93,7 +93,7 @@ const testimonials = [
         },
       },
       {
-        body: 'Architecto libero natus est. Est quam debitis officia enim atque et ut non. Sunt reiciendis quasi eaque. Itaque error ut et.',
+        body: 'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
         author: {
           name: 'Floyd Miles',
           handle: 'floydmiles',
@@ -102,7 +102,7 @@ const testimonials = [
         },
       },
       {
-        body: 'Temporibus ea molestiae impedit adipisci perspiciatis illo aliquid. Quis ut ratione et voluptatem et. Nostrum explicabo iste unde beatae.',
+        body: 'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
         author: {
           name: 'Emily Selman',
           handle: 'emilyselman',
@@ -147,9 +147,9 @@ export default function Example() {
       </div>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">Testimonials</h2>
+          <h2 className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">Depoimentos</h2>
           <p className="mt-2 text-4xl font-semibold tracking-tight text-balance text-gray-900 sm:text-5xl dark:text-white">
-            We have worked with thousands of amazing people
+            Já trabalhamos com milhares de pessoas incríveis
           </p>
         </div>
         <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 text-sm/6 text-gray-900 sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4 dark:text-gray-100">

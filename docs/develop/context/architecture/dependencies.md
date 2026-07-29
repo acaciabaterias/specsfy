@@ -28,7 +28,7 @@ cli/ ──instala──────────────► skills/ + specia
 cli/ ──consulta catálogo/tags autenticados──► GitHub + cache local
 
 AGENTS.md ──orienta──► skills ──executam──► spec.md
-input ─► ideia capturada ─► backlog ─► interview ─► spec.md
+input ─► inbox ─► backlog ─► spec.md
 spec.md ─► tarefas + testes ─► entrega
 pedido tardio ─► update-spec ─► spec.md
 implement ─► documentator ─► <projeto>/docs/
@@ -40,7 +40,7 @@ release-cli ─► cli/CHANGELOG.md + versão + binário ─► tag + GitHub Rel
 - Commits e pull requests pertencem à raiz única.
 - O CLI clona o monorepo e seleciona `skills/` ou `specialists/`.
 - A raiz oficial não é destino válido para instalação consumidora.
-- Catálogo e updater autenticam na API pelo ambiente ou pela sessão do `gh`;
+- Catálogo e updater autenticam na API pelo ambiente ou pela sessão do `gh`.
   somente o updater grava metadados no cache e delega upgrade ao `uv`.
 - Especialistas exigem autorização específica.
 - Documentação derivada não redefine código, manifests, schemas ou specs.
@@ -61,11 +61,11 @@ release-cli ─► cli/CHANGELOG.md + versão + binário ─► tag + GitHub Rel
 
 ## Não use para
 
-- registrar versões de pacote;
+- registrar versões de pacote.
 - substituir testes de dependência.
 
 ## Fonte da verdade e precedência
 
-Este documento governa direções conceituais; código e testes demonstram as
+Este documento governa direções conceituais. Código e testes demonstram as
 dependências implementadas no
 [`monorepo`](https://github.com/promovaweb/specsfy).

@@ -3,27 +3,27 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 const navigation = {
   solutions: [
     { name: 'Marketing', href: '#' },
-    { name: 'Analytics', href: '#' },
-    { name: 'Commerce', href: '#' },
-    { name: 'Insights', href: '#' },
+    { name: 'Análises', href: '#' },
+    { name: 'Comércio', href: '#' },
+    { name: 'Análises', href: '#' },
   ],
   support: [
-    { name: 'Pricing', href: '#' },
-    { name: 'Documentation', href: '#' },
-    { name: 'Guides', href: '#' },
-    { name: 'API Status', href: '#' },
+    { name: 'Preços', href: '#' },
+    { name: 'Documentação', href: '#' },
+    { name: 'Guias', href: '#' },
+    { name: 'Status da API', href: '#' },
   ],
   company: [
-    { name: 'About', href: '#' },
+    { name: 'Sobre', href: '#' },
     { name: 'Blog', href: '#' },
-    { name: 'Jobs', href: '#' },
-    { name: 'Press', href: '#' },
-    { name: 'Partners', href: '#' },
+    { name: 'Vagas', href: '#' },
+    { name: 'Imprensa', href: '#' },
+    { name: 'Parceiros', href: '#' },
   ],
   legal: [
-    { name: 'Claim', href: '#' },
-    { name: 'Privacy', href: '#' },
-    { name: 'Terms', href: '#' },
+    { name: 'Reivindicar', href: '#' },
+    { name: 'Privacidade', href: '#' },
+    { name: 'Termos', href: '#' },
   ],
   social: [
     {
@@ -98,7 +98,7 @@ export default function Example() {
           <div className="grid grid-cols-2 gap-8 xl:col-span-4">
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-base font-medium text-gray-900">Solutions</h3>
+                <h3 className="text-base font-medium text-gray-900">Soluções</h3>
                 <ul role="list" className="mt-4 space-y-4">
                   {navigation.solutions.map((item) => (
                     <li key={item.name}>
@@ -110,7 +110,7 @@ export default function Example() {
                 </ul>
               </div>
               <div className="mt-12 md:mt-0">
-                <h3 className="text-base font-medium text-gray-900">Support</h3>
+                <h3 className="text-base font-medium text-gray-900">Suporte</h3>
                 <ul role="list" className="mt-4 space-y-4">
                   {navigation.support.map((item) => (
                     <li key={item.name}>
@@ -124,7 +124,7 @@ export default function Example() {
             </div>
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-base font-medium text-gray-900">Company</h3>
+                <h3 className="text-base font-medium text-gray-900">Empresa</h3>
                 <ul role="list" className="mt-4 space-y-4">
                   {navigation.company.map((item) => (
                     <li key={item.name}>
@@ -136,7 +136,7 @@ export default function Example() {
                 </ul>
               </div>
               <div className="mt-12 md:mt-0">
-                <h3 className="text-base font-medium text-gray-900">Legal</h3>
+                <h3 className="text-base font-medium text-gray-900">Jurídico</h3>
                 <ul role="list" className="mt-4 space-y-4">
                   {navigation.legal.map((item) => (
                     <li key={item.name}>
@@ -150,24 +150,24 @@ export default function Example() {
             </div>
           </div>
           <div className="mt-12 xl:mt-0">
-            <h3 className="text-base font-medium text-gray-900">Language &amp; Currency</h3>
+            <h3 className="text-base font-medium text-gray-900">Idioma e moeda</h3>
             <form className="mt-4 sm:max-w-xs">
               <fieldset className="w-full">
                 <label htmlFor="language" className="sr-only">
-                  Language
+                  Idioma
                 </label>
                 <div className="relative">
                   <select
                     id="language"
                     name="language"
-                    defaultValue="English"
+                    defaultValue="Português"
                     className="block w-full appearance-none rounded-md border border-gray-300 bg-white bg-none py-2 pr-10 pl-3 text-base text-gray-900 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-hidden sm:text-sm"
                   >
-                    <option>English</option>
-                    <option>French</option>
-                    <option>German</option>
-                    <option>Japanese</option>
-                    <option>Spanish</option>
+                    <option>Português</option>
+                    <option>Francês</option>
+                    <option>Alemão</option>
+                    <option>Japonês</option>
+                    <option>Espanhol</option>
                   </select>
                   <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2">
                     <ChevronDownIcon aria-hidden="true" className="size-4 text-gray-400" />
@@ -176,7 +176,7 @@ export default function Example() {
               </fieldset>
               <fieldset className="mt-4 w-full">
                 <label htmlFor="currency" className="sr-only">
-                  Currency
+                  Moeda
                 </label>
                 <div className="relative">
                   <select
@@ -204,21 +204,21 @@ export default function Example() {
         </div>
         <div className="border-t border-gray-200 pt-8 lg:flex lg:items-center lg:justify-between xl:mt-0">
           <div>
-            <h3 className="text-base font-medium text-gray-900">Subscribe to our newsletter</h3>
+            <h3 className="text-base font-medium text-gray-900">Assine nossa newsletter</h3>
             <p className="mt-2 text-base text-gray-500">
-              The latest news, articles, and resources, sent to your inbox weekly.
+              Receba semanalmente as últimas notícias, artigos e recursos.
             </p>
           </div>
           <form className="mt-4 sm:flex sm:max-w-md lg:mt-0">
             <label htmlFor="email-address" className="sr-only">
-              Email address
+              Endereço de e-mail
             </label>
             <input
               id="email-address"
               name="email-address"
               type="email"
               required
-              placeholder="Enter your email"
+              placeholder="Digite seu e-mail"
               autoComplete="email"
               className="w-full min-w-0 appearance-none rounded-md border border-gray-300 bg-white px-4 py-2 text-base text-gray-900 placeholder-gray-500 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-hidden sm:max-w-xs"
             />
@@ -227,7 +227,7 @@ export default function Example() {
                 type="submit"
                 className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden"
               >
-                Subscribe
+                Assinar
               </button>
             </div>
           </form>
@@ -242,7 +242,7 @@ export default function Example() {
             ))}
           </div>
           <p className="mt-8 text-base text-gray-400 md:order-1 md:mt-0">
-            &copy; 2024 Your Company, Inc. All rights reserved.
+            &copy; 2024 Sua Empresa, Inc. Todos os direitos reservados.
           </p>
         </div>
       </div>

@@ -13,18 +13,16 @@ export default function Example() {
                 </span>
               </div>
               <div className="mt-6">
-                <h2 className="text-3xl font-bold tracking-tight text-gray-900">Stay on top of customer support</h2>
+                <h2 className="text-3xl font-bold tracking-tight text-gray-900">Mantenha o atendimento ao cliente sob controle</h2>
                 <p className="mt-4 text-lg text-gray-500">
-                  Semper curabitur ullamcorper posuere nunc sed. Ornare iaculis bibendum malesuada faucibus lacinia
-                  porttitor. Pulvinar laoreet sagittis viverra duis. In venenatis sem arcu pretium pharetra at. Lectus
-                  viverra dui tellus ornare pharetra.
+                  Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
                 </p>
                 <div className="mt-6">
                   <a
                     href="#"
                     className="inline-flex rounded-lg bg-indigo-600 px-4 py-1.5 text-base/7 font-semibold text-white shadow-xs ring-1 ring-indigo-600 hover:bg-indigo-700 hover:ring-indigo-700"
                   >
-                    Get started
+                    Começar
                   </a>
                 </div>
               </div>
@@ -33,8 +31,7 @@ export default function Example() {
               <blockquote>
                 <div>
                   <p className="text-base text-gray-500">
-                    &ldquo;Cras velit quis eros eget rhoncus lacus ultrices sed diam. Sit orci risus aenean curabitur
-                    donec aliquet. Mi venenatis in euismod ut.&rdquo;
+                    Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
                   </p>
                 </div>
                 <footer className="mt-3">
@@ -46,7 +43,7 @@ export default function Example() {
                         className="size-6 rounded-full"
                       />
                     </div>
-                    <div className="text-base font-medium text-gray-700">Marcia Hill, Digital Marketing Manager</div>
+                    <div className="text-base font-medium text-gray-700">Marcia Hill, Gerente de Marketing Digital</div>
                   </div>
                 </footer>
               </blockquote>
@@ -55,8 +52,8 @@ export default function Example() {
           <div className="mt-12 sm:mt-16 lg:mt-0">
             <div className="-mr-48 pl-6 md:-mr-16 lg:relative lg:m-0 lg:h-full lg:px-0">
               <img
-                alt="Inbox user interface"
-                src="https://tailwindcss.com/plus-assets/img/component-images/inbox-app-screenshot-1.jpg"
+                alt="Interface da caixa de entrada"
+                src="https://tailwindcss.com/mais-assets/img/component-images/inbox-app-screenshot-1.jpg"
                 className="w-full rounded-xl shadow-xl ring-1 ring-black/5 lg:absolute lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
               />
             </div>
@@ -73,18 +70,16 @@ export default function Example() {
                 </span>
               </div>
               <div className="mt-6">
-                <h2 className="text-3xl font-bold tracking-tight text-gray-900">Better understand your customers</h2>
+                <h2 className="text-3xl font-bold tracking-tight text-gray-900">Entenda melhor seus clientes</h2>
                 <p className="mt-4 text-lg text-gray-500">
-                  Semper curabitur ullamcorper posuere nunc sed. Ornare iaculis bibendum malesuada faucibus lacinia
-                  porttitor. Pulvinar laoreet sagittis viverra duis. In venenatis sem arcu pretium pharetra at. Lectus
-                  viverra dui tellus ornare pharetra.
+                  Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
                 </p>
                 <div className="mt-6">
                   <a
                     href="#"
                     className="inline-flex rounded-lg bg-indigo-600 px-4 py-1.5 text-base/7 font-semibold text-white shadow-xs ring-1 ring-indigo-600 hover:bg-indigo-700 hover:ring-indigo-700"
                   >
-                    Get started
+                    Começar
                   </a>
                 </div>
               </div>
@@ -93,8 +88,8 @@ export default function Example() {
           <div className="mt-12 sm:mt-16 lg:col-start-1 lg:mt-0">
             <div className="-ml-48 pr-6 md:-ml-16 lg:relative lg:m-0 lg:h-full lg:px-0">
               <img
-                alt="Customer profile user interface"
-                src="https://tailwindcss.com/plus-assets/img/component-images/inbox-app-screenshot-2.jpg"
+                alt="Interface do perfil do cliente"
+                src="https://tailwindcss.com/mais-assets/img/component-images/inbox-app-screenshot-2.jpg"
                 className="w-full rounded-xl shadow-xl ring-1 ring-black/5 lg:absolute lg:right-0 lg:h-full lg:w-auto lg:max-w-none"
               />
             </div>

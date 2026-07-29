@@ -64,17 +64,16 @@ export default function Example() {
             </div>
             <div className="relative mx-auto max-w-md space-y-6 px-6 py-12 sm:max-w-3xl sm:py-16 lg:col-span-6 lg:col-start-4 lg:max-w-none lg:p-0">
               <h2 id="join-heading" className="text-3xl font-bold tracking-tight text-white">
-                Join our team
+                Faça parte da nossa equipe
               </h2>
               <p className="text-lg text-white">
-                Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet purus
-                dui laoreet diam sed lacus, fames.
+                Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
               </p>
               <a
                 href="#"
                 className="block w-full rounded-md border border-transparent bg-white px-5 py-3 text-center text-base font-medium text-indigo-700 shadow-md hover:bg-gray-50 sm:inline-block sm:w-auto"
               >
-                Explore open positions
+                Ver vagas abertas
               </a>
             </div>
           </div>

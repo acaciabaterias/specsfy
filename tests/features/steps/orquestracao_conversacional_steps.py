@@ -7,16 +7,15 @@ from behave import given, then, when
 
 ROOT = Path(__file__).resolve().parents[3]
 BASE_SKILLS = (
-    "specsfy-base-idea",
-    "specsfy-base-backlog",
-    "specsfy-base-interview",
-    "specsfy-base-specify",
-    "specsfy-base-validate",
-    "specsfy-base-tasks",
-    "specsfy-base-tdd-bdd",
-    "specsfy-base-implement",
-    "specsfy-base-update-spec",
-    "specsfy-base-progress",
+    "specsfy-01-inbox",
+    "specsfy-02-backlog",
+    "specsfy-03-specify",
+    "specsfy-04-validate",
+    "specsfy-05-tasks",
+    "specsfy-06-tdd-bdd",
+    "specsfy-07-implement",
+    "specsfy-update-spec",
+    "specsfy-progress",
 )
 
 
@@ -45,7 +44,7 @@ def when_handoff_is_needed(context) -> None:
 
 @then("as skills posteriores à captura anunciam e executam a transição automaticamente")
 def then_skills_announce_and_execute(context) -> None:
-    assert len(context.skills) == 9
+    assert len(context.skills) == 8
     for content in context.skills:
         assert "Transição automática:" in content
         assert "carregue imediatamente a skill de destino" in " ".join(
@@ -73,12 +72,58 @@ def then_automatic_handoff_continues(context) -> None:
 @then("mudança tardia usa uma entrada pública e executável")
 def then_late_change_has_one_entrypoint(context) -> None:
     update = (
-        ROOT / "skills" / "specsfy-base-update-spec" / "SKILL.md"
+        ROOT / "skills" / "specsfy-update-spec" / "SKILL.md"
     ).read_text(encoding="utf-8")
     implement = (
-        ROOT / "skills" / "specsfy-base-implement" / "SKILL.md"
+        ROOT / "skills" / "specsfy-07-implement" / "SKILL.md"
     ).read_text(encoding="utf-8")
     entrypoint = (ROOT / "specsfy" / "README.md").read_text(encoding="utf-8")
     for source in (implement, entrypoint):
-        assert "$specsfy-base-update-spec" in source
+        assert "$specsfy-update-spec" in source
     assert "esqueceu" in update
+
+
+@given("o contrato do refinamento do backlog e do método MCR-10")
+def given_backlog_contract(context) -> None:
+    context.backlog = (
+        ROOT / "skills" / "specsfy-02-backlog" / "SKILL.md"
+    ).read_text(encoding="utf-8")
+    context.mcr = (
+        ROOT
+        / "skills"
+        / "specsfy-03-specify"
+        / "references"
+        / "mcr-10.md"
+    ).read_text(encoding="utf-8")
+
+
+@when("a pessoa responde uma pergunta do refinamento do backlog")
+def when_person_answers_backlog(context) -> None:
+    assert "## Conduzir a descoberta adaptativa" in context.backlog
+
+
+@then("o refinamento do backlog reavalia o contexto acumulado com a nova resposta")
+def then_backlog_reanalyses_context(context) -> None:
+    for source in (context.backlog, context.mcr):
+        assert "contexto acumulado e a nova resposta" in source
+
+
+@then("continua sem limite máximo enquanto existir lacuna aplicável")
+def then_backlog_has_no_question_limit(context) -> None:
+    for source in (context.backlog, context.mcr):
+        assert "sem limite máximo de perguntas" in source
+        assert "enquanto existir lacuna aplicável" in source
+
+
+@then("oferece avançar a partir da décima primeira pergunta")
+def then_backlog_offers_advance(context) -> None:
+    for source in (context.backlog, context.mcr):
+        assert "A partir da 11ª pergunta" in source
+        assert "`avançar`" in source
+
+
+@then("o avanço preserva as lacunas e mantém a definição pendente")
+def then_advance_preserves_open_gaps(context) -> None:
+    assert "lacunas não resolvidas" in context.backlog
+    assert "Status: Draft" in context.backlog
+    assert "Definition Gate: Pending" in context.backlog

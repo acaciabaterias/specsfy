@@ -52,242 +52,242 @@ inventadas.
 | Models | TeamInvitation | `app/Models/TeamInvitation.php` |
 | Models | User | `app/Models/User.php` |
 | Policies | TeamPolicy | `app/Policies/TeamPolicy.php` |
-| Routes and APIs | console | `routes/console.php` |
-| Routes and APIs | settings | `routes/settings.php` |
-| Routes and APIs | web | `routes/web.php` |
+| Rotas e APIs | console | `routes/console.php` |
+| Rotas e APIs | settings | `routes/settings.php` |
+| Rotas e APIs | web | `routes/web.php` |
 | Views | app | `resources/views/app.blade.php` |
-| Pages | layout | `resources/js/layouts/settings/layout.tsx` |
-| Pages | confirm-password | `resources/js/pages/auth/confirm-password.tsx` |
-| Pages | forgot-password | `resources/js/pages/auth/forgot-password.tsx` |
-| Pages | login | `resources/js/pages/auth/login.tsx` |
-| Pages | register | `resources/js/pages/auth/register.tsx` |
-| Pages | reset-password | `resources/js/pages/auth/reset-password.tsx` |
-| Pages | two-factor-challenge | `resources/js/pages/auth/two-factor-challenge.tsx` |
-| Pages | dashboard | `resources/js/pages/dashboard.tsx` |
-| Pages | index | `resources/js/pages/directory/teams/index.tsx` |
-| Pages | show | `resources/js/pages/directory/teams/show.tsx` |
-| Pages | index | `resources/js/pages/directory/users/index.tsx` |
-| Pages | show | `resources/js/pages/directory/users/show.tsx` |
-| Pages | appearance | `resources/js/pages/settings/appearance.tsx` |
-| Pages | profile | `resources/js/pages/settings/profile.tsx` |
-| Pages | security | `resources/js/pages/settings/security.tsx` |
-| Pages | edit | `resources/js/pages/teams/edit.tsx` |
-| Pages | index | `resources/js/pages/teams/index.tsx` |
-| Pages | welcome | `resources/js/pages/welcome.tsx` |
-| Components | alert-error | `resources/js/components/alert-error.tsx` |
-| Components | app-content | `resources/js/components/app-content.tsx` |
-| Components | app-header | `resources/js/components/app-header.tsx` |
-| Components | app-logo-icon | `resources/js/components/app-logo-icon.tsx` |
-| Components | app-logo | `resources/js/components/app-logo.tsx` |
-| Components | app-shell | `resources/js/components/app-shell.tsx` |
-| Components | app-sidebar-header | `resources/js/components/app-sidebar-header.tsx` |
-| Components | app-sidebar | `resources/js/components/app-sidebar.tsx` |
-| Components | appearance-tabs | `resources/js/components/appearance-tabs.tsx` |
-| Components | breadcrumbs | `resources/js/components/breadcrumbs.tsx` |
-| Components | cancel-invitation-modal | `resources/js/components/cancel-invitation-modal.tsx` |
-| Components | create-team-modal | `resources/js/components/create-team-modal.tsx` |
-| Components | delete-team-modal | `resources/js/components/delete-team-modal.tsx` |
-| Components | delete-user | `resources/js/components/delete-user.tsx` |
-| Components | heading | `resources/js/components/heading.tsx` |
-| Components | input-error | `resources/js/components/input-error.tsx` |
-| Components | invite-member-modal | `resources/js/components/invite-member-modal.tsx` |
-| Components | leave-team-modal | `resources/js/components/leave-team-modal.tsx` |
-| Components | manage-passkeys | `resources/js/components/manage-passkeys.tsx` |
-| Components | manage-two-factor | `resources/js/components/manage-two-factor.tsx` |
-| Components | nav-footer | `resources/js/components/nav-footer.tsx` |
-| Components | nav-main | `resources/js/components/nav-main.tsx` |
-| Components | nav-user | `resources/js/components/nav-user.tsx` |
-| Components | passkey-item | `resources/js/components/passkey-item.tsx` |
-| Components | passkey-register | `resources/js/components/passkey-register.tsx` |
-| Components | passkey-verify | `resources/js/components/passkey-verify.tsx` |
-| Components | password-input | `resources/js/components/password-input.tsx` |
-| Components | pending-invitations-modal | `resources/js/components/pending-invitations-modal.tsx` |
-| Components | remove-member-modal | `resources/js/components/remove-member-modal.tsx` |
-| Components | team-invitation-alert | `resources/js/components/team-invitation-alert.tsx` |
-| Components | team-switcher | `resources/js/components/team-switcher.tsx` |
-| Components | text-link | `resources/js/components/text-link.tsx` |
-| Components | two-factor-recovery-codes | `resources/js/components/two-factor-recovery-codes.tsx` |
-| Components | two-factor-setup-modal | `resources/js/components/two-factor-setup-modal.tsx` |
-| Components | alert | `resources/js/components/ui/alert.tsx` |
-| Components | avatar | `resources/js/components/ui/avatar.tsx` |
-| Components | badge | `resources/js/components/ui/badge.tsx` |
-| Components | breadcrumb | `resources/js/components/ui/breadcrumb.tsx` |
-| Components | button | `resources/js/components/ui/button.tsx` |
-| Components | card | `resources/js/components/ui/card.tsx` |
-| Components | checkbox | `resources/js/components/ui/checkbox.tsx` |
-| Components | collapsible | `resources/js/components/ui/collapsible.tsx` |
-| Components | dialog | `resources/js/components/ui/dialog.tsx` |
-| Components | dropdown-menu | `resources/js/components/ui/dropdown-menu.tsx` |
-| Components | icon | `resources/js/components/ui/icon.tsx` |
-| Components | input-otp | `resources/js/components/ui/input-otp.tsx` |
-| Components | input | `resources/js/components/ui/input.tsx` |
-| Components | label | `resources/js/components/ui/label.tsx` |
-| Components | navigation-menu | `resources/js/components/ui/navigation-menu.tsx` |
-| Components | placeholder-pattern | `resources/js/components/ui/placeholder-pattern.tsx` |
-| Components | select | `resources/js/components/ui/select.tsx` |
-| Components | separator | `resources/js/components/ui/separator.tsx` |
-| Components | sheet | `resources/js/components/ui/sheet.tsx` |
-| Components | sidebar | `resources/js/components/ui/sidebar.tsx` |
-| Components | skeleton | `resources/js/components/ui/skeleton.tsx` |
-| Components | sonner | `resources/js/components/ui/sonner.tsx` |
-| Components | spinner | `resources/js/components/ui/spinner.tsx` |
-| Components | toggle-group | `resources/js/components/ui/toggle-group.tsx` |
-| Components | toggle | `resources/js/components/ui/toggle.tsx` |
-| Components | tooltip | `resources/js/components/ui/tooltip.tsx` |
-| Components | user-info | `resources/js/components/user-info.tsx` |
-| Components | user-menu-content | `resources/js/components/user-menu-content.tsx` |
-| Tests | AuthenticationTest | `tests/Feature/Auth/AuthenticationTest.php` |
-| Tests | PasswordConfirmationTest | `tests/Feature/Auth/PasswordConfirmationTest.php` |
-| Tests | PasswordResetTest | `tests/Feature/Auth/PasswordResetTest.php` |
-| Tests | RegistrationTest | `tests/Feature/Auth/RegistrationTest.php` |
-| Tests | TwoFactorChallengeTest | `tests/Feature/Auth/TwoFactorChallengeTest.php` |
-| Tests | DashboardTest | `tests/Feature/DashboardTest.php` |
-| Tests | TeamDetailTest | `tests/Feature/Directory/TeamDetailTest.php` |
-| Tests | TeamDirectoryTest | `tests/Feature/Directory/TeamDirectoryTest.php` |
-| Tests | UserDirectoryTest | `tests/Feature/Directory/UserDirectoryTest.php` |
-| Tests | UserProfileTest | `tests/Feature/Directory/UserProfileTest.php` |
-| Tests | UserSearchTest | `tests/Feature/Directory/UserSearchTest.php` |
-| Tests | ExampleTest | `tests/Feature/ExampleTest.php` |
-| Tests | ProfileUpdateTest | `tests/Feature/Settings/ProfileUpdateTest.php` |
-| Tests | SecurityTest | `tests/Feature/Settings/SecurityTest.php` |
-| Tests | PruneExpiredTeamInvitationsTest | `tests/Feature/Teams/PruneExpiredTeamInvitationsTest.php` |
-| Tests | TeamInvitationTest | `tests/Feature/Teams/TeamInvitationTest.php` |
-| Tests | TeamMemberTest | `tests/Feature/Teams/TeamMemberTest.php` |
-| Tests | TeamTest | `tests/Feature/Teams/TeamTest.php` |
-| Tests | Pest | `tests/Pest.php` |
-| Tests | TestCase | `tests/TestCase.php` |
-| Tests | ExampleTest | `tests/Unit/ExampleTest.php` |
-| Tests | directory_team_detail | `tests/features/directory_team_detail.feature` |
-| Tests | directory_teams | `tests/features/directory_teams.feature` |
-| Tests | directory_user_profile | `tests/features/directory_user_profile.feature` |
-| Tests | directory_user_search | `tests/features/directory_user_search.feature` |
-| Tests | directory_users | `tests/features/directory_users.feature` |
-| Tests | documentation | `tests/features/documentation.feature` |
-| Tests | directory_steps | `tests/features/steps/directory_steps.py` |
-| Tests | documentation_steps | `tests/features/steps/documentation_steps.py` |
-| Tests | test_documentation | `tests/test_documentation.py` |
-| Other source | CreateNewUser | `app/Actions/Fortify/CreateNewUser.php` |
-| Other source | ResetUserPassword | `app/Actions/Fortify/ResetUserPassword.php` |
-| Other source | CreateTeam | `app/Actions/Teams/CreateTeam.php` |
-| Other source | GeneratesUniqueTeamSlugs | `app/Concerns/GeneratesUniqueTeamSlugs.php` |
-| Other source | HasTeams | `app/Concerns/HasTeams.php` |
-| Other source | PasswordValidationRules | `app/Concerns/PasswordValidationRules.php` |
-| Other source | ProfileValidationRules | `app/Concerns/ProfileValidationRules.php` |
-| Other source | TeamPermissions | `app/Data/TeamPermissions.php` |
-| Other source | UserTeam | `app/Data/UserTeam.php` |
-| Other source | TeamPermission | `app/Enums/TeamPermission.php` |
-| Other source | TeamRole | `app/Enums/TeamRole.php` |
-| Other source | EnsureTeamMembership | `app/Http/Middleware/EnsureTeamMembership.php` |
-| Other source | HandleAppearance | `app/Http/Middleware/HandleAppearance.php` |
-| Other source | HandleInertiaRequests | `app/Http/Middleware/HandleInertiaRequests.php` |
-| Other source | SetTeamUrlDefaults | `app/Http/Middleware/SetTeamUrlDefaults.php` |
-| Other source | PasswordUpdateRequest | `app/Http/Requests/Settings/PasswordUpdateRequest.php` |
-| Other source | ProfileDeleteRequest | `app/Http/Requests/Settings/ProfileDeleteRequest.php` |
-| Other source | ProfileUpdateRequest | `app/Http/Requests/Settings/ProfileUpdateRequest.php` |
-| Other source | TwoFactorAuthenticationRequest | `app/Http/Requests/Settings/TwoFactorAuthenticationRequest.php` |
-| Other source | CreateTeamInvitationRequest | `app/Http/Requests/Teams/CreateTeamInvitationRequest.php` |
-| Other source | DeleteTeamRequest | `app/Http/Requests/Teams/DeleteTeamRequest.php` |
-| Other source | RespondToTeamInvitationRequest | `app/Http/Requests/Teams/RespondToTeamInvitationRequest.php` |
-| Other source | SaveTeamRequest | `app/Http/Requests/Teams/SaveTeamRequest.php` |
-| Other source | UpdateTeamMemberRequest | `app/Http/Requests/Teams/UpdateTeamMemberRequest.php` |
-| Other source | RedirectsToCurrentTeam | `app/Http/Responses/Concerns/RedirectsToCurrentTeam.php` |
-| Other source | LoginResponse | `app/Http/Responses/LoginResponse.php` |
-| Other source | PasskeyLoginResponse | `app/Http/Responses/PasskeyLoginResponse.php` |
-| Other source | RegisterResponse | `app/Http/Responses/RegisterResponse.php` |
-| Other source | TwoFactorLoginResponse | `app/Http/Responses/TwoFactorLoginResponse.php` |
-| Other source | TeamInvitation | `app/Notifications/Teams/TeamInvitation.php` |
-| Other source | AppServiceProvider | `app/Providers/AppServiceProvider.php` |
-| Other source | FortifyServiceProvider | `app/Providers/FortifyServiceProvider.php` |
-| Other source | TeamName | `app/Rules/TeamName.php` |
-| Other source | UniqueTeamInvitation | `app/Rules/UniqueTeamInvitation.php` |
-| Other source | ValidTeamInvitation | `app/Rules/ValidTeamInvitation.php` |
-| Other source | app | `bootstrap/app.php` |
-| Other source | providers | `bootstrap/providers.php` |
-| Other source | app | `config/app.php` |
-| Other source | auth | `config/auth.php` |
-| Other source | cache | `config/cache.php` |
-| Other source | database | `config/database.php` |
-| Other source | filesystems | `config/filesystems.php` |
-| Other source | fortify | `config/fortify.php` |
-| Other source | inertia | `config/inertia.php` |
-| Other source | logging | `config/logging.php` |
-| Other source | mail | `config/mail.php` |
-| Other source | queue | `config/queue.php` |
-| Other source | services | `config/services.php` |
-| Other source | session | `config/session.php` |
-| Other source | TeamFactory | `database/factories/TeamFactory.php` |
-| Other source | TeamInvitationFactory | `database/factories/TeamInvitationFactory.php` |
-| Other source | UserFactory | `database/factories/UserFactory.php` |
-| Other source | 0001_01_01_000000_create_users_table | `database/migrations/0001_01_01_000000_create_users_table.php` |
-| Other source | 0001_01_01_000001_create_cache_table | `database/migrations/0001_01_01_000001_create_cache_table.php` |
-| Other source | 0001_01_01_000002_create_jobs_table | `database/migrations/0001_01_01_000002_create_jobs_table.php` |
-| Other source | 2024_01_01_000000_create_passkeys_table | `database/migrations/2024_01_01_000000_create_passkeys_table.php` |
-| Other source | 2025_08_14_170933_add_two_factor_columns_to_users_table | `database/migrations/2025_08_14_170933_add_two_factor_columns_to_users_table.php` |
-| Other source | 2026_01_27_000001_create_teams_table | `database/migrations/2026_01_27_000001_create_teams_table.php` |
-| Other source | 2026_01_27_000002_add_current_team_id_to_users_table | `database/migrations/2026_01_27_000002_add_current_team_id_to_users_table.php` |
-| Other source | DatabaseSeeder | `database/seeders/DatabaseSeeder.php` |
-| Other source | eslint.config | `eslint.config.js` |
-| Other source | index | `public/index.php` |
-| Other source | index | `resources/js/actions/App/Http/index.ts` |
-| Other source | index | `resources/js/actions/App/index.ts` |
-| Other source | RedirectController | `resources/js/actions/Illuminate/Routing/RedirectController.ts` |
-| Other source | index | `resources/js/actions/Illuminate/Routing/index.ts` |
-| Other source | index | `resources/js/actions/Illuminate/index.ts` |
-| Other source | Controller | `resources/js/actions/Inertia/Controller.ts` |
-| Other source | index | `resources/js/actions/Inertia/index.ts` |
-| Other source | index | `resources/js/actions/Laravel/Fortify/Http/index.ts` |
-| Other source | index | `resources/js/actions/Laravel/Fortify/index.ts` |
-| Other source | index | `resources/js/actions/Laravel/Passkeys/Http/index.ts` |
-| Other source | index | `resources/js/actions/Laravel/Passkeys/index.ts` |
-| Other source | index | `resources/js/actions/Laravel/index.ts` |
-| Other source | app | `resources/js/app.tsx` |
-| Other source | use-appearance | `resources/js/hooks/use-appearance.tsx` |
-| Other source | use-clipboard | `resources/js/hooks/use-clipboard.ts` |
-| Other source | use-current-url | `resources/js/hooks/use-current-url.ts` |
-| Other source | use-flash-toast | `resources/js/hooks/use-flash-toast.ts` |
-| Other source | use-initials | `resources/js/hooks/use-initials.tsx` |
-| Other source | use-mobile-navigation | `resources/js/hooks/use-mobile-navigation.ts` |
-| Other source | use-mobile | `resources/js/hooks/use-mobile.tsx` |
-| Other source | use-two-factor-auth | `resources/js/hooks/use-two-factor-auth.ts` |
-| Other source | app-header-layout | `resources/js/layouts/app/app-header-layout.tsx` |
-| Other source | app-sidebar-layout | `resources/js/layouts/app/app-sidebar-layout.tsx` |
-| Other source | app-layout | `resources/js/layouts/app-layout.tsx` |
-| Other source | auth-card-layout | `resources/js/layouts/auth/auth-card-layout.tsx` |
-| Other source | auth-simple-layout | `resources/js/layouts/auth/auth-simple-layout.tsx` |
-| Other source | auth-split-layout | `resources/js/layouts/auth/auth-split-layout.tsx` |
-| Other source | auth-layout | `resources/js/layouts/auth-layout.tsx` |
-| Other source | utils | `resources/js/lib/utils.ts` |
-| Other source | index | `resources/js/routes/appearance/index.ts` |
-| Other source | index | `resources/js/routes/boost/index.ts` |
-| Other source | index | `resources/js/routes/directory/index.ts` |
-| Other source | index | `resources/js/routes/directory/teams/index.ts` |
-| Other source | index | `resources/js/routes/directory/users/index.ts` |
-| Other source | index | `resources/js/routes/index.ts` |
-| Other source | index | `resources/js/routes/invitations/index.ts` |
-| Other source | index | `resources/js/routes/login/index.ts` |
-| Other source | index | `resources/js/routes/passkey/index.ts` |
-| Other source | index | `resources/js/routes/password/confirm/index.ts` |
-| Other source | index | `resources/js/routes/password/index.ts` |
-| Other source | index | `resources/js/routes/profile/index.ts` |
-| Other source | index | `resources/js/routes/register/index.ts` |
-| Other source | index | `resources/js/routes/security/index.ts` |
-| Other source | index | `resources/js/routes/teams/index.ts` |
-| Other source | index | `resources/js/routes/teams/invitations/index.ts` |
-| Other source | index | `resources/js/routes/teams/members/index.ts` |
-| Other source | index | `resources/js/routes/two-factor/index.ts` |
-| Other source | index | `resources/js/routes/two-factor/login/index.ts` |
-| Other source | index | `resources/js/routes/user-password/index.ts` |
-| Other source | index | `resources/js/routes/well-known/index.ts` |
-| Other source | auth | `resources/js/types/auth.ts` |
-| Other source | directory | `resources/js/types/directory.ts` |
-| Other source | global.d | `resources/js/types/global.d.ts` |
-| Other source | index | `resources/js/types/index.ts` |
-| Other source | navigation | `resources/js/types/navigation.ts` |
-| Other source | teams | `resources/js/types/teams.ts` |
-| Other source | ui | `resources/js/types/ui.ts` |
-| Other source | vite-env.d | `resources/js/types/vite-env.d.ts` |
-| Other source | index | `resources/js/wayfinder/index.ts` |
-| Other source | vite.config | `vite.config.ts` |
+| Páginas | layout | `resources/js/layouts/settings/layout.tsx` |
+| Páginas | confirm-password | `resources/js/pages/auth/confirm-password.tsx` |
+| Páginas | forgot-password | `resources/js/pages/auth/forgot-password.tsx` |
+| Páginas | login | `resources/js/pages/auth/login.tsx` |
+| Páginas | register | `resources/js/pages/auth/register.tsx` |
+| Páginas | reset-password | `resources/js/pages/auth/reset-password.tsx` |
+| Páginas | two-factor-challenge | `resources/js/pages/auth/two-factor-challenge.tsx` |
+| Páginas | dashboard | `resources/js/pages/dashboard.tsx` |
+| Páginas | index | `resources/js/pages/directory/teams/index.tsx` |
+| Páginas | show | `resources/js/pages/directory/teams/show.tsx` |
+| Páginas | index | `resources/js/pages/directory/users/index.tsx` |
+| Páginas | show | `resources/js/pages/directory/users/show.tsx` |
+| Páginas | appearance | `resources/js/pages/settings/appearance.tsx` |
+| Páginas | profile | `resources/js/pages/settings/profile.tsx` |
+| Páginas | security | `resources/js/pages/settings/security.tsx` |
+| Páginas | edit | `resources/js/pages/teams/edit.tsx` |
+| Páginas | index | `resources/js/pages/teams/index.tsx` |
+| Páginas | welcome | `resources/js/pages/welcome.tsx` |
+| Componentes | alert-error | `resources/js/components/alert-error.tsx` |
+| Componentes | app-content | `resources/js/components/app-content.tsx` |
+| Componentes | app-header | `resources/js/components/app-header.tsx` |
+| Componentes | app-logo-icon | `resources/js/components/app-logo-icon.tsx` |
+| Componentes | app-logo | `resources/js/components/app-logo.tsx` |
+| Componentes | app-shell | `resources/js/components/app-shell.tsx` |
+| Componentes | app-sidebar-header | `resources/js/components/app-sidebar-header.tsx` |
+| Componentes | app-sidebar | `resources/js/components/app-sidebar.tsx` |
+| Componentes | appearance-tabs | `resources/js/components/appearance-tabs.tsx` |
+| Componentes | breadcrumbs | `resources/js/components/breadcrumbs.tsx` |
+| Componentes | cancel-invitation-modal | `resources/js/components/cancel-invitation-modal.tsx` |
+| Componentes | create-team-modal | `resources/js/components/create-team-modal.tsx` |
+| Componentes | delete-team-modal | `resources/js/components/delete-team-modal.tsx` |
+| Componentes | delete-user | `resources/js/components/delete-user.tsx` |
+| Componentes | heading | `resources/js/components/heading.tsx` |
+| Componentes | input-error | `resources/js/components/input-error.tsx` |
+| Componentes | invite-member-modal | `resources/js/components/invite-member-modal.tsx` |
+| Componentes | leave-team-modal | `resources/js/components/leave-team-modal.tsx` |
+| Componentes | manage-passkeys | `resources/js/components/manage-passkeys.tsx` |
+| Componentes | manage-two-factor | `resources/js/components/manage-two-factor.tsx` |
+| Componentes | nav-footer | `resources/js/components/nav-footer.tsx` |
+| Componentes | nav-main | `resources/js/components/nav-main.tsx` |
+| Componentes | nav-user | `resources/js/components/nav-user.tsx` |
+| Componentes | passkey-item | `resources/js/components/passkey-item.tsx` |
+| Componentes | passkey-register | `resources/js/components/passkey-register.tsx` |
+| Componentes | passkey-verify | `resources/js/components/passkey-verify.tsx` |
+| Componentes | password-input | `resources/js/components/password-input.tsx` |
+| Componentes | pending-invitations-modal | `resources/js/components/pending-invitations-modal.tsx` |
+| Componentes | remove-member-modal | `resources/js/components/remove-member-modal.tsx` |
+| Componentes | team-invitation-alert | `resources/js/components/team-invitation-alert.tsx` |
+| Componentes | team-switcher | `resources/js/components/team-switcher.tsx` |
+| Componentes | text-link | `resources/js/components/text-link.tsx` |
+| Componentes | two-factor-recovery-codes | `resources/js/components/two-factor-recovery-codes.tsx` |
+| Componentes | two-factor-setup-modal | `resources/js/components/two-factor-setup-modal.tsx` |
+| Componentes | alert | `resources/js/components/ui/alert.tsx` |
+| Componentes | avatar | `resources/js/components/ui/avatar.tsx` |
+| Componentes | badge | `resources/js/components/ui/badge.tsx` |
+| Componentes | breadcrumb | `resources/js/components/ui/breadcrumb.tsx` |
+| Componentes | button | `resources/js/components/ui/button.tsx` |
+| Componentes | card | `resources/js/components/ui/card.tsx` |
+| Componentes | checkbox | `resources/js/components/ui/checkbox.tsx` |
+| Componentes | collapsible | `resources/js/components/ui/collapsible.tsx` |
+| Componentes | dialog | `resources/js/components/ui/dialog.tsx` |
+| Componentes | dropdown-menu | `resources/js/components/ui/dropdown-menu.tsx` |
+| Componentes | icon | `resources/js/components/ui/icon.tsx` |
+| Componentes | input-otp | `resources/js/components/ui/input-otp.tsx` |
+| Componentes | input | `resources/js/components/ui/input.tsx` |
+| Componentes | label | `resources/js/components/ui/label.tsx` |
+| Componentes | navigation-menu | `resources/js/components/ui/navigation-menu.tsx` |
+| Componentes | placeholder-pattern | `resources/js/components/ui/placeholder-pattern.tsx` |
+| Componentes | select | `resources/js/components/ui/select.tsx` |
+| Componentes | separator | `resources/js/components/ui/separator.tsx` |
+| Componentes | sheet | `resources/js/components/ui/sheet.tsx` |
+| Componentes | sidebar | `resources/js/components/ui/sidebar.tsx` |
+| Componentes | skeleton | `resources/js/components/ui/skeleton.tsx` |
+| Componentes | sonner | `resources/js/components/ui/sonner.tsx` |
+| Componentes | spinner | `resources/js/components/ui/spinner.tsx` |
+| Componentes | toggle-group | `resources/js/components/ui/toggle-group.tsx` |
+| Componentes | toggle | `resources/js/components/ui/toggle.tsx` |
+| Componentes | tooltip | `resources/js/components/ui/tooltip.tsx` |
+| Componentes | user-info | `resources/js/components/user-info.tsx` |
+| Componentes | user-menu-content | `resources/js/components/user-menu-content.tsx` |
+| Testes | AuthenticationTest | `tests/Feature/Auth/AuthenticationTest.php` |
+| Testes | PasswordConfirmationTest | `tests/Feature/Auth/PasswordConfirmationTest.php` |
+| Testes | PasswordResetTest | `tests/Feature/Auth/PasswordResetTest.php` |
+| Testes | RegistrationTest | `tests/Feature/Auth/RegistrationTest.php` |
+| Testes | TwoFactorChallengeTest | `tests/Feature/Auth/TwoFactorChallengeTest.php` |
+| Testes | DashboardTest | `tests/Feature/DashboardTest.php` |
+| Testes | TeamDetailTest | `tests/Feature/Directory/TeamDetailTest.php` |
+| Testes | TeamDirectoryTest | `tests/Feature/Directory/TeamDirectoryTest.php` |
+| Testes | UserDirectoryTest | `tests/Feature/Directory/UserDirectoryTest.php` |
+| Testes | UserProfileTest | `tests/Feature/Directory/UserProfileTest.php` |
+| Testes | UserSearchTest | `tests/Feature/Directory/UserSearchTest.php` |
+| Testes | ExampleTest | `tests/Feature/ExampleTest.php` |
+| Testes | ProfileUpdateTest | `tests/Feature/Settings/ProfileUpdateTest.php` |
+| Testes | SecurityTest | `tests/Feature/Settings/SecurityTest.php` |
+| Testes | PruneExpiredTeamInvitationsTest | `tests/Feature/Teams/PruneExpiredTeamInvitationsTest.php` |
+| Testes | TeamInvitationTest | `tests/Feature/Teams/TeamInvitationTest.php` |
+| Testes | TeamMemberTest | `tests/Feature/Teams/TeamMemberTest.php` |
+| Testes | TeamTest | `tests/Feature/Teams/TeamTest.php` |
+| Testes | Pest | `tests/Pest.php` |
+| Testes | TestCase | `tests/TestCase.php` |
+| Testes | ExampleTest | `tests/Unit/ExampleTest.php` |
+| Testes | directory_team_detail | `tests/features/directory_team_detail.feature` |
+| Testes | directory_teams | `tests/features/directory_teams.feature` |
+| Testes | directory_user_profile | `tests/features/directory_user_profile.feature` |
+| Testes | directory_user_search | `tests/features/directory_user_search.feature` |
+| Testes | directory_users | `tests/features/directory_users.feature` |
+| Testes | documentation | `tests/features/documentation.feature` |
+| Testes | directory_steps | `tests/features/steps/directory_steps.py` |
+| Testes | documentation_steps | `tests/features/steps/documentation_steps.py` |
+| Testes | test_documentation | `tests/test_documentation.py` |
+| Outras fontes | CreateNewUser | `app/Actions/Fortify/CreateNewUser.php` |
+| Outras fontes | ResetUserPassword | `app/Actions/Fortify/ResetUserPassword.php` |
+| Outras fontes | CreateTeam | `app/Actions/Teams/CreateTeam.php` |
+| Outras fontes | GeneratesUniqueTeamSlugs | `app/Concerns/GeneratesUniqueTeamSlugs.php` |
+| Outras fontes | HasTeams | `app/Concerns/HasTeams.php` |
+| Outras fontes | PasswordValidationRules | `app/Concerns/PasswordValidationRules.php` |
+| Outras fontes | ProfileValidationRules | `app/Concerns/ProfileValidationRules.php` |
+| Outras fontes | TeamPermissions | `app/Data/TeamPermissions.php` |
+| Outras fontes | UserTeam | `app/Data/UserTeam.php` |
+| Outras fontes | TeamPermission | `app/Enums/TeamPermission.php` |
+| Outras fontes | TeamRole | `app/Enums/TeamRole.php` |
+| Outras fontes | EnsureTeamMembership | `app/Http/Middleware/EnsureTeamMembership.php` |
+| Outras fontes | HandleAppearance | `app/Http/Middleware/HandleAppearance.php` |
+| Outras fontes | HandleInertiaRequests | `app/Http/Middleware/HandleInertiaRequests.php` |
+| Outras fontes | SetTeamUrlDefaults | `app/Http/Middleware/SetTeamUrlDefaults.php` |
+| Outras fontes | PasswordUpdateRequest | `app/Http/Requests/Settings/PasswordUpdateRequest.php` |
+| Outras fontes | ProfileDeleteRequest | `app/Http/Requests/Settings/ProfileDeleteRequest.php` |
+| Outras fontes | ProfileUpdateRequest | `app/Http/Requests/Settings/ProfileUpdateRequest.php` |
+| Outras fontes | TwoFactorAuthenticationRequest | `app/Http/Requests/Settings/TwoFactorAuthenticationRequest.php` |
+| Outras fontes | CreateTeamInvitationRequest | `app/Http/Requests/Teams/CreateTeamInvitationRequest.php` |
+| Outras fontes | DeleteTeamRequest | `app/Http/Requests/Teams/DeleteTeamRequest.php` |
+| Outras fontes | RespondToTeamInvitationRequest | `app/Http/Requests/Teams/RespondToTeamInvitationRequest.php` |
+| Outras fontes | SaveTeamRequest | `app/Http/Requests/Teams/SaveTeamRequest.php` |
+| Outras fontes | UpdateTeamMemberRequest | `app/Http/Requests/Teams/UpdateTeamMemberRequest.php` |
+| Outras fontes | RedirectsToCurrentTeam | `app/Http/Responses/Concerns/RedirectsToCurrentTeam.php` |
+| Outras fontes | LoginResponse | `app/Http/Responses/LoginResponse.php` |
+| Outras fontes | PasskeyLoginResponse | `app/Http/Responses/PasskeyLoginResponse.php` |
+| Outras fontes | RegisterResponse | `app/Http/Responses/RegisterResponse.php` |
+| Outras fontes | TwoFactorLoginResponse | `app/Http/Responses/TwoFactorLoginResponse.php` |
+| Outras fontes | TeamInvitation | `app/Notifications/Teams/TeamInvitation.php` |
+| Outras fontes | AppServiceProvider | `app/Providers/AppServiceProvider.php` |
+| Outras fontes | FortifyServiceProvider | `app/Providers/FortifyServiceProvider.php` |
+| Outras fontes | TeamName | `app/Rules/TeamName.php` |
+| Outras fontes | UniqueTeamInvitation | `app/Rules/UniqueTeamInvitation.php` |
+| Outras fontes | ValidTeamInvitation | `app/Rules/ValidTeamInvitation.php` |
+| Outras fontes | app | `bootstrap/app.php` |
+| Outras fontes | providers | `bootstrap/providers.php` |
+| Outras fontes | app | `config/app.php` |
+| Outras fontes | auth | `config/auth.php` |
+| Outras fontes | cache | `config/cache.php` |
+| Outras fontes | database | `config/database.php` |
+| Outras fontes | filesystems | `config/filesystems.php` |
+| Outras fontes | fortify | `config/fortify.php` |
+| Outras fontes | inertia | `config/inertia.php` |
+| Outras fontes | logging | `config/logging.php` |
+| Outras fontes | mail | `config/mail.php` |
+| Outras fontes | queue | `config/queue.php` |
+| Outras fontes | services | `config/services.php` |
+| Outras fontes | session | `config/session.php` |
+| Outras fontes | TeamFactory | `database/factories/TeamFactory.php` |
+| Outras fontes | TeamInvitationFactory | `database/factories/TeamInvitationFactory.php` |
+| Outras fontes | UserFactory | `database/factories/UserFactory.php` |
+| Outras fontes | 0001_01_01_000000_create_users_table | `database/migrations/0001_01_01_000000_create_users_table.php` |
+| Outras fontes | 0001_01_01_000001_create_cache_table | `database/migrations/0001_01_01_000001_create_cache_table.php` |
+| Outras fontes | 0001_01_01_000002_create_jobs_table | `database/migrations/0001_01_01_000002_create_jobs_table.php` |
+| Outras fontes | 2024_01_01_000000_create_passkeys_table | `database/migrations/2024_01_01_000000_create_passkeys_table.php` |
+| Outras fontes | 2025_08_14_170933_add_two_factor_columns_to_users_table | `database/migrations/2025_08_14_170933_add_two_factor_columns_to_users_table.php` |
+| Outras fontes | 2026_01_27_000001_create_teams_table | `database/migrations/2026_01_27_000001_create_teams_table.php` |
+| Outras fontes | 2026_01_27_000002_add_current_team_id_to_users_table | `database/migrations/2026_01_27_000002_add_current_team_id_to_users_table.php` |
+| Outras fontes | DatabaseSeeder | `database/seeders/DatabaseSeeder.php` |
+| Outras fontes | eslint.config | `eslint.config.js` |
+| Outras fontes | index | `public/index.php` |
+| Outras fontes | index | `resources/js/actions/App/Http/index.ts` |
+| Outras fontes | index | `resources/js/actions/App/index.ts` |
+| Outras fontes | RedirectController | `resources/js/actions/Illuminate/Routing/RedirectController.ts` |
+| Outras fontes | index | `resources/js/actions/Illuminate/Routing/index.ts` |
+| Outras fontes | index | `resources/js/actions/Illuminate/index.ts` |
+| Outras fontes | Controller | `resources/js/actions/Inertia/Controller.ts` |
+| Outras fontes | index | `resources/js/actions/Inertia/index.ts` |
+| Outras fontes | index | `resources/js/actions/Laravel/Fortify/Http/index.ts` |
+| Outras fontes | index | `resources/js/actions/Laravel/Fortify/index.ts` |
+| Outras fontes | index | `resources/js/actions/Laravel/Passkeys/Http/index.ts` |
+| Outras fontes | index | `resources/js/actions/Laravel/Passkeys/index.ts` |
+| Outras fontes | index | `resources/js/actions/Laravel/index.ts` |
+| Outras fontes | app | `resources/js/app.tsx` |
+| Outras fontes | use-appearance | `resources/js/hooks/use-appearance.tsx` |
+| Outras fontes | use-clipboard | `resources/js/hooks/use-clipboard.ts` |
+| Outras fontes | use-current-url | `resources/js/hooks/use-current-url.ts` |
+| Outras fontes | use-flash-toast | `resources/js/hooks/use-flash-toast.ts` |
+| Outras fontes | use-initials | `resources/js/hooks/use-initials.tsx` |
+| Outras fontes | use-mobile-navigation | `resources/js/hooks/use-mobile-navigation.ts` |
+| Outras fontes | use-mobile | `resources/js/hooks/use-mobile.tsx` |
+| Outras fontes | use-two-factor-auth | `resources/js/hooks/use-two-factor-auth.ts` |
+| Outras fontes | app-header-layout | `resources/js/layouts/app/app-header-layout.tsx` |
+| Outras fontes | app-sidebar-layout | `resources/js/layouts/app/app-sidebar-layout.tsx` |
+| Outras fontes | app-layout | `resources/js/layouts/app-layout.tsx` |
+| Outras fontes | auth-card-layout | `resources/js/layouts/auth/auth-card-layout.tsx` |
+| Outras fontes | auth-simple-layout | `resources/js/layouts/auth/auth-simple-layout.tsx` |
+| Outras fontes | auth-split-layout | `resources/js/layouts/auth/auth-split-layout.tsx` |
+| Outras fontes | auth-layout | `resources/js/layouts/auth-layout.tsx` |
+| Outras fontes | utils | `resources/js/lib/utils.ts` |
+| Outras fontes | index | `resources/js/routes/appearance/index.ts` |
+| Outras fontes | index | `resources/js/routes/boost/index.ts` |
+| Outras fontes | index | `resources/js/routes/directory/index.ts` |
+| Outras fontes | index | `resources/js/routes/directory/teams/index.ts` |
+| Outras fontes | index | `resources/js/routes/directory/users/index.ts` |
+| Outras fontes | index | `resources/js/routes/index.ts` |
+| Outras fontes | index | `resources/js/routes/invitations/index.ts` |
+| Outras fontes | index | `resources/js/routes/login/index.ts` |
+| Outras fontes | index | `resources/js/routes/passkey/index.ts` |
+| Outras fontes | index | `resources/js/routes/password/confirm/index.ts` |
+| Outras fontes | index | `resources/js/routes/password/index.ts` |
+| Outras fontes | index | `resources/js/routes/profile/index.ts` |
+| Outras fontes | index | `resources/js/routes/register/index.ts` |
+| Outras fontes | index | `resources/js/routes/security/index.ts` |
+| Outras fontes | index | `resources/js/routes/teams/index.ts` |
+| Outras fontes | index | `resources/js/routes/teams/invitations/index.ts` |
+| Outras fontes | index | `resources/js/routes/teams/members/index.ts` |
+| Outras fontes | index | `resources/js/routes/two-factor/index.ts` |
+| Outras fontes | index | `resources/js/routes/two-factor/login/index.ts` |
+| Outras fontes | index | `resources/js/routes/user-password/index.ts` |
+| Outras fontes | index | `resources/js/routes/well-known/index.ts` |
+| Outras fontes | auth | `resources/js/types/auth.ts` |
+| Outras fontes | directory | `resources/js/types/directory.ts` |
+| Outras fontes | global.d | `resources/js/types/global.d.ts` |
+| Outras fontes | index | `resources/js/types/index.ts` |
+| Outras fontes | navigation | `resources/js/types/navigation.ts` |
+| Outras fontes | teams | `resources/js/types/teams.ts` |
+| Outras fontes | ui | `resources/js/types/ui.ts` |
+| Outras fontes | vite-env.d | `resources/js/types/vite-env.d.ts` |
+| Outras fontes | index | `resources/js/wayfinder/index.ts` |
+| Outras fontes | vite.config | `vite.config.ts` |
 
 ## Mapa de responsabilidades
 
@@ -295,6 +295,6 @@ inventadas.
 | --- | --- |
 | Controllers e APIs | Entradas HTTP, validação e orquestração |
 | Models e entidades | Estado persistente, relações e invariantes |
-| Services e jobs | Casos de uso, integrações e processamento assíncrono |
+| Serviços e jobs | Casos de uso, integrações e processamento assíncrono |
 | Views, páginas e componentes | Apresentação e interação |
 <!-- specsfy:documentator:end -->

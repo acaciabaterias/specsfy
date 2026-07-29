@@ -1,8 +1,8 @@
 const stats = [
-  { id: 1, name: 'Creators on the platform', value: '8,000+' },
-  { id: 2, name: 'Flat platform fee', value: '3%' },
-  { id: 3, name: 'Uptime guarantee', value: '99.9%' },
-  { id: 4, name: 'Paid out to creators', value: '$70M' },
+  { id: 1, name: 'Criadores na plataforma', value: '8,000+' },
+  { id: 2, name: 'Taxa fixa da plataforma', value: '3%' },
+  { id: 3, name: 'Garantia de disponibilidade', value: '99.9%' },
+  { id: 4, name: 'Pagamentos aos criadores', value: '$70M' },
 ]
 
 export default function Example() {
@@ -32,13 +32,12 @@ export default function Example() {
           />
         </div>
         <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl">
-          <h2 className="text-base/8 font-semibold text-indigo-600 dark:text-indigo-400">Our track record</h2>
+          <h2 className="text-base/8 font-semibold text-indigo-600 dark:text-indigo-400">Nosso histórico</h2>
           <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
-            Trusted by thousands of creators&nbsp;worldwide
+            A confiança de milhares de criadores no mundo todo
           </p>
           <p className="mt-6 text-lg/8 text-gray-700 dark:text-gray-300">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste
-            dolor cupiditate blanditiis.
+            Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
           </p>
         </div>
         <dl className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-10 text-gray-900 sm:mt-20 sm:grid-cols-2 sm:gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-4 dark:text-white">

@@ -1,7 +1,6 @@
 /**
- * Adapt this component to the client-side framework's link component. Examples
- * for Next.js, Remix, and Inertia.js are available in the Catalyst
- * documentation:
+ * Adapte este componente ao componente de link do framework cliente. Há exemplos
+ * para Next.js, Remix e Inertia.js na documentação do Catalyst:
  *
  * https://catalyst.tailwindui.com/docs#client-side-router-integration
  */

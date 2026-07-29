@@ -20,41 +20,44 @@ adicionar integração externa.
 
 ## Atualize quando
 
-- uma classe de dados for introduzida;
-- retenção, exclusão ou acesso mudar;
+- uma classe de dados for introduzida.
+- retenção, exclusão ou acesso mudar.
 - logs ou research passarem a carregar informação sensível.
 
 ## Não use para
 
-- armazenar segredo, token ou dado pessoal;
-- substituir política jurídica da organização;
+- armazenar segredo, token ou dado pessoal.
+- substituir política jurídica da organização.
 - declarar dado seguro sem verificação.
 
 ## Fonte da verdade e precedência
 
-A spec da fatia define requisitos de privacidade aplicáveis; configuração,
+A spec da fatia define requisitos de privacidade aplicáveis. Configuração,
 código e testes demonstram enforcement. Este documento registra a política
 transversal mínima do repositório.
 
 ## Classificação dos dados
 
+<!-- markdownlint-disable MD013 -->
 | Classe | Exemplos | Regra |
 | --- | --- | --- |
 | Público | método e documentação publicada | pode ser versionado |
 | Interno | decisões e evidências de desenvolvimento | versionar somente quando necessário |
 | Sensível | credenciais, dados pessoais, segredos | não incluir em specs, research, logs ou fixtures reais |
 | Operacional local | preferência e cache de atualização do CLI | restringir ao usuário e não incluir conteúdo de projeto |
+<!-- markdownlint-enable MD013 -->
 
-Capturas em `specs/ideias/` são conteúdo interno versionado e preservam o input
-integral. A skill faz triagem silenciosa de segredos evidentes antes da escrita;
+Capturas em `specs/inbox/` são conteúdo interno versionado e preservam o input
+integral. A skill faz triagem silenciosa de segredos evidentes antes da escrita.
 ao detectar credencial, token, chave privada ou dado pessoal sensível, não
 persiste o arquivo e não copia o valor para logs ou mensagens.
 
 ## Retenção e exclusão
 
-- O Git preserva histórico; não versionar material que exija expurgo comum.
+- O Git preserva histórico. Não versione material que exija expurgo comum.
 - Research externo deve registrar origem, licença, data e propósito.
-- Dados sensíveis acidentais exigem interrupção, contenção e procedimento seguro de remoção.
+- Dados sensíveis acidentais exigem interrupção, contenção e procedimento
+  seguro de remoção.
 - Retenção específica de produto pertence à spec que introduz o dado.
 
 ## Logs e exposição

@@ -2,27 +2,27 @@ import { ArrowPathIcon, CloudArrowUpIcon, FingerPrintIcon, LockClosedIcon } from
 
 const features = [
   {
-    name: 'Push to deploy',
+    name: 'Envio para deploy',
     description:
-      'Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi. Odio urna massa nunc massa.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     icon: CloudArrowUpIcon,
   },
   {
-    name: 'SSL certificates',
+    name: 'Certificados SSL',
     description:
-      'Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget. Sem sodales gravida quam turpis enim lacus amet.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     icon: LockClosedIcon,
   },
   {
-    name: 'Simple queues',
+    name: 'Filas simples',
     description:
-      'Quisque est vel vulputate cursus. Risus proin diam nunc commodo. Lobortis auctor congue commodo diam neque.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     icon: ArrowPathIcon,
   },
   {
-    name: 'Advanced security',
+    name: 'Segurança avançada',
     description:
-      'Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     icon: FingerPrintIcon,
   },
 ]
@@ -32,13 +32,12 @@ export default function Example() {
     <div className="bg-white py-24 sm:py-32 dark:bg-gray-900">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
-          <h2 className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">Deploy faster</h2>
+          <h2 className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">Faça deploy mais rápido</h2>
           <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl lg:text-balance dark:text-white">
-            Everything you need to deploy your app
+            Tudo o que você precisa para fazer deploy da aplicação
           </p>
           <p className="mt-6 text-lg/8 text-gray-700 dark:text-gray-300">
-            Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum
-            pulvinar et feugiat blandit at. In mi viverra elit nunc.
+            Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">

@@ -1,28 +1,23 @@
 # Skills especialistas
 
-## Classificação
+As skills base conduzem a metodologia. As
+`specsfy-specialist-*` acrescentam orientação para a tecnologia encontrada no
+projeto, como Laravel, Astro, Next.js, Postgres ou Redis. Assim, você instala
+somente o conhecimento técnico usado pela aplicação.
 
-| Campo | Valor |
-| --- | --- |
-| Natureza | normativo |
-| Escopo | catálogo técnico opcional e instalação sob demanda |
-| Autoridade | uso público de `specialists/` |
+## Detectar e instalar
 
-## Papel
-
-Separar o método `specsfy-base-*` do contexto técnico
-`specsfy-specialist-*`, permitindo instalar somente o conhecimento necessário
-em cada projeto consumidor.
-
-## Como usar
-
-Detecte tecnologias e revise a sugestão:
+O comando `detect` lê o projeto e mostra recomendações sem instalar arquivos.
+O catálogo local só deve ser alterado depois que você revisar os nomes
+retornados:
 
 ```bash
 specsfy skills detect
 ```
 
-Instale nomes explícitos:
+Depois da revisão, informe ao comando `add` apenas os especialistas usados pela
+aplicação. O CLI registra cada instalação no `skills-lock.json`, permitindo
+conferir depois quais arquivos são gerenciados:
 
 ```bash
 specsfy skills add \
@@ -31,29 +26,10 @@ specsfy skills add \
   specsfy-specialist-redis
 ```
 
-As skills base podem propor um especialista. Se ele já estiver instalado,
-anunciam a transição automática e o carregam na mesma conversa. Se estiver
-ausente, a instalação recebe autorização específica; o handoff não instala nada
-automaticamente.
-
-## Atualize quando
-
-- uma skill entrar, sair ou mudar de responsabilidade;
-- o prefixo, detecção ou modo de instalação mudar;
-- padrões oficiais relevantes mudarem.
-
-## Não use para
-
-- redefinir o fluxo dos três atos;
-- criar uma spec ou substituir a fonte normativa do projeto;
-- instalar todo o catálogo por padrão;
-- copiar versões de dependências mantidas em manifests.
-
-## Fonte da verdade e precedência
-
-Diretórios, `SKILL.md`, referências, metadata e `catalog.json` vivem em
-[`specialists/`](../../specialists/). Esta página
-orienta usuários sem duplicar o conteúdo operacional de cada skill.
+As skills base podem sugerir um especialista. Quando ele já estiver instalado,
+a transição é anunciada e continua na mesma conversa. Quando estiver ausente, o
+agente precisa de autorização específica para instalar. A transição entre
+skills nunca instala o catálogo inteiro automaticamente.
 
 ## Catálogo por domínio
 
@@ -67,19 +43,24 @@ orienta usuários sem duplicar o conteúdo operacional de cada skill.
 | design técnico | arquitetura e modelagem de domínio |
 | engenharia | code review, debugging, prototipação, pesquisa e conflitos Git |
 
-Cada especialista inclui workflow, padrões, validação e referências oficiais.
-Use especialistas relacionados em conjunto apenas quando seus boundaries forem
-realmente tocados.
+Cada especialista explica o fluxo de trabalho e as validações próprias da sua
+tecnologia. Uma mudança em Eloquent pode combinar Laravel e Postgres, por
+exemplo, mas uma alteração isolada em uma página Astro não precisa carregar
+orientações de todo o catálogo.
 
 ## Relação com as bases
 
-- `specsfy-base-interview` identifica necessidade.
-- `specsfy-base-specify` registra requisitos e NFRs.
-- `specsfy-base-validate` seleciona lentes de revisão.
-- `specsfy-base-tasks` usa checklists técnicos para decompor trabalho.
-- `specsfy-base-tdd-bdd` preserva RED/GREEN.
-- `specsfy-base-implement` executa no contexto da stack.
-- `specsfy-base-update-spec` revisa requisitos e NFRs afetados por pedido tardio.
-- `specsfy-base-progress` identifica contexto e executa a transição automática.
+- `specsfy-02-backlog` identifica a necessidade.
+- `specsfy-03-specify` registra requisitos e atributos de qualidade.
+- `specsfy-04-validate` seleciona lentes de revisão.
+- `specsfy-05-tasks` usa checklists técnicos para decompor trabalho.
+- `specsfy-06-tdd-bdd` preserva RED/GREEN.
+- `specsfy-07-implement` executa de acordo com a stack.
+- `specsfy-update-spec` revisa requisitos e atributos de qualidade
+  afetados por uma mudança posterior.
+- `specsfy-progress` identifica a orientação técnica aplicável e executa a
+  transição automática.
 
-Especialista complementa conhecimento; nunca avança gate por presença.
+A presença de um especialista não aprova gates. O Plan Gate ainda exige um RED
+válido, e o Delivery Gate depende dos testes e das evidências registradas na
+spec.

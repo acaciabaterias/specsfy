@@ -17,63 +17,63 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 const features = [
   {
-    name: 'Analytics',
+    name: 'Análises',
     href: '#',
-    description: 'Get a better understanding of where your traffic is coming from.',
+    description: 'Entenda melhor de onde vem o seu tráfego.',
     icon: ChartBarIcon,
   },
   {
-    name: 'Engagement',
+    name: 'Engajamento',
     href: '#',
-    description: 'Speak directly to your customers in a more meaningful way.',
+    description: 'Converse diretamente com seus clientes de forma mais relevante.',
     icon: CursorArrowRaysIcon,
   },
-  { name: 'Security', href: '#', description: "Your customers' data will be safe and secure.", icon: ShieldCheckIcon },
+  { name: 'Segurança', href: '#', description: "Os dados dos seus clientes permanecerão protegidos.", icon: ShieldCheckIcon },
   {
-    name: 'Integrations',
+    name: 'Integrações',
     href: '#',
-    description: "Connect with third-party tools that you're already using.",
+    description: "Conecte as ferramentas de terceiros que você já usa.",
     icon: Squares2X2Icon,
   },
   {
-    name: 'Automations',
+    name: 'Automações',
     href: '#',
-    description: 'Build strategic funnels that will drive your customers to convert',
+    description: 'Crie funis estratégicos que ajudem seus clientes a converter',
     icon: ArrowPathIcon,
   },
 ]
 
 const callsToAction = [
-  { name: 'Watch Demo', href: '#', icon: PlayIcon },
-  { name: 'Contact Sales', href: '#', icon: PhoneIcon },
+  { name: 'Assistir à Demonstração', href: '#', icon: PlayIcon },
+  { name: 'Falar com Vendas', href: '#', icon: PhoneIcon },
 ]
 
 const resources = [
   {
-    name: 'Help Center',
-    description: 'Get all of your questions answered in our forums or contact support.',
+    name: 'Central de Ajuda',
+    description: 'Encontre respostas nos fóruns ou fale com o suporte.',
     href: '#',
     icon: LifebuoyIcon,
   },
   {
-    name: 'Guides',
-    description: 'Learn how to maximize our platform to get the most out of it.',
+    name: 'Guias',
+    description: 'Aprenda a aproveitar ao máximo a plataforma.',
     href: '#',
     icon: BookmarkSquareIcon,
   },
   {
-    name: 'Events',
-    description: 'See what meet-ups and other events we might be planning near you.',
+    name: 'Eventos',
+    description: 'Veja encontros e outros eventos planejados perto de você.',
     href: '#',
     icon: CalendarIcon,
   },
-  { name: 'Security', description: 'Understand how we take your privacy seriously.', href: '#', icon: ShieldCheckIcon },
+  { name: 'Segurança', description: 'Entenda como protegemos sua privacidade.', href: '#', icon: ShieldCheckIcon },
 ]
 
 const recentPosts = [
-  { id: 1, name: 'Boost your conversion rate', href: '#' },
-  { id: 2, name: 'How to use search engine optimization to drive traffic to your site', href: '#' },
-  { id: 3, name: 'Improve your customer experience', href: '#' },
+  { id: 1, name: 'Aumente sua taxa de conversão', href: '#' },
+  { id: 2, name: 'Como usar SEO para atrair tráfego ao seu site', href: '#' },
+  { id: 3, name: 'Melhore a experiência dos seus clientes', href: '#' },
 ]
 
 export default function Example() {
@@ -84,10 +84,10 @@ export default function Example() {
           <div className="flex items-center justify-between py-6 md:justify-start md:space-x-10">
             <div className="flex justify-start lg:w-0 lg:flex-1">
               <a href="#">
-                <span className="sr-only">Your Company</span>
+                <span className="sr-only">Sua Empresa</span>
                 <img
                   alt=""
-                  src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+                  src="https://tailwindcss.com/mais-assets/img/logos/mark.svg?color=indigo&shade=600"
                   className="h-8 w-auto sm:h-10"
                 />
               </a>
@@ -95,14 +95,14 @@ export default function Example() {
             <div className="-my-2 -mr-2 md:hidden">
               <PopoverButton className="relative inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:outline-hidden focus:ring-inset">
                 <span className="absolute -inset-0.5" />
-                <span className="sr-only">Open menu</span>
+                <span className="sr-only">Abrir menu</span>
                 <Bars3Icon aria-hidden="true" className="size-6" />
               </PopoverButton>
             </div>
             <PopoverGroup as="nav" className="hidden space-x-10 md:flex">
               <Popover className="relative">
                 <PopoverButton className="group inline-flex items-center rounded-md bg-white text-base font-medium text-gray-500 hover:text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden data-open:text-gray-900">
-                  <span>Solutions</span>
+                  <span>Soluções</span>
                   <ChevronDownIcon
                     aria-hidden="true"
                     className="ml-2 size-5 text-gray-400 group-hover:text-gray-500 group-data-open:text-gray-600 group-data-open:group-hover:text-gray-500"
@@ -147,15 +147,15 @@ export default function Example() {
               </Popover>
 
               <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
-                Pricing
+                Preços
               </a>
               <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
-                Docs
+                Documentação
               </a>
 
               <Popover className="relative">
                 <PopoverButton className="group inline-flex items-center rounded-md bg-white text-base font-medium text-gray-500 hover:text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden data-open:text-gray-900">
-                  <span>More</span>
+                  <span>Mais</span>
                   <ChevronDownIcon
                     aria-hidden="true"
                     className="ml-2 size-5 text-gray-400 group-hover:text-gray-500 group-data-open:text-gray-600 group-data-open:group-hover:text-gray-500"
@@ -184,7 +184,7 @@ export default function Example() {
                     </div>
                     <div className="bg-gray-50 px-5 py-5 sm:px-8 sm:py-8">
                       <div>
-                        <h3 className="text-base font-medium text-gray-500">Recent Posts</h3>
+                        <h3 className="text-base font-medium text-gray-500">Publicações recentes</h3>
                         <ul role="list" className="mt-4 space-y-4">
                           {recentPosts.map((item) => (
                             <li key={item.id} className="truncate text-base">
@@ -197,7 +197,7 @@ export default function Example() {
                       </div>
                       <div className="mt-5 text-sm">
                         <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                          View all posts
+                          Ver todos os posts
                           <span aria-hidden="true"> &rarr;</span>
                         </a>
                       </div>
@@ -208,13 +208,13 @@ export default function Example() {
             </PopoverGroup>
             <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
               <a href="#" className="text-base font-medium whitespace-nowrap text-gray-500 hover:text-gray-900">
-                Sign in
+                Entrar
               </a>
               <a
                 href="#"
                 className="ml-8 inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium whitespace-nowrap text-white shadow-xs hover:bg-indigo-700"
               >
-                Sign up
+                Criar conta
               </a>
             </div>
           </div>
@@ -229,15 +229,15 @@ export default function Example() {
               <div className="flex items-center justify-between">
                 <div>
                   <img
-                    alt="Your Company"
-                    src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+                    alt="Sua Empresa"
+                    src="https://tailwindcss.com/mais-assets/img/logos/mark.svg?color=indigo&shade=600"
                     className="h-8 w-auto"
                   />
                 </div>
                 <div className="-mr-2">
                   <PopoverButton className="relative inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:outline-hidden focus:ring-inset">
                     <span className="absolute -inset-0.5" />
-                    <span className="sr-only">Close menu</span>
+                    <span className="sr-only">Fechar menu</span>
                     <XMarkIcon aria-hidden="true" className="size-6" />
                   </PopoverButton>
                 </div>
@@ -260,11 +260,11 @@ export default function Example() {
             <div className="space-y-6 px-5 py-6">
               <div className="grid grid-cols-2 gap-x-8 gap-y-4">
                 <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
-                  Pricing
+                  Preços
                 </a>
 
                 <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
-                  Docs
+                  Documentação
                 </a>
                 {resources.map((item) => (
                   <a
@@ -281,12 +281,12 @@ export default function Example() {
                   href="#"
                   className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-xs hover:bg-indigo-700"
                 >
-                  Sign up
+                  Criar conta
                 </a>
                 <p className="mt-6 text-center text-base font-medium text-gray-500">
-                  Existing customer?
+                  Já é cliente?
                   <a href="#" className="text-indigo-600 hover:text-indigo-500">
-                    Sign in
+                    Entrar
                   </a>
                 </p>
               </div>
@@ -299,12 +299,11 @@ export default function Example() {
         <div className="mx-auto w-full max-w-7xl pt-16 pb-20 text-center lg:py-48 lg:text-left">
           <div className="px-6 sm:px-8 lg:w-1/2 xl:pr-16">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
-              <span className="block xl:inline">Data to enrich your</span>{' '}
-              <span className="block text-indigo-600 xl:inline">online business</span>
+              <span className="block xl:inline">Dados para fortalecer seu</span>{' '}
+              <span className="block text-indigo-600 xl:inline">negócio digital</span>
             </h1>
             <p className="mx-auto mt-3 max-w-md text-lg text-gray-500 sm:text-xl md:mt-5 md:max-w-3xl">
-              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
-              fugiat veniam occaecat fugiat aliqua.
+              Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
             </p>
             <div className="mt-10 sm:flex sm:justify-center lg:justify-start">
               <div className="rounded-md shadow-sm">
@@ -312,7 +311,7 @@ export default function Example() {
                   href="#"
                   className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:px-10 md:py-4 md:text-lg"
                 >
-                  Get started
+                  Começar
                 </a>
               </div>
               <div className="mt-3 rounded-md shadow-sm sm:mt-0 sm:ml-3">
@@ -320,7 +319,7 @@ export default function Example() {
                   href="#"
                   className="flex w-full items-center justify-center rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-indigo-600 hover:bg-gray-50 md:px-10 md:py-4 md:text-lg"
                 >
-                  Live demo
+                  Demonstração ao vivo
                 </a>
               </div>
             </div>

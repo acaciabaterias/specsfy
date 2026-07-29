@@ -12,16 +12,16 @@ export default function Example() {
         <div className="px-6 lg:px-8">
           <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
             <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
-              Let&apos;s work together
+              Vamos trabalhar juntos
             </h2>
             <p className="mt-2 text-lg/8 text-gray-600 dark:text-gray-400">
-              Proin volutpat consequat porttitor cras nullam gravida at orci molestie a eu arcu sed ut tincidunt magna.
+              Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
             </p>
             <form action="#" method="POST" className="mt-16">
               <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                 <div>
                   <label htmlFor="first-name" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                    First name
+                    Nome
                   </label>
                   <div className="mt-2.5">
                     <input
@@ -35,7 +35,7 @@ export default function Example() {
                 </div>
                 <div>
                   <label htmlFor="last-name" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                    Last name
+                    Sobrenome
                   </label>
                   <div className="mt-2.5">
                     <input
@@ -49,7 +49,7 @@ export default function Example() {
                 </div>
                 <div className="sm:col-span-2">
                   <label htmlFor="email" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                    Email
+                    E-mail
                   </label>
                   <div className="mt-2.5">
                     <input
@@ -63,7 +63,7 @@ export default function Example() {
                 </div>
                 <div className="sm:col-span-2">
                   <label htmlFor="company" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                    Company
+                    Empresa
                   </label>
                   <div className="mt-2.5">
                     <input
@@ -78,10 +78,10 @@ export default function Example() {
                 <div className="sm:col-span-2">
                   <div className="flex justify-between text-sm/6">
                     <label htmlFor="phone" className="block font-semibold text-gray-900 dark:text-white">
-                      Phone
+                      Telefone
                     </label>
                     <p id="phone-description" className="text-gray-400 dark:text-gray-500">
-                      Optional
+                      Opcional
                     </p>
                   </div>
                   <div className="mt-2.5">
@@ -98,10 +98,10 @@ export default function Example() {
                 <div className="sm:col-span-2">
                   <div className="flex justify-between text-sm/6">
                     <label htmlFor="message" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                      How can we help you?
+                      Como podemos ajudar?
                     </label>
                     <p id="message-description" className="text-gray-400 dark:text-gray-500">
-                      Max 500 characters
+                      Máximo de 500 caracteres
                     </p>
                   </div>
                   <div className="mt-2.5">
@@ -116,7 +116,7 @@ export default function Example() {
                   </div>
                 </div>
                 <fieldset className="sm:col-span-2">
-                  <legend className="block text-sm/6 font-semibold text-gray-900 dark:text-white">Expected budget</legend>
+                  <legend className="block text-sm/6 font-semibold text-gray-900 dark:text-white">Orçamento esperado</legend>
                   <div className="mt-4 space-y-4 text-sm/6 text-gray-600 dark:text-gray-400">
                     <div className="flex gap-x-2.5">
                       <input
@@ -127,7 +127,7 @@ export default function Example() {
                         type="radio"
                         className="relative mt-1 size-4 appearance-none rounded-full border border-gray-300 before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 dark:border-gray-600 dark:before:bg-white dark:checked:border-indigo-500 dark:checked:bg-indigo-500 dark:focus-visible:outline-indigo-500 dark:disabled:border-white/10 dark:disabled:bg-gray-800/50 dark:disabled:before:bg-gray-600 forced-colors:appearance-auto forced-colors:before:hidden"
                       />
-                      <label htmlFor="budget-under-25k">Less than $25K</label>
+                      <label htmlFor="budget-under-25k">Menos de US$ 25 mil</label>
                     </div>
                     <div className="flex gap-x-2.5">
                       <input
@@ -137,7 +137,7 @@ export default function Example() {
                         type="radio"
                         className="relative mt-1 size-4 appearance-none rounded-full border border-gray-300 before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 dark:border-gray-600 dark:before:bg-white dark:checked:border-indigo-500 dark:checked:bg-indigo-500 dark:focus-visible:outline-indigo-500 dark:disabled:border-white/10 dark:disabled:bg-gray-800/50 dark:disabled:before:bg-gray-600 forced-colors:appearance-auto forced-colors:before:hidden"
                       />
-                      <label htmlFor="budget-25k-50k">$25K – $50K</label>
+                      <label htmlFor="budget-25k-50k">US$ 25 mil a US$ 50 mil</label>
                     </div>
                     <div className="flex gap-x-2.5">
                       <input
@@ -147,7 +147,7 @@ export default function Example() {
                         type="radio"
                         className="relative mt-1 size-4 appearance-none rounded-full border border-gray-300 before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 dark:border-gray-600 dark:before:bg-white dark:checked:border-indigo-500 dark:checked:bg-indigo-500 dark:focus-visible:outline-indigo-500 dark:disabled:border-white/10 dark:disabled:bg-gray-800/50 dark:disabled:before:bg-gray-600 forced-colors:appearance-auto forced-colors:before:hidden"
                       />
-                      <label htmlFor="budget-50k-100k">$50K – $100K</label>
+                      <label htmlFor="budget-50k-100k">US$ 50 mil a US$ 100 mil</label>
                     </div>
                     <div className="flex gap-x-2.5">
                       <input
@@ -157,7 +157,7 @@ export default function Example() {
                         type="radio"
                         className="relative mt-1 size-4 appearance-none rounded-full border border-gray-300 before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 dark:border-gray-600 dark:before:bg-white dark:checked:border-indigo-500 dark:checked:bg-indigo-500 dark:focus-visible:outline-indigo-500 dark:disabled:border-white/10 dark:disabled:bg-gray-800/50 dark:disabled:before:bg-gray-600 forced-colors:appearance-auto forced-colors:before:hidden"
                       />
-                      <label htmlFor="budget-over-100k">$100K+</label>
+                      <label htmlFor="budget-over-100k">Acima de US$ 100 mil</label>
                     </div>
                   </div>
                 </fieldset>
@@ -167,7 +167,7 @@ export default function Example() {
                   type="submit"
                   className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
                 >
-                  Send message
+                  Enviar mensagem
                 </button>
               </div>
             </form>

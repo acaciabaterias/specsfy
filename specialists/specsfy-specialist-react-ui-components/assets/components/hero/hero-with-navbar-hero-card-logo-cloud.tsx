@@ -11,35 +11,35 @@ import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 
 const solutions = [
   {
-    name: 'Inbox',
-    description: 'Get a better understanding of where your traffic is coming from.',
+    name: 'Caixa de entrada',
+    description: 'Entenda melhor de onde vem o seu tráfego.',
     href: '#',
     icon: InboxIcon,
   },
   {
-    name: 'Messaging',
-    description: 'Speak directly to your customers in a more meaningful way.',
+    name: 'Mensagens',
+    description: 'Converse diretamente com seus clientes de forma mais relevante.',
     href: '#',
     icon: ChatBubbleBottomCenterTextIcon,
   },
   {
-    name: 'Live Chat',
-    description: "Your customers' data will be safe and secure.",
+    name: 'Chat ao vivo',
+    description: "Os dados dos seus clientes permanecerão protegidos.",
     href: '#',
     icon: ChatBubbleLeftRightIcon,
   },
   {
-    name: 'Knowledge Base',
-    description: "Connect with third-party tools that you're already using.",
+    name: 'Base de conhecimento',
+    description: "Conecte as ferramentas de terceiros que você já usa.",
     href: '#',
     icon: QuestionMarkCircleIcon,
   },
 ]
 
 const navigation = [
-  { name: 'Pricing', href: '#' },
-  { name: 'Partners', href: '#' },
-  { name: 'Company', href: '#' },
+  { name: 'Preços', href: '#' },
+  { name: 'Parceiros', href: '#' },
+  { name: 'Empresa', href: '#' },
 ]
 
 export default function Example() {
@@ -50,10 +50,10 @@ export default function Example() {
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:justify-start md:space-x-10 lg:px-8">
             <div className="flex justify-start lg:w-0 lg:flex-1">
               <a href="#">
-                <span className="sr-only">Your Company</span>
+                <span className="sr-only">Sua Empresa</span>
                 <img
                   alt=""
-                  src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+                  src="https://tailwindcss.com/mais-assets/img/logos/mark.svg?color=indigo&shade=600"
                   className="h-8 w-auto sm:h-10"
                 />
               </a>
@@ -61,14 +61,14 @@ export default function Example() {
             <div className="-my-2 -mr-2 md:hidden">
               <PopoverButton className="relative inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:outline-hidden focus:ring-inset">
                 <span className="absolute -inset-0.5" />
-                <span className="sr-only">Open menu</span>
+                <span className="sr-only">Abrir menu</span>
                 <Bars3Icon aria-hidden="true" className="size-6" />
               </PopoverButton>
             </div>
             <PopoverGroup as="nav" className="hidden space-x-10 md:flex">
               <Popover className="relative">
                 <PopoverButton className="group inline-flex items-center rounded-md bg-white text-base font-medium text-gray-500 hover:text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden data-open:text-gray-900">
-                  <span>Solutions</span>
+                  <span>Soluções</span>
                   <ChevronDownIcon
                     aria-hidden="true"
                     className="ml-2 size-5 text-gray-400 group-hover:text-gray-500 group-data-open:text-gray-600 group-data-open:group-hover:text-gray-500"
@@ -109,13 +109,13 @@ export default function Example() {
             </PopoverGroup>
             <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
               <a href="#" className="text-base font-medium whitespace-nowrap text-gray-500 hover:text-gray-900">
-                Sign in
+                Entrar
               </a>
               <a
                 href="#"
                 className="ml-8 inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium whitespace-nowrap text-white shadow-xs hover:bg-indigo-700"
               >
-                Sign up
+                Criar conta
               </a>
             </div>
           </div>
@@ -129,15 +129,15 @@ export default function Example() {
                 <div className="flex items-center justify-between">
                   <div>
                     <img
-                      alt="Your Company"
-                      src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+                      alt="Sua Empresa"
+                      src="https://tailwindcss.com/mais-assets/img/logos/mark.svg?color=indigo&shade=600"
                       className="h-8 w-auto"
                     />
                   </div>
                   <div className="-mr-2">
                     <PopoverButton className="relative inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:outline-hidden focus:ring-inset">
                       <span className="absolute -inset-0.5" />
-                      <span className="sr-only">Close menu</span>
+                      <span className="sr-only">Fechar menu</span>
                       <XMarkIcon aria-hidden="true" className="size-6" />
                     </PopoverButton>
                   </div>
@@ -176,12 +176,12 @@ export default function Example() {
                     href="#"
                     className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-xs hover:bg-indigo-700"
                   >
-                    Sign up
+                    Criar conta
                   </a>
                   <p className="mt-6 text-center text-base font-medium text-gray-500">
-                    Existing customer?
+                    Já é cliente?
                     <a href="#" className="text-gray-900">
-                      Sign in
+                      Entrar
                     </a>
                   </p>
                 </div>
@@ -199,7 +199,7 @@ export default function Example() {
               <div className="relative shadow-xl sm:overflow-hidden sm:rounded-2xl">
                 <div className="absolute inset-0">
                   <img
-                    alt="People working on laptops"
+                    alt="Pessoas trabalhando em notebooks"
                     src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2830&q=80&sat=-100"
                     className="size-full object-cover"
                   />
@@ -207,12 +207,11 @@ export default function Example() {
                 </div>
                 <div className="relative px-6 py-16 sm:py-24 lg:px-8 lg:py-32">
                   <h1 className="text-center text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-                    <span className="block text-white">Take control of your</span>
-                    <span className="block text-indigo-200">customer support</span>
+                    <span className="block text-white">Assuma o controle do seu</span>
+                    <span className="block text-indigo-200">atendimento ao cliente</span>
                   </h1>
                   <p className="mx-auto mt-6 max-w-lg text-center text-xl text-indigo-200 sm:max-w-3xl">
-                    Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt
-                    amet veniam occaecat fugiat aliqua.
+                    Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
                   </p>
                   <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
                     <div className="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">
@@ -220,13 +219,13 @@ export default function Example() {
                         href="#"
                         className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-indigo-700 shadow-xs hover:bg-indigo-50 sm:px-8"
                       >
-                        Get started
+                        Começar
                       </a>
                       <a
                         href="#"
                         className="flex items-center justify-center rounded-md border border-transparent bg-indigo-500/60 px-4 py-3 text-base font-medium text-white shadow-xs hover:bg-indigo-500/70 sm:px-8"
                       >
-                        Live demo
+                        Demonstração ao vivo
                       </a>
                     </div>
                   </div>
@@ -238,41 +237,41 @@ export default function Example() {
           <div className="bg-gray-100">
             <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
               <p className="text-center text-base font-semibold text-gray-500">
-                Trusted by over 5 very average small businesses
+                A confiança de mais de cinco pequenas empresas
               </p>
               <div className="mt-6 grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-5">
                 <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                   <img
                     alt="Tuple"
-                    src="https://tailwindcss.com/plus-assets/img/logos/tuple-logo-gray-400.svg"
+                    src="https://tailwindcss.com/mais-assets/img/logos/tuple-logo-gray-400.svg"
                     className="h-12"
                   />
                 </div>
                 <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                   <img
                     alt="Mirage"
-                    src="https://tailwindcss.com/plus-assets/img/logos/mirage-logo-gray-400.svg"
+                    src="https://tailwindcss.com/mais-assets/img/logos/mirage-logo-gray-400.svg"
                     className="h-12"
                   />
                 </div>
                 <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
                   <img
                     alt="StaticKit"
-                    src="https://tailwindcss.com/plus-assets/img/logos/statickit-logo-gray-400.svg"
+                    src="https://tailwindcss.com/mais-assets/img/logos/statickit-logo-gray-400.svg"
                     className="h-12"
                   />
                 </div>
                 <div className="col-span-1 flex justify-center md:col-span-2 md:col-start-2 lg:col-span-1">
                   <img
                     alt="Transistor"
-                    src="https://tailwindcss.com/plus-assets/img/logos/transistor-logo-gray-400.svg"
+                    src="https://tailwindcss.com/mais-assets/img/logos/transistor-logo-gray-400.svg"
                     className="h-12"
                   />
                 </div>
                 <div className="col-span-2 flex justify-center md:col-span-2 md:col-start-4 lg:col-span-1">
                   <img
                     alt="Workcation"
-                    src="https://tailwindcss.com/plus-assets/img/logos/workcation-logo-gray-400.svg"
+                    src="https://tailwindcss.com/mais-assets/img/logos/workcation-logo-gray-400.svg"
                     className="h-12"
                   />
                 </div>

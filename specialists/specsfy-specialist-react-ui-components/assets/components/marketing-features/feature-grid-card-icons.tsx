@@ -2,23 +2,23 @@ import { InboxIcon, TrashIcon, UsersIcon } from '@heroicons/react/24/outline'
 
 const features = [
   {
-    name: 'Unlimited inboxes',
+    name: 'Caixas de entrada ilimitadas',
     description:
-      'Non quo aperiam repellendus quas est est. Eos aut dolore aut ut sit nesciunt. Ex tempora quia. Sit nobis consequatur dolores incidunt.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     href: '#',
     icon: InboxIcon,
   },
   {
-    name: 'Manage team members',
+    name: 'Gerenciar integrantes da equipe',
     description:
-      'Vero eum voluptatem aliquid nostrum voluptatem. Vitae esse natus. Earum nihil deserunt eos quasi cupiditate. A inventore et molestiae natus.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     href: '#',
     icon: UsersIcon,
   },
   {
-    name: 'Spam report',
+    name: 'Relatório de spam',
     description:
-      'Et quod quaerat dolorem quaerat architecto aliquam accusantium. Ex adipisci et doloremque autem quia quam. Quis eos molestiae at iure impedit.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     href: '#',
     icon: TrashIcon,
   },
@@ -30,11 +30,10 @@ export default function Example() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
           <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
-            Stay on top of customer support
+            Mantenha o atendimento ao cliente sob controle
           </h2>
           <p className="mt-6 text-lg/8 text-gray-600 dark:text-gray-300">
-            Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in
-            accusamus quisquam.
+            Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
@@ -54,7 +53,7 @@ export default function Example() {
                       href={feature.href}
                       className="text-sm/6 font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
                     >
-                      Learn more <span aria-hidden="true">&rarr;</span>
+                      Saiba mais <span aria-hidden="true">&rarr;</span>
                     </a>
                   </p>
                 </dd>

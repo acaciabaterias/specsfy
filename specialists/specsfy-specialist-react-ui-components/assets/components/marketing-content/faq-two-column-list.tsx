@@ -1,21 +1,21 @@
 const faqs = [
   {
     id: 1,
-    question: "What's the best thing about Switzerland?",
+    question: "Qual é a melhor coisa sobre a Suíça?",
     answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      "Não sei, mas a bandeira é um grande diferencial.",
   },
   {
     id: 2,
-    question: 'How do you make holy water?',
+    question: 'Como se faz água benta?',
     answer:
-      'You boil the hell out of it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam aut tempora vitae odio inventore fuga.',
+      'Ferva até ficar pronta.',
   },
   {
     id: 3,
-    question: 'What do you call someone with no body and no nose?',
+    question: 'Como se chama alguém sem corpo e sem nariz?',
     answer:
-      'Nobody knows. Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, voluptas ipsa quia excepturi.',
+      'Ninguém sabe.',
   },
 ]
 
@@ -24,7 +24,7 @@ export default function Example() {
     <div className="bg-white dark:bg-gray-900">
       <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8 lg:py-40">
         <h2 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl dark:text-white">
-          Frequently asked questions
+          Perguntas frequentes
         </h2>
         <dl className="mt-20 divide-y divide-gray-900/10 dark:divide-white/10">
           {faqs.map((faq) => (

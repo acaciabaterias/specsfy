@@ -1,10 +1,10 @@
 const featuredPost = {
   id: 1,
-  title: "We're incredibly proud to announce we have secured $75m in Series B",
+  title: "Temos orgulho de anunciar a captação de US$ 75 milhões na rodada Série B",
   href: '#',
   description:
-    'Libero neque aenean tincidunt nec consequat tempor. Viverra odio id velit adipiscing id. Nisi vestibulum orci eget bibendum dictum. Velit viverra posuere vulputate volutpat nunc. Nunc netus sit faucibus.',
-  date: 'Mar 16, 2020',
+    'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
+  date: '16 mar. 2020',
   datetime: '2020-03-16',
   author: {
     name: 'Michael Foster',
@@ -17,11 +17,11 @@ const featuredPost = {
 const posts = [
   {
     id: 2,
-    title: 'Boost your conversion rate',
+    title: 'Aumente sua taxa de conversão',
     href: '#',
     description:
-      'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel iusto corrupti dicta laboris incididunt.',
-    date: 'Mar 10, 2020',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
+    date: '10 mar. 2020',
     datetime: '2020-03-16',
     author: {
       name: 'Lindsay Walton',
@@ -32,11 +32,11 @@ const posts = [
   },
   {
     id: 3,
-    title: 'How to use search engine optimization to drive sales',
+    title: 'Como usar SEO para aumentar as vendas',
     href: '#',
     description:
-      'Optio sit exercitation et ex ullamco aliquid explicabo. Dolore do ut officia anim non ad eu. Magna laboris incididunt commodo elit ipsum.',
-    date: 'Feb 12, 2020',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
+    date: '12 fev. 2020',
     datetime: '2020-03-10',
     author: {
       name: 'Tom Cook',
@@ -69,7 +69,7 @@ export default function Example() {
                 aria-describedby="featured-post"
                 className="text-sm/6 font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
               >
-                Continue reading <span aria-hidden="true">&rarr;</span>
+                Continuar lendo <span aria-hidden="true">&rarr;</span>
               </a>
             </div>
             <div className="flex lg:border-t lg:border-gray-900/10 lg:pt-8 dark:lg:border-white/10">

@@ -42,13 +42,14 @@ release-cli ──promove──► cli/CHANGELOG.md
 - A seção `## [X.Y.Z] - YYYY-MM-DD` origina o corpo do release.
 - O GitHub Release usa a mesma seção do changelog, sem regeneração.
 
-O push de `main` e da tag é atômico. Uma retomada reutiliza estado válido e não cria outra versão.
+O push de `main` e da tag é atômico. Uma retomada reutiliza o estado válido e
+não cria outra versão.
 
 ## Evidência
 
-- `.agents/skills/specsfy-release-cli/SKILL.md`;
-- `.agents/skills/specsfy-release-cli/scripts/release_changelog.py`;
-- `tests/test_cli_release_skill.py`;
+- `.agents/skills/specsfy-release-cli/SKILL.md`.
+- `.agents/skills/specsfy-release-cli/scripts/release_changelog.py`.
+- `tests/test_cli_release_skill.py`.
 - testes e artefatos em `cli/`.
 
 ## Atualize quando
@@ -58,11 +59,11 @@ ownership de qualquer efeito.
 
 ## Não use para
 
-- autorizar publicação;
-- lançar pré-release;
+- autorizar publicação.
+- lançar pré-release.
 - substituir testes e manifests.
 
 ## Fonte da verdade e precedência
 
-As notas confirmadas governam o conteúdo; `cli/CHANGELOG.md` governa a seção
+As notas confirmadas governam o conteúdo. `cli/CHANGELOG.md` governa a seção
 publicada e GitHub comprova tag, CI e release.

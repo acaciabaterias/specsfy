@@ -1,16 +1,16 @@
 const posts = [
   {
     id: 1,
-    title: 'Boost your conversion rate',
+    title: 'Aumente sua taxa de conversão',
     href: '#',
     description:
-      'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel iusto corrupti dicta laboris incididunt.',
-    date: 'Mar 16, 2020',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
+    date: '16 mar. 2020',
     datetime: '2020-03-16',
     category: { title: 'Marketing', href: '#' },
     author: {
       name: 'Michael Foster',
-      role: 'Co-Founder / CTO',
+      role: 'Cofundador e CTO',
       href: '#',
       imageUrl:
         'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
@@ -18,16 +18,16 @@ const posts = [
   },
   {
     id: 2,
-    title: 'How to use search engine optimization to drive sales',
+    title: 'Como usar SEO para aumentar as vendas',
     href: '#',
     description:
-      'Optio sit exercitation et ex ullamco aliquid explicabo. Dolore do ut officia anim non ad eu. Magna laboris incididunt commodo elit ipsum.',
-    date: 'Mar 10, 2020',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
+    date: '10 mar. 2020',
     datetime: '2020-03-10',
-    category: { title: 'Sales', href: '#' },
+    category: { title: 'Vendas', href: '#' },
     author: {
       name: 'Lindsay Walton',
-      role: 'Front-end Developer',
+      role: 'Desenvolvedor front-end',
       href: '#',
       imageUrl:
         'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
@@ -35,16 +35,16 @@ const posts = [
   },
   {
     id: 3,
-    title: 'Improve your customer experience',
+    title: 'Melhore a experiência dos seus clientes',
     href: '#',
     description:
-      'Dolore commodo in nulla do nulla esse consectetur. Adipisicing voluptate velit sint adipisicing ex duis elit deserunt sint ipsum. Culpa in exercitation magna adipisicing id reprehenderit consectetur culpa eu cillum.',
-    date: 'Feb 12, 2020',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
+    date: '12 fev. 2020',
     datetime: '2020-02-12',
-    category: { title: 'Business', href: '#' },
+    category: { title: 'Negócios', href: '#' },
     author: {
       name: 'Tom Cook',
-      role: 'Director of Product',
+      role: 'Diretor de Produto',
       href: '#',
       imageUrl:
         'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
@@ -58,10 +58,10 @@ export default function Example() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl">
           <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
-            From the blog
+            Do blog
           </h2>
           <p className="mt-2 text-lg/8 text-gray-600 dark:text-gray-300">
-            Learn how to grow your business with our expert advice.
+            Aprenda a desenvolver seu negócio com a orientação de especialistas.
           </p>
           <div className="mt-10 space-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 dark:border-gray-700">
             {posts.map((post) => (

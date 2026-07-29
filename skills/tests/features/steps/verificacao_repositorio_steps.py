@@ -10,7 +10,7 @@ from behave import given, then, when
 ROOT = Path(__file__).resolve().parents[3]
 
 
-@given("um projeto com dez skills base e dois especialistas válidos")
+@given("um projeto com nove skills base e dois especialistas válidos")
 def given_base_and_specialist_catalog(context) -> None:
     context.test = ROOT / "tests/test_verify_repo.py"
     assert context.test.is_file()
@@ -27,7 +27,7 @@ def when_catalog_contract_runs(context) -> None:
     )
 
 
-@then("as onze skills são aceitas sem enfraquecer o catálogo base")
+@then("o catálogo completo é aceito sem enfraquecer as skills base")
 def then_catalog_is_accepted(context) -> None:
     assert context.result.returncode == 0, (
         context.result.stdout + context.result.stderr

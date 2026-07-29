@@ -263,19 +263,19 @@ tests/features/directory_user_profile.feature
 #### Gate do Ato I — Definição
 
 - **Resultado**: Passed
-- **Comando**: `python3 -B .agents/skills/specsfy-base-validate/scripts/validate_spec.py specs/specs/0003-perfil-publico-usuario/spec.md`
+- **Comando**: `python3 -B .agents/skills/specsfy-04-validate/scripts/validate_spec.py specs/specs/0003-perfil-publico-usuario/spec.md`
 - **Achados**: READY; binding, privacidade, relações e 404 definidos; nenhum P1 aberto.
 
 #### Gate do Ato II — Plano
 
 - **Resultado**: Passed
-- **Comando**: `python3 -B .agents/skills/specsfy-base-tasks/scripts/validate_tasks.py specs/specs/0003-perfil-publico-usuario/spec.md`
+- **Comando**: `python3 -B .agents/skills/specsfy-05-tasks/scripts/validate_tasks.py specs/specs/0003-perfil-publico-usuario/spec.md`
 - **Achados**: tarefas válidas; T001/T002 concluídas após RED Behave/Pest pela rota ausente.
 
 #### Gate do Ato III — Entrega
 
 - **Resultado**: Passed
-- **Comando**: `python3 -B .agents/skills/specsfy-base-tdd-bdd/scripts/check_traceability.py specs/specs/0003-perfil-publico-usuario/spec.md . --full-chain`
+- **Comando**: `python3 -B .agents/skills/specsfy-06-tdd-bdd/scripts/check_traceability.py specs/specs/0003-perfil-publico-usuario/spec.md . --full-chain`
 - **Achados**: rastreabilidade 4/4; QA passou; regressão, checks e build verdes.
 
 ### 14. Tarefas

@@ -5,10 +5,10 @@ export default function Example() {
     <div className="isolate bg-white px-6 py-24 sm:py-32 lg:px-8 dark:bg-gray-900">
       <div className="mx-auto max-w-2xl sm:text-center">
         <h2 className="text-4xl font-semibold tracking-tight text-balance text-gray-900 sm:text-5xl dark:text-white">
-          Contact sales
+          Falar com vendas
         </h2>
         <p className="mt-2 text-lg/8 text-gray-600 dark:text-gray-400">
-          Aute magna irure deserunt veniam aliqua magna enim voluptate.
+          Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
         </p>
       </div>
       <div className="mx-auto mt-20 max-w-lg space-y-16">
@@ -17,14 +17,13 @@ export default function Example() {
             <ChatBubbleLeftRightIcon aria-hidden="true" className="size-6 text-white" />
           </div>
           <div>
-            <h3 className="text-base/7 font-semibold text-gray-900 dark:text-white">Sales support</h3>
+            <h3 className="text-base/7 font-semibold text-gray-900 dark:text-white">Suporte de vendas</h3>
             <p className="mt-2 text-base/7 text-gray-600 dark:text-gray-400">
-              Ut cursus est ut amet. Lobortis eget egestas leo vitae eget porttitor risus blandit. Nunc a in lorem vel
-              iaculis porttitor.
+              Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
             </p>
             <p className="mt-4 text-sm/6 font-semibold">
               <a href="#" className="text-indigo-600 dark:text-indigo-400">
-                Contact us <span aria-hidden="true">&rarr;</span>
+                Fale conosco <span aria-hidden="true">&rarr;</span>
               </a>
             </p>
           </div>
@@ -34,13 +33,13 @@ export default function Example() {
             <BugAntIcon aria-hidden="true" className="size-6 text-white" />
           </div>
           <div>
-            <h3 className="text-base/7 font-semibold text-gray-900 dark:text-white">Bug reports</h3>
+            <h3 className="text-base/7 font-semibold text-gray-900 dark:text-white">Relatos de bugs</h3>
             <p className="mt-2 text-base/7 text-gray-600 dark:text-gray-400">
-              Expedita qui non ut quia ipsum voluptatum ipsam pariatur. Culpa vitae ipsum minus eius vero quo quibusdam.
+              Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
             </p>
             <p className="mt-4 text-sm/6 font-semibold">
               <a href="#" className="text-indigo-600 dark:text-indigo-400">
-                Report a bug <span aria-hidden="true">&rarr;</span>
+                Relatar um bug <span aria-hidden="true">&rarr;</span>
               </a>
             </p>
           </div>
@@ -50,13 +49,13 @@ export default function Example() {
             <ComputerDesktopIcon aria-hidden="true" className="size-6 text-white" />
           </div>
           <div>
-            <h3 className="text-base/7 font-semibold text-gray-900 dark:text-white">Technical support</h3>
+            <h3 className="text-base/7 font-semibold text-gray-900 dark:text-white">Suporte técnico</h3>
             <p className="mt-2 text-base/7 text-gray-600 dark:text-gray-400">
-              Sint aut modi porro consequatur architecto commodi qui consequatur. Dignissimos adipisci minima.
+              Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
             </p>
             <p className="mt-4 text-sm/6 font-semibold">
               <a href="#" className="text-indigo-600 dark:text-indigo-400">
-                Join our Discord <span aria-hidden="true">&rarr;</span>
+                Entre no nosso Discord <span aria-hidden="true">&rarr;</span>
               </a>
             </p>
           </div>

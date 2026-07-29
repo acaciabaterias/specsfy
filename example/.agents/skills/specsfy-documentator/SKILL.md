@@ -1,6 +1,6 @@
 ---
 name: specsfy-documentator
-description: Construir ou reconstruir a documentação técnica completa de uma aplicação em docs/, a partir do código existente e das mudanças recém-implementadas. Use livremente quando o usuário pedir documentação, mapa técnico, arquitetura, UML, fluxos, banco, integrações, testes, frontend, Tailwind ou pacotes; use também obrigatoriamente depois de cada implementação conduzida por specsfy-base-implement. Funciona de forma independente, inclusive em projetos legados Laravel, Node, Next.js, React ou Astro, e preserva conteúdo humano fora dos blocos gerados.
+description: Construir ou reconstruir a documentação técnica completa de uma aplicação em docs/, a partir do código existente e das mudanças recém-implementadas. Use livremente quando o usuário pedir documentação, mapa técnico, arquitetura, UML, fluxos, banco, integrações, testes, frontend, Tailwind ou pacotes; use também obrigatoriamente depois de cada implementação conduzida por specsfy-07-implement. Funciona de forma independente, inclusive em projetos legados Laravel, Node, Next.js, React ou Astro, e preserva conteúdo humano fora dos blocos gerados.
 ---
 
 # Documentar o sistema

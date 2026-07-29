@@ -6,16 +6,15 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_SKILLS = (
-    "specsfy-base-idea",
-    "specsfy-base-backlog",
-    "specsfy-base-interview",
-    "specsfy-base-specify",
-    "specsfy-base-validate",
-    "specsfy-base-tasks",
-    "specsfy-base-tdd-bdd",
-    "specsfy-base-implement",
-    "specsfy-base-update-spec",
-    "specsfy-base-progress",
+    "specsfy-01-inbox",
+    "specsfy-02-backlog",
+    "specsfy-03-specify",
+    "specsfy-04-validate",
+    "specsfy-05-tasks",
+    "specsfy-06-tdd-bdd",
+    "specsfy-07-implement",
+    "specsfy-update-spec",
+    "specsfy-progress",
 )
 
 
@@ -64,7 +63,7 @@ class ConversationalOrchestrationTests(unittest.TestCase):
         self.assertIn("instalação de especialista", normalized)
 
     def test_specialist_handoffs_separate_loading_from_installation(self) -> None:
-        references = sorted(ROOT.glob("specsfy-base-*/references/specialists.md"))
+        references = sorted(ROOT.glob("specsfy-*/references/specialists.md"))
 
         self.assertEqual(7, len(references))
         for path in references:
@@ -79,21 +78,21 @@ class ConversationalOrchestrationTests(unittest.TestCase):
     def test_missing_red_reopens_the_plan_before_automatic_tdd(self) -> None:
         framework = " ".join((ROOT / "Spec.md").read_text(encoding="utf-8").split())
         implement = " ".join(
-            (ROOT / "specsfy-base-implement" / "SKILL.md")
+            (ROOT / "specsfy-07-implement" / "SKILL.md")
             .read_text(encoding="utf-8")
             .split()
         )
         tasks = " ".join(
-            (ROOT / "specsfy-base-tasks" / "SKILL.md")
+            (ROOT / "specsfy-05-tasks" / "SKILL.md")
             .read_text(encoding="utf-8")
             .split()
         )
 
         self.assertIn("Plan Gate já estiver `Passed`", framework)
-        self.assertIn("retorne automaticamente para `$specsfy-base-tasks`", implement)
+        self.assertIn("retorne automaticamente para `$specsfy-05-tasks`", implement)
         self.assertIn("`Defined`, `Planned` ou `Implementing`", tasks)
         self.assertIn("reabra o Ato II", tasks)
-        self.assertIn("chame automaticamente `$specsfy-base-tdd-bdd`", tasks)
+        self.assertIn("chame automaticamente `$specsfy-06-tdd-bdd`", tasks)
 
     def test_main_chain_and_critical_returns_name_automatic_destinations(
         self,
@@ -106,42 +105,41 @@ class ConversationalOrchestrationTests(unittest.TestCase):
         }
 
         expected_routes = {
-            "specsfy-base-idea": "$specsfy-base-backlog",
-            "specsfy-base-backlog": "$specsfy-base-interview",
-            "specsfy-base-interview": "$specsfy-base-specify",
-            "specsfy-base-specify": "$specsfy-base-validate",
-            "specsfy-base-validate": "$specsfy-base-tasks",
-            "specsfy-base-tasks": "$specsfy-base-tdd-bdd",
-            "specsfy-base-tdd-bdd": "$specsfy-base-tasks",
-            "specsfy-base-implement": "$specsfy-base-progress",
-            "specsfy-base-update-spec": "$specsfy-base-validate",
+            "specsfy-01-inbox": "$specsfy-02-backlog",
+            "specsfy-02-backlog": "$specsfy-03-specify",
+            "specsfy-03-specify": "$specsfy-04-validate",
+            "specsfy-04-validate": "$specsfy-05-tasks",
+            "specsfy-05-tasks": "$specsfy-06-tdd-bdd",
+            "specsfy-06-tdd-bdd": "$specsfy-05-tasks",
+            "specsfy-07-implement": "$specsfy-progress",
+            "specsfy-update-spec": "$specsfy-04-validate",
         }
         for source, destination in expected_routes.items():
             with self.subTest(source=source, destination=destination):
                 self.assertIn(destination, skills[source])
 
         self.assertIn(
-            "carregue automaticamente `$specsfy-base-update-spec`",
-            skills["specsfy-base-implement"],
+            "carregue automaticamente `$specsfy-update-spec`",
+            skills["specsfy-07-implement"],
         )
         self.assertIn(
-            "carregue automaticamente `$specsfy-base-update-spec`",
-            skills["specsfy-base-progress"],
+            "carregue automaticamente `$specsfy-update-spec`",
+            skills["specsfy-progress"],
         )
         for source in (
-            "specsfy-base-interview",
-            "specsfy-base-validate",
-            "specsfy-base-tasks",
+            "specsfy-02-backlog",
+            "specsfy-04-validate",
+            "specsfy-05-tasks",
         ):
             with self.subTest(late_change_return=source):
                 self.assertIn(
-                    "$specsfy-base-update-spec",
+                    "$specsfy-update-spec",
                     skills[source],
                 )
 
     def test_update_spec_is_the_obvious_entrypoint_for_late_changes(self) -> None:
         skill = (
-            ROOT / "specsfy-base-update-spec" / "SKILL.md"
+            ROOT / "specsfy-update-spec" / "SKILL.md"
         ).read_text(encoding="utf-8")
         normalized = " ".join(skill.split())
         description = skill.split("---", 2)[1]
@@ -151,9 +149,9 @@ class ConversationalOrchestrationTests(unittest.TestCase):
         self.assertIn("spec existente", description)
         self.assertIn("não cria uma spec nova", normalized)
         self.assertIn("não implementa", normalized)
-        self.assertIn("$specsfy-base-interview", normalized)
-        self.assertIn("$specsfy-base-validate", normalized)
-        self.assertIn("$specsfy-base-tasks", normalized)
+        self.assertIn("$specsfy-02-backlog", normalized)
+        self.assertIn("$specsfy-04-validate", normalized)
+        self.assertIn("$specsfy-05-tasks", normalized)
         self.assertIn("analyze_change.py", skill)
 
 

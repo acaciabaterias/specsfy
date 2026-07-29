@@ -9,9 +9,9 @@ export function SwitchGroup({ className, ...props }: React.ComponentPropsWithout
       {...props}
       className={clsx(
         className,
-        // Basic groups
+        // Grupos básicos
         'space-y-3 **:data-[slot=label]:font-normal',
-        // With descriptions
+        // Com descrições
         'has-data-[slot=description]:space-y-6 has-data-[slot=description]:**:data-[slot=label]:font-medium'
       )}
     />
@@ -28,15 +28,15 @@ export function SwitchField({
       {...props}
       className={clsx(
         className,
-        // Base layout
+        // Layout base
         'grid grid-cols-[1fr_auto] gap-x-8 gap-y-1 sm:grid-cols-[1fr_auto]',
-        // Control layout
+        // Layout do controle
         '*:data-[slot=control]:col-start-2 *:data-[slot=control]:self-start sm:*:data-[slot=control]:mt-0.5',
-        // Label layout
+        // Layout do rótulo
         '*:data-[slot=label]:col-start-1 *:data-[slot=label]:row-start-1',
-        // Description layout
+        // Layout da descrição
         '*:data-[slot=description]:col-start-1 *:data-[slot=description]:row-start-2',
-        // With description
+        // Com descrição
         'has-data-[slot=description]:**:data-[slot=label]:font-medium'
       )}
     />
@@ -150,43 +150,43 @@ export function Switch({
       {...props}
       className={clsx(
         className,
-        // Base styles
+        // Estilos base
         'group relative isolate inline-flex h-6 w-10 cursor-default rounded-full p-[3px] sm:h-5 sm:w-8',
-        // Transitions
+        // Transições
         'transition duration-0 ease-in-out data-changing:duration-200',
-        // Outline and background color in forced-colors mode so switch is still visible
+        // Contorno e fundo no modo de cores forçadas para manter o switch visível
         'forced-colors:outline forced-colors:[--switch-bg:Highlight] dark:forced-colors:[--switch-bg:Highlight]',
-        // Unchecked
+        // Desmarcado
         'bg-zinc-200 ring-1 ring-black/5 ring-inset dark:bg-white/5 dark:ring-white/15',
-        // Checked
+        // Marcado
         'data-checked:bg-(--switch-bg) data-checked:ring-(--switch-bg-ring) dark:data-checked:bg-(--switch-bg) dark:data-checked:ring-(--switch-bg-ring)',
-        // Focus
+        // Foco
         'focus:not-data-focus:outline-hidden data-focus:outline-2 data-focus:outline-offset-2 data-focus:outline-blue-500',
         // Hover
         'data-hover:ring-black/15 data-hover:data-checked:ring-(--switch-bg-ring)',
         'dark:data-hover:ring-white/25 dark:data-hover:data-checked:ring-(--switch-bg-ring)',
-        // Disabled
+        // Desabilitado
         'data-disabled:bg-zinc-200 data-disabled:opacity-50 data-disabled:data-checked:bg-zinc-200 data-disabled:data-checked:ring-black/5',
         'dark:data-disabled:bg-white/15 dark:data-disabled:data-checked:bg-white/15 dark:data-disabled:data-checked:ring-white/15',
-        // Color specific styles
+        // Estilos específicos de cor
         colors[color]
       )}
     >
       <span
         aria-hidden="true"
         className={clsx(
-          // Basic layout
+          // Layout básico
           'pointer-events-none relative inline-block size-4.5 rounded-full sm:size-3.5',
-          // Transition
+          // Transição
           'translate-x-0 transition duration-200 ease-in-out',
-          // Invisible border so the switch is still visible in forced-colors mode
+          // Borda invisível para manter o switch visível no modo de cores forçadas
           'border border-transparent',
-          // Unchecked
+          // Desmarcado
           'bg-white shadow-sm ring-1 ring-black/5',
-          // Checked
+          // Marcado
           'group-data-checked:bg-(--switch) group-data-checked:shadow-(--switch-shadow) group-data-checked:ring-(--switch-ring)',
           'group-data-checked:translate-x-4 sm:group-data-checked:translate-x-3',
-          // Disabled
+          // Desabilitado
           'group-data-checked:group-data-disabled:bg-white group-data-checked:group-data-disabled:shadow-sm group-data-checked:group-data-disabled:ring-black/5'
         )}
       />

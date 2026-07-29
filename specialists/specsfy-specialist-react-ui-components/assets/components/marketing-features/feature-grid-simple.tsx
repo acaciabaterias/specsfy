@@ -1,33 +1,33 @@
 const features = [
   {
-    name: 'Push to deploy',
+    name: 'Envio para deploy',
     description:
-      'Aut illo quae. Ut et harum ea animi natus. Culpa maiores et sed sint et magnam exercitationem quia. Ullam voluptas nihil vitae dicta molestiae et. Aliquid velit porro vero.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
   },
   {
-    name: 'SSL certificates',
+    name: 'Certificados SSL',
     description:
-      'Mollitia delectus a omnis. Quae velit aliquid. Qui nulla maxime adipisci illo id molestiae. Cumque cum ut minus rerum architecto magnam consequatur. Quia quaerat minima.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
   },
   {
-    name: 'Simple queues',
+    name: 'Filas simples',
     description:
-      'Aut repellendus et officiis dolor possimus. Deserunt velit quasi sunt fuga error labore quia ipsum. Commodi autem voluptatem nam. Quos voluptatem totam.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
   },
   {
-    name: 'Advanced security',
+    name: 'Segurança avançada',
     description:
-      'Magnam provident veritatis odit. Vitae eligendi repellat non. Eum fugit impedit veritatis ducimus. Non qui aspernatur laudantium modi. Praesentium rerum error deserunt harum.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
   },
   {
-    name: 'Powerful API',
+    name: 'API poderosa',
     description:
-      'Sit minus expedita quam in ullam molestiae dignissimos in harum. Tenetur dolorem iure. Non nesciunt dolorem veniam necessitatibus laboriosam voluptas perspiciatis error.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
   },
   {
-    name: 'Database backups',
+    name: 'Backups do banco de dados',
     description:
-      'Ipsa in earum deserunt aut. Quos minus aut animi et soluta. Ipsum dicta ut quia eius. Possimus reprehenderit iste aspernatur ut est velit consequatur distinctio.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
   },
 ]
 
@@ -37,11 +37,10 @@ export default function Example() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
           <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
-            All-in-one platform
+            Plataforma completa
           </h2>
           <p className="mt-6 text-lg/8 text-gray-700 dark:text-gray-300">
-            Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in
-            accusamus quisquam.
+            Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
           </p>
         </div>
         <dl className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 text-base/7 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">

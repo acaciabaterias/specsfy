@@ -56,7 +56,7 @@ errado" ou "verifique sua configuração".
 Sem emoji como marcador de seção, sem hype no título de algo que já é
 estrutural.
 
-**Resposta de um agente conversando com o usuário (ex.: `specsfy-base-interview`):**
+**Resposta de um agente conversando com o usuário (ex.: `specsfy-02-backlog`):**
 > "US-04 depende de um comportamento que ainda não está confirmado: o que
 > acontece se o usuário cancelar no meio da importação? Isso muda o
 > cenário BDD que vou escrever a seguir."
@@ -78,7 +78,7 @@ Ainda factual — vende pelo mecanismo, não pelo adjetivo.
   `Gate: Passed`) — o método já tem um vocabulário de estado; emoji o
   duplica informalmente.
 - **"Nosso/nossa IA"** referindo-se genericamente ao agente — nomeie a
-  skill (`specsfy-base-interview`, `specsfy-base-validate`) quando o contexto permite;
+  skill (`specsfy-02-backlog`, `specsfy-04-validate`) quando o contexto permite;
   é mais preciso e mais rastreável, coerente com o resto da marca.
 - **Desculpas performáticas em mensagem de erro** ("Ops! Algo deu errado 😅")
   — diga o que falhou e como corrigir, sem tom.

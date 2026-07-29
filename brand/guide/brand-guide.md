@@ -15,7 +15,7 @@ decisão, implementação e evidência em um fluxo auditável.
 
 > Do pedido à prova, sem perder contexto.
 
-Tagline principal: `Specify. Prove. Ship.`
+Tagline principal: `Especifique. Comprove. Entregue.`
 
 ### Personalidade
 

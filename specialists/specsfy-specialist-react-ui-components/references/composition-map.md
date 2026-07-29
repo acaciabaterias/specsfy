@@ -1,21 +1,23 @@
-# Mapa de Composicao
+# Mapa de composição
 
 Use este mapa, junto de `$specsfy-specialist-ui-design`, para decidir quais
 famílias de `assets/components/` consultar e em qual ordem. Os nomes `ui-*`
 abaixo são rótulos de família herdados pelas composições; consulte a
 correspondência em [catalog.md](catalog.md).
 
-## Landing Page SaaS
+## Landing page SaaS
 
-Sequencia comum:
+Sequência comum:
 
-1. `ui-hero`: primeira dobra com navbar e prova visual.
-2. `ui-marketing-features`: feature section ou grid de beneficios.
-3. `ui-marketing-proof`: stats, testimonials ou logos para prova.
-4. `ui-marketing-conversion` ou `ui-marketing-content`: pricing, FAQ ou CTA final.
-5. `ui-layout-navigation`: footer.
+1. `ui-hero`: primeira dobra com barra de navegação e prova visual.
+2. `ui-marketing-features`: seção de recursos ou grade de benefícios.
+3. `ui-marketing-proof`: estatísticas, depoimentos ou logos como prova.
+4. `ui-marketing-conversion` ou `ui-marketing-content`: preços, FAQ ou CTA final.
+5. `ui-layout-navigation`: rodapé.
 
-Boas combinacoes:
+Boas combinações:
+
+<!-- markdownlint-disable MD013 -->
 
 - `hero-with-navbar-screenshot` + `feature-grid-with-screenshot` + `testimonial-masonry-grid` + `pricing-three-tier-frequency-toggle` + `faq-disclosure-list` + `footer-newsletter-row`.
 - `hero-with-navbar-screenshot` + `feature-grid-three-column` + `logo-cloud-trusted-teams` + `pricing-two-tier-card-highlight` + `footer-newsletter-row`.
@@ -43,71 +45,88 @@ Boas combinacoes:
 - `contact-side-info-form` + `ui-forms/input` + `ui-forms/textarea`.
 - `contact-info-form-panel` + `ui-forms/input` + `ui-forms/textarea`.
 
-## Site Institucional
+<!-- markdownlint-enable MD013 -->
 
-Sequencia comum:
+## Site institucional
 
-1. `ui-hero`: imagem editorial, colagem ou split image.
-2. `ui-marketing-content` ou `ui-marketing-proof`: about/content, mission, stats.
-3. `ui-marketing-company`: team, offices, careers ou contact.
-4. `ui-layout-navigation`: footer multi-coluna.
+Sequência comum:
 
-Boas combinacoes:
+1. `ui-hero`: imagem editorial, colagem ou imagem dividida.
+2. `ui-marketing-content` ou `ui-marketing-proof`: apresentação, missão e
+   estatísticas.
+3. `ui-marketing-company`: equipe, escritórios, carreiras ou contato.
+4. `ui-layout-navigation`: rodapé com várias colunas.
+
+Boas combinações:
+
+<!-- markdownlint-disable MD013 -->
 
 - `hero-with-background-image-navbar` + `content-mission-stats` + `team-image-social-grid` + `offices-simple-grid` + `footer-multi-column-social`.
 - `hero-with-navbar-image-collage` + `careers-job-openings` + `team-avatar-dense-grid` + `footer-centered-links-social`.
 
-## Produto Mobile
+<!-- markdownlint-enable MD013 -->
 
-Sequencia comum:
+## Produto móvel
 
-1. `ui-hero`: mobile app em device frame.
-2. `ui-marketing-features`: features compactas.
-3. `ui-marketing-proof`: testimonials ou stats.
-4. `ui-marketing-conversion`: CTA/newsletter.
+Sequência comum:
 
-Use `ui-forms` se houver waitlist, email capture ou early access.
+1. `ui-hero`: aplicativo móvel em uma moldura de dispositivo.
+2. `ui-marketing-features`: recursos compactos.
+3. `ui-marketing-proof`: depoimentos ou estatísticas.
+4. `ui-marketing-conversion`: CTA ou newsletter.
 
-## App Autenticado
+Use `ui-forms` se houver lista de espera, captura de e-mail ou acesso
+antecipado.
 
-Sequencia comum:
+## Aplicativo autenticado
+
+Sequência comum:
 
 1. `ui-layout-navigation`: `sidebar-layout` ou `stacked-layout`.
-2. `ui-data-display`: tabela, badges, avatares, details.
-3. `ui-forms`: filtros, busca, edicao.
-4. `ui-actions-feedback`: dropdowns, dialogs, alerts, empty states.
-5. `ui-typography`: heading, description, dividers.
+2. `ui-data-display`: tabela, selos, avatares e detalhes.
+3. `ui-forms`: filtros, busca e edição.
+4. `ui-actions-feedback`: menus suspensos, diálogos, alertas e estados
+   vazios.
+5. `ui-typography`: título, descrição e divisores.
 
-Evite `ui-hero` e secoes de marketing dentro de dashboard, salvo telas publicas ou onboarding.
+Evite `ui-hero` e seções de marketing dentro de painéis, salvo em telas
+públicas ou de integração inicial.
 
-## Formulario Publico
+## Formulário público
 
-Sequencia comum:
+Sequência comum:
 
-1. `ui-marketing-company` ou `ui-marketing-features` para contexto da secao, se for landing/contact section.
+1. `ui-marketing-company` ou `ui-marketing-features` para contextualizar uma
+   seção de apresentação ou contato.
 2. `ui-forms` para campos e controles.
-3. `ui-actions-feedback` para submit, erro, sucesso e confirmacao.
-4. `ui-typography` para labels, helper text e policy copy.
+3. `ui-actions-feedback` para envio, erro, sucesso e confirmação.
+4. `ui-typography` para rótulos, textos de ajuda e avisos de política.
 
-Boas combinacoes:
+Boas combinações:
+
+<!-- markdownlint-disable MD013 -->
 
 - `contact-sales-form-gradient` + `ui-forms/input` + `ui-forms/select` + `ui-forms/textarea` + `ui-forms/switch`.
 
-## Pagina de Conteudo/Artigo
+<!-- markdownlint-enable MD013 -->
 
-Sequencia comum:
+## Página de conteúdo ou artigo
 
-1. `ui-marketing-content` para article/content section.
+Sequência comum:
+
+1. `ui-marketing-content` para a seção do artigo ou conteúdo.
 2. `ui-typography` para hierarquia de texto.
-3. `ui-marketing-content` ou `ui-marketing-conversion` para related posts, FAQ ou CTA final.
-4. `ui-layout-navigation` para footer.
+3. `ui-marketing-content` ou `ui-marketing-conversion` para publicações
+   relacionadas, FAQ ou CTA final.
+4. `ui-layout-navigation` para o rodapé.
 
 ## Componente Isolado
 
 Escolha a skill pelo papel do componente:
 
-- botao/menu/dialog/alerta -> `ui-actions-feedback`;
-- input/select/radio/switch -> `ui-forms`;
-- tabela/avatar/badge/detail -> `ui-data-display`;
-- heading/link/divider/text -> `ui-typography`;
-- footer/navbar/sidebar/pagination -> `ui-layout-navigation`.
+- botão, menu, diálogo ou alerta → `ui-actions-feedback`;
+- entrada, seleção, opção ou interruptor → `ui-forms`;
+- tabela, avatar, selo ou detalhe → `ui-data-display`;
+- título, link, divisor ou texto → `ui-typography`;
+- rodapé, barra de navegação, barra lateral ou paginação →
+  `ui-layout-navigation`.

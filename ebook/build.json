@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "version": "1.2.0",
-  "edition": "v1.2.0",
-  "generated_at": "2026-07-28T15:57:54Z",
-  "source_sha256": "f1b33cdd2ba63016fe255a2f60eac319eff5533c0349cb5659e45b46137cae25",
+  "version": "1.2.6",
+  "edition": "v1.2.6",
+  "generated_at": "2026-07-29T01:09:06Z",
+  "source_sha256": "9354cbf81917594fbe02779058e11caa7ffe1a8b5d323badfafc7bcb7952ce82",
   "sources": [
     ".ebook/build-ebook.sh",
     ".ebook/epub.css",
@@ -11,6 +11,7 @@
     ".ebook/extract-document-metadata.py",
     ".ebook/metadata.yaml",
     ".ebook/pdf.css",
+    ".ebook/prune-editions.py",
     ".ebook/strip-document-metadata.lua",
     ".ebook/template.html",
     "brand/logo/icon.png",
@@ -27,7 +28,7 @@
     "docs/user/cli.md",
     "docs/user/credits.md",
     "docs/user/getting-started.md",
-    "docs/user/ideas.md",
+    "docs/user/inbox.md",
     "docs/user/installation.md",
     "docs/user/laravel.md",
     "docs/user/method.md",
@@ -35,47 +36,21 @@
     "docs/user/project-context.md",
     "docs/user/reading-order.txt",
     "docs/user/skills/README.md",
-    "docs/user/skills/specsfy-base-backlog.md",
-    "docs/user/skills/specsfy-base-idea.md",
-    "docs/user/skills/specsfy-base-implement.md",
-    "docs/user/skills/specsfy-base-interview.md",
-    "docs/user/skills/specsfy-base-progress.md",
-    "docs/user/skills/specsfy-base-specify.md",
-    "docs/user/skills/specsfy-base-tasks.md",
-    "docs/user/skills/specsfy-base-tdd-bdd.md",
-    "docs/user/skills/specsfy-base-update-spec.md",
-    "docs/user/skills/specsfy-base-validate.md",
+    "docs/user/skills/specsfy-01-inbox.md",
+    "docs/user/skills/specsfy-02-backlog.md",
+    "docs/user/skills/specsfy-03-specify.md",
+    "docs/user/skills/specsfy-04-validate.md",
+    "docs/user/skills/specsfy-05-tasks.md",
+    "docs/user/skills/specsfy-06-tdd-bdd.md",
+    "docs/user/skills/specsfy-07-implement.md",
+    "docs/user/skills/specsfy-progress.md",
+    "docs/user/skills/specsfy-update-spec.md",
     "docs/user/specialists.md",
     "docs/user/system-documentation.md",
     "docs/user/update-spec.md",
     "ebook/VERSION"
   ],
   "document_metadata": {
-    "docs/user/advanced-usage.md": {
-      "autoridade": "interfaces de `cli/`, `skills/` e `specialists/`",
-      "escopo": "seleção técnica, automação, atualização e retomada de mudanças",
-      "natureza": "normativo"
-    },
-    "docs/user/astro.md": {
-      "autoridade": "catálogo e skill `specsfy-specialist-astro`",
-      "escopo": "aplicação da metodologia em projetos Astro",
-      "natureza": "normativo"
-    },
-    "docs/user/backlog.md": {
-      "autoridade": "uso público de `specsfy-base-backlog` e `specsfy-base-interview`",
-      "escopo": "captura, organização, refinamento, priorização e promoção de ideias",
-      "natureza": "normativo"
-    },
-    "docs/user/cli.md": {
-      "autoridade": "interface pública do repositório `cli/`",
-      "escopo": "automação, atualização e projeção visual do Specsfy",
-      "natureza": "normativo"
-    },
-    "docs/user/credits.md": {
-      "autoridade": "entrada pública e repositório de marca",
-      "escopo": "autoria, manutenção, comunidade e identidade do projeto",
-      "natureza": "descritivo"
-    },
     "docs/user/getting-started.md": {
       "autoridade": "metodologia executável de `skills/`",
       "escopo": "primeira fatia de trabalho em um projeto consumidor",
@@ -85,46 +60,16 @@
       "autoridade": "interfaces públicas de `cli/` e `skills/`",
       "escopo": "instalação do CLI e do framework em um projeto consumidor",
       "natureza": "normativo"
-    },
-    "docs/user/laravel.md": {
-      "autoridade": "catálogo e skill `specsfy-specialist-laravel`",
-      "escopo": "aplicação da metodologia em projetos Laravel",
-      "natureza": "normativo"
-    },
-    "docs/user/nextjs.md": {
-      "autoridade": "catálogo e skill `specsfy-specialist-nextjs`",
-      "escopo": "aplicação da metodologia em projetos Next.js",
-      "natureza": "normativo"
-    },
-    "docs/user/project-context.md": {
-      "autoridade": "localização, finalidade e regras de preservação desses arquivos",
-      "escopo": "arquivos de contexto mantidos em cada projeto consumidor",
-      "natureza": "normativo"
-    },
-    "docs/user/specialists.md": {
-      "autoridade": "uso público de `specialists/`",
-      "escopo": "catálogo técnico opcional e instalação sob demanda",
-      "natureza": "normativo"
-    },
-    "docs/user/system-documentation.md": {
-      "autoridade": "uso de `specsfy-documentator`; código e fontes normativas prevalecem",
-      "escopo": "documentação derivada no projeto consumidor",
-      "natureza": "descritivo"
-    },
-    "docs/user/update-spec.md": {
-      "autoridade": "uso público de `specsfy-base-update-spec`",
-      "escopo": "pedidos surgidos depois da definição inicial de uma spec",
-      "natureza": "normativo"
     }
   },
   "artifacts": {
     "pdf": {
-      "file": "Specsfy-Guia-do-Usuario-v1.2.0.pdf",
-      "sha256": "fbc8dea0ed30b5a8b07b2e53478e5f466c15a0525c3a6680502287e6b3c232f8"
+      "file": "Specsfy-Guia-do-Usuario-v1.2.6.pdf",
+      "sha256": "d14902b00690c5f25f0ced2646acfd45fa6a7f17306472f52e40270ac6360a71"
     },
     "epub": {
-      "file": "Specsfy-Guia-do-Usuario-v1.2.0.epub",
-      "sha256": "d4b3eae90f749d52906db5be8bbba311ffc6ade9338da1771a88f16b4199676c"
+      "file": "Specsfy-Guia-do-Usuario-v1.2.6.epub",
+      "sha256": "e1f197421a90d8d87c0ed2bbd7d515df9149f7ea161e134df95c4abc2968528c"
     }
   }
 }

@@ -34,19 +34,19 @@ export default function Example() {
           <svg viewBox="0 0 2 2" aria-hidden="true" className="mx-2 inline size-0.5 fill-current">
             <circle r={1} cx={1} cy={1} />
           </svg>
-          Join us in Denver from June 7 - 9 to see what&apos;s coming next.
+          Encontre-nos em Denver de 7 a 9 de junho para conhecer as novidades.
         </p>
         <a
           href="#"
           className="flex-none rounded-full bg-gray-900 px-3.5 py-1 text-sm font-semibold text-white shadow-xs hover:bg-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 dark:bg-white/10 dark:inset-ring-white/20 dark:hover:bg-white/15 dark:focus-visible:outline-white"
         >
-          Register now <span aria-hidden="true">&rarr;</span>
+          Inscreva-se agora <span aria-hidden="true">&rarr;</span>
         </a>
       </div>
 
       <div className="flex flex-1 justify-end">
         <button type="button" className="-m-3 p-3 focus-visible:-outline-offset-4">
-          <span className="sr-only">Dismiss</span>
+          <span className="sr-only">Dispensar</span>
           <XMarkIcon aria-hidden="true" className="size-5 text-gray-900 dark:text-gray-100" />
         </button>
       </div>

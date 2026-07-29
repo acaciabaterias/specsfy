@@ -2,38 +2,38 @@ import { Bars4Icon, CalendarIcon, CheckIcon, PlusIcon, UsersIcon, ViewColumnsIco
 
 const features = [
   {
-    name: 'List view',
+    name: 'Visualização em lista',
     icon: Bars4Icon,
     description:
-      'Nunc a, lacinia sed risus neque, arcu, rhoncus. Id mauris justo facilisis aliquam platea vestibulum condimentum morbi.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
   },
   {
-    name: 'Boards',
+    name: 'Quadros',
     icon: ViewColumnsIcon,
     description:
-      'Purus lobortis volutpat posuere id integer nunc tellus. Non mauris malesuada feugiat massa mi pellentesque cum est. Pharetra a varius urna rhoncus, tempor rutrum.',
+      'Organize o trabalho em etapas claras, acompanhe os resultados e ajuste o processo conforme novas evidências.',
   },
   {
-    name: 'Calendar',
+    name: 'Calendário',
     icon: CalendarIcon,
     description:
-      'Purus lobortis volutpat posuere id integer nunc tellus. Non mauris malesuada feugiat massa mi pellentesque cum est. Pharetra a varius urna rhoncus, tempor rutrum.',
+      'Organize o trabalho em etapas claras, acompanhe os resultados e ajuste o processo conforme novas evidências.',
   },
   {
-    name: 'Teams',
+    name: 'Equipes',
     icon: UsersIcon,
     description:
-      'Tincidunt sollicitudin interdum nunc sit risus at bibendum vitae. Urna, quam ut sit justo non, consectetur et varius.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
   },
 ]
 
 const checklist = [
-  'Unlimited projects',
-  'No per user fees',
-  'Unlimited storage',
-  '24/7 support',
-  'Cancel any time',
-  '14 days free',
+  'Projetos ilimitados',
+  'Sem cobrança por usuário',
+  'Armazenamento ilimitado',
+  'Suporte 24/7',
+  'Cancele quando quiser',
+  '14 dias grátis',
 ]
 
 export default function Example() {
@@ -45,9 +45,9 @@ export default function Example() {
       <div className="relative mx-auto max-w-7xl lg:grid lg:grid-cols-2 lg:px-8">
         <div className="bg-white px-6 py-16 sm:py-24 lg:px-0 lg:pr-8">
           <div className="mx-auto max-w-lg lg:mx-0">
-            <h2 className="text-lg font-semibold text-indigo-600">Full-featured</h2>
+            <h2 className="text-lg font-semibold text-indigo-600">Completo</h2>
             <p className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl sm:tracking-tight">
-              Everything you need to talk with your customers
+              Tudo o que você precisa para conversar com seus clientes
             </p>
             <dl className="mt-12 space-y-10">
               {features.map((feature) => (
@@ -67,12 +67,12 @@ export default function Example() {
         <div className="bg-indigo-700 px-6 py-16 sm:py-24 lg:flex lg:items-center lg:justify-end lg:bg-none lg:px-0 lg:pl-8">
           <div className="mx-auto w-full max-w-lg space-y-8 lg:mx-0">
             <div>
-              <h2 className="sr-only">Price</h2>
+              <h2 className="sr-only">Preço</h2>
               <p className="relative grid grid-cols-2">
                 <span className="flex flex-col text-center">
                   <span className="text-5xl font-bold tracking-tight text-white">$99</span>
-                  <span className="mt-2 text-base font-medium text-indigo-200">Setup fee</span>
-                  <span className="sr-only">plus</span>
+                  <span className="mt-2 text-base font-medium text-indigo-200">Taxa de configuração</span>
+                  <span className="sr-only">mais</span>
                 </span>
                 <span
                   aria-hidden="true"
@@ -83,7 +83,7 @@ export default function Example() {
                 <span>
                   <span className="flex flex-col text-center">
                     <span className="text-5xl font-bold tracking-tight text-white">$4</span>
-                    <span className="mt-2 text-base font-medium text-indigo-200">Per month</span>
+                    <span className="mt-2 text-base font-medium text-indigo-200">Por mês</span>
                   </span>
                 </span>
               </p>
@@ -100,10 +100,10 @@ export default function Example() {
               href="#"
               className="flex w-full items-center justify-center rounded-md border border-transparent bg-white px-8 py-4 text-lg/6 font-medium text-indigo-600 hover:bg-indigo-50 md:px-10"
             >
-              Get started today
+              Começar hoje
             </a>
             <a href="#" className="block text-center text-base font-medium text-indigo-200 hover:text-white">
-              Try our Lite plan for free
+              Experimente nosso plano Lite gratuitamente
             </a>
           </div>
         </div>

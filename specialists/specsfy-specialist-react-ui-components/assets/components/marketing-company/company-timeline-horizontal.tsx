@@ -1,29 +1,29 @@
 const timeline = [
   {
-    name: 'Founded company',
+    name: 'Fundação da empresa',
     description:
-      'Nihil aut nam. Dignissimos a pariatur et quos omnis. Aspernatur asperiores et dolorem dolorem optio voluptate repudiandae.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     date: 'Aug 2021',
     dateTime: '2021-08',
   },
   {
-    name: 'Secured $65m in funding',
+    name: 'Captação de US$ 65 milhões',
     description:
-      'Provident quia ut esse. Vero vel eos repudiandae aspernatur. Cumque minima impedit sapiente a architecto nihil.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     date: 'Dec 2021',
     dateTime: '2021-12',
   },
   {
-    name: 'Released beta',
+    name: 'Lançamento da versão beta',
     description:
-      'Sunt perspiciatis incidunt. Non necessitatibus aliquid. Consequatur ut officiis earum eum quia facilis. Hic deleniti dolorem quia et.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     date: 'Feb 2022',
     dateTime: '2022-02',
   },
   {
-    name: 'Global launch of product',
+    name: 'Lançamento global do produto',
     description:
-      'Ut ipsa sint distinctio quod itaque nam qui. Possimus aut unde id architecto voluptatem hic aut pariatur velit.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     date: 'Dec 2022',
     dateTime: '2022-12',
   },

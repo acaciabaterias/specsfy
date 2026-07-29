@@ -22,61 +22,61 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 const solutions = [
   {
-    name: 'Analytics',
-    description: 'Get a better understanding of where your traffic is coming from.',
+    name: 'Análises',
+    description: 'Entenda melhor de onde vem o seu tráfego.',
     href: '#',
     icon: ChartBarIcon,
   },
   {
-    name: 'Engagement',
-    description: 'Speak directly to your customers in a more meaningful way.',
+    name: 'Engajamento',
+    description: 'Converse diretamente com seus clientes de forma mais relevante.',
     href: '#',
     icon: CursorArrowRaysIcon,
   },
-  { name: 'Security', description: 'Your customers data will be safe and secure.', href: '#', icon: ShieldCheckIcon },
+  { name: 'Segurança', description: 'Os dados dos seus clientes permanecerão protegidos.', href: '#', icon: ShieldCheckIcon },
   {
-    name: 'Integrations',
-    description: "Connect with third-party tools that you're already using.",
+    name: 'Integrações',
+    description: "Conecte as ferramentas de terceiros que você já usa.",
     href: '#',
     icon: Squares2X2Icon,
   },
 ]
 
 const callsToAction = [
-  { name: 'Watch Demo', href: '#', icon: PlayIcon },
-  { name: 'View All Products', href: '#', icon: CheckCircleIcon },
-  { name: 'Contact Sales', href: '#', icon: PhoneIcon },
+  { name: 'Assistir à Demonstração', href: '#', icon: PlayIcon },
+  { name: 'Ver todos os produtos', href: '#', icon: CheckCircleIcon },
+  { name: 'Falar com Vendas', href: '#', icon: PhoneIcon },
 ]
 
 const company = [
-  { name: 'About', href: '#', icon: InformationCircleIcon },
-  { name: 'Customers', href: '#', icon: BuildingOfficeIcon },
-  { name: 'Press', href: '#', icon: NewspaperIcon },
-  { name: 'Careers', href: '#', icon: BriefcaseIcon },
-  { name: 'Privacy', href: '#', icon: ShieldCheckIcon },
+  { name: 'Sobre', href: '#', icon: InformationCircleIcon },
+  { name: 'Clientes', href: '#', icon: BuildingOfficeIcon },
+  { name: 'Imprensa', href: '#', icon: NewspaperIcon },
+  { name: 'Carreiras', href: '#', icon: BriefcaseIcon },
+  { name: 'Privacidade', href: '#', icon: ShieldCheckIcon },
 ]
 
 const resources = [
-  { name: 'Community', href: '#', icon: UserGroupIcon },
-  { name: 'Partners', href: '#', icon: GlobeAltIcon },
-  { name: 'Guides', href: '#', icon: BookmarkSquareIcon },
+  { name: 'Comunidade', href: '#', icon: UserGroupIcon },
+  { name: 'Parceiros', href: '#', icon: GlobeAltIcon },
+  { name: 'Guias', href: '#', icon: BookmarkSquareIcon },
   { name: 'Webinars', href: '#', icon: ComputerDesktopIcon },
 ]
 
 const blogPosts = [
   {
     id: 1,
-    name: 'Boost your conversion rate',
+    name: 'Aumente sua taxa de conversão',
     href: '#',
-    preview: 'Eget ullamcorper ac ut vulputate fames nec mattis pellentesque elementum. Viverra tempor id mus.',
+    preview: 'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     imageUrl:
       'https://images.unsplash.com/photo-1558478551-1a378f63328e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2849&q=80',
   },
   {
     id: 2,
-    name: 'How to use search engine optimization to drive traffic to your site',
+    name: 'Como usar SEO para atrair tráfego ao seu site',
     href: '#',
-    preview: 'Eget ullamcorper ac ut vulputate fames nec mattis pellentesque elementum. Viverra tempor id mus.',
+    preview: 'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     imageUrl:
       'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2300&q=80',
   },
@@ -90,15 +90,15 @@ export default function Example() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 sm:py-4 md:justify-start md:space-x-10 lg:px-8">
           <div>
             <a href="#" className="flex">
-              <span className="sr-only">Your Company</span>
+              <span className="sr-only">Sua Empresa</span>
               <img
                 alt=""
-                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+                src="https://tailwindcss.com/mais-assets/img/logos/mark.svg?color=indigo&shade=600"
                 className="h-8 w-auto dark:hidden sm:h-10"
               />
               <img
                 alt=""
-                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
+                src="https://tailwindcss.com/mais-assets/img/logos/mark.svg?color=indigo&shade=500"
                 className="hidden h-8 w-auto dark:block sm:h-10"
               />
             </a>
@@ -106,7 +106,7 @@ export default function Example() {
           <div className="-my-2 -mr-2 md:hidden">
             <PopoverButton className="relative inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:outline-hidden focus:ring-inset dark:bg-gray-900 dark:hover:bg-white/5 dark:hover:text-gray-300">
               <span className="absolute -inset-0.5" />
-              <span className="sr-only">Open menu</span>
+              <span className="sr-only">Abrir menu</span>
               <Bars3Icon aria-hidden="true" className="size-6" />
             </PopoverButton>
           </div>
@@ -114,7 +114,7 @@ export default function Example() {
             <PopoverGroup as="nav" className="flex space-x-10">
               <Popover>
                 <PopoverButton className="group inline-flex items-center rounded-md bg-white text-base font-medium text-gray-500 hover:text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden data-open:text-gray-900 dark:bg-gray-900 dark:text-gray-300 dark:hover:text-white dark:data-open:text-white">
-                  <span>Solutions</span>
+                  <span>Soluções</span>
                   <ChevronDownIcon
                     aria-hidden="true"
                     className="ml-2 size-5 text-gray-400 group-hover:text-gray-500 group-data-open:text-gray-600 group-data-open:group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300 dark:group-data-open:text-gray-300"
@@ -144,7 +144,7 @@ export default function Example() {
                               <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{item.description}</p>
                             </div>
                             <p className="mt-2 text-sm font-medium text-indigo-600 dark:text-indigo-400 lg:mt-4">
-                              Learn more
+                              Saiba mais
                               <span aria-hidden="true"> &rarr;</span>
                             </p>
                           </div>
@@ -170,14 +170,14 @@ export default function Example() {
                 </PopoverPanel>
               </Popover>
               <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
-                Pricing
+                Preços
               </a>
               <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
-                Docs
+                Documentação
               </a>
               <Popover>
                 <PopoverButton className="group inline-flex items-center rounded-md bg-white text-base font-medium text-gray-500 hover:text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden data-open:text-gray-900 dark:bg-gray-900 dark:text-gray-300 dark:hover:text-white dark:data-open:text-white">
-                  <span>More</span>
+                  <span>Mais</span>
                   <ChevronDownIcon
                     aria-hidden="true"
                     className="ml-2 size-5 text-gray-400 group-hover:text-gray-500 group-data-open:text-gray-600 group-data-open:group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300 dark:group-data-open:text-gray-300"
@@ -195,7 +195,7 @@ export default function Example() {
                   <div className="relative mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
                     <nav className="grid gap-y-10 bg-white px-4 py-8 dark:bg-gray-900 sm:grid-cols-2 sm:gap-x-8 sm:px-6 sm:py-12 lg:px-8 xl:pr-12">
                       <div>
-                        <h3 className="text-base font-medium text-gray-500 dark:text-gray-400">Company</h3>
+                        <h3 className="text-base font-medium text-gray-500 dark:text-gray-400">Empresa</h3>
                         <ul role="list" className="mt-5 space-y-6">
                           {company.map((item) => (
                             <li key={item.name} className="flow-root">
@@ -211,7 +211,7 @@ export default function Example() {
                         </ul>
                       </div>
                       <div>
-                        <h3 className="text-base font-medium text-gray-500 dark:text-gray-400">Resources</h3>
+                        <h3 className="text-base font-medium text-gray-500 dark:text-gray-400">Recursos</h3>
                         <ul role="list" className="mt-5 space-y-6">
                           {resources.map((item) => (
                             <li key={item.name} className="flow-root">
@@ -229,7 +229,7 @@ export default function Example() {
                     </nav>
                     <div className="bg-gray-50 px-4 py-8 dark:bg-gray-800/50 sm:px-6 sm:py-12 lg:px-8 xl:pl-12">
                       <div>
-                        <h3 className="text-base font-medium text-gray-500 dark:text-gray-400">From the blog</h3>
+                        <h3 className="text-base font-medium text-gray-500 dark:text-gray-400">Do blog</h3>
                         <ul role="list" className="mt-6 space-y-6">
                           {blogPosts.map((post) => (
                             <li key={post.id} className="flow-root">
@@ -248,7 +248,7 @@ export default function Example() {
                       </div>
                       <div className="mt-6 text-sm font-medium">
                         <a href="#" className="text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300">
-                          View all posts
+                          Ver todos os posts
                           <span aria-hidden="true"> &rarr;</span>
                         </a>
                       </div>
@@ -259,13 +259,13 @@ export default function Example() {
             </PopoverGroup>
             <div className="flex items-center md:ml-12">
               <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white">
-                Sign in
+                Entrar
               </a>
               <a
                 href="#"
                 className="ml-8 inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-xs hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400"
               >
-                Sign up
+                Criar conta
               </a>
             </div>
           </div>
@@ -281,20 +281,20 @@ export default function Example() {
             <div className="flex items-center justify-between">
               <div>
                 <img
-                  alt="Your Company"
-                  src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+                  alt="Sua Empresa"
+                  src="https://tailwindcss.com/mais-assets/img/logos/mark.svg?color=indigo&shade=600"
                   className="h-8 w-auto dark:hidden"
                 />
                 <img
-                  alt="Your Company"
-                  src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
+                  alt="Sua Empresa"
+                  src="https://tailwindcss.com/mais-assets/img/logos/mark.svg?color=indigo&shade=500"
                   className="hidden h-8 w-auto dark:block"
                 />
               </div>
               <div className="-mr-2">
                 <PopoverButton className="relative inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:outline-hidden focus:ring-inset dark:bg-gray-900 dark:hover:bg-white/5 dark:hover:text-gray-300">
                   <span className="absolute -inset-0.5" />
-                  <span className="sr-only">Close menu</span>
+                  <span className="sr-only">Fechar menu</span>
                   <XMarkIcon aria-hidden="true" className="size-6" />
                 </PopoverButton>
               </div>
@@ -317,7 +317,7 @@ export default function Example() {
                 </div>
                 <div className="mt-8 text-base">
                   <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300">
-                    View all products
+                    Ver todos os produtos
                     <span aria-hidden="true"> &rarr;</span>
                   </a>
                 </div>
@@ -327,22 +327,22 @@ export default function Example() {
           <div className="px-5 py-6">
             <div className="grid grid-cols-2 gap-4">
               <a href="#" className="rounded-md text-base font-medium text-gray-900 hover:text-gray-700 dark:text-white dark:hover:text-gray-300">
-                Pricing
+                Preços
               </a>
               <a href="#" className="rounded-md text-base font-medium text-gray-900 hover:text-gray-700 dark:text-white dark:hover:text-gray-300">
-                Docs
+                Documentação
               </a>
               <a href="#" className="rounded-md text-base font-medium text-gray-900 hover:text-gray-700 dark:text-white dark:hover:text-gray-300">
-                Company
+                Empresa
               </a>
               <a href="#" className="rounded-md text-base font-medium text-gray-900 hover:text-gray-700 dark:text-white dark:hover:text-gray-300">
-                Resources
+                Recursos
               </a>
               <a href="#" className="rounded-md text-base font-medium text-gray-900 hover:text-gray-700 dark:text-white dark:hover:text-gray-300">
                 Blog
               </a>
               <a href="#" className="rounded-md text-base font-medium text-gray-900 hover:text-gray-700 dark:text-white dark:hover:text-gray-300">
-                Contact Sales
+                Falar com Vendas
               </a>
             </div>
             <div className="mt-6">
@@ -350,12 +350,12 @@ export default function Example() {
                 href="#"
                 className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-xs hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400"
               >
-                Sign up
+                Criar conta
               </a>
               <p className="mt-6 text-center text-base font-medium text-gray-500 dark:text-gray-400">
-                Existing customer?{' '}
+                Já é cliente?{' '}
                 <a href="#" className="text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300">
-                  Sign in
+                  Entrar
                 </a>
               </p>
             </div>

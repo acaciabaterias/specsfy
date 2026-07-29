@@ -2,27 +2,27 @@ import { CheckIcon } from '@heroicons/react/24/outline'
 
 const tiers = [
   {
-    name: 'Standard',
+    name: 'Padrão',
     href: '#',
-    priceMonthly: 49,
-    description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit.',
+    priceMensalmente: 49,
+    description: 'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     features: [
-      'Pariatur quod similique',
-      'Sapiente libero doloribus modi nostrum',
-      'Vel ipsa esse repudiandae excepturi',
-      'Itaque cupiditate adipisci quibusdam',
+      'Resultados consistentes',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     ],
   },
   {
-    name: 'Enterprise',
+    name: 'Empresas',
     href: '#',
-    priceMonthly: 79,
-    description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit.',
+    priceMensalmente: 79,
+    description: 'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     features: [
-      'Pariatur quod similique',
-      'Sapiente libero doloribus modi nostrum',
-      'Vel ipsa esse repudiandae excepturi',
-      'Itaque cupiditate adipisci quibusdam',
+      'Resultados consistentes',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     ],
   },
 ]
@@ -33,12 +33,12 @@ export default function Example() {
       <div className="pt-12 sm:pt-16 lg:pt-24">
         <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl space-y-2 lg:max-w-none">
-            <h2 className="text-xl/6 font-semibold text-gray-300">Pricing</h2>
+            <h2 className="text-xl/6 font-semibold text-gray-300">Preços</h2>
             <p className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
-              The right price for you, whoever you are
+              O preço certo para você, seja qual for o seu perfil
             </p>
             <p className="text-xl text-gray-300">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum sequi unde repudiandae natus.
+              Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
             </p>
           </div>
         </div>
@@ -60,8 +60,8 @@ export default function Example() {
                       </h3>
                     </div>
                     <div className="mt-4 flex items-baseline text-6xl font-bold tracking-tight">
-                      ${tier.priceMonthly}
-                      <span className="ml-1 text-2xl font-medium tracking-normal text-gray-500">/mo</span>
+                      ${tier.priceMensalmente}
+                      <span className="ml-1 text-2xl font-medium tracking-normal text-gray-500">/mês</span>
                     </div>
                     <p className="mt-5 text-lg text-gray-500">{tier.description}</p>
                   </div>
@@ -82,7 +82,7 @@ export default function Example() {
                         aria-describedby="tier-standard"
                         className="flex items-center justify-center rounded-md border border-transparent bg-gray-800 px-5 py-3 text-base font-medium text-white hover:bg-gray-900"
                       >
-                        Get started
+                        Começar
                       </a>
                     </div>
                   </div>
@@ -97,12 +97,12 @@ export default function Example() {
               <div className="flex-1">
                 <div>
                   <h3 className="inline-flex rounded-full bg-white px-4 py-1 text-base font-semibold text-gray-800">
-                    Discounted
+                    Com desconto
                   </h3>
                 </div>
                 <div className="mt-4 text-lg text-gray-600">
-                  Get full access to all of standard license features for solo projects that make less than $20k gross
-                  revenue for <span className="font-semibold text-gray-900">$29</span>.
+                  Acesse todos os recursos da licença padrão para projetos individuais com faturamento bruto inferior a US$ 20 mil
+                  por <span className="font-semibold text-gray-900">$29</span>.
                 </div>
               </div>
               <div className="mt-6 rounded-md shadow-sm lg:mt-0 lg:ml-10 lg:shrink-0">
@@ -110,7 +110,7 @@ export default function Example() {
                   href="#"
                   className="flex items-center justify-center rounded-md border border-transparent bg-white px-5 py-3 text-base font-medium text-gray-900 hover:bg-gray-50"
                 >
-                  Buy Discounted License
+                  Comprar licença com desconto
                 </a>
               </div>
             </div>

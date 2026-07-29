@@ -73,9 +73,9 @@ class AuxiliaryContextIntegrationTests(unittest.TestCase):
         ):
             self.assertIn(document, content)
         for name in (
-            "specsfy-base-tasks",
-            "specsfy-base-implement",
-            "specsfy-base-progress",
+            "specsfy-05-tasks",
+            "specsfy-07-implement",
+            "specsfy-progress",
         ):
             skill = (SKILLS / name / "SKILL.md").read_text(encoding="utf-8")
             self.assertIn("monitor_context.py", skill)

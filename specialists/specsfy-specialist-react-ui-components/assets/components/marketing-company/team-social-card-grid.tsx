@@ -1,7 +1,7 @@
 const people = [
   {
     name: 'Leonard Krasner',
-    role: 'Senior Designer',
+    role: 'Designer Sênior',
     imageUrl:
       'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
     xUrl: '#',
@@ -9,7 +9,7 @@ const people = [
   },
   {
     name: 'Floyd Miles',
-    role: 'Principal Designer',
+    role: 'Designer Principal',
     imageUrl:
       'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
     xUrl: '#',
@@ -17,7 +17,7 @@ const people = [
   },
   {
     name: 'Emily Selman',
-    role: 'VP, User Experience',
+    role: 'VP de Experiência do Usuário',
     imageUrl:
       'https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
     xUrl: '#',
@@ -25,7 +25,7 @@ const people = [
   },
   {
     name: 'Kristin Watson',
-    role: 'VP, Human Resources',
+    role: 'VP de Recursos Humanos',
     imageUrl:
       'https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
     xUrl: '#',
@@ -33,7 +33,7 @@ const people = [
   },
   {
     name: 'Emma Dorsey',
-    role: 'Senior Developer',
+    role: 'Desenvolvedor Sênior',
     imageUrl:
       'https://images.unsplash.com/photo-1505840717430-882ce147ef2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
     xUrl: '#',
@@ -41,7 +41,7 @@ const people = [
   },
   {
     name: 'Alicia Bell',
-    role: 'Junior Copywriter',
+    role: 'Redator Júnior',
     imageUrl:
       'https://images.unsplash.com/photo-1509783236416-c9ad59bae472?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
     xUrl: '#',
@@ -55,11 +55,10 @@ export default function Example() {
       <div className="mx-auto max-w-7xl px-6 text-center lg:px-8">
         <div className="mx-auto max-w-2xl">
           <h2 className="text-4xl font-semibold tracking-tight text-balance text-gray-900 sm:text-5xl dark:text-white">
-            Meet our team
+            Conheça nossa equipe
           </h2>
           <p className="mt-6 text-lg/8 text-gray-600 dark:text-gray-400">
-            We're a dynamic group of individuals who are passionate about what we do and dedicated to delivering the best
-            results for our clients.
+            Somos uma equipe dinâmica, comprometida com nosso trabalho e com os melhores resultados para nossos clientes.
           </p>
         </div>
         <ul

@@ -5,54 +5,59 @@ Use antes de finalizar uma tela ou componente.
 ## Estrutura
 
 - A tela tem um objetivo principal claro.
-- A hierarquia visual guia o usuario na ordem certa.
-- O primeiro viewport comunica produto/oferta/acao sem depender de texto escondido.
-- Secoes repetidas variam ritmo visual sem parecer aleatorias.
-- Containers, max-width e spacing vertical estao consistentes.
+- A hierarquia visual guia o usuário na ordem certa.
+- A primeira área visível comunica produto, oferta e ação sem depender de texto escondido.
+- Seções repetidas variam o ritmo visual sem parecer aleatórias.
+- Contêineres, largura máxima e espaçamento vertical estão consistentes.
 
 ## Responsividade
 
-- Mobile nao tem overflow horizontal.
-- Grids viram uma coluna quando necessario.
-- Texto longo cabe dentro de botoes, cards e colunas.
-- Imagens usam `aspect-*`, `object-cover` ou dimensoes estaveis.
-- Navbars, footers e formularios continuam utilizaveis em telas pequenas.
+- A versão móvel não tem rolagem horizontal indesejada.
+- Grades viram uma coluna quando necessário.
+- Texto longo cabe dentro de botões, cartões e colunas.
+- Imagens usam `aspect-*`, `object-cover` ou dimensões estáveis.
+- Barras de navegação, rodapés e formulários continuam utilizáveis em telas pequenas.
 
 ## Acessibilidade
 
-- Inputs tem `label` associado.
-- Icon-only buttons/links tem `sr-only` ou `aria-label`.
+- Entradas têm um `label` associado.
+- Botões ou links formados apenas por ícone têm `sr-only` ou `aria-label`.
 - SVG decorativo usa `aria-hidden="true"`.
-- Imagens informativas tem `alt` util; imagens decorativas usam `alt=""`.
-- Landmarks semanticos fazem sentido: `header`, `main`, `section`, `article`, `footer`, `nav`, `form`.
-- Foco e estados interativos sao visiveis.
+- Imagens informativas têm um `alt` útil; imagens decorativas usam `alt=""`.
+- Regiões semânticas fazem sentido: `header`, `main`, `section`, `article`,
+  `footer`, `nav`, `form`.
+- Foco e estados interativos são visíveis.
 
 ## Dados e Estado
 
-- Lists usam keys estaveis.
-- Dados mockados sao faceis de substituir.
+- Listas usam chaves estáveis.
+- Dados simulados são fáceis de substituir.
 - Links `href="#"` foram trocados quando rotas reais existem.
-- Formularios tem estados de erro/sucesso quando a acao importa.
-- Acoes destrutivas pedem confirmacao quando aplicavel.
+- Formulários têm estados de erro e sucesso quando a ação importa.
+- Ações destrutivas pedem confirmação quando aplicável.
 
 ## Visual
 
-- Dark mode foi preservado se a referencia tinha dark mode.
-- Cores nao viram uma paleta monotona sem contraste.
+- O modo escuro foi preservado quando existia na referência.
+- As cores não formam uma paleta monótona sem contraste.
 - CTAs principais usam uma cor consistente.
-- Cards nao ficam aninhados sem necessidade.
-- Texto nao sobrepoe imagens de forma ilegivel.
-- Imagens externas sao adequadas ao dominio ou foram substituidas por assets reais.
+- Cartões não ficam aninhados sem necessidade.
+- O texto não sobrepõe imagens de forma ilegível.
+- Imagens externas são adequadas ao domínio ou foram substituídas por recursos
+  reais.
 
-## Integracao
+## Integração
 
-- Imports batem com dependencias do projeto.
-- Componentes locais existentes foram preferidos quando houver design system.
-- `Link`, `Button`, `Input`, `Avatar` ou wrappers locais foram usados se o app ja os possui.
+- Imports correspondem às dependências do projeto.
+- Componentes locais existentes foram preferidos quando há um design system.
+- `Link`, `Button`, `Input`, `Avatar` ou adaptadores locais foram usados se o
+  aplicativo já os possui.
 - Nenhuma biblioteca nova foi introduzida sem necessidade.
 
-## Validacao
+## Validação
 
-- Se existe app executavel, rode lint/typecheck/test ou dev server conforme o projeto.
-- Para UI significativa, verifique screenshot desktop e mobile quando possivel.
-- Se nao foi possivel validar, registre isso na resposta final.
+- Se existe um aplicativo executável, rode lint, verificação de tipos, testes ou
+  servidor de desenvolvimento conforme o projeto.
+- Para uma UI significativa, verifique capturas de tela em desktop e dispositivo
+  móvel quando possível.
+- Se não foi possível validar, registre isso na resposta final.

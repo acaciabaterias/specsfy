@@ -1,11 +1,13 @@
 # Arquitetura do Specsfy
 
+<!-- markdownlint-disable MD033 -->
 <p align="center">
   <picture>
     <source srcset="../../../../brand/logo/icon.svg" type="image/svg+xml">
     <img src="../../../../brand/logo/icon.png" alt="Logo do Specsfy" width="128">
   </picture>
 </p>
+<!-- markdownlint-enable MD033 -->
 
 ## Classificação
 
@@ -51,7 +53,7 @@ example/ (validação) ───► contratos do framework
 Dentro da metodologia:
 
 ```text
-input → ideia capturada → backlog → interview → spec única → gates → tarefas
+input → inbox → backlog → spec única → gates → tarefas
       → BDD/TDD RED → entrega → evidência
                          ↑ update-spec ← pedido tardio
 ```
@@ -83,7 +85,7 @@ repositório e baixa `skills/` e `specialists/` do mesmo checkout.
 - Contextos não duplicam comportamento de features.
 - Todo conteúdo é versionado pela raiz Git única.
 - Módulos não contêm `.git`, gitlinks ou submódulos próprios.
-- `example/` valida; `docs/user/` orienta usuários e `docs/develop/` orienta
+- `example/` valida. `docs/user/` orienta usuários e `docs/develop/` orienta
   contribuidores.
 - `cli/` instala somente em projetos consumidores.
 
@@ -93,10 +95,10 @@ repositório e baixa `skills/` e `specialists/` do mesmo checkout.
 
 ## Não use para
 
-- inventariar arquivos;
+- inventariar arquivos.
 - registrar comportamento exclusivo de uma feature.
 
 ## Fonte da verdade e precedência
 
 Este índice governa a arquitetura vigente. Código, manifests e testes comprovam
-o estado implementado; ADRs preservam motivação histórica.
+o estado implementado. ADRs preservam motivação histórica.

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Specsfy: Entrevistar"
-  short_description: "Aprofunda ideias antes da especificação"
-  default_prompt: "Use $specsfy-base-interview para me entrevistar sobre esta ideia ou backlog e preparar o handoff para a especificação. Orquestre transições automáticas com anúncio, execução e retomada na mesma conversa."

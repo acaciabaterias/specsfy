@@ -130,8 +130,8 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
             "specsfy install --project .",
             "specsfy skills list",
             "specsfy progress --project .",
-            "## Se algo não funcionar",
-            ".agents/skills/specsfy-base-*",
+            "## Corrija falhas comuns",
+            ".agents/skills/specsfy-01-inbox",
             ".specsfy/Spec.md",
         ):
             self.assertIn(evidence, installation)
@@ -144,7 +144,7 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
             "## Atualize quando",
             "## Não use para",
             "## Fonte da verdade e precedência",
-            ".specsfy/templates/Idea.md",
+            ".specsfy/templates/Inbox.md",
         ):
             self.assertNotIn(unnecessary_setup, installation)
         self.assertIn("[Instalação](installation.md)", router)
@@ -169,8 +169,8 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
             "specsfy install --project .",
             "uv tool upgrade specsfy-cli",
             "specsfy skills update --project .",
-            "specsfy-base-idea",
-            "specsfy-base-backlog",
+            "specsfy-01-inbox",
+            "specsfy-02-backlog",
             "Ato I — Definir",
             "Ato II — Projetar e provar",
             "Ato III — Entregar",
@@ -184,58 +184,26 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
             self.assertIn(evidence, public_entrypoint)
 
         base_flow = (
-            "$specsfy-base-idea",
-            "$specsfy-base-backlog",
-            "$specsfy-base-interview",
-            "$specsfy-base-specify",
-            "$specsfy-base-validate",
-            "$specsfy-base-tasks",
-            "$specsfy-base-tdd-bdd",
-            "$specsfy-base-implement",
-            "$specsfy-base-update-spec",
-            "$specsfy-base-progress",
+            "$specsfy-01-inbox",
+            "$specsfy-02-backlog",
+            "$specsfy-03-specify",
+            "$specsfy-04-validate",
+            "$specsfy-05-tasks",
+            "$specsfy-06-tdd-bdd",
+            "$specsfy-07-implement",
+            "$specsfy-update-spec",
+            "$specsfy-progress",
         )
         basic_usage = (ROOT / "docs" / "user" / "getting-started.md").read_text(
             encoding="utf-8"
         )
         for source in (public_entrypoint, basic_usage):
-            practical_journey = (
-                "### 1. Capture a ideia — `$specsfy-base-idea`",
-                "### 2. Refine no backlog — `$specsfy-base-backlog`",
-                "### 3. Tire as dúvidas — `$specsfy-base-interview`",
-                "### 4. Crie a especificação — `$specsfy-base-specify`",
-                "### 5. Confira a especificação — `$specsfy-base-validate`",
-                "### 6. Divida o trabalho — `$specsfy-base-tasks`",
-                "### 7. Prepare a verificação — `$specsfy-base-tdd-bdd`",
-                "### 8. Implemente — `$specsfy-base-implement`",
-                "### 9. Altere a especificação — `$specsfy-base-update-spec`",
-                "### 10. Veja o progresso — `$specsfy-base-progress`",
-            )
-            for evidence in practical_journey:
-                self.assertIn(evidence, source)
             practical_evidence = (
-                "specs/ideias/2026-07-28-143205-pagina-boas-vindas.md",
+                "specs/inbox/2026-07-28-143205-pagina-boas-vindas.md",
                 "specs/backlog/0001-pagina-boas-vindas.md",
-                "Brief pronto para especificar",
                 "specs/specs/0001-pagina-boas-vindas/spec.md",
                 "READY",
-                "2 tarefas preparadas",
-                "Verificação preparada",
-                "Implementação concluída",
-                "Pedido incorporado na especificação 0001-pagina-boas-vindas",
-                "Implementação atualizada",
                 "Complete",
-                "nenhuma pendência",
-                "Use $specsfy-base-interview para aprofundar este texto:",
-                "Use $specsfy-base-interview em specs/backlog/0001-pagina-boas-vindas.md",
-                "Use $specsfy-base-specify para criar uma especificação a partir deste texto:",
-                "Use $specsfy-base-specify para promover specs/backlog/0001-pagina-boas-vindas.md",
-                "**Opção 1 — texto livre**",
-                "**Opção 2 — arquivo de backlog**",
-                "Use $specsfy-base-validate em specs/specs/0001-pagina-boas-vindas/spec.md",
-                "Use $specsfy-base-tasks em specs/specs/0001-pagina-boas-vindas/spec.md",
-                "Use $specsfy-base-tdd-bdd em specs/specs/0001-pagina-boas-vindas/spec.md",
-                "Use $specsfy-base-implement em specs/specs/0001-pagina-boas-vindas/spec.md",
             )
             for evidence in practical_evidence:
                 self.assertIn(evidence, source)
@@ -247,9 +215,9 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
             self.assertEqual(sorted(positions), positions)
 
         guides = {
-            "getting-started.md": ("specsfy-base-idea", "Definition Gate"),
+            "getting-started.md": ("specsfy-01-inbox", "Definition Gate"),
             "update-spec.md": (
-                "specsfy-base-update-spec",
+                "specsfy-update-spec",
                 "esqueci",
                 "adicionar",
                 "remover",

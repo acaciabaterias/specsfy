@@ -7,53 +7,53 @@ const styles = {
   base: [
     // Base
     'relative isolate inline-flex items-baseline justify-center gap-x-2 rounded-lg border text-base/6 font-semibold',
-    // Sizing
+    // Dimensionamento
     'px-[calc(--spacing(3.5)-1px)] py-[calc(--spacing(2.5)-1px)] sm:px-[calc(--spacing(3)-1px)] sm:py-[calc(--spacing(1.5)-1px)] sm:text-sm/6',
-    // Focus
+    // Foco
     'focus:not-data-focus:outline-hidden data-focus:outline-2 data-focus:outline-offset-2 data-focus:outline-blue-500',
-    // Disabled
+    // Desabilitado
     'data-disabled:opacity-50',
-    // Icon
+    // Ícone
     '*:data-[slot=icon]:-mx-0.5 *:data-[slot=icon]:my-0.5 *:data-[slot=icon]:size-5 *:data-[slot=icon]:shrink-0 *:data-[slot=icon]:self-center *:data-[slot=icon]:text-(--btn-icon) sm:*:data-[slot=icon]:my-1 sm:*:data-[slot=icon]:size-4 forced-colors:[--btn-icon:ButtonText] forced-colors:data-hover:[--btn-icon:ButtonText]',
   ],
   solid: [
-    // Optical border, implemented as the button background to avoid corner artifacts
+    // Borda óptica implementada como fundo do botão para evitar artefatos nos cantos
     'border-transparent bg-(--btn-border)',
-    // Dark mode: border is rendered on `after` so background is set to button background
+    // Modo escuro: a borda é renderizada em `after`, então o fundo recebe a cor do botão
     'dark:bg-(--btn-bg)',
-    // Button background, implemented as foreground layer to stack on top of pseudo-border layer
+    // Fundo do botão implementado como camada frontal sobre a camada de pseudoborda
     'before:absolute before:inset-0 before:-z-10 before:rounded-[calc(var(--radius-lg)-1px)] before:bg-(--btn-bg)',
-    // Drop shadow, applied to the inset `before` layer so it blends with the border
+    // Sombra projetada na camada interna `before` para se integrar à borda
     'before:shadow-sm',
-    // Background color is moved to control and shadow is removed in dark mode so hide `before` pseudo
+    // No modo escuro, a cor de fundo passa ao controle e a sombra é removida; por isso, o pseudoelemento `before` fica oculto
     'dark:before:hidden',
-    // Dark mode: Subtle white outline is applied using a border
+    // Modo escuro: um contorno branco sutil é aplicado com uma borda
     'dark:border-white/5',
-    // Shim/overlay, inset to match button foreground and used for hover state + highlight shadow
+    // Camada sobreposta alinhada ao primeiro plano do botão, usada no hover e na sombra de realce
     'after:absolute after:inset-0 after:-z-10 after:rounded-[calc(var(--radius-lg)-1px)]',
-    // Inner highlight shadow
+    // Sombra de realce interna
     'after:shadow-[inset_0_1px_--theme(--color-white/15%)]',
-    // White overlay on hover
+    // Sobreposição branca no hover
     'data-active:after:bg-(--btn-hover-overlay) data-hover:after:bg-(--btn-hover-overlay)',
-    // Dark mode: `after` layer expands to cover entire button
+    // Modo escuro: a camada `after` se expande para cobrir todo o botão
     'dark:after:-inset-px dark:after:rounded-lg',
-    // Disabled
+    // Desabilitado
     'data-disabled:before:shadow-none data-disabled:after:shadow-none',
   ],
   outline: [
     // Base
     'border-zinc-950/10 text-zinc-950 data-active:bg-zinc-950/2.5 data-hover:bg-zinc-950/2.5',
-    // Dark mode
+    // Modo escuro
     'dark:border-white/15 dark:text-white dark:[--btn-bg:transparent] dark:data-active:bg-white/5 dark:data-hover:bg-white/5',
-    // Icon
+    // Ícone
     '[--btn-icon:var(--color-zinc-500)] data-active:[--btn-icon:var(--color-zinc-700)] data-hover:[--btn-icon:var(--color-zinc-700)] dark:data-active:[--btn-icon:var(--color-zinc-400)] dark:data-hover:[--btn-icon:var(--color-zinc-400)]',
   ],
   plain: [
     // Base
     'border-transparent text-zinc-950 data-active:bg-zinc-950/5 data-hover:bg-zinc-950/5',
-    // Dark mode
+    // Modo escuro
     'dark:text-white dark:data-active:bg-white/10 dark:data-hover:bg-white/10',
-    // Icon
+    // Ícone
     '[--btn-icon:var(--color-zinc-500)] data-active:[--btn-icon:var(--color-zinc-700)] data-hover:[--btn-icon:var(--color-zinc-700)] dark:[--btn-icon:var(--color-zinc-500)] dark:data-active:[--btn-icon:var(--color-zinc-400)] dark:data-hover:[--btn-icon:var(--color-zinc-400)]',
   ],
   colors: {
@@ -189,7 +189,7 @@ export const Button = forwardRef(function Button(
 })
 
 /**
- * Expand the hit area to at least 44×44px on touch devices
+ * Expanda a área de toque para pelo menos 44×44 px em dispositivos sensíveis ao toque
  */
 export function TouchTarget({ children }: { children: React.ReactNode }) {
   return (

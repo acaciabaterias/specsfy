@@ -2,10 +2,10 @@ import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const navigation = [
-  { name: 'Product', href: '#' },
-  { name: 'Features', href: '#' },
+  { name: 'Produto', href: '#' },
+  { name: 'Recursos', href: '#' },
   { name: 'Marketplace', href: '#' },
-  { name: 'Company', href: '#' },
+  { name: 'Empresa', href: '#' },
 ]
 
 export default function Example() {
@@ -42,17 +42,17 @@ export default function Example() {
             <div className="flex flex-1 items-center">
               <div className="flex w-full items-center justify-between md:w-auto">
                 <a href="#">
-                  <span className="sr-only">Your Company</span>
+                  <span className="sr-only">Sua Empresa</span>
                   <img
                     alt=""
-                    src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+                    src="https://tailwindcss.com/mais-assets/img/logos/mark.svg?color=indigo&shade=600"
                     className="h-8 w-auto sm:h-10"
                   />
                 </a>
                 <div className="-mr-2 flex items-center md:hidden">
                   <PopoverButton className="relative inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:outline-hidden focus:ring-inset">
                     <span className="absolute -inset-0.5" />
-                    <span className="sr-only">Open main menu</span>
+                    <span className="sr-only">Abrir menu principal</span>
                     <Bars3Icon aria-hidden="true" className="size-6" />
                   </PopoverButton>
                 </div>
@@ -71,7 +71,7 @@ export default function Example() {
                   href="#"
                   className="inline-flex items-center rounded-md border border-transparent bg-white px-4 py-2 text-base font-medium text-indigo-600 hover:bg-gray-50"
                 >
-                  Log in
+                  Entrar
                 </a>
               </span>
             </div>
@@ -87,14 +87,14 @@ export default function Example() {
                 <div>
                   <img
                     alt=""
-                    src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+                    src="https://tailwindcss.com/mais-assets/img/logos/mark.svg?color=indigo&shade=600"
                     className="h-8 w-auto"
                   />
                 </div>
                 <div className="-mr-2">
                   <PopoverButton className="relative inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500 focus:outline-hidden focus:ring-inset">
                     <span className="absolute -inset-0.5" />
-                    <span className="sr-only">Close main menu</span>
+                    <span className="sr-only">Fechar menu principal</span>
                     <XMarkIcon aria-hidden="true" className="size-6" />
                   </PopoverButton>
                 </div>
@@ -114,7 +114,7 @@ export default function Example() {
                 href="#"
                 className="block w-full bg-gray-50 px-5 py-3 text-center font-medium text-indigo-600 hover:bg-gray-100"
               >
-                Log in
+                Entrar
               </a>
             </div>
           </PopoverPanel>
@@ -125,41 +125,40 @@ export default function Example() {
             <div className="sm:text-center md:mx-auto md:max-w-2xl lg:col-span-6 lg:text-left">
               <h1>
                 <span className="block text-base font-semibold text-gray-500 sm:text-lg lg:text-base xl:text-lg">
-                  Coming soon
+                  Em breve
                 </span>
                 <span className="mt-1 block text-4xl font-bold tracking-tight sm:text-5xl xl:text-6xl">
-                  <span className="block text-gray-900">Data to enrich your</span>
-                  <span className="block text-indigo-600">online business</span>
+                  <span className="block text-gray-900">Dados para fortalecer seu</span>
+                  <span className="block text-indigo-600">negócio digital</span>
                 </span>
               </h1>
               <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
-                fugiat veniam occaecat fugiat aliqua ad ad non deserunt sunt.
+                Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
               </p>
               <div className="mt-8 sm:mx-auto sm:max-w-lg sm:text-center lg:mx-0 lg:text-left">
-                <p className="text-base font-medium text-gray-900">Sign up to get notified when it's ready.</p>
+                <p className="text-base font-medium text-gray-900">Cadastre-se para receber um aviso quando estiver pronto.</p>
                 <form action="#" method="POST" className="mt-3 sm:flex">
                   <label htmlFor="email" className="sr-only">
-                    Email
+                    E-mail
                   </label>
                   <input
                     id="email"
                     name="email"
                     type="email"
-                    placeholder="Enter your email"
+                    placeholder="Digite seu e-mail"
                     className="block w-full rounded-md border border-gray-300 p-3 text-base placeholder-gray-500 shadow-xs focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500 sm:flex-1"
                   />
                   <button
                     type="submit"
                     className="mt-3 w-full rounded-md border border-transparent bg-gray-800 px-6 py-3 text-base font-medium text-white shadow-xs hover:bg-gray-900 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden sm:mt-0 sm:ml-3 sm:inline-flex sm:w-auto sm:shrink-0 sm:items-center"
                   >
-                    Notify me
+                    Avise-me
                   </button>
                 </form>
                 <p className="mt-3 text-sm text-gray-500">
-                  We care about the protection of your data. Read our
+                  Levamos a proteção dos seus dados a sério. Leia nossa
                   <a href="#" className="font-medium text-gray-900 underline">
-                    Privacy Policy
+                    Política de Privacidade
                   </a>
                   .
                 </p>
@@ -194,7 +193,7 @@ export default function Example() {
                   type="button"
                   className="relative block w-full overflow-hidden rounded-lg bg-white focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden"
                 >
-                  <span className="sr-only">Watch our video to learn more</span>
+                  <span className="sr-only">Assista ao vídeo para saber mais</span>
                   <img
                     alt=""
                     src="https://images.unsplash.com/photo-1556740758-90de374c12ad?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"

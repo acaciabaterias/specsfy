@@ -10,7 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS = ROOT / "skills"
-VALIDATE_DIR = SKILLS / "specsfy-base-validate/scripts"
+VALIDATE_DIR = SKILLS / "specsfy-04-validate/scripts"
 sys.path.insert(0, str(VALIDATE_DIR))
 VALIDATE_MODULE_SPEC = importlib.util.spec_from_file_location(
     "validate_spec_integrated_coverage",
@@ -19,7 +19,7 @@ VALIDATE_MODULE_SPEC = importlib.util.spec_from_file_location(
 assert VALIDATE_MODULE_SPEC is not None and VALIDATE_MODULE_SPEC.loader is not None
 VALIDATE = importlib.util.module_from_spec(VALIDATE_MODULE_SPEC)
 VALIDATE_MODULE_SPEC.loader.exec_module(VALIDATE)
-TRACE = SKILLS / "specsfy-base-tdd-bdd/scripts/check_traceability.py"
+TRACE = SKILLS / "specsfy-06-tdd-bdd/scripts/check_traceability.py"
 
 
 def ac(ac_id: str, covers: str) -> str:

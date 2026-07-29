@@ -10,7 +10,7 @@
 ## Framework Specsfy
 
 Leia e siga integralmente `{{SPECSFY_SPEC_PATH}}` antes de trabalhar com
-backlogs, entrevistas, especificações, tarefas, testes ou implementação. Esse
+backlogs, refinamentos do backlog, especificações, tarefas, testes ou implementação. Esse
 arquivo contém o fluxo, os caminhos canônicos e os gates do framework.
 
 - Preserve as instruções próprias deste projeto.
@@ -23,7 +23,7 @@ arquivo contém o fluxo, os caminhos canônicos e os gates do framework.
   conteúdo humano.
 - Execute `$specsfy-documentator` depois de cada implementação para reconstruir
   a documentação técnica completa em `docs/`.
-- Use `specs/ideias/` para capturas imediatas ainda não refinadas.
+- Use `specs/inbox/` para capturas imediatas ainda não refinadas.
 - Use `specs/backlog/` para itens refináveis ainda não promovidos.
 - Use `specs/specs/<NNNN>-<slug>/spec.md` como fonte normativa de cada fatia.
 - Não crie `plan.md`, `tasks.md`, `research.md` ou outra fonte normativa

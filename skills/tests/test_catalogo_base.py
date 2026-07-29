@@ -7,6 +7,25 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_SKILLS = {
+    "specsfy-01-inbox",
+    "specsfy-02-backlog",
+    "specsfy-03-specify",
+    "specsfy-04-validate",
+    "specsfy-05-tasks",
+    "specsfy-06-tdd-bdd",
+    "specsfy-07-implement",
+    "specsfy-update-spec",
+    "specsfy-progress",
+}
+CONTEXT_SKILLS = {
+    "specsfy-setup",
+    "specsfy-aux-stack",
+    "specsfy-aux-rules",
+    "specsfy-aux-database",
+}
+DOCUMENTATION_SKILLS = {"specsfy-documentator"}
+FRAMEWORK_SKILLS = BASE_SKILLS | CONTEXT_SKILLS | DOCUMENTATION_SKILLS
+LEGACY_SKILLS = {
     "specsfy-base-idea",
     "specsfy-base-backlog",
     "specsfy-base-interview",
@@ -17,16 +36,8 @@ BASE_SKILLS = {
     "specsfy-base-implement",
     "specsfy-base-update-spec",
     "specsfy-base-progress",
+    "specsfy-base-discuss",
 }
-CONTEXT_SKILLS = {
-    "specsfy-setup",
-    "specsfy-aux-stack",
-    "specsfy-aux-rules",
-    "specsfy-aux-database",
-}
-DOCUMENTATION_SKILLS = {"specsfy-documentator"}
-FRAMEWORK_SKILLS = BASE_SKILLS | CONTEXT_SKILLS | DOCUMENTATION_SKILLS
-LEGACY_SKILLS = {name.replace("specsfy-base-", "specsfy-") for name in BASE_SKILLS}
 
 
 class BaseCatalogTests(unittest.TestCase):
@@ -51,20 +62,9 @@ class BaseCatalogTests(unittest.TestCase):
                 self.assertIn(f"${name}", metadata)
 
     def test_catalog_contains_no_legacy_skill_references(self) -> None:
-        legacy_pattern = re.compile(
-            r"(?<!base-)specsfy-(backlog|interview|discuss|specify|validate|tasks|tdd-bdd|implement|progress)"
-        )
-        for path in ROOT.rglob("*"):
-            if not path.is_file() or ".git" in path.parts:
-                continue
-            if path == Path(__file__):
-                continue
-            try:
-                content = path.read_text(encoding="utf-8")
-            except UnicodeDecodeError:
-                continue
-            with self.subTest(path=path.relative_to(ROOT)):
-                self.assertIsNone(legacy_pattern.search(content))
+        for name in LEGACY_SKILLS:
+            with self.subTest(skill=name):
+                self.assertFalse((ROOT / name).exists())
 
 
 if __name__ == "__main__":

@@ -24,10 +24,10 @@ fontes concorrentes.
 Draft → Defined → Planned → Implementing → Complete
 ```
 
-- `Draft`: definição em construção;
-- `Defined`: Definition Gate aprovado;
-- `Planned`: Plan Gate aprovado e RED comprovado;
-- `Implementing`: tarefas de produção em andamento;
+- `Draft`: definição em construção.
+- `Defined`: Definition Gate aprovado.
+- `Planned`: Plan Gate aprovado e RED comprovado.
+- `Implementing`: tarefas de produção em andamento.
 - `Complete`: Delivery Gate aprovado.
 
 Transições não são meras etiquetas. Cada uma depende da evidência registrada na
@@ -38,29 +38,34 @@ spec e nos testes.
 Antes do Ato I, a entrada possui duas camadas não normativas:
 
 ```text
-input → specs/ideias/ → specs/backlog/
+input → specs/inbox/ → specs/backlog/
 ```
 
-`specsfy-base-idea` preserva e pré-processa sem perguntas. O backlog adiciona
+`specsfy-01-inbox` preserva e pré-processa sem perguntas. O backlog adiciona
 refinamento dialogado. Ambas mantêm proveniência, mas somente `spec.md` governa
 o comportamento.
 
+O refinamento do backlog concentra as decisões materiais. Depois de cada resposta, ele
+recalcula as lacunas usando a entrada original, o contexto acumulado e a nova
+resposta. Não existe teto de perguntas: o ciclo termina ao fechar as lacunas
+aplicáveis ou quando a pessoa escolhe `avançar`, opção disponível da 11ª
+pergunta em diante. Essa saída mantém a definição em Draft e o gate pendente.
+
 Responsabilidades:
 
-- descobrir finalidade, atores, linguagem e limites;
-- separar declaração, inferência, hipótese e decisão;
-- produzir histórias, `FR`, `NFR`, critérios e Gherkin;
-- indexar research sem promovê-lo automaticamente;
+- descobrir finalidade, atores, linguagem e limites.
+- separar declaração, inferência, hipótese e decisão.
+- produzir histórias, `FR`, `NFR`, critérios e Gherkin.
+- indexar research sem promovê-lo automaticamente.
 - validar formato, clareza, completude, consistência e testabilidade.
 
 Skills principais:
 
 ```text
-specsfy-base-idea
-specsfy-base-backlog
-specsfy-base-interview
-specsfy-base-specify
-specsfy-base-validate
+specsfy-01-inbox
+specsfy-02-backlog
+specsfy-03-specify
+specsfy-04-validate
 ```
 
 Saída:
@@ -74,17 +79,17 @@ Status: Defined
 
 Responsabilidades:
 
-- escolher abordagem compatível com o código observado;
-- modelar contratos, dados, riscos e rollback;
-- decompor tarefas pequenas e ordenadas;
-- materializar casos TDD derivados dos critérios;
+- escolher abordagem compatível com o código observado.
+- modelar contratos, dados, riscos e rollback.
+- decompor tarefas pequenas e ordenadas.
+- materializar casos TDD derivados dos critérios.
 - observar RED válido antes de produção.
 
 Skills principais:
 
 ```text
-specsfy-base-tasks
-specsfy-base-tdd-bdd (modo prepare)
+specsfy-05-tasks
+specsfy-06-tdd-bdd (modo prepare)
 ```
 
 Saída:
@@ -105,7 +110,7 @@ Cada tarefa executa:
 RED → GREEN → REFACTOR
 ```
 
-`specsfy-base-implement` exige predecessoras TDD e gates válidos. Depois do
+`specsfy-07-implement` exige predecessoras TDD e gates válidos. Depois do
 GREEN focal, executa regressão proporcional ao risco, atualiza evidências e
 aciona `specsfy-documentator` quando código ou persistência mudam.
 
@@ -128,7 +133,7 @@ A suíte normal do projeto contém a prova executável. Não se cria uma segunda
 
 ## Mudança tardia
 
-`specsfy-base-update-spec` preserva o novo pedido, calcula o impacto e invalida
+`specsfy-update-spec` preserva o novo pedido, calcula o impacto e invalida
 somente o necessário:
 
 | Mudança | Reabre |
@@ -150,7 +155,7 @@ para ações sensíveis como push, deploy, exclusão ou alteração externa.
 
 ## Projeções
 
-CLI, TUI e `specsfy-base-progress` projetam o estado observado nas specs. Eles
+CLI, TUI e `specsfy-progress` projetam o estado observado nas specs. Eles
 não mantêm uma fonte paralela de progresso e não podem aprovar gates.
 
 ## Ao modificar a metodologia
@@ -158,11 +163,11 @@ não mantêm uma fonte paralela de progresso e não podem aprovar gates.
 Uma alteração em estado, gate, formato ou handoff normalmente exige mudanças
 coordenadas em:
 
-- `skills/Spec.md`, template e exemplo;
-- skills responsáveis e suas referências;
-- validadores e testes de `skills/`;
-- instalador ou projeção do `cli/`, quando aplicável;
-- documentação em `docs/user/` e `docs/develop/`;
+- `skills/Spec.md`, template e exemplo.
+- skills responsáveis e suas referências.
+- validadores e testes de `skills/`.
+- instalador ou projeção do `cli/`, quando aplicável.
+- documentação em `docs/user/` e `docs/develop/`.
 - contratos integrados em `tests/`.
 
 Siga [Contribuir](contributing.md) antes de editar.

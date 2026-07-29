@@ -10,6 +10,7 @@ from unittest.mock import patch
 
 from specsfy_cli.installer import (
     MONOREPO_REPOSITORY,
+    RENAMED_BASE_SKILLS,
     SkillInstaller,
     _RepositoryCheckout,
 )
@@ -18,7 +19,7 @@ from specsfy_cli.installer import (
 def write_template_files(source: Path) -> None:
     (source / "templates").mkdir(exist_ok=True)
     templates = {
-        "Idea.md": "# Ideia: {{IDEA_NAME}}\n",
+        "Inbox.md": "# Inbox: {{INBOX_NAME}}\n",
         "Backlog.md": "# Backlog: {{BACKLOG_NAME}}\n",
         "Spec.md": "# {{SPEC_NAME}}\n",
         "Tasks.md": "## 14. Tarefas\n",
@@ -97,6 +98,24 @@ class InstallerTests(unittest.TestCase):
                 self.assertEqual("skills", source.name)
                 self.assertTrue(source.is_dir())
 
+    def test_maps_every_legacy_base_name_to_the_new_catalog(self) -> None:
+        self.assertEqual(
+            {
+                "specsfy-base-idea": "specsfy-01-inbox",
+                "specsfy-base-backlog": "specsfy-02-backlog",
+                "specsfy-base-interview": "specsfy-02-backlog",
+                "specsfy-base-specify": "specsfy-03-specify",
+                "specsfy-base-validate": "specsfy-04-validate",
+                "specsfy-base-tasks": "specsfy-05-tasks",
+                "specsfy-base-tdd-bdd": "specsfy-06-tdd-bdd",
+                "specsfy-base-implement": "specsfy-07-implement",
+                "specsfy-base-update-spec": "specsfy-update-spec",
+                "specsfy-base-progress": "specsfy-progress",
+                "specsfy-base-discuss": "specsfy-02-backlog",
+            },
+            RENAMED_BASE_SKILLS,
+        )
+
     def test_installs_selected_skill_and_writes_lock(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -140,7 +159,7 @@ class InstallerTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             project = Path(directory)
             installer = SkillInstaller(project)
-            base_path = project / ".agents/skills/specsfy-base-backlog"
+            base_path = project / ".agents/skills/specsfy-02-backlog"
             setup_path = project / ".agents/skills/specsfy-setup"
             stack_path = project / ".agents/skills/specsfy-aux-stack"
             specialist_path = project / ".agents/skills/specsfy-specialist-react"
@@ -151,7 +170,7 @@ class InstallerTests(unittest.TestCase):
                     return_value={
                         "external-skill",
                         "specsfy-specialist-react",
-                        "specsfy-base-backlog",
+                        "specsfy-02-backlog",
                         "specsfy-setup",
                         "specsfy-aux-stack",
                     },
@@ -175,8 +194,8 @@ class InstallerTests(unittest.TestCase):
             )
             install_base.assert_called_once_with(
                 [
+                    "specsfy-02-backlog",
                     "specsfy-aux-stack",
-                    "specsfy-base-backlog",
                     "specsfy-setup",
                 ]
             )
@@ -220,7 +239,7 @@ class InstallerTests(unittest.TestCase):
             root = Path(directory)
             source = root / "source"
             project = root / "consumer"
-            skill = source / "specsfy-base-interview"
+            skill = source / "specsfy-02-backlog"
             skill.mkdir(parents=True)
             (skill / "SKILL.md").write_text("source", encoding="utf-8")
             installer = SkillInstaller(project)
@@ -231,7 +250,7 @@ class InstallerTests(unittest.TestCase):
             ).read_text(encoding="utf-8")
             generated = (
                 project
-                / ".agents/skills/specsfy-base-interview/__pycache__/helper.pyc"
+                / ".agents/skills/specsfy-02-backlog/__pycache__/helper.pyc"
             )
             generated.parent.mkdir()
             generated.write_bytes(b"cache local descartavel")
@@ -250,8 +269,8 @@ class InstallerTests(unittest.TestCase):
             root = Path(directory)
             source = root / "source"
             project = root / "consumer"
-            selected = source / "specsfy-base-backlog"
-            unselected = source / "specsfy-base-interview"
+            selected = source / "specsfy-02-backlog"
+            unselected = source / "specsfy-03-specify"
             for skill in (selected, unselected):
                 skill.mkdir(parents=True)
                 (skill / "SKILL.md").write_text(skill.name, encoding="utf-8")
@@ -267,18 +286,18 @@ class InstallerTests(unittest.TestCase):
 
             changed = installer.install_base_from_checkout(
                 source,
-                names=["specsfy-base-backlog"],
+                names=["specsfy-02-backlog"],
             )
 
             self.assertIn(
-                project / ".agents/skills/specsfy-base-backlog",
+                project / ".agents/skills/specsfy-02-backlog",
                 changed,
             )
             self.assertTrue(
-                (project / ".agents/skills/specsfy-base-backlog/SKILL.md").is_file()
+                (project / ".agents/skills/specsfy-02-backlog/SKILL.md").is_file()
             )
             self.assertFalse(
-                (project / ".agents/skills/specsfy-base-interview").exists()
+                (project / ".agents/skills/specsfy-03-specify").exists()
             )
 
     def test_remove_reconciles_skill_recorded_only_in_official_lock(self) -> None:
@@ -318,7 +337,7 @@ class InstallerTests(unittest.TestCase):
             root = Path(directory)
             source = root / "source"
             project = root / "consumer"
-            skill = source / "specsfy-base-interview"
+            skill = source / "specsfy-02-backlog"
             skill.mkdir(parents=True)
             skill_file = skill / "SKILL.md"
             skill_file.write_text("version one", encoding="utf-8")
@@ -343,7 +362,7 @@ class InstallerTests(unittest.TestCase):
             root = Path(directory)
             source = root / "source"
             project = root / "consumer"
-            skill = source / "specsfy-base-interview"
+            skill = source / "specsfy-02-backlog"
             skill.mkdir(parents=True)
             (skill / "SKILL.md").write_text("source", encoding="utf-8")
             installer = SkillInstaller(project)
@@ -363,10 +382,10 @@ class InstallerTests(unittest.TestCase):
             root = Path(directory)
             source = root / "source"
             project = root / "consumer"
-            skill = source / "specsfy-base-interview"
+            skill = source / "specsfy-02-backlog"
             skill.mkdir(parents=True)
             (skill / "SKILL.md").write_text("source", encoding="utf-8")
-            target = project / ".agents/skills/specsfy-base-interview"
+            target = project / ".agents/skills/specsfy-02-backlog"
             target.mkdir(parents=True)
             (target / "SKILL.md").write_text("local", encoding="utf-8")
 
@@ -380,7 +399,7 @@ class InstallerTests(unittest.TestCase):
             root = Path(directory)
             source = root / "source"
             project = root / "consumer"
-            skill = source / "specsfy-base-interview"
+            skill = source / "specsfy-02-backlog"
             skill.mkdir(parents=True)
             (skill / "SKILL.md").write_text("skill", encoding="utf-8")
             (source / "Spec.md").write_text("# Regras Specsfy\n", encoding="utf-8")
@@ -405,7 +424,7 @@ class InstallerTests(unittest.TestCase):
 
             with patch(
                 "specsfy_cli.installer.BASE_SKILLS",
-                ("specsfy-base-interview",),
+                ("specsfy-02-backlog",),
             ):
                 changed = installer.install_base_from_checkout(source)
                 tracked = (
@@ -413,7 +432,7 @@ class InstallerTests(unittest.TestCase):
                     project / "CLAUDE.md",
                     project / ".specsfy/Spec.md",
                     project / ".specsfy/templates/Spec.md",
-                    project / ".specsfy/templates/Idea.md",
+                    project / ".specsfy/templates/Inbox.md",
                     project / ".specsfy/templates/Backlog.md",
                     project / ".specsfy/templates/Tasks.md",
                     project / ".specsfy/templates/Project.md",
@@ -446,8 +465,8 @@ class InstallerTests(unittest.TestCase):
                 (project / ".specsfy/templates/Spec.md").read_text(encoding="utf-8"),
             )
             self.assertEqual(
-                "# Ideia: {{IDEA_NAME}}\n",
-                (project / ".specsfy/templates/Idea.md").read_text(encoding="utf-8"),
+                "# Inbox: {{INBOX_NAME}}\n",
+                (project / ".specsfy/templates/Inbox.md").read_text(encoding="utf-8"),
             )
             self.assertEqual(
                 "# Backlog: {{BACKLOG_NAME}}\n",
@@ -463,13 +482,60 @@ class InstallerTests(unittest.TestCase):
                 "# Exemplo completo\n",
                 (project / ".specsfy/examples/Spec.md").read_text(encoding="utf-8"),
             )
+            self.assertTrue((project / ".specsfy/templates/custom").is_dir())
+
+    def test_framework_update_preserves_custom_templates(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / "source"
+            project = root / "consumer"
+            skill = source / "specsfy-02-backlog"
+            skill.mkdir(parents=True)
+            (skill / "SKILL.md").write_text("skill", encoding="utf-8")
+            (source / "Spec.md").write_text("# Regras Specsfy\n", encoding="utf-8")
+            write_template_files(source)
+            (source / "AGENTS.md").write_text(
+                "<!-- specsfy:framework:start -->\n"
+                "Leia `{{SPECSFY_SPEC_PATH}}`.\n"
+                "<!-- specsfy:framework:end -->\n",
+                encoding="utf-8",
+            )
+
+            with patch(
+                "specsfy_cli.installer.BASE_SKILLS",
+                ("specsfy-02-backlog",),
+            ):
+                SkillInstaller(project).install_base_from_checkout(source)
+                custom = project / ".specsfy/templates/custom/Spec.md"
+                custom.write_text(
+                    "# Template customizado\n",
+                    encoding="utf-8",
+                )
+                (source / "templates/Spec.md").write_text(
+                    "# {{SPEC_NAME}}\n\nNovo padrão.\n",
+                    encoding="utf-8",
+                )
+                SkillInstaller(project, force=True).install_base_from_checkout(
+                    source
+                )
+
+            self.assertEqual(
+                "# Template customizado\n",
+                custom.read_text(encoding="utf-8"),
+            )
+            self.assertIn(
+                "Novo padrão.",
+                (project / ".specsfy/templates/Spec.md").read_text(
+                    encoding="utf-8"
+                ),
+            )
 
     def test_refuses_locally_modified_framework_block_without_force(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             source = root / "source"
             project = root / "consumer"
-            skill = source / "specsfy-base-interview"
+            skill = source / "specsfy-02-backlog"
             skill.mkdir(parents=True)
             (skill / "SKILL.md").write_text("skill", encoding="utf-8")
             (source / "Spec.md").write_text("# Regras Specsfy\n", encoding="utf-8")
@@ -483,7 +549,7 @@ class InstallerTests(unittest.TestCase):
             installer = SkillInstaller(project)
             with patch(
                 "specsfy_cli.installer.BASE_SKILLS",
-                ("specsfy-base-interview",),
+                ("specsfy-02-backlog",),
             ):
                 installer.install_base_from_checkout(source)
                 agents = project / "AGENTS.md"
@@ -502,7 +568,7 @@ class InstallerTests(unittest.TestCase):
             root = Path(directory)
             source = root / "source"
             project = root / "consumer"
-            skill = source / "specsfy-base-interview"
+            skill = source / "specsfy-02-backlog"
             skill.mkdir(parents=True)
             (skill / "SKILL.md").write_text("skill", encoding="utf-8")
             (source / "Spec.md").write_text("# Regras Specsfy\n", encoding="utf-8")
@@ -516,7 +582,7 @@ class InstallerTests(unittest.TestCase):
             installer = SkillInstaller(project)
             with patch(
                 "specsfy_cli.installer.BASE_SKILLS",
-                ("specsfy-base-interview",),
+                ("specsfy-02-backlog",),
             ):
                 installer.install_base_from_checkout(source)
                 framework_spec = project / ".specsfy/Spec.md"
@@ -532,7 +598,7 @@ class InstallerTests(unittest.TestCase):
             root = Path(directory)
             source = root / "source"
             project = root / "consumer"
-            skill = source / "specsfy-base-interview"
+            skill = source / "specsfy-02-backlog"
             skill.mkdir(parents=True)
             (skill / "SKILL.md").write_text("skill", encoding="utf-8")
             (source / "Spec.md").write_text("# Regras Specsfy\n", encoding="utf-8")
@@ -546,7 +612,7 @@ class InstallerTests(unittest.TestCase):
             installer = SkillInstaller(project)
             with patch(
                 "specsfy_cli.installer.BASE_SKILLS",
-                ("specsfy-base-interview",),
+                ("specsfy-02-backlog",),
             ):
                 installer.install_base_from_checkout(source)
                 template = project / ".specsfy/templates/Spec.md"
@@ -568,7 +634,7 @@ class InstallerTests(unittest.TestCase):
                 [old_skill.name],
                 source_name="base",
             )
-            new_skill = source / "specsfy-base-interview"
+            new_skill = source / "specsfy-02-backlog"
             new_skill.mkdir()
             (new_skill / "SKILL.md").write_text("new", encoding="utf-8")
             (source / "Spec.md").write_text("# Regras\n", encoding="utf-8")
@@ -582,13 +648,13 @@ class InstallerTests(unittest.TestCase):
 
             with patch(
                 "specsfy_cli.installer.BASE_SKILLS",
-                ("specsfy-base-interview",),
+                ("specsfy-02-backlog",),
             ):
                 installer.install_base_from_checkout(source)
 
             skills = project / ".agents/skills"
             self.assertFalse((skills / "specsfy-base-discuss").exists())
-            self.assertTrue((skills / "specsfy-base-interview").is_dir())
+            self.assertTrue((skills / "specsfy-02-backlog").is_dir())
 
     def test_refuses_parent_workspace(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

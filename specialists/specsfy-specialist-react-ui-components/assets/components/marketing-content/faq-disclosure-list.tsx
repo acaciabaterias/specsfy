@@ -5,24 +5,24 @@ import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/react/24/outline'
 
 const faqs = [
   {
-    question: "What's the best thing about Switzerland?",
+    question: "Qual é a melhor coisa sobre a Suíça?",
     answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      "Não sei, mas a bandeira é um grande diferencial.",
   },
   {
-    question: 'How do you make holy water?',
+    question: 'Como se faz água benta?',
     answer:
-      'You boil the hell out of it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam aut tempora vitae odio inventore fuga aliquam nostrum quod porro.',
+      'Ferva até ficar pronta.',
   },
   {
-    question: 'What do you call someone with no body and no nose?',
+    question: 'Como se chama alguém sem corpo e sem nariz?',
     answer:
-      'Nobody knows. Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, voluptas ipsa quia excepturi.',
+      'Ninguém sabe.',
   },
   {
-    question: 'Why do you never see elephants hiding in trees?',
+    question: 'Por que nunca vemos elefantes escondidos em árvores?',
     answer:
-      "Because they're so good at it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      "Porque eles são muito bons nisso.",
   },
 ]
 
@@ -32,7 +32,7 @@ export default function Example() {
       <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8 lg:py-40">
         <div className="mx-auto max-w-4xl">
           <h2 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl dark:text-white">
-            Frequently asked questions
+            Perguntas frequentes
           </h2>
           <dl className="mt-16 divide-y divide-gray-900/10 dark:divide-white/10">
             {faqs.map((faq) => (

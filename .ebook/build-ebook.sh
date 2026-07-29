@@ -17,6 +17,7 @@ METADATA="$SCRIPT_DIR/metadata.yaml"
 LINK_FILTER="$SCRIPT_DIR/external-links.lua"
 METADATA_FILTER="$SCRIPT_DIR/strip-document-metadata.lua"
 METADATA_EXTRACTOR="$SCRIPT_DIR/extract-document-metadata.py"
+RETENTION_SCRIPT="$SCRIPT_DIR/prune-editions.py"
 LOGO_SVG="$ROOT/brand/logo/icon.svg"
 LOGO_PNG="$ROOT/brand/logo/icon.png"
 STYLE_GUIDE="$ROOT/brand/style-guide.html"
@@ -49,6 +50,7 @@ required_sources=(
   "$LINK_FILTER"
   "$METADATA_FILTER"
   "$METADATA_EXTRACTOR"
+  "$RETENTION_SCRIPT"
   "$SCRIPT_DIR/build-ebook.sh"
   "$LOGO_SVG"
   "$LOGO_PNG"
@@ -57,6 +59,11 @@ required_sources=(
 for source in "${required_sources[@]}"; do
   [ -f "$source" ] || fail "fonte obrigatória ausente: $(relative_path "$source")"
 done
+
+grep -Fxq 'lang: "pt-BR"' "$METADATA" \
+  || fail '.ebook/metadata.yaml deve declarar lang: "pt-BR".'
+grep -Fq '<html lang="pt-BR">' "$TEMPLATE" \
+  || fail '.ebook/template.html deve declarar lang="pt-BR".'
 
 mapfile -t ordered_pages < <(
   sed -e '/^[[:space:]]*#/d' -e '/^[[:space:]]*$/d' "$ORDER_FILE"
@@ -378,5 +385,9 @@ jq -n \
   }' > "$MANIFEST"
 
 check_manifest
+python3 "$RETENTION_SCRIPT" \
+  --ebook-root "$EBOOK_ROOT" \
+  --keep 5 \
+  --protect-version "$VERSION"
 echo "PDF:  $PDF_OUT"
 echo "EPUB: $EPUB_OUT"

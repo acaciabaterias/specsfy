@@ -6,19 +6,18 @@ export default function Example() {
       <div className="mx-auto max-w-2xl lg:max-w-4xl">
         <img
           alt=""
-          src="https://tailwindcss.com/plus-assets/img/logos/workcation-logo-indigo-600.svg"
+          src="https://tailwindcss.com/mais-assets/img/logos/workcation-logo-indigo-600.svg"
           className="mx-auto h-12 dark:hidden"
         />
         <img
           alt=""
-          src="https://tailwindcss.com/plus-assets/img/logos/workcation-logo-indigo-400.svg"
+          src="https://tailwindcss.com/mais-assets/img/logos/workcation-logo-indigo-400.svg"
           className="mx-auto h-12 not-dark:hidden"
         />
         <figure className="mt-10">
           <blockquote className="text-center text-xl/8 font-semibold text-gray-900 sm:text-2xl/9 dark:text-white">
             <p>
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo expedita voluptas culpa sapiente alias
-              molestiae. Numquam corrupti in laborum sed rerum et corporis."
+              Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
             </p>
           </blockquote>
           <figcaption className="mt-10">
@@ -32,7 +31,7 @@ export default function Example() {
               <svg width={3} height={3} viewBox="0 0 2 2" aria-hidden="true" className="fill-gray-900 dark:fill-white">
                 <circle r={1} cx={1} cy={1} />
               </svg>
-              <div className="text-gray-600 dark:text-gray-400">CEO of Workcation</div>
+              <div className="text-gray-600 dark:text-gray-400">CEO da Workcation</div>
             </div>
           </figcaption>
         </figure>

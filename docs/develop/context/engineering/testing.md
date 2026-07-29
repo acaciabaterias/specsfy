@@ -20,19 +20,19 @@ Os IDs e cenários concretos permanecem na spec da fatia.
 
 ## Atualize quando
 
-- um runner ou comando canônico mudar;
-- a estratégia RED-GREEN-REFACTOR mudar;
+- um runner ou comando canônico mudar.
+- a estratégia RED-GREEN-REFACTOR mudar.
 - uma nova classe de verificação transversal for adotada.
 
 ## Não use para
 
-- listar todos os testes existentes;
-- escrever critérios de aceite de feature;
+- listar todos os testes existentes.
+- escrever critérios de aceite de feature.
 - considerar erro de fixture ou ambiente como RED válido.
 
 ## Fonte da verdade e precedência
 
-Specs definem o comportamento; arquivos em `tests/` materializam o contrato; a
+Specs definem o comportamento. Arquivos em `tests/` materializam o contrato. A
 execução fornece evidência. Este contexto define somente a estratégia
 transversal.
 
@@ -42,24 +42,25 @@ transversal.
 - Integração ou contrato para fronteiras reais.
 - Behave para comportamento observável descrito em Gherkin.
 - Regressão completa antes de concluir o Delivery Gate.
-- Verificação manual somente quando o resultado não puder ser automatizado, com justificativa.
+- Verificação manual somente quando o resultado não puder ser automatizado,
+  com justificativa.
 
 ## Cobertura mínima de contexto
 
 - Cada feature, história `US`, requisito funcional `FR` e requisito não
   funcional `NFR` possui pelo menos três cenários BDD `AC` distintos.
-- Um `AC` conta para um item somente quando declara seu ID em `**Cobre**`; os
+- Um `AC` conta para um item somente quando declara seu ID em `**Cobre**`. Os
   três cenários devem acrescentar contexto, como caminho feliz, regra ou
   variação crítica e falha ou limite material.
 - Cada feature, `US`, `FR` e `NFR` possui pelo menos três casos TDD executáveis.
   Cada `AC` possui ao menos um caso TDD.
 - O `Plan Gate` exige três tarefas predecessoras TDD distintas por feature,
-  `US`, `FR` e `NFR`; cada tarefa deriva um `AC`. O `Delivery Gate` confirma os
+  `US`, `FR` e `NFR`. Cada tarefa deriva um `AC`. O `Delivery Gate` confirma os
   casos realmente materializados nos arquivos de teste.
 - Cada caso TDD declara `SPECSFY:` junto à própria definição. Um marcador
   compartilhado por um arquivo conta como somente um caso, ainda que existam
   vários testes no arquivo.
-- O Gherkin permanece como referência na `spec.md`; ele não cria nem executa
+- O Gherkin permanece como referência na `spec.md`. Ele não cria nem executa
   uma segunda suíte `.feature`.
 
 ## Comandos de verificação
@@ -84,7 +85,7 @@ uv run --quiet --with pyyaml python \
   specsfy-<nome>
 ```
 
-O contrato de `specsfy-base-update-spec` comprova catálogo e metadata,
+O contrato de `specsfy-update-spec` comprova catálogo e metadata,
 roteamento de pedidos tardios e a classificação determinística de mudanças de
 definição, plano e evidência. A regressão integrada confirma a mesma entrada no
 CLI, na documentação oficial e na porta pública.
@@ -100,10 +101,11 @@ inválido para provar a recusa fora do checkout oficial. Ele também
 comprova a separação entre documentação oficial do Specsfy e documentação
 gerada em projetos consumidores.
 
-A skill local de release do CLI possui contrato focal em `promovaweb/specsfy`. O teste
-usa um checkout temporário sem rede para comprovar versão crescente, promoção
-do changelog e extração byte a byte das notas destinadas ao GitHub Release. A
-publicação real continua condicionada à regressão do owner `cli/`.
+A skill local de release do CLI possui contrato focal em
+`promovaweb/specsfy`. O teste usa um checkout temporário sem rede para
+comprovar versão crescente, promoção do changelog e extração byte a byte das
+notas destinadas ao GitHub Release. A publicação real continua condicionada à
+regressão do owner `cli/`.
 
 Validadores focais permanecem documentados no `AGENTS.md` do módulo responsável
 e na spec executada.
@@ -140,7 +142,7 @@ npm run build
 
 `composer ci:check` agrega as verificações declaradas pelos manifests do
 aplicativo. O CI de `example/` também valida sua documentação, rotas e
-comandos; esses contratos não substituem a suíte Pest do produto.
+comandos. Esses contratos não substituem a suíte Pest do produto.
 
 ## Evidência
 

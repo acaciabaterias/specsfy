@@ -162,6 +162,26 @@ class DocumentatorTests(unittest.TestCase):
                 "https://github.com/laravel/framework",
             ):
                 self.assertIn(term, combined)
+            for label in (
+                "Serviços",
+                "Rotas e APIs",
+                "Páginas",
+                "Componentes",
+                "Testes",
+                "Outras fontes",
+            ):
+                self.assertIn(label, combined)
+            for untranslated_label in (
+                "| Services |",
+                "| Routes and APIs |",
+                "| Pages |",
+                "| Components |",
+                "| Tests |",
+                "| Other source |",
+            ):
+                self.assertNotIn(untranslated_label, combined)
+            self.assertIn(": relaciona", combined)
+            self.assertNotIn(": relates", combined)
 
             application = docs / "application.md"
             application.write_text(
@@ -257,7 +277,7 @@ class DocumentatorTests(unittest.TestCase):
     def test_skill_is_independent_and_mandatory_after_implementation(self) -> None:
         skill = (SKILL / "SKILL.md").read_text(encoding="utf-8")
         implementation = (
-            ROOT / "specsfy-base-implement" / "SKILL.md"
+            ROOT / "specsfy-07-implement" / "SKILL.md"
         ).read_text(encoding="utf-8")
         framework = (ROOT / "Spec.md").read_text(encoding="utf-8")
         self.assertIn("código existente", skill)

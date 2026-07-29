@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prepare and extract one canonical Specsfy CLI changelog release section."""
+"""Prepara e extrai uma seção canônica de release no changelog do CLI."""
 
 from __future__ import annotations
 

@@ -4,9 +4,9 @@ export default function Example() {
       <div className="mx-auto max-w-max lg:max-w-7xl">
         <div className="relative z-10 mb-8 md:mb-2 md:px-6">
           <div className="max-w-prose lg:max-w-none">
-            <h2 className="text-base font-semibold text-indigo-600">Transactions</h2>
+            <h2 className="text-base font-semibold text-indigo-600">Transações</h2>
             <p className="mt-2 text-3xl/8 font-bold tracking-tight text-gray-900 sm:text-4xl">
-              A better way to send money
+              Uma maneira melhor de enviar dinheiro
             </p>
           </div>
         </div>
@@ -59,42 +59,32 @@ export default function Example() {
             <div className="lg:grid lg:grid-cols-2 lg:gap-6">
               <div className="text-lg/8 text-gray-500">
                 <p>
-                  Ultrices ultricies a in odio consequat egestas rutrum. Ut vitae aliquam in ipsum. Duis nullam placerat
-                  cursus risus ultrices nisi, vitae tellus in. Qui non fugiat aut minus aut rerum. Perspiciatis iusto
-                  mollitia iste minima soluta id.
+                  Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
                 </p>
                 <p className="mt-6">
-                  Erat pellentesque dictumst ligula porttitor risus eget et eget. Ultricies tellus felis id dignissim
-                  eget. Est augue{' '}
+                  Organize a narrativa com contexto suficiente para orientar a decisão. Destaque as{' '}
                   <a href="#" className="font-medium text-indigo-600 underline">
-                    maecenas
+                    evidências principais
                   </a>{' '}
-                  risus nulla ultrices congue nunc tortor. Eu leo risus porta integer suspendisse sed sit ligula elit.
+                  e explique como elas sustentam a proposta apresentada.
                 </p>
                 <ol role="list" className="mt-6 list-decimal space-y-3 pl-7">
-                  <li className="pl-2">Integer varius imperdiet sed interdum felis cras in nec nunc.</li>
-                  <li className="pl-2">Quam malesuada odio ut sit egestas. Elementum at porta vitae.</li>
+                  <li className="pl-2">A solução evolui conforme as evidências do projeto.</li>
+                  <li className="pl-2">A experiência permanece simples e acessível para todas as pessoas.</li>
                 </ol>
                 <p className="mt-6">
-                  Amet, eu nulla id molestie quis tortor. Auctor erat justo, sed pellentesque scelerisque interdum
-                  blandit lectus. Nec viverra amet ac facilisis vestibulum. Vestibulum purus nibh ac ultricies congue.
+                  Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
                 </p>
               </div>
               <div className="mt-6 text-lg/8 text-gray-500 lg:mt-0">
                 <p>
-                  Erat pellentesque dictumst ligula porttitor risus eget et eget. Ultricies tellus felis id dignissim
-                  eget. Est augue maecenas risus nulla ultrices congue nunc tortor.
+                  Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
                 </p>
                 <p className="mt-6">
-                  Eu leo risus porta integer suspendisse sed sit ligula elit. Elit egestas lacinia sagittis pellentesque
-                  neque dignissim vulputate sodales. Diam sed mauris felis risus, ultricies mauris netus tincidunt.
-                  Mauris sit eu ac tellus nibh non eget sed accumsan. Viverra ac sed venenatis pulvinar elit. Cras diam
-                  quis tincidunt lectus. Non mi vitae, scelerisque felis nisi, netus amet nisl.
+                  Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
                 </p>
                 <p className="mt-6">
-                  Eu eu mauris bibendum scelerisque adipiscing et. Justo, elementum consectetur morbi eros, posuere
-                  ipsum tortor. Eget cursus massa sed velit feugiat sed ut. Faucibus eros mauris morbi aliquam nullam.
-                  Scelerisque elementum sit magna ullamcorper dignissim pretium.
+                  Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
                 </p>
               </div>
             </div>
@@ -103,7 +93,7 @@ export default function Example() {
                 href="#"
                 className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-base font-medium text-white hover:bg-indigo-700"
               >
-                Contact sales
+                Falar com vendas
               </a>
             </div>
           </div>

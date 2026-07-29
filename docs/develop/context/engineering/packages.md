@@ -20,14 +20,14 @@ desenvolvimento, teste ou publicação.
 
 ## Atualize quando
 
-- a política de dependências mudar;
-- um pacote se tornar estrutural;
+- a política de dependências mudar.
+- um pacote se tornar estrutural.
 - uma exceção de segurança ou compatibilidade for aceita.
 
 ## Não use para
 
-- copiar a lista de dependências transitivas;
-- registrar versão já presente em manifest;
+- copiar a lista de dependências transitivas.
+- registrar versão já presente em manifest.
 - autorizar pacote sem teste e justificativa.
 
 ## Fonte da verdade e precedência

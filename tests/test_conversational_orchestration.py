@@ -6,16 +6,15 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_SKILLS = (
-    "specsfy-base-idea",
-    "specsfy-base-backlog",
-    "specsfy-base-interview",
-    "specsfy-base-specify",
-    "specsfy-base-validate",
-    "specsfy-base-tasks",
-    "specsfy-base-tdd-bdd",
-    "specsfy-base-implement",
-    "specsfy-base-update-spec",
-    "specsfy-base-progress",
+    "specsfy-01-inbox",
+    "specsfy-02-backlog",
+    "specsfy-03-specify",
+    "specsfy-04-validate",
+    "specsfy-05-tasks",
+    "specsfy-06-tdd-bdd",
+    "specsfy-07-implement",
+    "specsfy-update-spec",
+    "specsfy-progress",
 )
 
 
@@ -63,10 +62,10 @@ class ConversationalOrchestrationIntegrationTests(unittest.TestCase):
 
     def test_late_change_has_one_public_and_executable_entrypoint(self) -> None:
         implement = (
-            ROOT / "skills" / "specsfy-base-implement" / "SKILL.md"
+            ROOT / "skills" / "specsfy-07-implement" / "SKILL.md"
         ).read_text(encoding="utf-8")
         update = (
-            ROOT / "skills" / "specsfy-base-update-spec" / "SKILL.md"
+            ROOT / "skills" / "specsfy-update-spec" / "SKILL.md"
         ).read_text(encoding="utf-8")
         advanced = (ROOT / "docs" / "user" / "advanced-usage.md").read_text(
             encoding="utf-8"
@@ -74,9 +73,30 @@ class ConversationalOrchestrationIntegrationTests(unittest.TestCase):
         entrypoint = (ROOT / "specsfy" / "README.md").read_text(encoding="utf-8")
 
         for source in (implement, advanced, entrypoint):
-            self.assertIn("$specsfy-base-update-spec", source)
+            self.assertIn("$specsfy-update-spec", source)
         self.assertIn("esqueceu", update)
         self.assertIn("reabr", update)
+
+    def test_backlog_loop_is_consistent_across_contract_and_user_docs(
+        self,
+    ) -> None:
+        sources = (
+            ROOT / "skills" / "Spec.md",
+            ROOT / "skills" / "specsfy-02-backlog" / "SKILL.md",
+            ROOT / "docs" / "user" / "skills" / "specsfy-02-backlog.md",
+            ROOT / "docs" / "user" / "method.md",
+        )
+
+        for path in sources:
+            with self.subTest(path=path):
+                content = path.read_text(encoding="utf-8")
+                self.assertIn("sem limite máximo de perguntas", content)
+                self.assertIn("A partir da 11ª pergunta", content)
+                self.assertIn("`avançar`", content)
+
+        backlog = sources[1].read_text(encoding="utf-8")
+        self.assertIn("contexto acumulado e a nova resposta", backlog)
+        self.assertIn("Definition Gate: Pending", backlog)
 
 
 if __name__ == "__main__":

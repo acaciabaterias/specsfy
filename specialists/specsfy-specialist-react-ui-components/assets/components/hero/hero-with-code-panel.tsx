@@ -9,41 +9,41 @@ export default function Example() {
             <div className="mx-auto max-w-2xl">
               <div className="max-w-lg">
                 <img
-                  alt="Your Company"
-                  src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+                  alt="Sua Empresa"
+                  src="https://tailwindcss.com/mais-assets/img/logos/mark.svg?color=indigo&shade=600"
                   className="h-11 dark:hidden"
                 />
                 <img
-                  alt="Your Company"
-                  src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
+                  alt="Sua Empresa"
+                  src="https://tailwindcss.com/mais-assets/img/logos/mark.svg?color=indigo&shade=500"
                   className="h-11 not-dark:hidden"
                 />
                 <div className="mt-24 sm:mt-32 lg:mt-16">
                   <a href="#" className="inline-flex space-x-6">
                     <span className="rounded-full bg-indigo-50 px-3 py-1 text-sm/6 font-semibold text-indigo-600 ring-1 ring-indigo-600/20 ring-inset dark:bg-indigo-500/10 dark:text-indigo-400 dark:ring-indigo-500/25">
-                      What's new
+                      Novidades
                     </span>
                     <span className="inline-flex items-center space-x-2 text-sm/6 font-medium text-gray-600 dark:text-gray-300">
-                      <span>Just shipped v1.0</span>
+                      <span>Versão 1.0 recém-lançada</span>
                       <ChevronRightIcon aria-hidden="true" className="size-5 text-gray-400 dark:text-gray-500" />
                     </span>
                   </a>
                 </div>
                 <h1 className="mt-10 text-5xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-7xl dark:text-white">
-                  Supercharge your web app
+                  Potencialize sua aplicação web
                 </h1>
                 <p className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8 dark:text-gray-400">
-                  Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
+                  Centralize as informações essenciais e avance com mais clareza em cada etapa.
                 </p>
                 <div className="mt-10 flex items-center gap-x-6">
                   <a
                     href="#"
                     className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
                   >
-                    Documentation
+                    Documentação
                   </a>
                   <a href="#" className="text-sm/6 font-semibold text-gray-900 dark:text-white">
-                    View on GitHub <span aria-hidden="true">&rarr;</span>
+                    Ver no GitHub <span aria-hidden="true">&rarr;</span>
                   </a>
                 </div>
               </div>
@@ -71,7 +71,7 @@ export default function Example() {
                           <div className="border-r border-gray-600/10 px-4 py-2">App.jsx</div>
                         </div>
                       </div>
-                      <div className="px-6 pt-6 pb-14">{/* Your code example */}</div>
+                      <div className="px-6 pt-6 pb-14">{/* Seu exemplo de código */}</div>
                     </div>
                   </div>
                   <div

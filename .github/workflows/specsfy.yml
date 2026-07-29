@@ -53,7 +53,7 @@ jobs:
       - run: uv run python -B -m unittest discover -s tests -p 'test_*.py'
       - run: uv build
       - run: uv run specsfy --help
-      - name: Validate local install and upgrade
+      - name: Validar instalação local e atualização
         env:
           UV_TOOL_DIR: ${{ runner.temp }}/specsfy-tools
           UV_TOOL_BIN_DIR: ${{ runner.temp }}/specsfy-bin
@@ -61,7 +61,7 @@ jobs:
           uv tool install --force .
           uv tool upgrade specsfy-cli
           "${UV_TOOL_BIN_DIR}/specsfy" --version
-      - name: Validate tag version
+      - name: Validar versão da tag
         if: github.ref_type == 'tag'
         run: |
           version="$(uv run python -B -c 'from specsfy_cli import __version__; print(__version__)')"

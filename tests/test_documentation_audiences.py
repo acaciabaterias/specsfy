@@ -9,16 +9,15 @@ DOCS = ROOT / "docs"
 USER = DOCS / "user"
 DEVELOP = DOCS / "develop"
 BASE_SKILLS = (
-    "specsfy-base-idea",
-    "specsfy-base-backlog",
-    "specsfy-base-interview",
-    "specsfy-base-specify",
-    "specsfy-base-validate",
-    "specsfy-base-tasks",
-    "specsfy-base-tdd-bdd",
-    "specsfy-base-implement",
-    "specsfy-base-update-spec",
-    "specsfy-base-progress",
+    "specsfy-01-inbox",
+    "specsfy-02-backlog",
+    "specsfy-03-specify",
+    "specsfy-04-validate",
+    "specsfy-05-tasks",
+    "specsfy-06-tdd-bdd",
+    "specsfy-07-implement",
+    "specsfy-update-spec",
+    "specsfy-progress",
 )
 
 
@@ -36,9 +35,9 @@ class DocumentationAudienceContractTests(unittest.TestCase):
             "Instalação": "installation.md",
             "Primeiro projeto": "getting-started.md",
             "Metodologia": "method.md",
-            "Caixa de entrada": "ideas.md",
+            "Inbox": "inbox.md",
             "CLI e TUI": "cli.md",
-            "Contexto do projeto": "project-context.md",
+            "Informações permanentes do projeto": "project-context.md",
             "Especialistas": "specialists.md",
             "Documentação do sistema": "system-documentation.md",
             "Mudanças posteriores": "update-spec.md",
@@ -74,7 +73,7 @@ class DocumentationAudienceContractTests(unittest.TestCase):
                 self.assertIn(f"`{skill}`", text)
                 for section in (
                     "## Quando usar",
-                    "## Como pedir",
+                    "## Como descrever a tarefa",
                     "## Exemplo passo a passo",
                     "## O que esperar",
                     "## Erros comuns",

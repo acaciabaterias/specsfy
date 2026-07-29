@@ -33,24 +33,23 @@ export default function Example() {
           <div className="relative mx-auto max-w-2xl lg:mx-0">
             <img
               alt=""
-              src="https://tailwindcss.com/plus-assets/img/logos/workcation-logo-white.svg"
+              src="https://tailwindcss.com/mais-assets/img/logos/workcation-logo-white.svg"
               className="h-12 w-auto dark:hidden"
             />
             <img
               alt=""
-              src="https://tailwindcss.com/plus-assets/img/logos/workcation-logo-white.svg"
+              src="https://tailwindcss.com/mais-assets/img/logos/workcation-logo-white.svg"
               className="h-12 w-auto not-dark:hidden"
             />
             <figure>
               <blockquote className="mt-6 text-lg font-semibold text-white sm:text-xl/8">
                 <p>
-                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo expedita voluptas culpa sapiente alias
-                  molestiae. Numquam corrupti in laborum sed rerum et corporis."
+                  Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
                 </p>
               </blockquote>
               <figcaption className="mt-6 text-base text-white dark:text-gray-200">
                 <div className="font-semibold">Judith Black</div>
-                <div className="mt-1">CEO of Workcation</div>
+                <div className="mt-1">CEO da Workcation</div>
               </figcaption>
             </figure>
           </div>

@@ -9,28 +9,27 @@ export default function Example() {
       <div className="relative mx-auto max-w-7xl lg:grid lg:grid-cols-5">
         <div className="bg-gray-50 px-6 py-16 lg:col-span-2 lg:px-8 lg:py-24 xl:pr-12">
           <div className="mx-auto max-w-lg">
-            <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Get in touch</h2>
+            <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Entre em contato</h2>
             <p className="mt-3 text-lg/6 text-gray-500">
-              Nullam risus blandit ac aliquam justo ipsum. Quam mauris volutpat massa dictumst amet. Sapien tortor lacus
-              arcu.
+              Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
             </p>
             <dl className="mt-8 text-base text-gray-500">
               <div>
-                <dt className="sr-only">Postal address</dt>
+                <dt className="sr-only">Endereço postal</dt>
                 <dd>
                   <p>742 Evergreen Terrace</p>
                   <p>Springfield, OR 12345</p>
                 </dd>
               </div>
               <div className="mt-6">
-                <dt className="sr-only">Phone number</dt>
+                <dt className="sr-only">Telefone</dt>
                 <dd className="flex">
                   <PhoneIcon aria-hidden="true" className="size-6 shrink-0 text-gray-400" />
                   <span className="ml-3">+1 (555) 123-4567</span>
                 </dd>
               </div>
               <div className="mt-3">
-                <dt className="sr-only">Email</dt>
+                <dt className="sr-only">E-mail</dt>
                 <dd className="flex">
                   <EnvelopeIcon aria-hidden="true" className="size-6 shrink-0 text-gray-400" />
                   <span className="ml-3">support@example.com</span>
@@ -38,9 +37,9 @@ export default function Example() {
               </div>
             </dl>
             <p className="mt-6 text-base text-gray-500">
-              Looking for careers?{' '}
+              Procurando oportunidades de carreira?{' '}
               <a href="#" className="font-medium text-gray-700 underline">
-                View all job openings
+                Ver todas as vagas
               </a>
               .
             </p>
@@ -51,52 +50,52 @@ export default function Example() {
             <form action="#" method="POST" className="grid grid-cols-1 gap-y-6">
               <div>
                 <label htmlFor="full-name" className="sr-only">
-                  Full name
+                  Nome completo
                 </label>
                 <input
                   id="full-name"
                   name="full-name"
                   type="text"
-                  placeholder="Full name"
+                  placeholder="Nome completo"
                   autoComplete="name"
                   className="block w-full rounded-md border border-gray-300 px-4 py-3 placeholder-gray-500 shadow-xs focus:border-indigo-500 focus:ring-indigo-500"
                 />
               </div>
               <div>
                 <label htmlFor="email" className="sr-only">
-                  Email
+                  E-mail
                 </label>
                 <input
                   id="email"
                   name="email"
                   type="email"
-                  placeholder="Email"
+                  placeholder="E-mail"
                   autoComplete="email"
                   className="block w-full rounded-md border border-gray-300 px-4 py-3 placeholder-gray-500 shadow-xs focus:border-indigo-500 focus:ring-indigo-500"
                 />
               </div>
               <div>
                 <label htmlFor="phone" className="sr-only">
-                  Phone
+                  Telefone
                 </label>
                 <input
                   id="phone"
                   name="phone"
                   type="text"
-                  placeholder="Phone"
+                  placeholder="Telefone"
                   autoComplete="tel"
                   className="block w-full rounded-md border border-gray-300 px-4 py-3 placeholder-gray-500 shadow-xs focus:border-indigo-500 focus:ring-indigo-500"
                 />
               </div>
               <div>
                 <label htmlFor="message" className="sr-only">
-                  Message
+                  Mensagem
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   rows={4}
-                  placeholder="Message"
+                  placeholder="Mensagem"
                   className="block w-full rounded-md border border-gray-300 px-4 py-3 placeholder-gray-500 shadow-xs focus:border-indigo-500 focus:ring-indigo-500"
                   defaultValue={''}
                 />
@@ -106,7 +105,7 @@ export default function Example() {
                   type="submit"
                   className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-xs hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-hidden"
                 >
-                  Submit
+                  Enviar
                 </button>
               </div>
             </form>

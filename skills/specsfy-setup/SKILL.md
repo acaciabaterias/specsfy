@@ -10,8 +10,10 @@ description: Preparar, monitorar ou reconciliar o contexto persistente de um pro
    precisar auditar o bloco reservado em arquivos de agentes.
 3. Executar `python3 -B scripts/setup_context.py --project <raiz>`.
    Renderizar `PROJECT.md`, `STACK.md`, `RULES.md` e `DATABASE.md` a partir de
-   `.specsfy/templates/Project.md`, `Stack.md`, `Rules.md` e `Database.md`;
-   não manter modelos paralelos embutidos no script.
+   `.specsfy/templates/custom/<Nome>.md` quando existir ou dos arquivos
+   gerenciados `.specsfy/templates/Project.md`, `Stack.md`, `Rules.md` e
+   `Database.md` caso contrário; não manter modelos paralelos embutidos no
+   script.
 4. No início e no fim de cada mudança, executar:
 
 ```bash

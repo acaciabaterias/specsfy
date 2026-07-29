@@ -317,7 +317,7 @@ class ProjectContextContractTests(unittest.TestCase):
             "../brand/",
         ):
             self.assertIn(link, specsfy_readme)
-        self.assertIn("specsfy-base-interview", skills_readme)
+        self.assertIn("specsfy-02-backlog", skills_readme)
         self.assertIn("user/README.md", docs_readme)
         self.assertIn("develop/README.md", docs_readme)
 

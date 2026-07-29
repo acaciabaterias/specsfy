@@ -36,7 +36,7 @@ existem quando a responsabilidade exige.
 
 ```yaml
 ---
-name: specsfy-base-exemplo
+name: specsfy-08-exemplo
 description: "Use quando...; não use para..."
 ---
 ```
@@ -58,8 +58,11 @@ Scripts automatizam transformações determinísticas. Eles retornam códigos ú
 não instalam globalmente e não realizam ações destrutivas por padrão.
 
 Templates de documentos gerenciados vivem em `skills/templates/` e são
-publicados juntos em `.specsfy/templates/`. Assets internos permanecem
-materiais de saída específicos de uma skill, nunca uma segunda fonte normativa.
+publicados juntos em `.specsfy/templates/`. Nos projetos consumidores, um
+arquivo homônimo em `.specsfy/templates/custom/` tem precedência. Esse
+diretório pertence ao usuário e não entra no lock nem nas atualizações do CLI.
+Assets internos permanecem materiais de saída específicos de uma skill, nunca
+uma segunda fonte normativa.
 
 ## Handoff
 
@@ -74,14 +77,20 @@ O handoff é usado quando a responsabilidade muda. A skill de origem não execut
 silenciosamente o trabalho da vizinha. A skill de destino relê a spec e valida
 suas próprias pré-condições.
 
-`specsfy-base-idea` é a exceção de entrada: ela salva antes de qualquer
+`specsfy-01-inbox` é a exceção de entrada: ela salva antes de qualquer
 handoff, não pergunta e apenas sugere a próxima etapa. Essa fronteira impede que
-uma anotação simples se transforme em entrevista implícita.
+uma anotação simples se transforme em refinamento implícito.
+
+`specsfy-02-backlog` é a responsável exclusiva pelas perguntas de decisão
+material. `specify`, `update-spec` e `validate` fazem handoff para seu ciclo e
+retomam depois. O ciclo reanalisa cada resposta, não possui limite de perguntas
+e passa a oferecer `avançar` na 11ª rodada, preservando qualquer lacuna restante
+como definição pendente.
 
 ## Relação das skills base
 
 ```text
-idea → backlog → interview → specify → validate
+inbox → backlog → specify → validate
        → tasks → tdd-bdd → implement → progress
                          ↑
                     update-spec
@@ -94,29 +103,31 @@ leitura. `documentator` atua depois de mudanças implementadas no consumidor.
 
 `cli/src/specsfy_cli/installer.py` define o conjunto instalado. O instalador:
 
-- clona somente o diretório necessário do monorepo;
-- delega materialização ao instalador `skills`;
-- mantém `skills-lock.json` e fingerprints Specsfy;
-- preserva conteúdo local alterado sem `--force`;
-- mescla blocos gerenciados em `AGENTS.md` e `CLAUDE.md`;
+- clona somente o diretório necessário do monorepo.
+- delega materialização ao instalador `skills`.
+- mantém `skills-lock.json` e fingerprints Specsfy.
+- preserva conteúdo local alterado sem `--force`.
+- mescla blocos gerenciados em `AGENTS.md` e `CLAUDE.md`.
 - recusa a raiz oficial como consumidor.
 
-Os arquivos `Idea.md`, `Backlog.md`, `Spec.md`, `Tasks.md`, `Project.md`,
+Os arquivos `Inbox.md`, `Backlog.md`, `Spec.md`, `Tasks.md`, `Project.md`,
 `Stack.md`, `Rules.md` e `Database.md` são gerenciados individualmente, com
-fingerprints próprios e proteção contra sobrescrita local.
+fingerprints próprios e proteção contra sobrescrita local. A resolução usada
+pelas skills segue `custom/<Nome>.md`, template gerenciado e, somente no
+monorepo, `skills/templates/<Nome>.md`.
 
 ## Alterar uma skill
 
-1. escreva ou atualize o contrato BDD/TDD;
-2. observe RED;
-3. altere `SKILL.md`, scripts, referências ou assets do owner;
-4. sincronize fixtures instaladas quando o teste exigir;
-5. execute a suíte do módulo;
-6. rode `quick_validate.py`;
+1. escreva ou atualize o contrato BDD/TDD.
+2. observe RED.
+3. altere `SKILL.md`, scripts, referências ou assets do owner.
+4. sincronize fixtures instaladas quando o teste exigir.
+5. execute a suíte do módulo.
+6. rode `quick_validate.py`.
 7. atualize a página de usuário e este contexto quando a interface mudar.
 
 ## Validação
 
 O validador verifica frontmatter, nome, metadata e estrutura. Testes focais
-devem verificar o comportamento específico; validação estrutural não prova a
+devem verificar o comportamento específico. Validação estrutural não prova a
 metodologia.

@@ -258,7 +258,7 @@ tests/
 #### Gate do Ato I — Definição
 
 - **Resultado**: Pending
-- **Comando**: `python3 .agents/skills/specsfy-base-validate/scripts/validate_spec.py specs/specs/{{SPEC_NUMBER}}-{{SPEC_SLUG}}/spec.md`
+- **Comando**: `python3 .agents/skills/specsfy-04-validate/scripts/validate_spec.py specs/specs/{{SPEC_NUMBER}}-{{SPEC_SLUG}}/spec.md`
 - **Achados**: [Pending.]
 - Findings especializados, quando aplicáveis, seguem `FIND-PROD|ARCH|SEC-NNN`,
   severidade `P1|P2|P3`, estado `Open|Resolved|Accepted`, refs e evidência.
@@ -266,13 +266,13 @@ tests/
 #### Gate do Ato II — Plano
 
 - **Resultado**: Pending
-- **Comando**: `python3 .agents/skills/specsfy-base-tasks/scripts/validate_tasks.py specs/specs/{{SPEC_NUMBER}}-{{SPEC_SLUG}}/spec.md`
+- **Comando**: `python3 .agents/skills/specsfy-05-tasks/scripts/validate_tasks.py specs/specs/{{SPEC_NUMBER}}-{{SPEC_SLUG}}/spec.md`
 - **Achados**: [Pending.]
 
 #### Gate do Ato III — Entrega
 
 - **Resultado**: Pending
-- **Comando**: `python3 .agents/skills/specsfy-base-tdd-bdd/scripts/check_traceability.py specs/specs/{{SPEC_NUMBER}}-{{SPEC_SLUG}}/spec.md .`
+- **Comando**: `python3 .agents/skills/specsfy-06-tdd-bdd/scripts/check_traceability.py specs/specs/{{SPEC_NUMBER}}-{{SPEC_SLUG}}/spec.md .`
 - **Achados**: [Pending.]
 
 ### 14. Tarefas

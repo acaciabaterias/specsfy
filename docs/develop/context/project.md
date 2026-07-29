@@ -30,7 +30,7 @@ O Specsfy reduz a distância entre intenção, comportamento aceito, testes,
 tarefas, implementação e evidência. Ele evita que planos e checklists paralelos
 divirjam da especificação da fatia.
 
-Inputs podem permanecer em `specs/ideias/` como capturas sem entrevista. Ideias
+Inputs podem permanecer em `specs/inbox/` como capturas sem refinamento do backlog. Ideias
 escolhidas para refinamento podem permanecer no backlog antes da decisão de
 criar uma spec.
 Pedidos posteriores à definição atualizam explicitamente a mesma spec, reabrem
@@ -50,20 +50,20 @@ metodologia nem sua documentação oficial para usuários.
 
 ## Limites normativos
 
-- não decide requisitos materiais pela pessoa responsável;
-- não transforma research em fonte normativa;
-- não autoriza implementação sem RED BDD e TDD;
-- não substitui runtime, banco ou infraestrutura do produto consumidor;
-- não mistura responsabilidades dos módulos, embora compartilhem raiz Git;
-- não promove documentação operacional de `example/` a guia oficial;
+- não decide requisitos materiais pela pessoa responsável.
+- não transforma research em fonte normativa.
+- não autoriza implementação sem RED BDD e TDD.
+- não substitui runtime, banco ou infraestrutura do produto consumidor.
+- não mistura responsabilidades dos módulos, embora compartilhem raiz Git.
+- não promove documentação operacional de `example/` a guia oficial.
 - não instala skills consumidoras na raiz do monorepo.
 
 ## Atualize quando
 
-- a finalidade, o público ou os limites mudarem;
+- a finalidade, o público ou os limites mudarem.
 - a topologia ou responsabilidade de um módulo mudar.
 
 ## Não use para
 
-- detalhar uma feature;
+- detalhar uma feature.
 - substituir spec, teste ou fonte executável.

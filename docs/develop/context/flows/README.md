@@ -1,11 +1,13 @@
-# Fluxos transversais
+# Contexto dos fluxos
 
+<!-- markdownlint-disable MD033 -->
 <p align="center">
   <picture>
     <source srcset="../../../../brand/logo/icon.svg" type="image/svg+xml">
     <img src="../../../../brand/logo/icon.png" alt="Logo do Specsfy" width="128">
   </picture>
 </p>
+<!-- markdownlint-enable MD033 -->
 
 ## Classificação
 
@@ -27,21 +29,21 @@ ordem de eventos for difícil de compreender apenas por texto linear.
 
 ## Atualize quando
 
-- um fluxo transversal for criado, movido ou removido;
-- seus componentes ou links para specs mudarem;
+- um fluxo transversal for criado, movido ou removido.
+- seus componentes ou links para specs mudarem.
 - o contrato de documentação de fluxos mudar.
 
 ## Não use para
 
-- copiar Gherkin, regras e exceções de uma feature;
-- documentar chamadas internas triviais;
+- copiar Gherkin, regras e exceções de uma feature.
+- documentar chamadas internas triviais.
 - manter fluxo sem spec ou fonte executável relacionada.
 
 ## Fonte da verdade e precedência
 
-`specs/specs/<NNNN>-<slug>/spec.md` governa comportamento, erros e aceite. Código e testes
-demonstram a execução. Um documento de fluxo apenas mostra sequência,
-responsabilidades e links para essas fontes.
+`specs/specs/<NNNN>-<slug>/spec.md` governa comportamento, erros e aceite.
+Código e testes demonstram a execução. Um documento de fluxo apenas mostra
+sequência, responsabilidades e links para essas fontes.
 
 ## Fluxos transversais
 
@@ -56,38 +58,45 @@ projeto, não uma feature independente.
 Antes dos três atos, o fluxo de entrada é:
 
 ```text
-input → ideia capturada → backlog → interview → spec
+input → inbox → backlog → spec
 ```
 
-Captura preserva sem perguntar; backlog e entrevista preparam a decisão.
+Inbox preserva sem perguntar. Backlog registra o item e refina as decisões.
 Somente a spec governa comportamento, gates, tarefas e evidência.
 
 Durante os três atos, as etapas são bidirecionais:
 
+<!-- markdownlint-disable MD013 -->
 ```text
-idea → backlog ↔ interview → specify ↔ validate → tasks ↔ tdd-bdd → implement → documentator ↔ progress
+inbox → backlog → specify ↔ validate → tasks ↔ tdd-bdd → implement → documentator ↔ progress
                          ↑       ↑            ↑
                          └──── update-spec ───┘
 ```
+<!-- markdownlint-enable MD013 -->
 
 Cada skill resolve pendências pertencentes ao próprio escopo. Quando o estado
 exigir outra responsabilidade, ela anuncia origem, destino, motivo e resultado
 esperado e carrega automaticamente a skill responsável na mesma conversa, sem
 pedir confirmação. O mesmo protocolo governa avanço, retorno e retomada.
-`idea` conclui a gravação antes de qualquer transição e não faz perguntas; ela
-apenas oferece backlog ou entrevista como próximo passo opcional.
+`inbox` conclui a gravação antes de qualquer transição e não faz perguntas. Ela
+apenas oferece backlog como próximo passo opcional.
 Depois de cada tarefa de código, `implement` entrega o estado observado a
 `documentator`, que reconstrói `<projeto>/docs/` antes de a tarefa ou o gate
 final ser concluído. A pessoa também pode acionar `documentator` diretamente,
 sem spec ou implementação recente.
 
 Pedido surgido depois da definição retorna a `update-spec`. A skill chama
-`interview` quando faltar decisão, `validate` quando mudar comportamento e
+`backlog` quando faltar decisão, `validate` quando mudar comportamento e
 `tasks` quando mudar somente o plano. Teste ou RED ausente chama `tdd-bdd` com
-o plano pendente; se o plano já estava aprovado, `tasks` reabre o Ato II antes
+o plano pendente. Se o plano já estava aprovado, `tasks` reabre o Ato II antes
 de chamar `tdd-bdd`. Depois da correção, a etapa que detectou a pendência é
 retomada automaticamente. Handoffs não autorizam instalação, deploy, publicação
 ou ação destrutiva, que continuam exigindo autorização específica.
+
+Dentro de `backlog`, cada resposta provoca nova análise do contexto completo.
+O ciclo continua sem limite enquanto houver lacuna aplicável. Da 11ª pergunta em
+diante, `avançar` permite encerrar aquele refinamento, mas as lacunas seguem
+abertas e impedem a aprovação do Definition Gate.
 
 Crie um arquivo somente quando o mapa tiver gatilho de leitura e atualização
 próprio. Ao criá-lo, adicione a rota neste índice e no
@@ -97,9 +106,9 @@ próprio. Ao criá-lo, adicione a rota neste índice e no
 
 Cada fluxo deve declarar:
 
-- gatilho e estado inicial;
-- componentes e responsabilidade de cada etapa;
-- ordem, resultado e falha transversal;
-- spec ou specs que governam o comportamento;
-- testes ou fontes executáveis que demonstram a sequência;
+- gatilho e estado inicial.
+- componentes e responsabilidade de cada etapa.
+- ordem, resultado e falha transversal.
+- spec ou specs que governam o comportamento.
+- testes ou fontes executáveis que demonstram a sequência.
 - condição que exige atualização do mapa.

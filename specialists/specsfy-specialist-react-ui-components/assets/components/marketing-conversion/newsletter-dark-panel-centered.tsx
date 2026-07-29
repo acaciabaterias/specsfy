@@ -4,21 +4,21 @@ export default function Example() {
       <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="relative isolate overflow-hidden bg-gray-900 px-6 py-24 shadow-2xl sm:rounded-3xl sm:px-24 xl:py-32 dark:bg-gray-800 dark:shadow-none dark:after:pointer-events-none dark:after:absolute dark:after:inset-0 dark:after:inset-ring dark:after:inset-ring-white/15 dark:after:sm:rounded-3xl">
           <h2 className="mx-auto max-w-3xl text-center text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-            Get notified when we're launching
+            Receba um aviso quando fizermos o lançamento
           </h2>
           <p className="mx-auto mt-6 max-w-lg text-center text-lg text-gray-300">
-            Reprehenderit ad esse et non officia in nulla. Id proident tempor incididunt nostrud nulla et culpa.
+            Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
           </p>
           <form className="mx-auto mt-10 flex max-w-md gap-x-4">
             <label htmlFor="email-address" className="sr-only">
-              Email address
+              Endereço de e-mail
             </label>
             <input
               id="email-address"
               name="email"
               type="email"
               required
-              placeholder="Enter your email"
+              placeholder="Digite seu e-mail"
               autoComplete="email"
               className="min-w-0 flex-auto rounded-md bg-white/5 px-3.5 py-2 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6 dark:outline-white/20"
             />
@@ -26,7 +26,7 @@ export default function Example() {
               type="submit"
               className="flex-none rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-xs hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white dark:shadow-none"
             >
-              Notify me
+              Avise-me
             </button>
           </form>
           <svg

@@ -1,11 +1,13 @@
 # Decisões arquiteturais
 
+<!-- markdownlint-disable MD033 -->
 <p align="center">
   <picture>
     <source srcset="../../../brand/logo/icon.svg" type="image/svg+xml">
     <img src="../../../brand/logo/icon.png" alt="Logo do Specsfy" width="128">
   </picture>
 </p>
+<!-- markdownlint-enable MD033 -->
 
 ## Classificação
 
@@ -28,21 +30,21 @@ Para o estado atual, comece pela
 
 ## Atualize quando
 
-- uma decisão arquitetural material for aceita;
-- uma decisão existente for substituída;
+- uma decisão arquitetural material for aceita.
+- uma decisão existente for substituída.
 - o estado ou link de um ADR mudar.
 
 ## Não use para
 
-- registrar toda escolha reversível;
-- alterar arquitetura apenas editando o histórico;
+- registrar toda escolha reversível.
+- alterar arquitetura apenas editando o histórico.
 - substituir requisitos, tarefas ou evidências da spec.
 
 ## Fonte da verdade e precedência
 
 ADRs são históricos e imutáveis após aceitos, salvo correções editoriais. O
-contexto em `docs/develop/context/` descreve o estado vigente; a spec autoriza a mudança;
-código e testes demonstram a implementação.
+contexto em `docs/develop/context/` descreve o estado vigente. A spec autoriza
+a mudança. Código e testes demonstram a implementação.
 
 ## Índice de decisões
 
@@ -67,10 +69,10 @@ Proposto → Aceito → Substituído
 
 Um ADR usa nome `ADR-NNN-titulo-kebab-case.md` e contém:
 
-1. estado;
-2. contexto e forças;
-3. decisão;
-4. alternativas consideradas;
-5. consequências e riscos;
-6. estratégia de adoção ou reversão;
+1. estado.
+2. contexto e forças.
+3. decisão.
+4. alternativas consideradas.
+5. consequências e riscos.
+6. estratégia de adoção ou reversão.
 7. links para spec, contexto e evidência.

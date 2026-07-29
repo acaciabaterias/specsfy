@@ -1,26 +1,26 @@
 const navigation = {
   solutions: [
     { name: 'Marketing', href: '#' },
-    { name: 'Analytics', href: '#' },
-    { name: 'Automation', href: '#' },
-    { name: 'Commerce', href: '#' },
-    { name: 'Insights', href: '#' },
+    { name: 'Análises', href: '#' },
+    { name: 'Automação', href: '#' },
+    { name: 'Comércio', href: '#' },
+    { name: 'Análises', href: '#' },
   ],
   support: [
-    { name: 'Submit ticket', href: '#' },
-    { name: 'Documentation', href: '#' },
-    { name: 'Guides', href: '#' },
+    { name: 'Enviar chamado', href: '#' },
+    { name: 'Documentação', href: '#' },
+    { name: 'Guias', href: '#' },
   ],
   company: [
-    { name: 'About', href: '#' },
+    { name: 'Sobre', href: '#' },
     { name: 'Blog', href: '#' },
-    { name: 'Jobs', href: '#' },
-    { name: 'Press', href: '#' },
+    { name: 'Vagas', href: '#' },
+    { name: 'Imprensa', href: '#' },
   ],
   legal: [
-    { name: 'Terms of service', href: '#' },
-    { name: 'Privacy policy', href: '#' },
-    { name: 'License', href: '#' },
+    { name: 'Termos de serviço', href: '#' },
+    { name: 'Política de privacidade', href: '#' },
+    { name: 'Licença', href: '#' },
   ],
 }
 
@@ -30,21 +30,21 @@ export default function Example() {
       <div className="mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-8 lg:py-32">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <img
-            alt="Company name"
-            src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+            alt="Nome da empresa"
+            src="https://tailwindcss.com/mais-assets/img/logos/mark.svg?color=indigo&shade=600"
             className="h-9 dark:hidden"
           />
           <img
-            alt="Company name"
-            src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
+            alt="Nome da empresa"
+            src="https://tailwindcss.com/mais-assets/img/logos/mark.svg?color=indigo&shade=500"
             className="h-9 not-dark:hidden"
           />
           <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
             {[
-              ['Solutions', navigation.solutions],
-              ['Support', navigation.support],
-              ['Company', navigation.company],
-              ['Legal', navigation.legal],
+              ['Soluções', navigation.solutions],
+              ['Suporte', navigation.support],
+              ['Empresa', navigation.company],
+              ['Jurídico', navigation.legal],
             ].map(([title, items]) => (
               <div key={title}>
                 <h3 className="text-sm/6 font-semibold text-gray-900 dark:text-white">{title}</h3>

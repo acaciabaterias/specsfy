@@ -1,15 +1,17 @@
 # Specsfy Specialists
 
+<!-- markdownlint-disable MD033 -->
 <p align="center">
   <picture>
     <source srcset="../brand/logo/icon.svg" type="image/svg+xml">
     <img src="../brand/logo/icon.png" alt="Logo do Specsfy" width="128">
   </picture>
 </p>
+<!-- markdownlint-enable MD033 -->
 
 Catálogo oficial de skills técnicas opcionais do Specsfy. O prefixo
 `specsfy-specialist-` distingue contexto especializado das skills
-`specsfy-base-*` que executam a metodologia.
+skills base que executam a metodologia.
 
 Os especialistas são instalados sob demanda no projeto consumidor:
 

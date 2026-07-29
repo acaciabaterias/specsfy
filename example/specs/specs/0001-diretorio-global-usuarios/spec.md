@@ -274,19 +274,19 @@ tests/features/directory_users.feature
 #### Gate do Ato I — Definição
 
 - **Resultado**: Passed
-- **Comando**: `python3 -B .agents/skills/specsfy-base-validate/scripts/validate_spec.py specs/specs/0001-diretorio-global-usuarios/spec.md`
+- **Comando**: `python3 -B .agents/skills/specsfy-04-validate/scripts/validate_spec.py specs/specs/0001-diretorio-global-usuarios/spec.md`
 - **Achados**: READY; 1 US, 3 FR, 2 NFR e 1 AC válidos; nenhuma falha estrutural ou P1 aberto.
 
 #### Gate do Ato II — Plano
 
 - **Resultado**: Passed
-- **Comando**: `python3 -B .agents/skills/specsfy-base-tasks/scripts/validate_tasks.py specs/specs/0001-diretorio-global-usuarios/spec.md`
+- **Comando**: `python3 -B .agents/skills/specsfy-05-tasks/scripts/validate_tasks.py specs/specs/0001-diretorio-global-usuarios/spec.md`
 - **Achados**: tarefas válidas; T001/T002 concluídas após RED Behave/Pest pela rota ausente.
 
 #### Gate do Ato III — Entrega
 
 - **Resultado**: Passed
-- **Comando**: `python3 -B .agents/skills/specsfy-base-tdd-bdd/scripts/check_traceability.py specs/specs/0001-diretorio-global-usuarios/spec.md . --full-chain`
+- **Comando**: `python3 -B .agents/skills/specsfy-06-tdd-bdd/scripts/check_traceability.py specs/specs/0001-diretorio-global-usuarios/spec.md . --full-chain`
 - **Achados**: rastreabilidade 4/4; QA passou; regressão, checks e build verdes.
 
 ### 14. Tarefas

@@ -39,13 +39,13 @@ releases do monorepo
 
 | Módulo | Responsabilidade |
 | --- | --- |
-| `skills/specsfy-base-*/` | fluxo base da metodologia |
+| `skills/specsfy-<NN>-*/` e skills transversais | fluxo base da metodologia |
 | `skills/specsfy-setup/` | contexto persistente e blocos de agentes |
 | `skills/specsfy-documentator/` | documentação técnica do consumidor |
 | `skills/specsfy-aux-*/` | stack, regras e persistência do consumidor |
 | `specialists/specsfy-specialist-*/` | padrões opcionais sob demanda |
 | `cli/src/specsfy_cli/` | comandos, TUI, instalação e runners |
-| `.agents/skills/specsfy-monorepo-documentator/` | documentação do próprio projeto |
+| `.agents/skills/specsfy-monorepo-documentator/` | documentação oficial |
 | `.agents/skills/specsfy-release-cli/` | publicação de versões do CLI |
 | `tests/` | contratos integrados |
 | `example/` | validação em aplicação Laravel |
@@ -62,7 +62,7 @@ releases do monorepo
   [contexto documental](../documentation.md).
 - A release local altera artefatos em `cli/` e publica tag e release no
   monorepo.
-- `example/README.md` documenta o aplicativo; `docs/user/` orienta usuários do
+- `example/README.md` documenta o aplicativo. `docs/user/` orienta usuários do
   método.
 
 ## Atualize quando
@@ -71,10 +71,10 @@ releases do monorepo
 
 ## Não use para
 
-- inventariar cada arquivo;
+- inventariar cada arquivo.
 - descrever tarefas temporárias.
 
 ## Fonte da verdade e precedência
 
-Este documento governa ownership transversal; a árvore e os testes comprovam o
+Este documento governa ownership transversal. A árvore e os testes comprovam o
 estado implementado.

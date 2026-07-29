@@ -70,7 +70,7 @@ erDiagram
     json credential
     timestamp last_used_at
   }
-  USERS ||--o{ PASSKEYS : relates
+  USERS ||--o{ PASSKEYS : relaciona
   PASSWORD_RESET_TOKENS {
     string email
     string token
@@ -96,8 +96,8 @@ erDiagram
     timestamp expires_at
     timestamp accepted_at
   }
-  TEAMS ||--o{ TEAM_INVITATIONS : relates
-  USERS ||--o{ TEAM_INVITATIONS : relates
+  TEAMS ||--o{ TEAM_INVITATIONS : relaciona
+  USERS ||--o{ TEAM_INVITATIONS : relaciona
   TEAM_MEMBERS {
     id id
     timestamp created_at
@@ -106,8 +106,8 @@ erDiagram
     foreignId user_id
     string role
   }
-  TEAMS ||--o{ TEAM_MEMBERS : relates
-  USERS ||--o{ TEAM_MEMBERS : relates
+  TEAMS ||--o{ TEAM_MEMBERS : relaciona
+  USERS ||--o{ TEAM_MEMBERS : relaciona
   TEAMS {
     id id
     timestamp deleted_at
@@ -131,7 +131,7 @@ erDiagram
     timestamp two_factor_confirmed_at
     foreignId current_team_id
   }
-  TEAMS ||--o{ USERS : relates
+  TEAMS ||--o{ USERS : relaciona
 ```
 
 ## Fonte complementar

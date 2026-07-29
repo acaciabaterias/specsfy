@@ -1,12 +1,13 @@
 # Como a metodologia funciona
 
-O Specsfy ajuda você a transformar um pedido em uma entrega comprovada. Você explica
-o que precisa; o agente organiza definição, plano, testes e implementação.
+O Specsfy ajuda você a transformar uma necessidade em uma entrega comprovada.
+Você explica o que precisa, e o agente organiza a definição, o plano, os testes
+e a implementação na mesma especificação.
 
 A metodologia existe para responder, durante todo o trabalho, a três perguntas:
 
 1. **O que será entregue?**
-2. **Como sabemos que o plano está pronto?**
+2. **O que comprova que o plano está pronto?**
 3. **Qual evidência comprova que a entrega funciona?**
 
 Você não precisa decorar comandos nem escolher cada skill. O agente identifica a
@@ -14,48 +15,54 @@ etapa atual, anuncia as transições e mantém o trabalho na mesma conversa.
 
 ## Uma única especificação
 
-Cada entrega escolhida possui uma única fonte de referência:
+Cada mudança escolhida possui uma única fonte normativa. O caminho permite que
+você reconheça a sequência e o assunto ao listar o diretório de specs:
 
 ```text
 specs/specs/<NNNN>-<slug>/spec.md
 ```
 
-`NNNN` é o número da entrega, como `0001`. O `slug` é um nome curto que ajuda a
-reconhecer o assunto, como `recuperar-senha`.
+`NNNN` é o número da spec, como `0001`. O `slug` identifica o assunto, como
+`recuperar-senha`. Assim, o caminho `0001-recuperar-senha` pode ser localizado
+sem abrir o arquivo.
 
-Essa `spec.md` reúne:
+Ao abrir a `spec.md`, você encontra o comportamento esperado, o plano e as
+provas que permitem conferir o estado atual:
 
-- o problema e o resultado esperado;
-- quem será afetado e quais regras precisam ser respeitadas;
-- histórias, requisitos e limites;
-- exemplos de comportamento escritos em BDD;
-- decisões, riscos e plano técnico;
-- tarefas, testes e evidências da execução;
+- o problema e o resultado esperado.
+- as pessoas afetadas e as regras que precisam ser respeitadas.
+- histórias, requisitos e limites.
+- exemplos de comportamento escritos em BDD.
+- as escolhas registradas, as possíveis falhas e o plano técnico.
+- tarefas, testes e evidências da execução.
 - gates e estado atual da entrega.
 
-Plano e tarefas ficam dentro da própria spec. O Specsfy não cria `plan.md` ou
-`tasks.md`. Assim, um arquivo não fica contando uma versão antiga da entrega.
+O plano e as tarefas ficam dentro da própria spec. O Specsfy não cria
+`plan.md` ou `tasks.md`, então a explicação da entrega não se divide entre
+arquivos com estados diferentes.
 
 ## Da ideia até o código
 
-Nem todo texto precisa virar uma entrega imediatamente. O destino depende do
-quanto você já decidiu:
+Nem todo texto precisa virar uma entrega imediatamente. Você escolhe o destino
+de acordo com o quanto já definiu:
 
-- Uma **ideia** é uma captura rápida. Ela preserva seu texto em
-  `specs/ideias/` sem perguntas e sem autorizar implementação.
-- O **backlog** guarda algo que você quer organizar e refinar, mas ainda não
-  escolheu como entrega. Ele vive em `specs/backlog/`.
+- Uma **ideia** preserva seu texto em
+  `specs/inbox/` sem perguntas e sem autorizar implementação.
+- O **backlog** guarda uma proposta que merece organização e refinamento, mas
+  ainda não foi escolhida para entrega. Ela vive em `specs/backlog/`.
 - A **spec** representa uma entrega escolhida. A partir dela, definição, plano,
   testes, código e evidências passam a seguir o mesmo contrato.
 
-O percurso mais completo fica assim:
+O percurso mais completo preserva a ideia, aprofunda as definições e só chega
+ao código depois do plano e do RED:
 
 ```text
-ideia → backlog → entrevista → spec → plano e RED → código → validação
+inbox → backlog → spec → plano e RED → código → validação
 ```
 
-Você também pode começar com “implemente recuperação de senha”. O agente
-verifica o que falta e conduz as etapas necessárias antes de mexer no código.
+Você também pode começar com “implemente recuperação de senha”. O agente só
+altera o código depois de verificar as definições ausentes e conduzir as etapas
+correspondentes.
 
 ## Os três atos
 
@@ -63,16 +70,16 @@ Os atos são grupos de trabalho. Cada um termina com um **gate**, que é um pont
 de controle baseado em evidência. Um **gate** aprovado não significa apenas
 “parece bom”: significa que as condições daquela etapa foram verificadas.
 
-### Antes dos atos: escolha o destino da ideia
+### Escolha o destino da ideia
 
-**Objetivo:** preservar o pedido sem forçar uma entrega antes da hora.
+**Objetivo:** preservar a ideia sem transformá-la imediatamente em spec.
 
-**Sua participação:** você informa a ideia e decide quando vale refiná-la ou
-promovê-la. Se pedir apenas para capturar, o agente não inicia uma entrevista.
+**Sua participação:** você informa a ideia e escolhe quando vale refiná-la ou
+promovê-la. Se solicitar apenas a captura, o agente não inicia o refinamento.
 
-**Prova técnica:** a captura recebe um arquivo próprio em `specs/ideias/`. Se
-for escolhida para refinamento, passa ao backlog. Somente uma promoção
-intencional cria a `spec.md` normativa.
+**Prova técnica:** a captura recebe um arquivo próprio em `specs/inbox/`. Se
+você escolher o refinamento, ela segue para o backlog. A `spec.md` normativa
+só aparece depois de uma promoção explícita.
 
 Essa separação mantém a caixa de entrada leve e impede que toda observação se
 transforme em código ou em uma especificação extensa.
@@ -83,37 +90,42 @@ transforme em código ou em uma especificação extensa.
 que possa ser conferido.
 
 **Sua participação:** você responde apenas às dúvidas que realmente mudam a
-entrega. O agente reaproveita tudo o que já foi dito, pergunta uma lacuna
-importante por vez e não inventa requisitos quando faltar uma decisão.
+entrega. O agente reaproveita o que já foi informado, pergunta sobre uma
+lacuna importante por vez e não inventa requisitos quando falta uma definição.
+O ciclo segue sem limite máximo de perguntas: cada resposta atualiza a análise,
+e uma nova pergunta é feita enquanto restar uma lacuna aplicável.
+A partir da 11ª pergunta, você também pode escolher `avançar`; as lacunas ficam registradas
+e o Definition Gate continua pendente até serem resolvidas.
 
-**Prova técnica:** a spec registra finalidade, pessoas afetadas, requisitos,
-limites e cenários BDD. A validação procura contradições, decisões em aberto e
-dúvidas prioritárias.
+**Prova técnica:** a spec registra a finalidade, as pessoas afetadas, os
+requisitos, os limites e os cenários BDD. A validação procura contradições,
+definições em aberto e dúvidas que impedem o planejamento.
 
-O ato termina com:
+O Ato I termina quando a validação registra este gate na `spec.md`:
 
 ```text
 Definition Gate: Passed
 ```
 
-Isso quer dizer que a definição está clara o suficiente para orientar um plano.
-Ainda não quer dizer que a solução foi implementada.
+Esse estado permite que o agente organize o plano a partir dos requisitos e
+cenários já conferidos. O código ainda não foi alterado, e o Plan Gate continua
+pendente.
 
-### Ato II — Planejar e provar antes de implementar
+### Ato II — Planejar e preparar o RED
 
-**Objetivo:** decidir como a mudança será construída e demonstrar que os testes
+**Objetivo:** definir como a mudança será construída e demonstrar que os testes
 conseguem detectar a ausência do novo comportamento.
 
-**Sua participação:** você decide quando houver uma escolha material de produto,
-risco ou estratégia. Detalhes técnicos comprováveis podem ser derivados do
-código, da stack e das regras do projeto.
+**Sua participação:** você confirma escolhas de produto ou estratégia que
+alteram o resultado. Os detalhes técnicos que o repositório consegue comprovar
+podem ser derivados do código, da stack e das regras do projeto.
 
-**Prova técnica:** o agente registra tarefas, contratos, dados, riscos e
-reversibilidade na spec. Depois, transforma os cenários BDD em testes TDD
-executáveis e observa o **RED**: uma falha causada pela funcionalidade que ainda
-não existe.
+**Prova técnica:** o agente registra as tarefas, os contratos, as informações
+afetadas, as possíveis falhas e a reversibilidade na spec. Depois, transforma
+os cenários BDD em testes TDD executáveis e observa o **RED**, uma falha causada
+pela funcionalidade que ainda não existe.
 
-O ato termina com:
+O Ato II termina quando as tarefas e os testes permitem registrar:
 
 ```text
 Plan Gate: Passed
@@ -124,72 +136,78 @@ ou ambiente quebrado não prova que o teste protege o comportamento.
 
 ### Ato III — Entregar e conferir o resultado
 
-**Objetivo:** implementar cada tarefa e reunir evidências atuais de que a
-entrega atende à definição.
+**Objetivo:** implementar cada tarefa e reunir evidências atuais de que o
+resultado atende à definição.
 
-**Sua participação:** você acompanha decisões novas ou mudanças de escopo. Não
-precisa comandar cada ciclo de teste; o agente registra o que foi executado e
-apresenta o resultado verificável.
+**Sua participação:** você acompanha novas escolhas ou mudanças de escopo. O
+agente registra cada comando executado e apresenta o resultado verificável,
+sem exigir que você conduza os ciclos de teste.
 
-**Prova técnica:** cada tarefa segue:
+**Prova técnica:** cada tarefa de código parte de um teste que falha pelo motivo
+esperado, recebe a menor implementação capaz de deixá-lo verde e termina com
+refatoração protegida pela suíte:
 
 ```text
 RED → GREEN → REFACTOR
 ```
 
-- **RED:** o teste falha pela razão esperada;
-- **GREEN:** a menor implementação faz o teste passar;
+- **RED:** o teste falha pela razão esperada.
+- **GREEN:** a menor implementação faz o teste passar.
 - **REFACTOR:** o código é melhorado sem mudar o comportamento.
 
-Depois, o agente executa o aceite, a regressão completa, verifica a
-rastreabilidade entre requisito e teste, atualiza o contexto e reconstrói a
-documentação aplicável.
+Depois, o agente executa o aceite e a regressão completa, verifica a ligação
+entre cada requisito e seu teste, atualiza os registros permanentes do projeto
+e reconstrói a documentação aplicável.
 
-O ato termina com:
+O Ato III termina quando o aceite, a regressão e a documentação permitem
+registrar:
 
 ```text
 Delivery Gate: Passed
 Status: Complete
 ```
 
-`Complete` significa que a entrega possui código e evidência atual. Não é apenas
-uma tarefa marcada como concluída.
+`Complete` significa que a entrega possui código e evidência atual. Você pode
+abrir a spec e localizar os comandos, os resultados e os testes que comprovam
+esse estado.
 
 ## Como BDD e TDD trabalham juntos
 
-BDD e TDD têm papéis diferentes e complementares.
+O BDD (desenvolvimento orientado por comportamento) descreve o resultado que
+produto e desenvolvimento precisam discutir. O TDD (desenvolvimento orientado
+por testes) transforma esse comportamento em uma prova executável no projeto.
 
 O **BDD** descreve o comportamento em uma linguagem que produto,
 desenvolvimento e testes conseguem discutir. Por exemplo:
 
 ```gherkin
-Cenário: pessoa solicita recuperação de senha
-  Dado que existe uma conta para o e-mail informado
-  Quando a pessoa solicita a recuperação
-  Então o sistema confirma o pedido sem revelar dados privados
+Cenário: cliente solicita recuperação de senha
+  Dado que existe um cadastro para o e-mail informado
+  Quando o cliente solicita a recuperação
+  Então o sistema confirma a solicitação sem revelar informações privadas
 ```
 
-Esse cenário deixa visível a regra e o resultado esperado, mas o texto Gherkin
+Esse cenário mostra a regra e o resultado esperado, mas o texto Gherkin
 não é executado como uma suíte separada pelo Specsfy.
 
 O **TDD** transforma o comportamento em testes executáveis na ferramenta já
-usada pelo projeto. Primeiro o teste falha pelo motivo correto; depois a
+usada pelo projeto. Primeiro o teste falha pelo motivo correto. Depois, a
 implementação faz o teste passar. Em resumo:
 
-- BDD ajuda a definir **o comportamento que importa**;
+- BDD ajuda a definir **o comportamento que importa**.
 - TDD comprova **que o código apresenta esse comportamento**.
 
-Essa ligação evita dois extremos: uma descrição clara sem prova automática, ou
-um teste técnico que não representa o que foi pedido.
+Essa ligação evita uma descrição clara sem prova automática e também impede
+que um teste técnico seja aceito sem representar a necessidade registrada.
 
 ## O agente conduz as transições
 
 As skills dividem responsabilidades, mas você não precisa operar o fluxo como
 uma lista de comandos. Quando uma etapa depende de outra, o agente:
 
-1. informa de qual skill está saindo e para qual está indo;
-2. explica a pendência que motivou a transição;
-3. resolve a pendência no contexto correto;
+1. informa de qual skill está saindo e para qual está indo.
+2. explica a pendência que motivou a transição.
+3. resolve a pendência na skill responsável.
 4. retorna à etapa anterior quando necessário.
 
 Por exemplo, se a implementação encontrar um teste ausente, o agente volta ao
@@ -198,53 +216,63 @@ Ele não aprova um gate apenas para contornar a pendência.
 
 ## Mudanças durante o trabalho
 
-Se o pedido mudar depois que a spec já existe, você pode explicar a alteração
-em linguagem normal. A mudança entra na mesma `spec.md`; não é criada uma
+Se a necessidade mudar depois que a spec já existe, explique a alteração em
+linguagem normal. O novo requisito entra na mesma `spec.md`, sem criar uma
 segunda especificação.
 
 O Specsfy reabre somente as provas que perderam validade:
 
-- se mudou o comportamento, reabre definição, plano e entrega;
-- se mudou somente a estratégia técnica, reabre plano e entrega;
-- se apenas uma evidência ficou desatualizada, repete a validação necessária.
+- Uma mudança de comportamento reabre definição, plano e entrega.
+- Uma mudança apenas na estratégia técnica reabre plano e entrega.
+- Uma evidência desatualizada exige somente a repetição da validação
+  correspondente.
 
-Use [`specsfy-base-update-spec`](skills/specsfy-base-update-spec.md) para esse
-fluxo.
+Use [`specsfy-update-spec`](skills/specsfy-update-spec.md) para
+incorporar a nova instrução. A skill informa quais gates perderam validade e
+retoma a primeira etapa afetada.
 
-## Contexto que permanece entre entregas
+## Informações que permanecem entre entregas
 
 Além da spec de cada entrega, o projeto mantém informações que valem para o
 sistema inteiro:
 
-- `PROJECT.md`: finalidade, capacidades e limites do projeto;
-- `.specsfy/STACK.md`: tecnologias estruturais e suas evidências;
-- `.specsfy/RULES.md`: regras confirmadas para o trabalho;
-- `.specsfy/DATABASE.md`: mapa da persistência e das relações.
+- `PROJECT.md`: finalidade, capacidades e limites do projeto.
+- `.specsfy/STACK.md`: tecnologias estruturais e suas evidências.
+- `.specsfy/RULES.md`: regras confirmadas para o trabalho.
+- `.specsfy/DATABASE.md`: visão da persistência e das relações.
 
-O agente consulta esse contexto antes de planejar e o revisa durante a
-implementação. Assim, uma nova entrega não precisa redescobrir a arquitetura,
-as convenções ou o banco desde o início.
+O agente consulta esses arquivos antes de planejar e os revisa durante a
+implementação. Assim, uma nova entrega começa com a arquitetura, as convenções
+e o banco já documentados.
 
 ## O que você encontra ao final
 
-Uma entrega completa deixa um caminho auditável:
+Uma mudança completa deixa na `spec.md` um caminho auditável entre requisito,
+teste, tarefa e evidência:
 
-- a intenção e as decisões estão na spec;
-- cada requisito aponta para critérios de aceite;
-- os cenários BDD explicam o comportamento;
-- os testes TDD demonstram o resultado no código;
-- as tarefas registram execução e evidências;
-- os gates mostram quais etapas foram realmente comprovadas;
+- a intenção e as escolhas estão na spec.
+- cada requisito aponta para condições de aceite.
+- os cenários BDD explicam o comportamento.
+- os testes TDD demonstram o resultado no código.
+- as tarefas registram execução e evidências.
+- os gates mostram quais etapas foram realmente comprovadas.
 - a documentação reflete o sistema implementado.
 
 Para consultar esse estado sem alterar arquivos, use
-[`specsfy-base-progress`](skills/specsfy-base-progress.md).
+[`specsfy-progress`](skills/specsfy-progress.md).
 
 ## Limites do método
 
-O método não decide requisitos importantes sem você, não transforma toda ideia
+O método não define requisitos importantes sem você, não transforma toda ideia
 em spec e não trata pesquisa como requisito aprovado. Também não aceita erro de
 ambiente como RED nem substitui os testes e as ferramentas do seu projeto.
 
-Agora siga a [instalação](installation.md) e faça o
-[primeiro projeto](getting-started.md).
+## Justificativa de tamanho
+
+Este guia mantém os três atos, os gates e a relação entre BDD e TDD na mesma
+página para que você possa comparar o percurso completo sem alternar entre
+explicações parciais.
+
+O [guia de instalação](installation.md) prepara o CLI e o framework. Depois,
+o [primeiro projeto](getting-started.md) aplica os três atos a uma página de
+boas-vindas e mostra os gates na `spec.md`.

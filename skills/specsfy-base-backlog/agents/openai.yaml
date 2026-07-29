@@ -1,4 +1,0 @@
-interface:
-  display_name: "Specsfy: Backlog"
-  short_description: "Pesquisa, conversa e registra ideias completas"
-  default_prompt: "Use $specsfy-base-backlog para buscar referências no projeto, detectar lacunas, perguntar uma por vez e só registrar esta ideia quando a captura mínima estiver clara, sem criar uma especificação. Orquestre transições automáticas com anúncio, execução e retomada na mesma conversa."

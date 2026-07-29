@@ -34,7 +34,7 @@ class SkillLockTests(unittest.TestCase):
                     {
                         "version": 1,
                         "skills": {
-                            "specsfy-base-backlog": {
+                            "specsfy-02-backlog": {
                                 "source": "skills/",
                                 "sourceType": "github",
                                 "computedHash": "abc",
@@ -51,7 +51,7 @@ class SkillLockTests(unittest.TestCase):
             )
 
             self.assertEqual(
-                {"specsfy-base-backlog", "external-skill"},
+                {"specsfy-02-backlog", "external-skill"},
                 installed_skill_names(project),
             )
 

@@ -1,9 +1,9 @@
 const featuredPost = {
   id: 1,
-  title: "We're incredibly proud to announce we have secured $75m in Series B",
+  title: "Temos orgulho de anunciar a captação de US$ 75 milhões na rodada Série B",
   href: '#',
-  description: 'Libero neque aenean tincidunt nec consequat tempor. Viverra odio id velit adipiscing id.',
-  date: 'Mar 16, 2020',
+  description: 'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
+  date: '16 mar. 2020',
   datetime: '2020-03-16',
   author: {
     name: 'Michael Foster',
@@ -14,8 +14,8 @@ const featuredPost = {
 }
 
 const posts = [
-  ['Boost your conversion rate', 'Lindsay Walton'],
-  ['How to use search engine optimization to drive sales', 'Tom Cook'],
+  ['Aumente sua taxa de conversão', 'Lindsay Walton'],
+  ['Como usar SEO para aumentar as vendas', 'Tom Cook'],
 ]
 
 export default function Example() {
@@ -31,7 +31,7 @@ export default function Example() {
           </h2>
           <p className="mt-4 text-lg/8 text-gray-600 dark:text-gray-400">{featuredPost.description}</p>
           <a href={featuredPost.href} className="mt-8 inline-block text-sm/6 font-semibold text-indigo-600 dark:text-indigo-400">
-            Continue reading <span aria-hidden="true">&rarr;</span>
+            Continuar lendo <span aria-hidden="true">&rarr;</span>
           </a>
         </article>
         <div className="mx-auto w-full max-w-2xl border-t border-gray-900/10 pt-12 lg:mx-0 lg:max-w-none lg:border-t-0 lg:pt-0 dark:border-white/10">
@@ -40,7 +40,7 @@ export default function Example() {
               <article key={title} className="py-12">
                 <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{title}</h2>
                 <p className="mt-4 text-sm/6 text-gray-600 dark:text-gray-400">
-                  Optio sit exercitation et ex ullamco aliquid explicabo.
+                  Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
                 </p>
                 <p className="mt-4 text-sm/6 font-semibold text-gray-900 dark:text-white">{author}</p>
               </article>

@@ -54,7 +54,7 @@ produtos da equipe ativa, sem visualizar nem alterar produtos de outra equipe.
 
 #### Fontes e contexto consultados
 
-- Brief da entrevista realizada nesta conversa em 2026-07-25.
+- Brief do refinamento do backlog realizado nesta conversa em 2026-07-25.
 - `AGENTS.md`, `.specsfy/Spec.md` e `.specsfy/templates/Spec.md`.
 - `routes/web.php`, `app/Http/Middleware/EnsureTeamMembership.php`,
   `app/Models/Team.php` e `app/Models/User.php`.
@@ -580,7 +580,7 @@ tests/features/product_management.feature
 
 - **Resultado**: Passed
 - **Data**: 2026-07-25
-- **Comando**: `python3 .agents/skills/specsfy-base-validate/scripts/validate_spec.py specs/specs/0006-produtos/spec.md`
+- **Comando**: `python3 .agents/skills/specsfy-04-validate/scripts/validate_spec.py specs/specs/0006-produtos/spec.md`
 - **Achados**: `READY`; estrutura, requisitos e findings estão válidos, e o
   enforcement local selecionou e executou Pest com sucesso.
 - **FIND-PROD-001** [P1] [Resolved] a exclusão agora exige `confirmed=true` no servidor e AC-005 possui comando Pest que prova preservação sem confirmação e remoção confirmada — Refs: US-003, FR-007, NFR-002, AC-005 — Evidence: specs/0006-produtos/spec.md#11-estratégia-tdd — Effect: a proteção destrutiva possui RED e prova automatizada sem nova dependência — Suggestion: manter a inspeção do cancelamento do diálogo como complemento à garantia do servidor
@@ -591,20 +591,20 @@ tests/features/product_management.feature
 #### Gate do Ato II — Plano
 
 - **Resultado**: Pending
-- **Comando**: `python3 .agents/skills/specsfy-base-tasks/scripts/validate_tasks.py specs/specs/0006-produtos/spec.md`
+- **Comando**: `python3 .agents/skills/specsfy-05-tasks/scripts/validate_tasks.py specs/specs/0006-produtos/spec.md`
 - **Achados**: tarefas ainda não foram geradas; o planejamento depende do
   Definition Gate.
 
 #### Gate do Ato III — Entrega
 
 - **Resultado**: Pending
-- **Comando**: `python3 .agents/skills/specsfy-base-tdd-bdd/scripts/check_traceability.py specs/specs/0006-produtos/spec.md .`
+- **Comando**: `python3 .agents/skills/specsfy-06-tdd-bdd/scripts/check_traceability.py specs/specs/0006-produtos/spec.md .`
 - **Achados**: implementação e evidências ainda não iniciadas.
 
 ### 14. Tarefas
 
 - As tarefas executáveis ainda não foram decompostas. Após o Definition Gate,
-  `$specsfy-base-tasks` preencherá esta seção com IDs, dependências, checklists e
+  `$specsfy-05-tasks` preencherá esta seção com IDs, dependências, checklists e
   referências aos requisitos e cenários, sem criar arquivo paralelo.
 
 ### 15. Ordem de execução
@@ -655,7 +655,7 @@ tests/features/product_management.feature
 ### 17. Decisões
 
 - **DEC-001**: qualquer membro pode executar todo o CRUD — decisão da
-  entrevista; papéis não restringem produtos nesta fatia.
+  refinamento do backlog; papéis não restringem produtos nesta fatia.
 - **DEC-002**: produto pertence exatamente a uma equipe — garante o catálogo
   isolado pelo contexto já existente.
 - **DEC-003**: SKU é único por equipe e ignora caixa e espaços externos —

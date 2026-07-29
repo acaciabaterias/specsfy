@@ -2,18 +2,18 @@ import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/2
 
 const features = [
   {
-    name: 'Push to deploy.',
-    description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit aute id magna.',
+    name: 'Envio para deploy.',
+    description: 'Conteúdo de exemplo para demonstrar a composição visual do componente.',
     icon: CloudArrowUpIcon,
   },
   {
-    name: 'SSL certificates.',
-    description: 'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
+    name: 'Certificados SSL.',
+    description: 'Centralize as informações essenciais e avance com mais clareza em cada etapa.',
     icon: LockClosedIcon,
   },
   {
-    name: 'Database backups.',
-    description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus.',
+    name: 'Backups do banco de dados.',
+    description: 'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     icon: ServerIcon,
   },
 ]
@@ -26,16 +26,15 @@ export default function Example() {
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-center lg:gap-y-0">
             <div className="lg:row-start-2 lg:max-w-md">
               <h2 className="text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">
-                Boost your productivity. Start using our app today.
+                Aumente sua produtividade. Comece a usar nosso aplicativo hoje.
               </h2>
               <p className="mt-6 text-lg/8 text-gray-300">
-                Ac euismod vel sit maecenas id pellentesque eu sed consectetur. Malesuada adipiscing sagittis vel nulla.
-                Ac euismod vel sit maecenas.
+                Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
               </p>
             </div>
             <img
-              alt="Product screenshot"
-              src="https://tailwindcss.com/plus-assets/img/component-images/dark-project-app-screenshot.png"
+              alt="Captura de tela do produto"
+              src="https://tailwindcss.com/mais-assets/img/component-images/dark-project-app-screenshot.png"
               width={2432}
               height={1442}
               className="relative -z-20 max-w-xl min-w-full rounded-xl shadow-xl ring-1 ring-white/10 lg:row-span-4 lg:w-5xl lg:max-w-none"

@@ -33,13 +33,12 @@ export default function Example() {
         <div className="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
           <div className="lg:pr-4">
             <div className="lg:max-w-lg">
-              <p className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">Deploy faster</p>
+              <p className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">Faça deploy mais rápido</p>
               <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
-                A better workflow
+                Um fluxo de trabalho melhor
               </h1>
               <p className="mt-6 text-xl/8 text-gray-700 dark:text-gray-300">
-                Aliquet nec orci mattis amet quisque ullamcorper neque, nibh sem. At arcu, sit dui mi, nibh dui, diam eget
-                aliquam. Quisque id at vitae feugiat egestas.
+                Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
               </p>
             </div>
           </div>
@@ -47,7 +46,7 @@ export default function Example() {
         <div className="-mt-12 -ml-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
           <img
             alt=""
-            src="https://tailwindcss.com/plus-assets/img/component-images/dark-project-app-screenshot.png"
+            src="https://tailwindcss.com/mais-assets/img/component-images/dark-project-app-screenshot.png"
             className="w-3xl max-w-none rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 sm:w-228 dark:bg-gray-800 dark:ring-white/10"
           />
         </div>
@@ -55,10 +54,7 @@ export default function Example() {
           <div className="lg:pr-4">
             <div className="max-w-xl text-base/7 text-gray-600 lg:max-w-lg dark:text-gray-400">
               <p>
-                Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris semper sed amet vitae
-                sed turpis id. Id dolor praesent donec est. Odio penatibus risus viverra tellus varius sit neque erat velit.
-                Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris semper sed amet vitae
-                sed turpis id.
+                Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
               </p>
               <ul role="list" className="mt-8 space-y-8 text-gray-600 dark:text-gray-400">
                 <li className="flex gap-x-3">
@@ -67,9 +63,7 @@ export default function Example() {
                     className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
                   />
                   <span>
-                    <strong className="font-semibold text-gray-900 dark:text-white">Push to deploy.</strong> Lorem ipsum,
-                    dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor
-                    cupiditate blanditiis ratione.
+                    <strong className="font-semibold text-gray-900 dark:text-white">Envio para deploy.</strong> Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
                   </span>
                 </li>
                 <li className="flex gap-x-3">
@@ -78,8 +72,7 @@ export default function Example() {
                     className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
                   />
                   <span>
-                    <strong className="font-semibold text-gray-900 dark:text-white">SSL certificates.</strong> Anim aute id
-                    magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
+                    <strong className="font-semibold text-gray-900 dark:text-white">Certificados SSL.</strong> Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
                   </span>
                 </li>
                 <li className="flex gap-x-3">
@@ -88,24 +81,18 @@ export default function Example() {
                     className="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400"
                   />
                   <span>
-                    <strong className="font-semibold text-gray-900 dark:text-white">Database backups.</strong> Ac tincidunt
-                    sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.
+                    <strong className="font-semibold text-gray-900 dark:text-white">Backups do banco de dados.</strong> Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
                   </span>
                 </li>
               </ul>
               <p className="mt-8">
-                Et vitae blandit facilisi magna lacus commodo. Vitae sapien duis odio id et. Id blandit molestie auctor
-                fermentum dignissim. Lacus diam tincidunt ac cursus in vel. Mauris varius vulputate et ultrices hac
-                adipiscing egestas. Iaculis convallis ac tempor et ut. Ac lorem vel integer orci.
+                Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
               </p>
               <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                No server? No problem.
+                Sem servidor? Sem problema.
               </h2>
               <p className="mt-6">
-                Id orci tellus laoreet id ac. Dolor, aenean leo, ac etiam consequat in. Convallis arcu ipsum urna nibh.
-                Pharetra, euismod vitae interdum mauris enim, consequat vulputate nibh. Maecenas pellentesque id sed tellus
-                mauris, ultrices mauris. Tincidunt enim cursus ridiculus mi. Pellentesque nam sed nullam sed diam turpis
-                ipsum eu a sed convallis diam.
+                Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
               </p>
             </div>
           </div>

@@ -1,17 +1,22 @@
 # Guia de desenvolvimento da metodologia Specsfy
 
 Este `AGENTS.md` governa o módulo `skills/`. Ele contém a metodologia
-executável, as dez skills base, o setup, o documentador e as três skills auxiliares. Seus testes e fixtures pertencem a este
+executável, as nove skills base, o setup, o documentador e as três skills auxiliares. Seus testes e fixtures pertencem a este
 módulo. A raiz do monorepo não instala nem executa estas skills.
 
 Leia também [`Spec.md`](Spec.md), contrato central do framework publicado pelo
 CLI nos projetos consumidores.
 
+Ao consumir um template, respeite a precedência
+`.specsfy/templates/custom/<Nome>.md` sobre
+`.specsfy/templates/<Nome>.md`. O diretório `custom/` pertence ao usuário e
+nunca deve ser sobrescrito pelo instalador.
+
 <!-- specsfy:framework:start -->
 ## Framework Specsfy
 
 Leia e siga integralmente `{{SPECSFY_SPEC_PATH}}` antes de trabalhar com
-backlogs, entrevistas, especificações, tarefas, testes ou implementação. Esse
+backlogs, refinamentos do backlog, especificações, tarefas, testes ou implementação. Esse
 arquivo contém o fluxo, os caminhos canônicos e os gates do framework.
 
 - Preserve as instruções próprias deste projeto.
@@ -24,7 +29,7 @@ arquivo contém o fluxo, os caminhos canônicos e os gates do framework.
   conteúdo humano.
 - Execute `$specsfy-documentator` depois de cada implementação para reconstruir
   a documentação técnica completa em `docs/`.
-- Use `specs/ideias/` para capturas imediatas ainda não refinadas.
+- Use `specs/inbox/` para capturas imediatas ainda não refinadas.
 - Use `specs/backlog/` para itens refináveis ainda não promovidos.
 - Use `specs/specs/<NNNN>-<slug>/spec.md` como fonte normativa de cada fatia.
 - Não crie `plan.md`, `tasks.md`, `research.md` ou outra fonte normativa
@@ -37,7 +42,7 @@ arquivo contém o fluxo, os caminhos canônicos e os gates do framework.
   metodologia. Testes desta raiz usam diretórios temporários, nunca o workspace
   pai.
 - Mecanismos base vivem somente em
-  `specsfy-base-<responsabilidade>/` nesta raiz.
+  `specsfy-<NN>-<responsabilidade>/` nesta raiz.
 - Contexto técnico opcional pertence a
   [`specialists/`](../specialists/).
 - Código, testes e documentos publicados por uma skill são artefatos derivados;
@@ -48,7 +53,7 @@ normativa paralela.
 
 ## Fronteira com os demais módulos
 
-| Conteúdo | Owner |
+| Conteúdo | Responsável |
 | --- | --- |
 | metodologia, skills, scripts, referências e assets | `skills/` |
 | testes, fixtures e validação das skills | `skills/` |
@@ -65,8 +70,8 @@ módulos necessários para manter o monorepo coerente.
 
 ## Três atos
 
-Antes do Ato I, `specsfy-base-idea` captura sem perguntas em `specs/ideias/` e
-`specsfy-base-backlog` pode transformar uma captura em item refinável em
+Antes do Ato I, `specsfy-01-inbox` captura sem perguntas em `specs/inbox/` e
+`specsfy-02-backlog` pode transformar uma captura em item refinável em
 `specs/backlog/`. Nenhum desses registros é gate ou autorização para
 implementar.
 
@@ -76,7 +81,7 @@ Descobrir problema, finalidade, atores, linguagem, regras, limites e efeitos.
 Aplicar BDD como descoberta e escrever Gherkin. O ato termina sem dúvida P1 e
 com `Definition Gate: Passed`.
 
-Skills: `specsfy-base-interview`, `specsfy-base-specify` e `specsfy-base-validate`.
+Skills: `specsfy-02-backlog`, `specsfy-03-specify` e `specsfy-04-validate`.
 
 ### Ato II — Projetar e provar
 
@@ -84,7 +89,7 @@ Definir plano técnico, dados, contratos, riscos, rollback e tarefas. Usar o BDD
 da spec para escrever TDD e observar RED antes de alterar a implementação. O ato termina com
 `Plan Gate: Passed`.
 
-Skills: `specsfy-base-tasks` e `specsfy-base-tdd-bdd` no modo `prepare`.
+Skills: `specsfy-05-tasks` e `specsfy-06-tdd-bdd` no modo `prepare`.
 
 ### Ato III — Entregar e validar
 
@@ -92,9 +97,9 @@ Executar cada tarefa no ciclo `RED → GREEN → REFACTOR`, rodar aceite, regres
 e rastreabilidade e registrar evidência. O ato termina com
 `Delivery Gate: Passed` e `Status: Complete`.
 
-Skills: `specsfy-base-implement`, `specsfy-base-tdd-bdd`,
-`specsfy-base-update-spec`, `specsfy-documentator` e
-`specsfy-base-progress`.
+Skills: `specsfy-07-implement`, `specsfy-06-tdd-bdd`,
+`specsfy-update-spec`, `specsfy-documentator` e
+`specsfy-progress`.
 
 Mudança de comportamento reabre os Atos I–III. Mudança de plano reabre os Atos
 II–III.
@@ -109,16 +114,15 @@ Draft → Defined → Planned → Implementing → Complete
 
 | Skill | Responsabilidade | Não deve fazer |
 | --- | --- | --- |
-| `specsfy-base-idea` | preservar e pré-processar imediatamente um input | perguntar, criar backlog, spec, tarefas ou código |
-| `specsfy-base-backlog` | clarear superficialmente e registrar ideias | criar spec, tarefas ou código |
-| `specsfy-base-interview` | descobrir intenção e decisões | escrever arquivos por padrão |
-| `specsfy-base-specify` | consolidar `spec.md` e research | implementar ou criar backlog externo |
-| `specsfy-base-validate` | auditar prontidão da definição | decidir requisitos |
-| `specsfy-base-tdd-bdd` | usar BDD da spec para criar TDD e provar RED/GREEN | executar Gherkin ou inventar comportamento |
-| `specsfy-base-tasks` | manter tarefas nas seções 14–15 | criar `tasks.md` ou código |
-| `specsfy-base-implement` | executar tarefa pronta e registrar evidência | trabalhar sem TDD RED |
-| `specsfy-base-update-spec` | incorporar pedido tardio e reabrir somente os atos afetados | criar nova spec ou implementar a mudança |
-| `specsfy-base-progress` | projetar estado global sem escrita | alterar gates ou checkboxes |
+| `specsfy-01-inbox` | preservar e pré-processar imediatamente um input | perguntar, criar backlog, spec, tarefas ou código |
+| `specsfy-02-backlog` | refinar entradas, registrar backlog e descobrir decisões | criar spec, tarefas ou código |
+| `specsfy-03-specify` | consolidar `spec.md` e research | implementar ou criar backlog externo |
+| `specsfy-04-validate` | auditar prontidão da definição | decidir requisitos |
+| `specsfy-06-tdd-bdd` | usar BDD da spec para criar TDD e provar RED/GREEN | executar Gherkin ou inventar comportamento |
+| `specsfy-05-tasks` | manter tarefas nas seções 14–15 | criar `tasks.md` ou código |
+| `specsfy-07-implement` | executar tarefa pronta e registrar evidência | trabalhar sem TDD RED |
+| `specsfy-update-spec` | incorporar pedido tardio e reabrir somente os atos afetados | criar nova spec ou implementar a mudança |
+| `specsfy-progress` | projetar estado global sem escrita | alterar gates ou checkboxes |
 | `specsfy-setup` | garantir contexto persistente e blocos do framework | sobrescrever arquivos de contexto existentes |
 | `specsfy-documentator` | reconstruir `docs/` a partir do código existente | inventar decisões, relações ou URLs |
 | `specsfy-aux-stack` | mapear stack com evidência executável | copiar toda a árvore de dependências |
@@ -131,7 +135,7 @@ limites antes de publicar.
 ## Estrutura de uma skill
 
 ```text
-specsfy-base-<nome>/
+specsfy-<NN>-<nome>/
 ├── SKILL.md
 ├── agents/
 │   └── openai.yaml
@@ -170,8 +174,8 @@ teste ao risco, mas não pule RED.
 
 ## MCR-10
 
-`specsfy-base-interview` e `specsfy-base-specify` usam a referência canônica
-`specsfy-base-specify/references/mcr-10.md`.
+`specsfy-02-backlog` e `specsfy-03-specify` usam a referência canônica
+`specsfy-03-specify/references/mcr-10.md`.
 
 Antes de perguntar:
 
@@ -193,7 +197,7 @@ No diretório `skills/`:
 ```bash
 uv run --quiet --with pyyaml python \
   /home/luizeof/.codex/skills/.system/skill-creator/scripts/quick_validate.py \
-  specsfy-base-<nome>
+  specsfy-<NN>-<nome>
 ```
 
 Ainda nesta raiz:

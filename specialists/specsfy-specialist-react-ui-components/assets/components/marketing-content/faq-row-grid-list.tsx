@@ -1,39 +1,39 @@
 const faqs = [
   {
     id: 1,
-    question: "What's the best thing about Switzerland?",
+    question: "Qual é a melhor coisa sobre a Suíça?",
     answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      "Não sei, mas a bandeira é um grande diferencial.",
   },
   {
     id: 2,
-    question: 'How do you make holy water?',
+    question: 'Como se faz água benta?',
     answer:
-      'You boil the hell out of it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam aut tempora vitae odio inventore fuga aliquam nostrum quod porro. Delectus quia facere id sequi expedita natus.',
+      'Ferva até ficar pronta.',
   },
   {
     id: 3,
-    question: 'What do you call someone with no body and no nose?',
+    question: 'Como se chama alguém sem corpo e sem nariz?',
     answer:
-      'Nobody knows. Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, voluptas ipsa quia excepturi, quibusdam natus exercitationem sapiente tempore labore voluptatem.',
+      'Ninguém sabe.',
   },
   {
     id: 4,
-    question: 'Why do you never see elephants hiding in trees?',
+    question: 'Por que nunca vemos elefantes escondidos em árvores?',
     answer:
-      "Because they're so good at it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      "Porque eles são muito bons nisso.",
   },
   {
     id: 5,
-    question: "Why can't you hear a pterodactyl go to the bathroom?",
+    question: "Por que não ouvimos um pterodáctilo indo ao banheiro?",
     answer:
-      'Because the pee is silent. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, quas voluptatibus ex culpa ipsum, aspernatur blanditiis fugiat ullam magnam suscipit deserunt illum natus facilis atque vero consequatur! Quisquam, debitis error.',
+      'Porque ele vai em silêncio.',
   },
   {
     id: 6,
-    question: 'Why did the invisible man turn down the job offer?',
+    question: 'Por que o homem invisível recusou a oferta de trabalho?',
     answer:
-      "He couldn't see himself doing it. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet perspiciatis officiis corrupti tenetur. Temporibus ut voluptatibus, perferendis sed unde rerum deserunt eius.",
+      "Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.",
   },
 ]
 
@@ -42,7 +42,7 @@ export default function Example() {
     <div className="bg-white dark:bg-gray-900">
       <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8 lg:py-40">
         <h2 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl dark:text-white">
-          Frequently asked questions
+          Perguntas frequentes
         </h2>
         <dl className="mt-20 divide-y divide-gray-900/10 dark:divide-white/10">
           {faqs.map((faq) => (

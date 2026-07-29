@@ -33,7 +33,8 @@ artefatos e seção do changelog e retome apenas a etapa ausente.
 ## 2. Preparar versão
 
 ```bash
-python3 -B .agents/skills/specsfy-release-cli/scripts/release_changelog.py prepare \
+python3 -B \
+  .agents/skills/specsfy-release-cli/scripts/release_changelog.py prepare \
   --cli cli --version X.Y.Z --date YYYY-MM-DD \
   --notes-file /caminho/notas.md
 cd cli
@@ -44,7 +45,8 @@ uv run python -B -m unittest discover -s tests -p 'test_*.py'
 uv run specsfy --help
 ./bin/specsfy --version
 cd ..
-python3 -B .agents/skills/specsfy-release-cli/scripts/release_changelog.py extract \
+python3 -B \
+  .agents/skills/specsfy-release-cli/scripts/release_changelog.py extract \
   --changelog cli/CHANGELOG.md --version X.Y.Z \
   --output /caminho/release-notes.md
 ```
@@ -90,7 +92,8 @@ gh release view vX.Y.Z --repo promovaweb/specsfy \
   --json url,tagName,targetCommitish,body
 gh release view vX.Y.Z --repo promovaweb/specsfy \
   --json body > /caminho/release-publicado.json
-python3 -B .agents/skills/specsfy-release-cli/scripts/release_changelog.py verify \
+python3 -B \
+  .agents/skills/specsfy-release-cli/scripts/release_changelog.py verify \
   --changelog cli/CHANGELOG.md --version X.Y.Z \
   --release-json /caminho/release-publicado.json
 git ls-remote origin "refs/tags/vX.Y.Z^{}"

@@ -1,7 +1,7 @@
 const posts = [
-  ['Boost your conversion rate', 'https://images.unsplash.com/photo-1496128858413-b36217c2ce36?auto=format&fit=crop&w=1200&q=80'],
-  ['How to use search engine optimization to drive sales', 'https://images.unsplash.com/photo-1547586696-ea22b4d4235d?auto=format&fit=crop&w=1200&q=80'],
-  ['Improve your customer experience', 'https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=1200&q=80'],
+  ['Aumente sua taxa de conversão', 'https://images.unsplash.com/photo-1496128858413-b36217c2ce36?auto=format&fit=crop&w=1200&q=80'],
+  ['Como usar SEO para aumentar as vendas', 'https://images.unsplash.com/photo-1547586696-ea22b4d4235d?auto=format&fit=crop&w=1200&q=80'],
+  ['Melhore a experiência dos seus clientes', 'https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=1200&q=80'],
 ]
 
 export default function Example() {
@@ -10,10 +10,10 @@ export default function Example() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:max-w-4xl">
           <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
-            From the blog
+            Do blog
           </h2>
           <p className="mt-2 text-lg/8 text-gray-600 dark:text-gray-400">
-            Learn how to grow your business with our expert advice.
+            Aprenda a desenvolver seu negócio com a orientação de especialistas.
           </p>
           <div className="mt-16 space-y-20 lg:mt-20">
             {posts.map(([title, imageUrl]) => (
@@ -22,10 +22,10 @@ export default function Example() {
                   <img alt="" src={imageUrl} className="absolute inset-0 size-full rounded-2xl object-cover" />
                 </div>
                 <div>
-                  <time className="text-xs text-gray-500 dark:text-gray-400">Mar 16, 2020</time>
+                  <time className="text-xs text-gray-500 dark:text-gray-400">16 mar. 2020</time>
                   <h3 className="mt-3 text-lg/6 font-semibold text-gray-900 dark:text-white">{title}</h3>
                   <p className="mt-5 text-sm/6 text-gray-600 dark:text-gray-400">
-                    Dolore commodo in nulla do nulla esse consectetur.
+                    Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
                   </p>
                 </div>
               </article>

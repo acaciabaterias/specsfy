@@ -57,13 +57,13 @@ class FrameworkFileTests(unittest.TestCase):
 
     def test_bdd_runner_contract_is_stack_aware(self) -> None:
         tdd_skill = (
-            ROOT / "specsfy-base-tdd-bdd" / "SKILL.md"
+            ROOT / "specsfy-06-tdd-bdd" / "SKILL.md"
         ).read_text(encoding="utf-8")
         tasks_skill = (
-            ROOT / "specsfy-base-tasks" / "SKILL.md"
+            ROOT / "specsfy-05-tasks" / "SKILL.md"
         ).read_text(encoding="utf-8")
         verifier = (
-            ROOT / "specsfy-base-validate" / "scripts" / "verify_repo.py"
+            ROOT / "specsfy-04-validate" / "scripts" / "verify_repo.py"
         ).read_text(encoding="utf-8")
         agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
         readme = (ROOT / "README.md").read_text(encoding="utf-8")

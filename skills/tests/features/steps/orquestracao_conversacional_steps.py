@@ -7,16 +7,15 @@ from behave import given, then, when
 
 ROOT = Path(__file__).resolve().parents[3]
 BASE_SKILLS = (
-    "specsfy-base-idea",
-    "specsfy-base-backlog",
-    "specsfy-base-interview",
-    "specsfy-base-specify",
-    "specsfy-base-validate",
-    "specsfy-base-tasks",
-    "specsfy-base-tdd-bdd",
-    "specsfy-base-implement",
-    "specsfy-base-update-spec",
-    "specsfy-base-progress",
+    "specsfy-01-inbox",
+    "specsfy-02-backlog",
+    "specsfy-03-specify",
+    "specsfy-04-validate",
+    "specsfy-05-tasks",
+    "specsfy-06-tdd-bdd",
+    "specsfy-07-implement",
+    "specsfy-update-spec",
+    "specsfy-progress",
 )
 
 
@@ -32,7 +31,7 @@ def orchestration_contract() -> str:
 @given("uma skill base concluiu sua responsabilidade")
 @given("uma etapa posterior encontra uma pendência de uma etapa anterior")
 @given("uma transição automática exige uma ação sensível")
-@given("as dez skills base instaladas")
+@given("as nove skills base instaladas")
 def given_orchestration_context(context) -> None:
     context.contract = orchestration_contract()
 
@@ -75,16 +74,16 @@ def then_resumes_automatically(context) -> None:
     assert "Retomada automática:" in context.contract
 
 
-@then("a cadeia principal chama backlog, interview, specify, validate, tasks, tdd-bdd, implement e progress")
+@then("a cadeia principal chama inbox, backlog, specify, validate, tasks, tdd-bdd, implement e progress")
 def then_routes_main_chain(context) -> None:
     expected_handoffs = (
-        "$specsfy-base-interview",
-        "$specsfy-base-specify",
-        "$specsfy-base-validate",
-        "$specsfy-base-tasks",
-        "$specsfy-base-tdd-bdd",
-        "$specsfy-base-implement",
-        "$specsfy-base-progress",
+        "$specsfy-02-backlog",
+        "$specsfy-03-specify",
+        "$specsfy-04-validate",
+        "$specsfy-05-tasks",
+        "$specsfy-06-tdd-bdd",
+        "$specsfy-07-implement",
+        "$specsfy-progress",
     )
     for destination in expected_handoffs:
         assert destination in context.contract
@@ -92,25 +91,25 @@ def then_routes_main_chain(context) -> None:
 
 @then("mudança tardia chama update-spec automaticamente")
 def then_late_change_routes_to_update_spec(context) -> None:
-    implement = (ROOT / "specsfy-base-implement" / "SKILL.md").read_text(
+    implement = (ROOT / "specsfy-07-implement" / "SKILL.md").read_text(
         encoding="utf-8"
     )
     normalized = " ".join(implement.split())
-    assert "carregue automaticamente `$specsfy-base-update-spec`" in normalized
+    assert "carregue automaticamente `$specsfy-update-spec`" in normalized
 
 
 @then("ausência de especificação chama specify automaticamente")
 def then_missing_spec_routes_to_specify(context) -> None:
-    progress = (ROOT / "specsfy-base-progress" / "SKILL.md").read_text(
+    progress = (ROOT / "specsfy-progress" / "SKILL.md").read_text(
         encoding="utf-8"
     )
     normalized = " ".join(progress.split())
-    assert "carregue automaticamente `$specsfy-base-update-spec`" in normalized
+    assert "carregue automaticamente `$specsfy-update-spec`" in normalized
 
 
 @then("o handoff não pede confirmação")
 def then_handoff_does_not_request_confirmation(context) -> None:
-    assert "não peça confirmação para o handoff" in context.contract
+    assert "não peça confirmação para o handoff" in context.contract.casefold()
 
 
 @then("a ação sensível continua exigindo autorização específica")

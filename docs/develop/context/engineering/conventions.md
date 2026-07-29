@@ -18,10 +18,10 @@ Consulte antes de criar arquivos, escolher nomes ou definir tratamento de erro.
 
 ## Organização
 
-- Metodologia vive em `skills/`; especialistas em `specialists/`.
-- CLI e TUI vivem em `cli/`; guias oficiais em `docs/user/` e documentação
+- Metodologia vive em `skills/`. Especialistas vivem em `specialists/`.
+- CLI e TUI vivem em `cli/`. Guias oficiais vivem em `docs/user/` e documentação
   técnica em `docs/develop/`.
-- Tutorial detalhado vive em `specsfy/`; identidade em `brand/`.
+- Tutorial detalhado vive em `specsfy/`. Identidade vive em `brand/`.
 - Aplicação interna e documentação operacional vivem em `example/`.
 - Specs consumidoras vivem em
   `<projeto>/specs/specs/<NNNN>-<slug>/spec.md`.
@@ -38,14 +38,14 @@ Consulte antes de criar arquivos, escolher nomes ou definir tratamento de erro.
 - Use links relativos entre módulos.
 - Links públicos usam `https://github.com/promovaweb/specsfy`.
 - Não crie `.gitmodules`, gitlinks ou raízes Git internas.
-- Não copie fonte normativa para facilitar navegação; publique um link.
+- Não copie fonte normativa para facilitar navegação. Publique um link.
 
 ## Disciplina documental
 
 - Toda criação ou alteração atualiza a documentação aplicável na mesma entrega.
 - A [topologia documental](../documentation.md) determina público, destino,
   linguagem e quando os dois percursos precisam mudar juntos.
-- Contextos explicam decisões; não copiam inventários de versões, rotas ou
+- Contextos explicam decisões. Não copiam inventários de versões, rotas ou
   schemas.
 - Documentação gerada para consumidores pertence a `<projeto>/docs/`.
 - `example/README.md` não substitui os guias oficiais em `docs/user/`.
@@ -66,10 +66,10 @@ Consulte antes de criar arquivos, escolher nomes ou definir tratamento de erro.
 
 ## Não use para
 
-- impor estilo não verificável;
+- impor estilo não verificável.
 - substituir instruções específicas de um módulo.
 
 ## Fonte da verdade e precedência
 
-Este documento governa convenções; formatadores, validadores e testes fornecem
+Este documento governa convenções. Formatadores, validadores e testes fornecem
 evidência executável.

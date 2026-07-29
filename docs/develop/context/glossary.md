@@ -20,14 +20,14 @@ método. Preserve IDs e termos canônicos nas specs e testes.
 
 ## Atualize quando
 
-- um termo transversal ganhar definição nova;
-- duas palavras forem confirmadas como equivalentes;
+- um termo transversal ganhar definição nova.
+- duas palavras forem confirmadas como equivalentes.
 - um termo legado precisar ser distinguido do termo vigente.
 
 ## Não use para
 
-- definir vocabulário exclusivo de uma feature;
-- acumular toda palavra encontrada no código;
+- definir vocabulário exclusivo de uma feature.
+- acumular toda palavra encontrada no código.
 - mudar silenciosamente o significado de IDs existentes.
 
 ## Fonte da verdade e precedência
@@ -38,13 +38,14 @@ fonte normativa antes de alterar usos.
 
 ## Termos canônicos
 
+<!-- markdownlint-disable MD013 -->
 | Termo | Definição operacional | Não confundir com |
 | --- | --- | --- |
 | Fatia vertical | Entrega demonstrável com problema, aceite, testes, tarefas e evidência próprios | camada técnica |
-| Ideia capturada | Input preservado e pré-processado sem perguntas em `specs/ideias/<data-hora>-<slug>.md` | backlog, requisito ou autorização |
+| Ideia capturada | Input preservado e pré-processado sem perguntas em `specs/inbox/<data-hora>-<slug>.md` | backlog, requisito ou autorização |
 | Backlog | Item priorizável em `specs/backlog/<NNNN>-<slug>.md` que amadurece uma necessidade antes da promoção | captura bruta, spec ou tarefa |
-| Interview | Conversa adaptativa que aprofunda ideia, backlog ou spec e prepara o handoff | captura superficial ou especificação |
-| Spec | `specs/specs/<NNNN>-<slug>/spec.md`, fonte normativa única de uma fatia; somente o diretório é numerado | documento de contexto |
+| Backlog | Conversa adaptativa que aprofunda ideia, backlog ou spec e prepara o handoff | captura superficial ou especificação |
+| Spec | `specs/specs/<NNNN>-<slug>/spec.md`, fonte normativa única de uma fatia. Somente o diretório é numerado | documento de contexto |
 | Atualização de spec | incorporação explícita de pedido surgido depois do Definition Gate, com análise de impacto e reabertura seletiva dos atos | nova spec ou edição silenciosa de código |
 | Research | Evidência externa consultada e indexada pela spec | requisito |
 | Gate | Resultado verificável que autoriza o handoff entre atos | checkbox editorial |
@@ -53,6 +54,7 @@ fonte normativa antes de alterar usos.
 | Caso TDD | Definição de teste executável com marcador `SPECSFY:` próprio e RED/GREEN observável | arquivo de teste ou marcador compartilhado por vários testes |
 | Contexto transversal | Decisão vigente aplicável a várias fatias | comportamento de uma feature |
 | ADR | Registro histórico de uma decisão arquitetural e suas consequências | arquitetura vigente |
+<!-- markdownlint-enable MD013 -->
 
 ## Regras de vocabulário
 

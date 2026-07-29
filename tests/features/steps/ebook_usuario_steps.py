@@ -2,6 +2,7 @@ import json
 import posixpath
 import re
 import subprocess
+import tempfile
 import zipfile
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -22,6 +23,26 @@ def given_user_documentation(context) -> None:
 @given("o arquivo de versão do ebook")
 def given_ebook_version(context) -> None:
     context.version_path = EBOOK_ROOT / "VERSION"
+
+
+@given("seis edições portáteis em um diretório temporário")
+def given_six_portable_editions(context) -> None:
+    context.retention_directory = tempfile.TemporaryDirectory()
+    context.retention_root = Path(context.retention_directory.name)
+    context.retention_versions = (
+        "1.0.0",
+        "1.1.0",
+        "1.2.0",
+        "2.0.0",
+        "2.0.1",
+        "2.1.0",
+    )
+    for version in context.retention_versions:
+        stem = f"Specsfy-Guia-do-Usuario-v{version}"
+        (context.retention_root / f"{stem}.pdf").write_bytes(b"pdf")
+        (context.retention_root / f"{stem}.epub").write_bytes(b"epub")
+    context.unrelated_artifact = context.retention_root / "README.md"
+    context.unrelated_artifact.write_text("preservar", encoding="utf-8")
 
 
 @given("o manifesto verificável do ebook")
@@ -96,6 +117,23 @@ def when_integrity_is_calculated(context) -> None:
     )
     context.manifest = json.loads(
         context.manifest_path.read_text(encoding="utf-8")
+    )
+
+
+@when("a retenção do ebook é executada")
+def when_ebook_retention_runs(context) -> None:
+    context.retention = subprocess.run(
+        [
+            "python3",
+            str(ROOT / ".ebook" / "prune-editions.py"),
+            "--ebook-root",
+            str(context.retention_root),
+            "--keep",
+            "5",
+        ],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
     )
 
 
@@ -326,12 +364,37 @@ def then_epub_internal_targets_exist(context) -> None:
             )
 
 
+@then("somente as cinco versões SemVer mais recentes permanecem")
+def then_only_latest_five_editions_remain(context) -> None:
+    assert context.retention.returncode == 0, context.retention.stderr
+    remaining = {
+        path.name
+        for path in context.retention_root.glob(
+            "Specsfy-Guia-do-Usuario-v*.*"
+        )
+    }
+    expected_versions = set(context.retention_versions[1:])
+    assert len(remaining) == 10
+    for version in expected_versions:
+        stem = f"Specsfy-Guia-do-Usuario-v{version}"
+        assert f"{stem}.pdf" in remaining
+        assert f"{stem}.epub" in remaining
+
+
+@then("arquivos que não representam edições são preservados")
+def then_unrelated_files_are_preserved(context) -> None:
+    assert context.unrelated_artifact.read_text(
+        encoding="utf-8"
+    ) == "preservar"
+    context.retention_directory.cleanup()
+
+
 @then("cada etapa explica objetivo participação do usuário e prova técnica")
 def then_each_stage_is_explained(context) -> None:
     for heading in (
-        "### Antes dos atos: escolha o destino da ideia",
+        "### Escolha o destino da ideia",
         "### Ato I — Definir o que precisa mudar",
-        "### Ato II — Planejar e provar antes de implementar",
+        "### Ato II — Planejar e preparar o RED",
         "### Ato III — Entregar e conferir o resultado",
     ):
         assert heading in context.method
@@ -355,6 +418,6 @@ def then_method_terms_are_explained(context) -> None:
         "Um **gate**",
         "BDD",
         "TDD",
-        "Se o pedido mudar",
+        "Se a necessidade mudar",
     ):
         assert evidence in context.method

@@ -1,11 +1,13 @@
 # Contexto de engenharia
 
+<!-- markdownlint-disable MD033 -->
 <p align="center">
   <picture>
     <source srcset="../../../../brand/logo/icon.svg" type="image/svg+xml">
     <img src="../../../../brand/logo/icon.png" alt="Logo do Specsfy" width="128">
   </picture>
 </p>
+<!-- markdownlint-enable MD033 -->
 
 ## Classificação
 
@@ -27,20 +29,20 @@ decisão atravessar seus escopos.
 
 ## Atualize quando
 
-- uma folha de engenharia for criada, consolidada ou removida;
-- o gatilho de leitura ou atualização de uma folha mudar;
+- uma folha de engenharia for criada, consolidada ou removida.
+- o gatilho de leitura ou atualização de uma folha mudar.
 - um assunto adquirir responsabilidade independente.
 
 ## Não use para
 
-- repetir regras das folhas;
-- listar todos os arquivos ou pacotes;
+- repetir regras das folhas.
+- listar todos os arquivos ou pacotes.
 - registrar comportamento de feature.
 
 ## Fonte da verdade e precedência
 
 Este índice governa apenas o roteamento. As folhas governam decisões
-transversais; manifests, lockfiles, testes e configurações mostram o estado
+transversais. Manifests, lockfiles, testes e configurações mostram o estado
 executável.
 
 ## Roteamento de engenharia

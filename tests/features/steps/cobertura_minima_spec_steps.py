@@ -15,11 +15,11 @@ def given_coverage_contracts(context) -> None:
 @when("a política mínima da spec é inspecionada")
 def when_minimum_policy_is_inspected(context) -> None:
     context.validator = (
-        context.skills / "specsfy-base-validate/scripts/validate_spec.py"
+        context.skills / "specsfy-04-validate/scripts/validate_spec.py"
     ).read_text(encoding="utf-8")
     context.traceability = (
         context.skills
-        / "specsfy-base-tdd-bdd/scripts/check_traceability.py"
+        / "specsfy-06-tdd-bdd/scripts/check_traceability.py"
     ).read_text(encoding="utf-8")
     context.framework = (context.skills / "Spec.md").read_text(encoding="utf-8")
     context.template = (

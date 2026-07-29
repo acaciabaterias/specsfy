@@ -48,16 +48,15 @@ export default function Example() {
               </div>
             </div>
             <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">
-              Get in touch
+              Entre em contato
             </h2>
             <p className="mt-6 text-lg/8 text-gray-600 dark:text-gray-400">
-              Proin volutpat consequat porttitor cras nullam gravida at. Orci molestie a eu arcu. Sed ut tincidunt
-              integer elementum id sem. Arcu sed malesuada et magna.
+              Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
             </p>
             <dl className="mt-10 space-y-4 text-base/7 text-gray-600 dark:text-gray-300">
               <div className="flex gap-x-4">
                 <dt className="flex-none">
-                  <span className="sr-only">Address</span>
+                  <span className="sr-only">Endereço</span>
                   <BuildingOffice2Icon aria-hidden="true" className="h-7 w-6 text-gray-400" />
                 </dt>
                 <dd>
@@ -68,7 +67,7 @@ export default function Example() {
               </div>
               <div className="flex gap-x-4">
                 <dt className="flex-none">
-                  <span className="sr-only">Telephone</span>
+                  <span className="sr-only">Telefone</span>
                   <PhoneIcon aria-hidden="true" className="h-7 w-6 text-gray-400" />
                 </dt>
                 <dd>
@@ -79,7 +78,7 @@ export default function Example() {
               </div>
               <div className="flex gap-x-4">
                 <dt className="flex-none">
-                  <span className="sr-only">Email</span>
+                  <span className="sr-only">E-mail</span>
                   <EnvelopeIcon aria-hidden="true" className="h-7 w-6 text-gray-400" />
                 </dt>
                 <dd>
@@ -96,7 +95,7 @@ export default function Example() {
             <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
               <div>
                 <label htmlFor="first-name" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                  First name
+                  Nome
                 </label>
                 <div className="mt-2.5">
                   <input
@@ -110,7 +109,7 @@ export default function Example() {
               </div>
               <div>
                 <label htmlFor="last-name" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                  Last name
+                  Sobrenome
                 </label>
                 <div className="mt-2.5">
                   <input
@@ -124,7 +123,7 @@ export default function Example() {
               </div>
               <div className="sm:col-span-2">
                 <label htmlFor="email" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                  Email
+                  E-mail
                 </label>
                 <div className="mt-2.5">
                   <input
@@ -138,7 +137,7 @@ export default function Example() {
               </div>
               <div className="sm:col-span-2">
                 <label htmlFor="phone-number" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                  Phone number
+                  Telefone
                 </label>
                 <div className="mt-2.5">
                   <input
@@ -152,7 +151,7 @@ export default function Example() {
               </div>
               <div className="sm:col-span-2">
                 <label htmlFor="message" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
-                  Message
+                  Mensagem
                 </label>
                 <div className="mt-2.5">
                   <textarea
@@ -170,7 +169,7 @@ export default function Example() {
                 type="submit"
                 className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
               >
-                Send message
+                Enviar mensagem
               </button>
             </div>
           </div>

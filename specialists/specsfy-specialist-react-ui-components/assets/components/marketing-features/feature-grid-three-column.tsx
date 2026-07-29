@@ -2,23 +2,23 @@ import { ArrowPathIcon, CloudArrowUpIcon, LockClosedIcon } from '@heroicons/reac
 
 const features = [
   {
-    name: 'Push to deploy',
+    name: 'Envio para deploy',
     description:
-      'Commodo nec sagittis tortor mauris sed. Turpis tortor quis scelerisque diam id accumsan nullam tempus. Pulvinar etiam lacus volutpat eu.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     href: '#',
     icon: CloudArrowUpIcon,
   },
   {
-    name: 'SSL certificates',
+    name: 'Certificados SSL',
     description:
-      'Pellentesque enim a commodo malesuada turpis eleifend risus. Facilisis donec placerat sapien consequat tempor fermentum nibh.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     href: '#',
     icon: LockClosedIcon,
   },
   {
-    name: 'Simple queues',
+    name: 'Filas simples',
     description:
-      'Pellentesque sit elit congue ante nec amet. Dolor aenean curabitur viverra suspendisse iaculis eget. Nec mollis placerat ultricies euismod.',
+      'Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.',
     href: '#',
     icon: ArrowPathIcon,
   },
@@ -29,13 +29,12 @@ export default function Example() {
     <div className="bg-white py-24 sm:py-32 dark:bg-gray-900">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
-          <h2 className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">Deploy faster</h2>
+          <h2 className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">Faça deploy mais rápido</h2>
           <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl lg:text-balance dark:text-white">
-            Everything you need to deploy your app
+            Tudo o que você precisa para fazer deploy da aplicação
           </p>
           <p className="mt-6 text-lg/8 text-gray-600 dark:text-gray-300">
-            Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum
-            pulvinar et feugiat blandit at. In mi viverra elit nunc.
+            Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
@@ -53,7 +52,7 @@ export default function Example() {
                       href={feature.href}
                       className="text-sm/6 font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
                     >
-                      Learn more <span aria-hidden="true">&rarr;</span>
+                      Saiba mais <span aria-hidden="true">&rarr;</span>
                     </a>
                   </p>
                 </dd>

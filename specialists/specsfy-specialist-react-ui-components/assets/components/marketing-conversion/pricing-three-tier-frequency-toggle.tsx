@@ -1,8 +1,8 @@
 import { CheckIcon } from '@heroicons/react/20/solid'
 
 const frequencies = [
-  { value: 'monthly', label: 'Monthly', priceSuffix: '/month' },
-  { value: 'annually', label: 'Annually', priceSuffix: '/year' },
+  { value: 'monthly', label: 'Mensalmente', priceSuffix: '/mês' },
+  { value: 'annually', label: 'Anualmente', priceSuffix: '/ano' },
 ]
 
 const tiers = [
@@ -11,43 +11,43 @@ const tiers = [
     id: 'tier-freelancer',
     href: '#',
     price: { monthly: '$19', annually: '$199' },
-    description: 'The essentials to provide your best work for clients.',
-    features: ['5 products', 'Up to 1,000 subscribers', 'Basic analytics', '48-hour support response time'],
+    description: 'O essencial para entregar seu melhor trabalho aos clientes.',
+    features: ['5 produtos', 'Até 1.000 assinantes', 'Análises básicas', 'Resposta do suporte em até 48 horas'],
     featured: false,
-    cta: 'Buy plan',
+    cta: 'Comprar plano',
   },
   {
     name: 'Startup',
     id: 'tier-startup',
     href: '#',
     price: { monthly: '$29', annually: '$299' },
-    description: 'A plan that scales with your rapidly growing business.',
+    description: 'Um plano que acompanha o crescimento acelerado da sua empresa.',
     features: [
-      '25 products',
-      'Up to 10,000 subscribers',
-      'Advanced analytics',
-      '24-hour support response time',
-      'Marketing automations',
+      '25 produtos',
+      'Até 10.000 assinantes',
+      'Análises avançadas',
+      'Resposta do suporte em até 24 horas',
+      'Automações de marketing',
     ],
     featured: false,
-    cta: 'Buy plan',
+    cta: 'Comprar plano',
   },
   {
-    name: 'Enterprise',
+    name: 'Empresas',
     id: 'tier-enterprise',
     href: '#',
     price: 'Custom',
-    description: 'Dedicated support and infrastructure for your company.',
+    description: 'Suporte e infraestrutura dedicados para sua empresa.',
     features: [
-      'Unlimited products',
-      'Unlimited subscribers',
-      'Advanced analytics',
-      '1-hour, dedicated support response time',
-      'Marketing automations',
-      'Custom reporting tools',
+      'Produtos ilimitados',
+      'Assinantes ilimitados',
+      'Análises avançadas',
+      'Resposta do suporte dedicado em até 1 hora',
+      'Automações de marketing',
+      'Ferramentas personalizadas de relatórios',
     ],
     featured: true,
-    cta: 'Contact sales',
+    cta: 'Falar com vendas',
   },
 ]
 
@@ -60,17 +60,17 @@ export default function Example() {
     <form className="group/tiers bg-white py-24 sm:py-32 dark:bg-gray-900">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
-          <h2 className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">Pricing</h2>
+          <h2 className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">Preços</h2>
           <p className="mt-2 text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-6xl dark:text-white">
-            Pricing that grows with you
+            Preços que crescem com você
           </p>
         </div>
         <p className="mx-auto mt-6 max-w-2xl text-center text-lg font-medium text-pretty text-gray-600 sm:text-xl/8 dark:text-gray-400">
-          Choose an affordable plan that's packed with the best features for engaging your audience, creating customer
-          loyalty, and driving sales.
+          Escolha um plano acessível com recursos para engajar seu público e criar relacionamentos com clientes
+          relacionamentos e aumentar as vendas.
         </p>
         <div className="mt-16 flex justify-center">
-          <fieldset aria-label="Payment frequency">
+          <fieldset aria-label="Frequência de pagamento">
             <div className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs/5 font-semibold inset-ring inset-ring-gray-200 dark:inset-ring-white/10">
               {frequencies.map((frequency) => (
                 <label
@@ -119,7 +119,7 @@ export default function Example() {
                       {tier.price.monthly}
                     </span>
                     <span className="text-sm/6 font-semibold text-gray-600 group-data-featured/tier:text-gray-300 dark:text-gray-400">
-                      /month
+                      /mês
                     </span>
                   </p>
                   <p className="mt-6 flex items-baseline gap-x-1 group-not-has-[[name=frequency][value=annually]:checked]/tiers:hidden">
@@ -127,7 +127,7 @@ export default function Example() {
                       {tier.price.annually}
                     </span>
                     <span className="text-sm/6 font-semibold text-gray-600 group-data-featured/tier:text-gray-300 dark:text-gray-400">
-                      /year
+                      /ano
                     </span>
                   </p>
                 </>

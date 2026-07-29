@@ -1,41 +1,31 @@
 # Uso avançado do Specsfy
 
-## Classificação
+Este guia reúne recursos usados depois da primeira spec: seleção de
+especialistas, progresso em JSON, atualização visual e retomada de uma mudança
+posterior. Para acompanhar os exemplos, conclua o
+[primeiro projeto](getting-started.md), mantenha o CLI e o framework instalados
+e execute os comandos na raiz do projeto consumidor.
 
-| Campo | Valor |
-| --- | --- |
-| Natureza | normativo |
-| Escopo | seleção técnica, automação, atualização e retomada de mudanças |
-| Autoridade | interfaces de `cli/`, `skills/` e `specialists/` |
+## Detecte e instale orientação técnica
 
-## Papel
-
-Combinar o método base com especialistas, saída estruturada, monitoramento e
-reabertura disciplinada dos gates em projetos já operacionais.
-
-## Como usar
-
-### Pré-condições
-
-- jornada do [primeiro projeto](getting-started.md) compreendida;
-- CLI e framework instalados;
-- projeto consumidor selecionado explicitamente.
-
-## Detecte e instale contexto técnico
-
-Veja as recomendações sem alterar o projeto:
+Comece com `skills detect` para ler as recomendações do catálogo sem alterar o
+projeto:
 
 ```bash
 specsfy skills detect --project .
 ```
 
-Instale o framework e todos os especialistas detectados:
+Quando todas as recomendações forem aplicáveis, `--detected` instala o
+framework e os especialistas em uma única execução. O `skills-lock.json`
+registra os arquivos publicados:
 
 ```bash
 specsfy install --project . --detected
 ```
 
-Ou componha uma seleção explícita:
+Quando o catálogo listar tecnologias que não pertencem à aplicação, repita
+`--specialist` somente com os nomes confirmados. Assim, o instalador publica as
+bases e ignora as recomendações que não foram escolhidas:
 
 ```bash
 specsfy install --project . \
@@ -43,15 +33,17 @@ specsfy install --project . \
   --specialist specsfy-specialist-postgres
 ```
 
-Em projeto já preparado, adicione somente especialistas:
+Em um projeto já preparado, use `skills add` para acrescentar somente os
+especialistas escolhidos:
 
 ```bash
 specsfy skills add specsfy-specialist-laravel --project .
 ```
 
-Detecção é recomendação baseada em manifests, dependências e marcadores do
-projeto. Revise a seleção antes de instalar. Especialistas orientam decisões
-técnicas; não criam specs nem avançam gates.
+A detecção usa manifests, dependências e arquivos reconhecidos pelo catálogo.
+O comando de instalação só deve ser executado depois da revisão. Os
+especialistas orientam escolhas técnicas, mas não criam specs nem aprovam
+gates.
 
 ## Automatize a leitura de progresso
 
@@ -61,8 +53,9 @@ specsfy progress --project . --watch --interval 0.5 --json
 ```
 
 O JSON contém `summary` e `specs`. Com `--watch`, um snapshot novo aparece
-somente quando o conteúdo das specs muda. Use essa saída em painéis e
-automação de leitura; ela não deve ser usada para editar gates.
+somente quando o conteúdo das specs muda. Painéis podem consumir essa saída
+para leitura, mas os gates continuam sendo editados apenas na `spec.md` pela
+skill responsável.
 
 ## Ajuste a atualização visual
 
@@ -77,29 +70,44 @@ desconhecidas. Consulte todos os recursos no [guia do CLI](cli.md).
 ## Atualize sem perder customizações
 
 ```bash
-uv tool upgrade specsfy-cli
 specsfy skills update --project .
 ```
 
 O CLI usa fingerprints para distinguir conteúdo gerenciado intacto de
-customização local. Divergência bloqueia atualização ou remoção. Use `--force`
-somente após revisar a diferença e decidir descartar o conteúdo protegido.
+customização local. Uma diferença local faz a atualização ou a remoção ser
+recusada. Use `--force` somente depois de revisar a comparação e confirmar que
+o conteúdo protegido pode ser descartado.
 
-## Reabra a entrada correta
+Quando o CLI foi instalado pelo `uv`, o comando abaixo atualiza o ambiente
+gerenciado e preserva as opções registradas pela ferramenta:
+
+```bash
+uv tool upgrade specsfy-cli
+```
+
+Quando a instalação usa o zipapp oficial, substitua o executável pelo download
+mais recente e restaure a permissão:
+
+```bash
+curl -fL get.specsfy.dev -o "$HOME/.local/bin/specsfy"
+chmod +x "$HOME/.local/bin/specsfy"
+```
+
+## Incorpore uma mudança na spec
 
 Quando lembrar de algo depois da definição, use a entrada explícita:
 
 ```text
-Use $specsfy-base-update-spec em
+Use $specsfy-update-spec em
 specs/specs/<NNNN>-<slug>/spec.md:
-quero adicionar, remover, corrigir ou mudar este pedido.
+quero adicionar, remover, corrigir ou mudar esta especificação.
 ```
 
-Quando um requisito observável muda, a skill reabre a definição; Definition,
-Plan e Delivery Gate precisam de evidência nova. Quando apenas o plano técnico
-muda, ela reabre o Ato II e o Ato III. Uma entrada alterada invalida provas
-posteriores construídas sobre a versão anterior, mas preserva tarefas e
-evidências que continuam compatíveis.
+Quando um requisito observável muda, a skill reabre a definição. O Definition,
+o Plan e o Delivery Gate precisam de evidência nova. Quando apenas o plano
+técnico muda, ela reabre o Ato II e o Ato III. A spec alterada invalida as
+provas que dependiam da versão anterior e preserva tarefas e evidências ainda
+compatíveis.
 
 As skills fazem transições e retomadas na mesma conversa. Esse handoff não
 amplia autorização para instalar, publicar, fazer deploy ou executar ação
@@ -108,33 +116,14 @@ destrutiva.
 Consulte [Atualizar uma especificação](update-spec.md) para a classificação
 completa e exemplos em linguagem comum.
 
-## Resultado esperado
-
-O projeto mantém framework e especialistas deliberadamente selecionados,
-automação somente de leitura e gates coerentes com a versão atual da entrada.
-
 ## Limites
 
-- `--force` pode descartar customizações protegidas;
-- `--detected` depende do catálogo e do estado observado no projeto;
-- a TUI e o progresso projetam estado, não substituem a spec;
-- especialista não substitui descoberta de versão, convenções ou riscos locais.
+- `--force` pode descartar customizações protegidas.
+- `--detected` depende do catálogo e do estado observado no projeto.
+- A TUI e o progresso projetam estado, mas não substituem a spec.
+- o especialista não substitui a confirmação da versão, das convenções e das
+  falhas possíveis no projeto.
 
-## Atualize quando
-
-- argumentos públicos de seleção, progresso ou configuração mudarem;
-- proteções de atualização ou remoção mudarem;
-- a política de reabertura dos atos mudar.
-
-## Não use para
-
-- substituir o tutorial de primeira instalação;
-- escolher especialista sem observar o projeto;
-- automatizar escrita em gates ou specs.
-
-## Fonte da verdade e precedência
-
-Comandos e proteções pertencem a
-[`cli/`](../../cli/), o método base a
-[`skills/`](../../skills/) e o catálogo opcional a
-[`specialists/`](../../specialists/).
+O resultado esperado é um projeto com especialistas escolhidos de forma
+explícita, automação somente de leitura e gates coerentes com a versão atual da
+spec.

@@ -1,26 +1,26 @@
 const navigation = {
   solutions: [
     { name: 'Marketing', href: '#' },
-    { name: 'Analytics', href: '#' },
-    { name: 'Automation', href: '#' },
-    { name: 'Commerce', href: '#' },
-    { name: 'Insights', href: '#' },
+    { name: 'Análises', href: '#' },
+    { name: 'Automação', href: '#' },
+    { name: 'Comércio', href: '#' },
+    { name: 'Análises', href: '#' },
   ],
   support: [
-    { name: 'Submit ticket', href: '#' },
-    { name: 'Documentation', href: '#' },
-    { name: 'Guides', href: '#' },
+    { name: 'Enviar chamado', href: '#' },
+    { name: 'Documentação', href: '#' },
+    { name: 'Guias', href: '#' },
   ],
   company: [
-    { name: 'About', href: '#' },
+    { name: 'Sobre', href: '#' },
     { name: 'Blog', href: '#' },
-    { name: 'Jobs', href: '#' },
-    { name: 'Press', href: '#' },
+    { name: 'Vagas', href: '#' },
+    { name: 'Imprensa', href: '#' },
   ],
   legal: [
-    { name: 'Terms of service', href: '#' },
-    { name: 'Privacy policy', href: '#' },
-    { name: 'License', href: '#' },
+    { name: 'Termos de serviço', href: '#' },
+    { name: 'Política de privacidade', href: '#' },
+    { name: 'Licença', href: '#' },
   ],
   social: [
     {
@@ -94,17 +94,17 @@ export default function Example() {
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-8">
             <img
-              alt="Company name"
-              src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+              alt="Nome da empresa"
+              src="https://tailwindcss.com/mais-assets/img/logos/mark.svg?color=indigo&shade=600"
               className="h-9 dark:hidden"
             />
             <img
-              alt="Company name"
-              src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
+              alt="Nome da empresa"
+              src="https://tailwindcss.com/mais-assets/img/logos/mark.svg?color=indigo&shade=500"
               className="h-9 not-dark:hidden"
             />
             <p className="text-sm/6 text-balance text-gray-600 dark:text-gray-400">
-              Making the world a better place through constructing elegant hierarchies.
+              Tornamos o mundo melhor por meio de estruturas elegantes e bem organizadas.
             </p>
             <div className="flex gap-x-6">
               {navigation.social.map((item) => (
@@ -122,7 +122,7 @@ export default function Example() {
           <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-sm/6 font-semibold text-gray-900 dark:text-white">Solutions</h3>
+                <h3 className="text-sm/6 font-semibold text-gray-900 dark:text-white">Soluções</h3>
                 <ul role="list" className="mt-6 space-y-4">
                   {navigation.solutions.map((item) => (
                     <li key={item.name}>
@@ -137,7 +137,7 @@ export default function Example() {
                 </ul>
               </div>
               <div className="mt-10 md:mt-0">
-                <h3 className="text-sm/6 font-semibold text-gray-900 dark:text-white">Support</h3>
+                <h3 className="text-sm/6 font-semibold text-gray-900 dark:text-white">Suporte</h3>
                 <ul role="list" className="mt-6 space-y-4">
                   {navigation.support.map((item) => (
                     <li key={item.name}>
@@ -154,7 +154,7 @@ export default function Example() {
             </div>
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-sm/6 font-semibold text-gray-900 dark:text-white">Company</h3>
+                <h3 className="text-sm/6 font-semibold text-gray-900 dark:text-white">Empresa</h3>
                 <ul role="list" className="mt-6 space-y-4">
                   {navigation.company.map((item) => (
                     <li key={item.name}>
@@ -169,7 +169,7 @@ export default function Example() {
                 </ul>
               </div>
               <div className="mt-10 md:mt-0">
-                <h3 className="text-sm/6 font-semibold text-gray-900 dark:text-white">Legal</h3>
+                <h3 className="text-sm/6 font-semibold text-gray-900 dark:text-white">Jurídico</h3>
                 <ul role="list" className="mt-6 space-y-4">
                   {navigation.legal.map((item) => (
                     <li key={item.name}>
@@ -188,7 +188,7 @@ export default function Example() {
         </div>
         <div className="mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-24 dark:border-white/10">
           <p className="text-sm/6 text-gray-600 dark:text-gray-400">
-            &copy; 2024 Your Company, Inc. All rights reserved.
+            &copy; 2024 Sua Empresa, Inc. Todos os direitos reservados.
           </p>
         </div>
       </div>

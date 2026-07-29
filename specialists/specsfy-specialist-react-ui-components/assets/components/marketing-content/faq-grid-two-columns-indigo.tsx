@@ -1,38 +1,38 @@
 const faqs = [
   {
     id: 1,
-    question: "What's the best thing about Switzerland?",
+    question: "Qual é a melhor coisa sobre a Suíça?",
     answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      "Não sei, mas a bandeira é um grande diferencial.",
   },
   {
     id: 2,
-    question: 'Why do you never see elephants hiding in trees?',
+    question: 'Por que nunca vemos elefantes escondidos em árvores?',
     answer:
-      "Because they're so good at it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      "Porque eles são muito bons nisso.",
   },
   {
     id: 3,
-    question: 'How do you make holy water?',
+    question: 'Como se faz água benta?',
     answer:
-      'You boil the hell out of it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.',
+      'Ferva até ficar pronta.',
   },
   {
     id: 4,
-    question: "Why can't you hear a pterodactyl go to the bathroom?",
+    question: "Por que não ouvimos um pterodáctilo indo ao banheiro?",
     answer:
-      'Because the pee is silent. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.',
+      'Porque ele vai em silêncio.',
   },
   {
     id: 5,
-    question: 'What do you call someone with no body and no nose?',
-    answer: 'Nobody knows. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.',
+    question: 'Como se chama alguém sem corpo e sem nariz?',
+    answer: 'Ninguém sabe.',
   },
   {
     id: 6,
-    question: 'Why did the invisible man turn down the job offer?',
+    question: 'Por que o homem invisível recusou a oferta de trabalho?',
     answer:
-      "He couldn't see himself doing it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      "Ele não conseguia se imaginar nessa função. A equipe buscava uma pessoa com outro perfil para o desafio.",
   },
 ]
 
@@ -40,7 +40,7 @@ export default function Example() {
   return (
     <div className="bg-indigo-700">
       <div className="mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-8">
-        <h2 className="text-3xl font-bold tracking-tight text-white">Frequently asked questions</h2>
+        <h2 className="text-3xl font-bold tracking-tight text-white">Perguntas frequentes</h2>
         <div className="mt-6 border-t border-indigo-300/25 pt-10">
           <dl className="space-y-10 md:grid md:grid-cols-2 md:space-y-0 md:gap-x-8 md:gap-y-12">
             {faqs.map((faq) => (

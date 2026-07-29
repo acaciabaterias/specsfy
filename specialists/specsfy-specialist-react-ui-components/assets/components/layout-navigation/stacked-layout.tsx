@@ -33,7 +33,7 @@ function MobileSidebar({ open, close, children }: React.PropsWithChildren<{ open
       >
         <div className="flex h-full flex-col rounded-lg bg-white shadow-xs ring-1 ring-zinc-950/5 dark:bg-zinc-900 dark:ring-white/10">
           <div className="-mb-3 px-4 pt-3">
-            <Headless.CloseButton as={NavbarItem} aria-label="Close navigation">
+            <Headless.CloseButton as={NavbarItem} aria-label="Fechar navegação">
               <CloseMenuIcon />
             </Headless.CloseButton>
           </div>
@@ -53,22 +53,22 @@ export function StackedLayout({
 
   return (
     <div className="relative isolate flex min-h-svh w-full flex-col bg-white lg:bg-zinc-100 dark:bg-zinc-900 dark:lg:bg-zinc-950">
-      {/* Sidebar on mobile */}
+      {/* Barra lateral em dispositivos móveis */}
       <MobileSidebar open={showSidebar} close={() => setShowSidebar(false)}>
         {sidebar}
       </MobileSidebar>
 
-      {/* Navbar */}
+      {/* Barra de navegação */}
       <header className="flex items-center px-4">
         <div className="py-2.5 lg:hidden">
-          <NavbarItem onClick={() => setShowSidebar(true)} aria-label="Open navigation">
+          <NavbarItem onClick={() => setShowSidebar(true)} aria-label="Abrir navegação">
             <OpenMenuIcon />
           </NavbarItem>
         </div>
         <div className="min-w-0 flex-1">{navbar}</div>
       </header>
 
-      {/* Content */}
+      {/* Conteúdo */}
       <main className="flex flex-1 flex-col pb-2 lg:px-2">
         <div className="grow p-6 lg:rounded-lg lg:bg-white lg:p-10 lg:shadow-xs lg:ring-1 lg:ring-zinc-950/5 dark:lg:bg-zinc-900 dark:lg:ring-white/10">
           <div className="mx-auto max-w-6xl">{children}</div>

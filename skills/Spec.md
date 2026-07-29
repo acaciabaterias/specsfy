@@ -8,7 +8,7 @@ substitui `specs/specs/<NNNN>-<slug>/spec.md`.
 
 ```text
 specs/
-├── ideias/
+├── inbox/
 │   └── <AAAA-MM-DD-HHMMSS>-<slug>.md
 ├── backlog/
 │   └── <NNNN>-<slug>.md
@@ -18,7 +18,7 @@ specs/
         └── research/
 ```
 
-- `specs/ideias/` preserva inputs imediatamente, sem perguntas nem promoção.
+- `specs/inbox/` preserva inputs imediatamente, sem perguntas nem promoção.
 - `specs/backlog/` organiza ideias escolhidas para refinamento.
 - `specs/specs/<NNNN>-<slug>/spec.md` é a única fonte normativa de uma fatia.
 - `research/` armazena apenas evidência consultada e indexada pela spec.
@@ -57,30 +57,29 @@ specs/
 ## Fluxo
 
 ```text
-input → ideia → backlog → interview → spec → validate → tasks → TDD/BDD → implement → documentator → progress
+input → inbox → backlog → spec → validate → tasks → TDD/BDD → implement → documentator → progress
                                       ↑ update-spec ← mudança tardia
 ```
 
-1. Use `specsfy-base-idea` para preservar e pré-processar o texto em
-   `specs/ideias/`, sem fazer perguntas.
-2. Use `specsfy-base-backlog` para buscar material relacionado e esclarecer o
-   mínimo necessário quando a pessoa decidir refinar uma captura.
-3. Use `specsfy-base-interview` para aprofundar uma ideia, backlog ou spec por
-   perguntas adaptativas.
-4. Use `specsfy-base-specify` para criar e consolidar a spec normativa inicial.
-5. Use `specsfy-base-validate` para comprovar a definição.
-6. Use `specsfy-base-tasks` e `specsfy-base-tdd-bdd` para planejar, derivar
+1. Use `specsfy-01-inbox` para preservar e pré-processar o texto em
+   `specs/inbox/`, sem fazer perguntas.
+2. Use `specsfy-02-backlog` para buscar material relacionado, registrar o item
+   e aprofundar decisões por perguntas adaptativas. O refinamento reavalia cada
+   resposta enquanto houver lacuna aplicável.
+3. Use `specsfy-03-specify` para criar e consolidar a spec normativa inicial.
+4. Use `specsfy-04-validate` para comprovar a definição.
+5. Use `specsfy-05-tasks` e `specsfy-06-tdd-bdd` para planejar, derivar
    testes TDD do BDD de referência e observar RED válido.
-7. Use `specsfy-base-implement` para entregar em RED → GREEN → REFACTOR.
-8. Use `specsfy-base-update-spec` quando a pessoa quiser adicionar, remover,
+6. Use `specsfy-07-implement` para entregar em RED → GREEN → REFACTOR.
+7. Use `specsfy-update-spec` quando a pessoa quiser adicionar, remover,
    corrigir ou mudar algo depois de a spec já ter sido definida. A skill
    incorpora o pedido na fonte normativa e reabre somente os atos afetados.
-9. Use `specsfy-documentator` para reconstruir `docs/` a partir do sistema
+8. Use `specsfy-documentator` para reconstruir `docs/` a partir do sistema
    existente após cada implementação ou por acionamento livre.
-10. Use `specsfy-base-progress` somente para projetar o estado existente.
+9. Use `specsfy-progress` somente para projetar o estado existente.
 
-Um backlog não autoriza implementação. Uma entrevista não cria uma segunda
-fonte normativa. A promoção para spec exige intenção explícita do usuário.
+Um backlog não autoriza implementação nem cria uma segunda fonte normativa. A
+promoção para spec exige intenção explícita do usuário.
 
 ## Orquestração conversacional
 
@@ -105,18 +104,23 @@ pendência pertencente a outra etapa:
    e carregue imediatamente a skill de origem.
 
 Aplique o mesmo protocolo a avanço ou retorno. Mudança surgida depois da
-definição retorna para `$specsfy-base-update-spec`, que chama
-`$specsfy-base-interview` quando faltar decisão, `$specsfy-base-validate` após
-mudança de comportamento e `$specsfy-base-tasks` após mudança somente de plano.
+definição retorna para `$specsfy-update-spec`, que chama
+`$specsfy-02-backlog` quando faltar decisão, `$specsfy-04-validate` após
+mudança de comportamento e `$specsfy-05-tasks` após mudança somente de plano.
 Teste ou RED ausente chama
-`$specsfy-base-tdd-bdd` quando `Plan Gate` estiver `Pending`; se o Plan Gate já
-estiver `Passed`, retorne primeiro para `$specsfy-base-tasks`, que reabre o Ato
+`$specsfy-06-tdd-bdd` quando `Plan Gate` estiver `Pending`; se o Plan Gate já
+estiver `Passed`, retorne primeiro para `$specsfy-05-tasks`, que reabre o Ato
 II e chama TDD/BDD automaticamente. Depois de uma correção, retome
 automaticamente a etapa que a detectou.
 
 Não peça confirmação para o handoff. Se faltar uma decisão material que somente
-a pessoa pode fornecer, faça uma pergunta objetiva e retome o fluxo após a
-resposta; isso não transforma a escolha da próxima skill em decisão do usuário.
+a pessoa pode fornecer, carregue `$specsfy-02-backlog`. O refinamento do backlog
+reanalisa o contexto acumulado e a nova resposta antes de cada pergunta e
+continua sem limite máximo de perguntas enquanto existir lacuna aplicável. A
+A partir da 11ª pergunta, oferece `avançar`; essa saída encerra o ciclo atual, mas
+preserva as lacunas, `Status: Draft` e `Definition Gate: Pending`. A etapa
+chamadora não reabre o mesmo ciclo durante essa retomada. Isso não
+transforma a escolha da próxima skill em decisão do usuário.
 O handoff não autoriza ações destrutivas, publicação, deploy, instalação de
 especialista ou outras mudanças externas: cada ação sensível continua exigindo
 autorização específica. Carregue automaticamente um especialista já instalado;
@@ -147,7 +151,8 @@ os Atos II–III. Gate posterior não permanece aprovado sobre entrada invalidad
 
 - Preserve a formulação do usuário e diferencie declaração, inferência,
   hipótese, decisão, conflito e questão aberta.
-- Faça uma pergunta por vez quando uma decisão material estiver ausente.
+- Centralize no refinamento do backlog as perguntas sobre decisões materiais e faça uma por
+  vez.
 - Não invente requisitos, stakeholders, restrições ou evidência.
 - Mantenha o Gherkin BDD somente na `spec.md` como contrato de referência; não
   crie nem execute arquivos `.feature`.
@@ -169,11 +174,20 @@ os Atos II–III. Gate posterior não permanece aprovado sobre entrada invalidad
 ## Arquivos gerenciados
 
 O CLI instala skills em `.agents/skills/`, publica este contrato em
-`.specsfy/Spec.md`, o template canônico em `.specsfy/templates/Spec.md` e o
-exemplo não normativo em `.specsfy/examples/Spec.md`. A criação de uma spec
-copia e renderiza o template instalado em
-`specs/specs/<NNNN>-<slug>/spec.md`; o exemplo existe para inspeção, testes e
-compreensão da arquitetura, nunca como fonte de uma feature.
+`.specsfy/Spec.md`, os templates gerenciados em `.specsfy/templates/` e o
+exemplo não normativo em `.specsfy/examples/Spec.md`. A criação de um artefato
+resolve seu template nesta ordem:
+
+1. `.specsfy/templates/custom/<Nome>.md`, customização do usuário.
+2. `.specsfy/templates/<Nome>.md`, cópia gerenciada pelo CLI.
+3. `skills/templates/<Nome>.md`, fallback exclusivo do desenvolvimento deste
+   repositório.
+
+O CLI cria `.specsfy/templates/custom/`, mas não gerencia, atualiza nem remove
+seu conteúdo, inclusive com `--force`. A criação de uma spec copia e renderiza
+o template resolvido em `specs/specs/<NNNN>-<slug>/spec.md`; o exemplo existe
+para inspeção, testes e compreensão da arquitetura, nunca como fonte de uma
+feature.
 
 O CLI também mantém blocos delimitados em `AGENTS.md` e `CLAUDE.md`. Conteúdo
 fora desses blocos pertence ao usuário. Alterações locais em arquivos ou blocos

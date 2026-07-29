@@ -5,22 +5,20 @@ export default function Example() {
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:max-w-none lg:min-w-full lg:flex-none lg:gap-y-8">
           <div className="lg:col-end-1 lg:w-full lg:max-w-lg lg:pb-8">
             <h2 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl dark:text-white">
-              Our people
+              Nossa equipe
             </h2>
             <p className="mt-6 text-xl/8 text-gray-700 dark:text-gray-300">
-              Quasi est quaerat. Sit molestiae et. Provident ad dolorem occaecati eos iste. Soluta rerum quidem minus ut
-              molestiae velit error quod. Excepturi quidem expedita molestias quas.
+              Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
             </p>
             <p className="mt-6 text-base/7 text-gray-600 dark:text-gray-400">
-              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
-              fugiat veniam occaecat fugiat. Quasi aperiam sit non sit neque reprehenderit.
+              Conteúdo de exemplo para demonstrar a composição e a hierarquia visual.
             </p>
             <div className="mt-10 flex">
               <a
                 href="#"
                 className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
               >
-                Join our team
+                Faça parte da nossa equipe
                 <span aria-hidden="true">&rarr;</span>
               </a>
             </div>

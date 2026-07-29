@@ -12,7 +12,7 @@ docs/
 `docs/README.md` apenas apresenta e roteia os públicos. Conteúdo temático
 pertence a um dos dois percursos.
 
-## User
+## Usuário
 
 `docs/user/` é a documentação do usuário final. Use linguagem simples,
 explique termos antes de usá-los e mostre pedidos e resultados fáceis de
@@ -28,7 +28,7 @@ para `docs/develop/`.
 | método e conceitos | `docs/user/method.md` |
 | instalação | `docs/user/installation.md` |
 | primeira entrega | `docs/user/getting-started.md` |
-| caixa de entrada sem perguntas | `docs/user/ideas.md` |
+| caixa de entrada sem perguntas | `docs/user/inbox.md` |
 | índice das skills base | `docs/user/skills/README.md` |
 | aprofundamento de cada skill base | `docs/user/skills/specsfy-base-*.md` |
 | CLI e TUI | `docs/user/cli.md` |
@@ -58,21 +58,29 @@ viram navegação interna entre capítulos; referências externas permanecem
 legíveis como texto e não abrem destinos fora do PDF ou EPUB. A validação deve
 rejeitar links externos ativos e âncoras internas ausentes.
 
+Todo o conteúdo editorial do ebook e do PDF deve ser escrito em Português do
+Brasil. Metadados e template declaram `pt-BR`; termos técnicos em inglês só
+permanecem quando essa for a forma usada pelo ecossistema.
+
+O pipeline mantém no diretório `ebook/` somente as cinco edições SemVer mais
+recentes. A retenção ocorre após validar a edição vigente e remove apenas os
+pares PDF e EPUB que seguem o nome canônico.
+
 Cada página de skill base inclui:
 
 - quando usar e quando não usar;
-- como pedir em linguagem natural;
+- como descrever a tarefa em linguagem natural;
 - exemplo passo a passo;
 - resultado esperado;
 - erros comuns;
 - próximo passo.
 
-## Develop
+## Desenvolvimento
 
 `docs/develop/` é a documentação técnica para agentes e humanos que contribuem,
 implementam ou modificam o framework.
 
-| Assunto | Owner documental |
+| Assunto | Responsável documental |
 | --- | --- |
 | portal técnico | `docs/develop/README.md` |
 | estados, atos, gates e rastreabilidade | `docs/develop/methodology.md` |
@@ -82,9 +90,9 @@ implementam ou modificam o framework.
 | módulos e ownership | `docs/develop/modules.md` |
 | manutenção documental | `docs/develop/documentation.md` |
 | contexto transversal | `docs/develop/context/README.md` |
-| topologia e públicos da documentação | `docs/develop/context/documentation.md` |
+| públicos da documentação | `docs/develop/context/documentation.md` |
 | arquitetura e integrações | `docs/develop/context/architecture/` |
-| direção das dependências | `docs/develop/context/architecture/dependencies.md` |
+| dependências | `docs/develop/context/architecture/dependencies.md` |
 | stack, pacotes, convenções e testes | `docs/develop/context/engineering/` |
 | persistência, dados e privacidade | `docs/develop/context/data/` |
 | fluxos entre módulos | `docs/develop/context/flows/` |

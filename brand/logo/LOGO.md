@@ -118,9 +118,8 @@ Quando o nome **Specsfy** acompanhar o logo:
 - não una os dois elementos num novo arquivo chamado “logo”;
 - não use outra grafia, caixa alta integral ou fonte para simular um wordmark.
 
-A tagline localizada “Especifique. Prove. Entregue.”, derivada da principal
-`Specify. Prove. Ship.`, também fica fora da área de proteção e não integra o
-logo.
+A tagline “Especifique. Comprove. Entregue.” também fica fora da área de
+proteção e não integra o logo.
 
 ## Acessibilidade
 
