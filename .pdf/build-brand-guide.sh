@@ -9,7 +9,7 @@ HUB_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 BRAND_ROOT="$HUB_ROOT/brand"
 MD_SOURCE="$BRAND_ROOT/guide/brand-guide.md"
 TEMPLATE="$BRAND_ROOT/guide/template.html"
-STYLE_GUIDE="$BRAND_ROOT/style-guide.html"
+FONT_SOURCE="$BRAND_ROOT/fonts/fonts.css"
 LOGO_MANUAL="$BRAND_ROOT/logo/LOGO.md"
 LOGO_SVG="$BRAND_ROOT/logo/icon.svg"
 LOGO_PNG="$BRAND_ROOT/logo/icon.png"
@@ -27,7 +27,7 @@ for bin in pandoc weasyprint; do
   fi
 done
 
-for source in "$MD_SOURCE" "$TEMPLATE" "$STYLE_GUIDE" "$LOGO_MANUAL" "$LOGO_SVG" "$LOGO_PNG" "$PDF_STYLE"; do
+for source in "$MD_SOURCE" "$TEMPLATE" "$FONT_SOURCE" "$LOGO_MANUAL" "$LOGO_SVG" "$LOGO_PNG" "$PDF_STYLE"; do
   if [ ! -f "$source" ]; then
     echo "Erro: fonte obrigatória ausente: $source" >&2
     exit 1
@@ -36,17 +36,19 @@ done
 
 mkdir -p "$BUILD_DIR"
 
-# Reutiliza as fontes IBM Plex já embutidas no style guide, sem duplicar os
-# binários base64 na folha de estilo do PDF.
+# Reutiliza as webfontes locais do sistema de marca. Como o CSS entra no
+# template, os caminhos são ajustados em relação a brand/guide/.
 FONT_FACES_FILE="$BUILD_DIR/fontfaces.css"
 awk '
   /@font-face/ { p = 1 }
   /:root[ \t]*\{/ { exit }
   p { print }
-' "$STYLE_GUIDE" > "$FONT_FACES_FILE"
+' "$FONT_SOURCE" \
+  | sed 's#url("\./#url("../fonts/#g' \
+  > "$FONT_FACES_FILE"
 
 if [ ! -s "$FONT_FACES_FILE" ]; then
-  echo "Erro: não encontrei blocos @font-face em $STYLE_GUIDE." >&2
+  echo "Erro: não encontrei blocos @font-face em $FONT_SOURCE." >&2
   exit 1
 fi
 

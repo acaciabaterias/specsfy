@@ -4,7 +4,9 @@ BRAND_GUIDE_PDF := brand/Specsfy-Manual-de-Marca.pdf
 BRAND_GUIDE_SOURCES := \
 	brand/guide/brand-guide.md \
 	brand/guide/template.html \
-	brand/style-guide.html \
+	brand/fonts/fonts.css \
+	brand/fonts/inter-latin.woff2 \
+	brand/fonts/manrope-latin.woff2 \
 	brand/logo/LOGO.md \
 	brand/logo/icon.svg \
 	brand/logo/icon.png \

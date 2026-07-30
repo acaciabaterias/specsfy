@@ -17,7 +17,7 @@ prosa: um termo, uma grafia, sempre.
 ## Glossário de termos canônicos
 
 | Termo | Grafia fixa | Nunca escreva | Nota |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Gate | `Gate` (maiúsculo, en) | "portão", "checkpoint", "milestone" | Sempre com o nome completo: `Definition Gate`, `Plan Gate`, `Delivery Gate`. |
 | Ato | Ato I / Ato II / Ato III | "fase", "etapa", "sprint", "estágio" | Numeração romana, sempre. |
 | spec.md | `spec.md` (mono) | "a especificação" isolado quando se refere ao arquivo | "a especificação" é aceitável quando fala do conceito, não do arquivo. |
@@ -31,21 +31,25 @@ prosa: um termo, uma grafia, sempre.
 ## Exemplos por canal
 
 **Commit message:**
-```
+
+```text
 fix: corrige contraste do vermelho semântico (RED) para AA
 
 Use Blocked `#B91C1C` sobre White: o par alcança 6.47:1 e supera o mínimo
 de contraste para texto normal.
 Troca para B91C1C (6.0:1). Ver brand/accessibility.md.
 ```
+
 Direto, técnico, sem "melhorias" vagas — diz o número, diz a causa.
 
 **Mensagem de validação/erro (ex.: `validate_spec.py`):**
-```
+
+```text
 Definition Gate: Failed
 US-03 não tem cenário BDD associado — adicione um Scenario em spec.md
 antes de marcar este Gate como Passed.
 ```
+
 Diz o que falhou, onde, e a ação exata para resolver. Nunca "algo deu
 errado" ou "verifique sua configuração".
 

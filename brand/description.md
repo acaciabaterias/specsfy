@@ -24,6 +24,7 @@ oficiais.
 
 **Alternativas** (para contextos onde a tagline principal já apareceu perto,
 ou para variar em títulos de seção):
+
 - "Uma especificação. Rastreável até o código."
 - "Nenhum 'pronto' sem evidência."
 
@@ -54,7 +55,7 @@ ou para variar em títulos de seção):
 ## Voz e tom
 
 | Traço | Como soa | Como não soa |
-|---|---|---|
+| --- | --- | --- |
 | **Preciso** | "O Gate não passa sem RED registrado nos dois níveis." | "O Gate normalmente exige que os testes estejam ok." |
 | **Direto** | "Não crie `plan.md` paralelo." | "Recomendamos fortemente evitar arquivos adicionais quando possível." |
 | **Sem hype** | "Reduz a distância entre intenção e código." | "Revolucione sua forma de desenvolver software!" |
