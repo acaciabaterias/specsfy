@@ -34,18 +34,18 @@ releases Git.
 
 ## Instalação
 
-Requer Python 3.11+, [`uv`](https://docs.astral.sh/uv/) e o comando
+Requer Node.js 22.12 ou superior, npm e o comando
 [`skills`](https://github.com/vercel-labs/skills) ou `npx`.
 Enquanto o repositório for privado, autentique uma vez com `gh auth login`.
 o CLI reutiliza essa sessão. Em automações, defina `GH_TOKEN` ou
 `GITHUB_TOKEN` com acesso de leitura ao repositório.
 
 O executável versionado está disponível pelo download oficial
-`get.specsfy.dev`. Para instalar em um ambiente isolado e receber atualizações
-gerenciadas pelo `uv`:
+`get.specsfy.dev`. Para instalar o pacote publicado e receber atualizações
+gerenciadas pelo npm:
 
 ```bash
-uv tool install 'git+https://github.com/promovaweb/specsfy.git#subdirectory=cli'
+npm install --global @promovaweb/specsfy
 specsfy --version
 cd caminho/do/projeto
 specsfy install --project .

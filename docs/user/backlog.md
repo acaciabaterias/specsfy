@@ -133,7 +133,7 @@ verificáveis.
 ## Ordenar o backlog
 
 Mantenha o backlog realmente ordenado para que a próxima oportunidade fique
-visível sem depender da memória da equipe. Compare os itens pelos fatores
+visível no arquivo para todos os responsáveis. Compare os itens pelos fatores
 abaixo:
 
 1. valor para a pessoa e para o negócio.

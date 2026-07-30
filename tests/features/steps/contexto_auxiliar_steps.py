@@ -28,7 +28,7 @@ def when_contract_is_inspected(context) -> None:
     }
     context.framework = (context.skills / "Spec.md").read_text(encoding="utf-8")
     context.installer = (
-        context.cli / "src/specsfy_cli/installer.py"
+        context.cli / "src/installer.ts"
     ).read_text(encoding="utf-8")
 
 

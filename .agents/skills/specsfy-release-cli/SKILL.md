@@ -5,7 +5,7 @@ description: Publicar uma versão estável do Specsfy CLI a partir do monorepo p
 
 # Publicar o Specsfy CLI
 
-Executar na raiz `/home/luizeof/specsfy`. Exigir versão `X.Y.Z`, notas
+Executar na raiz do checkout oficial. Exigir versão `X.Y.Z`, notas
 confirmadas e autorização explícita antes de push.
 
 ## 1. Classificar o estado
@@ -14,6 +14,7 @@ confirmadas e autorização explícita antes de push.
 git remote get-url origin
 git branch --show-current
 gh auth status
+npm whoami
 git fetch origin main --tags
 git status --porcelain
 git rev-parse HEAD
@@ -38,12 +39,15 @@ python3 -B \
   --cli cli --version X.Y.Z --date YYYY-MM-DD \
   --notes-file /caminho/notas.md
 cd cli
-uv lock
-uv sync --locked
-./scripts/build-executable.sh
-uv run python -B -m unittest discover -s tests -p 'test_*.py'
-uv run specsfy --help
+npm install --package-lock-only --ignore-scripts
+npm ci
+npm run build:executable
+npm run typecheck
+npm test
+npm run build
+node dist/main.js --help
 ./bin/specsfy --version
+npm publish --dry-run
 cd ..
 python3 -B \
   .agents/skills/specsfy-release-cli/scripts/release_changelog.py extract \
@@ -51,8 +55,8 @@ python3 -B \
   --output /caminho/release-notes.md
 ```
 
-Exigir `X.Y.Z` em `pyproject.toml`, `__version__`, `uv.lock`, CLI instalado,
-binário e `bin/specsfy.build.json`. O changelog promove as notas sob
+Exigir `X.Y.Z` em `package.json`, `src/version.ts`, `package-lock.json`, CLI
+instalado, binário e `bin/specsfy.build.json`. O changelog promove as notas sob
 `## [X.Y.Z] - YYYY-MM-DD`.
 
 ## 3. Revisar e versionar
@@ -60,17 +64,17 @@ binário e `bin/specsfy.build.json`. O changelog promove as notas sob
 Permitir somente:
 
 - `cli/CHANGELOG.md`;
-- `cli/pyproject.toml`;
-- `cli/src/specsfy_cli/__init__.py`;
-- `cli/uv.lock`;
+- `cli/package.json`;
+- `cli/package-lock.json`;
+- `cli/src/version.ts`;
 - `cli/bin/specsfy`;
 - `cli/bin/specsfy.build.json`.
 
 Apresentar notas e diff. Após confirmação:
 
 ```bash
-git add cli/CHANGELOG.md cli/pyproject.toml \
-  cli/src/specsfy_cli/__init__.py cli/uv.lock \
+git add cli/CHANGELOG.md cli/package.json cli/package-lock.json \
+  cli/src/version.ts \
   cli/bin/specsfy cli/bin/specsfy.build.json
 git commit -m "chore(release): vX.Y.Z"
 git tag -a vX.Y.Z -m "Specsfy CLI vX.Y.Z"
@@ -84,6 +88,9 @@ Os hashes devem ser idênticos. A tag pertence ao monorepo.
 
 ```bash
 git push --atomic origin main vX.Y.Z
+gh run watch --repo promovaweb/specsfy \
+  "$(gh run list --repo promovaweb/specsfy --branch vX.Y.Z \
+    --workflow Specsfy --limit 1 --json databaseId --jq '.[0].databaseId')"
 gh release create vX.Y.Z \
   --repo promovaweb/specsfy --verify-tag \
   --title "Specsfy CLI vX.Y.Z" \
@@ -101,4 +108,6 @@ gh run list --repo promovaweb/specsfy --branch vX.Y.Z --workflow Specsfy
 ```
 
 Confirmar tag remota, CI e equivalência exata das notas. Em falha, preservar o
-estado e reclassificar; nunca criar uma tag compensatória.
+estado e reclassificar. O job da tag publica `@promovaweb/specsfy` no npm. A
+proveniência é incluída quando o repositório estiver público. Nunca crie uma tag
+compensatória.

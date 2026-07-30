@@ -38,7 +38,7 @@ referências como inspiração:
 - [GitHub Spec Kit](https://github.github.com/spec-kit/): aplicação de
   specification-driven development em etapas próximas ao código.
 - [OpenSpec](https://openspec.dev/): especificações e mudanças mantidas no
-  repositório como um acordo leve entre a pessoa responsável e o agente.
+  repositório como um acordo leve entre o desenvolvedor responsável e o agente.
 - [*Categorias*, de Aristóteles](https://classics.mit.edu/Aristotle/categories.html):
   referência filosófica para classificar objetos, atributos, relações e
   estados antes de formular afirmações sobre eles.

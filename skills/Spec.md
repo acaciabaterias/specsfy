@@ -34,9 +34,13 @@ specs/
 - `.specsfy/STACK.md` mantém tecnologias estruturais e suas evidências.
 - `.specsfy/RULES.md` mantém regras explícitas confirmadas pela pessoa
   responsável.
-- `.specsfy/DATABASE.md` mantém o mapa tabular completo de persistência.
+- `.specsfy/DATABASE.md` mantém o quadro tabular completo de persistência.
+- `.specsfy/PACKAGES.md` mantém o inventário npm e Composer derivado dos
+  manifests, lockfiles e metadados locais, com uma finalidade curta por pacote.
 - Executar `$specsfy-setup` no início e sempre que for necessário reconciliar
-  esses arquivos ou os blocos reservados em `AGENTS.md` e `CLAUDE.md`.
+  os quatro contextos iniciais ou os blocos reservados em `AGENTS.md` e
+  `CLAUDE.md`. Executar `$specsfy-documentator` quando `PACKAGES.md` estiver
+  ausente ou desatualizado.
 - Executar `$specsfy-aux-stack` após mudanças estruturais de tecnologia,
   `$specsfy-aux-rules` para regras confirmadas e `$specsfy-aux-database` sempre
   que banco, schema, tabela, campo, relação ou migration mudar.
@@ -44,8 +48,9 @@ specs/
   `.agents/skills/specsfy-setup/scripts/monitor_context.py --project . --check`
   no início, após cada tarefa de implementação e antes do Delivery Gate.
 - Executar `$specsfy-documentator` depois de cada tarefa de implementação e
-  sempre que o usuário pedir uma reconstrução técnica. A skill lê todo o código
-  existente e mantém a projeção completa em `docs/`, sem depender de uma spec.
+  sempre que o usuário pedir uma reconstrução técnica. A skill lê todo o
+  projeto e mantém a projeção completa em `docs/` e `.specsfy/PACKAGES.md`,
+  sem depender de uma spec.
 - Não concluir uma tarefa enquanto o monitor exigir `STACK.md` ou `DATABASE.md`.
   Toda mudança de aplicação revisa `PROJECT.md`; quando não houver impacto
   material, registrar a justificativa na evidência da tarefa antes do
@@ -74,8 +79,9 @@ input → inbox → backlog → spec → validate → tasks → TDD/BDD → impl
 7. Use `specsfy-update-spec` quando a pessoa quiser adicionar, remover,
    corrigir ou mudar algo depois de a spec já ter sido definida. A skill
    incorpora o pedido na fonte normativa e reabre somente os atos afetados.
-8. Use `specsfy-documentator` para reconstruir `docs/` a partir do sistema
-   existente após cada implementação ou por acionamento livre.
+8. Use `specsfy-documentator` para reconstruir `docs/` e
+   `.specsfy/PACKAGES.md` a partir do sistema existente após cada implementação
+   ou por acionamento livre.
 9. Use `specsfy-progress` somente para projetar o estado existente.
 
 Um backlog não autoriza implementação nem cria uma segunda fonte normativa. A
@@ -127,7 +133,7 @@ autorização específica. Carregue automaticamente um especialista já instalad
 se estiver ausente, anuncie a dependência antes de solicitar autorização para
 instalá-lo. Nunca altere gates para contornar a etapa responsável. Após cada
 handoff, reavalie o estado canônico; se origem, destino e pendência se repetirem
-sem mudança observável, pare o ciclo e relate o bloqueio.
+sem mudança observável, pare o ciclo e relate o impasse.
 
 ## Três atos e estado
 
@@ -162,7 +168,7 @@ os Atos II–III. Gate posterior não permanece aprovado sobre entrada invalidad
   válido antes da implementação.
 - Materialize no mínimo três casos TDD executáveis para a feature inteira e
   para cada `US`, `FR` e `NFR`. Cada caso declara seu próprio marcador
-  `SPECSFY:`; um marcador compartilhado conta como um caso.
+`SPECSFY:`; um marcador compartilhado é considerado como um caso.
 - Em projeto PHP, execute os testes derivados com Pest. Em projeto Node sem PHP,
   pergunte qual runner de testes adotar e recomende Vitest; não instale nem
   escolha silenciosamente. Em projeto misto PHP + Node, prevalece Pest.

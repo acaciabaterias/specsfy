@@ -57,9 +57,8 @@ intervalo padrão de 24 horas entre consultas.
 
 Quando uma tag aponta para uma versão superior, o CLI apresenta a versão atual
 e pergunta se deve atualizar. Recusar abre o dashboard normalmente. Aceitar
-executa `uv tool upgrade specsfy-cli` e encerra o CLI. Essa atualização
-automática só funciona quando o executável foi instalado e é gerenciado pelo
-`uv`. A versão nova entra em uso na próxima abertura.
+executa `npm install --global @promovaweb/specsfy@latest` e encerra o CLI. A
+versão nova entra em uso na próxima abertura.
 
 O arquivo global separa `settings`, incluindo habilitação e intervalo da
 consulta, de `cache`, que registra horário, tag, versão, commit, ETag e erro
@@ -71,17 +70,17 @@ Como o monorepo é privado, catálogo e tags são consultados com `GH_TOKEN`,
 `GITHUB_TOKEN` ou, na ausência dessas variáveis, com a sessão de
 `gh auth token`. O token não é copiado para `~/.specsfy/cli.json`.
 
-Em uma instalação gerenciada pelo `uv`, o comando abaixo atualiza o ambiente
-registrado pela ferramenta. Abra o CLI novamente para conferir a nova versão:
+Em uma instalação global gerenciada pelo npm, o comando abaixo atualiza o
+pacote. Abra o CLI novamente para conferir a nova versão:
 
 ```bash
-uv tool upgrade specsfy-cli
+npm update --global @promovaweb/specsfy
 ```
 
-Se você instalou o zipapp com `curl -fL get.specsfy.dev`, repita o download
-descrito no [guia de instalação](installation.md). Nesse caso, aceitar a oferta
-automática sem ter `uv` disponível apenas mostra a falha e abre a TUI
-normalmente.
+Se você instalou o executável Node com `curl -fL get.specsfy.dev`, repita o
+download descrito no [guia de instalação](installation.md). Nesse caso, a
+oferta automática exige o npm disponível; uma falha preserva a versão atual e
+abre a TUI normalmente.
 
 ## Dashboard e progresso
 
@@ -147,7 +146,6 @@ spec completa em um modal Markdown.
 A aba Skills combina busca, filtros, plano, categoria e estado com o painel de
 detalhes da seleção. Os totais acima da tabela mostram instalações e remoções
 planejadas. Nada muda no projeto até a ação **Aplicar**.
-nada muda no projeto até a ação **Aplicar**.
 
 ## Testes do projeto
 
@@ -191,11 +189,11 @@ para trocar de tela ou aplicar uma ação sem retirar o foco do terminal:
 - `Ctrl+D`: detectar recomendações.
 - `Ctrl+B`: selecionar todas as skills do framework.
 - `Ctrl+E`: alternar o plano da skill destacada.
-- `Ctrl+M`: marcar os resultados visíveis.
+- `Ctrl+V`: marcar os resultados visíveis.
 - `Ctrl+L`: limpar os resultados visíveis.
 - `Ctrl+A`: aplicar a seleção.
 - `Ctrl+R`: atualizar todas as skills Specsfy instaladas.
-- `Ctrl+T`, `Ctrl+I`, `Ctrl+C`: abrir os filtros Todas, Instaladas e
+- `Ctrl+T`, `Ctrl+N`, `Ctrl+C`: abrir os filtros Todas, Instaladas e
   Recomendadas.
 - `Ctrl+H`, `Ctrl+G`, `Ctrl+S`, `Ctrl+K`, `Ctrl+O`: abrir Home, Backlogs,
   Specs, Skills e Sobre.
@@ -208,8 +206,11 @@ inteira também aceita:
 - `Tab` e `Shift+Tab` para percorrer controles.
 - setas para navegar listas e tabelas.
 - `Enter` ou `Espaço` para alternar o plano da skill destacada.
-- `Esc` para limpar a busca ou voltar à Home.
+- `Esc` para fechar o modal da spec, limpar a busca ou voltar à Home.
 - mouse para abas, listas, preview, filtros e botões.
+
+O campo de projeto entra em edição com `Enter` ou com um clique. A confirmação
+recarrega backlogs, specs e skills a partir do caminho informado.
 
 Foco, cursor, seleção e ações primárias usam contraste reforçado para manter
 legibilidade em terminais escuros.

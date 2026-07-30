@@ -274,6 +274,189 @@ class DocumentatorTests(unittest.TestCase):
                 self.assertIn(heading, packages)
             self.assertIn("| Terceiro | desenvolvimento | vitest |", packages)
 
+    def test_builds_specsfy_package_inventory_with_all_declared_packages_and_descriptions(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory)
+            write(
+                project / "composer.json",
+                json.dumps(
+                    {
+                        "require": {"laravel/framework": "^12.0"},
+                        "require-dev": {"pestphp/pest": "^4.0"},
+                    }
+                ),
+            )
+            write(
+                project / "composer.lock",
+                json.dumps(
+                    {
+                        "packages": [
+                            {
+                                "name": "laravel/framework",
+                                "version": "v12.0.0",
+                                "description": "The Laravel Framework.",
+                            },
+                            {
+                                "name": "psr/log",
+                                "version": "3.0.2",
+                                "description": "Common interface for logging libraries.",
+                            }
+                        ],
+                        "packages-dev": [
+                            {
+                                "name": "pestphp/pest",
+                                "version": "v4.0.0",
+                                "description": "An elegant PHP testing framework.",
+                            }
+                        ],
+                    }
+                ),
+            )
+            write(
+                project / "package.json",
+                json.dumps(
+                    {
+                        "dependencies": {"acme-sdk": "^2.0"},
+                        "devDependencies": {"vitest": "^4.0"},
+                        "optionalDependencies": {"fsevents": "^2.3"},
+                        "peerDependencies": {"react": "^19.0"},
+                    }
+                ),
+            )
+            write(
+                project / "package-lock.json",
+                json.dumps(
+                    {
+                        "lockfileVersion": 3,
+                        "packages": {
+                            "": {},
+                            "node_modules/acme-sdk": {"version": "2.1.0"},
+                            "node_modules/nanoid": {"version": "5.1.0"},
+                        },
+                    }
+                ),
+            )
+            write(
+                project / "node_modules/acme-sdk/package.json",
+                json.dumps(
+                    {
+                        "name": "acme-sdk",
+                        "description": "Integra a aplicação com a API da Acme.",
+                    }
+                ),
+            )
+            write(
+                project / "node_modules/nanoid/package.json",
+                json.dumps(
+                    {
+                        "name": "nanoid",
+                        "description": "Gera identificadores pequenos e únicos.",
+                    }
+                ),
+            )
+            write(
+                project / "apps/admin/package.json",
+                json.dumps(
+                    {
+                        "dependencies": {"zod": "^4.0"},
+                    }
+                ),
+            )
+            write(
+                project / "apps/legacy/package.json",
+                json.dumps(
+                    {
+                        "dependencies": {"legacy-root": "^1.0"},
+                    }
+                ),
+            )
+            write(
+                project / "apps/legacy/package-lock.json",
+                json.dumps(
+                    {
+                        "lockfileVersion": 1,
+                        "dependencies": {
+                            "legacy-root": {
+                                "version": "1.2.0",
+                                "dependencies": {
+                                    "legacy-child": {"version": "2.0.0"},
+                                },
+                            }
+                        },
+                    }
+                ),
+            )
+            write(
+                project / "apps/legacy/node_modules/legacy-child/package.json",
+                json.dumps(
+                    {
+                        "name": "legacy-child",
+                        "description": "Compatibiliza a integração legada.",
+                    }
+                ),
+            )
+
+            result = run_builder(project)
+
+            self.assertEqual(0, result.returncode, result.stderr)
+            inventory_path = project / ".specsfy/PACKAGES.md"
+            self.assertTrue(inventory_path.is_file())
+            inventory = inventory_path.read_text(encoding="utf-8")
+            for package in (
+                "laravel/framework",
+                "pestphp/pest",
+                "psr/log",
+                "acme-sdk",
+                "nanoid",
+                "vitest",
+                "fsevents",
+                "react",
+                "zod",
+                "legacy-root",
+                "legacy-child",
+            ):
+                self.assertIn(package, inventory)
+            for heading in (
+                "Gerenciador",
+                "Escopo",
+                "Pacote",
+                "Versão",
+                "Finalidade",
+                "Fonte",
+            ):
+                self.assertIn(heading, inventory)
+            self.assertIn("The Laravel Framework.", inventory)
+            self.assertIn("An elegant PHP testing framework.", inventory)
+            self.assertIn("Common interface for logging libraries.", inventory)
+            self.assertIn("Integra a aplicação com a API da Acme.", inventory)
+            self.assertIn("Gera identificadores pequenos e únicos.", inventory)
+            self.assertIn("| Composer | transitiva | psr/log |", inventory)
+            self.assertIn("| npm | transitiva | nanoid |", inventory)
+            self.assertIn("| npm | transitiva | legacy-child |", inventory)
+            self.assertIn("Compatibiliza a integração legada.", inventory)
+            self.assertIn("Finalidade não descrita nos metadados locais", inventory)
+            self.assertEqual(0, run_builder(project, "--check").returncode)
+
+            inventory_path.write_text(
+                inventory + "\n## Nota humana\n\nRevisar licença antes de atualizar.\n",
+                encoding="utf-8",
+            )
+            preserved = run_builder(project)
+            self.assertEqual(0, preserved.returncode, preserved.stderr)
+            self.assertIn(
+                "Revisar licença antes de atualizar.",
+                inventory_path.read_text(encoding="utf-8"),
+            )
+
+            manifest = json.loads((project / "package.json").read_text(encoding="utf-8"))
+            manifest["dependencies"]["axios"] = "^1.0"
+            write(project / "package.json", json.dumps(manifest))
+            stale = run_builder(project, "--check")
+            self.assertEqual(1, stale.returncode)
+            self.assertIn(".specsfy/PACKAGES.md", stale.stderr)
+
     def test_skill_is_independent_and_mandatory_after_implementation(self) -> None:
         skill = (SKILL / "SKILL.md").read_text(encoding="utf-8")
         implementation = (

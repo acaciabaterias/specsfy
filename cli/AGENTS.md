@@ -1,6 +1,6 @@
 # Guia de desenvolvimento do Specsfy CLI
 
-Este módulo possui o executável Python `specsfy`, a TUI e os testes de
+Este módulo possui o executável Node.js `specsfy`, a TUI e os testes de
 instalação/progresso. Skills pertencem a `skills/` e
 `specialists/`; documentação final pertence a `docs/`.
 
@@ -15,7 +15,8 @@ instalação/progresso. Skills pertencem a `skills/` e
   `.specsfy/skills-lock.json` para fingerprints e proteção Specsfy.
 - Ler a seleção instalada do `skills-lock.json` na raiz do consumidor e criar
   o lock vazio compatível (`{"version": 1, "skills": {}}`) quando ele faltar.
-- Manter a TUI organizada nas abas Home, Backlogs, Specs, Skills e Sobre. A aba
+- Manter a TUI organizada nas abas Home, Backlogs, Specs, Testes, Skills e
+  Sobre. A aba
   Backlogs usa lista e preview Markdown em duas colunas; a aba Skills usa
   busca, filtros, catálogo tabular, plano de alteração e painel de detalhes,
   exibindo e gerenciando exclusivamente `specsfy-setup`,
@@ -31,20 +32,20 @@ instalação/progresso. Skills pertencem a `skills/` e
   compatível do layout legado `specs/*/spec.md`.
 - Manter comandos não interativos equivalentes às ações da TUI.
 - Testes não usam rede nem alteram repositório real.
-- Toda mudança neste módulo deve executar `scripts/build-executable.sh` e
+- Toda mudança neste módulo deve executar `npm run build:executable` e
   versionar `bin/specsfy` e `bin/specsfy.build.json`. O teste de fingerprint
   reprova qualquer alteração não reconstruída.
 - Releases estáveis usam `CHANGELOG.md` como fonte única das notas, atualizam
-  `pyproject.toml`, `src/specsfy_cli/__init__.py`, `uv.lock` e os artefatos
+  `package.json`, `src/version.ts`, `package-lock.json` e os artefatos
   versionados no mesmo commit, criam a tag anotada `v<versão>` nesse commit e
   publicam a seção correspondente no GitHub Release.
 
 ## Validação
 
 ```bash
-uv sync --locked
-uv run python -B -m unittest discover -s tests -p 'test_*.py'
-uv run specsfy --help
-./scripts/build-executable.sh
+npm ci
+npm run build:executable
+npm run check
+node dist/main.js --help
 ./bin/specsfy --version
 ```

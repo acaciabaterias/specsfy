@@ -14,12 +14,12 @@
 | Campo | Valor |
 | --- | --- |
 | Natureza | índice |
-| Escopo | mapas que atravessam módulos |
-| Autoridade | critérios e navegação de fluxos transversais |
+| Escopo | fluxos que atravessam módulos |
+| Autoridade | regras e navegação de fluxos transversais |
 
 ## Papel
 
-Indexar mapas que atravessam módulos e explicar como documentá-los sem criar uma
+Indexar fluxos que atravessam módulos e explicar como documentá-los sem criar uma
 segunda fonte de requisitos.
 
 ## Como usar
@@ -48,8 +48,8 @@ sequência, responsabilidades e links para essas fontes.
 ## Fluxos transversais
 
 - [Release do CLI](cli-release.md): prepara pacote, changelog e executável em
-  `cli/`, cria a tag no commit validado do monorepo e publica as mesmas notas no
-  GitHub Release.
+  `cli/`, cria a tag no commit validado do monorepo, publica o pacote npm e usa
+  as mesmas notas no GitHub Release.
 
 O fluxo canônico do método permanece na
 [visão arquitetural](../architecture/README.md) porque é uma invariante do
@@ -81,9 +81,10 @@ pedir confirmação. O mesmo protocolo governa avanço, retorno e retomada.
 `inbox` conclui a gravação antes de qualquer transição e não faz perguntas. Ela
 apenas oferece backlog como próximo passo opcional.
 Depois de cada tarefa de código, `implement` entrega o estado observado a
-`documentator`, que reconstrói `<projeto>/docs/` antes de a tarefa ou o gate
-final ser concluído. A pessoa também pode acionar `documentator` diretamente,
-sem spec ou implementação recente.
+`documentator`, que reconstrói `<projeto>/docs/` e
+`<projeto>/.specsfy/PACKAGES.md` antes de a tarefa ou o gate final ser
+concluído. A pessoa também pode acionar `documentator` diretamente, sem spec ou
+implementação recente.
 
 Pedido surgido depois da definição retorna a `update-spec`. A skill chama
 `backlog` quando faltar decisão, `validate` quando mudar comportamento e
@@ -98,7 +99,7 @@ O ciclo continua sem limite enquanto houver lacuna aplicável. Da 11ª pergunta 
 diante, `avançar` permite encerrar aquele refinamento, mas as lacunas seguem
 abertas e impedem a aprovação do Definition Gate.
 
-Crie um arquivo somente quando o mapa tiver gatilho de leitura e atualização
+Crie um arquivo somente quando o fluxo tiver gatilho de leitura e atualização
 próprio. Ao criá-lo, adicione a rota neste índice e no
 [roteador de contexto](../README.md).
 
@@ -111,4 +112,4 @@ Cada fluxo deve declarar:
 - ordem, resultado e falha transversal.
 - spec ou specs que governam o comportamento.
 - testes ou fontes executáveis que demonstram a sequência.
-- condição que exige atualização do mapa.
+- condição que exige atualização do fluxo.

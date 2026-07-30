@@ -16,13 +16,20 @@ CLAUDE_SKILL = ROOT / ".claude" / "skills" / "specsfy-release-cli"
 class CliReleaseSkillTests(unittest.TestCase):
     def make_cli_fixture(self, root: Path) -> Path:
         cli = root / "cli"
-        (cli / "src" / "specsfy_cli").mkdir(parents=True)
-        (cli / "pyproject.toml").write_text(
-            '[project]\nname = "specsfy-cli"\nversion = "0.6.0"\n',
+        (cli / "src").mkdir(parents=True)
+        (cli / "package.json").write_text(
+            json.dumps(
+                {
+                    "name": "@promovaweb/specsfy",
+                    "version": "0.6.0",
+                },
+                indent=2,
+            )
+            + "\n",
             encoding="utf-8",
         )
-        (cli / "src" / "specsfy_cli" / "__init__.py").write_text(
-            '__version__ = "0.6.0"\n',
+        (cli / "src" / "version.ts").write_text(
+            'export const VERSION = "0.6.0";\n',
             encoding="utf-8",
         )
         (cli / "CHANGELOG.md").write_text(
@@ -78,15 +85,15 @@ class CliReleaseSkillTests(unittest.TestCase):
             )
 
             self.assertEqual(0, result.returncode, result.stderr)
-            self.assertIn(
-                'version = "0.7.0"',
-                (cli / "pyproject.toml").read_text(encoding="utf-8"),
+            self.assertEqual(
+                "0.7.0",
+                json.loads(
+                    (cli / "package.json").read_text(encoding="utf-8")
+                )["version"],
             )
             self.assertIn(
-                '__version__ = "0.7.0"',
-                (cli / "src" / "specsfy_cli" / "__init__.py").read_text(
-                    encoding="utf-8"
-                ),
+                'VERSION = "0.7.0"',
+                (cli / "src" / "version.ts").read_text(encoding="utf-8"),
             )
             changelog = (cli / "CHANGELOG.md").read_text(encoding="utf-8")
             self.assertIn("## [Unreleased]\n\n## [0.7.0] - 2026-07-27", changelog)
@@ -173,9 +180,10 @@ class CliReleaseSkillTests(unittest.TestCase):
             "git fetch origin main --tags",
             "git rev-parse HEAD",
             "git rev-parse origin/main",
-            "uv sync --locked",
-            "python -B -m unittest discover",
-            "./scripts/build-executable.sh",
+            "npm ci",
+            "npm test",
+            "npm run build:executable",
+            "npm publish",
             "git tag -a",
             "git push --atomic origin main",
             "gh release create",

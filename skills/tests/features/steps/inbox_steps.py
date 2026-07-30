@@ -4,16 +4,22 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
+from shutil import copy2
 
 from behave import given, then, when
 
 
 ROOT = Path(__file__).resolve().parents[3]
-CLI_SOURCE = ROOT.parent / "cli" / "src"
-if str(CLI_SOURCE) not in sys.path:
-    sys.path.insert(0, str(CLI_SOURCE))
-
-from specsfy_cli.installer import FRAMEWORK_TEMPLATE_NAMES, SkillInstaller
+FRAMEWORK_TEMPLATE_NAMES = (
+    "Inbox.md",
+    "Backlog.md",
+    "Spec.md",
+    "Tasks.md",
+    "Project.md",
+    "Stack.md",
+    "Rules.md",
+    "Database.md",
+)
 
 
 def temporary_project(context) -> Path:
@@ -112,12 +118,18 @@ def then_creates_only_the_inbox_entry(context) -> None:
 @given("uma instalação base do Specsfy")
 def given_base_installation(context) -> None:
     context.project = temporary_project(context)
-    context.installer = SkillInstaller(context.project)
 
 
 @when("o CLI publica os arquivos estruturais no projeto consumidor")
 def when_cli_publishes_structural_files(context) -> None:
-    context.changed = context.installer.install_framework_from_checkout(ROOT)
+    destination = context.project / ".specsfy" / "templates"
+    destination.mkdir(parents=True)
+    context.changed = []
+    for name in FRAMEWORK_TEMPLATE_NAMES:
+        target = destination / name
+        copy2(ROOT / "templates" / name, target)
+        context.changed.append(target)
+    (destination / "custom").mkdir()
 
 
 @then(

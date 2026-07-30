@@ -6,11 +6,11 @@
 | --- | --- |
 | Natureza | normativo |
 | Escopo | tecnologias estruturais |
-| Autoridade | função, restrições e critérios das escolhas tecnológicas |
+| Autoridade | função, restrições e condições das escolhas tecnológicas |
 
 ## Papel
 
-Explicar tecnologias estruturais, suas responsabilidades e os critérios para
+Explicar tecnologias estruturais, suas responsabilidades e as condições para
 mudá-las sem duplicar versões mantidas por fontes executáveis.
 
 ## Como usar
@@ -34,8 +34,9 @@ Leia ao introduzir linguagem, runner, formato ou ferramenta transversal. Use
 ## Fonte da verdade e precedência
 
 Este arquivo explica escolhas. Manifests, lockfiles, workflows e comandos são
-fontes executáveis de versão e configuração. Atualmente o repositório não mantém
-manifest próprio de dependências Python.
+fontes executáveis de versão e configuração. O CLI mantém manifest e lockfile
+Node.js próprios. As automações Python usam biblioteca padrão ou dependências
+efêmeras declaradas nos comandos.
 
 ## Stack vigente
 
@@ -43,6 +44,7 @@ manifest próprio de dependências Python.
 | --- | --- | --- |
 | Markdown | skills, specs e contexto legível | arquivos versionados |
 | Python 3 | validadores e testes de contrato | scripts e ambiente de execução |
+| Node.js e TypeScript | CLI, TUI e distribuição npm | `cli/package.json` e lockfile |
 | biblioteca padrão | automação determinística principal | imports dos scripts |
 | Behave | aceite Gherkin | comandos e arquivos em `tests/features/` |
 | `unittest` | TDD e regressão | arquivos `tests/test_*.py` |
@@ -69,9 +71,9 @@ não transforma PHP, JavaScript ou seu runtime em dependências do Specsfy.
 <!-- markdownlint-disable MD013 -->
 | Área | Responsabilidade | Fonte executável |
 | --- | --- | --- |
-| Python, argparse, subprocess e urllib | comandos, instalação, projeção, runners e detecção de versões | `cli/` |
-| Textual | interface terminal, streaming e resultados de testes | `cli/pyproject.toml` e lockfile |
-| uv | instalação e atualização isoladas do CLI | manifest, lockfile e comandos publicados |
+| TypeScript, Commander e APIs do Node.js | comandos, instalação, projeção, runners e detecção de versões | `cli/src/` |
+| neo-blessed, marked e marked-terminal | interface terminal e Markdown | `cli/package.json` e lockfile |
+| npm | instalação, atualização e publicação do CLI | `cli/package.json` e workflow |
 | Markdown/YAML | instruções e metadata das skills | `skills/` e `specialists/` |
 | JSON | catálogo detectável e lock de instalação | `specialists/catalog.json` e lock do consumidor |
 <!-- markdownlint-enable MD013 -->
@@ -79,7 +81,7 @@ não transforma PHP, JavaScript ou seu runtime em dependências do Specsfy.
 O CLI é ferramenta de distribuição. Suas dependências não passam a ser
 dependências dos projetos consumidores nem do workspace `promovaweb/specsfy`.
 
-## Critérios de escolha
+## Condições de escolha
 
 - Preferir biblioteca padrão para scripts determinísticos.
 - Exigir benefício observável antes de adicionar dependência.

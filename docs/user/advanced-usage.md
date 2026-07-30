@@ -78,14 +78,14 @@ customização local. Uma diferença local faz a atualização ou a remoção se
 recusada. Use `--force` somente depois de revisar a comparação e confirmar que
 o conteúdo protegido pode ser descartado.
 
-Quando o CLI foi instalado pelo `uv`, o comando abaixo atualiza o ambiente
-gerenciado e preserva as opções registradas pela ferramenta:
+Quando o CLI foi instalado pelo npm, o comando abaixo atualiza o pacote
+global:
 
 ```bash
-uv tool upgrade specsfy-cli
+npm update --global @promovaweb/specsfy
 ```
 
-Quando a instalação usa o zipapp oficial, substitua o executável pelo download
+Quando a instalação usa o executável Node oficial, substitua-o pelo download
 mais recente e restaure a permissão:
 
 ```bash

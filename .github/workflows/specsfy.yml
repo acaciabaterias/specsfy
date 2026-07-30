@@ -41,31 +41,44 @@ jobs:
 
   cli:
     runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      id-token: write
     defaults:
       run:
         working-directory: cli
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          enable-cache: false
-      - run: uv sync --locked
-      - run: uv run python -B -m unittest discover -s tests -p 'test_*.py'
-      - run: uv build
-      - run: uv run specsfy --help
-      - name: Validar instalação local e atualização
-        env:
-          UV_TOOL_DIR: ${{ runner.temp }}/specsfy-tools
-          UV_TOOL_BIN_DIR: ${{ runner.temp }}/specsfy-bin
+          node-version: '22.12'
+          cache: npm
+          cache-dependency-path: cli/package-lock.json
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci
+      - run: npm run check
+      - name: Validar artefato versionado
+        run: git diff --exit-code -- bin/specsfy bin/specsfy.build.json
+      - name: Validar instalação local
         run: |
-          uv tool install --force .
-          uv tool upgrade specsfy-cli
-          "${UV_TOOL_BIN_DIR}/specsfy" --version
+          npm install --global --prefix "${RUNNER_TEMP}/specsfy-tools" .
+          "${RUNNER_TEMP}/specsfy-tools/bin/specsfy" --version
       - name: Validar versão da tag
         if: github.ref_type == 'tag'
         run: |
-          version="$(uv run python -B -c 'from specsfy_cli import __version__; print(__version__)')"
+          version="$(node --print 'require("./package.json").version')"
           test "v${version}" = "${GITHUB_REF_NAME}"
+      - name: Publicar pacote npm
+        if: github.ref_type == 'tag'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          REPOSITORY_PRIVATE: ${{ github.event.repository.private }}
+        run: |
+          if [ "${REPOSITORY_PRIVATE}" = "true" ]; then
+            npm publish --access public
+          else
+            npm publish --access public --provenance
+          fi
 
   example:
     runs-on: ubuntu-24.04

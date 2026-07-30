@@ -108,7 +108,8 @@ class DocumentationAudienceContractTests(unittest.TestCase):
                 "handoff",
             ),
             "cli.md": (
-                "cli/src/specsfy_cli",
+                "cli/src/",
+                "TypeScript",
                 "catálogo",
                 "GitHub",
                 "fingerprint",

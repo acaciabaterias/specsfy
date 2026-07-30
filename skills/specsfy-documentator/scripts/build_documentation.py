@@ -56,14 +56,32 @@ KNOWN_GITHUB = {
     "vite": "https://github.com/vitejs/vite",
     "vitest": "https://github.com/vitest-dev/vitest",
 }
+KNOWN_PURPOSES = {
+    "@astrojs/react": "Integra componentes React a aplicações Astro.",
+    "@inertiajs/react": "Conecta o frontend React a aplicações Inertia.",
+    "@vitejs/plugin-react": "Adiciona suporte a React no pipeline do Vite.",
+    "astro": "Constrói sites orientados a conteúdo com ilhas interativas.",
+    "axios": "Realiza requisições HTTP no navegador ou no servidor.",
+    "laravel/framework": "Fornece o framework web Laravel para aplicações PHP.",
+    "next": "Fornece o framework React para aplicações web renderizadas no servidor.",
+    "pestphp/pest": "Executa testes PHP com a interface do Pest.",
+    "phpunit/phpunit": "Executa testes unitários e de integração em PHP.",
+    "react": "Constrói interfaces de usuário baseadas em componentes.",
+    "react-dom": "Renderiza componentes React no DOM.",
+    "tailwindcss": "Gera estilos a partir de classes utilitárias.",
+    "vite": "Empacota e serve assets durante desenvolvimento e build.",
+    "vitest": "Executa testes JavaScript e TypeScript integrados ao Vite.",
+}
 
 
 @dataclass(frozen=True)
 class Package:
+    manager: str
     category: str
     scope: str
     name: str
     version: str
+    purpose: str
     source: str
     github: str
 
@@ -223,117 +241,320 @@ def github_from_repository(value: object) -> str | None:
     return normalized.removesuffix(".git")
 
 
-def github_for_npm(project: Path, name: str) -> tuple[str, str]:
-    installed = project / "node_modules" / name / "package.json"
+def manifest_paths(project: Path, filename: str) -> list[Path]:
+    return sorted(
+        path
+        for path in project.rglob(filename)
+        if path.is_file() and included(path, project)
+    )
+
+
+def local_purpose(
+    manager: str,
+    name: str,
+    scope: str,
+    metadata: dict,
+) -> str:
+    description = metadata.get("description")
+    if isinstance(description, str) and description.strip():
+        return description.strip()
+    if name in KNOWN_PURPOSES:
+        return KNOWN_PURPOSES[name]
+    return (
+        "Finalidade não descrita nos metadados locais; "
+        f"dependência {manager} de {scope} do projeto."
+    )
+
+
+def github_for_npm(
+    project: Path,
+    manifest: Path,
+    name: str,
+    installed: Path | None = None,
+) -> tuple[str, str, dict]:
+    if installed is None:
+        installed = manifest.parent / "node_modules" / name / "package.json"
     metadata = load_json(installed)
+    if not metadata:
+        hoisted = manifest.parent / "node_modules" / name / "package.json"
+        hoisted_metadata = load_json(hoisted)
+        if hoisted_metadata:
+            installed = hoisted
+            metadata = hoisted_metadata
     declared = github_from_repository(metadata.get("repository"))
     if declared:
-        return declared, f"`{relative(installed, project)}`"
+        return declared, f"`{relative(installed, project)}`", metadata
     if name in KNOWN_GITHUB:
-        return KNOWN_GITHUB[name], "catálogo conhecido do documentador"
+        return (
+            KNOWN_GITHUB[name],
+            "catálogo conhecido do documentador",
+            metadata,
+        )
     search = f"https://github.com/search?q={quote(name)}&type=repositories"
-    return search, "busca GitHub; repositório não declarado localmente"
+    return (
+        search,
+        "busca GitHub; repositório não declarado localmente",
+        metadata,
+    )
+
+
+def npm_name_from_lock_path(path: str) -> str | None:
+    parts = PurePosixPath(path).parts
+    positions = [index for index, part in enumerate(parts) if part == "node_modules"]
+    if not positions:
+        return None
+    start = positions[-1] + 1
+    if start >= len(parts):
+        return None
+    if parts[start].startswith("@") and start + 1 < len(parts):
+        return f"{parts[start]}/{parts[start + 1]}"
+    return parts[start]
+
+
+def npm_v1_lock_entries(
+    dependencies: object,
+    parent_key: str = "",
+) -> list[tuple[str, dict]]:
+    if not isinstance(dependencies, dict):
+        return []
+    entries: list[tuple[str, dict]] = []
+    for name, metadata in sorted(dependencies.items()):
+        if not isinstance(metadata, dict):
+            continue
+        lock_key = (
+            f"{parent_key}/node_modules/{name}"
+            if parent_key
+            else f"node_modules/{name}"
+        )
+        entries.append((lock_key, metadata))
+        entries.extend(
+            npm_v1_lock_entries(metadata.get("dependencies"), lock_key)
+        )
+    return entries
 
 
 def packages(project: Path) -> list[Package]:
     result: list[Package] = []
-    composer = load_json(project / "composer.json")
-    composer_lock = load_json(project / "composer.lock")
-    locked_composer = {}
-    for scope, key in (("produção", "packages"), ("desenvolvimento", "packages-dev")):
-        for item in composer_lock.get(key, []):
-            if isinstance(item, dict) and isinstance(item.get("name"), str):
-                locked_composer[item["name"]] = (item, scope)
-    composer_scopes = (
-        ("produção", composer.get("require", {})),
-        ("desenvolvimento", composer.get("require-dev", {})),
-    )
-    if composer:
+    for manifest in manifest_paths(project, "composer.json"):
+        composer = load_json(manifest)
+        lock_path = manifest.with_name("composer.lock")
+        composer_lock = load_json(lock_path)
+        locked_composer = {}
+        for scope, key in (
+            ("produção", "packages"),
+            ("desenvolvimento", "packages-dev"),
+        ):
+            for item in composer_lock.get(key, []):
+                if isinstance(item, dict) and isinstance(item.get("name"), str):
+                    locked_composer[item["name"]] = (item, scope)
+        composer_scopes = (
+            ("produção", composer.get("require", {})),
+            ("desenvolvimento", composer.get("require-dev", {})),
+        )
         result.append(
             Package(
+                "runtime",
                 "Nativo",
                 "runtime",
                 "PHP",
                 str(composer.get("require", {}).get("php", "detectada pelo manifest")),
-                "`composer.json`",
+                "Executa a aplicação e suas dependências PHP.",
+                f"`{relative(manifest, project)}`",
                 "https://github.com/php/php-src",
             )
         )
-    for scope, dependencies in composer_scopes:
-        for name, constraint in sorted(dependencies.items()):
-            if name == "php":
+        observed_composer: set[str] = set()
+        for scope, dependencies in composer_scopes:
+            if not isinstance(dependencies, dict):
                 continue
-            locked, _ = locked_composer.get(name, ({}, scope))
+            for name, constraint in sorted(dependencies.items()):
+                if name == "php":
+                    continue
+                observed_composer.add(name)
+                locked, _ = locked_composer.get(name, ({}, scope))
+                github = github_from_repository(locked.get("source"))
+                if not github:
+                    github = KNOWN_GITHUB.get(name)
+                source = (
+                    f"`{relative(lock_path, project)}`"
+                    if locked
+                    else f"`{relative(manifest, project)}`"
+                )
+                if not github:
+                    github = (
+                        f"https://github.com/search?q={quote(name)}"
+                        "&type=repositories"
+                    )
+                    source += "; busca GitHub"
+                category = (
+                    "Framework"
+                    if name in {"laravel/framework"}
+                    else "Integrado"
+                    if scope == "produção"
+                    else "Terceiro"
+                )
+                result.append(
+                    Package(
+                        "Composer",
+                        category,
+                        scope,
+                        name,
+                        str(locked.get("version", constraint)),
+                        local_purpose("Composer", name, scope, locked),
+                        source,
+                        github,
+                    )
+                )
+        for name, (locked, _) in sorted(locked_composer.items()):
+            if name in observed_composer:
+                continue
             github = github_from_repository(locked.get("source"))
             if not github:
                 github = KNOWN_GITHUB.get(name)
-            source = "`composer.lock`" if locked else "`composer.json`"
+            source = f"`{relative(lock_path, project)}`"
             if not github:
-                github = f"https://github.com/search?q={quote(name)}&type=repositories"
+                github = (
+                    f"https://github.com/search?q={quote(name)}"
+                    "&type=repositories"
+                )
                 source += "; busca GitHub"
-            category = (
-                "Framework"
-                if name in {"laravel/framework"}
-                else "Integrado"
-                if scope == "produção"
-                else "Terceiro"
-            )
             result.append(
                 Package(
-                    category,
-                    scope,
+                    "Composer",
+                    "Terceiro",
+                    "transitiva",
                     name,
-                    str(locked.get("version", constraint)),
+                    str(locked.get("version", "versão registrada no lockfile")),
+                    local_purpose("Composer", name, "transitiva", locked),
                     source,
                     github,
                 )
             )
 
-    package = load_json(project / "package.json")
-    package_lock = load_json(project / "package-lock.json")
-    lock_packages = package_lock.get("packages", {})
-    if package:
+    for manifest in manifest_paths(project, "package.json"):
+        package = load_json(manifest)
+        lock_path = manifest.with_name("package-lock.json")
+        package_lock = load_json(lock_path)
+        lock_packages = package_lock.get("packages", {})
+        if not isinstance(lock_packages, dict):
+            lock_packages = {}
+        if not lock_packages:
+            lock_packages = dict(
+                npm_v1_lock_entries(package_lock.get("dependencies"))
+            )
         result.append(
             Package(
+                "runtime",
                 "Nativo",
                 "runtime",
                 "Node.js",
                 str(package.get("engines", {}).get("node", "versão do ambiente")),
-                "`package.json`",
+                "Executa ferramentas e aplicações do ecossistema Node.js.",
+                f"`{relative(manifest, project)}`",
                 "https://github.com/nodejs/node",
             )
         )
-    npm_scopes = (
-        ("produção", package.get("dependencies", {})),
-        ("desenvolvimento", package.get("devDependencies", {})),
-    )
-    framework_names = {"next", "astro", "react", "react-dom", "tailwindcss", "vite"}
-    for scope, dependencies in npm_scopes:
-        for name, constraint in sorted(dependencies.items()):
-            locked = lock_packages.get(f"node_modules/{name}", {})
-            github, github_source = github_for_npm(project, name)
-            source = "`package-lock.json`" if locked else "`package.json`"
+        npm_scopes = (
+            ("produção", package.get("dependencies", {})),
+            ("desenvolvimento", package.get("devDependencies", {})),
+            ("opcional", package.get("optionalDependencies", {})),
+            ("peer", package.get("peerDependencies", {})),
+        )
+        framework_names = {
+            "next",
+            "astro",
+            "react",
+            "react-dom",
+            "tailwindcss",
+            "vite",
+        }
+        observed_names: set[str] = set()
+        direct_lock_keys: set[str] = set()
+        for scope, dependencies in npm_scopes:
+            if not isinstance(dependencies, dict):
+                continue
+            for name, constraint in sorted(dependencies.items()):
+                if name in observed_names:
+                    continue
+                observed_names.add(name)
+                direct_lock_keys.add(f"node_modules/{name}")
+                locked = lock_packages.get(f"node_modules/{name}", {})
+                github, github_source, metadata = github_for_npm(
+                    project,
+                    manifest,
+                    name,
+                )
+                source = (
+                    f"`{relative(lock_path, project)}`"
+                    if locked
+                    else f"`{relative(manifest, project)}`"
+                )
+                if "busca GitHub" in github_source:
+                    source += "; busca GitHub"
+                category = (
+                    "Framework"
+                    if name in framework_names
+                    else "Integrado"
+                    if scope in {"produção", "opcional"}
+                    else "Terceiro"
+                )
+                result.append(
+                    Package(
+                        "npm",
+                        category,
+                        scope,
+                        name,
+                        str(locked.get("version", constraint)),
+                        local_purpose("npm", name, scope, metadata),
+                        source,
+                        github,
+                    )
+                )
+        for lock_key, locked in sorted(lock_packages.items()):
+            if not isinstance(locked, dict):
+                continue
+            name = npm_name_from_lock_path(lock_key)
+            if not name or lock_key in direct_lock_keys:
+                continue
+            installed = manifest.parent / lock_key / "package.json"
+            github, github_source, metadata = github_for_npm(
+                project,
+                manifest,
+                name,
+                installed,
+            )
+            source = (
+                f"`{relative(lock_path, project)}` "
+                f"(`{safe_cell(lock_key)}`)"
+            )
             if "busca GitHub" in github_source:
                 source += "; busca GitHub"
-            category = (
-                "Framework"
-                if name in framework_names
-                else "Integrado"
-                if scope == "produção"
-                else "Terceiro"
-            )
             result.append(
                 Package(
-                    category,
-                    scope,
+                    "npm",
+                    "Terceiro",
+                    "transitiva",
                     name,
-                    str(locked.get("version", constraint)),
+                    str(locked.get("version", "versão registrada no lockfile")),
+                    local_purpose("npm", name, "transitiva", metadata),
                     source,
                     github,
                 )
             )
-    unique = {(item.name, item.scope): item for item in result}
-    return sorted(unique.values(), key=lambda item: (item.category, item.name, item.scope))
+    unique = {
+        (item.manager, item.name, item.scope, item.version, item.source): item
+        for item in result
+    }
+    return sorted(
+        unique.values(),
+        key=lambda item: (
+            item.manager,
+            item.category,
+            item.name,
+            item.scope,
+            item.source,
+        ),
+    )
 
 
 def laravel_entities(project: Path) -> list[Entity]:
@@ -808,12 +1029,13 @@ def render_frontend(groups: dict[str, list[Path]], project: Path, files: list[Pa
 def render_packages(package_items: list[Package]) -> str:
     return f"""## Catálogo de runtime e dependências
 
-{table(("Categoria", "Escopo", "Pacote", "Versão", "Fonte", "GitHub"), (
+{table(("Categoria", "Escopo", "Pacote", "Versão", "Finalidade", "Fonte", "GitHub"), (
     (
         item.category,
         item.scope,
         item.name,
         item.version,
+        item.purpose,
         item.source,
         md_link("repositório", item.github),
     )
@@ -829,6 +1051,31 @@ def render_packages(package_items: list[Package]) -> str:
 
 Links rotulados por busca indicam que manifests, locks e pacote instalado não
 declararam um repositório GitHub confiável.
+"""
+
+
+def render_package_context(package_items: list[Package]) -> str:
+    observed = [item for item in package_items if item.manager in {"npm", "Composer"}]
+    return f"""## Inventário de pacotes observados
+
+Este arquivo é reconstruído pela skill `specsfy-documentator` a partir dos
+manifests, lockfiles e metadados instalados encontrados no projeto. Ele inclui
+dependências diretas e transitivas registradas localmente.
+
+{table(("Gerenciador", "Escopo", "Pacote", "Versão", "Finalidade", "Fonte"), (
+    (
+        item.manager,
+        item.scope,
+        item.name,
+        item.version,
+        item.purpose,
+        item.source,
+    )
+    for item in observed
+))}
+
+Descrições ausentes não são inventadas. Nesses casos, o inventário registra o
+escopo observado e informa que os metadados locais não descrevem a finalidade.
 """
 
 
@@ -941,6 +1188,7 @@ def main() -> int:
         parser.error(f"projeto inexistente: {project}")
     docs = project / "docs"
     generated = build_documents(project)
+    package_context = render_package_context(packages(project))
     planned: dict[Path, str] = {}
     for name, content in generated.items():
         target = docs / name
@@ -958,6 +1206,17 @@ def main() -> int:
             "decisions.md": "Decisões técnicas",
         }[name]
         planned[target] = merge_document(existing, title, content)
+    package_target = project / ".specsfy" / "PACKAGES.md"
+    package_existing = (
+        package_target.read_text(encoding="utf-8")
+        if package_target.is_file()
+        else ""
+    )
+    planned[package_target] = merge_document(
+        package_existing,
+        "Pacotes do projeto",
+        package_context,
+    )
     changed = [
         path
         for path, content in planned.items()
@@ -969,13 +1228,21 @@ def main() -> int:
             for path in changed:
                 print(f"- {relative(path, project)}", file=sys.stderr)
             return 1
-        print(f"Documentação atual: {documentation_digest(generated)}")
+        digest_sources = {
+            **{f"docs/{name}": content for name, content in generated.items()},
+            ".specsfy/PACKAGES.md": package_context,
+        }
+        print(f"Documentação atual: {documentation_digest(digest_sources)}")
         return 0
-    docs.mkdir(parents=True, exist_ok=True)
     for path in changed:
+        path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(planned[path], encoding="utf-8")
         print(path)
-    print(f"Documentação construída: {documentation_digest(generated)}")
+    digest_sources = {
+        **{f"docs/{name}": content for name, content in generated.items()},
+        ".specsfy/PACKAGES.md": package_context,
+    }
+    print(f"Documentação construída: {documentation_digest(digest_sources)}")
     return 0
 
 

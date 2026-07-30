@@ -28,7 +28,7 @@ def when_monorepo_boundaries_are_inspected(context) -> None:
         / "collect_monorepo_evidence.py"
     ).read_text(encoding="utf-8")
     context.installer = (
-        ROOT / "cli" / "src" / "specsfy_cli" / "installer.py"
+        ROOT / "cli" / "src" / "installer.ts"
     ).read_text(encoding="utf-8")
 
 
@@ -140,7 +140,8 @@ def then_skill_requires_installation_guide(context) -> None:
 @then("o guia instala o CLI e o framework no projeto consumidor")
 def then_guide_installs_cli_and_framework(context) -> None:
     installation = context.installation.read_text(encoding="utf-8")
-    assert "Python 3.11" in installation
+    assert "Node.js 22.12" in installation
+    assert "npm install --global @promovaweb/specsfy" in installation
     assert "`get.specsfy.dev`" in installation
     assert "curl -fL get.specsfy.dev" in installation
     assert "https://get.specsfy.dev" not in installation
@@ -148,7 +149,7 @@ def then_guide_installs_cli_and_framework(context) -> None:
     assert "### Pré-requisitos" not in installation
     assert "gh auth login" not in installation
     assert "uv tool install" not in installation
-    assert "promovaweb/specsfy" not in installation
+    assert "git+https://github.com/promovaweb/specsfy" not in installation
     assert "specsfy install --project ." in installation
     assert "specsfy --version" in installation
     assert "specsfy skills list" in installation
@@ -174,7 +175,7 @@ def then_public_entrypoint_teaches_the_first_journey(context) -> None:
         "get.specsfy.dev",
         "specsfy --version",
         "specsfy install --project .",
-        "uv tool upgrade specsfy-cli",
+        "npm update --global @promovaweb/specsfy",
         "specsfy skills update --project .",
         "specsfy-01-inbox",
         "specsfy-02-backlog",

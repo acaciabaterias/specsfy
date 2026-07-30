@@ -1,7 +1,8 @@
 {
-  "schema_version": 2,
-  "format": "python-zipapp",
+  "schema_version": 3,
   "version": "0.6.0",
-  "source_sha256": "6ebcdc15ce34c7ab59fa5c4b5ed87b4aadcbf9a47297f15dc85a884ce420d232",
-  "binary_sha256": "15f8ad6c1f9c469c50bb82d704403d52598045eeff7c9027e0ee5cadd1f2ebf9"
+  "runtime": "node",
+  "minimum_node": ">=22.12.0",
+  "source_sha256": "e96fa8b100ed5fbe1b312799c7452f79516a1ec959230fec178da59c4a6b733c",
+  "binary_sha256": "122c1a3f653bf91f9ac59d80f28a49440a8d08972c4119b88e1c6e8f445dc8b0"
 }

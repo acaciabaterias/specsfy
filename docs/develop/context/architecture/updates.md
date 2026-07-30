@@ -6,17 +6,17 @@
 | --- | --- |
 | Natureza | normativo |
 | Escopo | descoberta, consentimento e instalação de versões do CLI |
-| Autoridade | fronteira de rede, cache, confiança e fallback do updater |
+| Autoridade | limites de rede, cache, confiança e fallback do updater |
 
 ## Papel
 
 Definir como o CLI descobre tags publicadas, oferece uma atualização e delega
-ao `uv` o gerenciamento do ambiente isolado sem tornar rede ou GitHub
-requisitos para abrir a aplicação.
+ao npm o gerenciamento do pacote global sem tornar rede ou GitHub requisitos
+para abrir a aplicação.
 
 ## Como usar
 
-Leia ao alterar a origem das versões, o cache global, o comando do `uv`, o
+Leia ao alterar a origem das versões, o cache global, o comando do npm, o
 prompt inicial, o intervalo de consulta ou a forma de publicação.
 
 ## Atualize quando
@@ -34,8 +34,8 @@ prompt inicial, o intervalo de consulta ou a forma de publicação.
 ## Fonte da verdade e precedência
 
 O código e os testes de `cli/` implementam esta política. Tags selecionam
-versões publicadas. O ambiente, a origem e a resolução da ferramenta pertencem
-ao `uv`. O cache apenas reduz consultas e nunca autoriza uma instalação.
+versões publicadas. O npm resolve e instala o pacote global. O cache apenas
+reduz consultas e nunca autoriza uma instalação.
 
 ## Fluxo
 
@@ -45,9 +45,9 @@ ao `uv`. O cache apenas reduz consultas e nunca autoriza uma instalação.
 3. Considera somente tags estáveis `vMAJOR.MINOR.PATCH` e registra o SHA
    apontado como evidência da consulta.
 4. Se a versão for superior, pede consentimento no terminal.
-5. Ao aceitar, executa `uv tool upgrade specsfy-cli`. O `uv` preserva a origem,
-   as opções e as restrições registradas na instalação.
-6. Depois que o `uv` conclui, o CLI encerra para que a próxima abertura use o
+5. Ao aceitar, executa
+   `npm install --global @promovaweb/specsfy@latest`.
+6. Depois que o npm conclui, o CLI encerra para que a próxima abertura use o
    ambiente atualizado.
 7. Recusa ou falha abre a aplicação atual normalmente.
 
@@ -63,13 +63,16 @@ governado pelo GitHub CLI. O Specsfy não a imprime nem a copia para seu cache.
 
 ## Distribuição e publicação
 
-O pacote instalável é definido por `pyproject.toml`, expõe o comando `specsfy`
-e inclui suas dependências no lockfile. O download público do executável usa
-`get.specsfy.dev`. A instalação gerenciada usa
-`uv tool install 'git+https://github.com/promovaweb/specsfy.git#subdirectory=cli'`
-e a atualização usa `uv tool upgrade specsfy-cli`. Uma tag atualizável aponta
-para o commit cuja versão do pacote corresponde ao nome `v<versão>`,
-verificado pelo CI.
+O pacote instalável é definido por `cli/package.json`, expõe o comando
+`specsfy` e inclui suas dependências no lockfile. O download público do
+executável usa `get.specsfy.dev`. A instalação gerenciada usa
+`npm install --global @promovaweb/specsfy` e a atualização usa
+`npm update --global @promovaweb/specsfy`. Uma tag atualizável aponta para o
+commit cuja versão do pacote corresponde ao nome `v<versão>`, verificado pelo
+CI antes da publicação no npm. A proveniência é acrescentada quando o
+repositório estiver público, porque o registro exige uma origem pública para
+essa atestação.
 
-O zipapp versionado continua sendo artefato de validação do repositório, mas
-não é a unidade instalada nem substituída pelo fluxo gerenciado pelo `uv`.
+O executável Node versionado continua sendo um artefato de distribuição e
+validação do repositório. Ele contém as dependências do CLI e usa o runtime
+Node.js instalado na máquina.

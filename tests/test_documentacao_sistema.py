@@ -11,7 +11,7 @@ SKILLS = ROOT / "skills"
 class SystemDocumentationIntegrationTests(unittest.TestCase):
     def test_documentator_is_installed_and_handed_off_after_implementation(self) -> None:
         installer = (
-            ROOT / "cli/src/specsfy_cli/installer.py"
+            ROOT / "cli/src/installer.ts"
         ).read_text(encoding="utf-8")
         implementation = (
             SKILLS / "specsfy-07-implement/SKILL.md"

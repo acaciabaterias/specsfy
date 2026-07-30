@@ -1,8 +1,10 @@
 # Documentação técnica do sistema
 
 `$specsfy-documentator` reconstrói a visão técnica de uma aplicação em
-`<projeto>/docs/`. Esses arquivos explicam o código do projeto consumidor e não
-se confundem com a documentação oficial da metodologia Specsfy.
+`<projeto>/docs/` e o inventário de dependências em
+`<projeto>/.specsfy/PACKAGES.md`. Esses arquivos explicam o código e os pacotes
+do projeto consumidor e não se confundem com a documentação oficial da
+metodologia Specsfy.
 
 Execute `$specsfy-documentator` livremente para documentar um sistema legado ou
 atualizar sua visão técnica. Depois de cada tarefa de código concluída por
@@ -26,6 +28,7 @@ seguintes arquivos e preserva o texto humano externo:
 | `docs/packages.md` | runtime, framework, nativos, integrados e terceiros |
 | `docs/integrations.md` | serviços externos e nomes de configuração |
 | `docs/decisions.md` | escolhas explícitas e suas fontes |
+| `.specsfy/PACKAGES.md` | pacotes npm e Composer, versão, finalidade e fonte |
 
 Em Laravel, o inventário acompanha a requisição pelas rotas, controllers e
 services, relaciona Eloquent e migrations e registra os testes Pest ou PHPUnit.
@@ -36,6 +39,13 @@ Cada pacote recebe a versão e a referência do repositório no GitHub. Quando
 essa origem não puder ser confirmada localmente, a documentação publica uma
 busca identificada como tal, em vez de inventar uma URL.
 
+O arquivo `.specsfy/PACKAGES.md` percorre todos os manifests npm e Composer do
+projeto e inclui também as dependências transitivas registradas em
+`package-lock.json` e `composer.lock`. A finalidade vem da descrição presente
+no lockfile, no pacote instalado ou no catálogo conhecido do documentador.
+Quando nenhuma dessas fontes existir, o arquivo declara que a finalidade não
+foi descrita nos metadados locais.
+
 Depois da reconstrução, a própria skill executa o modo `--check`. O comando
 compara os blocos gerados com o estado atual e falha quando `docs/` está
 desatualizado:
@@ -45,9 +55,11 @@ python3 -B .agents/skills/specsfy-documentator/scripts/build_documentation.py \
   --project . --check
 ```
 
-O monitor do setup também retorna `PENDING` quando o código da aplicação ou a
-persistência mudou sem uma nova reconstrução de `docs/`. Esse estado impede a
-conclusão da tarefa e do Delivery Gate.
+O monitor do setup também retorna `PENDING` quando o código da aplicação, a
+persistência ou as dependências mudaram sem uma nova reconstrução de `docs/`.
+Mudanças em manifests ou lockfiles exigem ainda a atualização de
+`.specsfy/PACKAGES.md`. Esse estado impede a conclusão da tarefa e do Delivery
+Gate.
 
 O código, os testes, os manifests, os schemas e as migrations comprovam o
 estado implementado. A spec governa o comportamento da mudança, enquanto

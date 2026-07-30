@@ -19,7 +19,7 @@ class InstallCliScriptTests(unittest.TestCase):
         claude_target_before = claude_skill.readlink()
         with tempfile.TemporaryDirectory() as directory:
             temporary = Path(directory)
-            fake_path, log = self._fake_uv(temporary)
+            fake_path, log = self._fake_npm(temporary)
 
             result = subprocess.run(
                 [str(SCRIPT)],
@@ -31,13 +31,13 @@ class InstallCliScriptTests(unittest.TestCase):
                     **os.environ,
                     "PATH": f"{fake_path}:{os.environ['PATH']}",
                     "SPECSFY_TEST_LOG": str(log),
-                    "SPECSFY_TEST_BIN": str(temporary / "installed-bin"),
+                    "SPECSFY_TEST_BIN": str(temporary / "bin"),
                 },
             )
 
             self.assertEqual(0, result.returncode, result.stderr)
             invocation = log.read_text(encoding="utf-8")
-            self.assertIn("tool install --force --reinstall", invocation)
+            self.assertIn("install --global --force", invocation)
             self.assertIn(str((ROOT / "cli").resolve()), invocation)
             self.assertIn("specsfy 0.4.0", result.stdout)
             self.assertFalse((ROOT / "specs").exists())
@@ -47,13 +47,13 @@ class InstallCliScriptTests(unittest.TestCase):
             )
             self.assertEqual(claude_target_before, claude_skill.readlink())
 
-    def test_can_install_published_cli_from_github(self) -> None:
+    def test_can_install_published_cli_from_npm(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             temporary = Path(directory)
-            fake_path, log = self._fake_uv(temporary)
+            fake_path, log = self._fake_npm(temporary)
 
             result = subprocess.run(
-                [str(SCRIPT), "--github"],
+                [str(SCRIPT), "--npm"],
                 text=True,
                 capture_output=True,
                 check=False,
@@ -61,26 +61,26 @@ class InstallCliScriptTests(unittest.TestCase):
                     **os.environ,
                     "PATH": f"{fake_path}:{os.environ['PATH']}",
                     "SPECSFY_TEST_LOG": str(log),
-                    "SPECSFY_TEST_BIN": str(temporary / "installed-bin"),
+                    "SPECSFY_TEST_BIN": str(temporary / "bin"),
                 },
             )
 
             self.assertEqual(0, result.returncode, result.stderr)
             self.assertIn(
-                "git+https://github.com/promovaweb/specsfy.git#subdirectory=cli",
+                "@promovaweb/specsfy@latest",
                 log.read_text(encoding="utf-8"),
             )
 
-    def _fake_uv(self, temporary: Path) -> tuple[Path, Path]:
+    def _fake_npm(self, temporary: Path) -> tuple[Path, Path]:
         fake_path = temporary / "fake-path"
         fake_path.mkdir()
-        log = temporary / "uv.log"
-        uv = fake_path / "uv"
-        uv.write_text(
+        log = temporary / "npm.log"
+        npm = fake_path / "npm"
+        npm.write_text(
             "#!/usr/bin/env bash\n"
             "set -euo pipefail\n"
-            "if [[ \"$1 $2 $3\" == \"tool dir --bin\" ]]; then\n"
-            "  printf '%s\\n' \"$SPECSFY_TEST_BIN\"\n"
+            "if [[ \"$1 $2\" == \"prefix --global\" ]]; then\n"
+            "  dirname \"$SPECSFY_TEST_BIN\"\n"
             "  exit 0\n"
             "fi\n"
             "printf '%s\\n' \"$*\" >> \"$SPECSFY_TEST_LOG\"\n"
@@ -90,7 +90,7 @@ class InstallCliScriptTests(unittest.TestCase):
             "chmod +x \"$SPECSFY_TEST_BIN/specsfy\"\n",
             encoding="utf-8",
         )
-        uv.chmod(0o755)
+        npm.chmod(0o755)
         return fake_path, log
 
 

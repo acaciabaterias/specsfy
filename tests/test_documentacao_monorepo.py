@@ -78,7 +78,7 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
             ROOT / "skills" / "specsfy-documentator" / "SKILL.md"
         ).read_text(encoding="utf-8")
         installer = (
-            ROOT / "cli" / "src" / "specsfy_cli" / "installer.py"
+            ROOT / "cli" / "src" / "installer.ts"
         ).read_text(encoding="utf-8")
 
         self.assertIn("documenta a metodologia", contract)
@@ -123,7 +123,8 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
 
         installation = installation_path.read_text(encoding="utf-8")
         for evidence in (
-            "Python 3.11",
+            "Node.js 22.12",
+            "npm install --global @promovaweb/specsfy",
             "get.specsfy.dev",
             "curl -fL get.specsfy.dev",
             "specsfy --version",
@@ -140,7 +141,7 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
             "### Pré-requisitos",
             "gh auth login",
             "uv tool install",
-            "promovaweb/specsfy",
+            "git+https://github.com/promovaweb/specsfy",
             "## Atualize quando",
             "## Não use para",
             "## Fonte da verdade e precedência",
@@ -167,7 +168,7 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
             "get.specsfy.dev",
             "specsfy --version",
             "specsfy install --project .",
-            "uv tool upgrade specsfy-cli",
+            "npm update --global @promovaweb/specsfy",
             "specsfy skills update --project .",
             "specsfy-01-inbox",
             "specsfy-02-backlog",

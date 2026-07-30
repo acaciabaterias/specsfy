@@ -1,6 +1,6 @@
 @cli @updater
-Feature: Atualizar o CLI instalado como ferramenta uv
-  Para receber correções no mesmo ambiente isolado da instalação
+Feature: Atualizar o CLI instalado como pacote npm
+  Para receber correções pelo gerenciador usado na instalação
   Como pessoa que abre a aplicação Specsfy
   Quero ser avisada e decidir antes de instalar uma versão nova
 
@@ -9,5 +9,5 @@ Feature: Atualizar o CLI instalado como ferramenta uv
     When o contrato de atualização é inspecionado
     Then dados e configurações globais usam ~/.specsfy/cli.json
     And a versão mais recente deriva de tags semânticas do repositório
-    And a atualização é delegada a uv tool upgrade specsfy-cli
+    And a atualização é delegada ao pacote npm oficial
     And aceitar a oferta atualiza e encerra enquanto recusar abre normalmente

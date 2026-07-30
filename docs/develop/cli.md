@@ -1,11 +1,12 @@
 # Arquitetura do CLI e da TUI
 
 O módulo `cli/` distribui o framework, gerencia especialistas, projeta progresso
-e oferece a interface terminal. Ele não define requisitos nem aprova gates.
+e oferece a interface terminal. A implementação usa TypeScript sobre Node.js e
+não define requisitos nem aprova gates.
 
 ## Entradas
 
-`cli/src/specsfy_cli/app.py` define:
+`cli/src/cli.ts` define:
 
 ```text
 specsfy install
@@ -22,17 +23,17 @@ Sem subcomando, a aplicação abre a TUI.
 
 | Módulo | Responsabilidade |
 | --- | --- |
-| `app.py` | parser, despacho e saída não interativa |
-| `installer.py` | framework, skills, merge e proteção local |
-| `catalog.py` | catálogo remoto de especialistas |
-| `skill_lock.py` | seleção instalada, fingerprints e proteção |
-| `progress.py` | leitura e resumo das specs |
-| `backlog.py` | projeção dos itens de backlog |
-| `testing.py` | detecção e execução do runner consumidor |
-| `config.py` | configuração por projeto |
-| `updater.py` | descoberta de tags e oferta de atualização |
-| `github.py` | headers e autenticação da API do GitHub |
-| `tui.py` | dashboard Textual e interações |
+| `cli.ts` | parser Commander, despacho e saída não interativa |
+| `installer.ts` | framework, skills, merge e proteção local |
+| `catalog.ts` | catálogo remoto de especialistas |
+| `skill-lock.ts` | seleção instalada, fingerprints e proteção |
+| `progress.ts` | leitura e resumo das specs |
+| `backlog.ts` | projeção dos itens de backlog |
+| `project-testing.ts` | detecção e execução do runner consumidor |
+| `config.ts` | configuração por projeto |
+| `updater.ts` | descoberta de tags e oferta de atualização |
+| `github.ts` | headers e autenticação da API do GitHub |
+| `tui.ts` | dashboard neo-blessed e interações |
 
 ## Instalação
 
@@ -46,7 +47,7 @@ fingerprint registrado, atualização e remoção recusam a operação sem `--fo
 O instalador publica `Inbox.md`, `Backlog.md`, `Spec.md`, `Tasks.md`,
 `Project.md`, `Stack.md`, `Rules.md` e `Database.md` em
 `.specsfy/templates/`. Cada template possui digest próprio. Assim, uma
-customização local em qualquer um deles bloqueia somente uma substituição
+customização local em qualquer um deles impede somente uma substituição
 explicitamente forçada.
 
 O instalador também cria `.specsfy/templates/custom/`, sem registrar os
@@ -77,17 +78,22 @@ quando o fingerprint das fontes muda.
 
 ## Testes do consumidor
 
-`testing.py` reconhece runners suportados a partir do projeto selecionado. O
-comando transmite saída e preserva o exit code. A TUI separa resumo e detalhes,
-mas usa o mesmo contrato.
+`project-testing.ts` reconhece runners suportados a partir do projeto
+selecionado. O comando transmite a saída e preserva o exit code. A TUI separa
+resumo e detalhes, mas usa o mesmo contrato.
+
+O painel detalhado usa uma caixa rolável com o conteúdo acumulado. O componente
+`blessed.log` não deve ser usado nessa tela porque agenda a rolagem depois da
+renderização e tenta acessar o widget anterior quando uma nova linha recria a
+aba.
 
 ## Atualização
 
-`updater.py` consulta tags semânticas estáveis, respeita intervalo e ETag,
+`updater.ts` consulta tags semânticas estáveis, respeita intervalo e ETag,
 oferece consentimento e delega a instalação a:
 
 ```text
-uv tool upgrade specsfy-cli
+npm install --global @promovaweb/specsfy@latest
 ```
 
 Falha de rede não impede a abertura. Configurações e metadados ficam em
@@ -95,22 +101,30 @@ Falha de rede não impede a abertura. Configurações e metadados ficam em
 
 ## Artefato versionado
 
-`scripts/build-executable.sh` constrói `cli/bin/specsfy` e
-`cli/bin/specsfy.build.json`. O executável é distribuído publicamente por
-`get.specsfy.dev`. O fingerprint usa modos equivalentes aos preservados
-pelo Git para produzir o mesmo resultado localmente e no CI.
+`scripts/build-executable.mjs` constrói `cli/bin/specsfy` e
+`cli/bin/specsfy.build.json`. O executável Node é distribuído publicamente por
+`get.specsfy.dev`. O fingerprint usa modos equivalentes aos preservados pelo
+Git para produzir o mesmo resultado localmente e no CI.
 
 Toda mudança em `cli/` reconstrói e versiona esses artefatos.
 
 ## Testes
 
+`SpecsfyTui.start()` aceita um `screen` do neo-blessed, um catálogo conhecido e
+a opção de desligar o polling. A suíte monta o mesmo renderer usado pelo
+executável em terminais virtuais de `80x24`, `129x44` e `160x50`. O buffer
+resultante confirma as seis abas, os painéis e os textos visíveis; eventos de
+teclado e mouse conferem foco, filtros, busca, seleção de skills e o modal de
+spec. Os atalhos de controle também são enviados como bytes de terminal. Essa
+cobertura inclui os nomes `linefeed` e `backspace`, usados pelo neo-blessed para
+`Ctrl+J` e `Ctrl+H`, e impede combinações indistinguíveis de `Tab` e `Enter`.
+
 ```bash
 cd cli
-uv sync --locked
-uv run python -B -m unittest discover -s tests -p 'test_*.py'
-uv build
-uv run specsfy --help
-./scripts/build-executable.sh
+npm ci
+npm run build:executable
+npm run check
+node dist/main.js --help
 ./bin/specsfy --version
 ```
 

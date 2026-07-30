@@ -10,14 +10,22 @@ from pathlib import Path, PurePosixPath
 STACK_DOCUMENT = ".specsfy/STACK.md"
 RULES_DOCUMENT = ".specsfy/RULES.md"
 DATABASE_DOCUMENT = ".specsfy/DATABASE.md"
+PACKAGES_DOCUMENT = ".specsfy/PACKAGES.md"
 PROJECT_DOCUMENT = "PROJECT.md"
 CONTEXT_DOCUMENTS = {
     STACK_DOCUMENT,
     RULES_DOCUMENT,
     DATABASE_DOCUMENT,
+    PACKAGES_DOCUMENT,
     PROJECT_DOCUMENT,
 }
 SYSTEM_DOCUMENTATION_PREFIX = "docs/"
+PACKAGE_MANIFEST_NAMES = {
+    "composer.json",
+    "composer.lock",
+    "package.json",
+    "package-lock.json",
+}
 
 
 def git_paths(project: Path) -> list[str]:
@@ -84,6 +92,10 @@ def is_stack_change(path: str) -> bool:
         or name.startswith("astro.config.")
         or name.startswith("vite.config.")
     )
+
+
+def is_package_change(path: str) -> bool:
+    return PurePosixPath(path).name.casefold() in PACKAGE_MANIFEST_NAMES
 
 
 def is_database_change(path: str) -> bool:
@@ -167,6 +179,7 @@ def analyze(
     changed = normalized_paths(paths)
     inspected = [path for path in changed if path not in CONTEXT_DOCUMENTS]
     stack_changes = [path for path in inspected if is_stack_change(path)]
+    package_changes = [path for path in inspected if is_package_change(path)]
     database_changes = [path for path in inspected if is_database_change(path)]
     application_changes = [path for path in inspected if is_application_change(path)]
     rules_changes = [path for path in inspected if is_rules_change(path)]
@@ -182,6 +195,15 @@ def analyze(
                 "skill": "specsfy-aux-stack",
                 "reason": "stack estrutural alterado",
                 "evidence": stack_changes,
+            }
+        )
+    if package_changes and PACKAGES_DOCUMENT not in changed:
+        pending.append(
+            {
+                "document": PACKAGES_DOCUMENT,
+                "skill": "specsfy-documentator",
+                "reason": "dependências alteradas exigem reconstrução do inventário",
+                "evidence": package_changes,
             }
         )
     if database_changes and DATABASE_DOCUMENT not in changed:
@@ -221,19 +243,27 @@ def analyze(
                 "evidence": rules_changes,
             }
         )
-    documentation_review_required = bool(application_changes or database_changes)
+    documentation_review_required = bool(
+        application_changes or database_changes or package_changes
+    )
     if documentation_review_required and not documentation_changes:
         pending.append(
             {
                 "document": "docs/",
                 "skill": "specsfy-documentator",
-                "reason": "aplicação ou persistência alterada exige reconstrução documental",
-                "evidence": sorted(set(application_changes + database_changes)),
+                "reason": (
+                    "aplicação, persistência ou dependências alteradas exigem "
+                    "reconstrução documental"
+                ),
+                "evidence": sorted(
+                    set(application_changes + database_changes + package_changes)
+                ),
             }
         )
     return {
         "changed_paths": changed,
         "stack_changes": stack_changes,
+        "package_changes": package_changes,
         "database_changes": database_changes,
         "application_changes": application_changes,
         "rules_changes": rules_changes,
@@ -273,7 +303,8 @@ def render_human(report: dict[str, object]) -> str:
         )
     if report["documentation_review_required"]:
         lines.append(
-            "- docs/ foi reconstruído por $specsfy-documentator após a mudança."
+            "- docs/ e .specsfy/PACKAGES.md foram reconstruídos por "
+            "$specsfy-documentator após a mudança."
         )
     return "\n".join(lines)
 

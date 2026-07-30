@@ -47,6 +47,7 @@ class AuxiliaryContextTests(unittest.TestCase):
         self.assertEqual(1, result.returncode)
         self.assertIn(".specsfy/STACK.md", result.stdout)
         self.assertIn(".specsfy/DATABASE.md", result.stdout)
+        self.assertIn(".specsfy/PACKAGES.md", result.stdout)
 
         documented = run_script(
             MONITOR,
@@ -57,9 +58,39 @@ class AuxiliaryContextTests(unittest.TestCase):
             *paths,
             ".specsfy/STACK.md",
             ".specsfy/DATABASE.md",
+            ".specsfy/PACKAGES.md",
             "docs/database.md",
         )
         self.assertEqual(0, documented.returncode, documented.stdout)
+
+    def test_monitor_requires_package_inventory_for_manifest_changes(self) -> None:
+        pending = run_script(
+            MONITOR,
+            "--project",
+            "/tmp/project",
+            "--check",
+            "--json",
+            "--paths",
+            "package.json",
+            ".specsfy/STACK.md",
+        )
+
+        self.assertEqual(1, pending.returncode)
+        self.assertIn('"document": ".specsfy/PACKAGES.md"', pending.stdout)
+        self.assertIn('"skill": "specsfy-documentator"', pending.stdout)
+
+        current = run_script(
+            MONITOR,
+            "--project",
+            "/tmp/project",
+            "--check",
+            "--paths",
+            "package.json",
+            ".specsfy/STACK.md",
+            ".specsfy/PACKAGES.md",
+            "docs/packages.md",
+        )
+        self.assertEqual(0, current.returncode, current.stdout)
 
     def test_monitor_requires_project_review_for_application_changes(self) -> None:
         pending = run_script(
@@ -111,6 +142,13 @@ class AuxiliaryContextTests(unittest.TestCase):
             stack = project / ".specsfy" / "STACK.md"
             stack.parent.mkdir()
             stack.write_text("# Stack\n", encoding="utf-8")
+            (project / ".specsfy" / "PACKAGES.md").write_text(
+                "# Pacotes\n",
+                encoding="utf-8",
+            )
+            docs = project / "docs"
+            docs.mkdir()
+            (docs / "packages.md").write_text("# Pacotes\n", encoding="utf-8")
             current = run_script(
                 MONITOR,
                 "--project",

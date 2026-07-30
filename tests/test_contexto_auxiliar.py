@@ -24,7 +24,7 @@ class AuxiliaryContextIntegrationTests(unittest.TestCase):
         self.assertTrue(EXPECTED <= discovered)
 
         installer = (
-            ROOT / "cli/src/specsfy_cli/installer.py"
+            ROOT / "cli/src/installer.ts"
         ).read_text(encoding="utf-8")
         guide = (ROOT / "docs/user/project-context.md").read_text(encoding="utf-8")
         framework = (SKILLS / "Spec.md").read_text(encoding="utf-8")

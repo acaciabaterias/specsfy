@@ -27,7 +27,7 @@ Os IDs e cenários concretos permanecem na spec da fatia.
 ## Não use para
 
 - listar todos os testes existentes.
-- escrever critérios de aceite de feature.
+- escrever condições de aceite de feature.
 - considerar erro de fixture ou ambiente como RED válido.
 
 ## Fonte da verdade e precedência
@@ -39,7 +39,7 @@ transversal.
 ## Pirâmide de testes
 
 - Unidade para regra pura e transformação.
-- Integração ou contrato para fronteiras reais.
+- Integração ou contrato para limites reais.
 - Behave para comportamento observável descrito em Gherkin.
 - Regressão completa antes de concluir o Delivery Gate.
 - Verificação manual somente quando o resultado não puder ser automatizado,
@@ -49,7 +49,8 @@ transversal.
 
 - Cada feature, história `US`, requisito funcional `FR` e requisito não
   funcional `NFR` possui pelo menos três cenários BDD `AC` distintos.
-- Um `AC` conta para um item somente quando declara seu ID em `**Cobre**`. Os
+- Um `AC` é considerado para um item somente quando declara seu ID em
+  `**Cobre**`. Os
   três cenários devem acrescentar contexto, como caminho feliz, regra ou
   variação crítica e falha ou limite material.
 - Cada feature, `US`, `FR` e `NFR` possui pelo menos três casos TDD executáveis.
@@ -58,8 +59,8 @@ transversal.
   `US`, `FR` e `NFR`. Cada tarefa deriva um `AC`. O `Delivery Gate` confirma os
   casos realmente materializados nos arquivos de teste.
 - Cada caso TDD declara `SPECSFY:` junto à própria definição. Um marcador
-  compartilhado por um arquivo conta como somente um caso, ainda que existam
-  vários testes no arquivo.
+  compartilhado por um arquivo é considerado como somente um caso, ainda que
+  existam vários testes no arquivo.
 - O Gherkin permanece como referência na `spec.md`. Ele não cria nem executa
   uma segunda suíte `.feature`.
 
@@ -92,8 +93,9 @@ CLI, na documentação oficial e na porta pública.
 
 O documentador possui fixtures focais para Laravel/Pest e
 Node/Next/React/Tailwind/Vitest. Elas comprovam a topologia, os diagramas
-Mermaid, o inventário retroativo, os links de pacotes, a preservação de conteúdo
-humano e a detecção de documentação desatualizada por `--check`.
+Mermaid, o inventário retroativo, os links de pacotes, a criação de
+`.specsfy/PACKAGES.md` com dependências diretas e transitivas, a preservação de
+conteúdo humano e a detecção de documentação desatualizada por `--check`.
 
 O documentador exclusivo do projeto possui contrato que executa o coletor sobre
 o monorepo, compara o status da raiz antes e depois e usa um diretório temporário
@@ -119,9 +121,9 @@ python3 -B -m unittest discover -s tests -p 'test_*.py'
 uv run --quiet --with behave behave tests/features --no-capture
 
 cd ../cli
-uv sync --locked
-uv run python -B -m unittest discover -s tests -p 'test_*.py'
-uv build
+npm ci
+npm run build:executable
+npm run check
 ```
 
 `specsfy test --project <consumidor>` é uma porta de entrada para executar e
@@ -148,7 +150,7 @@ comandos. Esses contratos não substituem a suíte Pest do produto.
 
 - Registre o RED antes de alterar o artefato derivado.
 - Associe BDD e TDD aos mesmos IDs.
-- Registre um marcador `SPECSFY:` por caso TDD para que a contagem mínima seja
+- Registre um marcador `SPECSFY:` por caso TDD para que a quantidade mínima seja
   verificável.
 - Registre comando, exit code e causa observada.
 - Execute novamente após GREEN e refactor.

@@ -67,9 +67,9 @@ CLI:
 
 ```bash
 cd cli
-uv sync --locked
-uv run python -B -m unittest discover -s tests -p 'test_*.py'
-./scripts/build-executable.sh
+npm ci
+npm run build:executable
+npm run check
 ./bin/specsfy --version
 ```
 
@@ -110,7 +110,7 @@ Uma entrega pronta informa:
 - o RED observado.
 - os comandos verdes.
 - documentação atualizada.
-- riscos ou limites restantes.
+- falhas possíveis ou limites restantes.
 
 Commits e push exigem escopo explícito. Release do CLI usa a skill local
 `specsfy-release-cli` e não é consequência automática de uma mudança comum.

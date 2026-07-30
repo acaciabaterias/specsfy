@@ -43,8 +43,8 @@ description: "Use quando...; não use para..."
 
 `name` deve coincidir com o diretório. `description` é o contrato de
 descoberta: contém gatilhos observáveis e limites negativos. Se duas skills
-disputam o mesmo pedido, corrija as descrições e fronteiras antes de adicionar
-mais instruções.
+disputam a mesma solicitação, corrija as descrições e os limites antes de
+adicionar mais instruções.
 
 `agents/openai.yaml` fornece o prompt padrão e menciona `$<nome-da-skill>`.
 
@@ -77,15 +77,15 @@ O handoff é usado quando a responsabilidade muda. A skill de origem não execut
 silenciosamente o trabalho da vizinha. A skill de destino relê a spec e valida
 suas próprias pré-condições.
 
-`specsfy-01-inbox` é a exceção de entrada: ela salva antes de qualquer
-handoff, não pergunta e apenas sugere a próxima etapa. Essa fronteira impede que
-uma anotação simples se transforme em refinamento implícito.
+`specsfy-01-inbox` é a exceção de entrada: ela registra a entrada antes de
+qualquer handoff, não pergunta e apenas sugere a próxima etapa. Esse limite
+impede que uma anotação simples se transforme em refinamento implícito.
 
 `specsfy-02-backlog` é a responsável exclusiva pelas perguntas de decisão
 material. `specify`, `update-spec` e `validate` fazem handoff para seu ciclo e
 retomam depois. O ciclo reanalisa cada resposta, não possui limite de perguntas
-e passa a oferecer `avançar` na 11ª rodada, preservando qualquer lacuna restante
-como definição pendente.
+e oferece `avançar` depois da décima pergunta, preservando qualquer lacuna
+restante como definição pendente.
 
 ## Relação das skills base
 
@@ -97,11 +97,12 @@ inbox → backlog → specify → validate
 ```
 
 `update-spec` pode reabrir definição, plano ou entrega. `progress` é somente
-leitura. `documentator` atua depois de mudanças implementadas no consumidor.
+leitura. `documentator` atua depois de mudanças implementadas no consumidor e
+projeta `docs/` junto de `.specsfy/PACKAGES.md`.
 
 ## Instalação
 
-`cli/src/specsfy_cli/installer.py` define o conjunto instalado. O instalador:
+`cli/src/installer.ts` define o conjunto instalado. O instalador:
 
 - clona somente o diretório necessário do monorepo.
 - delega materialização ao instalador `skills`.
@@ -125,6 +126,19 @@ monorepo, `skills/templates/<Nome>.md`.
 5. execute a suíte do módulo.
 6. rode `quick_validate.py`.
 7. atualize a página de usuário e este contexto quando a interface mudar.
+
+## Inventário de pacotes do consumidor
+
+`specsfy-documentator/scripts/build_documentation.py` percorre os manifests npm
+e Composer fora de árvores geradas. O script combina dependências diretas com
+entradas transitivas de `package-lock.json` e `composer.lock`, usa descrições
+locais quando disponíveis e escreve o bloco reconstruível de
+`.specsfy/PACKAGES.md`. O modo `--check` trata esse arquivo como parte do mesmo
+contrato de atualização de `docs/`.
+
+`specsfy-setup/scripts/monitor_context.py` encaminha mudanças em manifests ou
+lockfiles para o documentador. O inventário é derivado e não substitui os
+manifests nem autoriza instalar, atualizar ou remover dependências.
 
 ## Validação
 

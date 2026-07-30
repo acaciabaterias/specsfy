@@ -36,6 +36,12 @@ Manifests e lockfiles são as fontes executáveis de pacotes e versões. Este
 documento registra somente finalidade, política e restrições. Na ausência de
 manifest, comandos explícitos revelam dependências efêmeras.
 
+Nos projetos consumidores, `.specsfy/PACKAGES.md` é a projeção reconstruível
+dessas fontes. `$specsfy-documentator` lista dependências npm e Composer
+diretas e transitivas, acrescenta a descrição local disponível e declara a
+ausência de finalidade quando nenhum metadado confiável existir. Esse
+inventário não redefine a política nem substitui manifests e lockfiles.
+
 Os manifests de `example/` pertencem à aplicação interna de validação em
 `example/`. Eles são a fonte das dependências PHP e JavaScript daquele
 aplicativo, não um catálogo de pacotes obrigatórios para usar o Specsfy.
@@ -46,8 +52,11 @@ aplicativo, não um catálogo de pacotes obrigatórios para usar o Specsfy.
 | --- | --- | --- |
 | Behave | executar aceite Gherkin | fornecido de forma efêmera por `uv` |
 | PyYAML | validar metadata de skills | fornecido de forma efêmera por `uv` |
-| Textual | renderizar a TUI do CLI | manifest e lockfile de `cli/` |
-| Hatchling | construir a distribuição Python | build-system de `cli/` |
+| Commander | definir e despachar os comandos do CLI | `cli/package.json` |
+| neo-blessed | renderizar a TUI do CLI | `cli/package.json` |
+| marked e marked-terminal | renderizar Markdown na TUI | `cli/package.json` |
+| TypeScript e esbuild | verificar tipos e construir distribuições | `cli/package.json` |
+| Vitest | executar regressões do CLI | `cli/package.json` |
 
 ## Política de dependências
 

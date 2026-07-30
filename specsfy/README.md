@@ -24,8 +24,7 @@ Veja as demais telas e comandos no
 
 ## O que você precisa
 
-- Python 3.11 ou superior.
-- [`uv`](https://docs.astral.sh/uv/) disponível no terminal.
+- Node.js 22.12 ou superior, com o npm disponível.
 - o comando [`skills`](https://github.com/vercel-labs/skills) ou `npx`.
 - um projeto existente ou recém-criado no qual o Specsfy será aplicado.
 
@@ -37,12 +36,11 @@ projeto consumidor e recusa o bootstrap.
 
 ### 1. Instale o CLI
 
-Baixe o executável pela URL oficial
-`get.specsfy.dev`. Para manter a instalação e as atualizações gerenciadas pelo
-`uv`, use:
+Baixe o executável pela URL oficial `get.specsfy.dev` ou mantenha a instalação
+e as atualizações gerenciadas pelo npm:
 
 ```bash
-uv tool install 'git+https://github.com/promovaweb/specsfy.git#subdirectory=cli'
+npm install --global @promovaweb/specsfy
 ```
 
 Confirme a instalação:
@@ -51,8 +49,8 @@ Confirme a instalação:
 specsfy --version
 ```
 
-Se o comando não for encontrado, aplique a orientação de `PATH` exibida pelo
-`uv`, abra um novo terminal e repita a verificação.
+Se o comando não for encontrado, confira o diretório global de binários do npm
+no `PATH`, abra um novo terminal e repita a verificação.
 
 ### 2. Entre no projeto
 
@@ -281,10 +279,10 @@ automaticamente.
 
 ## Atualização
 
-Atualize o ambiente isolado do CLI:
+Atualize o pacote global do CLI:
 
 ```bash
-uv tool upgrade specsfy-cli
+npm update --global @promovaweb/specsfy
 ```
 
 Depois, atualize as skills Specsfy instaladas no projeto:

@@ -8,39 +8,40 @@
 | Escopo | instalação do CLI e do framework em um projeto consumidor |
 | Autoridade | interfaces públicas de `cli/` e `skills/` |
 
-## Baixe o CLI
+## Instale o CLI
 
-O executável do Specsfy é um aplicativo Python empacotado e requer Python 3.11
-ou superior. O download oficial fica em `get.specsfy.dev`. Os comandos abaixo
-salvam o arquivo em `$HOME/.local/bin`, uma pasta comum para executáveis do
-próprio usuário:
+O Specsfy requer Node.js 22.12 ou uma versão mais recente. O pacote oficial
+publicado no npm instala o comando no ambiente global do usuário:
 
 ```bash
-mkdir -p "$HOME/.local/bin"
-curl -fL get.specsfy.dev -o "$HOME/.local/bin/specsfy"
-chmod +x "$HOME/.local/bin/specsfy"
+npm install --global @promovaweb/specsfy
 ```
 
-Execute `specsfy --version` para confirmar que o sistema localiza o arquivo e
-que o Python consegue abrir o aplicativo. A saída esperada é o número da versão
-instalada:
+Execute `specsfy --version` para confirmar que o terminal localiza o comando e
+que o Node.js consegue abrir o aplicativo:
 
 ```bash
 specsfy --version
 ```
 
 Uma resposta com o número da versão confirma a instalação. Se o terminal
-mostrar `specsfy: command not found`, acrescente a pasta ao `PATH` da sessão e
-repita a conferência:
+mostrar `specsfy: command not found`, consulte o diretório global do npm e
+confirme se o diretório de executáveis está no `PATH`:
 
 ```bash
-export PATH="$HOME/.local/bin:$PATH"
+npm prefix --global
 specsfy --version
 ```
 
-Para manter o caminho disponível em novos terminais, registre o mesmo `export`
-no arquivo de configuração do seu shell. Em Bash, o arquivo costuma ser
-`~/.bashrc`. Em Zsh, use `~/.zshrc`.
+O download em `get.specsfy.dev` continua disponível para instalações mantidas
+em `$HOME/.local/bin`. Esse executável inclui as dependências do CLI, mas
+também requer Node.js 22.12 ou superior:
+
+```bash
+mkdir -p "$HOME/.local/bin"
+curl -fL get.specsfy.dev -o "$HOME/.local/bin/specsfy"
+chmod +x "$HOME/.local/bin/specsfy"
+```
 
 ## Prepare o projeto consumidor
 
@@ -96,16 +97,17 @@ estiverem vazias. Use `Ctrl+Q` para sair.
 
 ## Atualize sem perder customizações
 
-Para atualizar apenas o CLI, repita o download e a permissão de execução:
+Para atualizar o pacote instalado pelo npm:
 
 ```bash
-curl -fL get.specsfy.dev -o "$HOME/.local/bin/specsfy"
-chmod +x "$HOME/.local/bin/specsfy"
+npm update --global @promovaweb/specsfy
 specsfy --version
 ```
 
-Para atualizar as skills já instaladas, execute `skills update`. O CLI compara
-os fingerprints e preserva os arquivos customizados:
+Na instalação pelo arquivo de `get.specsfy.dev`, repita o download e a
+permissão de execução. Para atualizar as skills já instaladas, execute
+`skills update`. O CLI compara os fingerprints e preserva os arquivos
+customizados:
 
 ```bash
 specsfy skills update --project .
@@ -118,13 +120,13 @@ descarta a customização protegida no arquivo indicado.
 
 ## Corrija falhas comuns
 
-- **Comando ausente:** confirme que `$HOME/.local/bin` está no `PATH` e abra
-  outro terminal depois de atualizar o arquivo do shell.
-- **Python incompatível:** execute `python3 --version`. O aplicativo requer
-  Python 3.11 ou uma versão mais recente.
+- **Comando ausente:** confira o resultado de `npm prefix --global` e o `PATH`
+  usado pelo terminal.
+- **Node.js incompatível:** execute `node --version`. O aplicativo requer
+  Node.js 22.12 ou uma versão mais recente.
 - **Permissão negada:** execute novamente
-  `chmod +x "$HOME/.local/bin/specsfy"` e confira se o arquivo pertence ao seu
-  usuário.
+  `chmod +x "$HOME/.local/bin/specsfy"` quando usar o download. Em instalações
+  pelo npm, configure um diretório global gravável pelo seu usuário.
 - **Instalação das skills interrompida:** disponibilize o comando `skills` ou
   o `npx`, usado pelo CLI como alternativa.
 - **Arquivo gerenciado customizado:** preserve sua versão ou compare as

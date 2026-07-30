@@ -14,7 +14,7 @@ tecnologias e acompanhar em tempo real o progresso das specs de um projeto.
 
 ## Pré-requisitos
 
-- Python 3.11 ou superior para instalação via `uv`.
+- Node.js 22.12 ou superior, com o npm disponível.
 - `skills`, do projeto
   [`vercel-labs/skills`](https://github.com/vercel-labs/skills), ou `npx`
   disponível para executá-lo sob demanda.
@@ -23,30 +23,34 @@ tecnologias e acompanhar em tempo real o progresso das specs de um projeto.
 
 ## Download oficial
 
-O executável standalone versionado é publicado em
-`get.specsfy.dev`. Coloque o arquivo baixado em um diretório do seu `PATH` e
-preserve a permissão de execução.
+O executável versionado é publicado em `get.specsfy.dev`. Ele reúne o código e
+as dependências JavaScript em um arquivo, mas continua usando o Node.js
+instalado na máquina. Coloque o arquivo em um diretório do seu `PATH` e preserve
+a permissão de execução.
 
-## Instalar com uv
+## Instalar com npm
 
 ```bash
-uv tool install 'git+https://github.com/promovaweb/specsfy.git#subdirectory=cli'
+npm install --global @promovaweb/specsfy
+specsfy --version
 ```
 
-O `uv` cria um ambiente isolado, registra a origem Git e publica o comando
-`specsfy` no diretório de ferramentas do usuário. Para atualizar mantendo a
-mesma origem e as mesmas opções da instalação:
+O npm instala o pacote publicado e disponibiliza o comando `specsfy`. Para
+atualizar a instalação global:
 
 ```bash
-uv tool upgrade specsfy-cli
+npm update --global @promovaweb/specsfy
 ```
 
 O catálogo e a verificação de versões usam a API do GitHub. O CLI procura,
 nesta ordem, `GH_TOKEN`, `GITHUB_TOKEN` e a sessão retornada por
 `gh auth token`. As credenciais não são gravadas pelo Specsfy.
 
-Para trocar a origem ou uma restrição de versão, execute novamente
-`uv tool install` com o novo requisito.
+Para instalar uma versão específica, informe a versão no próprio pacote:
+
+```bash
+npm install --global @promovaweb/specsfy@0.6.0
+```
 
 ## Comandos
 
@@ -164,7 +168,7 @@ vez todas as skills Specsfy instaladas. O comando equivalente é
 `specsfy skills update --project .`. Customizações locais continuam protegidas e
 só podem ser substituídas explicitamente com `--force` no comando.
 
-## Atualização do CLI gerenciada pelo uv
+## Atualização do CLI gerenciada pelo npm
 
 Ao abrir `specsfy` ou `specsfy tui` em um terminal interativo, o CLI consulta
 as tags semânticas estáveis do monorepo. A consulta é limitada pelo cache
@@ -173,10 +177,9 @@ ou do GitHub nunca impede a abertura do dashboard.
 
 Quando existe versão mais recente, o CLI mostra as versões atual e disponível e
 pergunta antes de atualizar. Uma resposta negativa abre a aplicação normalmente.
-Uma resposta positiva delega a atualização ao comando
-`uv tool upgrade specsfy-cli`, que gerencia o ambiente isolado e preserva a
-origem registrada durante a instalação. O processo então fecha. Abra `specsfy`
-novamente para iniciar a versão instalada.
+Uma resposta positiva delega a atualização ao npm, que instala a versão mais
+recente de `@promovaweb/specsfy` no escopo global. O processo então fecha. Abra
+`specsfy` novamente para iniciar a versão instalada.
 
 O arquivo global usa permissão `0600`, preserva chaves desconhecidas e separa:
 
@@ -199,15 +202,22 @@ template instalado. O CLI recusa instalação na raiz do monorepo oficial.
 
 ## Executável versionado
 
-O executável empacotado fica em `bin/specsfy` e não depende do checkout para
-rodar. Reconstrua-o depois de qualquer alteração neste módulo:
+O executável empacotado fica em `bin/specsfy`, contém as dependências do CLI e
+requer apenas o Node.js compatível. Reconstrua-o depois de qualquer alteração
+neste módulo:
 
 ```bash
-./scripts/build-executable.sh
+npm run build:executable
 ```
 
 `bin/specsfy.build.json` registra o fingerprint dos inputs. A suíte de testes
 falha quando o artefato não corresponde ao estado atual.
+
+O pacote publicado no npm usa `@promovaweb/specsfy`. A tag estável dispara o
+job de publicação depois que tipos, testes, build, instalação local e
+executável versionado passam no CI. O job inclui proveniência quando o
+repositório estiver público; enquanto ele permanecer privado, publica com o
+token do registro e sem essa atestação.
 
 ## Atalhos da TUI
 
@@ -216,21 +226,23 @@ falha quando o artefato não corresponde ao estado atual.
 - `Ctrl+D`: detectar recomendações.
 - `Ctrl+B`: selecionar todas as skills do framework.
 - `Ctrl+E`: alternar o plano da skill destacada.
-- `Ctrl+M` / `Ctrl+L`: marcar ou limpar os itens visíveis.
+- `Ctrl+V` / `Ctrl+L`: marcar ou limpar os itens visíveis.
 - `Ctrl+A`: aplicar.
 - `Ctrl+R`: atualizar todas as skills Specsfy instaladas.
-- `Ctrl+T`, `Ctrl+I`, `Ctrl+C`: filtros Todas, Instaladas e Recomendadas.
+- `Ctrl+T`, `Ctrl+N`, `Ctrl+C`: filtros Todas, Instaladas e Recomendadas.
 - `Ctrl+H`, `Ctrl+G`, `Ctrl+S`, `Ctrl+K`, `Ctrl+O`: Home, Backlogs, Specs,
   Skills e Sobre.
 - `Ctrl+J`: abre Testes.
 - `Ctrl+X`: executa os testes do projeto.
 - `Espaço`: abre a spec destacada ou alterna a skill destacada, conforme a aba.
-- `Esc`: fecha o modal da spec ou volta para Home.
+- `Esc`: fecha o modal da spec, limpa a busca de Skills ou volta para Home.
 
 Cada botão mostra seu atalho no próprio rótulo. `Tab` e `Shift+Tab` percorrem
 os controles e as setas navegam as tabelas. Na aba Skills, `Enter` ou `Espaço`
 alternam o plano entre instalar, manter, remover e ignorar. Na aba Specs, abrem
-o modal da linha destacada. `Esc` retorna, e o mouse opera abas, linhas e
-botões. Nada é instalado ou removido antes de `Aplicar`.
+o modal da linha destacada. O campo de projeto entra em edição com `Enter` ou
+com um clique e atualiza o dashboard depois da confirmação. `Esc` retorna, e o
+mouse opera abas, linhas e botões. Nada é instalado ou removido antes de
+`Aplicar`.
 
 A documentação completa está em [`docs/`](../docs/).

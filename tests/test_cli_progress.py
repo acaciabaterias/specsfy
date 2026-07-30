@@ -1,15 +1,14 @@
 from __future__ import annotations
 
-import sys
+import json
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "cli" / "src"))
-
-from specsfy_cli.progress import scan_specs, summarize_specs
+CLI = ROOT / "cli" / "bin" / "specsfy"
 
 
 CANONICAL_SPEC = """# Especificação integrada: Entrega concluída
@@ -32,15 +31,22 @@ class CliProgressContractTests(unittest.TestCase):
             path.parent.mkdir(parents=True)
             path.write_text(CANONICAL_SPEC, encoding="utf-8")
 
-            specs = scan_specs(root)
+            result = subprocess.run(
+                [str(CLI), "progress", "--project", str(root), "--json"],
+                text=True,
+                capture_output=True,
+                check=True,
+            )
+            payload = json.loads(result.stdout)
+            spec = payload["specs"][0]
 
-            self.assertEqual("Complete", specs[0].status)
-            self.assertEqual("Passed", specs[0].definition_gate)
-            self.assertEqual("Passed", specs[0].plan_gate)
-            self.assertEqual("Passed", specs[0].delivery_gate)
-            self.assertEqual(3, specs[0].passed_gates)
-            self.assertEqual(CANONICAL_SPEC, specs[0].content)
-            self.assertEqual(1, summarize_specs(specs).completed_specs)
+            self.assertEqual("Complete", spec["status"])
+            self.assertEqual("Passed", spec["definition_gate"])
+            self.assertEqual("Passed", spec["plan_gate"])
+            self.assertEqual("Passed", spec["delivery_gate"])
+            self.assertEqual(3, spec["passed_gates"])
+            self.assertNotIn("content", spec)
+            self.assertEqual(1, payload["summary"]["completed_specs"])
 
 
 if __name__ == "__main__":

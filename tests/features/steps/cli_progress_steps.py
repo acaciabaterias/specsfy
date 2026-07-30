@@ -1,6 +1,5 @@
-from __future__ import annotations
-
-import sys
+import json
+import subprocess
 import tempfile
 from pathlib import Path
 
@@ -8,11 +7,7 @@ from behave import given, then, when
 
 
 ROOT = Path(__file__).resolve().parents[3]
-sys.path.insert(0, str(ROOT / "cli" / "src"))
-
-from specsfy_cli.progress import scan_specs, summarize_specs
-
-TUI = ROOT / "cli/src/specsfy_cli/tui.py"
+TUI = ROOT / "cli/src/tui.ts"
 
 
 CANONICAL_SPEC = """# Especificação integrada: Entrega concluída
@@ -39,23 +34,36 @@ def given_completed_spec_with_canonical_table(context) -> None:
 
 @when("o CLI projeta o progresso da especificação")
 def when_cli_projects_spec_progress(context) -> None:
-    context.specs = scan_specs(context.project)
-    context.summary = summarize_specs(context.specs)
+    result = subprocess.run(
+        [
+            str(ROOT / "cli/bin/specsfy"),
+            "progress",
+            "--project",
+            str(context.project),
+            "--json",
+        ],
+        text=True,
+        capture_output=True,
+        check=True,
+    )
+    payload = json.loads(result.stdout)
+    context.specs = payload["specs"]
+    context.summary = payload["summary"]
 
 
 @then("o status e os três gates são reconhecidos")
 def then_status_and_gates_are_recognized(context) -> None:
     spec = context.specs[0]
-    assert spec.status == "Complete"
-    assert spec.definition_gate == "Passed"
-    assert spec.plan_gate == "Passed"
-    assert spec.delivery_gate == "Passed"
-    assert spec.passed_gates == 3
+    assert spec["status"] == "Complete"
+    assert spec["definition_gate"] == "Passed"
+    assert spec["plan_gate"] == "Passed"
+    assert spec["delivery_gate"] == "Passed"
+    assert spec["passed_gates"] == 3
 
 
 @then("o resumo contabiliza a spec como concluída")
 def then_summary_counts_completed_spec(context) -> None:
-    assert context.summary.completed_specs == 1
+    assert context.summary["completed_specs"] == 1
 
 
 @given("a implementação da aba Specs do CLI")
@@ -66,23 +74,31 @@ def given_cli_specs_implementation(context) -> None:
 @when("o contrato de visualização da spec é inspecionado")
 def when_spec_view_contract_is_inspected(context) -> None:
     context.specs_markup = context.tui.partition(
-        'with TabPane("Specs", id="tab-specs"):'
-    )[2].partition('with TabPane("Skills", id="tab-skills"):')[0]
+        "private renderSpecs("
+    )[2].partition("private openSpec(")[0]
 
 
 @then("a tabela preserva gates, tarefas, checklist e progresso")
 def then_specs_table_preserves_progress(context) -> None:
-    assert 'DataTable(id="progress")' in context.specs_markup
-    for column in ("Spec", "Status", "Gates", "Tarefas", "Checklist", "Progresso"):
-        assert f'"{column}"' in context.tui
+    assert "blessed.list(" in context.specs_markup
+    normalized = context.specs_markup.upper()
+    for column in (
+        "SPEC",
+        "STATUS",
+        "GATES",
+        "TAREFAS",
+        "CHECKLIST",
+        "PROGRESSO",
+    ):
+        assert column in normalized
 
 
 @then("a barra de espaço abre a spec destacada em um modal Markdown")
 def then_space_opens_spec_markdown_modal(context) -> None:
-    assert '"space", "activate_selection"' in context.tui
-    assert "class SpecPreviewModal(ModalScreen" in context.tui
-    assert "Markdown(spec.content" in context.tui
-    assert "self.push_screen(SpecPreviewModal(spec))" in context.tui
+    assert 'list.key(["space"], open)' in context.tui
+    assert "private openSpec(" in context.tui
+    assert "renderMarkdown(spec.content)" in context.tui
+    assert "this.openSpec(spec)" in context.tui
 
 
 @then("o modal informa como voltar para a listagem")

@@ -104,15 +104,16 @@ existir lacuna aplicável, sem limite máximo. A partir da 11ª pergunta, oferec
 | [`specsfy-update-spec`](specsfy-update-spec/SKILL.md) | incorporar pedido tardio e reabrir somente os atos afetados | não cria nova spec nem implementa |
 | [`specsfy-progress`](specsfy-progress/SKILL.md) | projetar o estado global | não altera gates ou checkboxes |
 | [`specsfy-setup`](specsfy-setup/SKILL.md) | detectar o stack, criar contexto ausente e reconciliar blocos de agentes | não sobrescreve arquivos de contexto existentes |
-| [`specsfy-documentator`](specsfy-documentator/SKILL.md) | reconstruir documentação completa do sistema existente em `docs/` | não inventa decisões, relações ou referências |
+| [`specsfy-documentator`](specsfy-documentator/SKILL.md) | reconstruir `docs/` e o inventário `.specsfy/PACKAGES.md` | não inventa decisões, relações, finalidades ou referências |
 | [`specsfy-aux-stack`](specsfy-aux-stack/SKILL.md) | manter `.specsfy/STACK.md` a partir de evidência executável | não inventa nem copia toda dependência |
 | [`specsfy-aux-rules`](specsfy-aux-rules/SKILL.md) | ajudar a registrar regras confirmadas em `.specsfy/RULES.md` | não decide regras pela pessoa |
 | [`specsfy-aux-database`](specsfy-aux-database/SKILL.md) | manter `.specsfy/DATABASE.md` após toda mudança persistente | não copia dados ou segredos |
 
-`PROJECT.md` fica na raiz do projeto consumidor. `STACK.md`, `RULES.md` e
-`DATABASE.md` ficam em `.specsfy/`. O setup pode ser executado novamente para
-garantir presença e consistência, preservando arquivos existentes e todo
-conteúdo fora dos blocos gerenciados em `AGENTS.md` e `CLAUDE.md`.
+`PROJECT.md` fica na raiz do projeto consumidor. `STACK.md`, `RULES.md`,
+`DATABASE.md` e `PACKAGES.md` ficam em `.specsfy/`. O setup pode ser executado
+novamente para garantir os quatro contextos iniciais; o documentador garante o
+inventário de pacotes. Ambos preservam arquivos existentes e todo conteúdo fora
+dos blocos gerenciados.
 
 Durante planejamento, implementação e projeção de progresso,
 `specsfy-setup/scripts/monitor_context.py` classifica mudanças staged, unstaged
@@ -125,7 +126,9 @@ tarefa, nunca presumida silenciosamente.
 obrigatório após cada tarefa de implementação. Em toda execução, ele reavalia o
 código existente e reconstrói arquitetura, aplicação, banco, fluxos, testes,
 frontend, pacotes, integrações e decisões dentro dos blocos gerenciados de
-`docs/`, preservando texto humano externo.
+`docs/`. A mesma execução preenche `.specsfy/PACKAGES.md` com todos os pacotes
+npm e Composer observados, diretos ou transitivos, e suas finalidades locais,
+preservando texto humano externo.
 
 ## Capacidades nativas
 
@@ -151,7 +154,7 @@ development sem instalar outro runtime ou criar fontes paralelas:
 
 ## Especialistas sob demanda
 
-Cada skill base possui `references/specialists.md` com critérios para recomendar
+Cada skill base possui `references/specialists.md` com condições para recomendar
 contexto técnico opcional:
 
 ```bash
@@ -192,12 +195,11 @@ specsfy-{base-<responsabilidade>|setup|documentator|aux-<responsabilidade>}/
 
 ## Disponibilizar as skills
 
-O executável versionado pode ser baixado em
-`get.specsfy.dev`. Para instalar o CLI em um ambiente gerenciado pelo `uv` e
-então materializar o catálogo base:
+O executável versionado pode ser baixado em `get.specsfy.dev`. Para instalar o
+CLI com o npm e então materializar o catálogo base:
 
 ```bash
-uv tool install 'git+https://github.com/promovaweb/specsfy.git#subdirectory=cli'
+npm install --global @promovaweb/specsfy
 specsfy install
 ```
 

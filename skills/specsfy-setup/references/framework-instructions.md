@@ -14,15 +14,19 @@ backlogs, refinamentos do backlog, especificações, tarefas, testes ou implemen
 arquivo contém o fluxo, os caminhos canônicos e os gates do framework.
 
 - Preserve as instruções próprias deste projeto.
-- Leia `PROJECT.md`, `.specsfy/STACK.md`, `.specsfy/RULES.md` e
-  `.specsfy/DATABASE.md` como contexto persistente antes de planejar mudanças.
-- Execute `$specsfy-setup` quando algum desses arquivos estiver ausente.
+- Leia `PROJECT.md`, `.specsfy/STACK.md`, `.specsfy/RULES.md`,
+  `.specsfy/DATABASE.md` e `.specsfy/PACKAGES.md` como contexto persistente
+  antes de planejar mudanças.
+- Execute `$specsfy-setup` quando `PROJECT.md`, `STACK.md`, `RULES.md` ou
+  `DATABASE.md` estiver ausente. Execute `$specsfy-documentator` quando
+  `PACKAGES.md` estiver ausente ou desatualizado.
 - Execute o monitor de contexto no início, após cada tarefa e antes de concluir
   a entrega; resolva todo resultado `PENDING`.
 - Use as skills `specsfy-aux-*` para manter stack, regras e banco sem apagar
   conteúdo humano.
 - Execute `$specsfy-documentator` depois de cada implementação para reconstruir
-  a documentação técnica completa em `docs/`.
+  a documentação técnica completa em `docs/` e o inventário de dependências em
+  `.specsfy/PACKAGES.md`.
 - Use `specs/inbox/` para capturas imediatas ainda não refinadas.
 - Use `specs/backlog/` para itens refináveis ainda não promovidos.
 - Use `specs/specs/<NNNN>-<slug>/spec.md` como fonte normativa de cada fatia.

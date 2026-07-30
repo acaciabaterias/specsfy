@@ -10,7 +10,8 @@
 
 ## Papel
 
-Preservar uma versão e uma fonte de notas entre pacote, commit, tag e release.
+Preservar uma versão e uma fonte de notas entre pacote npm, commit, tag e
+release.
 
 ## Como usar
 
@@ -30,15 +31,18 @@ notas confirmadas
 release-cli ──promove──► cli/CHANGELOG.md
        │                 + versão + lock + binário
        ├──valida──► testes do CLI + regressão aplicável
-       └──publica─► commit do monorepo ─► tag vX.Y.Z ─► GitHub Release
-                                                       ▲
-                                                       └─ mesma seção
+       └──publica─► commit ─► tag vX.Y.Z ─► CI ─┬─► pacote npm
+                                                └─► GitHub Release
+                                                     ▲
+                                                     └─ mesma seção
 ```
 
 - A skill local governa a sequência.
 - `cli/` contém changelog, versão, lock e executável.
 - A raiz Git contém commit e tag.
 - GitHub hospeda o remoto, CI e release.
+- O registro npm hospeda `@promovaweb/specsfy`. O CI acrescenta proveniência
+  quando o repositório estiver público.
 - A seção `## [X.Y.Z] - YYYY-MM-DD` origina o corpo do release.
 - O GitHub Release usa a mesma seção do changelog, sem regeneração.
 
@@ -54,8 +58,8 @@ não cria outra versão.
 
 ## Atualize quando
 
-Atualize este mapa quando mudar origem das notas, versão, ordem de publicação ou
-ownership de qualquer efeito.
+Atualize este fluxo quando mudar origem das notas, versão, ordem de publicação
+ou ownership de qualquer efeito.
 
 ## Não use para
 
@@ -66,4 +70,5 @@ ownership de qualquer efeito.
 ## Fonte da verdade e precedência
 
 As notas confirmadas governam o conteúdo. `cli/CHANGELOG.md` governa a seção
-publicada e GitHub comprova tag, CI e release.
+publicada. GitHub comprova tag, CI e release, enquanto o registro npm comprova
+o pacote distribuído.

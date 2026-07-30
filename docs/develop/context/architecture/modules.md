@@ -6,7 +6,7 @@
 | --- | --- |
 | Natureza | normativo |
 | Escopo | ownership dos módulos |
-| Autoridade | responsabilidades e fronteiras internas |
+| Autoridade | responsabilidades e limites internos |
 
 ## Papel
 
@@ -16,7 +16,7 @@ Definir onde cada responsabilidade deve ser implementada e documentada.
 
 Consulte antes de criar ou mover arquivos entre módulos.
 
-## Mapa
+## Estrutura
 
 | Caminho | Responsabilidade |
 | --- | --- |
@@ -29,7 +29,7 @@ Consulte antes de criar ou mover arquivos entre módulos.
 | `example/` | aplicação interna e documentação operacional |
 | `specsfy/` | tutorial público detalhado |
 | `specialists/` | catálogo técnico opcional |
-| `cli/` | pacote Python, CLI, TUI, instalação e progresso |
+| `cli/` | pacote Node.js, CLI, TUI, instalação e progresso |
 
 Todos compartilham a raiz Git, remoto, branch, histórico, issues, tags e
 releases do monorepo
@@ -44,17 +44,17 @@ releases do monorepo
 | `skills/specsfy-documentator/` | documentação técnica do consumidor |
 | `skills/specsfy-aux-*/` | stack, regras e persistência do consumidor |
 | `specialists/specsfy-specialist-*/` | padrões opcionais sob demanda |
-| `cli/src/specsfy_cli/` | comandos, TUI, instalação e runners |
+| `cli/src/` | comandos TypeScript, TUI, instalação e runners |
 | `.agents/skills/specsfy-monorepo-documentator/` | documentação oficial |
 | `.agents/skills/specsfy-release-cli/` | publicação de versões do CLI |
 | `tests/` | contratos integrados |
 | `example/` | validação em aplicação Laravel |
 
-## Regras de fronteira
+## Limites entre módulos
 
 - Uma skill não absorve o gatilho principal de outra.
 - Scripts reutilizáveis permanecem na skill responsável.
-- Uma mudança transversal pode tocar vários módulos no mesmo PR.
+- Uma mudança transversal pode alterar vários módulos no mesmo PR.
 - A raiz não cria `specs/` nem instala skills consumidoras.
 - Skills locais da raiz não entram no catálogo de `skills/`.
 - O documentador local publica nos percursos `docs/user/` e `docs/develop/`.

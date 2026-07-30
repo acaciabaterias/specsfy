@@ -6,8 +6,8 @@ from behave import given, then, when
 
 
 ROOT = Path(__file__).resolve().parents[3]
-UPDATER = ROOT / "cli/src/specsfy_cli/updater.py"
-APP = ROOT / "cli/src/specsfy_cli/app.py"
+UPDATER = ROOT / "cli/src/updater.ts"
+APP = ROOT / "cli/src/cli.ts"
 
 
 @given("a implementação do auto updater do CLI")
@@ -33,13 +33,13 @@ def then_latest_version_comes_from_semantic_tags(context) -> None:
     assert "SEMANTIC_TAG" in context.updater
 
 
-@then("a atualização é delegada a uv tool upgrade specsfy-cli")
-def then_upgrade_is_delegated_to_uv(context) -> None:
-    assert 'UV_TOOL_NAME = "specsfy-cli"' in context.updater
-    assert '[uv_executable, "tool", "upgrade", UV_TOOL_NAME]' in context.updater
+@then("a atualização é delegada ao pacote npm oficial")
+def then_upgrade_is_delegated_to_npm(context) -> None:
+    assert 'NPM_PACKAGE_NAME = "@promovaweb/specsfy"' in context.updater
+    assert '"install", "--global"' in context.updater
 
 
 @then("aceitar a oferta atualiza e encerra enquanto recusar abre normalmente")
 def then_accept_updates_and_decline_continues(context) -> None:
-    assert "offer_startup_update()" in context.app
-    assert "return 0" in context.app
+    assert "offerStartupUpdate(" in context.app
+    assert "if (shouldExit) return" in context.app

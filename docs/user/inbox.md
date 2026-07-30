@@ -74,5 +74,5 @@ Database.md
 Para personalizar um modelo, copie somente o arquivo desejado para
 `.specsfy/templates/custom/` e preserve o mesmo nome. A versão em `custom/`
 tem precedência sobre a cópia padrão. O instalador protege alterações locais nos
-templates gerenciados, mas `--force` pode substituí-los; já o conteúdo de
+templates gerenciados, mas `--force` pode substituí-los. O conteúdo de
 `custom/` nunca é gerenciado nem sobrescrito.

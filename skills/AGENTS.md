@@ -20,15 +20,19 @@ backlogs, refinamentos do backlog, especificações, tarefas, testes ou implemen
 arquivo contém o fluxo, os caminhos canônicos e os gates do framework.
 
 - Preserve as instruções próprias deste projeto.
-- Leia `PROJECT.md`, `.specsfy/STACK.md`, `.specsfy/RULES.md` e
-  `.specsfy/DATABASE.md` como contexto persistente antes de planejar mudanças.
-- Execute `$specsfy-setup` quando algum desses arquivos estiver ausente.
+- Leia `PROJECT.md`, `.specsfy/STACK.md`, `.specsfy/RULES.md`,
+  `.specsfy/DATABASE.md` e `.specsfy/PACKAGES.md` como contexto persistente
+  antes de planejar mudanças.
+- Execute `$specsfy-setup` quando `PROJECT.md`, `STACK.md`, `RULES.md` ou
+  `DATABASE.md` estiver ausente. Execute `$specsfy-documentator` quando
+  `PACKAGES.md` estiver ausente ou desatualizado.
 - Execute o monitor de contexto no início, após cada tarefa e antes de concluir
   a entrega; resolva todo resultado `PENDING`.
 - Use as skills `specsfy-aux-*` para manter stack, regras e banco sem apagar
   conteúdo humano.
 - Execute `$specsfy-documentator` depois de cada implementação para reconstruir
-  a documentação técnica completa em `docs/`.
+  a documentação técnica completa em `docs/` e o inventário de dependências em
+  `.specsfy/PACKAGES.md`.
 - Use `specs/inbox/` para capturas imediatas ainda não refinadas.
 - Use `specs/backlog/` para itens refináveis ainda não promovidos.
 - Use `specs/specs/<NNNN>-<slug>/spec.md` como fonte normativa de cada fatia.
@@ -51,7 +55,7 @@ arquivo contém o fluxo, os caminhos canônicos e os gates do framework.
 Não crie `plan.md`, `tasks.md`, `research.md`, `data-model.md` ou outra fonte
 normativa paralela.
 
-## Fronteira com os demais módulos
+## Limites entre os módulos
 
 | Conteúdo | Responsável |
 | --- | --- |
@@ -85,7 +89,7 @@ Skills: `specsfy-02-backlog`, `specsfy-03-specify` e `specsfy-04-validate`.
 
 ### Ato II — Projetar e provar
 
-Definir plano técnico, dados, contratos, riscos, rollback e tarefas. Usar o BDD
+Definir plano técnico, persistência, contratos, falhas, rollback e tarefas. Usar o BDD
 da spec para escrever TDD e observar RED antes de alterar a implementação. O ato termina com
 `Plan Gate: Passed`.
 
@@ -124,10 +128,10 @@ Draft → Defined → Planned → Implementing → Complete
 | `specsfy-update-spec` | incorporar pedido tardio e reabrir somente os atos afetados | criar nova spec ou implementar a mudança |
 | `specsfy-progress` | projetar estado global sem escrita | alterar gates ou checkboxes |
 | `specsfy-setup` | garantir contexto persistente e blocos do framework | sobrescrever arquivos de contexto existentes |
-| `specsfy-documentator` | reconstruir `docs/` a partir do código existente | inventar decisões, relações ou URLs |
+| `specsfy-documentator` | reconstruir `docs/` e `.specsfy/PACKAGES.md` a partir do projeto | inventar decisões, relações, finalidades ou URLs |
 | `specsfy-aux-stack` | mapear stack com evidência executável | copiar toda a árvore de dependências |
 | `specsfy-aux-rules` | registrar regras confirmadas | inventar ou decidir regras |
-| `specsfy-aux-database` | manter mapa tabular da persistência | copiar dados, segredos ou substituir schemas |
+| `specsfy-aux-database` | manter quadro tabular da persistência | copiar registros, segredos ou substituir schemas |
 
 Se duas skills puderem responder ao mesmo gatilho, ajuste `description` e os
 limites antes de publicar.
@@ -159,18 +163,18 @@ specsfy-<NN>-<nome>/
 3. Execute ambos e registre RED causado pelo comportamento ausente.
 4. Para skill nova, inicialize nesta raiz:
 
-```bash
-python3 /home/luizeof/.codex/skills/.system/skill-creator/scripts/init_skill.py \
-  <nome> --path .
-```
+   ```bash
+   python3 /home/luizeof/.codex/skills/.system/skill-creator/scripts/init_skill.py \
+     <nome> --path .
+   ```
 
 5. Faça a menor alteração que satisfaz o contrato.
 6. Execute testes focais, refatore e repita a regressão desta raiz.
 7. Registre a evidência no contrato e na documentação afetada.
-8. Valide a skill e a fronteira Git.
+8. Valide a skill e os limites Git.
 
-Não existe implementação pequena demais para TDD orientado pelo BDD da spec. Ajuste a profundidade do
-teste ao risco, mas não pule RED.
+Não existe implementação pequena demais para TDD orientado pelo BDD da spec.
+Ajuste a profundidade do teste à consequência possível, mas não pule RED.
 
 ## MCR-10
 
@@ -186,9 +190,9 @@ Antes de perguntar:
 5. separe declaração, inferência, hipótese, decisão, conflito e aberto;
 6. selecione uma lacuna P1 por vez.
 
-As categorias são lentes adaptativas, não um questionário. Finalidade, evidência,
-risco, privacidade, observabilidade e reversibilidade são preocupações
-adicionais do método.
+As categorias são lentes adaptativas, não um questionário. Finalidade,
+evidência, privacidade, observabilidade, reversibilidade e consequências de
+falha são preocupações adicionais do método.
 
 ## Validação
 
@@ -211,7 +215,7 @@ executados. A prova automatizada pertence aos testes unitários derivados.
 
 Use `python3 -B` ou `PYTHONDONTWRITEBYTECODE=1` para não criar caches.
 
-## Critério de publicação
+## Condições de publicação
 
 - frontmatter e metadata válidos;
 - gatilhos positivos e limites negativos claros;

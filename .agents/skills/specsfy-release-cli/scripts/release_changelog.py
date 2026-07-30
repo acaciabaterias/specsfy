@@ -47,29 +47,27 @@ def prepare(cli: Path, version: str, release_date: str, notes_file: Path) -> Non
     except ValueError as error:
         raise ValueError(f"data ISO inválida: {release_date}") from error
 
-    pyproject = cli / "pyproject.toml"
-    package_init = cli / "src" / "specsfy_cli" / "__init__.py"
+    package_json = cli / "package.json"
+    version_source = cli / "src" / "version.ts"
     changelog = cli / "CHANGELOG.md"
-    for source in (pyproject, package_init, changelog, notes_file):
+    for source in (package_json, version_source, changelog, notes_file):
         if not source.is_file():
             raise ValueError(f"arquivo obrigatório ausente: {source}")
 
-    pyproject_text = pyproject.read_text(encoding="utf-8")
-    init_text = package_init.read_text(encoding="utf-8")
-    pyproject_match = re.search(
-        r'(?m)^version = "(\d+\.\d+\.\d+)"$', pyproject_text
+    package_payload = json.loads(package_json.read_text(encoding="utf-8"))
+    version_text = version_source.read_text(encoding="utf-8")
+    package_version = package_payload.get("version")
+    source_match = re.search(
+        r'(?m)^export const VERSION = "(\d+\.\d+\.\d+)";$', version_text
     )
-    init_match = re.search(
-        r'(?m)^__version__ = "(\d+\.\d+\.\d+)"$', init_text
-    )
-    if pyproject_match is None or init_match is None:
+    if not isinstance(package_version, str) or source_match is None:
         raise ValueError("fontes de versão do pacote não são reconhecíveis")
-    if pyproject_match.group(1) != init_match.group(1):
+    if package_version != source_match.group(1):
         raise ValueError("fontes de versão atuais divergem")
-    current_version = stable_version(pyproject_match.group(1))
+    current_version = stable_version(package_version)
     if next_version <= current_version:
         raise ValueError(
-            f"a versão {version} deve ser maior que {pyproject_match.group(1)}"
+            f"a versão {version} deve ser maior que {package_version}"
         )
 
     changelog_text = changelog.read_text(encoding="utf-8")
@@ -86,21 +84,17 @@ def prepare(cli: Path, version: str, release_date: str, notes_file: Path) -> Non
     )
     updated_changelog = changelog_text.replace(UNRELEASED, release_section, 1)
 
-    pyproject.write_text(
-        replace_once(
-            pyproject_text,
-            r'^(version = ")\d+\.\d+\.\d+("$)',
-            rf"\g<1>{version}\g<2>",
-            pyproject,
-        ),
+    package_payload["version"] = version
+    package_json.write_text(
+        json.dumps(package_payload, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
-    package_init.write_text(
+    version_source.write_text(
         replace_once(
-            init_text,
-            r'^(__version__ = ")\d+\.\d+\.\d+("$)',
+            version_text,
+            r'^(export const VERSION = ")\d+\.\d+\.\d+(";$)',
             rf"\g<1>{version}\g<2>",
-            package_init,
+            version_source,
         ),
         encoding="utf-8",
     )

@@ -31,9 +31,9 @@ AGENTS.md ──orienta──► skills ──executam──► spec.md
 input ─► inbox ─► backlog ─► spec.md
 spec.md ─► tarefas + testes ─► entrega
 pedido tardio ─► update-spec ─► spec.md
-implement ─► documentator ─► <projeto>/docs/
+implement ─► documentator ─► <projeto>/docs/ + <projeto>/.specsfy/PACKAGES.md
 fontes dos módulos ─► monorepo-documentator ─► docs/
-release-cli ─► cli/CHANGELOG.md + versão + binário ─► tag + GitHub Release
+release-cli ─► cli/CHANGELOG.md + versão + binário ─► tag + npm + GitHub Release
 ```
 
 - Links entre módulos usam caminhos relativos.
@@ -41,7 +41,7 @@ release-cli ─► cli/CHANGELOG.md + versão + binário ─► tag + GitHub Rel
 - O CLI clona o monorepo e seleciona `skills/` ou `specialists/`.
 - A raiz oficial não é destino válido para instalação consumidora.
 - Catálogo e updater autenticam na API pelo ambiente ou pela sessão do `gh`.
-  somente o updater grava metadados no cache e delega upgrade ao `uv`.
+  Somente o updater grava metadados no cache e delega upgrade ao npm.
 - Especialistas exigem autorização específica.
 - Documentação derivada não redefine código, manifests, schemas ou specs.
 
@@ -57,7 +57,7 @@ release-cli ─► cli/CHANGELOG.md + versão + binário ─► tag + GitHub Rel
 
 ## Atualize quando
 
-- uma direção, exceção ou fronteira mudar.
+- uma direção, exceção ou limite mudar.
 
 ## Não use para
 

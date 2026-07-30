@@ -17,7 +17,7 @@ def when_documentator_contract_is_inspected(context) -> None:
         ROOT / "skills" / "specsfy-documentator" / "SKILL.md"
     ).read_text(encoding="utf-8")
     context.installer = (
-        ROOT / "cli/src/specsfy_cli/installer.py"
+        ROOT / "cli/src/installer.ts"
     ).read_text(encoding="utf-8")
     context.guide = (
         ROOT / "docs/user/system-documentation.md"

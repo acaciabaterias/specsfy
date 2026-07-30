@@ -10,6 +10,8 @@ __pycache__/
 # CLI
 /cli/.venv/
 /cli/dist/
+/cli/node_modules/
+/cli/coverage/
 
 # Example application
 /example/.phpunit.cache

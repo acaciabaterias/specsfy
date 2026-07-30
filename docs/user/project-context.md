@@ -2,12 +2,14 @@
 
 O Specsfy separa a descrição durável do sistema das especificações de cada
 mudança. O arquivo `PROJECT.md` explica a finalidade da aplicação, enquanto
-três documentos em `.specsfy/` registram a stack, as instruções confirmadas e
-a persistência observada no código.
+quatro documentos em `.specsfy/` registram a stack, as instruções confirmadas,
+a persistência observada no código e os pacotes instalados.
 
 Execute `$specsfy-setup` depois de instalar o framework ou quando precisar
-verificar esses arquivos. A skill detecta Laravel, Next.js e Astro pelos
-manifests, sugere o modelo correspondente e garante esta estrutura:
+verificar os quatro contextos iniciais. A skill detecta Laravel, Next.js e
+Astro pelos manifests e sugere o modelo correspondente.
+`$specsfy-documentator` acrescenta e atualiza `PACKAGES.md`. Juntas, as skills
+mantêm esta estrutura:
 
 ```text
 <projeto>/
@@ -15,7 +17,8 @@ manifests, sugere o modelo correspondente e garante esta estrutura:
 └── .specsfy/
     ├── STACK.md
     ├── RULES.md
-    └── DATABASE.md
+    ├── DATABASE.md
+    └── PACKAGES.md
 ```
 
 O setup também reserva blocos delimitados para as diretrizes do Specsfy em
@@ -29,6 +32,7 @@ preservado. A referência publicável das diretrizes vive em
 | `.specsfy/STACK.md` | stack e evidências | `$specsfy-aux-stack` |
 | `.specsfy/RULES.md` | regras explícitas confirmadas | `$specsfy-aux-rules` |
 | `.specsfy/DATABASE.md` | persistência e relações | `$specsfy-aux-database` |
+| `.specsfy/PACKAGES.md` | pacotes npm e Composer com finalidade | `$specsfy-documentator` |
 
 Os quatro modelos ficam em `.specsfy/templates/Project.md`, `Stack.md`,
 `Rules.md` e `Database.md`, junto dos demais templates do framework. Para
@@ -56,9 +60,10 @@ python3 -B .agents/skills/specsfy-setup/scripts/monitor_context.py \
 | Sinal observado | Obrigação |
 | --- | --- |
 | manifest, lockfile ou configuração | `$specsfy-aux-stack` revisa `STACK.md` |
+| manifest ou lockfile npm/Composer | `$specsfy-documentator` reconstrói `PACKAGES.md` e `docs/` |
 | schema, model ou migration | `$specsfy-aux-database` revisa `DATABASE.md` |
 | código da aplicação | revisar `PROJECT.md` |
-| aplicação ou persistência | `$specsfy-documentator` reconstrói `docs/` |
+| aplicação ou persistência | `$specsfy-documentator` reconstrói `docs/` e `PACKAGES.md` |
 | instrução ou convenção | `$specsfy-aux-rules` revisa `RULES.md` |
 
 `PENDING` impede a conclusão da tarefa e do Delivery Gate. Quando uma mudança
@@ -77,12 +82,14 @@ Veja a topologia e o `--check` no guia de
 - Uma nova varredura nunca autoriza remover silenciosamente uma definição
   humana.
 - `DATABASE.md` usa tabelas Markdown para facilitar mapeamento e comparação.
+- `PACKAGES.md` deriva de manifests, lockfiles e metadados locais, preservando
+  texto humano fora do bloco gerado.
 - Valores sensíveis não são lidos nem registrados. Cite somente nomes seguros
   de variáveis e caminhos das fontes.
 
 O estado implementado é comprovado pelas fontes do próprio projeto. Os
 manifests e lockfiles mostram a stack, enquanto schemas e migrations mostram a
-persistência. Os quatro documentos resumem essas evidências e as definições
+persistência. Os cinco documentos resumem essas evidências e as definições
 humanas que precisam permanecer entre mudanças. Eles não substituem a
 `spec.md`, não registram gates e nunca devem copiar segredos, valores de `.env`
 ou registros de produção.

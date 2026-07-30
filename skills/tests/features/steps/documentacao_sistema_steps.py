@@ -134,6 +134,16 @@ def then_packages_have_provenance(context) -> None:
     assert "https://github.com/" in packages
 
 
+@then(".specsfy/PACKAGES.md inventaria todos os pacotes npm e Composer com finalidade")
+def then_specsfy_packages_inventories_dependencies(context) -> None:
+    packages = (
+        context.project / ".specsfy/PACKAGES.md"
+    ).read_text(encoding="utf-8")
+    for package in ("next", "react", "tailwindcss", "vitest"):
+        assert package in packages
+    assert "Finalidade" in packages
+
+
 @given("uma documentação gerada com observações adicionadas pela equipe")
 def given_generated_docs_with_human_notes(context) -> None:
     context.project = project(context)

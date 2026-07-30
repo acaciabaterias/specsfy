@@ -1,34 +1,18 @@
-from __future__ import annotations
-
-import sys
-import tempfile
 import unittest
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "cli" / "src"))
-
-from specsfy_cli.updater import global_config_path, uv_upgrade_command
+UPDATER = (ROOT / "cli/src/updater.ts").read_text(encoding="utf-8")
 
 
 class CliUpdaterContractTests(unittest.TestCase):
     def test_global_cache_uses_the_specsfy_path(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            home = Path(directory)
+        self.assertIn('join(home, ".specsfy", "cli.json")', UPDATER)
 
-            self.assertEqual(
-                home / ".specsfy/cli.json",
-                global_config_path(home=home),
-            )
-
-    def test_cli_upgrade_is_managed_by_uv_tool(self) -> None:
-        command = uv_upgrade_command("/usr/local/bin/uv")
-
-        self.assertEqual(
-            ["/usr/local/bin/uv", "tool", "upgrade", "specsfy-cli"],
-            command,
-        )
+    def test_cli_upgrade_is_managed_by_npm(self) -> None:
+        self.assertIn('NPM_PACKAGE_NAME = "@promovaweb/specsfy"', UPDATER)
+        self.assertIn('["install", "--global",', UPDATER)
 
 
 if __name__ == "__main__":

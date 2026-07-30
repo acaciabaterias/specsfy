@@ -22,8 +22,8 @@ def when_stable_release_is_prepared(context) -> None:
 
 @then("a versão é atualizada nas fontes do pacote")
 def then_package_versions_are_updated(context) -> None:
-    assert "pyproject.toml" in context.release_skill
-    assert "src/specsfy_cli/__init__.py" in context.release_skill
+    assert "package.json" in context.release_skill
+    assert "src/version.ts" in context.release_skill
     assert "replace_once" in context.release_script.read_text(encoding="utf-8")
 
 
@@ -58,8 +58,8 @@ def then_validates_hub_branch_and_worktree(context) -> None:
 
 @then("ele executa testes e reconstrói o executável antes do commit")
 def then_tests_and_build_precede_commit(context) -> None:
-    build = context.release_skill.index("./scripts/build-executable.sh")
-    tests = context.release_skill.index("python -B -m unittest discover")
+    build = context.release_skill.index("npm run build:executable")
+    tests = context.release_skill.index("npm test")
     commit = context.release_skill.index('git commit -m')
     assert build < commit
     assert tests < commit

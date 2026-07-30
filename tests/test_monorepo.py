@@ -11,10 +11,12 @@ TEXT_SUFFIXES = {
     ".bash",
     ".feature",
     ".json",
+    ".mjs",
     ".md",
     ".py",
     ".sh",
     ".toml",
+    ".ts",
     ".yaml",
     ".yml",
 }
@@ -90,15 +92,15 @@ class MonorepoContractTest(unittest.TestCase):
 
     def test_cli_uses_monorepo_distribution_endpoints(self) -> None:
         installer = (
-            ROOT / "cli/src/specsfy_cli/installer.py"
+            ROOT / "cli/src/installer.ts"
         ).read_text(encoding="utf-8")
         catalog = (
-            ROOT / "cli/src/specsfy_cli/catalog.py"
+            ROOT / "cli/src/catalog.ts"
         ).read_text(encoding="utf-8")
         updater = (
-            ROOT / "cli/src/specsfy_cli/updater.py"
+            ROOT / "cli/src/updater.ts"
         ).read_text(encoding="utf-8")
-        package = (ROOT / "cli/pyproject.toml").read_text(encoding="utf-8")
+        package = (ROOT / "cli/package.json").read_text(encoding="utf-8")
 
         self.assertIn("https://github.com/promovaweb/specsfy.git", installer)
         self.assertIn('BASE_DIRECTORY = "skills"', installer)
@@ -111,10 +113,10 @@ class MonorepoContractTest(unittest.TestCase):
             updater,
         )
         for endpoint in (
-            'Homepage = "https://github.com/promovaweb/specsfy"',
-            'Repository = "https://github.com/promovaweb/specsfy.git"',
-            'Documentation = "https://github.com/promovaweb/specsfy/tree/main/docs"',
-            'Issues = "https://github.com/promovaweb/specsfy/issues"',
+            '"homepage": "https://github.com/promovaweb/specsfy"',
+            '"url": "git+https://github.com/promovaweb/specsfy.git"',
+            '"url": "https://github.com/promovaweb/specsfy/issues"',
+            '"name": "@promovaweb/specsfy"',
         ):
             self.assertIn(endpoint, package)
 

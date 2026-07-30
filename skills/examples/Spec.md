@@ -61,7 +61,7 @@ Exibir no terminal uma visão consolidada e atualizada das checklists.
 
 #### Incluído
 
-- Listagem de specs e contagem de itens concluídos e pendentes.
+- Listagem de specs e totais de itens concluídos e pendentes.
 
 #### Fora de escopo
 
@@ -134,7 +134,7 @@ Feature: Progresso consolidado
 
 #### Funcionais
 
-- **FR-001**: O CLI deve contar checklists concluídas e pendentes por spec.
+- **FR-001**: O CLI deve calcular checklists concluídas e pendentes por spec.
 
 #### Não funcionais
 
@@ -151,7 +151,7 @@ Feature: Progresso consolidado
 
 #### Contexto existente
 
-- CLI Python com parser de Markdown e interface textual.
+- CLI TypeScript com parser de Markdown e interface terminal.
 
 #### Arquitetura e módulos
 
@@ -163,7 +163,7 @@ Feature: Progresso consolidado
 
 #### Models
 
-- `SpecProgress` preserva identidade e contagens derivadas.
+- `SpecProgress` preserva identidade e totais derivados.
 
 #### Controllers e casos de uso
 
@@ -186,8 +186,8 @@ Feature: Progresso consolidado
 ```text
 specs/specs/0001-painel-progresso/
   spec.md
-src/specsfy_cli/
-tests/
+cli/src/progress.ts
+cli/tests/progress.test.ts
 ```
 
 ### 9. Modelo de dados
@@ -228,7 +228,7 @@ tests/
 
 ### 11. Estratégia TDD
 
-- **Unidade**: contagem e percentual.
+- **Unidade**: cálculo e percentual.
 - **Integração/contrato**: descoberta da estrutura canônica.
 - **BDD/aceite**: Gherkin AC-001, AC-002 e AC-003 como referência para os testes derivados.
 - **E2E**: inicialização do dashboard com a fixture.
@@ -296,7 +296,7 @@ tests/
   - [ ] **EVIDENCE**: Registrar comando e causa do RED.
   - [ ] **IMPROVE**: Revisar a clareza da fixture.
 
-- [ ] T004 [CODE] [US-001] Implementar a contagem em src/specsfy_cli/progress.py — Refs: US-001, FR-001, NFR-001, AC-001, AC-002, AC-003 — Depends: T001, T002, T003
+- [ ] T004 [CODE] [US-001] Implementar o cálculo em cli/src/progress.ts — Refs: US-001, FR-001, NFR-001, AC-001, AC-002, AC-003 — Depends: T001, T002, T003
   - [ ] **PREP**: Confirmar RED e contrato somente leitura.
   - [ ] **EXECUTE**: Implementar a menor mudança.
   - [ ] **VERIFY**: Executar teste focal e regressão.
@@ -311,15 +311,15 @@ tests/
 
 ## Ato III — Entregar e validar
 
-### 16. Dependências, riscos e suposições
+### 16. Dependências, falhas possíveis e suposições
 
 #### Dependências
 
 - Parser Markdown do próprio CLI.
 
-#### Riscos
+#### Falhas possíveis
 
-- Contar checklists em blocos de código → ignorar blocos cercados.
+- Somar checklists em blocos de código → ignorar blocos cercados.
 
 #### Suposições
 
