@@ -16,9 +16,20 @@ from urllib.parse import urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 EBOOK_ROOT = ROOT / "ebook"
 PIPELINE_ROOT = ROOT / ".ebook"
+WORKFLOW = ROOT / ".github" / "workflows" / "specsfy.yml"
 
 
 class UserEbookTests(unittest.TestCase):
+    def test_ci_installs_ebook_inspection_dependencies(self) -> None:
+        workflow = WORKFLOW.read_text(encoding="utf-8")
+        dependency_step = "sudo apt-get install -y libxml2-utils poppler-utils"
+        tests_step = (
+            "python3 -B -m unittest discover -s tests -p 'test_*.py'"
+        )
+
+        self.assertIn(dependency_step, workflow)
+        self.assertLess(workflow.index(dependency_step), workflow.index(tests_step))
+
     def test_portable_guide_requires_brazilian_portuguese(self) -> None:
         metadata = (PIPELINE_ROOT / "metadata.yaml").read_text(encoding="utf-8")
         template = (PIPELINE_ROOT / "template.html").read_text(encoding="utf-8")

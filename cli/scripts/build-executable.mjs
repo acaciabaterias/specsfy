@@ -9,14 +9,13 @@ import {
   chmod,
   mkdir,
   readFile,
-  readdir,
   rename,
   rm,
-  stat,
   writeFile,
 } from "node:fs/promises";
-import { dirname, join, relative, resolve } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { build } from "esbuild";
+import { sourceFingerprint } from "./source-fingerprint.mjs";
 
 const root = resolve(import.meta.dirname, "..");
 const output = join(root, "bin", "specsfy");
@@ -92,41 +91,3 @@ await writeFile(
     2,
   )}\n`,
 );
-
-async function sourceFingerprint(directory) {
-  const digest = createHash("sha256");
-  const inputs = [
-    join(directory, "package.json"),
-    join(directory, "package-lock.json"),
-    join(directory, "tsconfig.json"),
-    join(directory, "bin", "package.json"),
-    join(directory, "src"),
-    join(directory, "scripts", "build-executable.mjs"),
-  ];
-  const files = [];
-  for (const input of inputs) {
-    const metadata = await stat(input);
-    if (metadata.isDirectory()) files.push(...(await walk(input)));
-    else files.push(input);
-  }
-  for (const file of files.sort()) {
-    const metadata = await stat(file);
-    digest.update(relative(directory, file));
-    digest.update("\0");
-    digest.update(metadata.mode & 0o111 ? "executable" : "regular");
-    digest.update("\0");
-    digest.update(await readFile(file));
-    digest.update("\0");
-  }
-  return digest.digest("hex");
-}
-
-async function walk(directory) {
-  const output = [];
-  for (const entry of await readdir(directory, { withFileTypes: true })) {
-    const path = join(directory, entry.name);
-    if (entry.isDirectory()) output.push(...(await walk(path)));
-    else if (entry.isFile()) output.push(path);
-  }
-  return output;
-}
