@@ -35,7 +35,7 @@ módulo. Um checkout parcial, outro remoto ou um projeto consumidor é recusado.
 
 Decisões transversais ficam em `docs/develop/context/`: finalidade,
 vocabulário, arquitetura, módulos, dependências, stack, dados, fluxos e testes.
-A separação de públicos e os critérios de atualização são normativos no
+A separação de públicos e as regras de atualização são normativas no
 [contexto documental](context/documentation.md).
 
 ## Guias para usuários
@@ -78,10 +78,10 @@ capítulos. Links para destinos que não fazem parte do percurso permanecem como
 texto sem ação no PDF e no EPUB. A verificação rejeita links clicáveis externos
 e destinos internos ausentes, mantendo os dois formatos autocontidos.
 
-O sistema visual deriva de `brand/`: logo oficial, IBM Plex, preto, branco,
-neutros e estilos de código, tabela e navegação. As fontes do pipeline vivem
-em `.ebook/`. Os artefatos publicados e o controle de edição vivem em
-`ebook/`.
+O sistema visual deriva de `brand/`: logo oficial, Inter no corpo, Manrope em
+títulos, preto, branco, neutros e estilos de código, tabela e navegação. O
+pipeline incorpora as fontes mantidas pelo sistema de marca. Os artefatos
+publicados e o controle de edição vivem em `ebook/`.
 
 ## Evidência e publicação
 

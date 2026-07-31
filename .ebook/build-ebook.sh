@@ -257,7 +257,7 @@ awk '
   /:root[ \t]*\{/ { exit }
   p { print }
 ' "$STYLE_GUIDE" > "$FONT_FACES"
-[ -s "$FONT_FACES" ] || fail "fontes IBM Plex ausentes em brand/style-guide.html."
+[ -s "$FONT_FACES" ] || fail "fontes Inter e Manrope ausentes em brand/style-guide.html."
 
 FILLED_TEMPLATE="$BUILD_ROOT/template.filled.html"
 awk -v ff="$FONT_FACES" '
@@ -276,26 +276,26 @@ YEAR="$(date +%Y)"
 PT_DATE="$DAY de ${MESES[$((MONTH_NUM - 1))]} de $YEAR"
 HTML_OUT="$BUILD_ROOT/$STEM.html"
 COVER_PNG="$BUILD_ROOT/$STEM-cover.png"
-SANS_FONT="$(fc-match -f '%{file}\n' 'IBM Plex Sans:style=SemiBold' | head -1)"
-MONO_FONT="$(fc-match -f '%{file}\n' 'IBM Plex Mono:style=Regular' | head -1)"
-[ -f "$SANS_FONT" ] || fail "IBM Plex Sans não encontrada."
-[ -f "$MONO_FONT" ] || fail "IBM Plex Mono não encontrada."
+SANS_FONT="$(fc-match -f '%{file}\n' 'Manrope:style=SemiBold' | head -1)"
+BODY_FONT="$(fc-match -f '%{file}\n' 'Inter:style=Regular' | head -1)"
+[ -f "$SANS_FONT" ] || fail "Manrope não encontrada."
+[ -f "$BODY_FONT" ] || fail "Inter não encontrada."
 
 magick \
   -size 1600x2560 xc:'#FFFFFF' \
   \( "$LOGO_PNG" -resize 300x300 \) -geometry +150+170 -composite \
-  -font "$MONO_FONT" -fill '#171717' -pointsize 34 \
+  -font "$BODY_FONT" -fill '#171717' -pointsize 34 \
   -annotate +150+850 'SPECSFY' \
   -font "$SANS_FONT" -fill '#000000' -pointsize 116 \
   -annotate +150+1050 'Guia completo' \
   -annotate +150+1190 'do usuário' \
-  -font "$MONO_FONT" -fill '#171717' -pointsize 42 \
+  -font "$BODY_FONT" -fill '#171717' -pointsize 42 \
   -annotate +150+1400 'Specify. Prove. Ship.' \
   -font "$SANS_FONT" -fill '#737373' -pointsize 38 \
   -annotate +150+1540 'Da primeira ideia à entrega comprovada,' \
   -annotate +150+1600 'em uma jornada prática e rastreável.' \
   -stroke '#D4D4D4' -strokewidth 2 -draw 'line 150,2260 1450,2260' \
-  -stroke none -font "$MONO_FONT" -fill '#737373' -pointsize 30 \
+  -stroke none -font "$BODY_FONT" -fill '#737373' -pointsize 30 \
   -annotate +150+2340 "EDIÇÃO V$VERSION" \
   "$COVER_PNG"
 
