@@ -106,6 +106,10 @@ description: "Projetar e revisar CI/CD, artefatos, releases, promoções, migrat
   pipeline, supply chain e assinatura de artefato.
 - `$specsfy-specialist-performance-engineering` quando o rollout precisa de
   um baseline de performance antes de liberar tráfego total.
+- `$specsfy-specialist-gitflow` quando o projeto declarar Gitflow como
+  estratégia de branch — aquela skill entrega a branch e a tag corretas
+  (merge de `release/*`/`hotfix/*` em `main`), esta decide como o pipeline
+  reage a elas.
 
 Leia [references/standards.md](references/standards.md) para etapas mínimas
 de pipeline, comparação de estratégias de release e supply chain, com fontes

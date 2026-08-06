@@ -31,6 +31,13 @@ description: Preparar e monitorar PROJECT.md e os contextos .specsfy de stack, r
 8. Quando aplicação, persistência ou dependências mudar, carregar
    `$specsfy-documentator` depois das auxiliares e reconstruir `docs/` e
    `.specsfy/PACKAGES.md` a partir de todo o projeto.
+9. Somente quando a pessoa solicitar ou indicar explicitamente o uso de
+   Gitflow para o projeto (ver [references/gitflow.md](references/gitflow.md)),
+   anunciar o handoff, carregar `$specsfy-specialist-gitflow` e registrar a
+   convenção de branches confirmada em `RULES.md` via `$specsfy-aux-rules`.
+   Nunca propor, presumir ou aplicar Gitflow a partir da estrutura de
+   branches do repositório, da presença de uma branch `develop` ou de
+   qualquer outro sinal implícito.
 
 Não contornar um resultado `PENDING`. Atualizar o documento indicado e executar
 o monitor novamente. Para mudança de aplicação sem impacto material na história

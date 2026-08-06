@@ -97,6 +97,10 @@ description: Resolver conflitos Git de merge ou rebase pela intenção de cada l
 - `$specsfy-specialist-domain-modeling` quando o conflito semântico revelar
   que dois lados modelaram o mesmo conceito de domínio de forma
   incompatível — o conflito é sintoma de um boundary não alinhado.
+- `$specsfy-specialist-gitflow` quando o merge/rebase em conflito envolver
+  `feature/`, `release/` ou `hotfix/` de um projeto que declarou Gitflow —
+  aquela skill decide a topologia e o destino do merge, esta resolve o
+  conflito textual ou semântico já aberto.
 
 Leia [references/standards.md](references/standards.md) para comandos de
 diagnóstico, tipos de conflito sem marcador textual e fontes oficiais do Git.
