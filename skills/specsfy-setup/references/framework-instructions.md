@@ -29,7 +29,8 @@ arquivo contém o fluxo, os caminhos canônicos e os gates do framework.
   `.specsfy/PACKAGES.md`.
 - Use `specs/inbox/` para capturas imediatas ainda não refinadas.
 - Use `specs/backlog/` para itens refináveis ainda não promovidos.
-- Use `specs/specs/<NNNN>-<slug>/spec.md` como fonte normativa de cada fatia.
+- Use `specs/<estado>/<NNNN>-<slug>/spec.md` como fonte normativa de cada
+  fatia, em uma única pasta de estado.
 - Não crie `plan.md`, `tasks.md`, `research.md` ou outra fonte normativa
   paralela.
 <!-- specsfy:framework:end -->

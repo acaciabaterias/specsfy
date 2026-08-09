@@ -14,7 +14,7 @@ description: Construir a documentação técnica em docs/ e o inventário npm/Co
    skill for acionada sem uma spec ou implementação recente:
 
    ```bash
-   python3 -B scripts/build_documentation.py --project <raiz>
+   node scripts/build_documentation.mjs --project <raiz>
    ```
 
 4. Inspecionar os arquivos gerados e corrigir manualmente somente inferências
@@ -22,7 +22,7 @@ description: Construir a documentação técnica em docs/ e o inventário npm/Co
 5. Executar `--check` para provar que a documentação representa o estado atual:
 
    ```bash
-   python3 -B scripts/build_documentation.py --project <raiz> --check
+   node scripts/build_documentation.mjs --project <raiz> --check
    ```
 
 6. Preservar conteúdo humano fora dos blocos `specsfy:documentator`, inclusive

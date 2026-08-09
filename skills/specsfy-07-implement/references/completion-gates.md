@@ -28,9 +28,9 @@
 
 - `Definition Gate` e `Plan Gate` permanecem `Passed`; `Delivery Gate` só muda
   para `Passed` depois das evidências abaixo.
-- A seção `14. Tarefas` de `specs/specs/<NNNN>-<slug>/spec.md` não possui tarefas abertas.
+- A seção `14. Tarefas` de `specs/<estado>/<NNNN>-<slug>/spec.md` não possui tarefas abertas.
 - A suite completa, lint, tipos e build disponíveis passam.
 - Rastreabilidade não possui gaps automatizáveis.
 - NFRs têm medição ou evidência documentada.
 - Não há placeholder, teste pulado ou mudança de escopo escondida.
-- O código observado corresponde à versão atual da fonte única `specs/specs/<NNNN>-<slug>/spec.md`.
+- O código observado corresponde à versão atual da fonte única `specs/<estado>/<NNNN>-<slug>/spec.md`.

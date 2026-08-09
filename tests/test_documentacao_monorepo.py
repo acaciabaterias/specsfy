@@ -194,6 +194,7 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
             "$specsfy-07-implement",
             "$specsfy-update-spec",
             "$specsfy-progress",
+            "$specsfy-interviewer",
         )
         basic_usage = (ROOT / "docs" / "user" / "getting-started.md").read_text(
             encoding="utf-8"
@@ -202,9 +203,9 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
             practical_evidence = (
                 "specs/inbox/2026-07-28-143205-pagina-boas-vindas.md",
                 "specs/backlog/0001-pagina-boas-vindas.md",
-                "specs/specs/0001-pagina-boas-vindas/spec.md",
+                "specs/<estado>/0001-pagina-boas-vindas/spec.md",
                 "READY",
-                "Complete",
+                "Reviewing",
             )
             for evidence in practical_evidence:
                 self.assertIn(evidence, source)

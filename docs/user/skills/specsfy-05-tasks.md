@@ -12,7 +12,7 @@ Não use para escrever código nem para marcar uma tarefa como concluída.
 
 ```text
 Use $specsfy-05-tasks em
-specs/specs/0004-recuperar-senha/spec.md.
+specs/<estado>/0004-recuperar-senha/spec.md.
 ```
 
 Se a spec contiver mais de uma entrega observável, indique a fatia vertical que

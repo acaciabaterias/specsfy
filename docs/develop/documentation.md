@@ -92,6 +92,27 @@ publicados e o controle de edição vivem em `ebook/`.
 - Após alterar `docs/user/`, ajuste a edição e execute `make ebook`.
 - Execute testes focais dos módulos, a regressão integrada e revise o diff único.
 
+## Cobertura obrigatória de conceitos públicos
+
+O Specsfy não introduz uma capacidade pública somente com entrada no catálogo,
+opção de CLI ou alteração de template. Cada conceito visível para quem usa o
+framework precisa de explicação navegável no percurso de usuário e, quando há
+implementação correspondente, de contexto técnico no percurso de desenvolvimento.
+
+Para cada campo, estado, gate, comando, métrica, template, skill ou integração,
+a documentação precisa explicar finalidade, uso e não uso, entradas, saídas,
+artefatos alterados, pré-condições, limites, falhas, exemplo, resultado
+observável, fonte executável e forma de verificação.
+
+`docs/user/method-reference.md` é a referência central para Effort, estados,
+gates, transições, IDs, rastreabilidade, pesquisa, tarefas e progresso. Uma
+mudança nesses contratos atualiza essa página, os guias de jornada afetados,
+`reading-order.txt`, a edição do ebook e o contexto técnico correspondente.
+
+Na revisão, compare alterações em `skills/`, `cli/`, templates e testes com os
+dois percursos. Se a documentação não permitir entender, aplicar e conferir o
+resultado de um item, o trabalho ainda não está pronto.
+
 A skill local vive em
 [`/.agents/skills/specsfy-monorepo-documentator`](../../.agents/skills/specsfy-monorepo-documentator/)
 e não integra o catálogo instalado em consumidores. A skill

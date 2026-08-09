@@ -102,7 +102,7 @@ specs/backlog/0001-pagina-boas-vindas.md
 A skill cria o diretório numerado e mantém a fonte normativa neste caminho:
 
 ```text
-specs/specs/0001-pagina-boas-vindas/spec.md
+specs/<estado>/0001-pagina-boas-vindas/spec.md
 ```
 
 Abra esse arquivo e confira se o problema, as pessoas afetadas, os requisitos,
@@ -118,7 +118,7 @@ completa:
 
 ```text
 Use $specsfy-04-validate em
-specs/specs/0001-pagina-boas-vindas/spec.md
+specs/<estado>/0001-pagina-boas-vindas/spec.md
 ```
 
 Uma definição pronta termina a validação com estes dois sinais:
@@ -141,7 +141,7 @@ o teste em RED e cada tarefa de produção:
 
 ```text
 Use $specsfy-05-tasks em
-specs/specs/0001-pagina-boas-vindas/spec.md
+specs/<estado>/0001-pagina-boas-vindas/spec.md
 ```
 
 A skill separa testes, código, documentação e trabalho operacional, registra
@@ -154,7 +154,7 @@ Use `$specsfy-06-tdd-bdd` no modo de preparação:
 
 ```text
 Use $specsfy-06-tdd-bdd em
-specs/specs/0001-pagina-boas-vindas/spec.md para preparar o TDD.
+specs/<estado>/0001-pagina-boas-vindas/spec.md para preparar o TDD.
 ```
 
 Como o projeto do exemplo usa PHP, a skill cria testes Pest derivados dos
@@ -176,7 +176,7 @@ Com os gates de definição e plano aprovados, use
 
 ```text
 Use $specsfy-07-implement em
-specs/specs/0001-pagina-boas-vindas/spec.md
+specs/<estado>/0001-pagina-boas-vindas/spec.md
 ```
 
 A implementação percorre cada tarefa em `RED → GREEN → REFACTOR`. Para uma
@@ -194,7 +194,7 @@ documentação e Definition of Done. Uma entrega comprovada termina com:
 
 ```text
 Delivery Gate: Passed
-Status: Complete
+Status: Reviewing
 ```
 
 ## Incorpore uma mudança posterior
@@ -204,7 +204,7 @@ caracteres. Use `$specsfy-update-spec` na spec existente:
 
 ```text
 Use $specsfy-update-spec em
-specs/specs/0001-pagina-boas-vindas/spec.md:
+specs/<estado>/0001-pagina-boas-vindas/spec.md:
 o nome deve ter no máximo 80 caracteres.
 ```
 
@@ -235,9 +235,15 @@ specsfy progress --project . --json
 specsfy tui --project .
 ```
 
-Uma entrega pronta deve aparecer como `Complete`, com os três gates aprovados
-e sem pendência documental. Capturas em `specs/inbox/` e itens em
+Depois do aceite final, a entrega pronta aparece como `Complete` em
+`completed/`, com os três gates aprovados e sem pendência documental. Capturas em `specs/inbox/` e itens em
 `specs/backlog/` não entram nesse cálculo.
+
+## Converse sobre a próxima escolha — `$specsfy-interviewer`
+
+Quando uma lacuna puder alterar escopo, plano, execução ou aceite, use
+`$specsfy-interviewer` na mesma spec. Ele registra respostas confirmadas e
+recalibra Effort, sem aprovar gates nem substituir a skill da etapa.
 
 ## Continue na mesma conversa
 
@@ -262,5 +268,5 @@ produzido pelo resultado da etapa anterior.
 Atualize esta página quando a sequência dos atos, a responsabilidade de uma
 skill base, os gates, os estados ou os caminhos canônicos mudarem. Use a
 metodologia executável em [`skills/`](../../skills/) como fonte e preserve
-`specs/specs/<NNNN>-<slug>/spec.md` como a única fonte normativa de cada
+`specs/<estado>/<NNNN>-<slug>/spec.md` como a única fonte normativa de cada
 fatia no projeto consumidor.

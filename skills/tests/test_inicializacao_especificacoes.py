@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import ast
 import os
 import subprocess
 import sys
@@ -10,7 +9,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = ROOT / "specsfy-03-specify/scripts/iniciar_spec.py"
+SCRIPT = ROOT / "specsfy-03-specify/scripts/iniciar_spec.mjs"
 MODEL = ROOT / "templates/Spec.md"
 
 
@@ -21,7 +20,7 @@ def run_initializer(
     root: Path | None = None,
     slug: str | None = None,
 ) -> subprocess.CompletedProcess[str]:
-    args = [sys.executable, "-B", str(SCRIPT), "--title", title]
+    args = ["node", str(SCRIPT), "--title", title]
     if root is not None:
         args.extend(["--root", str(root)])
     if slug is not None:
@@ -46,7 +45,7 @@ class InitializationTests(unittest.TestCase):
             created = run_initializer(current, "Current Project")
             self.assertEqual(0, created.returncode, created.stderr)
             expected = (
-                current / "specs" / "specs" / "0001-current-project" / "spec.md"
+                current / "specs" / "draft" / "0001-current-project" / "spec.md"
             )
             self.assertEqual(str(expected.resolve()), created.stdout.strip())
             self.assertTrue(expected.is_file())
@@ -68,7 +67,7 @@ class InitializationTests(unittest.TestCase):
                 (
                     nested
                     / "specs"
-                    / "specs"
+                    / "draft"
                     / "0001-nested-project"
                     / "spec.md"
                 ).is_file()
@@ -87,7 +86,7 @@ class InitializationTests(unittest.TestCase):
                 (
                     target
                     / "specs"
-                    / "specs"
+                    / "draft"
                     / "0001-explicit-root"
                     / "spec.md"
                 ).is_file()
@@ -106,7 +105,7 @@ class InitializationTests(unittest.TestCase):
             )
             self.assertEqual(0, created.returncode, created.stderr)
             spec = (
-                root / "specs" / "specs" / "0001-slug-explicito" / "spec.md"
+                root / "specs" / "draft" / "0001-slug-explicito" / "spec.md"
             )
             content = spec.read_text(encoding="utf-8")
             self.assertIn("# Especificação integrada: Título com Acento", content)
@@ -140,7 +139,7 @@ class InitializationTests(unittest.TestCase):
         """SPECSFY: FR-005 FR-006 AC-003"""
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            specs = root / "specs" / "specs"
+            specs = root / "specs" / "draft"
             for name in ("0001-first", "0003-third", "legacy"):
                 (specs / name).mkdir(parents=True)
             created = run_initializer(root, "Fourth")
@@ -156,7 +155,7 @@ class InitializationTests(unittest.TestCase):
             root = Path(directory)
             processes = [
                 subprocess.Popen(
-                    [sys.executable, "-B", str(SCRIPT), "--title", title],
+                    ["node", str(SCRIPT), "--title", title],
                     cwd=root,
                     text=True,
                     stdout=subprocess.PIPE,
@@ -174,7 +173,7 @@ class InitializationTests(unittest.TestCase):
             )
             directories = sorted(
                 path.name
-                for path in (root / "specs" / "specs").iterdir()
+                for path in (root / "specs" / "draft").iterdir()
                 if path.is_dir()
             )
             self.assertEqual(["0001", "0002"], [name[:4] for name in directories])
@@ -187,19 +186,9 @@ class InitializationTests(unittest.TestCase):
     def test_standard_library_and_actionable_errors(self) -> None:
         """SPECSFY: NFR-001 NFR-002 AC-005"""
         self.assertTrue(SCRIPT.is_file(), f"script ausente: {SCRIPT}")
-        tree = ast.parse(SCRIPT.read_text(encoding="utf-8"))
-        imported = {
-            alias.name.split(".", 1)[0]
-            for node in ast.walk(tree)
-            if isinstance(node, ast.Import)
-            for alias in node.names
-        }
-        imported.update(
-            node.module.split(".", 1)[0]
-            for node in ast.walk(tree)
-            if isinstance(node, ast.ImportFrom) and node.module
-        )
-        self.assertLessEqual(imported, sys.stdlib_module_names)
+        source = SCRIPT.read_text(encoding="utf-8")
+        self.assertIn('from "node:fs/promises"', source)
+        self.assertNotIn("python3", source.lower())
 
         with tempfile.NamedTemporaryFile() as file_root:
             failed = run_initializer(Path.cwd(), "Invalid Root", root=Path(file_root.name))

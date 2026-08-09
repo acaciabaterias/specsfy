@@ -99,7 +99,7 @@ Quando lembrar de algo depois da definição, use a entrada explícita:
 
 ```text
 Use $specsfy-update-spec em
-specs/specs/<NNNN>-<slug>/spec.md:
+specs/<estado>/<NNNN>-<slug>/spec.md:
 quero adicionar, remover, corrigir ou mudar esta especificação.
 ```
 

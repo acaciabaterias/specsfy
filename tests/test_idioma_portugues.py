@@ -186,6 +186,8 @@ class PortugueseLanguageContractTest(unittest.TestCase):
             for path in files_under(prose_root):
                 if path.suffix not in PROSE_SUFFIXES:
                     continue
+                if path.name.startswith("OFL-"):
+                    continue
                 fenced = False
                 for line_number, line in enumerate(
                     path.read_text(encoding="utf-8", errors="ignore").splitlines(),

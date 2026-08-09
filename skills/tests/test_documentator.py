@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL = ROOT / "specsfy-documentator"
-BUILDER = SKILL / "scripts" / "build_documentation.py"
+BUILDER = SKILL / "scripts" / "build_documentation.mjs"
 EXPECTED_DOCS = {
     "README.md",
     "architecture.md",
@@ -27,8 +27,7 @@ EXPECTED_DOCS = {
 def run_builder(project: Path, *arguments: str) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
         [
-            "python3",
-            "-B",
+            "node",
             str(BUILDER),
             "--project",
             str(project),
@@ -464,7 +463,7 @@ class DocumentatorTests(unittest.TestCase):
         ).read_text(encoding="utf-8")
         framework = (ROOT / "Spec.md").read_text(encoding="utf-8")
         self.assertIn("código existente", skill)
-        self.assertIn("build_documentation.py", skill)
+        self.assertIn("build_documentation.mjs", skill)
         self.assertIn("$specsfy-documentator", implementation)
         self.assertIn("$specsfy-documentator", framework)
 

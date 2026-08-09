@@ -50,10 +50,23 @@ hashes dos dois arquivos. As tabelas `## Classificação` permanecem nas fontes
 Markdown: o build extrai `Natureza`, `Escopo` e `Autoridade` para
 `document_metadata` no manifesto, mas não as exibe no PDF nem no EPUB.
 
-Nos artefatos portáteis, todo link clicável navega dentro do próprio ebook.
+Nos artefatos portáteis, todo link clicável navega dentro do próprio ebook. A
+experiência autocontida explica a metodologia, as etapas e os procedimentos no
+próprio capítulo, sem encaminhar você ao repositório ou à documentação online
+para completar uma instrução.
+
+Um caminho de arquivo pode aparecer quando ele for necessário para executar a
+ação descrita, como `specs/<estado>/<NNNN>-<slug>/spec.md`. Uma citação nominal
+de uma fonte também pode permanecer nos créditos. Fora desses casos, não use o
+ebook para encaminhar a pessoa a diretórios, módulos ou páginas externas.
 Referências externas continuam visíveis como texto, sem abrir o navegador ou
 retirar a pessoa da leitura. O build também verifica se cada capítulo e âncora
 interna referenciada realmente existe.
+
+Quando uma seção só fizer sentido no portal, como o download do próprio PDF ou
+EPUB, envolva-a em `::: {.online-only}` nas fontes de `docs/user/`. O filtro do
+ebook a remove dos formatos portáteis; não use essa classe para esconder uma
+explicação necessária à jornada de quem lê.
 
 ## Gerar
 

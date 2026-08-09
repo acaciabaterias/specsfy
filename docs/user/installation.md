@@ -82,7 +82,7 @@ specsfy progress --project .
 O catálogo deve mostrar as skills do Specsfy. Em um projeto novo, o comando de
 progresso pode retornar zero specs. Esse resultado confirma que o CLI leu o
 repositório e ainda não encontrou arquivos em
-`specs/specs/<NNNN>-<slug>/spec.md`.
+`specs/<estado>/<NNNN>-<slug>/spec.md`.
 
 O comando sem subcomando abre a interface visual no diretório atual. O nome do
 projeto aparece no topo e as abas devem carregar mesmo quando ainda não houver

@@ -20,7 +20,7 @@ describe("progresso das specs", () => {
     await writeFile(
       canonical,
       "# Dashboard\n\n**Status**: Implementing\n\n" +
-        "**Definition Gate**: Passed\n\n- [x] T001 Feita\n- [ ] T002 Pendente\n",
+        "**Definition Gate**: Passed\n\n| Effort | 6 |\n\n- [x] T001 Feita\n- [ ] T002 Pendente\n",
     );
     await writeFile(
       legacy,
@@ -47,6 +47,10 @@ describe("progresso das specs", () => {
       percent: 50,
     });
     expect(serializeSpec(specs[0]!)).not.toHaveProperty("content");
+    expect(specs.find((spec) => spec.slug === "0001-dashboard")).toMatchObject({
+      effort: 6,
+      execution_profile: "standard",
+    });
   });
 
   test("usa gates quando a spec não possui checklist", async () => {
@@ -62,6 +66,25 @@ describe("progresso das specs", () => {
 
     expect(spec?.percent).toBe(67);
     expect(summarizeSpecs([spec!]).percent).toBe(67);
+  });
+
+  test("inclui cada pasta de estado no progresso", async () => {
+    const project = await temporaryDirectory();
+    const paths = [
+      "specs/draft/0001-ideia/spec.md",
+      "specs/review/0002-revisao/spec.md",
+      "specs/completed/0003-entrega/spec.md",
+    ];
+    for (const path of paths) {
+      await mkdir(join(project, path, ".."), { recursive: true });
+      await writeFile(join(project, path), "# Spec\n\n| Status | Draft |\n");
+    }
+
+    expect((await scanSpecs(project)).map((spec) => spec.slug)).toEqual([
+      "0003-entrega",
+      "0001-ideia",
+      "0002-revisao",
+    ]);
   });
 
   test("fingerprint muda com o conteúdo", async () => {

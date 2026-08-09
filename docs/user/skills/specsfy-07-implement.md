@@ -12,7 +12,7 @@ uma feature planejada. Não use para pular definição, planejamento ou testes.
 
 ```text
 Use $specsfy-07-implement para executar a próxima tarefa pronta de
-specs/specs/0004-recuperar-senha/spec.md.
+specs/<estado>/0004-recuperar-senha/spec.md.
 ```
 
 Quando houver mais de uma tarefa pronta, indique o ID da tarefa que deve ser

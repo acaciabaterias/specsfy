@@ -3,9 +3,10 @@
  */
 
 import { createHash } from "node:crypto";
-import { readFile, readdir } from "node:fs/promises";
-import { basename, dirname, join, relative } from "node:path";
-import { isFile, resolvePath } from "./filesystem.js";
+import { readFile } from "node:fs/promises";
+import { basename, dirname, relative } from "node:path";
+import { resolvePath } from "./filesystem.js";
+import { scanSpecPaths } from "./lifecycle.js";
 
 const FIELD = /^\*\*([^*]+)\*\*:\s*(.+?)\s*$/;
 const TABLE_FIELD = /^\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|\s*$/;
@@ -20,6 +21,8 @@ export interface SpecProgress {
   path: string;
   content: string;
   status: string;
+  effort: number | null;
+  execution_profile: "light" | "standard" | "high" | "maximum" | "unknown";
   definition_gate: string;
   plan_gate: string;
   delivery_gate: string;
@@ -52,7 +55,7 @@ export interface ProgressSummary {
 /** Lê specs no layout canônico e no layout legado. */
 export async function scanSpecs(project: string): Promise<SpecProgress[]> {
   const root = resolvePath(project);
-  return Promise.all((await specPaths(root)).map(parseSpec));
+  return Promise.all((await scanSpecPaths(root)).map(parseSpec));
 }
 
 /** Consolida as métricas das specs fornecidas. */
@@ -86,7 +89,7 @@ export function summarizeSpecs(specs: SpecProgress[]): ProgressSummary {
 export async function specsFingerprint(project: string): Promise<string> {
   const root = resolvePath(project);
   const digest = createHash("sha256");
-  for (const path of await specPaths(root)) {
+  for (const path of await scanSpecPaths(root)) {
     digest.update(relative(root, path));
     digest.update("\0");
     try {
@@ -103,27 +106,6 @@ export async function specsFingerprint(project: string): Promise<string> {
 export function serializeSpec(spec: SpecProgress): Omit<SpecProgress, "content"> {
   const { content: _content, ...serialized } = spec;
   return serialized;
-}
-
-async function specPaths(root: string): Promise<string[]> {
-  const paths = new Set<string>();
-  for (const parent of [
-    join(root, "specs", "specs"),
-    join(root, "specs"),
-  ]) {
-    let entries;
-    try {
-      entries = await readdir(parent, { withFileTypes: true });
-    } catch {
-      continue;
-    }
-    for (const entry of entries) {
-      if (!entry.isDirectory()) continue;
-      const path = join(parent, entry.name, "spec.md");
-      if (await isFile(path)) paths.add(path);
-    }
-  }
-  return [...paths].sort();
 }
 
 async function parseSpec(path: string): Promise<SpecProgress> {
@@ -161,6 +143,8 @@ async function parseSpec(path: string): Promise<SpecProgress> {
     path,
     content,
     status: fields.get("status") ?? "Unknown",
+    effort: parsedEffort(fields.get("effort")),
+    execution_profile: effortProfile(parsedEffort(fields.get("effort"))),
     definition_gate: fields.get("definition gate") ?? "Unknown",
     plan_gate: fields.get("plan gate") ?? "Unknown",
     delivery_gate: fields.get("delivery gate") ?? "Unknown",
@@ -177,6 +161,22 @@ async function parseSpec(path: string): Promise<SpecProgress> {
       totalItems ? totalItems : totalGates,
     ),
   };
+}
+
+function parsedEffort(value: string | undefined): number | null {
+  if (!value || !/^\d+$/u.test(value)) return null;
+  const effort = Number(value);
+  return effort >= 1 && effort <= 10 ? effort : null;
+}
+
+function effortProfile(
+  effort: number | null,
+): "light" | "standard" | "high" | "maximum" | "unknown" {
+  if (effort === null) return "unknown";
+  if (effort <= 2) return "light";
+  if (effort <= 6) return "standard";
+  if (effort <= 8) return "high";
+  return "maximum";
 }
 
 function sum(

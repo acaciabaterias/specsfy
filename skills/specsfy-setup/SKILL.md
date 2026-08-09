@@ -8,7 +8,7 @@ description: Preparar e monitorar PROJECT.md e os contextos .specsfy de stack, r
 1. Ler `AGENTS.md`, `CLAUDE.md` e instruções locais antes de escrever.
 2. Ler [as diretrizes publicáveis](references/framework-instructions.md) quando
    precisar auditar o bloco reservado em arquivos de agentes.
-3. Executar `python3 -B scripts/setup_context.py --project <raiz>`.
+3. Executar `node scripts/setup_context.mjs --project <raiz>`.
    Renderizar `PROJECT.md`, `STACK.md`, `RULES.md` e `DATABASE.md` a partir de
    `.specsfy/templates/custom/<Nome>.md` quando existir ou dos arquivos
    gerenciados `.specsfy/templates/Project.md`, `Stack.md`, `Rules.md` e
@@ -17,7 +17,7 @@ description: Preparar e monitorar PROJECT.md e os contextos .specsfy de stack, r
 4. No início e no fim de cada mudança, executar:
 
    ```bash
-   python3 -B scripts/monitor_context.py --project <raiz> --check
+   node scripts/monitor_context.mjs --project <raiz> --check
    ```
 
 5. Inspecionar os quatro arquivos iniciais, `.specsfy/PACKAGES.md` quando

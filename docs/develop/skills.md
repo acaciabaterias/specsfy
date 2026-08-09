@@ -129,14 +129,14 @@ monorepo, `skills/templates/<Nome>.md`.
 
 ## Inventário de pacotes do consumidor
 
-`specsfy-documentator/scripts/build_documentation.py` percorre os manifests npm
+`specsfy-documentator/scripts/build_documentation.mjs` percorre os manifests npm
 e Composer fora de árvores geradas. O script combina dependências diretas com
 entradas transitivas de `package-lock.json` e `composer.lock`, usa descrições
 locais quando disponíveis e escreve o bloco reconstruível de
 `.specsfy/PACKAGES.md`. O modo `--check` trata esse arquivo como parte do mesmo
 contrato de atualização de `docs/`.
 
-`specsfy-setup/scripts/monitor_context.py` encaminha mudanças em manifests ou
+`specsfy-setup/scripts/monitor_context.mjs` encaminha mudanças em manifests ou
 lockfiles para o documentador. O inventário é derivado e não substitui os
 manifests nem autoriza instalar, atualizar ou remover dependências.
 

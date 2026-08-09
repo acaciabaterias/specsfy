@@ -35,7 +35,7 @@ com base nas definições desta conversa.
 3. Cria o pacote:
 
 ```text
-specs/specs/0004-recuperar-senha/
+specs/<estado>/0004-recuperar-senha/
 ├── spec.md
 └── research/        # somente quando houver pesquisa externa
 ```

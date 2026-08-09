@@ -152,7 +152,7 @@ class ConversationalOrchestrationTests(unittest.TestCase):
         self.assertIn("$specsfy-02-backlog", normalized)
         self.assertIn("$specsfy-04-validate", normalized)
         self.assertIn("$specsfy-05-tasks", normalized)
-        self.assertIn("analyze_change.py", skill)
+        self.assertIn("analyze_change.mjs", skill)
 
 
 if __name__ == "__main__":

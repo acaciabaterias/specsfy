@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[3]
 
 @given("um projeto com nove skills base e dois especialistas válidos")
 def given_base_and_specialist_catalog(context) -> None:
-    context.test = ROOT / "tests/test_verify_repo.py"
+    context.test = ROOT / "tests/test_verify_repo.mjs"
     assert context.test.is_file()
 
 

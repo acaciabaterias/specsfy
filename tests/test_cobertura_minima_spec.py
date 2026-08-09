@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import importlib.util
+import json
 import subprocess
 import sys
 import tempfile
@@ -10,16 +10,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS = ROOT / "skills"
-VALIDATE_DIR = SKILLS / "specsfy-04-validate/scripts"
-sys.path.insert(0, str(VALIDATE_DIR))
-VALIDATE_MODULE_SPEC = importlib.util.spec_from_file_location(
-    "validate_spec_integrated_coverage",
-    VALIDATE_DIR / "validate_spec.py",
-)
-assert VALIDATE_MODULE_SPEC is not None and VALIDATE_MODULE_SPEC.loader is not None
-VALIDATE = importlib.util.module_from_spec(VALIDATE_MODULE_SPEC)
-VALIDATE_MODULE_SPEC.loader.exec_module(VALIDATE)
-TRACE = SKILLS / "specsfy-06-tdd-bdd/scripts/check_traceability.py"
+VALIDATE = SKILLS / "specsfy-04-validate/scripts/validate_spec.mjs"
+TRACE = SKILLS / "specsfy-06-tdd-bdd/scripts/check_traceability.mjs"
 
 
 def ac(ac_id: str, covers: str) -> str:
@@ -27,6 +19,13 @@ def ac(ac_id: str, covers: str) -> str:
 
 
 class MinimumCoverageIntegrationTests(unittest.TestCase):
+    def validate(self, text: str) -> list[str]:
+        with tempfile.TemporaryDirectory() as temporary:
+            spec = Path(temporary) / "spec.md"
+            spec.write_text(text, encoding="utf-8")
+            result = subprocess.run(["node", str(VALIDATE), str(spec), "--allow-draft", "--json"], text=True, capture_output=True, check=False)
+            return json.loads(result.stdout)["errors"]
+
     def test_definition_contract_counts_three_distinct_acs_per_item(self) -> None:
         covers = "US-001, FR-001, NFR-001"
         valid = (
@@ -39,10 +38,10 @@ class MinimumCoverageIntegrationTests(unittest.TestCase):
         )
         invalid = valid.replace("US-001, FR-001, NFR-001", "US-002, FR-002", 1)
 
-        self.assertEqual([], VALIDATE.minimum_bdd_coverage_errors(valid))
+        self.assertNotIn("US-001 possui 2 cenários BDD; mínimo exigido: 3.", self.validate(valid))
         self.assertIn(
             "US-001 possui 2 cenários BDD; mínimo exigido: 3.",
-            VALIDATE.minimum_bdd_coverage_errors(invalid),
+            self.validate(invalid),
         )
 
     def test_traceability_contract_counts_one_marker_per_tdd_case(self) -> None:
@@ -70,8 +69,7 @@ class MinimumCoverageIntegrationTests(unittest.TestCase):
                 encoding="utf-8",
             )
             command = [
-                sys.executable,
-                "-B",
+                "node",
                 str(TRACE),
                 str(spec),
                 str(root),

@@ -23,13 +23,13 @@ exigindo autorização específica.
 
 ## Executar a validação
 
-1. Resolva `specs/specs/<NNNN>-<slug>/spec.md` pelo caminho informado; se houver várias specs e nenhum slug, pergunte qual validar.
+1. Resolva `specs/<estado>/<NNNN>-<slug>/spec.md` pelo caminho informado; se houver várias specs e nenhum slug, pergunte qual validar.
 2. Confirme `Formato: Specsfy/2.0`, os três atos na ordem, slug igual ao diretório e pacote restrito a `spec.md` e ao diretório opcional `research/`.
 3. Para toda API ou documentação externa consultada, confirme uma evidência local em `research/` e seu índice em `Artefatos de pesquisa armazenados`; esse material é informativo, nunca uma segunda fonte normativa.
 4. Enquanto `Status` ou `Definition Gate` ainda estiverem pendentes, execute:
 
 ```bash
-python3 .agents/skills/specsfy-04-validate/scripts/validate_spec.py specs/specs/<NNNN>-<slug>/spec.md --allow-draft
+node .agents/skills/specsfy-04-validate/scripts/validate_spec.mjs specs/<estado>/<NNNN>-<slug>/spec.md --allow-draft
 ```
 
 5. Leia `references/quality-gates.md` e faça a revisão semântica.
@@ -39,7 +39,7 @@ python3 .agents/skills/specsfy-04-validate/scripts/validate_spec.py specs/specs/
    com “especificação correta”.
 7. Quando produto, arquitetura ou segurança forem materiais, leia
    `references/review-lenses.md`, registre findings na seção 13 e execute
-   `scripts/review_findings.py`. `P1 Open` mantém o gate pendente.
+   `scripts/review_findings.mjs`. `P1 Open` mantém o gate pendente.
 8. Se a definição alterar stack ou persistência, exija que a Definition of Done
    cite respectivamente `.specsfy/STACK.md` ou `.specsfy/DATABASE.md`. Para
    mudança material de finalidade ou capacidade, exija revisão de `PROJECT.md`;
@@ -82,8 +82,14 @@ Sem alterar requisitos automaticamente:
 2. em `READY`, defina `Definition Gate: Passed` e `Status: Defined`;
 3. em `NOT READY`, defina `Definition Gate: Failed`, `Plan Gate: Pending`,
    `Delivery Gate: Pending` e mantenha `Status: Draft`;
-4. execute novamente `validate_spec.py specs/specs/<NNNN>-<slug>/spec.md` sem `--allow-draft` quando o gate passar;
+4. execute novamente `validate_spec.mjs specs/<estado>/<NNNN>-<slug>/spec.md` sem `--allow-draft` quando o gate passar;
 5. relate o resultado no chat.
+
+Quando o Definition Gate passar, execute `specsfy transition <id> defined`.
+Em `review`, use a mesma análise para o aceite final. Com Delivery Gate passado,
+Status `Complete` e a DoD comprovada, execute `specsfy transition <id> completed`.
+Antes disso, chame `$specsfy-interviewer` quando uma resposta puder mudar a
+entrega ou o Effort.
 
 Se o usuário pedir correções, edite as seções de origem, preserve IDs e revalide. Nunca crie outro arquivo de especificação ou validação.
 
@@ -92,7 +98,7 @@ Se o usuário pedir correções, edite as seções de origem, preserve IDs e rev
 Use o mesmo runner localmente e no CI:
 
 ```bash
-python3 -B .agents/skills/specsfy-04-validate/scripts/verify_repo.py . \
+node .agents/skills/specsfy-04-validate/scripts/verify_repo.mjs . \
   --boundary local --timeout-seconds 300 --max-output-bytes 65536
 ```
 

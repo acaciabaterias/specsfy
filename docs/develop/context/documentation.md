@@ -68,6 +68,15 @@ implementarem ou modificarem o framework:
   mesma entrega.
 - Nova skill base ou alteração material de uma skill base: atualize sua página
   de usuário e o contexto técnico aplicável.
+- Nova capacidade, campo, estado, gate, comando, métrica, template ou regra de
+  transição: documente finalidade, fonte normativa, entrada, saída, limites,
+  falhas esperadas, exemplo e forma de verificação antes de publicar. Quando a
+  mudança for visível para quem usa o framework, atualize a referência do
+  método e o guia de usuário correspondente. Quando também alterar a execução,
+  atualize o percurso de desenvolvimento no mesmo diff.
+- Uma menção em lista, catálogo ou changelog não explica uma capacidade. A
+  pessoa precisa conseguir entender para que serve, quando usar, quando não
+  usar, quais dados muda e como confirmar o resultado sem consultar o código.
 - Qualquer alteração em `docs/user/`, inclusive imagens: atualize a edição em
   `ebook/VERSION` conforme SemVer e reconstrua PDF, EPUB e `ebook/build.json`
   com `make ebook`.
@@ -79,7 +88,13 @@ implementarem ou modificarem o framework:
 - Tabelas `## Classificação` permanecem nas fontes Markdown. O ebook pode
   extrair seus valores, mas não deve exibir o cabeçalho nem a tabela.
 - Links clicáveis do ebook apontam somente para capítulos e âncoras do próprio
-  artefato. Referências externas permanecem legíveis, sem ação de navegação.
+  artefato. O ebook explica método, etapas e procedimentos no próprio texto,
+  sem encaminhar a pessoa ao repositório ou à documentação online para obter o
+  conteúdo. Caminhos de arquivos necessários à execução e citações nominais de
+  fontes podem permanecer legíveis, sem ação de navegação.
+- Se uma seção for exclusiva do portal, como links para baixar o próprio PDF ou
+  EPUB, envolva-a em `::: {.online-only}`. O filtro do ebook a omite; conteúdo
+  necessário à jornada deve continuar no capítulo portátil.
 - Movimento de arquivo: atualize roteadores, links, imagens, testes e referências
   no mesmo diff.
 

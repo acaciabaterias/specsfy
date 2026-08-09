@@ -33,7 +33,7 @@ Se o usuário não indicar o modo, use `prepare` quando a seção 14 ainda não 
 
 ## Preparar
 
-1. Leia `specs/specs/<NNNN>-<slug>/spec.md`, testes e configuração do projeto.
+1. Leia `specs/<estado>/<NNNN>-<slug>/spec.md`, testes e configuração do projeto.
 2. Exija `Formato: Specsfy/2.0` e `Definition Gate: Passed`. No modo `prepare`,
    use `Status: Defined` e `Plan Gate: Pending`; nos modos `cycle` e `verify`,
    use `Status: Planned` ou `Implementing`.
@@ -106,7 +106,7 @@ Registre o comando de regressão na seção 11 e a evidência na matriz da seç�
 Execute:
 
 ```bash
-python3 .agents/skills/specsfy-06-tdd-bdd/scripts/check_traceability.py specs/specs/<NNNN>-<slug>/spec.md .
+node .agents/skills/specsfy-06-tdd-bdd/scripts/check_traceability.mjs specs/<estado>/<NNNN>-<slug>/spec.md .
 ```
 
 Trate como gap cada feature, `US`, `FR` ou `NFR` com menos de três casos TDD e
@@ -140,8 +140,8 @@ Depois de executar os runners pertencentes ao repositório, registre `Passed` ou
 a falha na coluna Evidência da seção 12 e audite:
 
 ```bash
-python3 -B .agents/skills/specsfy-06-tdd-bdd/scripts/verify_acceptance.py \
-  specs/specs/<NNNN>-<slug>/spec.md .
+node .agents/skills/specsfy-06-tdd-bdd/scripts/verify_acceptance.mjs \
+  specs/<estado>/<NNNN>-<slug>/spec.md .
 ```
 
 O auditor não executa comandos extraídos de Markdown. AC manual exige método,

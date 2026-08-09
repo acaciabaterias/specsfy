@@ -1,11 +1,11 @@
 ---
 name: specsfy-03-specify
-description: "Use quando o usuário pede para promover uma entrada ou backlog já refinado, criar, iniciar ou consolidar uma especificação nova ou ainda em Draft em `spec.md`. Use também quando uma transição automática exigir criar ou completar a fonte normativa inicial. Inicializa specs em `specs/specs/` e aplica o MCR-10; para mudar spec aprovada use specsfy-update-spec, para captura sem perguntas use specsfy-01-inbox, para refinamento use specsfy-02-backlog e para revisão sem edição use specsfy-04-validate."
+description: "Use quando o usuário pede para promover uma entrada ou backlog já refinado, criar, iniciar ou consolidar uma especificação nova ou ainda em Draft em `spec.md`. Use também quando uma transição automática exigir criar ou completar a fonte normativa inicial. Inicializa specs em `specs/draft/` e aplica o MCR-10; para mudar spec aprovada use specsfy-update-spec, para captura sem perguntas use specsfy-01-inbox, para refinamento use specsfy-02-backlog e para revisão sem edição use specsfy-04-validate."
 ---
 
 # Montar a especificação única
 
-Crie ou atualize o pacote `specs/specs/<NNNN>-<slug>/`, no qual `spec.md` é a única fonte normativa de todo o fluxo SDD. Somente o diretório recebe o número; mantenha o arquivo sempre como `spec.md`. Consolide descoberta, research, esclarecimentos, produto, plano técnico, modelo de dados, contratos, TDD, BDD, validações, tarefas, decisões e conclusão em três atos explícitos. Evidências externas consultadas vivem em `research/`; não gere `plan.md`, `research.md`, `data-model.md`, `tasks.md`, checklists ou uma segunda especificação.
+Crie ou atualize o pacote `specs/draft/<NNNN>-<slug>/`, no qual `spec.md` é a única fonte normativa de todo o fluxo SDD. Somente o diretório recebe o número; mantenha o arquivo sempre como `spec.md`. Consolide descoberta, research, esclarecimentos, produto, plano técnico, modelo de dados, contratos, TDD, BDD, validações, tarefas, decisões e conclusão em três atos explícitos. Evidências externas consultadas vivem em `research/`; não gere `plan.md`, `research.md`, `data-model.md`, `tasks.md`, checklists ou uma segunda especificação.
 
 ## Orquestrar a conversa
 
@@ -30,14 +30,14 @@ exigindo autorização específica.
    escrever:
 
 ```bash
-python3 -B <diretório-da-skill>/scripts/iniciar_spec.py \
+node <diretório-da-skill>/scripts/iniciar_spec.mjs \
   --title "<nome da especificação>" [--slug <slug>] [--root <raiz>]
 ```
 
 3. Use o caminho absoluto impresso pelo script. Ele aloca o próximo ID local,
    prefere `.specsfy/templates/custom/Spec.md`, recorre ao template gerenciado
    `.specsfy/templates/Spec.md` e cria somente
-   `specs/specs/<NNNN>-<slug>/spec.md`; nunca renomeie o arquivo para incluir o ID.
+   `specs/draft/<NNNN>-<slug>/spec.md`; nunca renomeie o arquivo para incluir o ID.
    Ao desenvolver este repositório, o script usa `skills/templates/Spec.md` como
    fallback; no projeto consumidor, template ausente exige `specsfy install`.
 4. Ao atualizar, use o caminho da spec existente fornecido ou descoberto sob a
@@ -72,9 +72,9 @@ python3 -B <diretório-da-skill>/scripts/iniciar_spec.py \
 
 ## Escrever
 
-- Grave sempre em `<raiz>/specs/specs/<NNNN>-<slug>/spec.md`; o ID pertence ao
+- Grave sempre em `<raiz>/specs/draft/<NNNN>-<slug>/spec.md`; o ID pertence ao
   diretório e o arquivo permanece exatamente `spec.md`.
-- Use `<raiz>/specs/specs/<NNNN>-<slug>/research/` somente para cópias, snapshots, contratos, schemas, exemplos e notas de proveniência realmente consultados. Não coloque código de produção, testes ou documentos normativos nesse diretório.
+- Use `<raiz>/specs/draft/<NNNN>-<slug>/research/` somente para cópias, snapshots, contratos, schemas, exemplos e notas de proveniência realmente consultados. Não coloque código de produção, testes ou documentos normativos nesse diretório.
 - Ao pesquisar uma API ou documentação externa, armazene a evidência permitida em `research/` e indexe caminho, origem, versão/data, licença e impacto em `Artefatos de pesquisa armazenados`. Se licença ou termos impedirem a cópia, armazene metadados, URL, data de acesso, checksum/versão quando disponível e notas próprias, sem reproduzir conteúdo protegido.
 - Fora de `spec.md` e `research/`, não crie outra entrada no pacote da feature.
 - Ao promover `specs/backlog/<NNNN>-<slug>.md`, registre esse caminho na spec e
@@ -133,8 +133,8 @@ casos TDD e na seção 14.
   claims com:
 
 ```bash
-python3 -B .agents/skills/specsfy-03-specify/scripts/load_research.py \
-  specs/specs/<NNNN>-<slug>/spec.md
+node .agents/skills/specsfy-03-specify/scripts/load_research.mjs \
+  specs/<estado>/<NNNN>-<slug>/spec.md
 ```
 
 - Para pesquisa material, registre `R-ID`, criticalidade, claim, veredito,
@@ -147,7 +147,7 @@ python3 -B .agents/skills/specsfy-03-specify/scripts/load_research.py \
 Enquanto o arquivo estiver em Draft, execute a validação estrutural intermediária:
 
 ```bash
-python3 .agents/skills/specsfy-04-validate/scripts/validate_spec.py specs/specs/<NNNN>-<slug>/spec.md --allow-draft
+node .agents/skills/specsfy-04-validate/scripts/validate_spec.mjs specs/<estado>/<NNNN>-<slug>/spec.md --allow-draft
 ```
 
 Corrija falhas estruturais em no máximo três ciclos. A skill `specsfy-04-validate` faz a revisão semântica, registra o resultado na seção 13 e promove `Definition Gate: Passed` e `Status: Defined`. Até lá, mantenha `Status: Draft`, `Definition Gate: Pending` e relate decisões bloqueantes.
@@ -156,7 +156,7 @@ Corrija falhas estruturais em no máximo três ciclos. A skill `specsfy-04-valid
 
 Informe:
 
-- caminho `specs/specs/<NNNN>-<slug>/spec.md`;
+- caminho `specs/<estado>/<NNNN>-<slug>/spec.md`;
 - caminhos de research armazenados ou a declaração de que não houve fonte externa;
 - status;
 - contagem de `US`, `FR`, `NFR` e `AC`;

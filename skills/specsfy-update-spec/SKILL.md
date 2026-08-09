@@ -26,7 +26,7 @@ exigindo autorização específica.
 
 1. Preserve literalmente o novo pedido antes de interpretá-lo.
 2. Localize a spec canônica em
-   `specs/specs/<NNNN>-<slug>/spec.md` e leia seus metadados, requisitos,
+   `specs/<estado>/<NNNN>-<slug>/spec.md` e leia seus metadados, requisitos,
    cenários, plano, tarefas, gates e evidências.
 3. Leia as instruções do projeto, `PROJECT.md`, `.specsfy/STACK.md`,
    `.specsfy/RULES.md`, `.specsfy/DATABASE.md` e o research indexado aplicável.
@@ -84,8 +84,8 @@ não altera código de produção e não implementa o pedido.
 5. Execute a projeção de impacto:
 
 ```bash
-python3 -B .agents/skills/specsfy-update-spec/scripts/analyze_change.py \
-  specs/specs/<NNNN>-<slug>/spec.md --base HEAD --mode impact
+node .agents/skills/specsfy-update-spec/scripts/analyze_change.mjs \
+  specs/<estado>/<NNNN>-<slug>/spec.md --base HEAD --mode impact
 ```
 
 Use `--mode changelog` para listar IDs adicionados, removidos e alterados. A
@@ -110,8 +110,8 @@ semântica com o pedido.
 Valide a estrutura intermediária:
 
 ```bash
-python3 -B .agents/skills/specsfy-04-validate/scripts/validate_spec.py \
-  specs/specs/<NNNN>-<slug>/spec.md --allow-draft
+node .agents/skills/specsfy-04-validate/scripts/validate_spec.mjs \
+  specs/<estado>/<NNNN>-<slug>/spec.md --allow-draft
 ```
 
 ## Retomar o fluxo

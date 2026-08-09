@@ -192,6 +192,12 @@ with ZipFile(os.environ["EPUB_OUT"]) as archive:
         entry for entry in names if entry.endswith((".xhtml", ".html"))
     ):
         documents[name] = ET.fromstring(archive.read(name))
+    package = ET.fromstring(archive.read("EPUB/content.opf"))
+    identifier = package.find(
+        ".//{http://purl.org/dc/elements/1.1/}identifier"
+    )
+    if identifier is None or identifier.text != "urn:specsfy:guia-do-usuario":
+        failures.append("EPUB -> identificador não canônico")
     document_ids = {
         name: {
             node.attrib["id"]

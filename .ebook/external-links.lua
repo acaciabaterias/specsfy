@@ -95,6 +95,14 @@ function Pandoc(document)
   end
 
   return result:walk({
+    Div = function(div)
+      for _, class in ipairs(div.classes) do
+        if class == "online-only" then
+          return {}
+        end
+      end
+      return div
+    end,
     Link = function(link)
       local target = link.target
       if target:match("^#") then

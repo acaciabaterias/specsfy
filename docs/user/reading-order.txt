@@ -1,9 +1,11 @@
 docs/user/README.md
 docs/user/method.md
+docs/user/method-reference.md
 docs/user/installation.md
 docs/user/getting-started.md
 docs/user/inbox.md
 docs/user/backlog.md
+docs/user/milestones.md
 docs/user/skills/README.md
 docs/user/skills/specsfy-01-inbox.md
 docs/user/skills/specsfy-02-backlog.md
@@ -14,6 +16,10 @@ docs/user/skills/specsfy-06-tdd-bdd.md
 docs/user/skills/specsfy-07-implement.md
 docs/user/skills/specsfy-update-spec.md
 docs/user/skills/specsfy-progress.md
+docs/user/skills/specsfy-interviewer.md
+docs/user/skills/specsfy-mvp-milestone-interviewer.md
+docs/user/skills/specsfy-roadmap-milestone-interviewer.md
+docs/user/skills/specsfy-milestone-governor.md
 docs/user/cli.md
 docs/user/project-context.md
 docs/user/system-documentation.md

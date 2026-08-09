@@ -2,7 +2,7 @@
 
 Este arquivo contém as regras gerais carregadas por `AGENTS.md` e `CLAUDE.md`
 nos projetos consumidores. Ele não é uma especificação de feature e não
-substitui `specs/specs/<NNNN>-<slug>/spec.md`.
+substitui `specs/<estado>/<NNNN>-<slug>/spec.md`.
 
 ## Estrutura canônica
 
@@ -12,7 +12,12 @@ specs/
 │   └── <AAAA-MM-DD-HHMMSS>-<slug>.md
 ├── backlog/
 │   └── <NNNN>-<slug>.md
-└── specs/
+├── draft/
+├── defined/
+├── planned/
+├── in-progress/
+├── review/
+└── completed/
     └── <NNNN>-<slug>/
         ├── spec.md
         └── research/
@@ -20,12 +25,37 @@ specs/
 
 - `specs/inbox/` preserva inputs imediatamente, sem perguntas nem promoção.
 - `specs/backlog/` organiza ideias escolhidas para refinamento.
-- `specs/specs/<NNNN>-<slug>/spec.md` é a única fonte normativa de uma fatia.
+- `specs/<estado>/<NNNN>-<slug>/spec.md` é a única fonte normativa de uma
+  fatia. Ela existe em uma única pasta de estado.
 - `research/` armazena apenas evidência consultada e indexada pela spec.
 - O cabeçalho de `spec.md` é uma tabela Markdown de duas colunas, `Campo` e
   `Valor`; cada metadado ocupa uma linha da tabela.
 - Não criar `plan.md`, `tasks.md`, `research.md`, `data-model.md` ou uma fonte
   normativa paralela.
+
+## Estado, Effort e transição
+
+O ciclo físico e o campo `Status` seguem a mesma ordem:
+
+```text
+draft → defined → planned → in-progress → review → completed
+Draft → Defined → Planned → Implementing → Reviewing → Complete
+```
+
+Use `specsfy transition <id> <pasta>` para transições adjacentes. O comando
+move todo o pacote e atualiza `Status`. Use `specsfy migrate` uma única vez
+para mover o layout anterior `specs/specs/` para as pastas atuais.
+
+Toda spec tem `Effort` de 1 a 10, `Effort updated at` e `Effort rationale` no
+metadado. A pontuação estima a capacidade de raciocínio e execução necessária,
+não prazo: 1–2 usa perfil `light`, 3–6 `standard`, 7–8 `high` e 9–10
+`maximum`. Atualize-a com `specsfy effort <id> <1-10> --reason "<motivo>"`
+sempre que a descoberta, o plano ou a execução trouxer informação material.
+
+`ClickUp Task` pode vincular a spec a uma tarefa externa. Quando houver skills
+`clickupfy-*` instaladas, a skill responsável delega a sincronização da pasta e
+do Effort. O estado local continua canônico quando a integração estiver ausente
+ou pendente.
 
 ## Contexto persistente do projeto
 
@@ -45,7 +75,7 @@ specs/
   `$specsfy-aux-rules` para regras confirmadas e `$specsfy-aux-database` sempre
   que banco, schema, tabela, campo, relação ou migration mudar.
 - Executar
-  `.agents/skills/specsfy-setup/scripts/monitor_context.py --project . --check`
+  `.agents/skills/specsfy-setup/scripts/monitor_context.mjs --project . --check`
   no início, após cada tarefa de implementação e antes do Delivery Gate.
 - Executar `$specsfy-documentator` depois de cada tarefa de implementação e
   sempre que o usuário pedir uma reconstrução técnica. A skill lê todo o
@@ -83,6 +113,12 @@ input → inbox → backlog → spec → validate → tasks → TDD/BDD → impl
    `.specsfy/PACKAGES.md` a partir do sistema existente após cada implementação
    ou por acionamento livre.
 9. Use `specsfy-progress` somente para projetar o estado existente.
+10. Use `specsfy-interviewer` para conversar com a spec nas fases `draft`,
+    `defined`, `planned`, `in-progress` e `review`, antes da próxima skill.
+11. Use `specsfy-mvp-milestone-interviewer` para definir o MVP por estados
+    demonstráveis e `specsfy-roadmap-milestone-interviewer` para evolução após
+    o MVP aceito. Use `specsfy-milestone-governor` para manter relações e a
+    projeção `specs.md` sem substituir conteúdo humano.
 
 Um backlog não autoriza implementação nem cria uma segunda fonte normativa. A
 promoção para spec exige intenção explícita do usuário.
@@ -191,7 +227,7 @@ resolve seu template nesta ordem:
 
 O CLI cria `.specsfy/templates/custom/`, mas não gerencia, atualiza nem remove
 seu conteúdo, inclusive com `--force`. A criação de uma spec copia e renderiza
-o template resolvido em `specs/specs/<NNNN>-<slug>/spec.md`; o exemplo existe
+o template resolvido em `specs/<estado>/<NNNN>-<slug>/spec.md`; o exemplo existe
 para inspeção, testes e compreensão da arquitetura, nunca como fonte de uma
 feature.
 

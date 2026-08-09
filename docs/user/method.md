@@ -19,12 +19,22 @@ Cada mudança escolhida possui uma única fonte normativa. O caminho permite que
 você reconheça a sequência e o assunto ao listar o diretório de specs:
 
 ```text
-specs/specs/<NNNN>-<slug>/spec.md
+specs/<estado>/<NNNN>-<slug>/spec.md
 ```
 
 `NNNN` é o número da spec, como `0001`. O `slug` identifica o assunto, como
 `recuperar-senha`. Assim, o caminho `0001-recuperar-senha` pode ser localizado
 sem abrir o arquivo.
+
+A pasta também mostra o estado operacional da entrega:
+
+```text
+draft → defined → planned → in-progress → review → completed
+```
+
+O campo `Status` dentro da spec espelha essa pasta. Use `specsfy transition`
+para mover o pacote inteiro, e não mova arquivos manualmente. `completed/`
+mantém o histórico das entregas finalizadas.
 
 Ao abrir a `spec.md`, você encontra o comportamento esperado, o plano e as
 provas que permitem conferir o estado atual:
@@ -40,6 +50,20 @@ provas que permitem conferir o estado atual:
 O plano e as tarefas ficam dentro da própria spec. O Specsfy não cria
 `plan.md` ou `tasks.md`, então a explicação da entrega não se divide entre
 arquivos com estados diferentes.
+
+## Effort e conversa contínua
+
+Cada spec inclui `Effort`, uma estimativa de 1 a 10 da capacidade de raciocínio
+e execução necessária. A pontuação não é prazo: 1–2 indica trabalho atômico,
+3–6 mudança local, 7–8 integração ou migração e 9–10 uma entrega com alta
+incerteza ou revisão humana frequente.
+
+O entrevistador do Specsfy conversa com você quando uma lacuna puder mudar a
+próxima etapa. Ele atualiza a justificativa de Effort conforme a definição, o
+plano e a execução ganham forma. A Inbox continua sem perguntas.
+
+A [Referência do método](method-reference.md) detalha a escala de Effort, os
+perfis exibidos pelo progresso, os estados e os gates apresentados neste guia.
 
 ## Da ideia até o código
 
@@ -94,8 +118,8 @@ entrega. O agente reaproveita o que já foi informado, pergunta sobre uma
 lacuna importante por vez e não inventa requisitos quando falta uma definição.
 O ciclo segue sem limite máximo de perguntas: cada resposta atualiza a análise,
 e uma nova pergunta é feita enquanto restar uma lacuna aplicável.
-A partir da 11ª pergunta, você também pode escolher `avançar`; as lacunas ficam registradas
-e o Definition Gate continua pendente até serem resolvidas.
+A partir da 11ª pergunta, você também pode escolher `avançar`; as lacunas
+ficam registradas e o Definition Gate continua pendente até serem resolvidas.
 
 **Prova técnica:** a spec registra a finalidade, as pessoas afetadas, os
 requisitos, os limites e os cenários BDD. A validação procura contradições,
@@ -164,10 +188,11 @@ registrar:
 
 ```text
 Delivery Gate: Passed
-Status: Complete
+Status: Reviewing
 ```
 
-`Complete` significa que a entrega possui código e evidência atual. Você pode
+Depois do aceite final, a spec passa por `review/` para `completed/`, com
+`Status: Complete`. A entrega concluída possui código e evidência atual. Você pode
 abrir a spec e localizar os comandos, os resultados e os testes que comprovam
 esse estado.
 

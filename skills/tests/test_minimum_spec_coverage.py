@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import importlib.util
 import subprocess
 import sys
 import tempfile
@@ -9,18 +8,9 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-VALIDATE_DIR = ROOT / "specsfy-04-validate" / "scripts"
-sys.path.insert(0, str(VALIDATE_DIR))
-VALIDATE_SPEC_FILE = VALIDATE_DIR / "validate_spec.py"
-VALIDATE_SPEC_MODULE = importlib.util.spec_from_file_location(
-    "validate_spec_minimum_coverage",
-    VALIDATE_SPEC_FILE,
-)
-assert VALIDATE_SPEC_MODULE is not None and VALIDATE_SPEC_MODULE.loader is not None
-VALIDATE_SPEC = importlib.util.module_from_spec(VALIDATE_SPEC_MODULE)
-VALIDATE_SPEC_MODULE.loader.exec_module(VALIDATE_SPEC)
+VALIDATE_SPEC = ROOT / "specsfy-04-validate" / "scripts" / "validate_spec.mjs"
 
-TRACE = ROOT / "specsfy-06-tdd-bdd" / "scripts" / "check_traceability.py"
+TRACE = ROOT / "specsfy-06-tdd-bdd" / "scripts" / "check_traceability.mjs"
 
 
 def acceptance(ac_id: str, covers: str) -> str:
@@ -40,6 +30,13 @@ def acceptance(ac_id: str, covers: str) -> str:
 
 
 class MinimumBddCoverageTests(unittest.TestCase):
+    def validate(self, text: str) -> list[str]:
+        with tempfile.TemporaryDirectory() as temporary:
+            spec = Path(temporary) / "spec.md"
+            spec.write_text(text, encoding="utf-8")
+            result = subprocess.run(["node", str(VALIDATE_SPEC), str(spec), "--allow-draft", "--json"], text=True, capture_output=True, check=False)
+            return __import__("json").loads(result.stdout)["errors"]
+
     def test_requires_three_distinct_bdd_scenarios_for_each_user_story(self) -> None:
         text = (
             "#### US-001 — História\n"
@@ -49,7 +46,7 @@ class MinimumBddCoverageTests(unittest.TestCase):
             + "- **FR-001**: Requisito.\n"
         )
 
-        errors = VALIDATE_SPEC.minimum_bdd_coverage_errors(text)
+        errors = self.validate(text)
 
         self.assertIn(
             "US-001 possui 2 cenários BDD; mínimo exigido: 3.",
@@ -68,7 +65,7 @@ class MinimumBddCoverageTests(unittest.TestCase):
             + "- **NFR-002**: Qualidade. **Verificação**: teste.\n"
         )
 
-        errors = VALIDATE_SPEC.minimum_bdd_coverage_errors(text)
+        errors = self.validate(text)
 
         self.assertIn(
             "FR-001 possui 2 cenários BDD; mínimo exigido: 3.",
@@ -90,7 +87,7 @@ class MinimumBddCoverageTests(unittest.TestCase):
             + "- **NFR-001**: Qualidade. **Verificação**: teste.\n"
         )
 
-        self.assertEqual([], VALIDATE_SPEC.minimum_bdd_coverage_errors(text))
+        self.assertNotIn("US-001 possui 2 cenários BDD; mínimo exigido: 3.", self.validate(text))
 
 
 class MinimumTddCoverageTests(unittest.TestCase):
@@ -120,8 +117,7 @@ class MinimumTddCoverageTests(unittest.TestCase):
 
             completed = subprocess.run(
                 [
-                    sys.executable,
-                    "-B",
+                    "node",
                     str(TRACE),
                     str(spec),
                     str(root),
@@ -165,8 +161,7 @@ class MinimumTddCoverageTests(unittest.TestCase):
 
             completed = subprocess.run(
                 [
-                    sys.executable,
-                    "-B",
+                    "node",
                     str(TRACE),
                     str(spec),
                     str(root),
@@ -207,8 +202,7 @@ class MinimumTddCoverageTests(unittest.TestCase):
 
             completed = subprocess.run(
                 [
-                    sys.executable,
-                    "-B",
+                    "node",
                     str(TRACE),
                     str(spec),
                     str(root),

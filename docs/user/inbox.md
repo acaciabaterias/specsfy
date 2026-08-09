@@ -50,7 +50,7 @@ captura sem perguntas → backlog refinável → spec normativa
 
 - `specs/inbox/` preserva o input.
 - `specs/backlog/` organiza algo escolhido para refinamento.
-- `specs/specs/<NNNN>-<slug>/spec.md` governa comportamento e entrega.
+- `specs/<estado>/<NNNN>-<slug>/spec.md` governa comportamento e entrega.
 
 Uma captura pode permanecer indefinidamente na Inbox. Quando quiser avançar,
 use `$specsfy-02-backlog` com o caminho do arquivo.

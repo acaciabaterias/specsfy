@@ -31,7 +31,7 @@ class SystemDocumentationIntegrationTests(unittest.TestCase):
             SKILLS
             / "specsfy-documentator"
             / "scripts"
-            / "build_documentation.py"
+            / "build_documentation.mjs"
         ).read_text(encoding="utf-8")
         guide = (ROOT / "docs/user/system-documentation.md").read_text(
             encoding="utf-8"
@@ -59,7 +59,7 @@ class SystemDocumentationIntegrationTests(unittest.TestCase):
 
     def test_monitor_requires_generated_docs_for_application_or_database(self) -> None:
         monitor = (
-            SKILLS / "specsfy-setup" / "scripts" / "monitor_context.py"
+            SKILLS / "specsfy-setup" / "scripts" / "monitor_context.mjs"
         ).read_text(encoding="utf-8")
         self.assertIn("documentation_review_required", monitor)
         self.assertIn("specsfy-documentator", monitor)

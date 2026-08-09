@@ -6,6 +6,35 @@
 do projeto consumidor e não se confundem com a documentação oficial da
 metodologia Specsfy.
 
+## O que esta documentação explica
+
+A documentação reconstruída responde como a aplicação está montada no momento da
+varredura. Ela não tenta substituir a spec de uma entrega e não cria uma segunda
+lista de tarefas. Use a spec para entender por que uma mudança existe, quais
+requisitos ela atende e quais testes a comprovam. Use o diretório docs/ do
+projeto consumidor para entender a aplicação como um todo antes de alterar um
+módulo.
+
+Essa separação evita dois problemas comuns. O primeiro é usar uma documentação
+de arquitetura para aprovar comportamento que nunca foi definido. O segundo é
+copiar toda a arquitetura dentro de cada spec e deixá-la envelhecer depois da
+próxima mudança. A spec aponta apenas o contexto necessário para sua entrega,
+enquanto a documentação técnica volta a ser construída a partir do código,
+manifests, schemas, migrations e testes atuais.
+
+## O que é gerado e o que é preservado
+
+A skill reconstrói somente blocos identificados pelo marcador
+specsfy:documentator. Texto humano escrito fora desses blocos permanece no
+arquivo. Isso permite acrescentar uma explicação de negócio, uma observação de
+suporte ou uma escolha editorial sem que a próxima varredura a apague.
+
+O conteúdo gerado descreve somente o que as fontes locais sustentam. Quando a
+skill encontra uma convenção, ela pode registrá-la como observação encontrada,
+mas não a apresenta como escolha humana confirmada. Escolhas explícitas do
+projeto continuam em PROJECT.md, RULES.md, na spec aplicável ou em um ADR,
+conforme o alcance da escolha.
+
 Execute `$specsfy-documentator` livremente para documentar um sistema legado ou
 atualizar sua visão técnica. Depois de cada tarefa de código concluída por
 `$specsfy-07-implement`, a transição para o documentador é obrigatória. A
@@ -30,6 +59,70 @@ seguintes arquivos e preserva o texto humano externo:
 | `docs/decisions.md` | escolhas explícitas e suas fontes |
 | `.specsfy/PACKAGES.md` | pacotes npm e Composer, versão, finalidade e fonte |
 
+## Como ler cada documento
+
+O portal docs/README.md oferece uma ordem de leitura. architecture.md mostra a
+visão dos componentes e suas dependências. application.md aproxima essa visão do
+código, apontando módulos e implementações encontradas. database.md separa
+entidades, campos, relações e a origem dessas informações. flows.md mostra a
+passagem entre rotas, handlers, serviços e integrações para que um fluxo possa
+ser conferido de ponta a ponta.
+
+testing.md não promete cobertura que o repositório não mostra. Ele identifica os
+runners, os comandos disponíveis, arquivos de teste e o resumo observado.
+frontend.md só aparece com as superfícies que o projeto contém, como views,
+páginas, componentes, React ou Tailwind. integrations.md lista serviços e nomes
+seguros de configuração, jamais o valor de uma variável. decisions.md conserva
+escolhas que possuem fonte explícita, distinguindo uma escolha registrada de
+uma inferência do código.
+
+PACKAGES.md tem outro papel: tornar as dependências auditáveis. Ele lista o
+gerenciador, escopo, nome, versão, finalidade e fonte encontrada localmente. A
+finalidade pode estar ausente nos metadados. Nessa situação, o documento declara
+a ausência em vez de completar a coluna por suposição.
+
+## Procedimento depois de uma mudança
+
+Depois de uma tarefa de código, a implementação chama o documentador. Você
+também pode executá-lo para iniciar a documentação de um sistema legado ou
+reconciliar uma alteração feita fora do fluxo:
+
+    node .agents/skills/specsfy-documentator/scripts/build_documentation.mjs \
+      --project .
+
+Leia primeiro o portal, o arquivo diretamente relacionado à alteração e o
+resultado das seções geradas. Quando alguma relação, pacote ou integração não
+corresponder ao que o código demonstra, corrija a fonte que permite a inferência
+ou registre a limitação. Não edite o bloco gerado para alterar uma conclusão
+que a próxima execução voltará a produzir.
+
+Em seguida, execute o modo de conferência. Ele não escreve arquivos: compara a
+projeção atual com os blocos publicados.
+
+    node .agents/skills/specsfy-documentator/scripts/build_documentation.mjs \
+      --project . --check
+
+O resultado aprovado mostra que a documentação corresponde às fontes atuais. Um
+resultado pendente indica que a aplicação, a persistência ou as dependências
+mudaram sem nova reconstrução, ou que a saída publicada foi modificada.
+
+## Situações que impedem a conclusão
+
+O monitor de contexto e o modo check participam do Delivery Gate. A entrega não
+termina quando existe uma das condições abaixo:
+
+- código da aplicação alterado sem reconstruir docs/;
+- migration, schema ou modelo persistente alterado sem atualizar o mapa de
+  dados e os documentos reconstruídos;
+- manifest ou lockfile alterado sem atualizar PACKAGES.md;
+- documentação gerada que não corresponde ao estado atual das fontes;
+- inclusão de segredo, valor de ambiente ou dado de produção em um documento.
+
+Quando a aplicação mudou mas sua finalidade, capacidades e limites não mudaram,
+registre essa avaliação na tarefa e use o reconhecimento permitido pelo monitor.
+Esse reconhecimento não dispensa a reconstrução de documentação técnica nem
+serve para ocultar uma mudança documental real.
+
 Em Laravel, o inventário acompanha a requisição pelas rotas, controllers e
 services, relaciona Eloquent e migrations e registra os testes Pest ou PHPUnit.
 Em projetos Node, Next.js, React ou Astro, a documentação mostra páginas,
@@ -50,10 +143,8 @@ Depois da reconstrução, a própria skill executa o modo `--check`. O comando
 compara os blocos gerados com o estado atual e falha quando `docs/` está
 desatualizado:
 
-```bash
-python3 -B .agents/skills/specsfy-documentator/scripts/build_documentation.py \
-  --project . --check
-```
+    node .agents/skills/specsfy-documentator/scripts/build_documentation.mjs \
+      --project . --check
 
 O monitor do setup também retorna `PENDING` quando o código da aplicação, a
 persistência ou as dependências mudaram sem uma nova reconstrução de `docs/`.

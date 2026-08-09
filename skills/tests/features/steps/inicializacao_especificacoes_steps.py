@@ -11,7 +11,7 @@ from behave import given, then, when
 
 
 ROOT = Path(__file__).resolve().parents[3]
-SCRIPT = ROOT / "specsfy-03-specify/scripts/iniciar_spec.py"
+SCRIPT = ROOT / "specsfy-03-specify/scripts/iniciar_spec.mjs"
 
 
 def temporary_directory(context, name: str) -> Path:

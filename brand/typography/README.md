@@ -1,5 +1,14 @@
 # Tipografia do Specsfy
 
+<!-- markdownlint-disable MD033 -->
+<p align="center">
+  <picture>
+    <source srcset="../logo/icon.svg" type="image/svg+xml">
+    <img src="../logo/icon.png" alt="Logo do Specsfy" width="128">
+  </picture>
+</p>
+<!-- markdownlint-enable MD033 -->
+
 ## Famílias
 
 - **Manrope**: títulos, chamadas e wordmark editável; pesos 500 a 800.

@@ -10,7 +10,7 @@ artefatos.
 Em um projeto consumidor, cada fatia usa:
 
 ```text
-specs/specs/<NNNN>-<slug>/spec.md
+specs/<estado>/<NNNN>-<slug>/spec.md
 ```
 
 O formato atual é `Specsfy/2.0`. O pacote pode conter `research/` para
@@ -21,14 +21,24 @@ fontes concorrentes.
 ## Estados
 
 ```text
-Draft → Defined → Planned → Implementing → Complete
+Draft → Defined → Planned → Implementing → Reviewing → Complete
 ```
 
 - `Draft`: definição em construção.
 - `Defined`: Definition Gate aprovado.
 - `Planned`: Plan Gate aprovado e RED comprovado.
 - `Implementing`: tarefas de produção em andamento.
+- `Reviewing`: entrega implementada, aguardando aceite final.
 - `Complete`: Delivery Gate aprovado.
+
+As pastas seguem a mesma ordem: `draft`, `defined`, `planned`,
+`in-progress`, `review` e `completed`. `specsfy transition` move o pacote e
+sincroniza o campo `Status`; `specsfy migrate` converte o layout anterior.
+
+`Effort` é inteiro de 1 a 10, acompanhado de data e justificativa. O
+entrevistador recalibra a estimativa quando novas informações alteram a
+capacidade de execução exigida. Quando ClickUpfy está instalado e `ClickUp
+Task` existe na spec, a skill da etapa sincroniza a projeção remota.
 
 Transições não são meras etiquetas. Cada uma depende da evidência registrada na
 spec e nos testes.
@@ -118,8 +128,11 @@ Saída final:
 
 ```text
 Delivery Gate: Passed
-Status: Complete
+Status: Reviewing
 ```
+
+`specsfy-04-validate` confirma o aceite em `review/` e conclui a transição para
+`completed/`.
 
 ## Cobertura e rastreabilidade
 
@@ -157,6 +170,12 @@ para ações sensíveis como push, deploy, exclusão ou alteração externa.
 
 CLI, TUI e `specsfy-progress` projetam o estado observado nas specs. Eles
 não mantêm uma fonte paralela de progresso e não podem aprovar gates.
+
+Milestones são estados demonstráveis de produto e ficam em
+`specs/milestones/MNN.md`. Specs e backlog declaram relações no campo
+`Milestones`; `specs.md` é uma projeção derivada mantida por
+`specsfy milestones sync --project .`. O percentual considera apenas specs
+`Complete`, enquanto a condição de saída do marco exige validação humana.
 
 ## Ao modificar a metodologia
 

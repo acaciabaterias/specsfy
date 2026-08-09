@@ -49,6 +49,10 @@ export const BASE_SKILLS = [
   "specsfy-07-implement",
   "specsfy-update-spec",
   "specsfy-progress",
+  "specsfy-interviewer",
+  "specsfy-mvp-milestone-interviewer",
+  "specsfy-roadmap-milestone-interviewer",
+  "specsfy-milestone-governor",
 ] as const;
 export const AUXILIARY_SKILLS = [
   "specsfy-aux-stack",

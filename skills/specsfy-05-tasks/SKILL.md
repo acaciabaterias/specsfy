@@ -5,7 +5,7 @@ description: "Use quando o usuário quer quebrar ou decompor a especificação e
 
 # Quebrar a especificação em tarefas
 
-Preencha a seção `14. Tarefas` de `specs/specs/<NNNN>-<slug>/spec.md`. O arquivo permanece a única fonte da verdade; cada tarefa precisa ser pequena, verificável, ordenada e ligada a IDs definidos nele.
+Preencha a seção `14. Tarefas` de `specs/<estado>/<NNNN>-<slug>/spec.md`. O arquivo permanece a única fonte da verdade; cada tarefa precisa ser pequena, verificável, ordenada e ligada a IDs definidos nele.
 
 ## Orquestrar a conversa
 
@@ -23,7 +23,7 @@ exigindo autorização específica.
 
 ## Pré-condições
 
-1. Leia a spec indicada em `specs/specs/<NNNN>-<slug>/spec.md` e exija
+1. Leia a spec indicada em `specs/defined/<NNNN>-<slug>/spec.md` e exija
    `Formato: Specsfy/2.0`, `Definition Gate: Passed` e `Status` `Defined`,
    `Planned` ou `Implementing`. Aceite os dois últimos somente para
    replanejamento automático de uma pendência detectada em etapa posterior.
@@ -34,7 +34,7 @@ exigindo autorização específica.
 4. Execute o monitor antes de planejar:
 
 ```bash
-python3 -B .agents/skills/specsfy-setup/scripts/monitor_context.py \
+node .agents/skills/specsfy-setup/scripts/monitor_context.mjs \
   --project .
 ```
 
@@ -50,7 +50,7 @@ python3 -B .agents/skills/specsfy-setup/scripts/monitor_context.py \
 Use `.specsfy/templates/custom/Tasks.md` como contrato quando existir e recorra
 a `.specsfy/templates/Tasks.md` caso contrário. Substitua somente o conteúdo
 das seções `14. Tarefas` e `15. Ordem de execução` em
-`<raiz>/specs/specs/<NNNN>-<slug>/spec.md`; preserve todas as outras seções.
+`<raiz>/specs/<estado>/<NNNN>-<slug>/spec.md`; preserve todas as outras seções.
 
 - Se a spec estiver `Planned` ou `Implementing`, anuncie a pendência, reabra o
   Ato II e defina `Status: Defined`, `Plan Gate: Pending` e
@@ -112,7 +112,7 @@ Tags permitidas após o ID: `[P]`, `[TEST]`, `[TDD]`, `[CODE]`,
 Execute:
 
 ```bash
-python3 .agents/skills/specsfy-05-tasks/scripts/validate_tasks.py specs/specs/<NNNN>-<slug>/spec.md --allow-draft
+node .agents/skills/specsfy-05-tasks/scripts/validate_tasks.mjs specs/<estado>/<NNNN>-<slug>/spec.md --allow-draft
 ```
 
 Corrija IDs duplicados, dependências inválidas/cíclicas, referências inexistentes,
@@ -134,6 +134,10 @@ teste. Em seguida, retome automaticamente esta skill para:
 2. altere `Plan Gate` para `Passed` e defina `Status: Planned`;
 3. registre o resultado em `Gate do Ato II — Plano`;
 4. execute sem `--allow-draft`.
+
+Depois do Plan Gate, execute `specsfy transition <id> planned`. Quando a
+conversa alterar abrangência, dependência ou capacidade necessária, chame
+`$specsfy-interviewer` antes de replanejar e atualize Effort com justificativa.
 
 O modo estrito rejeita `Plan Gate: Passed` quando algum predecessor TDD
 de uma tarefa `[CODE]` continua aberto. Se a validação falhar, mantenha

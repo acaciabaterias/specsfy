@@ -19,7 +19,7 @@ Leia antes de mudar finalidade, público, topologia ou limites do produto.
 ## Fonte da verdade e precedência
 
 Este documento governa o contexto transversal. Cada entrega consumidora mantém
-sua formulação normativa em `specs/specs/<NNNN>-<slug>/spec.md`. A
+sua formulação normativa em `specs/<estado>/<NNNN>-<slug>/spec.md`. A
 [raiz do monorepo](../../../README.md) apresenta o método, `specsfy/` mantém o
 tutorial detalhado, `docs/user/` orienta usuários e `docs/develop/` orienta
 agentes e contribuidores.

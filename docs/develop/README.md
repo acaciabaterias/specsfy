@@ -25,6 +25,7 @@ Para aprender a usar o produto em um projeto consumidor, siga o
 | como preparar e entregar uma contribuição | [Contribuir](contributing.md) |
 | contrato, estrutura e orquestração das skills | [Skills](skills.md) |
 | instalação, catálogo, TUI, progresso e updater | [CLI](cli.md) |
+| modelo, sincronização e entrevistas de milestones | [Milestones](milestones.md) |
 | módulos e ownership do monorepo | [Módulos](modules.md) |
 | como manter esta documentação | [Documentação](documentation.md) |
 | decisões transversais vigentes | [Roteador de contexto](context/README.md) |

@@ -14,7 +14,7 @@ definição. Também é
 
 ```text
 Use $specsfy-04-validate em
-specs/specs/0004-recuperar-senha/spec.md.
+specs/<estado>/0004-recuperar-senha/spec.md.
 ```
 
 ## Exemplo passo a passo

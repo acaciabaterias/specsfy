@@ -184,7 +184,7 @@ Feature: Progresso consolidado
 #### Estrutura de arquivos
 
 ```text
-specs/specs/0001-painel-progresso/
+specs/draft/0001-painel-progresso/
   spec.md
 cli/src/progress.ts
 cli/tests/progress.test.ts
@@ -238,17 +238,17 @@ cli/tests/progress.test.ts
 
 | IDs | BDD de referência | Teste TDD informado pelo BDD | RED observado | GREEN observado | Refactor/regressão |
 | --- | --- | --- | --- | --- | --- |
-| US-001, FR-001, NFR-001, AC-001 | AC-001 na seção 6 | caso de percentual em tests/test_progress.py com `SPECSFY:` próprio | Pending | Pending | Pending |
-| US-001, FR-001, NFR-001, AC-002 | AC-002 na seção 6 | caso vazio em tests/test_progress.py com `SPECSFY:` próprio | Pending | Pending | Pending |
-| US-001, FR-001, NFR-001, AC-003 | AC-003 na seção 6 | caso ilegível em tests/test_progress.py com `SPECSFY:` próprio | Pending | Pending | Pending |
+| US-001, FR-001, NFR-001, AC-001 | AC-001 na seção 6 | caso de percentual em tests/progress.test.ts com `SPECSFY:` próprio | Pending | Pending | Pending |
+| US-001, FR-001, NFR-001, AC-002 | AC-002 na seção 6 | caso vazio em tests/progress.test.ts com `SPECSFY:` próprio | Pending | Pending | Pending |
+| US-001, FR-001, NFR-001, AC-003 | AC-003 na seção 6 | caso ilegível em tests/progress.test.ts com `SPECSFY:` próprio | Pending | Pending | Pending |
 
 ### 12. Plano de testes e rastreabilidade
 
 | Requisito | Cenário BDD | Nível | Arquivo/comando esperado | Evidência |
 | --- | --- | --- | --- | --- |
-| FR-001 | AC-001 | Unidade | `python3 -B -m unittest tests.test_progress` | Pending |
-| FR-001 | AC-002 | Unidade | `python3 -B -m unittest tests.test_progress` | Pending |
-| FR-001 | AC-003 | Integração | `python3 -B -m unittest tests.test_progress` | Pending |
+| FR-001 | AC-001 | Unidade | `npm test -- --run tests/progress.test.ts` | Pending |
+| FR-001 | AC-002 | Unidade | `npm test -- --run tests/progress.test.ts` | Pending |
+| FR-001 | AC-003 | Integração | `npm test -- --run tests/progress.test.ts` | Pending |
 | NFR-001 | AC-001 | Integração | comparar checksum antes e depois | Pending |
 | NFR-001 | AC-002 | Integração | comparar checksum antes e depois | Pending |
 | NFR-001 | AC-003 | Integração | comparar checksum antes e depois | Pending |
@@ -258,38 +258,38 @@ cli/tests/progress.test.ts
 #### Gate do Ato I — Definição
 
 - **Resultado**: Pending
-- **Comando**: `validate_spec.py specs/specs/0001-painel-progresso/spec.md`
+- **Comando**: `validate_spec.mjs specs/draft/0001-painel-progresso/spec.md`
 - **Achados**: Exemplo mantido em Draft.
 
 #### Gate do Ato II — Plano
 
 - **Resultado**: Pending
-- **Comando**: `validate_tasks.py specs/specs/0001-painel-progresso/spec.md`
+- **Comando**: `validate_tasks.mjs specs/draft/0001-painel-progresso/spec.md`
 - **Achados**: Execução ainda não iniciada.
 
 #### Gate do Ato III — Entrega
 
 - **Resultado**: Pending
-- **Comando**: `check_traceability.py specs/specs/0001-painel-progresso/spec.md .`
+- **Comando**: `check_traceability.mjs specs/draft/0001-painel-progresso/spec.md .`
 - **Achados**: Execução ainda não iniciada.
 
 ### 14. Tarefas
 
-- [ ] T001 [TEST] [TDD] [US-001] Materializar o caso de percentual em tests/test_progress.py — Refs: US-001, FR-001, NFR-001, AC-001 — Depends: none
+- [ ] T001 [TEST] [TDD] [US-001] Materializar o caso de percentual em tests/progress.test.ts — Refs: US-001, FR-001, NFR-001, AC-001 — Depends: none
   - [ ] **PREP**: Confirmar fixture, IDs e baseline.
   - [ ] **EXECUTE**: Escrever o caso com marcador `SPECSFY:` próprio.
   - [ ] **VERIFY**: Observar RED válido.
   - [ ] **EVIDENCE**: Registrar comando e causa do RED.
   - [ ] **IMPROVE**: Revisar a clareza da fixture.
 
-- [ ] T002 [TEST] [TDD] [US-001] Materializar o caso vazio em tests/test_progress.py — Refs: US-001, FR-001, NFR-001, AC-002 — Depends: none
+- [ ] T002 [TEST] [TDD] [US-001] Materializar o caso vazio em tests/progress.test.ts — Refs: US-001, FR-001, NFR-001, AC-002 — Depends: none
   - [ ] **PREP**: Confirmar fixture, IDs e baseline.
   - [ ] **EXECUTE**: Escrever o caso com marcador `SPECSFY:` próprio.
   - [ ] **VERIFY**: Observar RED válido.
   - [ ] **EVIDENCE**: Registrar comando e causa do RED.
   - [ ] **IMPROVE**: Revisar a clareza da fixture.
 
-- [ ] T003 [TEST] [TDD] [US-001] Materializar o caso ilegível em tests/test_progress.py — Refs: US-001, FR-001, NFR-001, AC-003 — Depends: none
+- [ ] T003 [TEST] [TDD] [US-001] Materializar o caso ilegível em tests/progress.test.ts — Refs: US-001, FR-001, NFR-001, AC-003 — Depends: none
   - [ ] **PREP**: Confirmar fixture, IDs e baseline.
   - [ ] **EXECUTE**: Escrever o caso com marcador `SPECSFY:` próprio.
   - [ ] **VERIFY**: Observar RED válido.
@@ -323,7 +323,7 @@ cli/tests/progress.test.ts
 
 #### Suposições
 
-- A estrutura canônica permanece em `specs/specs/<NNNN>-<slug>/spec.md`.
+- A estrutura canônica permanece em `specs/<estado>/<NNNN>-<slug>/spec.md`.
 
 ### 17. Decisões
 

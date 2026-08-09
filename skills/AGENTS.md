@@ -35,7 +35,8 @@ arquivo contém o fluxo, os caminhos canônicos e os gates do framework.
   `.specsfy/PACKAGES.md`.
 - Use `specs/inbox/` para capturas imediatas ainda não refinadas.
 - Use `specs/backlog/` para itens refináveis ainda não promovidos.
-- Use `specs/specs/<NNNN>-<slug>/spec.md` como fonte normativa de cada fatia.
+- Use `specs/<estado>/<NNNN>-<slug>/spec.md` como fonte normativa de cada
+  fatia, em uma única pasta de estado.
 - Não crie `plan.md`, `tasks.md`, `research.md` ou outra fonte normativa
   paralela.
 <!-- specsfy:framework:end -->
@@ -111,7 +112,7 @@ II–III.
 O estado canônico é:
 
 ```text
-Draft → Defined → Planned → Implementing → Complete
+Draft → Defined → Planned → Implementing → Reviewing → Complete
 ```
 
 ## Responsabilidade das skills
@@ -152,7 +153,7 @@ specsfy-<NN>-<nome>/
   instruções imperativas.
 - `agents/openai.yaml` contém prompt padrão que menciona `$<nome>`.
 - Detalhes extensos ficam em referências de um nível com gatilho de leitura.
-- Scripts usam Python 3 e biblioteca padrão, retornam códigos úteis e não fazem
+- Scripts usam Node.js 22 e módulos padrão, retornam códigos úteis e não fazem
   rede, instalação global ou ação destrutiva por padrão.
 - Assets são templates ou materiais usados na saída, nunca uma segunda fonte.
 
@@ -207,13 +208,13 @@ uv run --quiet --with pyyaml python \
 Ainda nesta raiz:
 
 ```bash
-python3 -B -m unittest discover -s tests -p 'test_*.py'
+Execute os testes focais declarados pelo módulo alterado.
 ```
 
 Os arquivos em `tests/features/` preservam BDD como referência e não são
 executados. A prova automatizada pertence aos testes unitários derivados.
 
-Use `python3 -B` ou `PYTHONDONTWRITEBYTECODE=1` para não criar caches.
+Não crie caches ou artefatos transitórios durante as validações.
 
 ## Condições de publicação
 

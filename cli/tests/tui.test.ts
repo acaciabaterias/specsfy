@@ -108,7 +108,7 @@ describe("catálogo de skills", () => {
 
   test("monta framework, catálogo e instalação fora do catálogo", () => {
     const options = buildSkillOptions(catalog, installed);
-    expect(options).toHaveLength(16);
+    expect(options).toHaveLength(20);
     expect(options.find((option) => option.name === "external-skill")).toBeUndefined();
     expect(
       options.find((option) => option.name === "specsfy-specialist-legado"),
@@ -116,7 +116,7 @@ describe("catálogo de skills", () => {
   });
 
   test.each([
-    ["all", "", 16],
+    ["all", "", 20],
     ["installed", "", 2],
     ["detected", "", 1],
     ["all", "react", 1],
@@ -247,7 +247,7 @@ describe("renderização e interação em terminal real", () => {
     const { screen, input } = await mountedTui();
     input.write(Buffer.from([0x0b]));
     await settle();
-    expect(screenText(screen)).toContain("16 visível(is)");
+    expect(screenText(screen)).toContain("20 visível(is)");
 
     input.write(Buffer.from([0x0e]));
     await settle();
@@ -297,7 +297,7 @@ describe("renderização e interação em terminal real", () => {
     expect(screenText(screen)).toContain("React");
     press(screen, "escape");
     expect(tui.activeTab).toBe("skills");
-    expect(screenText(screen)).toContain("16 visível(is)");
+    expect(screenText(screen)).toContain("20 visível(is)");
   });
 
   test("responde ao clique nas abas e nos controles de Skills", async () => {
@@ -307,7 +307,7 @@ describe("renderização e interação em terminal real", () => {
     findWidgetByContent(screen, "Instaladas  ^N").emit("press");
     expect(screenText(screen)).toContain("2 visível(is)");
     findWidgetByContent(screen, "Todas  ^T").emit("press");
-    expect(screenText(screen)).toContain("16 visível(is)");
+    expect(screenText(screen)).toContain("20 visível(is)");
   });
 
   test("alterna, limpa e marca novamente a seleção por teclado", async () => {
@@ -316,22 +316,22 @@ describe("renderização e interação em terminal real", () => {
     press(screen, "space");
     await settle();
     expect(screenText(screen)).toContain(
-      "3 selecionada(s) · 16 visível(is) · 1 para instalar · 0 para remover",
+      "3 selecionada(s) · 20 visível(is) · 1 para instalar · 0 para remover",
     );
     press(screen, "enter");
     await settle();
     expect(screenText(screen)).toContain(
-      "2 selecionada(s) · 16 visível(is) · 0 para instalar · 0 para remover",
+      "2 selecionada(s) · 20 visível(is) · 0 para instalar · 0 para remover",
     );
     press(screen, "l", true);
     await settle();
     expect(screenText(screen)).toContain(
-      "0 selecionada(s) · 16 visível(is) · 0 para instalar · 2 para remover",
+      "0 selecionada(s) · 20 visível(is) · 0 para instalar · 2 para remover",
     );
     press(screen, "v", true);
     await settle();
     expect(screenText(screen)).toContain(
-      "16 selecionada(s) · 16 visível(is) · 14 para instalar · 0 para remover",
+      "20 selecionada(s) · 20 visível(is) · 18 para instalar · 0 para remover",
     );
   });
 
@@ -343,7 +343,7 @@ describe("renderização e interação em terminal real", () => {
     press(screen, "c", true);
     expect(screenText(screen)).toContain("0 visível(is)");
     press(screen, "t", true);
-    expect(screenText(screen)).toContain("16 visível(is)");
+    expect(screenText(screen)).toContain("20 visível(is)");
   });
 
   test("mantém Resumo e Testes como subabas clicáveis", async () => {

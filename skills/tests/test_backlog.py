@@ -8,7 +8,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = ROOT / "specsfy-02-backlog/scripts/iniciar_backlog.py"
+SCRIPT = ROOT / "specsfy-02-backlog/scripts/iniciar_backlog.mjs"
 SKILL = ROOT / "specsfy-02-backlog/SKILL.md"
 TEMPLATE = ROOT / "templates/Backlog.md"
 
@@ -39,7 +39,7 @@ class BacklogTests(unittest.TestCase):
         self.assertIn("## Buscar duplicatas e referências", skill)
         self.assertIn("termos derivados do pedido do usuário", skill)
         self.assertIn("`specs/backlog/*.md`", skill)
-        self.assertIn("`specs/specs/*/spec.md`", skill)
+        self.assertIn("`specs/<estado>/*/spec.md`", skill)
         self.assertIn("`docs/**/*.md`", skill)
         self.assertIn("possível duplicata", skill)
         self.assertIn("confirme com o usuário", skill)
@@ -71,8 +71,7 @@ class BacklogTests(unittest.TestCase):
             project = Path(directory)
             result = subprocess.run(
                 [
-                    sys.executable,
-                    "-B",
+                    "node",
                     str(SCRIPT),
                     "--title",
                     "Painel de acompanhamento",
@@ -103,8 +102,7 @@ class BacklogTests(unittest.TestCase):
             project = Path(directory)
             result = subprocess.run(
                 [
-                    sys.executable,
-                    "-B",
+                    "node",
                     str(SCRIPT),
                     "--title",
                     "Painel de acompanhamento",
@@ -157,7 +155,7 @@ class BacklogTests(unittest.TestCase):
             self.assertIn("## Dependências", content)
             self.assertIn("## Situações de erro", content)
             self.assertIn("## Pronto para desenvolvimento", content)
-            self.assertFalse((project / "specs/specs").exists())
+            self.assertFalse((project / "specs/draft").exists())
 
     def test_allocates_backlog_ids_independently_from_specs(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -169,8 +167,7 @@ class BacklogTests(unittest.TestCase):
 
             result = subprocess.run(
                 [
-                    sys.executable,
-                    "-B",
+                    "node",
                     str(SCRIPT),
                     "--title",
                     "Próxima ideia",
@@ -218,8 +215,7 @@ class BacklogTests(unittest.TestCase):
 
             result = subprocess.run(
                 [
-                    sys.executable,
-                    "-B",
+                    "node",
                     str(SCRIPT),
                     "--title",
                     "Precedência customizada",

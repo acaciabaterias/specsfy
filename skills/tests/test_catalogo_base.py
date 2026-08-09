@@ -16,6 +16,10 @@ BASE_SKILLS = {
     "specsfy-07-implement",
     "specsfy-update-spec",
     "specsfy-progress",
+    "specsfy-interviewer",
+    "specsfy-mvp-milestone-interviewer",
+    "specsfy-roadmap-milestone-interviewer",
+    "specsfy-milestone-governor",
 }
 CONTEXT_SKILLS = {
     "specsfy-setup",

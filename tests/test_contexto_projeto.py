@@ -274,7 +274,7 @@ class ProjectContextContractTests(unittest.TestCase):
         flows = (CONTEXT_ROOT / "flows" / "README.md").read_text(encoding="utf-8")
         self.assertIn("manifests e lockfiles", packages.casefold())
         self.assertIn("schemas e migrations", persistence.casefold())
-        self.assertIn("specs/specs/<NNNN>-<slug>/spec.md", flows)
+        self.assertIn("specs/<estado>/<NNNN>-<slug>/spec.md", flows)
 
     def test_multi_repository_ownership_and_entrypoints(self) -> None:
         """SPECSFY: FR-015 FR-016 FR-017 FR-018 FR-019 FR-020 AC-006"""

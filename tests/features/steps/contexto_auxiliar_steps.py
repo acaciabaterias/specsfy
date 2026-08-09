@@ -79,7 +79,7 @@ def then_installer_recognizes_framework_skills(context) -> None:
 @given("o monitor de contexto publicado pela skill de setup")
 def given_context_monitor(context) -> None:
     context.monitor = (
-        SKILLS / "specsfy-setup/scripts/monitor_context.py"
+        SKILLS / "specsfy-setup/scripts/monitor_context.mjs"
     ).read_text(encoding="utf-8")
 
 
@@ -109,4 +109,4 @@ def then_flow_requires_context_documents(context) -> None:
 @then("planejamento implementação e progresso consultam o mesmo monitor")
 def then_workflow_uses_same_monitor(context) -> None:
     for name, text in context.workflow_skills.items():
-        assert "monitor_context.py" in text, name
+        assert "monitor_context.mjs" in text, name

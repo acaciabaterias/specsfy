@@ -62,7 +62,7 @@ class AuxiliaryContextIntegrationTests(unittest.TestCase):
         self.assertEqual(reference_match.group(0).strip(), match.group(0).strip())
 
     def test_workflow_skills_share_context_monitor(self) -> None:
-        monitor = SKILLS / "specsfy-setup/scripts/monitor_context.py"
+        monitor = SKILLS / "specsfy-setup/scripts/monitor_context.mjs"
         self.assertTrue(monitor.is_file())
         content = monitor.read_text(encoding="utf-8")
         for document in (
@@ -78,7 +78,7 @@ class AuxiliaryContextIntegrationTests(unittest.TestCase):
             "specsfy-progress",
         ):
             skill = (SKILLS / name / "SKILL.md").read_text(encoding="utf-8")
-            self.assertIn("monitor_context.py", skill)
+            self.assertIn("monitor_context.mjs", skill)
 
 
 if __name__ == "__main__":

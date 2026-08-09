@@ -13,7 +13,7 @@ Os templates de ideia, backlog, spec, tarefas e informações permanentes ficam
 em `.specsfy/templates/`. Customizações com o mesmo nome ficam em
 `.specsfy/templates/custom/` e têm precedência sobre os arquivos padrão. Ao
 criar uma especificação, `specsfy-03-specify` renderiza o template resolvido em
-`specs/specs/<NNNN>-<slug>/spec.md`. O exemplo demonstra os três atos e as 18
+`specs/draft/<NNNN>-<slug>/spec.md`. O exemplo demonstra os três atos e as 18
 seções para agentes, testes e diagnóstico do CLI, mas não governa uma feature.
 O cabeçalho renderizado é uma tabela Markdown de duas colunas, `Campo` e
 `Valor`, com um metadado por linha.
@@ -83,6 +83,26 @@ oferta automática exige o npm disponível; uma falha preserva a versão atual e
 abre a TUI normalmente.
 
 ## Dashboard e progresso
+
+## Ciclo de vida de specs
+
+O CLI move specs pelo ciclo `draft`, `defined`, `planned`, `in-progress`,
+`review` e `completed`. Ele atualiza o campo `Status` junto com a pasta:
+
+```bash
+specsfy transition 0001-recuperar-senha defined --project .
+specsfy transition 0001-recuperar-senha planned --project .
+specsfy transition 0001-recuperar-senha in-progress --project .
+specsfy migrate --project .
+```
+
+Use `migrate` apenas para converter o layout anterior `specs/specs/`. Para
+recalibrar a execução, registre Effort e sua justificativa diretamente na fonte
+normativa:
+
+```bash
+specsfy effort 0001-recuperar-senha 7 --reason "Inclui migração e integração externa." --project .
+```
 
 Execute sem argumentos dentro do projeto consumidor para abrir a TUI:
 
@@ -167,7 +187,7 @@ rolável. Quando o projeto fornece um relatório Pest estruturado, cada falha é
 apresentada com nome do teste, arquivo, linha e mensagem.
 
 O progresso usa todos os checkboxes Markdown de
-`specs/specs/*/spec.md`. Tarefas com
+`specs/<estado>/*/spec.md`. Tarefas com
 ID `T...` também ganham estatística própria. Quando uma spec não possui
 checkboxes, os três gates são usados como projeção de fallback.
 
@@ -241,7 +261,7 @@ leituras repetidas em uma integração. A instalação das bases e dos
 especialistas continua disponível na TUI e nos comandos de `skills`.
 
 O leitor mantém compatibilidade com `specs/<NNNN>-<slug>/spec.md` para projetos
-existentes, mas toda spec nova usa `specs/specs/`. Itens em `specs/backlog/`
+existentes, mas toda spec nova usa `specs/draft/`. Itens em `specs/backlog/`
 não entram na porcentagem de entrega.
 
 ## Justificativa de tamanho

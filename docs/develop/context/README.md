@@ -44,7 +44,7 @@ selecionado indicar uma dependência real.
 ## Fonte da verdade e precedência
 
 O [`AGENTS.md` do workspace](../../../AGENTS.md) governa como o trabalho
-integrado é executado. `specs/specs/<NNNN>-<slug>/spec.md` governa o
+integrado é executado. `specs/<estado>/<NNNN>-<slug>/spec.md` governa o
 comportamento da fatia. Estes contextos governam decisões transversais dentro
 do escopo declarado. Código, testes, manifests, configurações, schemas e
 migrations são fontes executáveis do estado implementado.
@@ -73,7 +73,7 @@ apropriada.
 | Escopo | Fonte autorizada |
 | --- | --- |
 | Processo de trabalho | `AGENTS.md` da raiz ou do módulo |
-| Comportamento da fatia | `specs/specs/<NNNN>-<slug>/spec.md` |
+| Comportamento da fatia | `specs/<estado>/<NNNN>-<slug>/spec.md` |
 | Decisão transversal vigente | Documento específico desta árvore |
 | Estado implementado | fontes executáveis e testes |
 | Motivação e alternativas históricas | ADR em `docs/develop/decisions/` |

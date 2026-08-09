@@ -57,14 +57,14 @@ def given_implementation_and_monitoring(context) -> None:
         ROOT / "skills" / "specsfy-07-implement" / "SKILL.md"
     ).read_text(encoding="utf-8")
     context.monitor = (
-        ROOT / "skills" / "specsfy-setup" / "scripts" / "monitor_context.py"
+        ROOT / "skills" / "specsfy-setup" / "scripts" / "monitor_context.mjs"
     ).read_text(encoding="utf-8")
     context.builder = (
         ROOT
         / "skills"
         / "specsfy-documentator"
         / "scripts"
-        / "build_documentation.py"
+        / "build_documentation.mjs"
     ).read_text(encoding="utf-8")
 
 

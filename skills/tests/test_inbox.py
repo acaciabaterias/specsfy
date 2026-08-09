@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = ROOT / "specsfy-01-inbox/scripts/capturar_inbox.py"
+SCRIPT = ROOT / "specsfy-01-inbox/scripts/capturar_inbox.mjs"
 SKILL = ROOT / "specsfy-01-inbox/SKILL.md"
 TEMPLATE = ROOT / "templates/Inbox.md"
 
@@ -45,8 +45,7 @@ class InboxCaptureTests(unittest.TestCase):
             )
             result = subprocess.run(
                 [
-                    sys.executable,
-                    "-B",
+                    "node",
                     str(SCRIPT),
                     "--input",
                     idea,
@@ -91,7 +90,7 @@ class InboxCaptureTests(unittest.TestCase):
                 re.search(r"\| Capturada em \| \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}", content)
             )
             self.assertFalse((project / "specs/backlog").exists())
-            self.assertFalse((project / "specs/specs").exists())
+            self.assertFalse((project / "specs/draft").exists())
 
     def test_same_second_never_overwrites_an_existing_idea(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -103,8 +102,7 @@ class InboxCaptureTests(unittest.TestCase):
                 encoding="utf-8",
             )
             command = [
-                sys.executable,
-                "-B",
+                "node",
                 str(SCRIPT),
                 "--input",
                 "Uma ideia curta.",
@@ -152,8 +150,7 @@ class InboxCaptureTests(unittest.TestCase):
 
             result = subprocess.run(
                 [
-                    sys.executable,
-                    "-B",
+                    "node",
                     str(SCRIPT),
                     "--input",
                     "Capturar com template customizado.",

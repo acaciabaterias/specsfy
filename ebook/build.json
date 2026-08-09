@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "version": "1.3.1",
-  "edition": "v1.3.1",
-  "generated_at": "2026-07-30T23:04:48Z",
-  "source_sha256": "e99238b7a4b34bbdb40b4019102d5c66ffc8e343d6571df70efd9b6e0e7e9ac6",
+  "version": "1.5.0",
+  "edition": "v1.5.0",
+  "generated_at": "2026-08-09T05:22:55Z",
+  "source_sha256": "459a73ec1f1f3e947a828ddebe13406e93107c9dc794228cb7246032795b26b7",
   "sources": [
     ".ebook/build-ebook.sh",
     ".ebook/epub.css",
@@ -31,7 +31,9 @@
     "docs/user/inbox.md",
     "docs/user/installation.md",
     "docs/user/laravel.md",
+    "docs/user/method-reference.md",
     "docs/user/method.md",
+    "docs/user/milestones.md",
     "docs/user/nextjs.md",
     "docs/user/project-context.md",
     "docs/user/reading-order.txt",
@@ -43,7 +45,11 @@
     "docs/user/skills/specsfy-05-tasks.md",
     "docs/user/skills/specsfy-06-tdd-bdd.md",
     "docs/user/skills/specsfy-07-implement.md",
+    "docs/user/skills/specsfy-interviewer.md",
+    "docs/user/skills/specsfy-milestone-governor.md",
+    "docs/user/skills/specsfy-mvp-milestone-interviewer.md",
     "docs/user/skills/specsfy-progress.md",
+    "docs/user/skills/specsfy-roadmap-milestone-interviewer.md",
     "docs/user/skills/specsfy-update-spec.md",
     "docs/user/specialists.md",
     "docs/user/system-documentation.md",
@@ -60,16 +66,21 @@
       "autoridade": "interfaces públicas de `cli/` e `skills/`",
       "escopo": "instalação do CLI e do framework em um projeto consumidor",
       "natureza": "normativo"
+    },
+    "docs/user/milestones.md": {
+      "autoridade": "uso público da capacidade de milestones",
+      "escopo": "MVP, roadmap, specs e backlog de projetos consumidores",
+      "natureza": "guia de uso"
     }
   },
   "artifacts": {
     "pdf": {
-      "file": "Specsfy-Guia-do-Usuario-v1.3.1.pdf",
-      "sha256": "1c2035169c1db6befb753e4e91a75512244305f868e0f6e03ec4e6fdfde43e78"
+      "file": "Specsfy-Guia-do-Usuario-v1.5.0.pdf",
+      "sha256": "5fb9d48ced502c624f38e2c310f992561681b5b804bee78cef460363c6b4c9bf"
     },
     "epub": {
-      "file": "Specsfy-Guia-do-Usuario-v1.3.1.epub",
-      "sha256": "f9398d3df9511705fdf7785202f72e50a1c4531cce6dab9bddc3326d8d0e0d72"
+      "file": "Specsfy-Guia-do-Usuario-v1.5.0.epub",
+      "sha256": "f22a78f9d14d8a05473fd09ca926709f240dc7219504929cf456758e42f0d792"
     }
   }
 }

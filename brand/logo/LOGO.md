@@ -4,6 +4,9 @@ As três camadas com código representam especificação, implementação e
 evidência conectadas. A geometria principal vive em `icon.svg`; as demais
 versões são derivações aprovadas.
 
+O arquivo `icon.svg` usa uma prancheta de 512 × 512 px, preservada também no
+fallback `icon.png`.
+
 ## Variantes
 
 | Arquivo | Fundo |

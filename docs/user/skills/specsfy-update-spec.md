@@ -18,7 +18,7 @@ e gates já registrados.
 
 ```text
 Use $specsfy-update-spec para adicionar expiração de 30 minutos à
-specs/specs/0004-recuperar-senha/spec.md.
+specs/<estado>/0004-recuperar-senha/spec.md.
 ```
 
 Para remover um comportamento, identifique a exigência e o arquivo `spec.md`

@@ -51,7 +51,7 @@ organiza sinais úteis, mas não decide requisitos nem autoriza implementação.
 Execute uma única vez:
 
 ```bash
-python3 -B <diretório-da-skill>/scripts/capturar_inbox.py \
+node <diretório-da-skill>/scripts/capturar_inbox.mjs \
   --input "<texto original integral>" \
   --title "<título derivado>" \
   --summary "<resumo>" \
@@ -90,6 +90,6 @@ resultado esperado: <resultado>` depois de a captura estar segura.
 - Não pesquisar duplicatas antes de salvar.
 - Não alterar nem apagar capturas anteriores.
 - Não transformar inferência em declaração do usuário.
-- Não criar `specs/backlog/`, `specs/specs/`, tarefas, research, testes ou
+- Não criar `specs/backlog/`, qualquer pasta de estado de spec, tarefas, research, testes ou
   código.
 - Não usar a ideia como fonte normativa de comportamento.

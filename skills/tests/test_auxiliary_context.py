@@ -7,16 +7,17 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SETUP = ROOT / "specsfy-setup" / "scripts" / "setup_context.py"
-STACK = ROOT / "specsfy-aux-stack" / "scripts" / "update_stack.py"
-RULES = ROOT / "specsfy-aux-rules" / "scripts" / "add_rule.py"
-DATABASE = ROOT / "specsfy-aux-database" / "scripts" / "update_database.py"
-MONITOR = ROOT / "specsfy-setup" / "scripts" / "monitor_context.py"
+SETUP = ROOT / "specsfy-setup" / "scripts" / "setup_context.mjs"
+STACK = ROOT / "specsfy-aux-stack" / "scripts" / "update_stack.mjs"
+RULES = ROOT / "specsfy-aux-rules" / "scripts" / "add_rule.mjs"
+DATABASE = ROOT / "specsfy-aux-database" / "scripts" / "update_database.mjs"
+MONITOR = ROOT / "specsfy-setup" / "scripts" / "monitor_context.mjs"
 
 
 def run_script(script: Path, *arguments: str) -> subprocess.CompletedProcess[str]:
+    command = ["node", str(script)] if script.suffix == ".mjs" else ["python3", "-B", str(script)]
     return subprocess.run(
-        ["python3", "-B", str(script), *arguments],
+        [*command, *arguments],
         text=True,
         capture_output=True,
         check=False,
@@ -29,7 +30,7 @@ class AuxiliaryContextTests(unittest.TestCase):
         for name in ("Project.md", "Stack.md", "Rules.md", "Database.md"):
             with self.subTest(template=name):
                 self.assertTrue((ROOT / "templates" / name).is_file())
-                self.assertIn(f'Path(".specsfy/templates/{name}")', setup)
+                self.assertIn(f'join(project, ".specsfy", "templates", name)', setup)
 
     def test_monitor_requires_stack_and_database_docs_in_same_change(self) -> None:
         paths = [
@@ -212,12 +213,12 @@ class AuxiliaryContextTests(unittest.TestCase):
         )
         framework = (ROOT / "Spec.md").read_text(encoding="utf-8")
         for path in workflow_skills:
-            self.assertIn("monitor_context.py", path.read_text(encoding="utf-8"))
+            self.assertIn("monitor_context.mjs", path.read_text(encoding="utf-8"))
         for text in (
             workflow_skills[1].read_text(encoding="utf-8"),
             framework,
         ):
-            self.assertIn("monitor_context.py", text)
+            self.assertIn("monitor_context.mjs", text)
             self.assertIn("$specsfy-aux-stack", text)
             self.assertIn("$specsfy-aux-database", text)
 

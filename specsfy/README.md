@@ -162,7 +162,7 @@ Resultado:
 
 ```text
 Especificação criada em
-specs/specs/0001-pagina-boas-vindas/spec.md
+specs/<estado>/0001-pagina-boas-vindas/spec.md
 ```
 
 Ela registra dois resultados esperados: com `?nome=Ana`, mostrar `Olá, Ana!`.
@@ -173,7 +173,7 @@ Sem nome, mostrar `Olá, visitante!`.
 Envie:
 
 ```text
-Use $specsfy-04-validate em specs/specs/0001-pagina-boas-vindas/spec.md
+Use $specsfy-04-validate em specs/<estado>/0001-pagina-boas-vindas/spec.md
 ```
 
 Resultado:
@@ -190,7 +190,7 @@ Definition Gate: Passed
 Envie:
 
 ```text
-Use $specsfy-05-tasks em specs/specs/0001-pagina-boas-vindas/spec.md
+Use $specsfy-05-tasks em specs/<estado>/0001-pagina-boas-vindas/spec.md
 ```
 
 Resultado:
@@ -204,7 +204,7 @@ Resultado:
 Envie:
 
 ```text
-Use $specsfy-06-tdd-bdd em specs/specs/0001-pagina-boas-vindas/spec.md
+Use $specsfy-06-tdd-bdd em specs/<estado>/0001-pagina-boas-vindas/spec.md
 para preparar a verificação.
 ```
 
@@ -219,7 +219,7 @@ Verificação preparada.
 Envie:
 
 ```text
-Use $specsfy-07-implement em specs/specs/0001-pagina-boas-vindas/spec.md
+Use $specsfy-07-implement em specs/<estado>/0001-pagina-boas-vindas/spec.md
 ```
 
 Resultado:
@@ -236,7 +236,7 @@ Depois de implementar, imagine que você lembrou de uma regra:
 
 ```text
 Use $specsfy-update-spec em
-specs/specs/0001-pagina-boas-vindas/spec.md:
+specs/<estado>/0001-pagina-boas-vindas/spec.md:
 o nome deve ter no máximo 80 caracteres.
 ```
 
@@ -261,7 +261,7 @@ Use $specsfy-progress para mostrar o resultado final.
 Resultado:
 
 ```text
-Complete · 3/3 etapas · nenhuma pendência
+Reviewing · 3/3 etapas · nenhuma pendência
 ```
 
 Você também pode abrir a mesma visão pelo CLI:
@@ -271,6 +271,13 @@ specsfy progress --project .
 specsfy progress --project . --json
 specsfy tui --project .
 ```
+
+### 10. Converse antes da próxima etapa — `$specsfy-interviewer`
+
+Quando uma lacuna puder alterar o plano, a execução ou o aceite, o
+entrevistador lê a mesma spec, faz uma pergunta por vez e registra a resposta
+confirmada. Ele também recalibra `Effort` de 1 a 10 com uma justificativa.
+Não aprova gates nem move a spec sem a skill responsável.
 
 Pronto: uma ideia pequena atravessou `Ato I — Definir`,
 `Ato II — Projetar e provar` e `Ato III — Entregar`. Depois que você autoriza a
@@ -365,7 +372,7 @@ instala automaticamente.
 Cada fatia atravessa:
 
 ```text
-Draft → Defined → Planned → Implementing → Complete
+Draft → Defined → Planned → Implementing → Reviewing → Complete
 ```
 
 Os mesmos IDs conectam histórias, requisitos, condições de aceite, testes,

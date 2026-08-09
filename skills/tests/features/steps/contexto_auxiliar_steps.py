@@ -9,10 +9,10 @@ from behave import given, then, when
 
 
 ROOT = Path(__file__).resolve().parents[3]
-SETUP = ROOT / "specsfy-setup" / "scripts" / "setup_context.py"
-STACK = ROOT / "specsfy-aux-stack" / "scripts" / "update_stack.py"
-DATABASE = ROOT / "specsfy-aux-database" / "scripts" / "update_database.py"
-MONITOR = ROOT / "specsfy-setup" / "scripts" / "monitor_context.py"
+SETUP = ROOT / "specsfy-setup" / "scripts" / "setup_context.mjs"
+STACK = ROOT / "specsfy-aux-stack" / "scripts" / "update_stack.mjs"
+DATABASE = ROOT / "specsfy-aux-database" / "scripts" / "update_database.mjs"
+MONITOR = ROOT / "specsfy-setup" / "scripts" / "monitor_context.mjs"
 
 
 def temporary_project(context) -> Path:

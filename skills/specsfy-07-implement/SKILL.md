@@ -23,22 +23,22 @@ exigindo autorização específica.
 
 ## Gate inicial
 
-1. Leia `specs/specs/<NNNN>-<slug>/spec.md`, evidências indexadas em `specs/specs/<NNNN>-<slug>/research/`, instruções do repositório e código relevante. Não procure `tasks.md`, `plan.md`, `research.md` ou `data-model.md`.
+1. Leia `specs/planned/<NNNN>-<slug>/spec.md`, evidências indexadas em `research/`, instruções do repositório e código relevante. Não procure `tasks.md`, `plan.md`, `research.md` ou `data-model.md`.
 2. Exija `Formato: Specsfy/2.0`, `Status: Planned` ou `Implementing`,
    `Definition Gate: Passed` e `Plan Gate: Passed`.
-3. Execute os validadores contra `specs/specs/<NNNN>-<slug>/spec.md`. Se um gate
+3. Execute os validadores contra `specs/<estado>/<NNNN>-<slug>/spec.md`. Se um gate
    falhar por tarefa, predecessor TDD ou RED ausente em um plano antes aprovado,
    anuncie a pendência e retorne automaticamente para
    `$specsfy-05-tasks`; não altere produção. Essa skill reabre o Ato II, chama
    TDD/BDD e retoma esta implementação depois de validar novamente o plano. Para
    outra falha, carregue automaticamente a skill responsável pelo gate.
 4. Execute a suite base relevante. Registre falhas preexistentes e não as atribua à nova mudança.
-5. Antes da primeira alteração de produção, defina `Status: Implementing` e
-   `Delivery Gate: In Progress`.
+5. Antes da primeira alteração de produção, defina `Status: Implementing`,
+   `Delivery Gate: In Progress` e execute `specsfy transition <id> in-progress`.
 6. Selecione trabalho pronto com:
 
 ```bash
-python3 .agents/skills/specsfy-07-implement/scripts/next_task.py specs/specs/<NNNN>-<slug>/spec.md
+node .agents/skills/specsfy-07-implement/scripts/next_task.mjs specs/<estado>/<NNNN>-<slug>/spec.md
 ```
 
 Se não houver tarefa pronta, diferencie `concluído` de `bloqueado por dependência`.
@@ -59,7 +59,7 @@ Se não houver tarefa pronta, diferencie `concluído` de `bloqueado por dependê
 5. Depois de alterar produção e antes de marcar `EXECUTE`, monitore o contexto:
 
 ```bash
-python3 -B .agents/skills/specsfy-setup/scripts/monitor_context.py \
+node .agents/skills/specsfy-setup/scripts/monitor_context.mjs \
   --project . --check
 ```
 
@@ -87,8 +87,8 @@ python3 -B .agents/skills/specsfy-setup/scripts/monitor_context.py \
    `specsfy:evidence` no bloco da tarefa e execute:
 
 ```bash
-python3 -B .agents/skills/specsfy-07-implement/scripts/verify_evidence.py \
-  specs/specs/<NNNN>-<slug>/spec.md . --task TNNN
+node .agents/skills/specsfy-07-implement/scripts/verify_evidence.mjs \
+  specs/<estado>/<NNNN>-<slug>/spec.md . --task TNNN
 ```
 
 Quando uma execução completa produzir atestação schema 2, verifique novamente
@@ -96,8 +96,8 @@ com `--attestation PATH`. Exija commit compatível, binding da mesma spec/tarefa
 refs e comandos idênticos, checks realmente aprovados e SHA-256 atual de cada
 arquivo. Atestação de `--self-test` não prova entrega.
 12. Faça uma micro-retrospectiva: aplique uma melhoria segura encontrada ou registre “nenhuma melhoria necessária” com justificativa; então marque `IMPROVE`.
-13. Na seção 14 de `specs/specs/<NNNN>-<slug>/spec.md`, altere o pai de `- [ ]` para `- [x]` somente quando os cinco itens estiverem concluídos.
-14. Execute `validate_tasks.py`, recalcule a próxima tarefa e confira o próximo item retornado por `next_task.py`.
+13. Na seção 14 de `specs/<estado>/<NNNN>-<slug>/spec.md`, altere o pai de `- [ ]` para `- [x]` somente quando os cinco itens estiverem concluídos.
+14. Execute `validate_tasks.mjs`, recalcule a próxima tarefa e confira o próximo item retornado por `next_task.mjs`.
 
 Atualize os itens conforme o trabalho acontece; não os marque em lote no encerramento. Tarefas `[P]` podem ser agrupadas apenas quando não tocam os mesmos arquivos ou estado. Se a execução revelar dependência oculta, torne-a explícita na seção 14.
 
@@ -112,7 +112,7 @@ TDD/BDD. Retome esta skill somente com os gates novamente aprovados. Atualize na
 ordem:
 
 ```text
-specs/specs/<NNNN>-<slug>/spec.md (seções 1–13) → tarefas (seção 14) → testes → código → evidências na mesma spec
+specs/<estado>/<NNNN>-<slug>/spec.md (seções 1–13) → tarefas (seção 14) → testes → código → evidências na mesma spec
 ```
 
 Correções internas reversíveis podem ser decididas no código e registradas no relato sem reabrir a especificação.
@@ -125,18 +125,20 @@ Quando todas as tarefas da seção 14 estiverem marcadas:
 2. execute a rastreabilidade de testes;
 3. compare cada `AC`, `FR`, `NFR` e item da Definition of Done com evidência atual;
 4. procure tarefas abertas, placeholders, testes pulados e falhas conhecidas;
-5. execute novamente `monitor_context.py --project . --check` e resolva toda
+5. execute novamente `monitor_context.mjs --project . --check` e resolva toda
    documentação pendente;
 6. carregue `$specsfy-documentator`, reconstrua `docs/` e exija que o
-   `build_documentation.py --project . --check` passe;
+   `build_documentation.mjs --project . --check` passe;
 7. não declare conclusão se alguma evidência estiver ausente;
-8. altere `Delivery Gate` para `Passed` somente com rastreabilidade completa e `Status` para `Complete` somente com os três gates e a DoD aprovados.
+8. altere `Delivery Gate` para `Passed` somente com rastreabilidade completa,
+   defina `Status: Reviewing` e execute `specsfy transition <id> review`.
+   `$specsfy-04-validate` conclui o aceite e move a spec para `completed`.
 
 Depois do gate final, projete o resumo de entrega sem criar arquivo:
 
 ```bash
-python3 -B .agents/skills/specsfy-07-implement/scripts/render_delivery.py \
-  specs/specs/<NNNN>-<slug>/spec.md --format markdown
+node .agents/skills/specsfy-07-implement/scripts/render_delivery.mjs \
+  specs/<estado>/<NNNN>-<slug>/spec.md --format markdown
 ```
 
 Use `--preview` enquanto a entrega estiver aberta. Publicar o texto em PR,

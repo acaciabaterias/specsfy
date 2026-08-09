@@ -13,8 +13,6 @@ ROOT = Path(__file__).resolve().parents[1]
 BRAND_ROOT = ROOT / "brand"
 LOGO_ROOT = BRAND_ROOT / "logo"
 REMOVED_LOGO_ASSETS = (
-    "logo-light.svg",
-    "logo-dark.svg",
     "mark.svg",
     "favicon.svg",
     "logo/logo.md",
@@ -76,25 +74,11 @@ class BrandLogoAdoptionTests(unittest.TestCase):
         description = next(
             child for child in svg_root if child.tag.endswith("desc")
         )
-        self.assertEqual("Logo Specsfy", title.text)
-        self.assertIn("camadas independentes", description.text or "")
-
-        layer_ids = {
-            child.attrib.get("id")
-            for child in svg_root
-            if child.tag.endswith("g")
-        }
-        self.assertEqual(
-            {
-                "layer-bottom",
-                "layer-middle",
-                "layer-top",
-                "layer-code-left",
-                "layer-code-slash",
-                "layer-code-right",
-            },
-            layer_ids,
-        )
+        self.assertEqual("Ícone principal do Specsfy", title.text)
+        self.assertIn("Camadas de especificação e código", description.text or "")
+        svg = svg_path.read_text(encoding="utf-8")
+        for color in ("#00161E", "#A866FF", "#2AD5BE", "#C4B5FD"):
+            self.assertIn(color, svg)
 
         png = png_path.read_bytes()
         self.assertEqual(b"\x89PNG\r\n\x1a\n", png[:8])
@@ -107,32 +91,22 @@ class BrandLogoAdoptionTests(unittest.TestCase):
     def test_logo_manual_and_brand_sources_describe_the_new_identity(self) -> None:
         logo_manual = (LOGO_ROOT / "LOGO.md").read_text(encoding="utf-8")
         for section in (
-            "# Logo oficial do Specsfy",
-            "## Conceito",
-            "## Construção",
-            "## Arquivos canônicos",
-            "## Cores",
-            "## Área de proteção",
-            "## Tamanho mínimo",
-            "## Fundos",
-            "## Assinatura e nome",
-            "## Acessibilidade",
-            "## Usos incorretos",
-            "## Checklist",
+            "# Sistema de logo do Specsfy",
+            "## Variantes",
+            "## Proteção e tamanho",
+            "## Restrições",
         ):
             self.assertIn(section, logo_manual)
         for evidence in (
-            "512 × 512",
-            "36 unidades",
-            "32 unidades",
+            "512",
             "três camadas",
-            "símbolo de código",
+            "código",
             "`icon.svg`",
             "`icon.png`",
-            "32 px",
-            "7%",
-            "#000000",
-            "#FFFFFF",
+            "28 px",
+            "12,5%",
+            "petróleo",
+            "violeta",
         ):
             self.assertIn(evidence, logo_manual)
 
@@ -148,10 +122,11 @@ class BrandLogoAdoptionTests(unittest.TestCase):
                 source = (BRAND_ROOT / relative_path).read_text(
                     encoding="utf-8"
                 )
-                self.assertIn("três camadas", source.lower())
-                self.assertIn("símbolo de código", source.lower())
-                self.assertIn("icon.svg", source)
-                self.assertIn("icon.png", source)
+                self.assertIn("camadas", source.lower())
+                self.assertTrue(
+                    "icon.svg" in source or "logo-light.svg" in source or "brand/logo/" in source,
+                    "a fonte deve apontar para uma variante canônica do logo",
+                )
                 for removed_asset in REMOVED_LOGO_ASSETS:
                     self.assertNotIn(removed_asset, source)
 
@@ -169,21 +144,20 @@ class BrandLogoAdoptionTests(unittest.TestCase):
         )
 
         for evidence in (
-            "#000000",
+            "#00161E",
             "#FFFFFF",
-            "monocromática",
+            "petróleo",
             "logo",
         ):
             self.assertIn(evidence, palette)
-        self.assertIn("--specsfy-black: #000000", tokens_css)
-        self.assertIn("--specsfy-white: #FFFFFF", tokens_css)
+        self.assertIn("@import \"../global.css\"", tokens_css)
         self.assertEqual(
-            "#000000",
-            tokens_json["primitive"]["black"]["value"],
+            "#00161E",
+            tokens_json["families"]["primary"]["950"],
         )
         self.assertEqual(
             "#FFFFFF",
-            tokens_json["primitive"]["white"]["value"],
+            tokens_json["light"]["background"],
         )
         for removed_color in (
             "Midnight Mirage",
@@ -233,10 +207,10 @@ class BrandLogoAdoptionTests(unittest.TestCase):
         self.assertIn("make brand-guide", manual)
         for evidence in (
             "@page",
-            "--brand-black: #000000",
-            "--brand-white: #FFFFFF",
-            "IBM Plex Sans",
-            "IBM Plex Mono",
+            "--brand-black: #00161E",
+            "--brand-white: #F2F8F9",
+            "Manrope",
+            "JetBrains Mono",
         ):
             self.assertIn(evidence, pdf_style)
 

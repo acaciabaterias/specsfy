@@ -15,7 +15,7 @@ Para preparar o próximo teste focal e produzir a evidência de RED, use o modo
 
 ```text
 Use $specsfy-06-tdd-bdd em modo prepare para
-specs/specs/0004-recuperar-senha/spec.md.
+specs/<estado>/0004-recuperar-senha/spec.md.
 ```
 
 Para conferir os testes e a rastreabilidade de uma entrega existente, use o

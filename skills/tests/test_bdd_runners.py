@@ -1,21 +1,22 @@
 from __future__ import annotations
 
 import subprocess
-import sys
+import json
 import tempfile
 import unittest
-import importlib.util
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-TRACE = ROOT / "specsfy-06-tdd-bdd/scripts/check_traceability.py"
-TASKS = ROOT / "specsfy-05-tasks/scripts/validate_tasks.py"
-TASKS_SPEC = importlib.util.spec_from_file_location("validate_tasks_bdd", TASKS)
-assert TASKS_SPEC is not None and TASKS_SPEC.loader is not None
-VALIDATE_TASKS = importlib.util.module_from_spec(TASKS_SPEC)
-sys.modules[TASKS_SPEC.name] = VALIDATE_TASKS
-TASKS_SPEC.loader.exec_module(VALIDATE_TASKS)
+TRACE = ROOT / "specsfy-06-tdd-bdd/scripts/check_traceability.mjs"
+TASKS = ROOT / "specsfy-05-tasks/scripts/validate_tasks.mjs"
+def run_node(script: Path, *arguments: str) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(["node", str(script), *arguments], text=True, capture_output=True, check=False)
+
+
+def validate_tasks(spec: Path) -> dict:
+    result = run_node(TASKS, str(spec), "--allow-draft", "--json")
+    return json.loads(result.stdout)
 
 
 class BddRunnerTests(unittest.TestCase):
@@ -45,8 +46,7 @@ class BddRunnerTests(unittest.TestCase):
 
             completed = subprocess.run(
                 [
-                    sys.executable,
-                    "-B",
+                    "node",
                     str(TRACE),
                     str(spec),
                     str(root),
@@ -87,8 +87,7 @@ class BddRunnerTests(unittest.TestCase):
 
             completed = subprocess.run(
                 [
-                    sys.executable,
-                    "-B",
+                    "node",
                     str(TRACE),
                     str(spec),
                     str(root),
@@ -139,7 +138,7 @@ class BddRunnerTests(unittest.TestCase):
                 encoding="utf-8",
             )
 
-            result = VALIDATE_TASKS.validate(spec, allow_draft=True)
+            result = validate_tasks(spec)
 
             self.assertEqual([], result["errors"])
             self.assertEqual(3, result["counts"]["tdd"])
@@ -175,7 +174,7 @@ class BddRunnerTests(unittest.TestCase):
                 encoding="utf-8",
             )
 
-            result = VALIDATE_TASKS.validate(spec, allow_draft=True)
+            result = validate_tasks(spec)
 
             self.assertIn(
                 "A feature possui 1 predecessor(es) TDD; mínimo exigido: 3.",
@@ -187,14 +186,16 @@ class BddRunnerTests(unittest.TestCase):
             )
 
     def test_feature_path_is_not_a_tdd_task(self) -> None:
-        task = VALIDATE_TASKS.parse_tasks(
-            "### 14. Tarefas\n"
-            "- [ ] T001 [TEST] [US-001] Referenciar cenário em specs/example.feature — Refs: AC-001 — Depends: none\n",
-            [],
-            1,
-        )[0]
-
-        self.assertFalse(task.is_tdd)
+        with tempfile.TemporaryDirectory() as temporary:
+            spec = Path(temporary) / "spec.md"
+            spec.write_text(
+                "| Campo | Valor |\n| --- | --- |\n| Formato | Specsfy/2.0 |\n| Status | Defined |\n| Definition Gate | Passed |\n| Plan Gate | Pending |\n"
+                "#### US-001 — Example\n#### AC-001 — Example\n- **FR-001**: Example.\n- **NFR-001**: Example. **Verificação**: teste.\n"
+                "### 14. Tarefas\n- [ ] T001 [TEST] [US-001] Referenciar cenário em specs/example.feature — Refs: US-001, FR-001, NFR-001, AC-001 — Depends: none\n",
+                encoding="utf-8",
+            )
+            result = validate_tasks(spec)
+            self.assertIn("A feature possui 0 predecessor(es) TDD; mínimo exigido: 3.", result["errors"])
 
 
 if __name__ == "__main__":

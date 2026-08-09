@@ -9,8 +9,16 @@ import { Command, CommanderError, Option } from "commander";
 import { createInterface } from "node:readline/promises";
 import { stdin, stdout } from "node:process";
 import { Catalog } from "./catalog.js";
+import { clickUpfyHandoff } from "./clickupfy.js";
 import { loadConfig, updateConfig } from "./config.js";
 import { SkillInstaller } from "./installer.js";
+import {
+  migrateSpecs,
+  SPEC_FOLDERS,
+  transitionSpec,
+  updateSpecEffort,
+} from "./lifecycle.js";
+import { syncMilestones } from "./milestones.js";
 import {
   scanSpecs,
   serializeSpec,
@@ -131,6 +139,74 @@ export function buildProgram(): Command {
     });
 
   program
+    .command("transition")
+    .description("move uma spec para o próximo estado")
+    .argument("<identificador>", "ID e slug da spec")
+    .argument("<status>", "pasta de destino")
+    .addOption(projectOption())
+    .option("--json", "emite resultado JSON")
+    .action(async (
+      identifier: string,
+      status: string,
+      options: ProjectOptions & { json?: boolean },
+    ) => {
+      if (!SPEC_FOLDERS.includes(status as (typeof SPEC_FOLDERS)[number])) {
+        throw new Error(`status de pasta inválido: ${status}`);
+      }
+      const result = await transitionSpec(
+        options.project,
+        identifier,
+        status as (typeof SPEC_FOLDERS)[number],
+      );
+      await syncMilestones(options.project);
+      printTransition(result, await clickUpfyHandoff(options.project, result.path, "transition"), Boolean(options.json));
+    });
+
+  program
+    .command("migrate")
+    .description("migra specs do layout anterior para pastas de estado")
+    .addOption(projectOption())
+    .option("--json", "emite resultado JSON")
+    .action(async (options: ProjectOptions & { json?: boolean }) => {
+      const migrated = await migrateSpecs(options.project);
+      if (migrated.length) await syncMilestones(options.project);
+      if (options.json) console.log(JSON.stringify({ migrated }));
+      else if (migrated.length) {
+        for (const item of migrated) {
+          printTransition(item, await clickUpfyHandoff(options.project, item.path, "transition"), false);
+        }
+      }
+      else console.log("nenhuma spec legada para migrar");
+    });
+
+  program
+    .command("effort")
+    .description("atualiza o esforço estimado de uma spec")
+    .argument("<identificador>", "ID e slug da spec")
+    .argument("<pontuacao>", "inteiro de 1 a 10", Number)
+    .requiredOption("--reason <texto>", "justificativa da estimativa")
+    .addOption(projectOption())
+    .option("--json", "emite resultado JSON")
+    .action(async (
+      identifier: string,
+      score: number,
+      options: ProjectOptions & { reason: string; json?: boolean },
+    ) => {
+      const result = await updateSpecEffort(
+        options.project,
+        identifier,
+        score,
+        options.reason,
+      );
+      const handoff = await clickUpfyHandoff(options.project, result.path, "effort");
+      if (options.json) console.log(JSON.stringify({ ...result, clickupfy: handoff }));
+      else {
+        console.log(`${result.identifier}\tEffort ${result.effort}/10`);
+        printClickUpfyHandoff(handoff);
+      }
+    });
+
+  program
     .command("progress")
     .description("exibe progresso das specs")
     .addOption(projectOption())
@@ -144,6 +220,28 @@ export function buildProgram(): Command {
         interval?: number;
       }) => runProgress(options),
     );
+
+  const milestones = program
+    .command("milestones")
+    .description("mantém os marcos derivados de specs e backlog");
+  milestones
+    .command("sync")
+    .description("atualiza specs.md e o progresso dos milestones")
+    .addOption(projectOption())
+    .option("--json", "emite resultado JSON")
+    .action(async (options: ProjectOptions & { json?: boolean }) => {
+      const result = await syncMilestones(options.project);
+      if (options.json) console.log(JSON.stringify(result));
+      else {
+        console.log(`Índice\t${result.index_path}`);
+        for (const milestone of result.milestones) {
+          console.log(
+            `${milestone.id}\t${milestone.completed_specs}/${milestone.total_specs} specs\t` +
+              `${milestone.backlog_items} backlog\t${milestone.percent}%`,
+          );
+        }
+      }
+    });
 
   program
     .command("test")
@@ -335,5 +433,25 @@ function printInstallation(paths: string[], json: boolean): void {
     printPaths(paths);
   } else {
     console.log("skills já estão atualizadas");
+  }
+}
+
+function printTransition(
+  transition: Awaited<ReturnType<typeof transitionSpec>>,
+  handoff: Awaited<ReturnType<typeof clickUpfyHandoff>>,
+  json: boolean,
+): void {
+  if (json) console.log(JSON.stringify({ ...transition, clickupfy: handoff }));
+  else {
+    console.log(
+      `${transition.identifier}\t${transition.from} → ${transition.to}\t${transition.status}`,
+    );
+    printClickUpfyHandoff(handoff);
+  }
+}
+
+function printClickUpfyHandoff(handoff: Awaited<ReturnType<typeof clickUpfyHandoff>>): void {
+  if (handoff.available && handoff.task_id) {
+    console.log(`ClickUpfy\tencaminhar ${handoff.action} para a tarefa ${handoff.task_id}`);
   }
 }

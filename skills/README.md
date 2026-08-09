@@ -57,7 +57,7 @@ capturar imediatamente em specs/inbox
 ```
 
 Cada fatia usa uma única fonte normativa em
-`specs/specs/<NNNN>-<slug>/spec.md` e atravessa:
+`specs/<estado>/<NNNN>-<slug>/spec.md` e atravessa:
 
 ```text
 Draft → Defined → Planned → Implementing → Complete
@@ -103,6 +103,9 @@ existir lacuna aplicável, sem limite máximo. A partir da 11ª pergunta, oferec
 | [`specsfy-07-implement`](specsfy-07-implement/SKILL.md) | executar tarefas prontas e evidenciar | não trabalha sem RED |
 | [`specsfy-update-spec`](specsfy-update-spec/SKILL.md) | incorporar pedido tardio e reabrir somente os atos afetados | não cria nova spec nem implementa |
 | [`specsfy-progress`](specsfy-progress/SKILL.md) | projetar o estado global | não altera gates ou checkboxes |
+| [`specsfy-mvp-milestone-interviewer`](specsfy-mvp-milestone-interviewer/SKILL.md) | entrevistar e definir o MVP por milestones | não planeja tarefas ou código |
+| [`specsfy-roadmap-milestone-interviewer`](specsfy-roadmap-milestone-interviewer/SKILL.md) | entrevistar a evolução pós-MVP | não altera o núcleo sem confirmação |
+| [`specsfy-milestone-governor`](specsfy-milestone-governor/SKILL.md) | sincronizar a projeção de milestones | não inventa condição de saída |
 | [`specsfy-setup`](specsfy-setup/SKILL.md) | detectar o stack, criar contexto ausente e reconciliar blocos de agentes | não sobrescreve arquivos de contexto existentes |
 | [`specsfy-documentator`](specsfy-documentator/SKILL.md) | reconstruir `docs/` e o inventário `.specsfy/PACKAGES.md` | não inventa decisões, relações, finalidades ou referências |
 | [`specsfy-aux-stack`](specsfy-aux-stack/SKILL.md) | manter `.specsfy/STACK.md` a partir de evidência executável | não inventa nem copia toda dependência |
@@ -116,7 +119,7 @@ inventário de pacotes. Ambos preservam arquivos existentes e todo conteúdo for
 dos blocos gerenciados.
 
 Durante planejamento, implementação e projeção de progresso,
-`specsfy-setup/scripts/monitor_context.py` classifica mudanças staged, unstaged
+`specsfy-setup/scripts/monitor_context.mjs` classifica mudanças staged, unstaged
 e untracked. Alterações estruturais exigem `STACK.md`. Alterações de
 persistência exigem `DATABASE.md`. Código de aplicação exige revisão de
 `PROJECT.md`. A ausência de impacto material é registrada na evidência da
@@ -244,12 +247,12 @@ uv run --quiet --with pyyaml python \
 Execute os contratos das skills a partir desta raiz:
 
 ```bash
-python3 -B -m unittest discover -s tests -p 'test_*.py'
-python3 -B specsfy-04-validate/scripts/verify_repo.py . \
+node -m unittest discover -s tests -p 'test_*.py'
+node specsfy-04-validate/scripts/verify_repo.mjs . \
   --boundary local
 ```
 
-O verificador exige as nove skills base. Os contratos do catálogo também
+O verificador exige as skills base. Os contratos do catálogo também
 validam o setup, o documentador e as três auxiliares. Especialistas instalados
 são validados sem limitar o tamanho total do catálogo.
 

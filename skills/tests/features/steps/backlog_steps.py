@@ -10,7 +10,7 @@ from behave import given, then, when
 
 
 ROOT = Path(__file__).resolve().parents[3]
-SCRIPT = ROOT / "specsfy-02-backlog/scripts/iniciar_backlog.py"
+SCRIPT = ROOT / "specsfy-02-backlog/scripts/iniciar_backlog.mjs"
 SKILL = ROOT / "specsfy-02-backlog/SKILL.md"
 
 

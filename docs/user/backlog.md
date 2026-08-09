@@ -104,7 +104,7 @@ regras detalhadas, aceite e solução técnica podem ser refinados depois.
 ### Duplicatas e referências
 
 Antes de criar, a skill pesquisa termos da ideia em `specs/backlog/*.md`,
-`specs/specs/*/spec.md` e `docs/**/*.md`. Ela separa possível duplicata de
+`specs/<estado>/*/spec.md` e `docs/**/*.md`. Ela separa possível duplicata de
 backlog relacionado, spec relacionada ou documentação útil.
 
 Uma possível duplicata exige confirmar se o item existente será atualizado ou
@@ -177,7 +177,7 @@ input → inbox → backlog → spec
    houver decisões materiais abertas.
 3. Use `$specsfy-03-specify` somente quando houver intenção explícita de
    promover o material. A fonte normativa é criada em
-   `specs/specs/<NNNN>-<slug>/spec.md`.
+   `specs/<estado>/<NNNN>-<slug>/spec.md`.
 4. Depois da promoção, mantenha o backlog como proveniência, marque-o
    `Promoted` e registre o caminho da spec.
 

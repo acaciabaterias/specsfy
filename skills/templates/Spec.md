@@ -6,6 +6,11 @@
 | ID | {{SPEC_ID}} |
 | Slug | {{SPEC_NUMBER}}-{{SPEC_SLUG}} |
 | Status | Draft |
+| Effort | 1 |
+| Effort updated at | {{CURRENT_DATE}} |
+| Effort rationale | Estimativa inicial; revisar durante a descoberta. |
+| ClickUp Task | |
+| Milestones | |
 | Definition Gate | Pending |
 | Plan Gate | Pending |
 | Delivery Gate | Pending |
@@ -45,7 +50,7 @@
 
 #### Artefatos de pesquisa armazenados
 
-- `specs/specs/{{SPEC_NUMBER}}-{{SPEC_SLUG}}/research/[fonte]/`: [origem, versão/data, licença quando aplicável e propósito], ou “Nenhum artefato externo”.
+- `specs/draft/{{SPEC_NUMBER}}-{{SPEC_SLUG}}/research/[fonte]/`: [origem, versão/data, licença quando aplicável e propósito], ou “Nenhum artefato externo”.
 - Toda fonte externa efetivamente consultada deve ter uma evidência local em `research/`; registre aqui o caminho e mantenha conclusões normativas no `spec.md`.
 
 #### Dúvidas respondidas
@@ -181,7 +186,7 @@ Feature: [capacidade observável]
 #### Estrutura de arquivos
 
 ```text
-specs/specs/{{SPEC_NUMBER}}-{{SPEC_SLUG}}/
+specs/draft/{{SPEC_NUMBER}}-{{SPEC_SLUG}}/
   spec.md
   research/
 src/
@@ -258,7 +263,7 @@ tests/
 #### Gate do Ato I — Definição
 
 - **Resultado**: Pending
-- **Comando**: `python3 .agents/skills/specsfy-04-validate/scripts/validate_spec.py specs/specs/{{SPEC_NUMBER}}-{{SPEC_SLUG}}/spec.md`
+- **Comando**: `node .agents/skills/specsfy-04-validate/scripts/validate_spec.mjs specs/draft/{{SPEC_NUMBER}}-{{SPEC_SLUG}}/spec.md`
 - **Achados**: [Pending.]
 - Findings especializados, quando aplicáveis, seguem `FIND-PROD|ARCH|SEC-NNN`,
   severidade `P1|P2|P3`, estado `Open|Resolved|Accepted`, refs e evidência.
@@ -266,13 +271,13 @@ tests/
 #### Gate do Ato II — Plano
 
 - **Resultado**: Pending
-- **Comando**: `python3 .agents/skills/specsfy-05-tasks/scripts/validate_tasks.py specs/specs/{{SPEC_NUMBER}}-{{SPEC_SLUG}}/spec.md`
+- **Comando**: `node .agents/skills/specsfy-05-tasks/scripts/validate_tasks.mjs specs/draft/{{SPEC_NUMBER}}-{{SPEC_SLUG}}/spec.md`
 - **Achados**: [Pending.]
 
 #### Gate do Ato III — Entrega
 
 - **Resultado**: Pending
-- **Comando**: `python3 .agents/skills/specsfy-06-tdd-bdd/scripts/check_traceability.py specs/specs/{{SPEC_NUMBER}}-{{SPEC_SLUG}}/spec.md .`
+- **Comando**: `node .agents/skills/specsfy-06-tdd-bdd/scripts/check_traceability.mjs specs/draft/{{SPEC_NUMBER}}-{{SPEC_SLUG}}/spec.md .`
 - **Achados**: [Pending.]
 
 ### 14. Tarefas

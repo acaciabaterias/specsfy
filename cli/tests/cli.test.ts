@@ -1,5 +1,5 @@
 /** Contratos observáveis da interface de linha de comando. */
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { afterEach, describe, expect, test, vi } from "vitest";
 import { buildProgram, runCli } from "../src/cli.js";
@@ -15,7 +15,11 @@ describe("CLI público", () => {
     expect(program.commands.map((command) => command.name())).toEqual([
       "install",
       "skills",
+      "transition",
+      "migrate",
+      "effort",
       "progress",
+      "milestones",
       "test",
       "tui",
       "config",
@@ -30,6 +34,11 @@ describe("CLI público", () => {
         .find((command) => command.name() === "config")
         ?.commands.map((command) => command.name()),
     ).toEqual(["show", "set"]);
+    expect(
+      program.commands
+        .find((command) => command.name() === "milestones")
+        ?.commands.map((command) => command.name()),
+    ).toEqual(["sync"]);
   });
 
   test("progress JSON mantém summary e remove conteúdo bruto", async () => {
@@ -69,6 +78,45 @@ describe("CLI público", () => {
     expect(
       await runCli(["node", "specsfy", "progress", "--project", project]),
     ).toBe(2);
+  });
+
+  test("transition e migrate expõem o ciclo de vida físico", async () => {
+    const project = await temporaryDirectory();
+    const path = join(project, "specs/planned/0001-dashboard/spec.md");
+    await mkdir(join(path, ".."), { recursive: true });
+    await writeFile(path, "# Dashboard\n\n| Status | Planned |\n| Milestones | M01 |\n");
+    const output = vi.spyOn(console, "log").mockImplementation(() => undefined);
+
+    expect(
+      await runCli([
+        "node", "specsfy", "transition", "0001-dashboard", "in-progress",
+        "--project", project, "--json",
+      ]),
+    ).toBe(0);
+    expect(JSON.parse(String(output.mock.calls.at(-1)?.[0]))).toMatchObject({
+      to: "in-progress",
+      status: "Implementing",
+    });
+    expect(await readFile(join(project, "specs.md"), "utf8")).toContain("M01");
+  });
+
+  test("effort registra estimativa e justificativa na spec", async () => {
+    const project = await temporaryDirectory();
+    const path = join(project, "specs/draft/0001-dashboard/spec.md");
+    await mkdir(join(path, ".."), { recursive: true });
+    await writeFile(path, "# Dashboard\n\n| Status | Draft |\n");
+    const output = vi.spyOn(console, "log").mockImplementation(() => undefined);
+
+    expect(
+      await runCli([
+        "node", "specsfy", "effort", "0001-dashboard", "6",
+        "--reason", "Mudança atravessa CLI e skills.", "--project", project, "--json",
+      ]),
+    ).toBe(0);
+    expect(JSON.parse(String(output.mock.calls.at(-1)?.[0]))).toMatchObject({
+      effort: 6,
+      identifier: "0001-dashboard",
+    });
   });
 
   test("config set e show usam o mesmo contrato", async () => {

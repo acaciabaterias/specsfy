@@ -6,7 +6,7 @@ description: Monitorar manifests e arquivos estruturais para criar ou atualizar 
 # Manter o stack
 
 1. Ler instruções locais, `PROJECT.md` e o `STACK.md` existente.
-2. Executar `python3 -B scripts/update_stack.py --project <raiz>`.
+2. Executar `node scripts/update_stack.mjs --project <raiz>`.
 3. Conferir cada linha contra manifests, lockfiles e configurações presentes.
 4. Manter decisões, notas e linhas humanas fora do bloco
    `specsfy:stack`; nunca removê-las.

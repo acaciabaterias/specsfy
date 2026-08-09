@@ -33,7 +33,7 @@ específica.
 2. Antes de criar ou atualizar o item, pesquise esses termos em:
    - `specs/inbox/*.md`;
    - `specs/backlog/*.md`;
-   - `specs/specs/*/spec.md`;
+   - `specs/<estado>/*/spec.md`;
    - `docs/**/*.md`.
 3. Leia somente resultados plausíveis e classifique cada relação:
    - **possível duplicata**: problema, pessoa, resultado e contexto
@@ -83,7 +83,7 @@ ou prioridade. Esses dados podem amadurecer no aprofundamento.
 4. Para criar um item novo, execute:
 
 ```bash
-python3 -B <diretório-da-skill>/scripts/iniciar_backlog.py \
+node <diretório-da-skill>/scripts/iniciar_backlog.mjs \
   --title "<título curto>" \
   --idea "<formulação original>" \
   --problem "<problema percebido>" \

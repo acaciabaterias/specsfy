@@ -13,7 +13,7 @@ description: Monitorar e ajudar a descobrir, formular e registrar regras duráve
 5. Executar:
 
 ```bash
-python3 -B scripts/add_rule.py \
+node scripts/add_rule.mjs \
   --project <raiz> \
   --section "<tema>" \
   --rule "<regra confirmada>"

@@ -41,7 +41,7 @@ ordem de eventos for difícil de compreender apenas por texto linear.
 
 ## Fonte da verdade e precedência
 
-`specs/specs/<NNNN>-<slug>/spec.md` governa comportamento, erros e aceite.
+`specs/<estado>/<NNNN>-<slug>/spec.md` governa comportamento, erros e aceite.
 Código e testes demonstram a execução. Um documento de fluxo apenas mostra
 sequência, responsabilidades e links para essas fontes.
 

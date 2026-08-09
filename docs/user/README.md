@@ -20,19 +20,23 @@ uma entrega completa. Os capítulos seguintes explicam a rotina com o CLI, as
 mudanças posteriores e os recursos avançados. Você não precisa conhecer a
 implementação do framework para seguir esse percurso.
 
+::: {.online-only}
+
 ## Leia online ou como ebook
 
-Este mesmo percurso compõe a edição portátil **v1.2.5**. Use o PDF para leitura
+Este mesmo percurso compõe a edição portátil **v1.5.0**. Use o PDF para leitura
 e impressão ou o EPUB em leitores que permitem ajustar fonte e tamanho:
 
-- [PDF](../../ebook/Specsfy-Guia-do-Usuario-v1.2.5.pdf), para leitura,
+- [PDF](../../ebook/Specsfy-Guia-do-Usuario-v1.5.0.pdf), para leitura,
   compartilhamento e impressão.
-- [EPUB](../../ebook/Specsfy-Guia-do-Usuario-v1.2.5.epub), para leitores
+- [EPUB](../../ebook/Specsfy-Guia-do-Usuario-v1.5.0.epub), para leitores
   digitais com fonte e tamanho ajustáveis.
 
 Os dois formatos são reconstruídos a partir destas páginas. A
 [pasta do ebook](../../ebook/README.md) informa a versão vigente e os hashes
 usados para conferir se o PDF e o EPUB correspondem ao mesmo build.
+
+:::
 
 ## Percurso pedagógico
 
@@ -54,6 +58,10 @@ Os três atos ligam cada fase a uma evidência verificável na `spec.md`:
 3. **Ato III — Entregar e validar:** implementar, obter testes verdes e
    registrar evidências.
 
+Para interpretar cada campo da spec, consulte a [Referência do
+método](method-reference.md). Ela detalha Effort, estados, transições, gates,
+IDs, pesquisa, tarefas e progresso.
+
 ### 2. Instale o Specsfy
 
 Com o método entendido, siga a [Instalação](installation.md) para instalar o
@@ -72,6 +80,7 @@ entradas:
 
 - preserve um texto sem perguntas na [Inbox](inbox.md).
 - refine e priorize uma proposta no [Backlog](backlog.md).
+- organize o MVP e o roadmap com [Milestones](milestones.md).
 
 ### 4. Aprofunde o fluxo base
 
@@ -87,6 +96,10 @@ cada etapa nesta ordem:
 7. [Implementar](skills/specsfy-07-implement.md).
 8. [Atualizar a especificação](skills/specsfy-update-spec.md).
 9. [Consultar o progresso](skills/specsfy-progress.md).
+10. [Conversar com a spec](skills/specsfy-interviewer.md).
+11. [Entrevistar o MVP](skills/specsfy-mvp-milestone-interviewer.md).
+12. [Planejar o roadmap](skills/specsfy-roadmap-milestone-interviewer.md).
+13. [Governar milestones](skills/specsfy-milestone-governor.md).
 
 Essas páginas explicam quando usar cada skill, como descrever a tarefa em
 linguagem natural, o resultado esperado, os erros comuns e o próximo passo.
@@ -131,7 +144,7 @@ Imagine uma página de boas-vindas. Você pode preservar a ideia, refiná-la no
 backlog e promovê-la até chegar a:
 
 ```text
-specs/specs/0001-pagina-boas-vindas/spec.md
+specs/<estado>/0001-pagina-boas-vindas/spec.md
 ```
 
 Em seguida, o agente valida a definição, organiza tarefas, prepara testes,

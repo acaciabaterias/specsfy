@@ -14,7 +14,7 @@ afetados:
 
 ```text
 Use $specsfy-update-spec em
-specs/specs/0001-pagina-boas-vindas/spec.md:
+specs/<estado>/0001-pagina-boas-vindas/spec.md:
 esqueci de pedir que o nome tenha no máximo 80 caracteres.
 ```
 

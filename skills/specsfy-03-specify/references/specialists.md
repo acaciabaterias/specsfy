@@ -16,6 +16,6 @@ specsfy skills add specsfy-specialist-<nome>
 ```
 
 Especialista informa padrões; a fonte normativa continua sendo
-`specs/specs/<NNNN>-<slug>/spec.md` do projeto consumidor.
+`specs/<estado>/<NNNN>-<slug>/spec.md` do projeto consumidor.
 Se já estiver instalado, anuncie a transição automática e carregue-o na mesma
 conversa.

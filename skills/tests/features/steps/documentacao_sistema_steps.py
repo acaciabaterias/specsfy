@@ -12,7 +12,7 @@ BUILDER = (
     ROOT
     / "specsfy-documentator"
     / "scripts"
-    / "build_documentation.py"
+    / "build_documentation.mjs"
 )
 EXPECTED = {
     "README.md",

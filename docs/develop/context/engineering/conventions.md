@@ -24,7 +24,7 @@ Consulte antes de criar arquivos, escolher nomes ou definir tratamento de erro.
 - Tutorial detalhado vive em `specsfy/`. Identidade vive em `brand/`.
 - Aplicação interna e documentação operacional vivem em `example/`.
 - Specs consumidoras vivem em
-  `<projeto>/specs/specs/<NNNN>-<slug>/spec.md`.
+  `<projeto>/specs/<estado>/<NNNN>-<slug>/spec.md`.
 - A raiz oficial não cria specs nem instala skills consumidoras.
 - Contratos integrados vivem em `tests/`.
 - Testes focais rodam com o módulo correspondente como diretório de trabalho.

@@ -1,8 +1,19 @@
 # Marca Specsfy
 
+<!-- markdownlint-disable MD033 -->
+<p align="center">
+  <picture>
+    <source srcset="logo/icon.svg" type="image/svg+xml">
+    <img src="logo/icon.png" alt="Logo do Specsfy" width="128">
+  </picture>
+</p>
+<!-- markdownlint-enable MD033 -->
+
 O Specsfy conecta intenção, especificação, implementação e evidência. Sua
 identidade combina o petróleo e o turquesa da Promovaweb com violeta, variação
 que diferencia o trabalho de modelagem e especificação.
+
+Este diretório é a fonte normativa da identidade visual do Specsfy.
 
 ## Conceito visual
 

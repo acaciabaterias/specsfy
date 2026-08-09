@@ -25,7 +25,7 @@ specsfy progress --project .
 
 ## Exemplo passo a passo
 
-1. A skill lê `specs/specs/*/spec.md`.
+1. A skill lê `specs/<estado>/*/spec.md`.
 2. Calcula o estado a partir de gates e checkboxes.
 3. Não consulta um relatório paralelo.
 4. Apresenta:

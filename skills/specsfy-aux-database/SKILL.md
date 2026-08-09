@@ -8,7 +8,7 @@ description: Monitorar e manter a documentação completa da persistência em .s
 1. Ler instruções locais, `PROJECT.md`, `STACK.md` e todo o `DATABASE.md`.
 2. Inspecionar schemas, migrations, models persistentes e configurações sem
    revelar valores de ambiente ou credenciais.
-3. Executar `python3 -B scripts/update_database.py --project <raiz>`.
+3. Executar `node scripts/update_database.mjs --project <raiz>`.
 4. Conferir o inventário detectado contra as fontes executáveis.
 5. Completar relações, índices, constraints, ownership, retenção e finalidade
    que não possam ser inferidos com segurança; marcar desconhecidos em vez de

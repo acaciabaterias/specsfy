@@ -16,3 +16,6 @@ o Specsfy dentro do ecossistema.
 A escala completa e os estados semânticos vivem em `palette.json`. Não copie
 hexadecimais para componentes; use `../global.css`, `../tokens.json` ou
 `../tailwind-theme.js`.
+
+As cores do logo canônico estão definidas em `../logo/icon.svg`; mantenha
+petróleo, violeta e turquesa nas proporções originais do símbolo.

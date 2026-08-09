@@ -63,7 +63,7 @@ class FrameworkFileTests(unittest.TestCase):
             ROOT / "specsfy-05-tasks" / "SKILL.md"
         ).read_text(encoding="utf-8")
         verifier = (
-            ROOT / "specsfy-04-validate" / "scripts" / "verify_repo.py"
+            ROOT / "specsfy-04-validate" / "scripts" / "verify_repo.mjs"
         ).read_text(encoding="utf-8")
         agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
         readme = (ROOT / "README.md").read_text(encoding="utf-8")

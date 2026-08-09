@@ -12,6 +12,7 @@ não define requisitos nem aprova gates.
 specsfy install
 specsfy skills
 specsfy progress
+specsfy milestones sync
 specsfy test
 specsfy tui
 specsfy config
@@ -28,6 +29,7 @@ Sem subcomando, a aplicação abre a TUI.
 | `catalog.ts` | catálogo remoto de especialistas |
 | `skill-lock.ts` | seleção instalada, fingerprints e proteção |
 | `progress.ts` | leitura e resumo das specs |
+| `milestones.ts` | projeção de milestones, vínculos e índice `specs.md` |
 | `backlog.ts` | projeção dos itens de backlog |
 | `project-testing.ts` | detecção e execução do runner consumidor |
 | `config.ts` | configuração por projeto |
@@ -39,7 +41,8 @@ Sem subcomando, a aplicação abre a TUI.
 
 `SkillInstaller` valida que o destino é um projeto consumidor, obtém `skills/`
 do monorepo e instala o conjunto `FRAMEWORK_SKILLS`. Esse conjunto inclui setup,
-três auxiliares, documentador e nove skills base.
+três auxiliares, documentador e skills base, incluindo as entrevistas de MVP,
+roadmap e governança de milestones.
 
 Conteúdo gerenciado recebe fingerprints. Se a cópia local divergir do último
 fingerprint registrado, atualização e remoção recusam a operação sem `--force`.
@@ -72,9 +75,17 @@ gravado pelo Specsfy.
 
 ## Progresso
 
-O scanner lê `specs/specs/*/spec.md`, com compatibilidade de leitura do layout
+O scanner lê `specs/<estado>/*/spec.md`, com compatibilidade de leitura do layout
 legado. Status, gates, tarefas e checklists são projeções. `--watch` recalcula
 quando o fingerprint das fontes muda.
+
+## Milestones
+
+`specsfy milestones sync --project .` lê o campo `Milestones` das specs e do
+backlog. O comando atualiza blocos gerados em `specs.md` e em
+`specs/milestones/MNN.md`, preservando o restante do Markdown. Consulte
+[Milestones](milestones.md) para o contrato, as fronteiras de escrita e os
+testes do módulo.
 
 ## Testes do consumidor
 

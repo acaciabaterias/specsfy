@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD013 -->
+
 # Informações permanentes do projeto
 
 O Specsfy separa a descrição durável do sistema das especificações de cada
@@ -53,7 +55,7 @@ arquivos staged, unstaged e untracked do Git para descobrir qual documento
 precisa ser revisto, mas não permanece como daemon em segundo plano:
 
 ```bash
-python3 -B .agents/skills/specsfy-setup/scripts/monitor_context.py \
+node .agents/skills/specsfy-setup/scripts/monitor_context.mjs \
   --project . --check
 ```
 

@@ -42,6 +42,24 @@ class UserEbookTests(unittest.TestCase):
         self.assertIn("deve declarar lang:", build)
         self.assertIn('deve declarar lang="pt-BR"', build)
 
+    def test_portable_guide_does_not_identify_itself_as_the_repository(
+        self,
+    ) -> None:
+        metadata = (PIPELINE_ROOT / "metadata.yaml").read_text(
+            encoding="utf-8"
+        )
+        template = (PIPELINE_ROOT / "template.html").read_text(
+            encoding="utf-8"
+        )
+        readme = (EBOOK_ROOT / "README.md").read_text(encoding="utf-8")
+
+        self.assertIn('identifier: "urn:specsfy:guia-do-usuario"', metadata)
+        self.assertNotIn("github.com/promovaweb/specsfy", metadata)
+        self.assertNotIn("Fonte editorial: docs/user/", template)
+        self.assertIn("experiência autocontida", readme)
+        self.assertIn("citação nominal", readme)
+        self.assertIn("online-only", readme)
+
     def test_retention_keeps_only_the_five_latest_editions(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             ebook_root = Path(directory)
@@ -235,6 +253,28 @@ class UserEbookTests(unittest.TestCase):
             )
         self.assertNotIn("Classificação", epub_text)
 
+    def test_portable_guide_omits_online_download_directions(self) -> None:
+        version = (EBOOK_ROOT / "VERSION").read_text(
+            encoding="utf-8"
+        ).strip()
+        stem = EBOOK_ROOT / f"Specsfy-Guia-do-Usuario-v{version}"
+        pdf_text = subprocess.run(
+            ["pdftotext", f"{stem}.pdf", "-"],
+            check=True,
+            text=True,
+            capture_output=True,
+        ).stdout
+        with zipfile.ZipFile(f"{stem}.epub") as archive:
+            epub_text = "\n".join(
+                archive.read(name).decode("utf-8")
+                for name in archive.namelist()
+                if name.endswith(".xhtml")
+            )
+
+        for text in (pdf_text, epub_text):
+            self.assertNotIn("Leia online ou como ebook", text)
+            self.assertNotIn("pasta do ebook", text)
+
     def test_epub_is_well_formed_and_contains_navigation(self) -> None:
         version = (EBOOK_ROOT / "VERSION").read_text(
             encoding="utf-8"
@@ -272,6 +312,14 @@ class UserEbookTests(unittest.TestCase):
             )
             self.assertIsNotNone(title)
             self.assertIn(f"v{version}", title.text or "")
+            identifier = package.find(
+                ".//{http://purl.org/dc/elements/1.1/}identifier"
+            )
+            self.assertIsNotNone(identifier)
+            self.assertEqual(
+                "urn:specsfy:guia-do-usuario",
+                identifier.text,
+            )
 
     def test_pdf_and_epub_links_stay_inside_the_ebook(self) -> None:
         version = (EBOOK_ROOT / "VERSION").read_text(

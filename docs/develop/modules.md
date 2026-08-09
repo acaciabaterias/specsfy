@@ -37,7 +37,7 @@ Os módulos possuem ownership de conteúdo, mas compartilham raiz Git, remoto,
 branch, histórico, issues, tags e releases. Links entre eles são relativos e
 uma mudança transversal forma um único commit ou pull request coerente.
 
-Specs de produto vivem em `specs/specs/<NNNN>-<slug>/spec.md` dentro de cada
+Specs de produto vivem em `specs/<estado>/<NNNN>-<slug>/spec.md` dentro de cada
 projeto consumidor, nunca neste monorepo.
 
 ## Atualize quando
