@@ -102,28 +102,44 @@ def when_person_answers_backlog(context) -> None:
     assert "## Conduzir a descoberta adaptativa" in context.backlog
 
 
-@then("o refinamento do backlog reavalia o contexto acumulado com a nova resposta")
+@then("o refinamento do backlog reavalia o contexto acumulado com as novas respostas")
 def then_backlog_reanalyses_context(context) -> None:
     for source in (context.backlog, context.mcr):
-        assert "contexto acumulado e a nova resposta" in source
+        assert "contexto acumulado e as novas respostas" in source
 
 
 @then("continua sem limite máximo enquanto existir lacuna aplicável")
 def then_backlog_has_no_question_limit(context) -> None:
     for source in (context.backlog, context.mcr):
-        assert "sem limite máximo de perguntas" in source
+        assert "sem limite máximo de rodadas" in source
         assert "enquanto existir lacuna aplicável" in source
 
 
-@then("oferece avançar a partir da décima primeira pergunta")
+@then("oferece avançar desde a primeira rodada")
 def then_backlog_offers_advance(context) -> None:
     for source in (context.backlog, context.mcr):
-        assert "A partir da 11ª pergunta" in source
-        assert "`avançar`" in source
+        assert "desde a primeira rodada" in source
+        assert "`Avançar`" in source
 
 
-@then("o avanço preserva as lacunas e mantém a definição pendente")
-def then_advance_preserves_open_gaps(context) -> None:
-    assert "lacunas não resolvidas" in context.backlog
-    assert "Status: Draft" in context.backlog
+@then("o avanço confirma se a área será encerrada, adiada ou retomada")
+def then_advance_confirms_area_destination(context) -> None:
+    for source in (context.backlog, context.mcr):
+        normalized = " ".join(source.split())
+        assert (
+            "encerrar definitivamente" in normalized
+            or "encerra definitivamente" in normalized
+        )
+        assert "responde depois" in normalized or "responder depois" in normalized
+        assert (
+            "volta a responder agora" in normalized
+            or "voltar a responder agora" in normalized
+        )
+
+
+@then("o refinamento registra e respeita o destino da área")
+def then_backlog_records_area_destination(context) -> None:
+    for source in (context.backlog, context.mcr):
+        assert "Área encerrada pelo usuário" in source
+        assert "Área adiada pelo usuário" in source
     assert "Definition Gate: Pending" in context.backlog

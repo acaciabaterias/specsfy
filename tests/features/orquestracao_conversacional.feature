@@ -11,10 +11,11 @@ Feature: Orquestração conversacional integrada
     And a etapa escolhida continua na mesma conversa sem confirmação
     And mudança tardia usa uma entrada pública e executável
 
-  Scenario: Refinar o backlog até fechar lacunas ou receber avanço explícito
+  Scenario: Refinar o backlog até fechar lacunas ou tratar avanço explícito
     Given o contrato do refinamento do backlog e do método MCR-10
     When a pessoa responde uma pergunta do refinamento do backlog
-    Then o refinamento do backlog reavalia o contexto acumulado com a nova resposta
+    Then o refinamento do backlog reavalia o contexto acumulado com as novas respostas
     And continua sem limite máximo enquanto existir lacuna aplicável
-    And oferece avançar a partir da décima primeira pergunta
-    And o avanço preserva as lacunas e mantém a definição pendente
+    And oferece avançar desde a primeira rodada
+    And o avanço confirma se a área será encerrada, adiada ou retomada
+    And o refinamento registra e respeita o destino da área
