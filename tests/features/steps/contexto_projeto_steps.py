@@ -164,7 +164,7 @@ def then_finds_exact_routes(context) -> None:
 @then("encontra a precedência entre contexto, especificação e fonte executável")
 def then_finds_source_precedence(context) -> None:
     router_text = context.entrypoint_text[context.router]
-    assert "specs/specs/<NNNN>-<slug>/spec.md" in router_text
+    assert "specs/<estado>/<NNNN>-<slug>/spec.md" in router_text
     assert "fontes executáveis" in router_text
     assert "AGENTS.md" in router_text
 

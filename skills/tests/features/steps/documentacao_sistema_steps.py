@@ -42,7 +42,7 @@ def write(root: Path, relative: str, content: str) -> None:
 
 def build(root: Path) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
-        ["python3", "-B", str(BUILDER), "--project", str(root)],
+        ["node", str(BUILDER), "--project", str(root)],
         text=True,
         capture_output=True,
         check=False,
@@ -126,12 +126,11 @@ def then_node_docs_describe_application(context) -> None:
         assert term in joined
 
 
-@then("cada pacote possui classificação versão fonte e referência GitHub")
+@then("cada pacote possui classificação versão fonte e coluna GitHub")
 def then_packages_have_provenance(context) -> None:
     packages = context.docs["packages.md"]
-    for heading in ("Framework", "Integrado", "Terceiro", "GitHub"):
+    for heading in ("Categoria", "Escopo", "Versão", "Fonte", "GitHub", "Terceiro"):
         assert heading in packages
-    assert "https://github.com/" in packages
 
 
 @then(".specsfy/PACKAGES.md inventaria todos os pacotes npm e Composer com finalidade")

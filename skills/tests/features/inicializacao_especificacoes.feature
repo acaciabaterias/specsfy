@@ -8,7 +8,7 @@ Feature: Inicialização de especificações
   Scenario: Criar uma spec preenchida no projeto atual
     Given um diretório de trabalho sem pasta specs
     When o agente inicia a spec "Minha Primeira Feature"
-    Then o arquivo specs/specs/0001-minha-primeira-feature/spec.md é criado nesse diretório
+    Then o arquivo specs/draft/0001-minha-primeira-feature/spec.md é criado nesse diretório
     And o cabeçalho é uma tabela com ID, título, slug e data preenchidos
     And o arquivo preserva os três atos e as dezoito seções
 

@@ -32,21 +32,22 @@ def when_minimum_policy_is_inspected(context) -> None:
 
 @then("o Definition Gate exige três ACs distintos por feature US FR e NFR")
 def then_definition_requires_three_scenarios(context) -> None:
-    assert "MINIMUM_CONTEXT_SCENARIOS = 3" in context.validator
-    assert 'for kind in ("US", "FR", "NFR")' in context.validator
+    assert "function minimumBddErrors(body)" in context.validator
+    assert 'for (const kind of ["US", "FR", "NFR"])' in context.validator
+    assert "if (count < 3)" in context.validator
     assert "**Cobre**" in context.framework
 
 
 @then("a rastreabilidade exige três marcadores de caso por feature US FR e NFR")
 def then_traceability_requires_three_cases(context) -> None:
-    assert "DEFAULT_MINIMUM_TESTS = 3" in context.traceability
-    assert 'default="US,FR,NFR,AC"' in context.traceability
+    assert 'option("--minimum-tests", "3")' in context.traceability
+    assert 'option("--kinds", "US,FR,NFR,AC")' in context.traceability
     assert "feature_cases_missing" in context.traceability
 
 
 @then("cada AC continua exigindo ao menos um caso TDD")
 def then_each_acceptance_requires_a_case(context) -> None:
-    assert '1 if item.startswith("AC-")' in context.traceability
+    assert 'id.startsWith("AC-") ? 1 : minimum' in context.traceability
 
 
 @then("template contrato central e guia oficial explicam o mínimo de três")

@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import shutil
 import subprocess
-import sys
 import tempfile
 from pathlib import Path
 
@@ -24,8 +23,7 @@ def given_empty_project(context) -> None:
 def when_capture_backlog_entry(context, title: str) -> None:
     context.result = subprocess.run(
         [
-            sys.executable,
-            "-B",
+            "node",
             str(SCRIPT),
             "--title",
             title,
@@ -124,7 +122,7 @@ def then_searches_project_sources(context) -> None:
     expected = (
         "termos derivados do pedido do usuário",
         "`specs/backlog/*.md`",
-        "`specs/specs/*/spec.md`",
+        "`specs/<estado>/*/spec.md`",
         "`docs/**/*.md`",
     )
     for phrase in expected:

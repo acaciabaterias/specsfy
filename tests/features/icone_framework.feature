@@ -13,8 +13,8 @@ Feature: Sistema oficial de logo do Specsfy
   Scenario: Documentar todas as regras do logo
     Given o manual normativo LOGO.md
     When o contrato de identidade visual é inspecionado
-    Then construção cores proteção redução fundos e acessibilidade estão definidos
-    And os guias de marca não descrevem os ativos removidos
+    Then variantes proteção tamanho restrições cores e acessibilidade estão definidos
+    And os guias de marca descrevem somente as variantes oficiais
 
   Scenario: Exibir o logo em todos os READMEs do monorepo
     Given os READMEs versionados encontrados recursivamente

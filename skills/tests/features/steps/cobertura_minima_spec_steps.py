@@ -48,7 +48,10 @@ def then_story_reports_observed_and_required_coverage(context) -> None:
 @then("a feature não avança enquanto a lacuna permanecer")
 def then_feature_does_not_advance_with_gap(context) -> None:
     assert_contract_passed(context)
-    assert "minimum_bdd_coverage_errors" in context.contract
+    assert (
+        "test_requires_three_distinct_bdd_scenarios_for_each_user_story"
+        in context.contract
+    )
 
 
 @given("uma spec com requisitos funcionais e não funcionais")

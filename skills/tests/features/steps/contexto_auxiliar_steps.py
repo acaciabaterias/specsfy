@@ -23,7 +23,7 @@ def temporary_project(context) -> Path:
 
 def run(script: Path, *arguments: str) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
-        ["python3", "-B", str(script), *arguments],
+        ["node", str(script), *arguments],
         text=True,
         capture_output=True,
         check=False,

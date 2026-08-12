@@ -3,7 +3,6 @@ from __future__ import annotations
 import os
 import shutil
 import subprocess
-import sys
 import tempfile
 from pathlib import Path
 
@@ -26,7 +25,7 @@ def command(
     *,
     root: Path | None = None,
 ) -> subprocess.CompletedProcess[str]:
-    args = [sys.executable, "-B", str(SCRIPT), "--title", title]
+    args = ["node", str(SCRIPT), "--title", title]
     if root is not None:
         args.extend(["--root", str(root)])
     return subprocess.run(
@@ -52,13 +51,13 @@ def when_initialize_named_spec(context, title: str) -> None:
 
 
 @then(
-    "o arquivo specs/specs/0001-minha-primeira-feature/spec.md é criado nesse diretório"
+    "o arquivo specs/draft/0001-minha-primeira-feature/spec.md é criado nesse diretório"
 )
 def then_spec_is_created_in_cwd(context) -> None:
     context.spec = (
         context.project
         / "specs"
-        / "specs"
+        / "draft"
         / "0001-minha-primeira-feature"
         / "spec.md"
     )
@@ -110,7 +109,7 @@ def then_only_explicit_root_is_used(context) -> None:
     expected = (
         context.project
         / "specs"
-        / "specs"
+        / "draft"
         / "0001-raiz-explicita"
         / "spec.md"
     )
@@ -122,7 +121,7 @@ def then_only_explicit_root_is_used(context) -> None:
 @given("um projeto com specs convertidas 0001-primeira, 0003-terceira e legado")
 def given_numbered_and_legacy_specs(context) -> None:
     context.project = temporary_directory(context, "sequence")
-    specs = context.project / "specs" / "specs"
+    specs = context.project / "specs" / "draft"
     for name in ("0001-primeira", "0003-terceira", "legado"):
         (specs / name).mkdir(parents=True)
 
@@ -135,7 +134,7 @@ def when_initialize_new_spec(context) -> None:
 @then("a nova spec recebe o ID SPEC-0004")
 def then_new_spec_has_fourth_id(context) -> None:
     context.spec = (
-        context.project / "specs" / "specs" / "0004-quarta" / "spec.md"
+        context.project / "specs" / "draft" / "0004-quarta" / "spec.md"
     )
     assert context.result.returncode == 0, context.result.stderr
     assert "| ID | SPEC-0004 |" in context.spec.read_text(encoding="utf-8")
@@ -157,7 +156,7 @@ def when_both_allocate(context) -> None:
     for title in ("Alpha", "Beta"):
         commands.append(
             subprocess.Popen(
-                [sys.executable, "-B", str(SCRIPT), "--title", title],
+                ["node", str(SCRIPT), "--title", title],
                 cwd=context.project,
                 text=True,
                 stdout=subprocess.PIPE,
@@ -172,7 +171,7 @@ def when_both_allocate(context) -> None:
 def then_concurrent_ids_are_unique(context) -> None:
     assert all(returncode == 0 for _, _, returncode in context.results), context.results
     names = sorted(
-        path.name for path in (context.project / "specs" / "specs").iterdir()
+        path.name for path in (context.project / "specs" / "draft").iterdir()
     )
     assert [name[:4] for name in names] == ["0001", "0002"]
 

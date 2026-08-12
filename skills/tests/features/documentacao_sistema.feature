@@ -15,7 +15,7 @@ Feature: Documentação técnica viva do sistema
     Given uma aplicação Node existente com Next React Tailwind e Vitest
     When a skill specsfy-documentator constrói a documentação
     Then a documentação descreve páginas componentes APIs testes e comandos
-    And cada pacote possui classificação versão fonte e referência GitHub
+    And cada pacote possui classificação versão fonte e coluna GitHub
     And .specsfy/PACKAGES.md inventaria todos os pacotes npm e Composer com finalidade
 
   Scenario: Reconstruir sem apagar conhecimento humano

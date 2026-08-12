@@ -10,9 +10,15 @@ from behave import given, then, when
 ROOT = Path(__file__).resolve().parents[3]
 BRAND_ROOT = ROOT / "brand"
 LOGO_ROOT = BRAND_ROOT / "logo"
-REMOVED_ASSETS = (
+OFFICIAL_ASSETS = (
     "logo-light.svg",
     "logo-dark.svg",
+    "icon-light.svg",
+    "icon-dark.svg",
+    "icon.svg",
+    "icon.png",
+)
+REMOVED_ASSETS = (
     "mark.svg",
     "favicon.svg",
     "logo/logo.md",
@@ -34,19 +40,15 @@ def when_vector_construction_is_inspected(context) -> None:
 @then("o logo preserva as três camadas e o símbolo de código")
 def then_logo_preserves_layers_and_code(context) -> None:
     assert context.svg_root.attrib["viewBox"] == "0 0 512 512"
-    layer_ids = {
-        child.attrib.get("id")
+    colors = {
+        value.upper()
         for child in context.svg_root
-        if child.tag.endswith("g")
+        for attribute in ("fill", "stroke")
+        if (value := child.attrib.get(attribute, "")).startswith("#")
     }
-    assert layer_ids == {
-        "layer-bottom",
-        "layer-middle",
-        "layer-top",
-        "layer-code-left",
-        "layer-code-slash",
-        "layer-code-right",
-    }
+    assert {"#A866FF", "#2AD5BE", "#C4B5FD", "#ECFDFB"} <= colors
+    paths = [child for child in context.svg_root if child.tag.endswith("path")]
+    assert len(paths) == 5
 
 
 @then("o PNG preserva a prancheta quadrada de 512 pixels")
@@ -76,29 +78,24 @@ def when_visual_identity_contract_is_inspected(context) -> None:
     )
 
 
-@then(
-    "construção cores proteção redução fundos e acessibilidade estão definidos"
-)
+@then("variantes proteção tamanho restrições cores e acessibilidade estão definidos")
 def then_complete_logo_rules_are_defined(context) -> None:
-    for section in (
-        "## Construção",
-        "## Cores",
-        "## Área de proteção",
-        "## Tamanho mínimo",
-        "## Fundos",
-        "## Acessibilidade",
-        "## Usos incorretos",
-    ):
+    for section in ("## Variantes", "## Proteção e tamanho", "## Restrições"):
         assert section in context.logo_manual
+    guide = context.brand_sources[3]
+    for section in ("## Cores", "## Acessibilidade"):
+        assert section in guide
 
 
-@then("os guias de marca não descrevem os ativos removidos")
-def then_brand_guides_do_not_describe_removed_assets(context) -> None:
-    for source in context.brand_sources:
-        assert "três camadas" in source.lower()
-        assert "símbolo de código" in source.lower()
-        for removed_asset in REMOVED_ASSETS:
-            assert removed_asset not in source
+@then("os guias de marca descrevem somente as variantes oficiais")
+def then_brand_guides_describe_only_official_assets(context) -> None:
+    sources = "\n".join((context.logo_manual, *context.brand_sources))
+    assert "três camadas" in sources.lower()
+    assert "símbolo de código" in sources.lower()
+    for official_asset in OFFICIAL_ASSETS:
+        assert official_asset in context.logo_manual
+    for removed_asset in REMOVED_ASSETS:
+        assert removed_asset not in sources
 
 
 @given("os READMEs versionados encontrados recursivamente")

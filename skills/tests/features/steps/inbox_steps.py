@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import subprocess
-import sys
 import tempfile
 from pathlib import Path
 from shutil import copy2
@@ -49,9 +48,8 @@ def when_agent_receives_inbox_text(context) -> None:
     )
     context.result = subprocess.run(
         [
-            sys.executable,
-            "-B",
-            str(ROOT / "specsfy-01-inbox" / "scripts" / "capturar_inbox.py"),
+            "node",
+            str(ROOT / "specsfy-01-inbox" / "scripts" / "capturar_inbox.mjs"),
             "--input",
             context.original,
             "--title",
