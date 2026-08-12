@@ -129,6 +129,16 @@ def when_new_logo_adoption_is_inspected(context) -> None:
 def then_all_readmes_use_canonical_logo(context) -> None:
     assert context.readme_contents
     for path, content in context.readme_contents.items():
+        if path == ROOT / "cli" / "README.md":
+            assert (
+                'srcset="https://promovaweb.com/opensource/specsfy/icon.svg"'
+                in content
+            )
+            assert (
+                'src="https://promovaweb.com/opensource/specsfy/icon.png"'
+                in content
+            )
+            continue
         logo_root = Path(
             os.path.relpath(LOGO_ROOT, start=path.parent)
         ).as_posix()

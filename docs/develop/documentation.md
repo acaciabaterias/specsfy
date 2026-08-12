@@ -50,6 +50,10 @@ segunda fonte editorial. `ebook/VERSION` controla a edição com SemVer e
 `docs/user/reading-order.txt` declara a ordem pedagógica única, compartilhada
 pelo portal e pelo ebook.
 
+O guia `docs/user/cli.md` explica o percurso visual. A referência
+`docs/user/cli-reference.md` cobre cada comando e subcomando registrado na
+implementação, com parâmetros, efeitos, saídas, recusas e cinco exemplos.
+
 Todo o texto do ebook e do PDF é escrito em Português do Brasil. O pipeline
 exige `lang: "pt-BR"` nos metadados e `lang="pt-BR"` no template HTML; termos
 técnicos em inglês permanecem somente quando forem a forma usada pelo

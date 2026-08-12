@@ -32,6 +32,7 @@ para `docs/develop/`.
 | índice das skills base | `docs/user/skills/README.md` |
 | aprofundamento de cada skill base | `docs/user/skills/specsfy-base-*.md` |
 | CLI e TUI | `docs/user/cli.md` |
+| referência completa do CLI | `docs/user/cli-reference.md` |
 | mudança posterior | `docs/user/update-spec.md` |
 | contexto persistente | `docs/user/project-context.md` |
 | documentação do sistema gerada | `docs/user/system-documentation.md` |

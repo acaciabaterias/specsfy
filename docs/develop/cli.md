@@ -84,7 +84,7 @@ quando o fingerprint das fontes muda.
 `specsfy milestones sync --project .` lê o campo `Milestones` das specs e do
 backlog. O comando atualiza blocos gerados em `specs.md` e em
 `specs/milestones/MNN.md`, preservando o restante do Markdown. Consulte
-[Milestones](milestones.md) para o contrato, as fronteiras de escrita e os
+[Milestones](milestones.md) para o contrato, os limites de escrita e os
 testes do módulo.
 
 ## Testes do consumidor
@@ -124,11 +124,18 @@ Toda mudança em `cli/` reconstrói e versiona esses artefatos.
 `SpecsfyTui.start()` aceita um `screen` do neo-blessed, um catálogo conhecido e
 a opção de desligar o polling. A suíte monta o mesmo renderer usado pelo
 executável em terminais virtuais de `80x24`, `129x44` e `160x50`. O buffer
-resultante confirma as seis abas, os painéis e os textos visíveis; eventos de
+resultante confirma as seis abas, os painéis e os textos visíveis. Eventos de
 teclado e mouse conferem foco, filtros, busca, seleção de skills e o modal de
 spec. Os atalhos de controle também são enviados como bytes de terminal. Essa
 cobertura inclui os nomes `linefeed` e `backspace`, usados pelo neo-blessed para
 `Ctrl+J` e `Ctrl+H`, e impede combinações indistinguíveis de `Tab` e `Enter`.
+
+`TUI_THEME`, em `tui.ts`, centraliza cores semânticas derivadas da paleta dark
+de `brand/tokens.json`. A suíte calcula a razão de contraste dos pares usados
+em texto, borda, seleção e foco. Texto principal e foco devem alcançar `7:1`, a
+seleção deve alcançar `4.5:1` e a borda deve alcançar `3:1`. As cores
+hexadecimais também evitam a variação introduzida por nomes configuráveis da
+paleta de 16 cores do terminal.
 
 ```bash
 cd cli
@@ -140,4 +147,7 @@ node dist/main.js --help
 ```
 
 Mudanças de interface atualizam também
-[`docs/user/cli.md`](../user/cli.md).
+[`docs/user/cli.md`](../user/cli.md) e a
+[`referência pública dos comandos`](../user/cli-reference.md). A regressão
+compara os comandos registrados no Commander com as seções dessa referência e
+exige cinco exemplos por comando ou subcomando.

@@ -8,6 +8,8 @@ já responde no terminal e que o bootstrap foi executado no projeto consumidor.
 Para conduzir a primeira fatia depois do bootstrap, siga o
 [guia do primeiro projeto](getting-started.md). Para seleção técnica, automação
 e reabertura de gates, consulte o [uso avançado](advanced-usage.md).
+Para consultar cada argumento, opção, efeito e formato de saída, use a
+[referência dos comandos](cli-reference.md).
 
 Os templates de ideia, backlog, spec, tarefas e informações permanentes ficam
 em `.specsfy/templates/`. Customizações com o mesmo nome ficam em
@@ -79,7 +81,7 @@ npm update --global @promovaweb/specsfy
 
 Se você instalou o executável Node com `curl -fL get.specsfy.dev`, repita o
 download descrito no [guia de instalação](installation.md). Nesse caso, a
-oferta automática exige o npm disponível; uma falha preserva a versão atual e
+oferta automática exige o npm disponível. Uma falha preserva a versão atual e
 abre a TUI normalmente.
 
 ## Dashboard e progresso
@@ -101,7 +103,8 @@ recalibrar a execução, registre Effort e sua justificativa diretamente na font
 normativa:
 
 ```bash
-specsfy effort 0001-recuperar-senha 7 --reason "Inclui migração e integração externa." --project .
+specsfy effort 0001-recuperar-senha 7 \
+  --reason "Inclui migração e integração externa." --project .
 ```
 
 Execute sem argumentos dentro do projeto consumidor para abrir a TUI:
@@ -232,8 +235,10 @@ inteira também aceita:
 O campo de projeto entra em edição com `Enter` ou com um clique. A confirmação
 recarrega backlogs, specs e skills a partir do caminho informado.
 
-Foco, cursor, seleção e ações primárias usam contraste reforçado para manter
-legibilidade em terminais escuros.
+A TUI usa a paleta escura oficial do Specsfy. O turquesa identifica o foco e a
+aba ativa, o violeta marca a linha selecionada e as ações primárias usam fundo
+petróleo com texto claro. Cada estado também mantém um rótulo visível, por isso
+continua compreensível quando a paleta configurada no terminal altera as cores.
 
 Na aba Skills, cada linha separa `Plano`, `Skill`, `Categoria` e `Estado`. O
 plano usa os valores `Instalar`, `Manter`, `Remover` e `Ignorar`. Ele expressa

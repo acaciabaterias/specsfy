@@ -25,7 +25,7 @@ LEGACY_PATTERNS = (
     re.compile(r"raw\.githubusercontent\.com/specsfy/"),
     re.compile(r"api\.github\.com/repos/specsfy/"),
     re.compile(
-        r"(?<!\.)\bspecsfy/"
+        r"(?<![./])\bspecsfy/"
         r"(?:dev|brand|skills|docs|example|specsfy|specialists|cli)\b"
     ),
     re.compile(r"oito repositórios|oito raízes Git|repositórios independentes"),
@@ -113,9 +113,9 @@ class MonorepoContractTest(unittest.TestCase):
             updater,
         )
         for endpoint in (
-            '"homepage": "https://github.com/promovaweb/specsfy"',
+            '"homepage": "https://promovaweb.com/docs/specsfy/cli/"',
             '"url": "git+https://github.com/promovaweb/specsfy.git"',
-            '"url": "https://github.com/promovaweb/specsfy/issues"',
+            '"email": "contato@promovaweb.com"',
             '"name": "@promovaweb/specsfy"',
         ):
             self.assertIn(endpoint, package)

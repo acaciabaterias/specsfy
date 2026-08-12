@@ -3,8 +3,12 @@
 <!-- markdownlint-disable MD033 -->
 <p align="center">
   <picture>
-    <source srcset="../brand/logo/icon.svg" type="image/svg+xml">
-    <img src="../brand/logo/icon.png" alt="Logo do Specsfy" width="128">
+    <source srcset="https://promovaweb.com/opensource/specsfy/icon.svg" type="image/svg+xml">
+    <img
+      src="https://promovaweb.com/opensource/specsfy/icon.png"
+      alt="Logo do Specsfy"
+      width="128"
+    >
   </picture>
 </p>
 <!-- markdownlint-enable MD033 -->
@@ -49,7 +53,7 @@ nesta ordem, `GH_TOKEN`, `GITHUB_TOKEN` e a sessão retornada por
 Para instalar uma versão específica, informe a versão no próprio pacote:
 
 ```bash
-npm install --global @promovaweb/specsfy@0.6.0
+npm install --global @promovaweb/specsfy@0.8.0
 ```
 
 ## Comandos
@@ -66,9 +70,14 @@ specsfy skills detect --project .
 specsfy skills add specsfy-specialist-laravel --project .
 specsfy skills remove specsfy-specialist-laravel --project .
 specsfy skills update --project .
+specsfy transition 0001-recuperar-senha defined --project .
+specsfy migrate --project .
+specsfy effort 0001-recuperar-senha 7 \
+  --reason "Inclui migração e integração externa." --project .
 specsfy progress --project .
 specsfy progress --project . --json
 specsfy progress --project . --watch
+specsfy milestones sync --project .
 specsfy test --project .
 specsfy config show --project .
 specsfy config set --project . --watch-interval 0.5
@@ -97,18 +106,23 @@ possui seis abas:
   por um painel de detalhes e resumo das alterações pendentes.
 - **Sobre**: versão e finalidade do CLI.
 
+A interface usa a paleta escura oficial do Specsfy. O turquesa identifica foco
+e abas ativas, o violeta marca seleções e o petróleo diferencia superfícies e
+ações primárias. Os estados continuam nomeados no próprio controle para que a
+cor não seja o único sinal disponível.
+
 ## Capturas de tela
 
-![Dashboard Home](../docs/user/assets/cli/cli-dash.png)
+![Dashboard Home](https://promovaweb.com/docs/specsfy/cli/cli-dash.png)
 
-![Backlogs](../docs/user/assets/cli/cli-backlogs.png)
+![Backlogs](https://promovaweb.com/docs/specsfy/cli/cli-backlogs.png)
 
-![Specs](../docs/user/assets/cli/cli-specs.png)
+![Specs](https://promovaweb.com/docs/specsfy/cli/cli-specs.png)
 
-![Skills](../docs/user/assets/cli/cli-skills.png)
+![Skills](https://promovaweb.com/docs/specsfy/cli/cli-skills.png)
 
 Alterações em `specs/inbox/*.md`, `specs/backlog/*.md`,
-`specs/specs/*/spec.md` e no `skills-lock.json` são detectadas
+`specs/<estado>/*/spec.md` e no `skills-lock.json` são detectadas
 automaticamente.
 
 Em projetos Laravel com Pest, `specsfy test --project .` detecta `artisan` e
@@ -195,7 +209,7 @@ reconstrói os artefatos versionados, cria a tag anotada `v<versão>` no mesmo
 commit e usa exatamente a seção promovida como corpo do GitHub Release. O CI
 valida o build e a correspondência da tag.
 
-Novas specs usam `specs/specs/<NNNN>-<slug>/spec.md`. Capturas imediatas ficam
+Novas specs usam `specs/draft/<NNNN>-<slug>/spec.md`. Capturas imediatas ficam
 em `specs/inbox/<data-hora>-<slug>.md` e itens refináveis em
 `specs/backlog/<NNNN>-<slug>.md`. O dashboard mantém leitura do layout
 legado. A skill de especificação renderiza cada arquivo novo a partir do
@@ -217,7 +231,7 @@ falha quando o artefato não corresponde ao estado atual.
 O pacote publicado no npm usa `@promovaweb/specsfy`. A tag estável dispara o
 job de publicação depois que tipos, testes, build, instalação local e
 executável versionado passam no CI. O job inclui proveniência quando o
-repositório estiver público; enquanto ele permanecer privado, publica com o
+repositório estiver público. Enquanto ele permanecer privado, publica com o
 token do registro e sem essa atestação.
 
 ## Atalhos da TUI
@@ -246,4 +260,7 @@ com um clique e atualiza o dashboard depois da confirmação. `Esc` retorna, e o
 mouse opera abas, linhas e botões. Nada é instalado ou removido antes de
 `Aplicar`.
 
-A documentação completa está em [`docs/`](../docs/).
+A documentação completa está no
+[portal público do Specsfy](https://promovaweb.com/docs/specsfy/). A
+[referência dos comandos](https://promovaweb.com/docs/specsfy/referencia-cli/)
+detalha parâmetros, saídas, efeitos persistentes e exemplos de automação.

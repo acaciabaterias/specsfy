@@ -4,6 +4,23 @@ Todas as mudanças relevantes do Specsfy CLI são registradas neste arquivo.
 
 ## [Unreleased]
 
+## [0.8.0] - 2026-08-12
+
+- Adiciona os comandos `transition`, `migrate` e `effort` para manter pasta,
+  status e estimativa das specs pela mesma interface, com saída JSON e
+  integração opcional com o ClickUpfy.
+- Adiciona `milestones sync` para projetar o progresso dos milestones em
+  `specs.md` e `specs/milestones/`, preservando o conteúdo escrito pelo
+  usuário.
+- Passa a ler o ciclo de vida em `specs/<estado>/`, mantém compatibilidade com
+  o layout anterior e inclui Effort e perfil de execução no progresso.
+- Amplia o bootstrap com as skills de entrevista e governança de milestones e
+  mantém a instalação protegida por fingerprints.
+- Reorganiza a paleta escura da TUI com cores semânticas e contraste verificado
+  para texto, foco, seleção, bordas, campos, botões e barras de rolagem.
+- Atualiza capturas, documentação de usuário e desenvolvimento, referência de
+  comandos, ebook e publicação dos guias no site da Promovaweb.
+
 ## [0.7.0] - 2026-07-30
 
 - Migra o CLI e a TUI de Python para Node.js 22, com instalação global por

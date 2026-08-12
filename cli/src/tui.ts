@@ -29,10 +29,7 @@ import {
   summarizeSpecs,
 } from "./progress.js";
 import { runProjectTests, type TestRun } from "./project-testing.js";
-import {
-  ensureSkillsLock,
-  skillsLockFingerprint,
-} from "./skill-lock.js";
+import { ensureSkillsLock, skillsLockFingerprint } from "./skill-lock.js";
 import { VERSION } from "./version.js";
 
 marked.use(
@@ -46,7 +43,8 @@ marked.use(
 /** Descrições do framework exibidas quando o catálogo remoto não as fornece. */
 export const BASE_DESCRIPTIONS: Readonly<Record<string, string>> = {
   "specsfy-01-inbox": "Captura e pré-processa entradas sem fazer perguntas.",
-  "specsfy-02-backlog": "Refina entradas, reduz ambiguidades e prioriza o backlog.",
+  "specsfy-02-backlog":
+    "Refina entradas, reduz ambiguidades e prioriza o backlog.",
   "specsfy-03-specify": "Criação e evolução da especificação normativa.",
   "specsfy-04-validate": "Revisão de qualidade, riscos e gates.",
   "specsfy-05-tasks": "Decomposição rastreável do trabalho.",
@@ -56,9 +54,11 @@ export const BASE_DESCRIPTIONS: Readonly<Record<string, string>> = {
   "specsfy-progress": "Leitura e acompanhamento do progresso.",
   "specsfy-setup": "Prepara e reconcilia o contexto persistente do projeto.",
   "specsfy-aux-stack": "Mapeia e mantém o stack técnico observado.",
-  "specsfy-aux-rules": "Ajuda a registrar regras explícitas sem apagar as atuais.",
+  "specsfy-aux-rules":
+    "Ajuda a registrar regras explícitas sem apagar as atuais.",
   "specsfy-aux-database": "Mantém o mapa tabular completo da persistência.",
-  "specsfy-documentator": "Reconstrói a documentação técnica completa do sistema.",
+  "specsfy-documentator":
+    "Reconstrói a documentação técnica completa do sistema.",
 };
 
 const CATEGORY_LABELS: Readonly<Record<string, string>> = {
@@ -112,6 +112,31 @@ export const TUI_TABS = [
   { id: "skills", label: "Skills", key: "C-k" },
   { id: "about", label: "Sobre", key: "C-o" },
 ] as const;
+
+/**
+ * Paleta semântica da TUI, derivada dos tokens oficiais do dark mode.
+ *
+ * Os pares de texto, seleção e foco mantêm contraste mensurável sem depender
+ * das cores configuráveis de 16 posições do terminal da pessoa usuária.
+ */
+export const TUI_THEME = {
+  background: "#000A0E",
+  surface: "#001117",
+  surfaceRaised: "#03212A",
+  text: "#F2F8F9",
+  textMuted: "#B2C6CE",
+  border: "#5F7D8C",
+  accent: "#C4B5FD",
+  activeBackground: "#5EEDE1",
+  activeText: "#001117",
+  selectedBackground: "#6D28D9",
+  selectedText: "#F2F8F9",
+  primaryBackground: "#15626A",
+  primaryText: "#F2F8F9",
+  focusBackground: "#5EEDE1",
+  focusText: "#001117",
+  warning: "#FCD34D",
+} as const;
 
 /** Identificador válido de uma área principal do dashboard. */
 export type Tab = (typeof TUI_TABS)[number]["id"];
@@ -236,7 +261,11 @@ export class SpecsfyTui {
       height: 1,
       align: "center",
       content: "Specsfy — Dashboard de specs e skills",
-      style: { fg: "white", bg: "black", bold: true },
+      style: {
+        fg: TUI_THEME.text,
+        bg: TUI_THEME.selectedBackground,
+        bold: true,
+      },
     });
     this.#projectInput = blessed.textbox({
       parent: screen,
@@ -250,10 +279,10 @@ export class SpecsfyTui {
       keys: true,
       mouse: true,
       style: {
-        fg: "white",
-        bg: "black",
-        border: { fg: "gray" },
-        focus: { border: { fg: "cyan" } },
+        fg: TUI_THEME.text,
+        bg: TUI_THEME.surface,
+        border: { fg: TUI_THEME.border },
+        focus: { border: { fg: TUI_THEME.focusBackground } },
       },
     });
     this.#projectInput.on("submit", (value) => {
@@ -293,10 +322,14 @@ export class SpecsfyTui {
         mouse: true,
         keys: true,
         style: {
-          fg: "gray",
-          bg: "black",
-          focus: { fg: "white", bg: "blue", bold: true },
-          hover: { fg: "white", bg: "blue" },
+          fg: TUI_THEME.textMuted,
+          bg: TUI_THEME.background,
+          focus: {
+            fg: TUI_THEME.focusText,
+            bg: TUI_THEME.focusBackground,
+            bold: true,
+          },
+          hover: { fg: TUI_THEME.focusText, bg: TUI_THEME.focusBackground },
         },
       });
       button.on("press", () => this.showTab(id));
@@ -309,7 +342,7 @@ export class SpecsfyTui {
       left: 0,
       width: "100%",
       orientation: "horizontal",
-      style: { fg: "gray" },
+      style: { fg: TUI_THEME.border },
     });
     this.#body = blessed.box({
       parent: screen,
@@ -317,7 +350,7 @@ export class SpecsfyTui {
       left: 1,
       right: 1,
       bottom: 4,
-      style: { fg: "white", bg: "black" },
+      style: { fg: TUI_THEME.text, bg: TUI_THEME.background },
     });
     this.#status = blessed.box({
       parent: screen,
@@ -326,7 +359,7 @@ export class SpecsfyTui {
       width: "100%",
       height: 1,
       padding: { left: 1 },
-      style: { fg: "gray", bg: "black" },
+      style: { fg: TUI_THEME.textMuted, bg: TUI_THEME.surface },
     });
     blessed.box({
       parent: screen,
@@ -337,7 +370,7 @@ export class SpecsfyTui {
       content:
         " ^ = Ctrl  ·  Tab/Shift+Tab: foco  ·  Setas: navegar  ·  " +
         "Espaço: abrir spec/alternar skill  ·  Esc: voltar  ·  Mouse: disponível",
-      style: { fg: "cyan", bg: "black" },
+      style: { fg: TUI_THEME.accent, bg: TUI_THEME.background },
     });
     blessed.box({
       parent: screen,
@@ -346,7 +379,7 @@ export class SpecsfyTui {
       width: "100%",
       height: 1,
       content: " ^Q Sair    Esc Voltar",
-      style: { fg: "white", bg: "black", bold: true },
+      style: { fg: TUI_THEME.text, bg: TUI_THEME.surface, bold: true },
     });
   }
 
@@ -392,8 +425,9 @@ export class SpecsfyTui {
     const body = this.#body;
     if (!body || !this.#screen) return;
     for (const [id, button] of this.#tabButtons) {
-      button.style.bg = id === tab ? "cyan" : "black";
-      button.style.fg = id === tab ? "black" : "gray";
+      button.style.bg =
+        id === tab ? TUI_THEME.activeBackground : TUI_THEME.background;
+      button.style.fg = id === tab ? TUI_THEME.activeText : TUI_THEME.textMuted;
       button.style.bold = id === tab;
     }
     for (const child of [...body.children]) child.destroy();
@@ -433,24 +467,24 @@ export class SpecsfyTui {
   private renderHome(body: blessed.Widgets.BoxElement): void {
     const summary = summarizeSpecs(this.#specs);
     const cards: Array<[string, string, string, string]> = [
-      ["Specs", String(summary.total_specs), "#173e67", "#2f81f7"],
+      ["Specs", String(summary.total_specs), "#021C26", "#5EEDE1"],
       [
         `Tarefas · ${summary.pending_tasks} pendentes`,
         `${summary.completed_tasks}/${summary.total_tasks}`,
-        "#3f2d63",
-        "#a371f7",
+        "#2E1065",
+        "#C4B5FD",
       ],
       [
         `Itens · ${summary.pending_items} pendentes`,
         `${summary.completed_items}/${summary.total_items}`,
-        "#174b43",
-        "#2ea043",
+        "#03212A",
+        "#37E1D0",
       ],
       [
         "",
         `${summary.percent}%\n${progressBar(summary.percent, 16)}`,
-        "#4a381c",
-        "#d29922",
+        "#001117",
+        TUI_THEME.warning,
       ],
     ];
     cards.forEach(([label, value, background, border], index) => {
@@ -465,7 +499,7 @@ export class SpecsfyTui {
         valign: "middle",
         content: `{bold}${value}{/bold}${label ? `\n${label}` : ""}`,
         tags: true,
-        style: { fg: "white", bg: background, border: { fg: border } },
+        style: { fg: TUI_THEME.text, bg: background, border: { fg: border } },
       });
     });
     blessed.box({
@@ -480,7 +514,11 @@ export class SpecsfyTui {
       content:
         "Visão consolidada do andamento das especificações. " +
         "Os números são recalculados quando os arquivos mudam.",
-      style: { fg: "white", border: { fg: "gray" } },
+      style: {
+        fg: TUI_THEME.text,
+        bg: TUI_THEME.surface,
+        border: { fg: TUI_THEME.border },
+      },
     });
   }
 
@@ -499,8 +537,8 @@ export class SpecsfyTui {
       keys: true,
       vi: true,
       mouse: true,
-      scrollbar: { ch: " ", track: { bg: "gray" }, style: { bg: "cyan" } },
-      style: { border: { fg: "gray" }, focus: { border: { fg: "yellow" } } },
+      scrollbar: terminalScrollbar(),
+      style: focusablePanelStyle(),
     });
     const list = blessed.list({
       parent: body,
@@ -516,18 +554,24 @@ export class SpecsfyTui {
       mouse: true,
       tags: false,
       style: {
-        selected: { fg: "white", bg: "blue", bold: true },
-        item: { fg: "white" },
-        border: { fg: "gray" },
-        focus: { border: { fg: "yellow" } },
+        ...focusablePanelStyle(),
+        selected: {
+          fg: TUI_THEME.selectedText,
+          bg: TUI_THEME.selectedBackground,
+          bold: true,
+        },
+        item: { fg: TUI_THEME.text, bg: TUI_THEME.background },
       },
     });
     const updatePreview = (): void => {
       const item = this.#backlogs[selectedIndex(list)];
-      preview.setLabel(item ? ` ${item.identifier} · ${item.status} ` : " Nenhum backlog ");
+      preview.setLabel(
+        item ? ` ${item.identifier} · ${item.status} ` : " Nenhum backlog ",
+      );
       preview.setContent(
-        item ? renderMarkdown(formatBacklogPreview(item.content)) :
-          "Crie arquivos em specs/backlog/<NNNN>-<slug>.md para visualizá-los aqui.",
+        item
+          ? renderMarkdown(formatBacklogPreview(item.content))
+          : "Crie arquivos em specs/backlog/<NNNN>-<slug>.md para visualizá-los aqui.",
       );
       this.#screen?.render();
     };
@@ -547,7 +591,7 @@ export class SpecsfyTui {
       width: "100%",
       height: "100%",
       border: "line",
-      style: { border: { fg: "gray" } },
+      style: { border: { fg: TUI_THEME.border } },
     });
     blessed.box({
       parent: panel,
@@ -556,7 +600,11 @@ export class SpecsfyTui {
       width: "100%-2",
       height: 1,
       content: heading,
-      style: { fg: "white", bg: "cyan", bold: true },
+      style: {
+        fg: TUI_THEME.activeText,
+        bg: TUI_THEME.activeBackground,
+        bold: true,
+      },
     });
     const list = blessed.list({
       parent: panel,
@@ -577,8 +625,12 @@ export class SpecsfyTui {
       vi: true,
       mouse: true,
       style: {
-        selected: { fg: "white", bg: "blue", bold: true },
-        item: { fg: "white" },
+        selected: {
+          fg: TUI_THEME.selectedText,
+          bg: TUI_THEME.selectedBackground,
+          bold: true,
+        },
+        item: { fg: TUI_THEME.text, bg: TUI_THEME.background },
       },
     });
     const open = (): void => {
@@ -613,8 +665,12 @@ export class SpecsfyTui {
       vi: true,
       mouse: true,
       padding: { left: 1, right: 1 },
-      scrollbar: { ch: " ", track: { bg: "gray" }, style: { bg: "cyan" } },
-      style: { fg: "white", bg: "black", border: { fg: "cyan" } },
+      scrollbar: terminalScrollbar(),
+      style: {
+        fg: TUI_THEME.text,
+        bg: TUI_THEME.background,
+        border: { fg: TUI_THEME.focusBackground },
+      },
     });
     this.#modal = modal;
     modal.focus();
@@ -632,12 +688,7 @@ export class SpecsfyTui {
       align: "center",
       mouse: true,
       keys: true,
-      style: {
-        fg: "white",
-        bg: "blue",
-        focus: { bg: "cyan", fg: "black" },
-        hover: { bg: "cyan", fg: "black" },
-      },
+      style: buttonStyle(true),
     });
     button.on("press", () => void this.runTests());
     blessed.box({
@@ -699,7 +750,7 @@ export class SpecsfyTui {
         vi: true,
         mouse: true,
         scrollable: true,
-        style: { border: { fg: "gray" }, focus: { border: { fg: "yellow" } } },
+        style: focusablePanelStyle(),
       });
     } else {
       // O blessed.log agenda a rolagem depois de setContent e acessa widgets
@@ -721,7 +772,7 @@ export class SpecsfyTui {
         alwaysScroll: true,
         tags: false,
         content: this.#testOutput.join("\n"),
-        style: { border: { fg: "gray" }, focus: { border: { fg: "yellow" } } },
+        style: focusablePanelStyle(),
       });
     }
     button.focus();
@@ -773,8 +824,10 @@ export class SpecsfyTui {
       content:
         `${this.project}/skills-lock.json · ` +
         `${this.#installed.size} skill(s) Specsfy instalada(s)` +
-        (this.#catalogError ? ` · catálogo indisponível: ${this.#catalogError}` : ""),
-      style: { fg: "gray" },
+        (this.#catalogError
+          ? ` · catálogo indisponível: ${this.#catalogError}`
+          : ""),
+      style: { fg: TUI_THEME.textMuted },
     });
     const search = blessed.textbox({
       parent: body,
@@ -788,7 +841,7 @@ export class SpecsfyTui {
       inputOnFocus: false,
       keys: true,
       mouse: true,
-      style: { border: { fg: "gray" }, focus: { border: { fg: "yellow" } } },
+      style: focusablePanelStyle(),
     });
     search.on("submit", (value) => {
       this.#skillQuery = String(value ?? "");
@@ -849,7 +902,7 @@ export class SpecsfyTui {
       content:
         `${this.#selected.size} selecionada(s) · ${visible.length} visível(is) · ` +
         `${toInstall} para instalar · ${toRemove} para remover`,
-      style: { fg: "white", bold: true },
+      style: { fg: TUI_THEME.text, bold: true },
     });
     const catalog = blessed.box({
       parent: body,
@@ -876,10 +929,13 @@ export class SpecsfyTui {
       vi: true,
       mouse: true,
       style: {
-        selected: { fg: "white", bg: "blue", bold: true },
-        item: { fg: "white" },
-        border: { fg: "gray" },
-        focus: { border: { fg: "yellow" } },
+        ...focusablePanelStyle(),
+        selected: {
+          fg: TUI_THEME.selectedText,
+          bg: TUI_THEME.selectedBackground,
+          bold: true,
+        },
+        item: { fg: TUI_THEME.text, bg: TUI_THEME.background },
       },
     });
     const detail = blessed.box({
@@ -895,7 +951,7 @@ export class SpecsfyTui {
       keys: true,
       vi: true,
       mouse: true,
-      style: { border: { fg: "gray" }, focus: { border: { fg: "yellow" } } },
+      style: focusablePanelStyle(),
     });
     blessed.box({
       parent: catalog,
@@ -905,7 +961,11 @@ export class SpecsfyTui {
       height: 1,
       content:
         " PLANO    SKILL                        CATEGORIA          ESTADO ",
-      style: { fg: "black", bg: "white", bold: true },
+      style: {
+        fg: TUI_THEME.activeText,
+        bg: TUI_THEME.activeBackground,
+        bold: true,
+      },
     });
     const updateDetail = (): void => {
       const option = visible[selectedIndex(list)];
@@ -930,11 +990,7 @@ export class SpecsfyTui {
     };
     list.on("select", toggle);
     list.key(["space"], toggle);
-    const actions: Array<[
-      string,
-      () => void,
-      boolean?,
-    ]> = [
+    const actions: Array<[string, () => void, boolean?]> = [
       ["Detectar  ^D", () => void this.detectSkills()],
       ["Framework  ^B", () => this.selectFramework()],
       ["Marcar  ^V", () => this.selectVisible()],
@@ -1011,7 +1067,9 @@ export class SpecsfyTui {
       this.showStatus(
         `${this.project} · ${summary.completed_specs}/${summary.total_specs} specs completas · ` +
           "atualização automática ativa" +
-          (this.#catalogError ? ` · catálogo indisponível: ${this.#catalogError}` : ""),
+          (this.#catalogError
+            ? ` · catálogo indisponível: ${this.#catalogError}`
+            : ""),
       );
       this.showTab(this.#activeTab);
     } catch (error) {
@@ -1055,7 +1113,9 @@ export class SpecsfyTui {
 
   private selectFramework(): void {
     this.#selected = new Set([...this.#selected, ...FRAMEWORK_SKILLS]);
-    this.showStatus("As skills do framework foram selecionadas. Use ^A para aplicar.");
+    this.showStatus(
+      "As skills do framework foram selecionadas. Use ^A para aplicar.",
+    );
     this.showTab("skills");
   }
 
@@ -1098,7 +1158,8 @@ export class SpecsfyTui {
 
   private clearVisible(): void {
     this.#suppressSkillToggleUntil = Date.now() + 100;
-    for (const option of this.visibleSkills()) this.#selected.delete(option.name);
+    for (const option of this.visibleSkills())
+      this.#selected.delete(option.name);
     this.showTab("skills");
   }
 
@@ -1117,7 +1178,9 @@ export class SpecsfyTui {
         }
       }
       const toAdd = [...selected].filter((name) => !this.#installed.has(name));
-      const toRemove = [...this.#installed].filter((name) => !selected.has(name));
+      const toRemove = [...this.#installed].filter(
+        (name) => !selected.has(name),
+      );
       const base = toAdd.filter((name) =>
         (FRAMEWORK_SKILLS as readonly string[]).includes(name),
       );
@@ -1126,7 +1189,8 @@ export class SpecsfyTui {
       );
       const installer = await SkillInstaller.create(this.project);
       const changed: string[] = [];
-      if (base.length) changed.push(...(await installer.installBaseSelection(base)));
+      if (base.length)
+        changed.push(...(await installer.installBaseSelection(base)));
       if (specialists.length) {
         this.#catalog ??= await Catalog.fetch();
         const names = this.#catalog
@@ -1135,7 +1199,8 @@ export class SpecsfyTui {
           .filter((name) => !this.#installed.has(name));
         changed.push(...(await installer.installSpecialists(names)));
       }
-      if (toRemove.length) changed.push(...(await installer.remove(toRemove.sort())));
+      if (toRemove.length)
+        changed.push(...(await installer.remove(toRemove.sort())));
       await this.refreshAll(false);
       this.showStatus(
         changed.length
@@ -1150,7 +1215,9 @@ export class SpecsfyTui {
   private async updateSkills(): Promise<void> {
     this.showTab("skills");
     try {
-      const changed = await (await SkillInstaller.create(this.project)).updateAll();
+      const changed = await (
+        await SkillInstaller.create(this.project)
+      ).updateAll();
       await this.refreshAll(true);
       this.showStatus(
         changed.length
@@ -1177,7 +1244,8 @@ export function buildSkillOptions(
     name,
     description: BASE_DESCRIPTIONS[name] ?? "Skill do framework Specsfy.",
     kind:
-      (AUXILIARY_SKILLS as readonly string[]).includes(name) || name === "specsfy-setup"
+      (AUXILIARY_SKILLS as readonly string[]).includes(name) ||
+      name === "specsfy-setup"
         ? "auxiliary"
         : (DOCUMENTATION_SKILLS as readonly string[]).includes(name)
           ? "documentation"
@@ -1287,9 +1355,7 @@ function friendlySkillName(name: string): string {
   };
   if (baseNames[name]) return baseNames[name];
   return titleCase(
-    name
-      .replace(/^specsfy-(?:aux|specialist)-/u, "")
-      .replaceAll("-", " "),
+    name.replace(/^specsfy-(?:aux|specialist)-/u, "").replaceAll("-", " "),
   );
 }
 
@@ -1351,20 +1417,49 @@ function renderMarkdown(content: string): string {
 
 function buttonStyle(primary = false): blessed.Widgets.Types.TStyle {
   return {
-    fg: "white",
-    bg: primary ? "blue" : "black",
-    border: { fg: primary ? "cyan" : "gray" },
-    focus: { fg: "white", bg: "blue", border: { fg: "cyan" } },
-    hover: { fg: "white", bg: "blue", border: { fg: "cyan" } },
+    fg: primary ? TUI_THEME.primaryText : TUI_THEME.text,
+    bg: primary ? TUI_THEME.primaryBackground : TUI_THEME.surface,
+    border: { fg: primary ? TUI_THEME.focusBackground : TUI_THEME.border },
+    focus: {
+      fg: TUI_THEME.focusText,
+      bg: TUI_THEME.focusBackground,
+      border: { fg: TUI_THEME.focusBackground },
+    },
+    hover: {
+      fg: TUI_THEME.focusText,
+      bg: TUI_THEME.focusBackground,
+      border: { fg: TUI_THEME.focusBackground },
+    },
   };
 }
 
 function tabStyle(active: boolean): blessed.Widgets.Types.TStyle {
   return {
-    fg: active ? "black" : "gray",
-    bg: active ? "cyan" : "black",
+    fg: active ? TUI_THEME.activeText : TUI_THEME.textMuted,
+    bg: active ? TUI_THEME.activeBackground : TUI_THEME.background,
     bold: active,
-    focus: { fg: "white", bg: "blue" },
-    hover: { fg: "white", bg: "blue" },
+    focus: { fg: TUI_THEME.focusText, bg: TUI_THEME.focusBackground },
+    hover: { fg: TUI_THEME.focusText, bg: TUI_THEME.focusBackground },
+  };
+}
+
+/** Mantém borda e foco legíveis em painéis, inputs e regiões roláveis. */
+function focusablePanelStyle(): blessed.Widgets.Types.TStyle {
+  return {
+    fg: TUI_THEME.text,
+    bg: TUI_THEME.background,
+    border: { fg: TUI_THEME.border },
+    focus: { border: { fg: TUI_THEME.focusBackground } },
+  };
+}
+
+/** Usa trilho discreto e indicador turquesa na rolagem dos painéis. */
+function terminalScrollbar(): NonNullable<
+  blessed.Widgets.ScrollableBoxOptions["scrollbar"]
+> {
+  return {
+    ch: " ",
+    track: { bg: TUI_THEME.surfaceRaised },
+    style: { bg: TUI_THEME.focusBackground },
   };
 }

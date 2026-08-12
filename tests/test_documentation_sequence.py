@@ -30,6 +30,7 @@ PEDAGOGICAL_ORDER = (
     "docs/user/skills/specsfy-roadmap-milestone-interviewer.md",
     "docs/user/skills/specsfy-milestone-governor.md",
     "docs/user/cli.md",
+    "docs/user/cli-reference.md",
     "docs/user/project-context.md",
     "docs/user/system-documentation.md",
     "docs/user/update-spec.md",

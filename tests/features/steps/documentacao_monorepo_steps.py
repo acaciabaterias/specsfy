@@ -335,7 +335,7 @@ def then_cli_readme_stacks_screenshots_vertically(context) -> None:
         ("cli-skills.png", "Skills"),
     )
     stacked_screenshots = "\n\n".join(
-        f"![{alt_text}](../docs/user/assets/cli/{filename})"
+        f"![{alt_text}](https://promovaweb.com/docs/specsfy/cli/{filename})"
         for filename, alt_text in screenshots
     )
     assert stacked_screenshots in context.cli_readme

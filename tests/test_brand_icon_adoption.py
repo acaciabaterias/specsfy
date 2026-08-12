@@ -47,6 +47,16 @@ class BrandLogoAdoptionTests(unittest.TestCase):
                     os.path.relpath(LOGO_ROOT, start=readme_path.parent)
                 ).as_posix()
                 readme = readme_path.read_text(encoding="utf-8")
+                if readme_path == ROOT / "cli" / "README.md":
+                    self.assertIn(
+                        'srcset="https://promovaweb.com/opensource/specsfy/icon.svg"',
+                        readme,
+                    )
+                    self.assertIn(
+                        'src="https://promovaweb.com/opensource/specsfy/icon.png"',
+                        readme,
+                    )
+                    continue
                 self.assertIn(
                     f'<source srcset="{logo_root}/icon.svg" '
                     'type="image/svg+xml">',

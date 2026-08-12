@@ -302,7 +302,7 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
                 )
 
         stacked_screenshots = "\n\n".join(
-            f"![{alt_text}](../docs/user/assets/cli/{filename})"
+            f"![{alt_text}](https://promovaweb.com/docs/specsfy/cli/{filename})"
             for filename, alt_text in screenshots
         )
         self.assertIn(stacked_screenshots, cli_readme)

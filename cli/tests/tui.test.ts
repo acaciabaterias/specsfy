@@ -23,6 +23,7 @@ import {
   skillPlanLabel,
   SpecsfyTui,
   TUI_BINDINGS,
+  TUI_THEME,
   TUI_TABS,
 } from "../src/tui.js";
 import { temporaryDirectory } from "./helpers.js";
@@ -36,6 +37,33 @@ afterEach(() => {
 });
 
 describe("contrato herdado da TUI Python", () => {
+  test("mantém contraste mínimo nos pares semânticos da interface", () => {
+    expect(
+      contrastRatio(TUI_THEME.text, TUI_THEME.background),
+    ).toBeGreaterThanOrEqual(7);
+    expect(
+      contrastRatio(TUI_THEME.textMuted, TUI_THEME.background),
+    ).toBeGreaterThanOrEqual(7);
+    expect(
+      contrastRatio(TUI_THEME.textMuted, TUI_THEME.surface),
+    ).toBeGreaterThanOrEqual(7);
+    expect(
+      contrastRatio(TUI_THEME.border, TUI_THEME.background),
+    ).toBeGreaterThanOrEqual(3);
+    expect(
+      contrastRatio(TUI_THEME.selectedText, TUI_THEME.selectedBackground),
+    ).toBeGreaterThanOrEqual(4.5);
+    expect(
+      contrastRatio(TUI_THEME.focusText, TUI_THEME.focusBackground),
+    ).toBeGreaterThanOrEqual(7);
+    expect(
+      contrastRatio(TUI_THEME.primaryText, TUI_THEME.primaryBackground),
+    ).toBeGreaterThanOrEqual(4.5);
+    expect(
+      contrastRatio(TUI_THEME.accent, TUI_THEME.background),
+    ).toBeGreaterThanOrEqual(7);
+  });
+
   test("mantém as seis áreas na mesma ordem", () => {
     expect(TUI_TABS).toEqual([
       { id: "home", label: "Home", key: "C-h" },
@@ -109,7 +137,9 @@ describe("catálogo de skills", () => {
   test("monta framework, catálogo e instalação fora do catálogo", () => {
     const options = buildSkillOptions(catalog, installed);
     expect(options).toHaveLength(20);
-    expect(options.find((option) => option.name === "external-skill")).toBeUndefined();
+    expect(
+      options.find((option) => option.name === "external-skill"),
+    ).toBeUndefined();
     expect(
       options.find((option) => option.name === "specsfy-specialist-legado"),
     ).toMatchObject({ kind: "instalada", installed: true });
@@ -137,11 +167,13 @@ describe("catálogo de skills", () => {
 
   test("expõe o plano antes de executar qualquer alteração", () => {
     const selected = new Set(["specsfy-02-backlog", "nova"]);
-    expect(skillPlanLabel("specsfy-02-backlog", installed, selected)).toBe("Manter");
-    expect(skillPlanLabel("nova", installed, selected)).toBe("Instalar");
-    expect(skillPlanLabel("specsfy-specialist-legado", installed, selected)).toBe(
-      "Remover",
+    expect(skillPlanLabel("specsfy-02-backlog", installed, selected)).toBe(
+      "Manter",
     );
+    expect(skillPlanLabel("nova", installed, selected)).toBe("Instalar");
+    expect(
+      skillPlanLabel("specsfy-specialist-legado", installed, selected),
+    ).toBe("Remover");
     expect(skillPlanLabel("ignorar", installed, selected)).toBe("Ignorar");
   });
 
@@ -267,7 +299,9 @@ describe("renderização e interação em terminal real", () => {
     expect(screenText(screen)).toContain("Esc: voltar para a lista de specs");
     press(screen, "escape");
     expect(tui.activeTab).toBe("specs");
-    expect(screenText(screen)).not.toContain("Esc: voltar para a lista de specs");
+    expect(screenText(screen)).not.toContain(
+      "Esc: voltar para a lista de specs",
+    );
   });
 
   test("atualiza o preview ao navegar pelos backlogs", async () => {
@@ -288,9 +322,11 @@ describe("renderização e interação em terminal real", () => {
     expect(
       descendants(screen).filter((child) =>
         String(
-          (child as blessed.Widgets.BlessedElement & {
-            options?: { label?: string };
-          }).options?.label ?? "",
+          (
+            child as blessed.Widgets.BlessedElement & {
+              options?: { label?: string };
+            }
+          ).options?.label ?? "",
         ).includes("Buscar por nome"),
       ),
     ).toHaveLength(1);
@@ -353,7 +389,8 @@ describe("renderização e interação em terminal real", () => {
     const testButtons = descendants(screen).filter(
       (child) =>
         child.type === "button" &&
-        (child as blessed.Widgets.BlessedElement).getContent().trim() === "Testes",
+        (child as blessed.Widgets.BlessedElement).getContent().trim() ===
+          "Testes",
     );
     expect(testButtons).toHaveLength(2);
     testButtons.at(-1)?.emit("press");
@@ -364,7 +401,9 @@ describe("renderização e interação em terminal real", () => {
     const { tui, screen, input } = await mountedTui();
     input.write(Buffer.from([0x18]));
     await waitFor(() =>
-      screenText(screen).includes("Erro ao executar testes: Pest não foi detectado"),
+      screenText(screen).includes(
+        "Erro ao executar testes: Pest não foi detectado",
+      ),
     );
     await settle();
     await settle();
@@ -383,13 +422,18 @@ describe("renderização e interação em terminal real", () => {
   });
 });
 
-async function mountedTui(columns = 129, rows = 44): Promise<{
+async function mountedTui(
+  columns = 129,
+  rows = 44,
+): Promise<{
   tui: SpecsfyTui;
   screen: blessed.Widgets.Screen;
   input: PassThrough;
 }> {
   const project = await temporaryDirectory();
-  await mkdir(join(project, "specs", "specs", "0001-login"), { recursive: true });
+  await mkdir(join(project, "specs", "specs", "0001-login"), {
+    recursive: true,
+  });
   await mkdir(join(project, "specs", "backlog"), { recursive: true });
   await writeFile(
     join(project, "specs", "specs", "0001-login", "spec.md"),
@@ -447,11 +491,18 @@ async function mountedTui(columns = 129, rows = 44): Promise<{
 }
 
 function screenText(screen: blessed.Widgets.Screen): string {
-  const lines = (screen as unknown as {
-    lines: Array<Array<[number, string]>>;
-  }).lines;
+  const lines = (
+    screen as unknown as {
+      lines: Array<Array<[number, string]>>;
+    }
+  ).lines;
   return lines
-    .map((line) => line.map((cell) => cell[1]).join("").trimEnd())
+    .map((line) =>
+      line
+        .map((cell) => cell[1])
+        .join("")
+        .trimEnd(),
+    )
     .join("\n");
 }
 
@@ -465,18 +516,16 @@ function press(
     "keypress",
     "",
     {
-    name,
-    ctrl,
-    shift,
-    meta: false,
-    full: ctrl ? `C-${name}` : shift ? `S-${name}` : name,
+      name,
+      ctrl,
+      shift,
+      meta: false,
+      full: ctrl ? `C-${name}` : shift ? `S-${name}` : name,
     },
   );
 }
 
-function descendants(
-  widget: blessed.Widgets.Node,
-): blessed.Widgets.Node[] {
+function descendants(widget: blessed.Widgets.Node): blessed.Widgets.Node[] {
   return [
     ...widget.children,
     ...widget.children.flatMap((child) => descendants(child)),
@@ -493,9 +542,11 @@ function findWidgetByLabel(
 ): blessed.Widgets.BlessedElement {
   const widget = descendants(screen).find((child) =>
     String(
-      (child as blessed.Widgets.BlessedElement & {
-        options?: { label?: string };
-      }).options?.label ?? "",
+      (
+        child as blessed.Widgets.BlessedElement & {
+          options?: { label?: string };
+        }
+      ).options?.label ?? "",
     ).includes(label),
   );
   if (!widget) throw new Error(`widget com label ${label} não encontrado`);
@@ -508,7 +559,8 @@ function findWidgetByContent(
 ): blessed.Widgets.BlessedElement {
   const widget = descendants(screen).find(
     (child) =>
-      (child as blessed.Widgets.BlessedElement).getContent?.().trim() === content,
+      (child as blessed.Widgets.BlessedElement).getContent?.().trim() ===
+      content,
   );
   if (!widget) throw new Error(`widget com conteúdo ${content} não encontrado`);
   return widget as blessed.Widgets.BlessedElement;
@@ -522,9 +574,29 @@ function activeTabCount(screen: blessed.Widgets.Screen): number {
     return (
       element.type === "button" &&
       TUI_TABS.some(({ label }) => element.getContent().trim() === label) &&
-      element.style?.bg === "cyan"
+      element.style?.bg === TUI_THEME.activeBackground
     );
   }).length;
+}
+
+/** Calcula a razão WCAG entre duas cores hexadecimais sRGB. */
+function contrastRatio(foreground: string, background: string): number {
+  const luminances = [foreground, background].map(relativeLuminance);
+  return (Math.max(...luminances) + 0.05) / (Math.min(...luminances) + 0.05);
+}
+
+/** Converte uma cor hexadecimal sRGB em luminância relativa. */
+function relativeLuminance(color: string): number {
+  const channels = color
+    .slice(1)
+    .match(/.{2}/gu)
+    ?.map((channel) => Number.parseInt(channel, 16) / 255)
+    .map((channel) =>
+      channel <= 0.03928 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4,
+    );
+  if (!channels || channels.length !== 3)
+    throw new Error(`Cor inválida: ${color}`);
+  return 0.2126 * channels[0]! + 0.7152 * channels[1]! + 0.0722 * channels[2]!;
 }
 
 async function settle(): Promise<void> {
