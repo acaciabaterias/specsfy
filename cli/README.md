@@ -118,8 +118,9 @@ mostra status, runner, comando, duração e resumo em uma subaba. A outra exibe
 cada teste e falha. Relatórios Pest estruturados são convertidos em linhas
 legíveis com arquivo, linha e mensagem.
 
-O bootstrap instala as nove skills base, incluindo `specsfy-01-inbox` e
-`specsfy-update-spec` para pedidos surgidos depois da definição,
+O bootstrap instala as treze skills base, incluindo `specsfy-01-inbox` e
+`specsfy-update-spec` para pedidos surgidos depois da definição, as skills de
+conversa e as de milestones,
 `specsfy-setup`,
 `specsfy-documentator` e as três skills `specsfy-aux-*`, publica as regras em
 `.specsfy/Spec.md`, os templates `Inbox.md`, `Backlog.md`, `Spec.md`, `Tasks.md`,

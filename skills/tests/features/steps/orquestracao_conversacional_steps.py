@@ -31,7 +31,7 @@ def orchestration_contract() -> str:
 @given("uma skill base concluiu sua responsabilidade")
 @given("uma etapa posterior encontra uma pendência de uma etapa anterior")
 @given("uma transição automática exige uma ação sensível")
-@given("as nove skills base instaladas")
+@given("as treze skills base instaladas")
 def given_orchestration_context(context) -> None:
     context.contract = orchestration_contract()
 

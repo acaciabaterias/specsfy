@@ -84,7 +84,10 @@ consegue ler o projeto. A primeira spec é criada durante o fluxo de uso.
 ## Veja o Specsfy trabalhando
 
 Vamos criar uma página de boas-vindas em um projeto Laravel que já usa Pest.
-Este exemplo mostra as nove skills base, do começo ao fim.
+Este exemplo mostra as nove skills que conduzem uma fatia, da captura à
+projeção final. As outras quatro skills base atendem conversas sobre uma spec e
+o planejamento e acompanhamento de milestones, explicados no [guia de
+milestones](../docs/user/milestones.md).
 
 ### 1. Capture uma entrada — `$specsfy-01-inbox`
 

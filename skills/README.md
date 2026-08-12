@@ -21,7 +21,7 @@ está em [`docs/`](../docs/).
 
 Este módulo possui:
 
-- as instruções operacionais das nove skills base, do setup, do documentador e
+- as instruções operacionais das treze skills base, do setup, do documentador e
   das três auxiliares.
 - os templates de ideia, backlog, spec e tarefas em `templates/`.
 - um documento preenchido e não normativo em `examples/Spec.md`.

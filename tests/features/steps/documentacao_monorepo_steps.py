@@ -187,7 +187,7 @@ def then_public_entrypoint_teaches_the_first_journey(context) -> None:
         assert evidence in context.public_entrypoint
 
 
-@then("os dois exemplos percorrem todas as skills base até a projeção final")
+@then("os dois exemplos percorrem o fluxo principal até a projeção final")
 def then_examples_cover_the_complete_base_flow(context) -> None:
     base_flow = (
         "$specsfy-01-inbox",
@@ -238,7 +238,7 @@ def then_examples_show_each_command_and_result_without_source_code(context) -> N
     for evidence in (
             "specs/inbox/2026-07-28-143205-pagina-boas-vindas.md",
             "specs/backlog/0001-pagina-boas-vindas.md",
-            "specs/specs/0001-pagina-boas-vindas/spec.md",
+                "specs/<estado>/0001-pagina-boas-vindas/spec.md",
             "READY",
             "Complete",
     ):
@@ -259,10 +259,10 @@ def then_examples_show_each_command_and_result_without_source_code(context) -> N
             "#### Refinar a partir do backlog",
             "#### Especificar a partir de texto livre",
             "#### Especificar a partir do backlog",
-            "Use $specsfy-04-validate em specs/specs/0001-pagina-boas-vindas/spec.md",
-            "Use $specsfy-05-tasks em specs/specs/0001-pagina-boas-vindas/spec.md",
-            "Use $specsfy-06-tdd-bdd em specs/specs/0001-pagina-boas-vindas/spec.md",
-            "Use $specsfy-07-implement em specs/specs/0001-pagina-boas-vindas/spec.md",
+            "Use $specsfy-04-validate em specs/<estado>/0001-pagina-boas-vindas/spec.md",
+            "Use $specsfy-05-tasks em specs/<estado>/0001-pagina-boas-vindas/spec.md",
+            "Use $specsfy-06-tdd-bdd em specs/<estado>/0001-pagina-boas-vindas/spec.md",
+            "Use $specsfy-07-implement em specs/<estado>/0001-pagina-boas-vindas/spec.md",
     ):
         assert evidence in context.public_entrypoint
     for source in (context.public_entrypoint, context.basic_usage):

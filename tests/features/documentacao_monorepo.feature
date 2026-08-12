@@ -30,7 +30,7 @@ Feature: Documentação oficial do monorepo Specsfy
     Given a fonte da verdade distribuída do Specsfy
     When o contrato documental do monorepo é inspecionado
     Then a porta pública ensina instalação atualização e primeiro uso
-    And os dois exemplos percorrem todas as skills base até a projeção final
+    And os dois exemplos percorrem o fluxo principal até a projeção final
     And os exemplos mostram cada comando e seu resultado sem código de implementação
     And a porta pública oferece dicas operacionais do CLI
     And a documentação separa uso básico uso avançado repositórios e créditos

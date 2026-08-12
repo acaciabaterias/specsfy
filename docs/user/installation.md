@@ -64,9 +64,10 @@ Para personalizar um template sem impedir atualizações, copie-o para
 `.specsfy/templates/custom/` com o mesmo nome. Essa versão tem precedência e
 nunca é sobrescrita pelo instalador, inclusive com `--force`.
 
-A instalação inclui as nove skills base, o setup, o documentador do sistema e as
-três skills auxiliares. Ela prepara os arquivos usados pelo agente, mas não cria
-uma spec de produto nem altera o código da aplicação.
+A instalação inclui as treze skills base, entre elas as quatro de conversa e
+milestones, além do setup, do documentador do sistema e das três skills
+auxiliares. Ela prepara os arquivos usados pelo agente, mas não cria uma spec
+de produto nem altera o código da aplicação.
 
 ## Confira os arquivos instalados
 
