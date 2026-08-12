@@ -5,6 +5,12 @@ description: Monitorar e manter a documentação completa da persistência em .s
 
 # Manter o mapa de dados
 
+## Modo de interação
+
+Modo de interação: `sem perguntas`.
+Não formule perguntas nesta skill. Quando faltar informação confirmada,
+sinalize o campo pendente para a etapa conversacional responsável.
+
 1. Ler instruções locais, `PROJECT.md`, `STACK.md` e todo o `DATABASE.md`.
 2. Inspecionar schemas, migrations, models persistentes e configurações sem
    revelar valores de ambiente ou credenciais.

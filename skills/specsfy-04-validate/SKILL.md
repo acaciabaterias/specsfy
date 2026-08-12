@@ -5,6 +5,12 @@ description: "Use quando o usuário pede para validar, revisar, auditar ou checa
 
 # Validar a especificação
 
+## Modo de interação
+
+Modo de interação: `perguntas`.
+Antes de formular qualquer pergunta, leia e aplique o
+`Contrato de perguntas numeradas` de `.specsfy/Spec.md`.
+
 Trate `spec.md` como a única fonte da verdade e como código em linguagem natural: verifique primeiro o formato rígido, depois clareza, completude, consistência e testabilidade semanticamente.
 
 ## Orquestrar a conversa

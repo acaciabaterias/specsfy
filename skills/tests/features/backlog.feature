@@ -14,7 +14,7 @@ Feature: Captura de ideias no backlog
   Scenario: Esclarecer lacunas antes de registrar uma ideia
     Given uma ideia de backlog com informações essenciais ausentes ou ambíguas
     When o agente avalia se a ideia está minimamente completa
-    Then ele pergunta uma lacuna relevante por vez
+    Then ele apresenta pelo menos três perguntas numeradas por rodada
     And reavalia o que falta depois de cada resposta
     And só persiste o backlog quando problema, pessoa, resultado e contexto estão claros
 

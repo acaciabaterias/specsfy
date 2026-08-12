@@ -5,6 +5,12 @@ description: Construir a documentação técnica em docs/ e o inventário npm/Co
 
 # Documentar o sistema
 
+## Modo de interação
+
+Modo de interação: `sem perguntas`.
+Não formule perguntas nesta skill. Registre como não identificado todo dado
+que as fontes executáveis não sustentarem.
+
 1. Ler instruções locais, `PROJECT.md`, `.specsfy/STACK.md`,
    `.specsfy/RULES.md`, `.specsfy/DATABASE.md`, manifests, lockfiles,
    metadados instalados e código existente.

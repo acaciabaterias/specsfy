@@ -9,6 +9,10 @@ alterar silenciosamente a jornada central já aprovada.
 
 Use quando o MVP já possui objetivo e condição de saída confirmados.
 
+Cada rodada traz pelo menos três perguntas numeradas. Abaixo de cada pergunta,
+você recebe três ou mais sugestões, `Escrever outra resposta` e `Avançar`
+desde a primeira rodada.
+
 ## Como descrever a tarefa
 
 Peça: “planeje o roadmap depois do MVP com milestones”.

@@ -86,9 +86,11 @@ TDD/BDD. O handoff é automático, mas não autoriza instalação, deploy,
 publicação ou ação destrutiva, que continuam exigindo autorização específica.
 
 Toda decisão material ausente é tratada por `specsfy-02-backlog`. A skill
-reanalisa o contexto depois de cada resposta e pergunta novamente enquanto
-existir lacuna aplicável, sem limite máximo. A partir da 11ª pergunta, oferece
-`avançar`; a saída preserva as lacunas em Draft e não aprova o Definition Gate.
+reanalisa o contexto depois de cada rodada e pergunta novamente enquanto
+existir lacuna aplicável, sem limite máximo. Cada rodada contém pelo menos três
+perguntas numeradas. Cada pergunta oferece três ou mais opções numeradas,
+`Escrever outra resposta` e `Avançar` desde a primeira rodada. O avanço
+preserva as lacunas em Draft e não aprova o Definition Gate.
 
 ## Catálogo
 

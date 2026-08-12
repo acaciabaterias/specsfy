@@ -27,22 +27,24 @@ class BacklogLoopContractTests(unittest.TestCase):
             ROOT / "skills" / "specsfy-update-spec" / "SKILL.md"
         ).read_text(encoding="utf-8")
 
-    def test_backlog_reanalyses_every_answer_without_question_limit(self) -> None:
+    def test_backlog_reanalyses_every_round_without_limit(self) -> None:
         for source in (self.backlog, self.mcr):
             with self.subTest(source=source[:40]):
-                self.assertIn("sem limite máximo de perguntas", source)
-                self.assertIn("contexto acumulado e a nova resposta", source)
+                self.assertIn("sem limite máximo de rodadas", source)
+                self.assertIn("contexto acumulado e as novas respostas", source)
                 self.assertIn("enquanto existir lacuna aplicável", source)
 
-    def test_advance_is_offered_only_after_ten_questions(self) -> None:
+    def test_advance_is_offered_from_the_first_round(self) -> None:
         for source in (self.backlog, self.mcr):
             with self.subTest(source=source[:40]):
-                self.assertIn("A partir da 11ª pergunta", source)
-                self.assertIn("`avançar`", source)
+                self.assertIn("desde a primeira rodada", source)
+                self.assertIn("`Avançar`", source)
 
-    def test_advance_preserves_open_gaps_and_pending_definition(self) -> None:
-        self.assertIn("encerre somente o ciclo atual", self.backlog)
-        self.assertIn("lacunas não resolvidas", self.backlog)
+    def test_advance_confirms_and_records_the_area_destination(self) -> None:
+        self.assertIn("encerra definitivamente", self.backlog)
+        self.assertIn("responde depois", self.backlog)
+        self.assertIn("Área encerrada pelo usuário", self.backlog)
+        self.assertIn("Área adiada pelo usuário", self.backlog)
         self.assertIn("Status: Draft", self.backlog)
         self.assertIn("Definition Gate: Pending", self.backlog)
 
@@ -67,7 +69,8 @@ class BacklogLoopContractTests(unittest.TestCase):
 
         for source in (self.specify, self.update_spec, validate):
             with self.subTest(source=source[:40]):
-                self.assertIn("não reabra o mesmo ciclo", source)
+                normalized = " ".join(source.split())
+                self.assertIn("não reabra o mesmo ciclo", normalized)
 
 
 if __name__ == "__main__":

@@ -8,6 +8,10 @@ rastreabilidade entre o comportamento descrito e a prova no código.
 Use para preparar o RED que autoriza a implementação, executar um ciclo
 RED–GREEN–REFACTOR ou verificar testes e rastreabilidade.
 
+Se precisar escolher runner, comando ou caso focal, a skill apresenta pelo
+menos três perguntas numeradas. Cada uma contém três ou mais respostas
+sugeridas, `Escrever outra resposta` e `Avançar` desde a primeira rodada.
+
 ## Como descrever a tarefa
 
 Para preparar o próximo teste focal e produzir a evidência de RED, use o modo

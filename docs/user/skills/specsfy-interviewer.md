@@ -1,8 +1,12 @@
 # Conversar com uma spec
 
-`specsfy-interviewer` ajuda você a resolver uma lacuna que pode mudar a próxima
-etapa da spec. Ele lê o estado atual, faz uma pergunta relevante por vez e só
-registra respostas que você confirmou.
+`specsfy-interviewer` ajuda você a resolver lacunas que podem mudar a próxima
+etapa da spec. Ele lê o estado atual, apresenta pelo menos três perguntas
+numeradas por rodada e só registra respostas que você confirmou. Cada pergunta
+traz três ou mais opções numeradas, `Escrever outra resposta` e `Avançar`.
+Depois de avançar, você escolhe entre encerrar definitivamente as perguntas da
+área, responder depois ou retomar agora. A skill registra a escolha e respeita
+o encerramento até uma reabertura explícita.
 
 ## Quando usar
 
@@ -17,9 +21,9 @@ ou informe o ID da spec e a dúvida que precisa resolver.
 
 ## Exemplo passo a passo
 
-O entrevistador lê a spec e pergunta apenas o ponto que impede o
-plano, como o provedor de identidade ou o comportamento quando a conta já
-existe.
+O entrevistador lê a spec e agrupa os pontos que impedem o plano, como o
+provedor de identidade, o comportamento quando a conta já existe e o método de
+recuperação. Você pode escolher uma opção, escrever outra resposta ou avançar.
 
 ```text
 specs/planned/0042-login-social/spec.md

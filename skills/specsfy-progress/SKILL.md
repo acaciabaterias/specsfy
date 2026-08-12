@@ -5,6 +5,12 @@ description: Use quando o usuário pede progresso geral, status de todas as espe
 
 # Informar progresso geral
 
+## Modo de interação
+
+Modo de interação: `sem perguntas`.
+Não formule perguntas nesta skill. Apresente a projeção observada e o próximo
+handoff aplicável.
+
 Leia o estado exclusivamente de `specs/<estado>/*/spec.md`. O relatório é uma projeção da
 fonte da verdade, nunca uma segunda fonte de estado.
 

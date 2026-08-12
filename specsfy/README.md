@@ -133,10 +133,11 @@ quero uma página /boas-vindas que cumprimente a pessoa pelo nome.
 Use $specsfy-02-backlog em specs/backlog/0001-pagina-boas-vindas.md
 ```
 
-O agente reavalia cada resposta e continua enquanto houver lacunas aplicáveis,
-sem um limite máximo de perguntas. A partir da 11ª pergunta, também oferece
-`avançar`; essa saída encerra o refinamento do backlog atual, mas mantém a definição
-pendente. Neste exemplo:
+O agente reavalia cada rodada e continua enquanto houver lacunas aplicáveis,
+sem um limite máximo. Cada rodada traz pelo menos três perguntas numeradas.
+Cada pergunta oferece três ou mais opções numeradas, `Escrever outra resposta`
+e `Avançar` desde a primeira rodada. O avanço encerra o refinamento do campo
+atual, mas mantém a definição pendente. Neste exemplo:
 
 ```text
 Agente: O que deve aparecer quando nenhum nome for informado?
@@ -278,8 +279,10 @@ specsfy tui --project .
 ### 10. Converse antes da próxima etapa — `$specsfy-interviewer`
 
 Quando uma lacuna puder alterar o plano, a execução ou o aceite, o
-entrevistador lê a mesma spec, faz uma pergunta por vez e registra a resposta
-confirmada. Ele também recalibra `Effort` de 1 a 10 com uma justificativa.
+entrevistador lê a mesma spec e apresenta pelo menos três perguntas numeradas
+por rodada, com opções numeradas, escrita livre e avanço. Ele registra as
+respostas confirmadas e também recalibra `Effort` de 1 a 10 com uma
+justificativa.
 Não aprova gates nem move a spec sem a skill responsável.
 
 Pronto: uma ideia pequena atravessou `Ato I — Definir`,

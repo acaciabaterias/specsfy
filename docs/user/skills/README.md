@@ -13,6 +13,30 @@ As skills base dividem o método por responsabilidade. Você pode chamar uma
 delas pelo nome ou explicar o resultado esperado. O agente lê o estado da spec,
 seleciona a etapa responsável e anuncia cada transição necessária.
 
+## Como responder às perguntas
+
+Toda skill que precisa perguntar segue o mesmo formato desde a primeira rodada:
+
+1. apresenta pelo menos três perguntas com os rótulos `Pergunta 1`,
+   `Pergunta 2` e `Pergunta 3`;
+2. oferece pelo menos três respostas sugeridas e numeradas abaixo de cada
+   pergunta;
+3. acrescenta `Escrever outra resposta` para você informar seu próprio texto;
+4. acrescenta `Avançar` para abrir a confirmação de encerramento da área,
+   adiamento ou retomada imediata.
+
+Você pode responder com combinações como `1.2`, `2.4: meu texto` e `3.5`.
+Ao escolher `Avançar`, a rodada seguinte pergunta se você quer encerrar
+definitivamente as perguntas daquela área, responder depois ou voltar a
+responder agora. Se encerrar, a skill registra sua escolha e não pergunta sobre
+a área novamente, a menos que você a reabra. Se adiar, os pontos ficam
+registrados para retomada. Nenhuma das escolhas inventa uma resposta ou aprova
+uma etapa incompleta.
+
+Inbox, progresso, auxiliares de stack e banco e documentador não conduzem
+entrevista. Essas skills registram ou projetam o que já existe e encaminham
+qualquer pergunta para uma etapa conversacional.
+
 | Etapa | Skill | Resultado principal |
 | --- | --- | --- |
 | capturar sem perguntas | [`specsfy-01-inbox`](specsfy-01-inbox.md) | arquivo em `specs/inbox/` |

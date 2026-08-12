@@ -5,10 +5,16 @@ description: Monitorar e ajudar a descobrir, formular e registrar regras duráve
 
 # Manter regras do projeto
 
+## Modo de interação
+
+Modo de interação: `perguntas`.
+Antes de formular qualquer pergunta, leia e aplique o
+`Contrato de perguntas numeradas` de `.specsfy/Spec.md`.
+
 1. Ler instruções locais, `PROJECT.md` e todo o `RULES.md` existente.
 2. Distinguir regra declarada, inferência e sugestão.
-3. Perguntar uma decisão material por vez quando a formulação não estiver
-   confirmada.
+3. Quando a formulação não estiver confirmada, reunir pelo menos três perguntas
+   reais e aplicar o contrato central de perguntas numeradas.
 4. Formular regras verificáveis, com verbo e limite claros.
 5. Executar:
 

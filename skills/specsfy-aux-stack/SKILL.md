@@ -5,6 +5,12 @@ description: Monitorar manifests e arquivos estruturais para criar ou atualizar 
 
 # Manter o stack
 
+## Modo de interação
+
+Modo de interação: `sem perguntas`.
+Não formule perguntas nesta skill. Quando faltar informação confirmada,
+sinalize o campo pendente para a etapa conversacional responsável.
+
 1. Ler instruções locais, `PROJECT.md` e o `STACK.md` existente.
 2. Executar `node scripts/update_stack.mjs --project <raiz>`.
 3. Conferir cada linha contra manifests, lockfiles e configurações presentes.

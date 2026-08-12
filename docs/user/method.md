@@ -114,12 +114,14 @@ transforme em código ou em uma especificação extensa.
 que possa ser conferido.
 
 **Sua participação:** você responde apenas às dúvidas que realmente mudam a
-entrega. O agente reaproveita o que já foi informado, pergunta sobre uma
-lacuna importante por vez e não inventa requisitos quando falta uma definição.
-O ciclo segue sem limite máximo de perguntas: cada resposta atualiza a análise,
-e uma nova pergunta é feita enquanto restar uma lacuna aplicável.
-A partir da 11ª pergunta, você também pode escolher `avançar`; as lacunas
-ficam registradas e o Definition Gate continua pendente até serem resolvidas.
+entrega. O agente reaproveita o que já foi informado e apresenta pelo menos
+três perguntas numeradas por rodada. Cada pergunta inclui três ou mais opções
+numeradas, `Escrever outra resposta` e `Avançar` desde a primeira rodada. O
+ciclo segue sem limite máximo: cada conjunto de respostas atualiza a análise,
+e outra rodada aparece enquanto restar uma lacuna aplicável. O avanço mantém
+uma confirmação para você encerrar a área, responder depois ou retomar agora.
+O encerramento é respeitado até uma reabertura explícita. O adiamento mantém os
+pontos registrados e o Definition Gate pendente até serem resolvidos.
 
 **Prova técnica:** a spec registra a finalidade, as pessoas afetadas, os
 requisitos, os limites e os cenários BDD. A validação procura contradições,

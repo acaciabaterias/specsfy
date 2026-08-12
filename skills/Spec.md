@@ -123,6 +123,61 @@ input → inbox → backlog → spec → validate → tasks → TDD/BDD → impl
 Um backlog não autoriza implementação nem cria uma segunda fonte normativa. A
 promoção para spec exige intenção explícita do usuário.
 
+## Contrato de perguntas numeradas
+
+Toda skill que formular perguntas usa este contrato desde a primeira rodada,
+inclusive para escolher arquivo, runner, autorização, confirmação ou próximo
+passo.
+
+1. Apresente pelo menos três perguntas numeradas por rodada, com os rótulos
+   `Pergunta 1`, `Pergunta 2`, `Pergunta 3` e assim por diante.
+2. Abaixo de cada pergunta, ofereça pelo menos três opções numeradas e
+   específicas para o assunto apresentado.
+3. Depois das opções sugeridas, acrescente como itens numerados
+   `Escrever outra resposta` e `Avançar`.
+4. Mantenha `Avançar` disponível desde a primeira rodada. Na rodada seguinte,
+   pergunte se a pessoa quer encerrar definitivamente as perguntas daquela
+   área, responder depois ou voltar a responder agora. Inclua essa confirmação
+   entre as três perguntas numeradas da rodada.
+5. Aceite respostas no formato `1.2`, `2. Escrever: <texto>` ou equivalente e
+   releia todas as respostas antes da rodada seguinte.
+6. Se a pessoa encerrar a área, registre
+   `Área encerrada pelo usuário: <área>` no artefato aplicável e não volte ao
+   assunto, salvo se ela o reabrir explicitamente. Se escolher responder
+   depois, registre `Área adiada pelo usuário: <área>` e preserve os pontos
+   abertos para retomada.
+7. Encerrar ou adiar não autoriza preencher conteúdo por inferência nem aprovar
+   um gate incompleto.
+8. Se restarem menos de três lacunas, complete a rodada com perguntas de
+   confirmação da síntese, do registro e do próximo passo. Não invente outro
+   assunto apenas para aumentar a quantidade.
+9. Não use opções sem número, letras, bullets soltos ou uma pergunta isolada.
+
+Use este formato mínimo:
+
+```text
+Pergunta 1. <pergunta>
+1. <opção sugerida>
+2. <opção sugerida>
+3. <opção sugerida>
+4. Escrever outra resposta
+5. Avançar
+
+Pergunta 2. <pergunta>
+1. <opção sugerida>
+2. <opção sugerida>
+3. <opção sugerida>
+4. Escrever outra resposta
+5. Avançar
+
+Pergunta 3. <pergunta>
+1. <opção sugerida>
+2. <opção sugerida>
+3. <opção sugerida>
+4. Escrever outra resposta
+5. Avançar
+```
+
 ## Orquestração conversacional
 
 Trate o fluxo como uma conversa contínua, não como uma lista de comandos que a
@@ -157,10 +212,15 @@ automaticamente a etapa que a detectou.
 
 Não peça confirmação para o handoff. Se faltar uma decisão material que somente
 a pessoa pode fornecer, carregue `$specsfy-02-backlog`. O refinamento do backlog
-reanalisa o contexto acumulado e a nova resposta antes de cada pergunta e
-continua sem limite máximo de perguntas enquanto existir lacuna aplicável. A
-A partir da 11ª pergunta, oferece `avançar`; essa saída encerra o ciclo atual, mas
-preserva as lacunas, `Status: Draft` e `Definition Gate: Pending`. A etapa
+reanalisa o contexto acumulado e as novas respostas antes de cada rodada e
+continua sem limite máximo de rodadas enquanto existir lacuna aplicável.
+`Avançar` permanece disponível em cada pergunta desde a primeira rodada. Antes
+de encerrar o ciclo atual, a rodada seguinte confirma se a pessoa encerra
+definitivamente aquela área, responde depois ou volta a responder agora. A
+primeira escolha fica registrada e impede novas perguntas sobre a área até uma
+reabertura explícita. A segunda preserva as lacunas para retomada. Ambas mantêm
+`Status: Draft` e `Definition Gate: Pending` quando houver pontos aplicáveis
+em aberto. A etapa
 chamadora não reabre o mesmo ciclo durante essa retomada. Isso não
 transforma a escolha da próxima skill em decisão do usuário.
 O handoff não autoriza ações destrutivas, publicação, deploy, instalação de
@@ -193,8 +253,8 @@ os Atos II–III. Gate posterior não permanece aprovado sobre entrada invalidad
 
 - Preserve a formulação do usuário e diferencie declaração, inferência,
   hipótese, decisão, conflito e questão aberta.
-- Centralize no refinamento do backlog as perguntas sobre decisões materiais e faça uma por
-  vez.
+- Centralize no refinamento do backlog as perguntas sobre decisões materiais e
+  aplique o Contrato de perguntas numeradas em cada rodada.
 - Não invente requisitos, stakeholders, restrições ou evidência.
 - Mantenha o Gherkin BDD somente na `spec.md` como contrato de referência; não
   crie nem execute arquivos `.feature`.

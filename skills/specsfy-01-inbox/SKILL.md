@@ -5,6 +5,12 @@ description: "Use quando o usuário enviar uma ideia, pensamento, necessidade, o
 
 # Registrar uma entrada na Inbox
 
+## Modo de interação
+
+Modo de interação: `sem perguntas`.
+Não formule perguntas nesta skill. Registre pontos ausentes para uma etapa
+posterior sem interromper a captura.
+
 Registre imediatamente o texto recebido em `specs/inbox/`. Trate a Inbox como
 uma entrada durável anterior ao backlog: ela preserva intenção e
 organiza sinais úteis, mas não decide requisitos nem autoriza implementação.

@@ -5,6 +5,12 @@ description: "Use quando o usuário pede TDD, BDD, testes derivados do Gherkin d
 
 # Executar TDD orientado pelo BDD da especificação
 
+## Modo de interação
+
+Modo de interação: `perguntas`.
+Antes de formular qualquer pergunta, leia e aplique o
+`Contrato de perguntas numeradas` de `.specsfy/Spec.md`.
+
 Leia o BDD como referência e converta o comportamento especificado em testes TDD
 executáveis e evidência rastreável. O Gherkin ajuda o usuário e o agente a
 entender contexto, ação e resultado; ele próprio não é uma suíte de testes.

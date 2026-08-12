@@ -5,6 +5,12 @@ description: "Use quando o usuário pede para promover uma entrada ou backlog j�
 
 # Montar a especificação única
 
+## Modo de interação
+
+Modo de interação: `perguntas`.
+Antes de formular qualquer pergunta, leia e aplique o
+`Contrato de perguntas numeradas` de `.specsfy/Spec.md`.
+
 Crie ou atualize o pacote `specs/draft/<NNNN>-<slug>/`, no qual `spec.md` é a única fonte normativa de todo o fluxo SDD. Somente o diretório recebe o número; mantenha o arquivo sempre como `spec.md`. Consolide descoberta, research, esclarecimentos, produto, plano técnico, modelo de dados, contratos, TDD, BDD, validações, tarefas, decisões e conclusão em três atos explícitos. Evidências externas consultadas vivem em `research/`; não gere `plan.md`, `research.md`, `data-model.md`, `tasks.md`, checklists ou uma segunda especificação.
 
 ## Orquestrar a conversa
@@ -62,9 +68,10 @@ node <diretório-da-skill>/scripts/iniciar_spec.mjs \
    ou questão aberta produzida durante a análise.
 5. Se existir lacuna aplicável, carregue `$specsfy-02-backlog` para executar o ciclo
    sem limite e retome esta skill ao final do ciclo. Se a pessoa
-   escolher `avançar`, registre as lacunas na fonte normativa, mantenha
-   `Status: Draft` e `Definition Gate: Pending`; não promova a spec a `Defined`
-   e não reabra o mesmo ciclo nesta retomada.
+   escolher `avançar`, aplique a confirmação e o registro definidos no contrato
+   central. Mantenha `Status: Draft` e `Definition Gate: Pending` quando
+   restarem pontos aplicáveis; não promova a spec a `Defined` e não reabra o
+   mesmo ciclo nesta retomada.
 6. Recombine decisões em afirmações com sujeito, condição, ação e efeito
    observável; derive regras, histórias, Gherkin, limites e falhas.
 7. Registre o resultado nas seções existentes de `spec.md`; não gere relatório

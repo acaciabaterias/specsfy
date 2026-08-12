@@ -64,6 +64,29 @@ diretório pertence ao usuário e não entra no lock nem nas atualizações do C
 Assets internos permanecem materiais de saída específicos de uma skill, nunca
 uma segunda fonte normativa.
 
+## Modos de interação
+
+Cada `SKILL.md` declara `perguntas` ou `sem perguntas`. Uma skill no primeiro
+modo aplica o contrato de `skills/Spec.md` sempre que solicitar escolha,
+confirmação, autorização, runner, arquivo ou próximo passo. A rodada contém no
+mínimo três perguntas numeradas; cada pergunta contém três ou mais opções
+numeradas, `Escrever outra resposta` e `Avançar` desde a primeira rodada.
+Os rótulos começam em `Pergunta 1`, `Pergunta 2` e `Pergunta 3`.
+Ao receber `Avançar`, a próxima rodada confirma encerramento definitivo da
+área, adiamento ou retomada imediata. A skill registra
+`Área encerrada pelo usuário: <área>` ou `Área adiada pelo usuário: <área>` no
+artefato aplicável. Uma área encerrada só volta ao roteiro após reabertura
+explícita da pessoa.
+
+As skills sem perguntas não improvisam uma entrevista. Elas preservam a
+entrada, atualizam projeções derivadas ou encaminham a lacuna para uma skill
+conversacional.
+
+| Modo | Skills |
+| --- | --- |
+| perguntas | `specsfy-02-backlog`, `specsfy-03-specify`, `specsfy-04-validate`, `specsfy-05-tasks`, `specsfy-06-tdd-bdd`, `specsfy-07-implement`, `specsfy-aux-rules`, `specsfy-interviewer`, `specsfy-milestone-governor`, `specsfy-mvp-milestone-interviewer`, `specsfy-roadmap-milestone-interviewer`, `specsfy-setup`, `specsfy-update-spec` |
+| sem perguntas | `specsfy-01-inbox`, `specsfy-aux-database`, `specsfy-aux-stack`, `specsfy-documentator`, `specsfy-progress` |
+
 ## Handoff
 
 As skills base participam da orquestração:
@@ -81,11 +104,12 @@ suas próprias pré-condições.
 qualquer handoff, não pergunta e apenas sugere a próxima etapa. Esse limite
 impede que uma anotação simples se transforme em refinamento implícito.
 
-`specsfy-02-backlog` é a responsável exclusiva pelas perguntas de decisão
+`specsfy-02-backlog` é a responsável exclusiva pelas perguntas de escolha
 material. `specify`, `update-spec` e `validate` fazem handoff para seu ciclo e
-retomam depois. O ciclo reanalisa cada resposta, não possui limite de perguntas
-e oferece `avançar` depois da décima pergunta, preservando qualquer lacuna
-restante como definição pendente.
+retomam depois. O ciclo reanalisa cada rodada, não possui limite e oferece
+`Avançar` desde a primeira pergunta. A rodada seguinte distingue encerramento
+da área, adiamento e retomada imediata. O encerramento é respeitado até uma
+reabertura explícita; o adiamento preserva a definição pendente.
 
 ## Relação das skills base
 

@@ -5,6 +5,12 @@ description: "Use quando o usuário quer quebrar ou decompor a especificação e
 
 # Quebrar a especificação em tarefas
 
+## Modo de interação
+
+Modo de interação: `perguntas`.
+Antes de formular qualquer pergunta, leia e aplique o
+`Contrato de perguntas numeradas` de `.specsfy/Spec.md`.
+
 Preencha a seção `14. Tarefas` de `specs/<estado>/<NNNN>-<slug>/spec.md`. O arquivo permanece a única fonte da verdade; cada tarefa precisa ser pequena, verificável, ordenada e ligada a IDs definidos nele.
 
 ## Orquestrar a conversa

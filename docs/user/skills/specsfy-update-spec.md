@@ -45,11 +45,14 @@ somente os gates que perderam validade. Depois, retoma refinamento, validação,
 tarefas, testes e implementação na ordem necessária. A nova evidência é
 registrada sem apagar o histórico relevante.
 
-Se a mudança abrir decisões materiais, o refinamento do backlog pergunta uma lacuna por
-vez e reavalia o contexto após cada resposta. O ciclo não possui limite. A
-partir da 11ª pergunta, `avançar` encerra o refinamento do backlog atual, preserva as
-lacunas e mantém o Ato I reaberto, sem iniciar outra vez o mesmo ciclo nessa
-retomada.
+Se a mudança abrir escolhas materiais, o refinamento do backlog apresenta pelo
+menos três perguntas numeradas por rodada e reavalia o contexto após as
+respostas. Cada pergunta oferece três ou mais opções numeradas, `Escrever outra
+resposta` e `Avançar` desde a primeira rodada. O ciclo não possui limite. O
+avanço abre uma confirmação para encerrar definitivamente as perguntas daquela
+área, responder depois ou retomar agora. O encerramento é respeitado até você
+reabrir a área. O adiamento preserva os pontos e mantém o Ato I reaberto, sem
+iniciar outra vez o mesmo ciclo nessa retomada.
 
 ## O que esperar
 

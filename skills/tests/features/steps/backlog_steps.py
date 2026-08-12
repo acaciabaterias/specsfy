@@ -80,9 +80,9 @@ def when_agent_checks_minimum(context) -> None:
     )[2].partition("\n## ")[0]
 
 
-@then("ele pergunta uma lacuna relevante por vez")
-def then_asks_one_gap_at_a_time(context) -> None:
-    assert "uma pergunta por vez" in context.minimum_section
+@then("ele apresenta pelo menos três perguntas numeradas por rodada")
+def then_asks_three_numbered_questions(context) -> None:
+    assert "três lacunas reais de maior impacto" in context.minimum_section
 
 
 @then("reavalia o que falta depois de cada resposta")

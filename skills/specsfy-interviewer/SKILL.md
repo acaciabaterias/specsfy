@@ -5,6 +5,12 @@ description: "Use quando uma spec em draft, defined, planned, in-progress ou rev
 
 # Conversar com uma spec pelo estado atual
 
+## Modo de interação
+
+Modo de interação: `perguntas`.
+Antes de formular qualquer pergunta, leia e aplique o
+`Contrato de perguntas numeradas` de `.specsfy/Spec.md`.
+
 Leia a `spec.md` pelo ID informado e confirme a pasta de estado. A pasta é o
 estado operacional; `Status` é seu espelho verificável. Preserve a spec como
 fonte normativa e registre apenas respostas, escolhas e justificativas
@@ -13,10 +19,10 @@ confirmadas pela pessoa responsável.
 ## Conduzir a conversa
 
 1. Leia a spec, seus gates, tarefas, evidências e o contexto do projeto.
-2. Identifique a lacuna que mais afeta a próxima etapa. Faça uma pergunta por
-   vez, salvo pedido explícito de coleta em lote.
-3. Reavalie a spec depois de cada resposta. Não repita informação confirmada
-   nem use perguntas como ritual.
+2. Identifique pelo menos três lacunas reais que mais afetam a próxima etapa e
+   monte uma rodada conforme o contrato central.
+3. Reavalie a spec depois de cada rodada. Não repita informação confirmada nem
+   use perguntas como ritual.
 4. Atualize a seção adequada da spec após confirmar a resposta. Quando a nova
    informação mudar capacidade necessária, ajuste também o Effort.
 5. Entregue a responsabilidade de validação, implementação ou transição à skill

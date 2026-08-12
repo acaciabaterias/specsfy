@@ -90,12 +90,23 @@ class ConversationalOrchestrationIntegrationTests(unittest.TestCase):
         for path in sources:
             with self.subTest(path=path):
                 content = path.read_text(encoding="utf-8")
-                self.assertIn("sem limite máximo de perguntas", content)
-                self.assertIn("A partir da 11ª pergunta", content)
-                self.assertIn("`avançar`", content)
+                normalized = " ".join(content.split()).casefold()
+                self.assertIn("sem limite máximo", normalized)
+                self.assertTrue(
+                    "pelo menos três perguntas numeradas" in normalized
+                    or "pelo menos três lacunas reais" in normalized
+                )
+                self.assertIn("`avançar`", normalized)
+                self.assertIn("encerr", normalized)
+                self.assertTrue(
+                    "responder depois" in normalized
+                    or "responde depois" in normalized
+                )
 
         backlog = sources[1].read_text(encoding="utf-8")
-        self.assertIn("contexto acumulado e a nova resposta", backlog)
+        self.assertIn("contexto acumulado e as novas respostas", backlog)
+        self.assertIn("Área encerrada pelo usuário", backlog)
+        self.assertIn("Área adiada pelo usuário", backlog)
         self.assertIn("Definition Gate: Pending", backlog)
 
 

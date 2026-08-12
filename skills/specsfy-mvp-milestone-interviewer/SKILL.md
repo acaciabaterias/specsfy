@@ -5,6 +5,12 @@ description: Use quando uma ideia de produto precisar de uma entrevista adaptati
 
 # Entrevistar para definir o MVP e seus marcos
 
+## Modo de interação
+
+Modo de interação: `perguntas`.
+Antes de formular qualquer pergunta, leia e aplique o
+`Contrato de perguntas numeradas` de `.specsfy/Spec.md`.
+
 Leia `PROJECT.md`, a Inbox ou backlog que originou a conversa e as specs já
 existentes. Preserve formulações confirmadas. Esta skill conduz a descoberta do
 MVP antes de transformar o material em specs e backlog.
@@ -12,15 +18,15 @@ MVP antes de transformar o material em specs e backlog.
 ## Conduzir uma conversa adaptativa
 
 1. Comece pela finalidade, pela pessoa atendida e pelo problema observável.
-2. Após cada resposta, apresente uma síntese curta do que foi entendido e
-   formule a próxima pergunta a partir da maior lacuna que ainda impede definir
-   um fluxo utilizável.
+2. Após cada rodada, apresente uma síntese curta do que foi entendido e formule
+   pelo menos três perguntas numeradas a partir das lacunas que ainda impedem
+   definir um fluxo utilizável.
 3. Explore somente o assunto necessário: fluxo principal, dados indispensáveis,
    papéis, regras, integrações, limites, demonstração e validação. Não aplique
    formulário fixo nem repita resposta confirmada.
 4. Continue enquanto faltar informação para declarar quem conclui qual jornada,
    em qual contexto e como a jornada será verificada. Não há máximo de
-   perguntas.
+   rodadas.
 5. Registre respostas aprovadas em `PROJECT.md` e, quando a pessoa aprovar a
    síntese, crie ou atualize `specs/milestones/MNN.md`.
 

@@ -5,6 +5,12 @@ description: "Use quando o usuário esqueceu algo, quer adicionar, remover, corr
 
 # Atualizar uma especificação existente
 
+## Modo de interação
+
+Modo de interação: `perguntas`.
+Antes de formular qualquer pergunta, leia e aplique o
+`Contrato de perguntas numeradas` de `.specsfy/Spec.md`.
+
 Incorpore um pedido surgido depois da definição inicial sem esconder a mudança,
 duplicar a fonte normativa ou obrigar a pessoa a conhecer atos e gates.
 
@@ -58,8 +64,9 @@ pedido puder alterar comportamento, plano ou fronteira entre specs.
   `$specsfy-03-specify` conforme a maturidade do pedido.
 - Quando opções plausíveis mudarem materialmente o resultado, faça handoff para
   `$specsfy-02-backlog`, execute o ciclo adaptativo e
-  retome esta skill ao final do ciclo. Se a pessoa escolher `avançar`, preserve as lacunas abertas,
-  reabra o Ato I, não encaminhe a definição como aprovada e
+  retome esta skill ao final do ciclo. Se a pessoa escolher `avançar`, aplique a
+  confirmação e o registro definidos no contrato central, reabra o Ato I quando
+  restarem pontos aplicáveis, não encaminhe a definição como aprovada e
   não reabra o mesmo ciclo nesta retomada.
 
 Esta skill não cria uma spec nova, não decide requisito material pela pessoa,

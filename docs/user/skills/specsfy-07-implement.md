@@ -8,6 +8,10 @@ somente quando existe um plano válido e um teste focal em RED.
 Use para implementar a próxima tarefa pronta, continuar uma entrega ou concluir
 uma feature planejada. Não use para pular definição, planejamento ou testes.
 
+Quando uma autorização ou escolha for necessária, a skill apresenta pelo
+menos três perguntas numeradas. Cada uma contém três ou mais respostas
+sugeridas, `Escrever outra resposta` e `Avançar` desde a primeira rodada.
+
 ## Como descrever a tarefa
 
 ```text

@@ -5,6 +5,12 @@ description: Use para projetar o estado dos milestones a partir de specs e backl
 
 # Governar milestones a partir das fontes do projeto
 
+## Modo de interação
+
+Modo de interação: `perguntas`.
+Antes de formular qualquer pergunta, leia e aplique o
+`Contrato de perguntas numeradas` de `.specsfy/Spec.md`.
+
 Leia `specs.md`, `specs/milestones/`, `specs/backlog/` e as specs existentes.
 Milestone, spec e backlog possuem responsabilidades distintas: o marco descreve
 um estado demonstrável; a spec define uma capacidade; o backlog registra

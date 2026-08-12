@@ -53,18 +53,21 @@ continua sendo backlog e não autoriza implementação.
 
 ## Como o ciclo termina
 
-O refinamento funciona sem limite máximo de perguntas. A cada resposta, o
-agente reconsidera o pedido original, o contexto acumulado e a nova resposta.
-Ele continua enquanto existir uma lacuna aplicável, sem seguir uma lista fixa.
+O refinamento funciona sem limite máximo de rodadas. Cada uma traz pelo menos
+três perguntas numeradas. Cada pergunta oferece três ou mais opções numeradas,
+`Escrever outra resposta` e `Avançar`. O agente reconsidera o pedido e as
+respostas antes de montar a próxima rodada.
 
-A partir da 11ª pergunta, cada rodada também oferece `avançar`. Essa opção
-permite encerrar o ciclo atual mesmo com decisões abertas. Nesse caso, o brief
-lista as lacunas, a spec permanece `Status: Draft` e o
-`Definition Gate: Pending`; avançar não equivale a aprovar a definição.
+`Avançar` existe desde a primeira rodada. Na rodada seguinte, você escolhe se
+quer encerrar definitivamente as perguntas daquela área, responder depois ou
+voltar a responder agora. O encerramento fica registrado e é respeitado até
+você reabrir a área. O adiamento preserva os pontos para retomada. Quando ainda
+houver lacunas aplicáveis, a spec permanece `Status: Draft` e o
+`Definition Gate: Pending`.
 
 ## O que esperar
 
-- perguntas adaptadas ao caso, uma lacuna importante por vez.
+- perguntas adaptadas ao caso, agrupadas em rodadas numeradas.
 - preservação das suas palavras.
 - indicação de duplicatas ou relações.
 - distinção entre fato, hipótese e escolha confirmada.

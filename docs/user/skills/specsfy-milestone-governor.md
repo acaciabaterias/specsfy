@@ -8,6 +8,10 @@ mantém `specs.md` atualizado sem substituir a escrita humana dos marcos.
 
 Use depois de criar, alterar ou concluir specs vinculadas a milestones.
 
+Se uma relação precisar de confirmação, a skill apresenta pelo menos três
+perguntas numeradas. Cada pergunta contém três ou mais sugestões,
+`Escrever outra resposta` e `Avançar` desde a primeira rodada.
+
 ## Como descrever a tarefa
 
 Peça: “revise os milestones do projeto e sincronize o mapa”.

@@ -5,6 +5,12 @@ description: Preparar e monitorar PROJECT.md e os contextos .specsfy de stack, r
 
 # Preparar contexto do projeto
 
+## Modo de interação
+
+Modo de interação: `perguntas`.
+Antes de formular qualquer pergunta, leia e aplique o
+`Contrato de perguntas numeradas` de `.specsfy/Spec.md`.
+
 1. Ler `AGENTS.md`, `CLAUDE.md` e instruções locais antes de escrever.
 2. Ler [as diretrizes publicáveis](references/framework-instructions.md) quando
    precisar auditar o bloco reservado em arquivos de agentes.

@@ -24,12 +24,12 @@ implementação do framework para seguir esse percurso.
 
 ## Leia online ou como ebook
 
-Este mesmo percurso compõe a edição portátil **v1.6.0**. Use o PDF para leitura
+Este mesmo percurso compõe a edição portátil **v1.7.0**. Use o PDF para leitura
 e impressão ou o EPUB em leitores que permitem ajustar fonte e tamanho:
 
-- [PDF](../../ebook/Specsfy-Guia-do-Usuario-v1.6.0.pdf), para leitura,
+- [PDF](../../ebook/Specsfy-Guia-do-Usuario-v1.7.0.pdf), para leitura,
   compartilhamento e impressão.
-- [EPUB](../../ebook/Specsfy-Guia-do-Usuario-v1.6.0.epub), para leitores
+- [EPUB](../../ebook/Specsfy-Guia-do-Usuario-v1.7.0.epub), para leitores
   digitais com fonte e tamanho ajustáveis.
 
 Os dois formatos são reconstruídos a partir destas páginas. O
@@ -103,6 +103,12 @@ cada etapa nesta ordem:
 
 Essas páginas explicam quando usar cada skill, como descrever a tarefa em
 linguagem natural, o resultado esperado, os erros comuns e o próximo passo.
+Quando uma delas precisar perguntar, você recebe pelo menos três perguntas
+numeradas por rodada. Cada pergunta traz três ou mais opções numeradas,
+`Escrever outra resposta` e `Avançar` desde o início da conversa.
+Depois de avançar, você informa se quer encerrar definitivamente as perguntas
+daquela área, responder depois ou retomar agora. O encerramento é respeitado
+até você reabrir a área; o adiamento preserva os pontos para retomada.
 
 ### 5. Opere o projeto no dia a dia
 

@@ -5,6 +5,12 @@ description: "Use quando o usuário pede para implementar, executar ou concluir 
 
 # Implementar as tarefas e criar o código
 
+## Modo de interação
+
+Modo de interação: `perguntas`.
+Antes de formular qualquer pergunta, leia e aplique o
+`Contrato de perguntas numeradas` de `.specsfy/Spec.md`.
+
 Execute a seção `14. Tarefas` de `spec.md` em ordem de dependência, mantendo a fonte única, testes, código, evidências e checkboxes coerentes.
 
 ## Orquestrar a conversa

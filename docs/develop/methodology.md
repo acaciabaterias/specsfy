@@ -55,11 +55,16 @@ input → specs/inbox/ → specs/backlog/
 refinamento dialogado. Ambas mantêm proveniência, mas somente `spec.md` governa
 o comportamento.
 
-O refinamento do backlog concentra as decisões materiais. Depois de cada resposta, ele
-recalcula as lacunas usando a entrada original, o contexto acumulado e a nova
-resposta. Não existe teto de perguntas: o ciclo termina ao fechar as lacunas
-aplicáveis ou quando a pessoa escolhe `avançar`, opção disponível da 11ª
-pergunta em diante. Essa saída mantém a definição em Draft e o gate pendente.
+O refinamento do backlog concentra as escolhas materiais. Depois de cada
+rodada, ele recalcula as lacunas usando a entrada original, o contexto acumulado
+e as novas respostas. Não existe teto de rodadas. Cada rodada possui pelo menos
+três perguntas numeradas, e cada pergunta oferece três ou mais opções
+numeradas, `Escrever outra resposta` e `Avançar`. Essa última opção está
+disponível desde a primeira rodada. Na rodada seguinte, a pessoa informa se
+encerra definitivamente as perguntas da área, responde depois ou retoma agora.
+O encerramento ou adiamento fica registrado. Uma área encerrada não volta ao
+roteiro sem reabertura explícita; uma área adiada preserva seus pontos para
+retomada. Lacunas aplicáveis mantêm a definição em Draft com o gate pendente.
 
 Responsabilidades:
 

@@ -10,6 +10,10 @@ apenas o que você confirmar e propõe milestones com condições de saída.
 Use antes de criar um conjunto de specs para um produto novo ou quando o MVP
 ainda não tem uma jornada confirmada.
 
+Cada rodada traz pelo menos três perguntas numeradas. Abaixo de cada pergunta,
+você recebe três ou mais sugestões, `Escrever outra resposta` e `Avançar`
+desde a primeira rodada.
+
 ## Como descrever a tarefa
 
 Peça: “use o entrevistador de MVP para organizar os marcos do meu sistema de

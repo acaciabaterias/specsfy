@@ -5,6 +5,12 @@ description: "Use quando o usuário quer transformar uma captura de `specs/inbox
 
 # Refinar e aprofundar o backlog
 
+## Modo de interação
+
+Modo de interação: `perguntas`.
+Antes de formular qualquer pergunta, leia e aplique o
+`Contrato de perguntas numeradas` de `.specsfy/Spec.md`.
+
 Transforme uma entrada vaga em um item de backlog compreensível e, quando a
 intenção exigir especificação, aprofunde as decisões até produzir um brief
 testável. Esta é a segunda etapa sequencial do framework. Ela reúne registro,
@@ -61,8 +67,7 @@ resultado ou o contexto, repita a busca.
    - pessoa afetada ou beneficiada;
    - resultado ou valor esperado;
    - contexto suficiente para distinguir a entrada de pedidos semelhantes.
-3. Se algo estiver ausente, vago, contraditório ou ambíguo, escolha a lacuna de
-   maior impacto e faça uma pergunta por vez.
+3. Se algo estiver ausente, vago, contraditório ou ambíguo, selecione três lacunas reais de maior impacto e monte uma rodada numerada.
 4. Reavalie as lacunas depois de cada resposta. Não transforme os itens em
    questionário fixo nem repita informação já fornecida.
 5. Não crie nem atualize o arquivo enquanto algum item essencial continuar
@@ -131,36 +136,40 @@ Quando a pessoa pedir aprofundamento, promoção ou criação de uma spec:
 
 ## Conduzir a descoberta adaptativa
 
-Execute um ciclo sem limite máximo de perguntas:
+Execute um ciclo sem limite máximo de rodadas:
 
-1. Antes de cada pergunta, releia a entrada, as decisões confirmadas, o
-   contexto acumulado e a nova resposta, além da evidência aplicável.
+1. Antes de cada rodada, releia a entrada, as decisões confirmadas, o contexto acumulado e as novas respostas, além da evidência aplicável.
 2. Reclassifique lacunas e dependências. Continue enquanto existir lacuna aplicável;
    encerre quando cada uma estiver decidida, não aplicável ou resolvida por
    evidência.
-3. Selecione a lacuna de maior `impacto × incerteza`, priorizando P1, P2 e P3,
-   e faça uma pergunta por vez.
-4. Registre a resposta original, a decisão normalizada e seus efeitos. Volte ao
+3. Selecione pelo menos três lacunas reais por `impacto × incerteza`,
+   priorizando P1, P2 e P3, e apresente a rodada conforme o contrato central.
+4. Registre cada resposta original, a decisão normalizada e seus efeitos. Volte ao
    primeiro passo; não reutilize uma fila fixa.
 
-A partir da 11ª pergunta, inclua a opção explícita `avançar` em todas as
-rodadas. Antes disso, não ofereça essa saída. Se a pessoa escolher `avançar`:
+Inclua `Avançar` em cada pergunta desde a primeira rodada. Se a pessoa escolher
+essa opção:
 
-- preserve as lacunas não resolvidas, com impacto e estado;
+- na rodada seguinte, confirme se ela encerra definitivamente as perguntas
+  daquela área, responde depois ou volta a responder agora;
+- inclua a confirmação entre as três perguntas numeradas da rodada;
+- ao encerrar, registre `Área encerrada pelo usuário: <área>` e não pergunte
+  novamente, salvo reabertura explícita;
+- ao adiar, registre `Área adiada pelo usuário: <área>` e preserve os pontos
+  não respondidos para retomada;
 - não preencha respostas por inferência;
-- encerre somente o ciclo atual;
 - permita o handoff solicitado, mantendo `Status: Draft` e
-  `Definition Gate: Pending` até resolver as lacunas aplicáveis.
+  `Definition Gate: Pending` quando restarem lacunas aplicáveis.
 
 Durante a conversa:
 
-- ofereça 2–3 opções mutuamente exclusivas quando reduzirem o esforço e
+- ofereça pelo menos três opções numeradas quando reduzirem o esforço e
   recomende uma com justificativa curta;
 - aceite respostas livres e use-as na reanálise;
 - preserve termos originais e diferencie declaração, inferência, hipótese,
   decisão, conflito e aberto;
 - confirme intenção operacional por síntese;
-- não recite as dez categorias nem faça uma pergunta por categoria.
+- não recite as dez categorias nem transforme cada uma em pergunta.
 
 Garanta cobertura suficiente de problema, atores, resultado, escopo, jornadas,
 falhas, limites, regras, dados, segurança, privacidade, desempenho,
