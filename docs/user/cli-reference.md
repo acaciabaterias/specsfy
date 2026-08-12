@@ -1,6 +1,6 @@
 # Referência dos comandos do Specsfy CLI
 
-Esta referência descreve a interface pública do `specsfy` 0.8.0. O caminho
+Esta referência descreve a interface pública do `specsfy` 0.8.1. O caminho
 informado por `--project` deve apontar para a raiz do projeto consumidor. Sem
 essa opção, o CLI usa o diretório atual. Os comandos que consultam catálogo ou
 versões privadas usam `GH_TOKEN`, `GITHUB_TOKEN` ou a sessão de `gh auth token`.
@@ -41,6 +41,59 @@ specsfy install --project ./aplicativo --json
 specsfy install --project . --detected
 specsfy install --project . --specialist specsfy-specialist-laravel
 specsfy install --project . --detected --force --json
+```
+
+## `specsfy doctor`
+
+Verifica Node.js, Git, npm, acesso de leitura e escrita ao projeto e a
+disponibilidade do `skills CLI`. Uma instalação global de `skills` tem
+preferência; `npx skills` funciona como fallback. `--json` retorna cada item,
+seu estado e o comando encontrado. Qualquer requisito ausente produz exit code
+1.
+
+Exemplos:
+
+```bash
+specsfy doctor
+specsfy doctor --project .
+specsfy doctor --project ./api
+specsfy doctor --json
+specsfy doctor --project ./api --json
+```
+
+## `specsfy update`
+
+Atualiza todas as skills Specsfy registradas no projeto, incluindo skills base,
+auxiliares, setup, documentador e especialistas. Skills externas e templates
+customizados permanecem intocados. `--force` substitui conteúdo gerenciado
+alterado e `--json` informa os caminhos modificados. O comando executa o
+diagnóstico de instalação antes do download.
+
+Exemplos:
+
+```bash
+specsfy update
+specsfy update --project .
+specsfy update --project ./api
+specsfy update --force
+specsfy update --project ./api --force --json
+```
+
+## `specsfy upgrade`
+
+Consulta novamente as tags estáveis e atualiza o próprio CLI pelo pacote
+`@promovaweb/specsfy@latest`. O npm só é executado quando a versão encontrada é
+superior à versão atual, o que impede downgrade. `--json` informa se houve
+atualização e as versões envolvidas. O projeto não é alterado.
+
+Exemplos:
+
+```bash
+specsfy upgrade
+specsfy upgrade --json
+GH_TOKEN="$TOKEN_SPECSFY" specsfy upgrade
+GITHUB_TOKEN="$TOKEN_SPECSFY" specsfy upgrade --json
+PATH="$HOME/.npm-global/bin:$PATH" specsfy upgrade
 ```
 
 ## `specsfy skills list`
@@ -110,8 +163,9 @@ specsfy skills remove specsfy-specialist-laravel --project . --force
 
 ## `specsfy skills update`
 
-Atualiza todas as skills Specsfy já instaladas. `--project <caminho>` seleciona
-o projeto. `--force` permite substituir conteúdo gerenciado alterado. Skills
+Alias compatível de `specsfy update`. Atualiza todas as skills Specsfy já
+instaladas. `--project <caminho>` seleciona o projeto. `--force` permite
+substituir conteúdo gerenciado alterado e `--json` retorna os caminhos. Skills
 externas e arquivos de `.specsfy/templates/custom/` permanecem intocados.
 
 Exemplos:

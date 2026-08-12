@@ -67,7 +67,8 @@ O pacote instalável é definido por `cli/package.json`, expõe o comando
 `specsfy` e inclui suas dependências no lockfile. O download público do
 executável usa `get.specsfy.dev`. A instalação gerenciada usa
 `npm install --global @promovaweb/specsfy` e a atualização usa
-`npm update --global @promovaweb/specsfy`. Uma tag atualizável aponta para o
+`specsfy upgrade`, que delega ao npm somente quando encontra uma versão estável
+superior. Uma tag atualizável aponta para o
 commit cuja versão do pacote corresponde ao nome `v<versão>`, verificado pelo
 CI antes da publicação no npm. A proveniência é acrescentada quando o
 repositório estiver público, porque o registro exige uma origem pública para

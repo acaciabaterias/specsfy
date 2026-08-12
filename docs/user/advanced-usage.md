@@ -70,7 +70,7 @@ desconhecidas. Consulte todos os recursos no [guia do CLI](cli.md).
 ## Atualize sem perder customizações
 
 ```bash
-specsfy skills update --project .
+specsfy update --project .
 ```
 
 O CLI usa fingerprints para distinguir conteúdo gerenciado intacto de
@@ -82,7 +82,7 @@ Quando o CLI foi instalado pelo npm, o comando abaixo atualiza o pacote
 global:
 
 ```bash
-npm update --global @promovaweb/specsfy
+specsfy upgrade
 ```
 
 Quando a instalação usa o executável Node oficial, substitua-o pelo download

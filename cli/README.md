@@ -43,7 +43,7 @@ O npm instala o pacote publicado e disponibiliza o comando `specsfy`. Para
 atualizar a instalação global:
 
 ```bash
-npm update --global @promovaweb/specsfy
+specsfy upgrade
 ```
 
 O catálogo e a verificação de versões usam a API do GitHub. O CLI procura,
@@ -53,13 +53,14 @@ nesta ordem, `GH_TOKEN`, `GITHUB_TOKEN` e a sessão retornada por
 Para instalar uma versão específica, informe a versão no próprio pacote:
 
 ```bash
-npm install --global @promovaweb/specsfy@0.8.0
+npm install --global @promovaweb/specsfy@0.8.1
 ```
 
 ## Comandos
 
 ```bash
 specsfy
+specsfy doctor --project .
 specsfy install --project .
 specsfy install --project . --detected
 specsfy install --project . \
@@ -69,7 +70,8 @@ specsfy skills list
 specsfy skills detect --project .
 specsfy skills add specsfy-specialist-laravel --project .
 specsfy skills remove specsfy-specialist-laravel --project .
-specsfy skills update --project .
+specsfy update --project .
+specsfy upgrade
 specsfy transition 0001-recuperar-senha defined --project .
 specsfy migrate --project .
 specsfy effort 0001-recuperar-senha 7 \
@@ -180,10 +182,15 @@ descarte alterações locais.
 
 Na aba Skills, o botão `Atualizar ^R` baixa as origens atuais e atualiza de uma
 vez todas as skills Specsfy instaladas. O comando equivalente é
-`specsfy skills update --project .`. Customizações locais continuam protegidas e
-só podem ser substituídas explicitamente com `--force` no comando.
+`specsfy update --project .`. O nome anterior
+`specsfy skills update --project .` permanece compatível. Customizações locais
+continuam protegidas e só podem ser substituídas explicitamente com `--force`.
 
 ## Atualização do CLI gerenciada pelo npm
+
+`specsfy update` atualiza as skills do projeto. `specsfy upgrade` consulta a
+versão estável mais recente e atualiza o próprio pacote global. O segundo
+comando só chama o npm quando encontra uma versão superior à atual.
 
 Ao abrir `specsfy` ou `specsfy tui` em um terminal interativo, o CLI consulta
 as tags semânticas estáveis do monorepo. A consulta é limitada pelo cache

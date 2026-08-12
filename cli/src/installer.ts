@@ -8,7 +8,6 @@
 import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
 import {
-  access,
   lstat,
   mkdir,
   mkdtemp,
@@ -32,6 +31,7 @@ import {
   ensureSkillsLock,
   installedSkillNames,
 } from "./skill-lock.js";
+import { resolveSkillsCommand } from "./prerequisites.js";
 
 const execFileAsync = promisify(execFile);
 
@@ -660,31 +660,18 @@ function contentDigest(content: string): string {
   return createHash("sha256").update(content).digest("hex");
 }
 
-async function skillsCommand(): Promise<string[]> {
-  const override = process.env.SPECSFY_SKILLS_CLI;
-  if (override) {
-    const executable = resolvePath(override);
-    try {
-      await access(executable, 1);
-    } catch {
-      throw new Error(`SPECSFY_SKILLS_CLI não é executável: ${executable}`);
-    }
-    return [executable];
-  }
-  if (await executableExists("skills")) return ["skills"];
-  if (await executableExists("npx")) return ["npx", "--yes", "skills"];
-  throw new Error(
-    "skills CLI não encontrado; instale https://github.com/vercel-labs/skills " +
-      "ou disponibilize npx no PATH",
-  );
-}
-
 async function installWithSkillsCli(
   source: string,
   names: string[],
   project: string,
 ): Promise<void> {
-  const command = await skillsCommand();
+  const command = await resolveSkillsCommand();
+  if (!command) {
+    throw new Error(
+      "skills CLI não encontrado; instale https://github.com/vercel-labs/skills " +
+        "ou disponibilize npx no PATH",
+    );
+  }
   const arguments_ = [...command.slice(1), "add", resolve(source)];
   for (const name of names) arguments_.push("--skill", name);
   arguments_.push("--agent", "universal", "--copy", "-y", "--full-depth");
@@ -695,7 +682,13 @@ async function removeWithSkillsCli(
   names: string[],
   project: string,
 ): Promise<void> {
-  const command = await skillsCommand();
+  const command = await resolveSkillsCommand();
+  if (!command) {
+    throw new Error(
+      "skills CLI não encontrado; instale https://github.com/vercel-labs/skills " +
+        "ou disponibilize npx no PATH",
+    );
+  }
   await runSkillsCommand(
     command[0]!,
     [...command.slice(1), "remove", ...names, "--agent", "universal", "-y"],
@@ -725,26 +718,6 @@ async function runSkillsCommand(
         (detail || `exit ${String(value.code ?? 1)}`),
     );
   }
-}
-
-async function executableExists(command: string): Promise<boolean> {
-  const directories = (process.env.PATH ?? "").split(sep);
-  const extensions =
-    process.platform === "win32"
-      ? ["", ...(process.env.PATHEXT ?? ".EXE;.CMD;.BAT").split(";")]
-      : [""];
-  for (const directory of directories) {
-    if (!directory) continue;
-    for (const extension of extensions) {
-      try {
-        await access(join(directory, `${command}${extension}`), 1);
-        return true;
-      } catch {
-        continue;
-      }
-    }
-  }
-  return false;
 }
 
 /** Calcula o fingerprint estável de uma skill, ignorando caches gerados. */

@@ -4,6 +4,17 @@ Todas as mudanças relevantes do Specsfy CLI são registradas neste arquivo.
 
 ## [Unreleased]
 
+## [0.8.1] - 2026-08-12
+
+- Adiciona `specsfy doctor` e executa o mesmo diagnóstico antes do setup para
+  conferir Node.js, Git, npm, projeto e disponibilidade do `skills` ou `npx`.
+- Adiciona `specsfy update` para atualizar todas as skills Specsfy instaladas e
+  preserva `specsfy skills update` como comando compatível.
+- Adiciona `specsfy upgrade` para consultar uma versão estável mais recente e
+  atualizar o próprio CLI pelo pacote oficial do npm sem fazer downgrade.
+- Documenta separadamente instalação, atualização das skills e atualização do
+  CLI nos guias, na referência de comandos, no ebook e no site.
+
 ## [0.8.0] - 2026-08-12
 
 - Adiciona os comandos `transition`, `migrate` e `effort` para manter pasta,

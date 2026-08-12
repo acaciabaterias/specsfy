@@ -96,4 +96,24 @@ describe("atualizador", () => {
       "@promovaweb/specsfy@latest",
     ]);
   });
+
+  test("não oferece downgrade quando a versão local é mais recente", async () => {
+    const root = await temporaryDirectory();
+    const fetcher = vi.fn(async () =>
+      new Response(
+        JSON.stringify([
+          { name: "v0.8.0", commit: { sha: "8".repeat(40) } },
+        ]),
+        { status: 200 },
+      ),
+    );
+
+    expect(
+      await checkForUpdate("0.8.1", {
+        cachePath: join(root, "cli.json"),
+        force: true,
+        fetcher,
+      }),
+    ).toBeUndefined();
+  });
 });

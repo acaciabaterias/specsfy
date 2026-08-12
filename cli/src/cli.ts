@@ -26,7 +26,16 @@ import {
   summarizeSpecs,
 } from "./progress.js";
 import { runProjectTests } from "./project-testing.js";
-import { offerStartupUpdate } from "./updater.js";
+import {
+  assertPrerequisites,
+  checkPrerequisites,
+  type PrerequisiteCheck,
+} from "./prerequisites.js";
+import {
+  checkForUpdate,
+  offerStartupUpdate,
+  upgradeWithNpm,
+} from "./updater.js";
 import { VERSION } from "./version.js";
 
 interface ProjectOptions {
@@ -60,6 +69,8 @@ export function buildProgram(): Command {
         specialist: string[];
         json?: boolean;
       }) => {
+        const checks = await checkPrerequisites(options.project);
+        assertPrerequisites(checks, ["node", "git", "skills", "project"]);
         const installer = await SkillInstaller.create(options.project, options.force);
         const changed = await installer.installBase();
         let specialistNames = [...options.specialist];
@@ -78,6 +89,50 @@ export function buildProgram(): Command {
         printInstallation(changed, Boolean(options.json));
       },
     );
+
+  program
+    .command("doctor")
+    .description("verifica os pré-requisitos do Specsfy")
+    .addOption(projectOption())
+    .option("--json", "emite resultado JSON")
+    .action(async (options: ProjectOptions & { json?: boolean }) => {
+      const checks = await checkPrerequisites(options.project);
+      printPrerequisites(checks, Boolean(options.json));
+      if (checks.some(({ ok }) => !ok)) process.exitCode = 1;
+    });
+
+  program
+    .command("update")
+    .description("atualiza todas as skills Specsfy instaladas")
+    .addOption(projectOption())
+    .option("--force", "substitui arquivos gerenciados alterados")
+    .option("--json", "emite resultado JSON")
+    .action((options: ProjectOptions & { force?: boolean; json?: boolean }) =>
+      updateSkills(options),
+    );
+
+  program
+    .command("upgrade")
+    .description("atualiza o próprio Specsfy CLI")
+    .option("--json", "emite resultado JSON")
+    .action(async (options: { json?: boolean }) => {
+      const checks = await checkPrerequisites(process.cwd());
+      assertPrerequisites(checks, ["node", "npm"]);
+      const update = await checkForUpdate(VERSION, { force: true });
+      if (!update) {
+        printUpgrade({ upgraded: false, current_version: VERSION }, Boolean(options.json));
+        return;
+      }
+      await upgradeWithNpm();
+      printUpgrade(
+        {
+          upgraded: true,
+          current_version: VERSION,
+          latest_version: update.latest_version,
+        },
+        Boolean(options.json),
+      );
+    });
 
   const skills = program.command("skills").description("gerencia especialistas");
   skills
@@ -133,10 +188,10 @@ export function buildProgram(): Command {
     .description("atualiza todas as skills Specsfy instaladas")
     .addOption(projectOption())
     .option("--force", "substitui arquivos gerenciados alterados")
-    .action(async (options: ProjectOptions & { force?: boolean }) => {
-      const installer = await SkillInstaller.create(options.project, options.force);
-      printInstallation(await installer.updateAll(), false);
-    });
+    .option("--json", "emite resultado JSON")
+    .action((options: ProjectOptions & { force?: boolean; json?: boolean }) =>
+      updateSkills(options),
+    );
 
   program
     .command("transition")
@@ -433,6 +488,39 @@ function printInstallation(paths: string[], json: boolean): void {
     printPaths(paths);
   } else {
     console.log("skills já estão atualizadas");
+  }
+}
+
+async function updateSkills(
+  options: ProjectOptions & { force?: boolean; json?: boolean },
+): Promise<void> {
+  const checks = await checkPrerequisites(options.project);
+  assertPrerequisites(checks, ["node", "git", "skills", "project"]);
+  const installer = await SkillInstaller.create(options.project, options.force);
+  printInstallation(await installer.updateAll(), Boolean(options.json));
+}
+
+function printPrerequisites(checks: PrerequisiteCheck[], json: boolean): void {
+  if (json) {
+    console.log(JSON.stringify({ ok: checks.every(({ ok }) => ok), checks }));
+    return;
+  }
+  for (const check of checks) {
+    console.log(`${check.ok ? "OK" : "FALHA"}\t${check.name}\t${check.detail}`);
+  }
+}
+
+function printUpgrade(
+  result: { upgraded: boolean; current_version: string; latest_version?: string },
+  json: boolean,
+): void {
+  if (json) console.log(JSON.stringify(result));
+  else if (result.upgraded) {
+    console.log(
+      `Specsfy CLI atualizado: ${result.current_version} → ${result.latest_version}.`,
+    );
+  } else {
+    console.log(`Specsfy CLI já está atualizado em ${result.current_version}.`);
   }
 }
 

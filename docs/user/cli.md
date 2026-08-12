@@ -26,6 +26,7 @@ Para preparar um projeto novo, o comando `install` pode publicar as bases e
 todos os especialistas detectados em uma única execução:
 
 ```bash
+specsfy doctor --project .
 specsfy install --project . --detected
 ```
 
@@ -46,7 +47,7 @@ gerenciadas:
 specsfy skills list
 specsfy skills detect --project .
 specsfy skills add specsfy-specialist-laravel --project .
-specsfy skills update --project .
+specsfy update --project .
 ```
 
 ## Atualização automática
@@ -72,12 +73,17 @@ Como o monorepo é privado, catálogo e tags são consultados com `GH_TOKEN`,
 `GITHUB_TOKEN` ou, na ausência dessas variáveis, com a sessão de
 `gh auth token`. O token não é copiado para `~/.specsfy/cli.json`.
 
-Em uma instalação global gerenciada pelo npm, o comando abaixo atualiza o
-pacote. Abra o CLI novamente para conferir a nova versão:
+Em uma instalação global gerenciada pelo npm, `upgrade` atualiza o próprio
+CLI. Abra o comando novamente para conferir a nova versão:
 
 ```bash
-npm update --global @promovaweb/specsfy
+specsfy upgrade
+specsfy --version
 ```
+
+Não confunda os dois fluxos: `specsfy update --project .` atualiza as skills do
+projeto; `specsfy upgrade` atualiza o programa global. O comando anterior
+`specsfy skills update` permanece como alias compatível.
 
 Se você instalou o executável Node com `curl -fL get.specsfy.dev`, repita o
 download descrito no [guia de instalação](installation.md). Nesse caso, a

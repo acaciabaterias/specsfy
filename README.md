@@ -48,8 +48,12 @@ gerenciadas pelo npm:
 npm install --global @promovaweb/specsfy
 specsfy --version
 cd caminho/do/projeto
+specsfy doctor --project .
 specsfy install --project .
 ```
+
+Depois da instalação, `specsfy update --project .` atualiza as skills do
+projeto e `specsfy upgrade` atualiza o próprio CLI.
 
 O CLI instala a metodologia de `skills/` e, sob demanda, especialistas de
 `specialists/`. Veja o [guia de instalação](docs/user/installation.md), o

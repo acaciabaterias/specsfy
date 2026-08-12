@@ -10,6 +10,9 @@ não define requisitos nem aprova gates.
 
 ```text
 specsfy install
+specsfy doctor
+specsfy update
+specsfy upgrade
 specsfy skills
 specsfy progress
 specsfy milestones sync
@@ -26,6 +29,7 @@ Sem subcomando, a aplicação abre a TUI.
 | --- | --- |
 | `cli.ts` | parser Commander, despacho e saída não interativa |
 | `installer.ts` | framework, skills, merge e proteção local |
+| `prerequisites.ts` | diagnóstico de Node.js, executáveis e projeto |
 | `catalog.ts` | catálogo remoto de especialistas |
 | `skill-lock.ts` | seleção instalada, fingerprints e proteção |
 | `progress.ts` | leitura e resumo das specs |
@@ -38,6 +42,11 @@ Sem subcomando, a aplicação abre a TUI.
 | `tui.ts` | dashboard neo-blessed e interações |
 
 ## Instalação
+
+`specsfy doctor` apresenta todos os requisitos do ambiente. Antes de qualquer
+escrita, `specsfy install` exige Node.js 22.12 ou superior, Git, um projeto
+legível e gravável e o `skills CLI`, aceitando `npx skills` como fallback. O
+diagnóstico também informa a disponibilidade do npm, usado por `upgrade`.
 
 `SkillInstaller` valida que o destino é um projeto consumidor, obtém `skills/`
 do monorepo e instala o conjunto `FRAMEWORK_SKILLS`. Esse conjunto inclui setup,
@@ -99,6 +108,14 @@ renderização e tenta acessar o widget anterior quando uma nova linha recria a
 aba.
 
 ## Atualização
+
+`specsfy update` atualiza todas as skills Specsfy registradas no projeto.
+`specsfy skills update` usa a mesma função para preservar compatibilidade.
+Ambos executam o preflight do instalador antes de baixar as origens.
+
+`specsfy upgrade` força uma nova consulta de tags e só executa o npm quando a
+versão estável encontrada supera `VERSION`. Assim, uma versão de desenvolvimento
+mais recente que a publicação disponível não sofre downgrade.
 
 `updater.ts` consulta tags semânticas estáveis, respeita intervalo e ETag,
 oferece consentimento e delega a instalação a:

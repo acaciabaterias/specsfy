@@ -51,8 +51,15 @@ ambiente de desenvolvimento e recusa a operação:
 
 ```bash
 cd caminho/do/projeto
+specsfy doctor --project .
 specsfy install --project .
 ```
+
+O diagnóstico confere Node.js 22.12 ou superior, Git, npm, o diretório do
+projeto e o comando `skills`. Quando `skills` não está instalado globalmente,
+o `npx` é aceito como executor sob demanda. `install` repete as verificações
+necessárias antes de escrever qualquer arquivo e reúne todas as correções na
+mesma mensagem.
 
 O instalador publica as etapas numeradas a partir de
 `.agents/skills/specsfy-01-inbox`, grava o contrato central em
@@ -98,21 +105,23 @@ estiverem vazias. Use `Ctrl+Q` para sair.
 
 ## Atualize sem perder customizações
 
-Para atualizar o pacote instalado pelo npm:
+Para atualizar o próprio CLI instalado pelo npm:
 
 ```bash
-npm update --global @promovaweb/specsfy
+specsfy upgrade
 specsfy --version
 ```
 
 Na instalação pelo arquivo de `get.specsfy.dev`, repita o download e a
-permissão de execução. Para atualizar as skills já instaladas, execute
-`skills update`. O CLI compara os fingerprints e preserva os arquivos
-customizados:
+permissão de execução quando o npm não gerenciar o executável. Para atualizar
+as skills já instaladas, execute `specsfy update`. O CLI compara os
+fingerprints e preserva os arquivos customizados:
 
 ```bash
-specsfy skills update --project .
+specsfy update --project .
 ```
+
+`specsfy skills update --project .` continua aceito para automações anteriores.
 
 O Specsfy registra fingerprints dos arquivos gerenciados. Uma atualização
 normal substitui versões intactas e preserva arquivos customizados. Se o CLI

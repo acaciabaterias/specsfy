@@ -14,6 +14,9 @@ describe("CLI público", () => {
     const program = buildProgram();
     expect(program.commands.map((command) => command.name())).toEqual([
       "install",
+      "doctor",
+      "update",
+      "upgrade",
       "skills",
       "transition",
       "migrate",
@@ -78,6 +81,24 @@ describe("CLI público", () => {
     expect(
       await runCli(["node", "specsfy", "progress", "--project", project]),
     ).toBe(2);
+  });
+
+  test("install interrompe antes de escrever quando o preflight falha", async () => {
+    const project = await temporaryDirectory();
+    const previousPath = process.env.PATH;
+    const error = vi.spyOn(console, "error").mockImplementation(() => undefined);
+    process.env.PATH = "";
+    try {
+      expect(
+        await runCli(["node", "specsfy", "install", "--project", project]),
+      ).toBe(1);
+      expect(String(error.mock.calls.at(-1)?.[0])).toContain(
+        "pré-requisitos ausentes",
+      );
+    } finally {
+      if (previousPath === undefined) delete process.env.PATH;
+      else process.env.PATH = previousPath;
+    }
   });
 
   test("transition e migrate expõem o ciclo de vida físico", async () => {
