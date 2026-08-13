@@ -4,6 +4,12 @@ Todas as mudanças relevantes do Specsfy CLI são registradas neste arquivo.
 
 ## [Unreleased]
 
+- Inclui o pacote oficial `skills` como dependência do CLI e o localiza mesmo
+  quando um launcher inicia o Specsfy com um `PATH` reduzido.
+- Alinha o requisito mínimo ao Node.js 22.20 exigido pelo materializador.
+- Adiciona `specsfy setup` como alias de `specsfy install`, com o mesmo
+  diagnóstico de Node.js, Git, projeto e materializador de skills.
+
 ## [0.8.1] - 2026-08-12
 
 - Adiciona `specsfy doctor` e executa o mesmo diagnóstico antes do setup para

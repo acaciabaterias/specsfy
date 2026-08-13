@@ -27,7 +27,7 @@ todos os especialistas detectados em uma única execução:
 
 ```bash
 specsfy doctor --project .
-specsfy install --project . --detected
+specsfy setup --project . --detected
 ```
 
 Quando você já souber quais stacks precisam de orientação especializada,

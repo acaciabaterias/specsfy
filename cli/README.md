@@ -18,10 +18,8 @@ tecnologias e acompanhar em tempo real o progresso das specs de um projeto.
 
 ## Pré-requisitos
 
-- Node.js 22.12 ou superior, com o npm disponível.
-- `skills`, do projeto
-  [`vercel-labs/skills`](https://github.com/vercel-labs/skills), ou `npx`
-  disponível para executá-lo sob demanda.
+- Node.js 22.20 ou superior, com o npm disponível.
+- Git para obter o framework e acesso de escrita ao projeto consumidor.
 - acesso autenticado ao repositório privado: execute `gh auth login` no uso
   interativo ou defina `GH_TOKEN`/`GITHUB_TOKEN` na automação.
 
@@ -46,6 +44,12 @@ atualizar a instalação global:
 specsfy upgrade
 ```
 
+A instalação pelo npm inclui o `skills`, do projeto
+[`vercel-labs/skills`](https://github.com/vercel-labs/skills). O Specsfy também
+aceita uma instalação global, `SPECSFY_SKILLS_CLI` ou `npx` como alternativas.
+O executável avulso de `get.specsfy.dev` não carrega pacotes externos; nesse
+caso, mantenha `skills` ou `npx` disponível no `PATH`.
+
 O catálogo e a verificação de versões usam a API do GitHub. O CLI procura,
 nesta ordem, `GH_TOKEN`, `GITHUB_TOKEN` e a sessão retornada por
 `gh auth token`. As credenciais não são gravadas pelo Specsfy.
@@ -61,6 +65,7 @@ npm install --global @promovaweb/specsfy@0.8.1
 ```bash
 specsfy
 specsfy doctor --project .
+specsfy setup --project .
 specsfy install --project .
 specsfy install --project . --detected
 specsfy install --project . \

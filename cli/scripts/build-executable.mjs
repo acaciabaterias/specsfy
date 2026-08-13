@@ -30,7 +30,7 @@ try {
     outfile: temporary,
     bundle: true,
     platform: "node",
-    target: "node22.12",
+    target: "node22.20",
     format: "cjs",
     external: ["term.js", "pty.js"],
     alias: {

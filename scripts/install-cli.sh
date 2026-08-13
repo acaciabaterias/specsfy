@@ -53,7 +53,7 @@ fi
 if ! command -v npm >/dev/null 2>&1; then
     printf '%s\n' \
         'erro: npm não foi encontrado no PATH.' \
-        'Instale o Node.js 22.12 ou superior e tente novamente.' \
+        'Instale o Node.js 22.20 ou superior e tente novamente.' \
         >&2
     exit 1
 fi

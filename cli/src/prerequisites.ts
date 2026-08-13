@@ -1,10 +1,11 @@
 /** Diagnóstico compartilhado pelos fluxos de setup, update e upgrade. */
 
 import { constants } from "node:fs";
-import { access, stat } from "node:fs/promises";
+import { access, realpath, stat } from "node:fs/promises";
+import { createRequire } from "node:module";
 import { delimiter, join, resolve } from "node:path";
 
-const MINIMUM_NODE_VERSION = [22, 12, 0] as const;
+const MINIMUM_NODE_VERSION = [22, 20, 0] as const;
 
 export interface PrerequisiteCheck {
   name: "node" | "git" | "skills" | "npm" | "project";
@@ -17,6 +18,7 @@ interface CheckOptions {
   path?: string;
   nodeVersion?: string;
   skillsOverride?: string;
+  skillsLauncher?: string;
 }
 
 /** Informa se a versão do runtime satisfaz o contrato do pacote. */
@@ -30,10 +32,16 @@ export function nodeVersionSupported(version: string): boolean {
   return true;
 }
 
-/** Resolve o comando oficial `skills`, com fallback explícito por `npx`. */
+/**
+ * Resolve o comando oficial `skills` sem depender apenas do PATH do processo.
+ *
+ * A instalação incluída no pacote cobre launchers gráficos e chamadas por
+ * caminho absoluto, que podem omitir o diretório global do npm no PATH.
+ */
 export async function resolveSkillsCommand(
   path = process.env.PATH ?? "",
   override = process.env.SPECSFY_SKILLS_CLI,
+  launcher = process.argv[1],
 ): Promise<string[] | undefined> {
   if (override) {
     const executable = resolve(override);
@@ -41,6 +49,8 @@ export async function resolveSkillsCommand(
   }
   const skills = await findExecutable("skills", path);
   if (skills) return [skills];
+  const packaged = await resolvePackagedSkills(launcher);
+  if (packaged) return [process.execPath, packaged];
   const npx = await findExecutable("npx", path);
   return npx ? [npx, "--yes", "skills"] : undefined;
 }
@@ -57,6 +67,7 @@ export async function checkPrerequisites(
   const skills = await resolveSkillsCommand(
     path,
     options.skillsOverride ?? process.env.SPECSFY_SKILLS_CLI,
+    options.skillsLauncher ?? process.argv[1],
   );
   const target = resolve(project);
   let projectOk = false;
@@ -71,7 +82,7 @@ export async function checkPrerequisites(
     {
       name: "node",
       ok: nodeVersionSupported(nodeVersion),
-      detail: `Node.js 22.12 ou mais recente; versão atual: ${nodeVersion}`,
+      detail: `Node.js 22.20 ou mais recente; versão atual: ${nodeVersion}`,
     },
     {
       name: "git",
@@ -84,7 +95,8 @@ export async function checkPrerequisites(
       ok: Boolean(skills),
       detail: skills
         ? `skills CLI disponível por ${skills.join(" ")}`
-        : "skills CLI ausente; instale `skills` ou disponibilize `npx` no PATH",
+        : "skills CLI ausente; reinstale `@promovaweb/specsfy` pelo npm ou " +
+          "disponibilize `skills` ou `npx` no PATH",
       command: skills,
     },
     {
@@ -124,6 +136,21 @@ async function findExecutable(name: string, path: string): Promise<string | unde
     if (await isExecutable(executable)) return executable;
   }
   return undefined;
+}
+
+/** Localiza a dependência `skills` a partir do launcher instalado do Specsfy. */
+async function resolvePackagedSkills(
+  launcher: string | undefined,
+): Promise<string | undefined> {
+  if (!launcher) return undefined;
+  try {
+    const require = createRequire(await realpath(resolve(launcher)));
+    const executable = require.resolve("skills/bin/cli.mjs");
+    await access(executable, constants.R_OK);
+    return executable;
+  } catch {
+    return undefined;
+  }
 }
 
 async function isExecutable(path: string): Promise<boolean> {

@@ -56,6 +56,7 @@ export function buildProgram(): Command {
 
   program
     .command("install")
+    .alias("setup")
     .description("instala as skills do framework")
     .addOption(projectOption())
     .option("--force", "substitui arquivos gerenciados alterados")

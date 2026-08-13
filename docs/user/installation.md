@@ -10,7 +10,7 @@
 
 ## Instale o CLI
 
-O Specsfy requer Node.js 22.12 ou uma versão mais recente. O pacote oficial
+O Specsfy requer Node.js 22.20 ou uma versão mais recente. O pacote oficial
 publicado no npm instala o comando no ambiente global do usuário:
 
 ```bash
@@ -35,7 +35,7 @@ specsfy --version
 
 O download em `get.specsfy.dev` continua disponível para instalações mantidas
 em `$HOME/.local/bin`. Esse executável inclui as dependências do CLI, mas
-também requer Node.js 22.12 ou superior:
+também requer Node.js 22.20 ou superior:
 
 ```bash
 mkdir -p "$HOME/.local/bin"
@@ -52,14 +52,17 @@ ambiente de desenvolvimento e recusa a operação:
 ```bash
 cd caminho/do/projeto
 specsfy doctor --project .
+specsfy setup --project .
+# Nome compatível para scripts e automações anteriores:
 specsfy install --project .
 ```
 
-O diagnóstico confere Node.js 22.12 ou superior, Git, npm, o diretório do
-projeto e o comando `skills`. Quando `skills` não está instalado globalmente,
-o `npx` é aceito como executor sob demanda. `install` repete as verificações
-necessárias antes de escrever qualquer arquivo e reúne todas as correções na
-mesma mensagem.
+O diagnóstico confere Node.js 22.20 ou superior, Git, npm, o diretório do
+projeto e o comando `skills`. A instalação do Specsfy pelo npm já inclui esse
+materializador. Uma instalação global de `skills` e o `npx` continuam
+disponíveis como alternativas. `setup` e seu nome compatível `install` repetem
+as verificações necessárias antes de escrever qualquer arquivo e reúnem todas
+as correções na mesma mensagem.
 
 O instalador publica as etapas numeradas a partir de
 `.agents/skills/specsfy-01-inbox`, grava o contrato central em
@@ -133,12 +136,13 @@ descarta a customização protegida no arquivo indicado.
 - **Comando ausente:** confira o resultado de `npm prefix --global` e o `PATH`
   usado pelo terminal.
 - **Node.js incompatível:** execute `node --version`. O aplicativo requer
-  Node.js 22.12 ou uma versão mais recente.
+  Node.js 22.20 ou uma versão mais recente.
 - **Permissão negada:** execute novamente
   `chmod +x "$HOME/.local/bin/specsfy"` quando usar o download. Em instalações
   pelo npm, configure um diretório global gravável pelo seu usuário.
-- **Instalação das skills interrompida:** disponibilize o comando `skills` ou
-  o `npx`, usado pelo CLI como alternativa.
+- **Mensagem `skills CLI não encontrado`:** reinstale a versão atual do pacote
+  com `npm install --global @promovaweb/specsfy@latest`. No executável avulso,
+  disponibilize `skills` ou `npx` no `PATH`.
 - **Arquivo gerenciado customizado:** preserve sua versão ou compare as
   mudanças oficiais e só então repita o comando com `--force`.
 

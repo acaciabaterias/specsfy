@@ -24,7 +24,7 @@ Veja as demais telas e comandos no
 
 ## O que você precisa
 
-- Node.js 22.12 ou superior, com o npm disponível.
+- Node.js 22.20 ou superior, com o npm disponível.
 - o comando [`skills`](https://github.com/vercel-labs/skills) ou `npx`.
 - um projeto existente ou recém-criado no qual o Specsfy será aplicado.
 

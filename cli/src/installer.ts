@@ -668,8 +668,8 @@ async function installWithSkillsCli(
   const command = await resolveSkillsCommand();
   if (!command) {
     throw new Error(
-      "skills CLI não encontrado; instale https://github.com/vercel-labs/skills " +
-        "ou disponibilize npx no PATH",
+      "skills CLI não encontrado. Reinstale @promovaweb/specsfy pelo npm para " +
+        "receber a dependência incluída ou disponibilize skills ou npx no PATH",
     );
   }
   const arguments_ = [...command.slice(1), "add", resolve(source)];
@@ -685,8 +685,8 @@ async function removeWithSkillsCli(
   const command = await resolveSkillsCommand();
   if (!command) {
     throw new Error(
-      "skills CLI não encontrado; instale https://github.com/vercel-labs/skills " +
-        "ou disponibilize npx no PATH",
+      "skills CLI não encontrado. Reinstale @promovaweb/specsfy pelo npm para " +
+        "receber a dependência incluída ou disponibilize skills ou npx no PATH",
     );
   }
   await runSkillsCommand(

@@ -1,18 +1,19 @@
 /** Contratos do diagnóstico executado antes de setup e atualização. */
-import { chmod, mkdir, writeFile } from "node:fs/promises";
+import { chmod, mkdir, symlink, writeFile } from "node:fs/promises";
 import { delimiter, join } from "node:path";
 import { describe, expect, test } from "vitest";
 import {
   assertPrerequisites,
   checkPrerequisites,
   nodeVersionSupported,
+  resolveSkillsCommand,
 } from "../src/prerequisites.js";
 import { temporaryDirectory } from "./helpers.js";
 
 describe("pré-requisitos", () => {
-  test("exige Node.js 22.12 ou mais recente", () => {
-    expect(nodeVersionSupported("22.11.9")).toBe(false);
-    expect(nodeVersionSupported("22.12.0")).toBe(true);
+  test("exige Node.js 22.20 ou mais recente", () => {
+    expect(nodeVersionSupported("22.19.9")).toBe(false);
+    expect(nodeVersionSupported("22.20.0")).toBe(true);
     expect(nodeVersionSupported("24.1.0")).toBe(true);
   });
 
@@ -30,7 +31,7 @@ describe("pré-requisitos", () => {
 
     const checks = await checkPrerequisites(project, {
       path: [bin, process.env.PATH ?? ""].join(delimiter),
-      nodeVersion: "22.12.0",
+      nodeVersion: "22.20.0",
     });
 
     expect(checks.map(({ name }) => name)).toEqual([
@@ -57,6 +58,7 @@ describe("pré-requisitos", () => {
     const checks = await checkPrerequisites(join(root, "ausente"), {
       path: bin,
       nodeVersion: "20.0.0",
+      skillsLauncher: "",
     });
 
     expect(checks.find(({ name }) => name === "skills")).toMatchObject({
@@ -64,7 +66,36 @@ describe("pré-requisitos", () => {
       command: [npx, "--yes", "skills"],
     });
     expect(() => assertPrerequisites(checks)).toThrow(
-      /Node\.js 22\.12.*Git.*npm.*projeto/s,
+      /Node\.js 22\.20.*Git.*npm.*projeto/s,
     );
+  });
+
+  test("usa o skills incluído no pacote quando o PATH está reduzido", async () => {
+    const root = await temporaryDirectory();
+    const launcher = join(root, "package", "bin", "specsfy.cjs");
+    const linkedLauncher = join(root, "global", "bin", "specsfy");
+    const skills = join(
+      root,
+      "package",
+      "node_modules",
+      "skills",
+      "bin",
+      "cli.mjs",
+    );
+    await mkdir(join(skills, ".."), { recursive: true });
+    await mkdir(join(launcher, ".."), { recursive: true });
+    await mkdir(join(linkedLauncher, ".."), { recursive: true });
+    await writeFile(launcher, "#!/usr/bin/env node\n");
+    await symlink(launcher, linkedLauncher);
+    await writeFile(skills, "#!/usr/bin/env node\n");
+    await writeFile(
+      join(root, "package", "node_modules", "skills", "package.json"),
+      JSON.stringify({ name: "skills", version: "1.5.22", type: "module" }),
+    );
+
+    expect(await resolveSkillsCommand("", undefined, linkedLauncher)).toEqual([
+      process.execPath,
+      skills,
+    ]);
   });
 });

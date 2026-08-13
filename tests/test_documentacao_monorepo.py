@@ -123,7 +123,7 @@ class MonorepoDocumentationIntegrationTests(unittest.TestCase):
 
         installation = installation_path.read_text(encoding="utf-8")
         for evidence in (
-            "Node.js 22.12",
+            "Node.js 22.20",
             "npm install --global @promovaweb/specsfy",
             "get.specsfy.dev",
             "curl -fL get.specsfy.dev",

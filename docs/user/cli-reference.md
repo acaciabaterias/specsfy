@@ -43,13 +43,30 @@ specsfy install --project . --specialist specsfy-specialist-laravel
 specsfy install --project . --detected --force --json
 ```
 
+## `specsfy setup`
+
+Executa o mesmo fluxo de `specsfy install`. O alias existe para quem procura um
+comando de preparação do projeto e repete o diagnóstico completo antes de
+escrever templates, regras ou skills. As opções, a saída, as proteções de
+arquivos locais e os códigos de saída são idênticos aos de `install`.
+
+Exemplos:
+
+```bash
+specsfy setup --project .
+specsfy setup --project ./aplicativo --json
+specsfy setup --project . --detected
+specsfy setup --project . --specialist specsfy-specialist-laravel
+specsfy setup --project . --detected --force --json
+```
+
 ## `specsfy doctor`
 
 Verifica Node.js, Git, npm, acesso de leitura e escrita ao projeto e a
-disponibilidade do `skills CLI`. Uma instalação global de `skills` tem
-preferência; `npx skills` funciona como fallback. `--json` retorna cada item,
-seu estado e o comando encontrado. Qualquer requisito ausente produz exit code
-1.
+disponibilidade do `skills CLI`. A resolução usa, nesta ordem, o override
+`SPECSFY_SKILLS_CLI`, uma instalação no `PATH`, a dependência incluída no pacote
+npm e `npx skills`. `--json` retorna cada item, seu estado e o comando
+encontrado. Qualquer requisito ausente produz exit code 1.
 
 Exemplos:
 

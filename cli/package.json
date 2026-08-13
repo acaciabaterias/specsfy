@@ -39,13 +39,14 @@
     "check": "npm run typecheck && npm test && npm run build && npm run build:executable && npm pack --dry-run"
   },
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=22.20.0"
   },
   "dependencies": {
     "commander": "^15.0.0",
     "marked": "^15.0.12",
     "marked-terminal": "^7.3.0",
-    "neo-blessed": "^0.2.0"
+    "neo-blessed": "^0.2.0",
+    "skills": "^1.5.22"
   },
   "devDependencies": {
     "@types/blessed": "^0.1.27",

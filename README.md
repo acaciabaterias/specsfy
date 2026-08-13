@@ -34,7 +34,7 @@ releases Git.
 
 ## Instalação
 
-Requer Node.js 22.12 ou superior, npm e o comando
+Requer Node.js 22.20 ou superior, npm e o comando
 [`skills`](https://github.com/vercel-labs/skills) ou `npx`.
 Enquanto o repositório for privado, autentique uma vez com `gh auth login`.
 o CLI reutiliza essa sessão. Em automações, defina `GH_TOKEN` ou
@@ -49,7 +49,7 @@ npm install --global @promovaweb/specsfy
 specsfy --version
 cd caminho/do/projeto
 specsfy doctor --project .
-specsfy install --project .
+specsfy setup --project .
 ```
 
 Depois da instalação, `specsfy update --project .` atualiza as skills do

@@ -12,6 +12,9 @@ describe("CLI público", () => {
 
   test("expõe todos os comandos e subcomandos compatíveis", () => {
     const program = buildProgram();
+    expect(
+      program.commands.find((command) => command.name() === "install")?.aliases(),
+    ).toContain("setup");
     expect(program.commands.map((command) => command.name())).toEqual([
       "install",
       "doctor",

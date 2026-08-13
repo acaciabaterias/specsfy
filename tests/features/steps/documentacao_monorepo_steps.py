@@ -140,7 +140,7 @@ def then_skill_requires_installation_guide(context) -> None:
 @then("o guia instala o CLI e o framework no projeto consumidor")
 def then_guide_installs_cli_and_framework(context) -> None:
     installation = context.installation.read_text(encoding="utf-8")
-    assert "Node.js 22.12" in installation
+    assert "Node.js 22.20" in installation
     assert "npm install --global @promovaweb/specsfy" in installation
     assert "`get.specsfy.dev`" in installation
     assert "curl -fL get.specsfy.dev" in installation
