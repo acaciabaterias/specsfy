@@ -40,6 +40,11 @@ Specsfy-Guia-do-Usuario-v<versão>.pdf
 Specsfy-Guia-do-Usuario-v<versão>.epub
 ```
 
+Para links permanentes, use os aliases da edição mais recente:
+
+- [PDF vigente](ebook-specsfy.pdf): `ebook-specsfy.pdf`;
+- [EPUB vigente](ebook-specsfy.epub): `ebook-specsfy.epub`.
+
 Cada execução bem-sucedida mantém somente as cinco edições SemVer mais
 recentes. PDF e EPUB de versões mais antigas são removidos juntos. A limpeza
 considera exclusivamente arquivos que seguem o padrão acima e preserva
