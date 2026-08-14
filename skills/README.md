@@ -120,6 +120,13 @@ novamente para garantir os quatro contextos iniciais; o documentador garante o
 inventário de pacotes. Ambos preservam arquivos existentes e todo conteúdo fora
 dos blocos gerenciados.
 
+Quando o projeto já usa GitHub Spec Kit, a constituição em
+`.specify/memory/constitution.md` ativa uma ponte de leitura. O setup percorre
+todos os arquivos regulares em `specs/`, cria `.specsfy/SPECKIT.md` com os
+caminhos e fingerprints encontrados e orienta os agentes a ler as fontes
+originais. Nenhum arquivo de `.specify/` ou `specs/` é movido, convertido,
+substituído ou removido.
+
 Durante planejamento, implementação e projeção de progresso,
 `specsfy-setup/scripts/monitor_context.mjs` classifica mudanças staged, unstaged
 e untracked. Alterações estruturais exigem `STACK.md`. Alterações de

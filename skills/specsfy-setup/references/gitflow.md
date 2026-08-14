@@ -1,9 +1,9 @@
 # Especialista de branch sob demanda
 
-O setup não escolhe modelo de branch por conta própria. `git branch -a` já
+O setup não escolhe modelo de branch por iniciativa própria. `git branch -a` já
 existente, uma branch chamada `develop` ou qualquer outro sinal do repositório
-não autorizam propor Gitflow — a escolha do modelo de branch pertence a quem
-conduz o projeto.
+não autorizam propor Gitflow. A escolha do modelo de branch pertence à pessoa
+que conduz o projeto.
 
 - Carregar `$specsfy-specialist-gitflow` somente quando a pessoa pedir
   Gitflow explicitamente nesta conversa, ou quando `RULES.md` já registrar
@@ -13,7 +13,7 @@ conduz o projeto.
   `.specsfy/RULES.md` via `$specsfy-aux-rules`, para que o setup não precise
   perguntar de novo na próxima execução.
 - Se a pessoa não mencionar Gitflow nem indicar essa preferência, seguir o
-  setup normalmente sem branch model nenhum declarado; a ausência de menção
+  setup normalmente sem branch model nenhum declarado. A ausência de menção
   não é uma lacuna a resolver por inferência.
 
 Instale no projeto consumidor:

@@ -40,6 +40,21 @@ class AuxiliaryContextIntegrationTests(unittest.TestCase):
             self.assertIn(path, framework)
             self.assertIn(path, guide)
 
+        for path in (
+            ".specify/memory/constitution.md",
+            ".specsfy/SPECKIT.md",
+        ):
+            self.assertIn(path, guide)
+            self.assertIn(path, framework)
+
+        setup = (SKILLS / "specsfy-setup/SKILL.md").read_text(encoding="utf-8")
+        setup_script = (
+            SKILLS / "specsfy-setup/scripts/setup_context.mjs"
+        ).read_text(encoding="utf-8")
+        self.assertIn("sync_speckit_context.mjs", setup_script)
+        self.assertIn("Nunca", setup)
+        self.assertIn("escrever, mover, renomear ou remover", setup)
+
     def test_setup_reference_matches_agents_publishable_block(self) -> None:
         agents = (SKILLS / "AGENTS.md").read_text(encoding="utf-8")
         reference = (

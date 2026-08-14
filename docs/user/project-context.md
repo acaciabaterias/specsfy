@@ -20,7 +20,8 @@ mantêm esta estrutura:
     ├── STACK.md
     ├── RULES.md
     ├── DATABASE.md
-    └── PACKAGES.md
+    ├── PACKAGES.md
+    └── SPECKIT.md      # somente quando GitHub Spec Kit for detectado
 ```
 
 O setup também reserva blocos delimitados para as diretrizes do Specsfy em
@@ -35,12 +36,31 @@ preservado. A referência publicável das diretrizes vive em
 | `.specsfy/RULES.md` | regras explícitas confirmadas | `$specsfy-aux-rules` |
 | `.specsfy/DATABASE.md` | persistência e relações | `$specsfy-aux-database` |
 | `.specsfy/PACKAGES.md` | pacotes npm e Composer com finalidade | `$specsfy-documentator` |
+| `.specsfy/SPECKIT.md` | constituição e fontes preservadas do GitHub Spec Kit | `$specsfy-setup` |
 
 Os quatro modelos ficam em `.specsfy/templates/Project.md`, `Stack.md`,
 `Rules.md` e `Database.md`, junto dos demais templates do framework. Para
 personalizar um deles, mantenha o mesmo nome em
 `.specsfy/templates/custom/`; essa cópia tem precedência e não é alterada pelo
 CLI.
+
+## Projeto existente com GitHub Spec Kit
+
+O setup reconhece o GitHub Spec Kit pela constituição em
+`.specify/memory/constitution.md`. Quando ela existe, a skill lê a constituição
+e todos os arquivos regulares dentro de `specs/`, inclusive specs, planos,
+tarefas, contratos e anexos. O resultado aparece em `.specsfy/SPECKIT.md` como
+uma lista de caminhos, títulos, tipos e fingerprints SHA-256.
+
+Abra as fontes listadas antes de trabalhar na feature correspondente. A
+constituição continua governando o projeto e os artefatos do GitHub Spec Kit
+permanecem nos caminhos originais. O setup não escreve, move, converte ou
+remove arquivos de `.specify/` e `specs/`.
+
+Você pode acrescentar notas próprias fora do bloco
+`specsfy:speckit` em `.specsfy/SPECKIT.md`. Uma nova execução atualiza somente
+o bloco delimitado. Se a constituição divergir de `.specsfy/RULES.md`, preserve
+os dois textos e resolva a divergência antes de alterar a feature.
 
 Execute `$specsfy-aux-stack` após alterar frameworks, runtimes, ferramentas
 estruturais ou persistência. Execute `$specsfy-aux-database` sempre que criar ou

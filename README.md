@@ -55,6 +55,11 @@ specsfy setup --project .
 Depois da instalação, `specsfy update --project .` atualiza as skills do
 projeto e `specsfy upgrade` atualiza o próprio CLI.
 
+Em um projeto iniciado com GitHub Spec Kit, `$specsfy-setup` lê
+`.specify/memory/constitution.md` e os arquivos existentes em `specs/`. A skill
+publica uma ponte de leitura em `.specsfy/SPECKIT.md` e preserva os artefatos
+originais nos mesmos caminhos.
+
 O CLI instala a metodologia de `skills/` e, sob demanda, especialistas de
 `specialists/`. Veja o [guia de instalação](docs/user/installation.md), o
 [primeiro uso](docs/user/getting-started.md) e o

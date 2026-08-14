@@ -141,6 +141,19 @@ fingerprints próprios e proteção contra sobrescrita local. A resolução usad
 pelas skills segue `custom/<Nome>.md`, template gerenciado e, somente no
 monorepo, `skills/templates/<Nome>.md`.
 
+### Ponte com GitHub Spec Kit
+
+`specsfy-setup/scripts/sync_speckit_context.mjs` ativa a integração somente
+quando encontra `.specify/memory/constitution.md`. O script lê essa fonte como
+bytes, percorre recursivamente os arquivos regulares em `specs/` e atualiza o
+bloco `specsfy:speckit` de `.specsfy/SPECKIT.md`. Cada linha registra caminho,
+tipo, título e SHA-256.
+
+O script não escreve nas árvores do GitHub Spec Kit. Texto fora do bloco
+gerenciado em `SPECKIT.md` permanece intacto. O bloco publicado em `AGENTS.md`
+obriga o agente a abrir a constituição e as fontes listadas, mantendo os
+artefatos anteriores sem conversão para a estrutura nativa do Specsfy.
+
 ## Alterar uma skill
 
 1. escreva ou atualize o contrato BDD/TDD.

@@ -23,6 +23,10 @@ arquivo contém o fluxo, os caminhos canônicos e os gates do framework.
 - Leia `PROJECT.md`, `.specsfy/STACK.md`, `.specsfy/RULES.md`,
   `.specsfy/DATABASE.md` e `.specsfy/PACKAGES.md` como contexto persistente
   antes de planejar mudanças.
+- Quando `.specsfy/SPECKIT.md` existir, leia
+  `.specify/memory/constitution.md` e cada fonte do GitHub Spec Kit listada na
+  projeção. Preserve `.specify/` e os artefatos já existentes em `specs/`; o
+  Specsfy não os migra nem os substitui.
 - Execute `$specsfy-setup` quando `PROJECT.md`, `STACK.md`, `RULES.md` ou
   `DATABASE.md` estiver ausente. Execute `$specsfy-documentator` quando
   `PACKAGES.md` estiver ausente ou desatualizado.
@@ -31,7 +35,7 @@ arquivo contém o fluxo, os caminhos canônicos e os gates do framework.
 - Use as skills `specsfy-aux-*` para manter stack, regras e banco sem apagar
   conteúdo humano.
 - Execute `$specsfy-documentator` depois de cada implementação para reconstruir
-  a documentação técnica completa em `docs/` e o inventário de dependências em
+  a documentação técnica completa em `docs/` e o registro de dependências em
   `.specsfy/PACKAGES.md`.
 - Use `specs/inbox/` para capturas imediatas ainda não refinadas.
 - Use `specs/backlog/` para itens refináveis ainda não promovidos.

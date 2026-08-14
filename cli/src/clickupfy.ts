@@ -1,5 +1,6 @@
 /** Integração opcional com ClickUpfy, sem substituir a spec local. */
 import { access, readFile } from "node:fs/promises";
+import { homedir } from "node:os";
 import { join } from "node:path";
 
 export interface ClickUpfyHandoff {
@@ -20,11 +21,31 @@ export async function clickUpfyHandoff(
   return task ? { available, task_id: task, action } : { available };
 }
 
-async function hasClickUpfySkill(project: string): Promise<boolean> {
-  try {
-    await access(join(project, ".agents", "skills", "clickupfy-executar-tarefa", "SKILL.md"));
-    return true;
-  } catch {
-    return false;
+/**
+ * Verifica as instalações atual e legada do ClickUpfy.
+ *
+ * A versão atual usa `clickup-issue-implement` em `.codex/skills`, com
+ * instalação local ou global. A pasta `.agents/skills` permanece como
+ * compatibilidade para projetos que ainda usam a integração anterior.
+ */
+export async function hasClickUpfySkill(
+  project: string,
+  userHome = homedir(),
+): Promise<boolean> {
+  const candidates = [
+    join(project, ".codex", "skills", "clickup-issue-implement", "SKILL.md"),
+    join(userHome, ".codex", "skills", "clickup-issue-implement", "SKILL.md"),
+    join(project, ".agents", "skills", "clickupfy-executar-tarefa", "SKILL.md"),
+  ];
+
+  for (const candidate of candidates) {
+    try {
+      await access(candidate);
+      return true;
+    } catch {
+      // A ausência de uma candidata apenas leva à próxima instalação possível.
+    }
   }
+
+  return false;
 }

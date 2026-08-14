@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import subprocess
 import tempfile
 import unittest
@@ -305,6 +306,74 @@ class AuxiliaryContextTests(unittest.TestCase):
                     state,
                     {path: path.read_text(encoding="utf-8") for path in state},
                 )
+
+    def test_setup_adapts_github_spec_kit_context_without_changing_sources(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory)
+            constitution = project / ".specify/memory/constitution.md"
+            feature = project / "specs/001-checkout"
+            contracts = feature / "contracts"
+            constitution.parent.mkdir(parents=True)
+            contracts.mkdir(parents=True)
+            sources = {
+                constitution: b"# Constituicao do projeto\n\n## I. Qualidade\n",
+                feature / "spec.md": b"# Checkout recorrente\n\n## Requisitos\n",
+                feature / "plan.md": b"# Plano do checkout\n",
+                feature / "tasks.md": b"# Tarefas do checkout\n",
+                contracts / "openapi.yaml": b"openapi: 3.1.0\n",
+                feature / "fixture.bin": b"\x00\x01spec-kit\xff",
+            }
+            for path, content in sources.items():
+                path.write_bytes(content)
+
+            first = run_script(SETUP, "--project", str(project))
+
+            self.assertEqual(0, first.returncode, first.stderr)
+            bridge = project / ".specsfy/SPECKIT.md"
+            self.assertTrue(bridge.is_file())
+            projection = bridge.read_text(encoding="utf-8")
+            for path, content in sources.items():
+                relative = path.relative_to(project).as_posix()
+                with self.subTest(source=relative):
+                    self.assertIn(f"`{relative}`", projection)
+                    self.assertIn(hashlib.sha256(content).hexdigest(), projection)
+                    self.assertEqual(content, path.read_bytes())
+            self.assertIn("Checkout recorrente", projection)
+            self.assertIn("| Constituição |", projection)
+            self.assertIn("arquivo binário", projection)
+            agents = (project / "AGENTS.md").read_text(encoding="utf-8")
+            self.assertIn("`.specsfy/SPECKIT.md`", agents)
+            self.assertIn("`.specify/memory/constitution.md`", agents)
+
+            human_note = "# Nota local\n\nPreservar esta observacao.\n\n"
+            bridge.write_text(human_note + projection, encoding="utf-8")
+            changed_spec = b"# Checkout recorrente\n\n## Requisitos revistos\n"
+            (feature / "spec.md").write_bytes(changed_spec)
+
+            second = run_script(SETUP, "--project", str(project))
+
+            self.assertEqual(0, second.returncode, second.stderr)
+            refreshed = bridge.read_text(encoding="utf-8")
+            self.assertTrue(refreshed.startswith(human_note))
+            self.assertIn(hashlib.sha256(changed_spec).hexdigest(), refreshed)
+            self.assertEqual(1, refreshed.count("<!-- specsfy:speckit:start -->"))
+            self.assertEqual(1, refreshed.count("<!-- specsfy:speckit:end -->"))
+            self.assertEqual(changed_spec, (feature / "spec.md").read_bytes())
+            for path, content in sources.items():
+                if path != feature / "spec.md":
+                    self.assertEqual(content, path.read_bytes())
+
+    def test_setup_does_not_create_spec_kit_projection_without_constitution(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory)
+            feature = project / "specs/001-native"
+            feature.mkdir(parents=True)
+            (feature / "spec.md").write_text("# Spec nativa\n", encoding="utf-8")
+
+            result = run_script(SETUP, "--project", str(project))
+
+            self.assertEqual(0, result.returncode, result.stderr)
+            self.assertFalse((project / ".specsfy/SPECKIT.md").exists())
 
     def test_setup_prefers_custom_context_template(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

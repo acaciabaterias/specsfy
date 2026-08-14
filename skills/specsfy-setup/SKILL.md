@@ -1,6 +1,6 @@
 ---
 name: specsfy-setup
-description: Preparar e monitorar PROJECT.md e os contextos .specsfy de stack, regras e banco. Use no setup ou ao reconciliar mudanças da aplicação.
+description: Preparar e monitorar os contextos do projeto, incluindo a constituição e as specs preservadas de projetos com GitHub Spec Kit.
 ---
 
 # Preparar contexto do projeto
@@ -14,6 +14,8 @@ Antes de formular qualquer pergunta, leia e aplique o
 1. Ler `AGENTS.md`, `CLAUDE.md` e instruções locais antes de escrever.
 2. Ler [as diretrizes publicáveis](references/framework-instructions.md) quando
    precisar auditar o bloco reservado em arquivos de agentes.
+   Quando `.specify/memory/constitution.md` existir, ler também
+   [a compatibilidade com GitHub Spec Kit](references/github-spec-kit.md).
 3. Executar `specsfy doctor --project <raiz>` e corrigir cada requisito
    ausente antes de preparar o contexto. O diagnóstico confere Node.js, Git,
    npm, acesso ao projeto e o `skills CLI`, com fallback por `npx`.
@@ -22,7 +24,9 @@ Antes de formular qualquer pergunta, leia e aplique o
    `.specsfy/templates/custom/<Nome>.md` quando existir ou dos arquivos
    gerenciados `.specsfy/templates/Project.md`, `Stack.md`, `Rules.md` e
    `Database.md` caso contrário; não manter modelos paralelos embutidos no
-   script.
+   script. O mesmo comando deve ler a constituição e todos os arquivos
+   regulares em `specs/` quando detectar GitHub Spec Kit, depois atualizar o
+   bloco gerenciado de `.specsfy/SPECKIT.md`.
 5. No início e no fim de cada mudança, executar:
 
    ```bash
@@ -30,10 +34,12 @@ Antes de formular qualquer pergunta, leia e aplique o
    ```
 
 6. Inspecionar os quatro arquivos iniciais, `.specsfy/PACKAGES.md` quando
-   gerado e a fonte de stack usada pelo script.
+   gerado e a fonte de stack usada pelo script. Quando `.specsfy/SPECKIT.md`
+   existir, abrir a constituição e cada fonte original listada na projeção.
 7. Nunca substituir um arquivo de contexto existente, mesmo com conteúdo
-   incompleto. Em `AGENTS.md` e `CLAUDE.md`, atualizar somente o bloco
-   delimitado do framework e preservar tudo fora dele.
+   incompleto. Em `AGENTS.md`, `CLAUDE.md` e `.specsfy/SPECKIT.md`, atualizar
+   somente o bloco delimitado do framework e preservar tudo fora dele. Nunca
+   escrever, mover, renomear ou remover arquivos em `.specify/` e `specs/`.
 8. Para completar ou corrigir stack, regras ou dados, anunciar o handoff e
    carregar respectivamente `$specsfy-aux-stack`, `$specsfy-aux-rules` ou
    `$specsfy-aux-database`.
@@ -55,9 +61,10 @@ ou finalidade, registrar essa avaliação nas fontes da tarefa e repetir com
 `--acknowledge-rules-no-change`; nunca usar o reconhecimento para ocultar uma
 mudança documental real.
 
-Manter `PROJECT.md` na raiz. Manter `STACK.md`, `RULES.md`, `DATABASE.md` e
-`PACKAGES.md` em `.specsfy/`. Tratar esses documentos como contexto derivado do
-projeto, não como spec, gate ou autorização de implementação.
+Manter `PROJECT.md` na raiz. Manter `STACK.md`, `RULES.md`, `DATABASE.md`,
+`PACKAGES.md` e a projeção opcional `SPECKIT.md` em `.specsfy/`. Tratar esses
+documentos como contexto derivado do projeto, não como spec, gate ou
+autorização de implementação.
 
 Em projeto com mais de um framework, registrar todas as fontes observadas;
 não escolher silenciosamente um único stack. Se nenhum framework for

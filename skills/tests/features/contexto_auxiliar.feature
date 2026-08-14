@@ -36,3 +36,11 @@ Feature: Contexto auxiliar persistente do projeto
     And exige DATABASE.md para mudanças de banco ou migration
     And exige revisão explícita de PROJECT.md para mudanças da aplicação
     And a entrega não conclui enquanto uma obrigação documental estiver aberta
+
+  @FR-010 @FR-011 @FR-012 @AC-005
+  Scenario: Adaptar um projeto existente do GitHub Spec Kit
+    Given uma constituição e artefatos do GitHub Spec Kit em specs
+    When a skill specsfy-setup é executada
+    Then a projeção SPECKIT.md referencia a constituição e todos os artefatos
+    And as diretrizes do Specsfy exigem a leitura das fontes originais
+    And nenhum arquivo do GitHub Spec Kit é alterado ou removido

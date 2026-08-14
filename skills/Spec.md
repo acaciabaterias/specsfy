@@ -67,10 +67,16 @@ ou pendente.
 - `.specsfy/DATABASE.md` mantém o quadro tabular completo de persistência.
 - `.specsfy/PACKAGES.md` mantém o inventário npm e Composer derivado dos
   manifests, lockfiles e metadados locais, com uma finalidade curta por pacote.
+- `.specsfy/SPECKIT.md` aparece quando o projeto possui
+  `.specify/memory/constitution.md`. Essa projeção lista a constituição e todos
+  os arquivos regulares encontrados em `specs/`, sem alterar as fontes do
+  GitHub Spec Kit.
 - Executar `$specsfy-setup` no início e sempre que for necessário reconciliar
   os quatro contextos iniciais ou os blocos reservados em `AGENTS.md` e
-  `CLAUDE.md`. Executar `$specsfy-documentator` quando `PACKAGES.md` estiver
-  ausente ou desatualizado.
+  `CLAUDE.md`. Em projetos com GitHub Spec Kit, a mesma execução atualiza apenas
+  o bloco gerenciado de `SPECKIT.md` e exige a leitura dos arquivos originais.
+  Executar `$specsfy-documentator` quando `PACKAGES.md` estiver ausente ou
+  desatualizado.
 - Executar `$specsfy-aux-stack` após mudanças estruturais de tecnologia,
   `$specsfy-aux-rules` para regras confirmadas e `$specsfy-aux-database` sempre
   que banco, schema, tabela, campo, relação ou migration mudar.
