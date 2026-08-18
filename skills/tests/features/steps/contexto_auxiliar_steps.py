@@ -206,3 +206,42 @@ def then_delivery_is_blocked(context) -> None:
         item["skill"] == "specsfy-documentator"
         for item in context.report["pending"]
     )
+
+
+@given("uma constituição e artefatos do GitHub Spec Kit em specs")
+def given_github_spec_kit_project(context) -> None:
+    context.project = temporary_project(context)
+    constitution = context.project / ".specify/memory/constitution.md"
+    constitution.parent.mkdir(parents=True)
+    constitution.write_text("# Constituição\n\nPreservar esta fonte.\n", encoding="utf-8")
+    specification = context.project / "specs/001-pedidos/spec.md"
+    specification.parent.mkdir(parents=True)
+    specification.write_text("# Pedidos\n\nEspecificação existente.\n", encoding="utf-8")
+    plan = context.project / "specs/001-pedidos/plan.md"
+    plan.write_text("# Plano\n\nArtefato existente.\n", encoding="utf-8")
+    context.spec_kit_sources = {
+        path.relative_to(context.project): path.read_text(encoding="utf-8")
+        for path in (constitution, specification, plan)
+    }
+
+
+@then("a projeção SPECKIT.md referencia a constituição e todos os artefatos")
+def then_speckit_projection_references_sources(context) -> None:
+    projection = (context.project / ".specsfy/SPECKIT.md").read_text(encoding="utf-8")
+    for source in context.spec_kit_sources:
+        assert str(source) in projection
+
+
+@then("as diretrizes do Specsfy exigem a leitura das fontes originais")
+def then_agent_instructions_require_original_sources(context) -> None:
+    agents = (context.project / "AGENTS.md").read_text(encoding="utf-8")
+    assert ".specify/memory/constitution.md" in agents
+    assert "cada fonte do GitHub Spec Kit listada na\n  projeção" in agents
+
+
+@then("nenhum arquivo do GitHub Spec Kit é alterado ou removido")
+def then_spec_kit_sources_remain_untouched(context) -> None:
+    for relative_path, original in context.spec_kit_sources.items():
+        source = context.project / relative_path
+        assert source.is_file()
+        assert source.read_text(encoding="utf-8") == original
