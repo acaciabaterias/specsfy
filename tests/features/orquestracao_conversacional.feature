@@ -15,7 +15,7 @@ Feature: Orquestração conversacional integrada
     Given o contrato do refinamento do backlog e do método MCR-10
     When a pessoa responde uma pergunta do refinamento do backlog
     Then o refinamento do backlog reavalia o contexto acumulado com as novas respostas
-    And continua sem limite máximo enquanto existir lacuna aplicável
+    And faz no máximo oito perguntas por área enquanto existir lacuna aplicável
     And oferece avançar desde a primeira rodada
     And o avanço confirma se a área será encerrada, adiada ou retomada
     And o refinamento registra e respeita o destino da área

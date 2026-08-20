@@ -11,13 +11,14 @@ Modo de interação: `perguntas`.
 Antes de formular qualquer pergunta, leia e aplique o
 `Contrato de perguntas numeradas` de `.specsfy/Spec.md`.
 
-Converse sobre informações do sistema sem pedir que a pessoa descreva banco de
-dados, tabela, campo, chave ou relacionamento. Use palavras do próprio produto:
+Converse em Português do Brasil sobre informações do sistema sem pedir que a
+pessoa descreva banco de dados, tabela, campo, chave ou relacionamento. Use
+palavras do próprio produto:
 o que será lembrado, quem usa, o que muda e quando deixa de ser necessário.
 
 ## Preparar a conversa
 
-1. Leia a Inbox, o backlog, a importação de `MVP.md`, a spec ou o pedido que
+1. Leia a Inbox, a descoberta de `MVP.md`, o backlog, a spec ou o pedido que
    originou a descoberta.
 2. Leia `PROJECT.md` e `.specsfy/DATABASE.md` quando existirem. Separe o que
    já foi confirmado do que ainda precisa de conversa.
@@ -29,8 +30,12 @@ o que será lembrado, quem usa, o que muda e quando deixa de ser necessário.
 
 ## Perguntar sem linguagem técnica
 
-Em cada rodada, escolha ao menos três assuntos aplicáveis e siga o contrato
-central. Prefira perguntas como estas, ajustadas ao contexto:
+Em cada rodada, escolha uma informação aplicável de maior impacto ainda não
+confirmada e siga o contrato central. Mantenha uma lista das informações a
+guardar ausentes ou ambíguas. Depois de cada resposta, atualize a lista e
+pergunte sobre a próxima até que todas estejam confirmadas, adiadas ou
+encerradas, respeitando o máximo de oito perguntas por área. Prefira perguntas
+como estas, ajustadas ao contexto:
 
 - "O que você precisa lembrar sobre cada pedido, pessoa ou atendimento?"
 - "Quem pode ver ou mudar essa informação?"
@@ -89,8 +94,9 @@ copie dados reais, credenciais ou informações pessoais sensíveis.
 
 - No backlog, faça esta descoberta antes de declarar o brief pronto quando a
   jornada depender de informações guardadas.
-- Durante a importação do MVP, preserve primeiro a fonte e as Inboxes; depois
-  carregue esta skill se o texto indicar informações do produto a guardar.
+- Durante a descoberta do MVP, preserve primeiro a fonte e as Inboxes; depois
+  carregue esta skill para cada informação do produto a guardar que estiver
+  ausente ou ambígua.
 - Na especificação, carregue esta skill se a fonte de dados não explicar o que
   a jornada precisa lembrar ou quem pode consultar cada informação.
 - A Inbox não faz perguntas. Ela apenas preserva sinais para esta etapa.

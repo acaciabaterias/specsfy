@@ -7,9 +7,15 @@ Feature: Perguntas numeradas em todas as skills conversacionais
   Scenario: Exibir uma rodada completa de perguntas
     Given o contrato central de interação do Specsfy
     When uma skill precisa perguntar algo à pessoa
-    Then a rodada contém pelo menos três perguntas numeradas
-    And cada pergunta oferece pelo menos três opções numeradas
-    And cada pergunta oferece escrever outra resposta ou avançar
+    Then a rodada contém exatamente uma pergunta numerada
+    And a pergunta oferece pelo menos três opções numeradas
+    And a pergunta oferece escrever outra resposta, gerar outras opções ou avançar
+
+  Scenario: Limitar uma área de conversa
+    Given o contrato central de interação do Specsfy
+    When uma área chegar a oito perguntas
+    Then o agente apresenta uma síntese e para a conversa daquela área
+    And só continua se a pessoa pedir mais perguntas e informar quantas quer responder
 
   Scenario: Confirmar o destino da área depois de avançar
     Given o contrato central de interação do Specsfy

@@ -42,10 +42,9 @@ class NumberedQuestionsDocumentationTests(unittest.TestCase):
         normalized = " ".join(documentation.split())
         for expected in (
             "Pergunta 1",
-            "Pergunta 2",
-            "Pergunta 3",
             "três respostas sugeridas",
             "Escrever outra resposta",
+            "Gere outras opções",
             "Avançar",
             "primeira rodada",
             "encerrar definitivamente",
@@ -68,6 +67,7 @@ class NumberedQuestionsDocumentationTests(unittest.TestCase):
         for expected in (
             "Pergunta 1",
             "Escrever outra resposta",
+            "Gere outras opções",
             "Avançar",
             "Área encerrada pelo usuário",
             "Área adiada pelo usuário",

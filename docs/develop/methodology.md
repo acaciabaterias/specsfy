@@ -58,16 +58,17 @@ o comportamento.
 Na descoberta de MVP, `specsfy-mvp-milestone-interviewer` preserva uma sessão
 em várias Inboxes. Ele procura `MVP.md` e `BRAND.md` na raiz do consumidor. Se
 o consumidor for um submódulo Git e os arquivos locais estiverem ausentes,
-consulta a raiz do superprojeto uma única vez. `MVP.md` é importado para
-`specs/milestones/M01.md` como `Milestone 1.0`; `BRAND.md` orienta a conversa
-quando presente. A série só recebe tratamento pelo backlog quando a pessoa o
-solicitar.
+consulta a raiz do superprojeto uma única vez. `MVP.md` cria a milestone
+`M01`, uma série de Inboxes e um backlog candidato por Inbox. A skill
+orquestradora entrevista cada backlog e chama descoberta de dados quando
+necessário. `BRAND.md` orienta a conversa quando presente. Só depois de cada
+entrevista a pessoa pode autorizar a promoção para spec.
 
 O refinamento do backlog concentra as escolhas materiais. Depois de cada
 rodada, ele recalcula as lacunas usando a entrada original, o contexto acumulado
-e as novas respostas. Não existe teto de rodadas. Cada rodada possui pelo menos
-três perguntas numeradas, e cada pergunta oferece três ou mais opções
-numeradas, `Escrever outra resposta` e `Avançar`. Essa última opção está
+e as novas respostas. Cada área possui no máximo oito perguntas. Cada rodada
+possui uma pergunta numerada, que oferece três ou mais opções, `Escrever outra
+resposta`, `Gere outras opções` e `Avançar`. Essa última opção está
 disponível desde a primeira rodada. Na rodada seguinte, a pessoa informa se
 encerra definitivamente as perguntas da área, responde depois ou retoma agora.
 O encerramento ou adiamento fica registrado. Uma área encerrada não volta ao

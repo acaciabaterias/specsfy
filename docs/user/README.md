@@ -104,9 +104,11 @@ cada etapa nesta ordem:
 
 Essas páginas explicam quando usar cada skill, como descrever a tarefa em
 linguagem natural, o resultado esperado, os erros comuns e o próximo passo.
-Quando uma delas precisar perguntar, você recebe pelo menos três perguntas
-numeradas por rodada. Cada pergunta traz três ou mais opções numeradas,
-`Escrever outra resposta` e `Avançar` desde o início da conversa.
+Quando uma delas precisar perguntar, você recebe uma pergunta numerada por
+rodada. Ela traz três ou mais opções numeradas,
+`Escrever outra resposta`, `Gere outras opções` e `Avançar` desde o início da
+conversa. Cada área aceita no máximo oito perguntas, salvo se você pedir mais e
+informar quantas deseja responder.
 Depois de avançar, você informa se quer encerrar definitivamente as perguntas
 daquela área, responder depois ou retomar agora. O encerramento é respeitado
 até você reabrir a área; o adiamento preserva os pontos para retomada.

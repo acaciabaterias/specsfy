@@ -754,13 +754,11 @@ Evite:
 
 Os conceitos filosóficos orientam o analista. Eles não precisam aparecer na conversa quando não ajudarem o usuário.
 
-### 9.3 Fazer pelo menos três perguntas numeradas
+### 9.3 Fazer uma pergunta numerada por rodada
 
-Em cada rodada, apresente pelo menos três perguntas reais, numeradas como
-`Pergunta 1`, `Pergunta 2` e `Pergunta 3`. Se houver mais lacunas relacionadas,
-inclua outras perguntas na mesma sequência. Se restarem apenas uma ou duas,
-complete a rodada confirmando a síntese, o registro e o próximo passo, sem
-introduzir outro assunto.
+Em cada rodada, apresente uma pergunta real, numerada como `Pergunta 1`, e
+espere a resposta antes de formular a próxima. Se houver outras lacunas,
+reordene-as depois da resposta, sem antecipá-las na mesma rodada.
 
 Abaixo de cada pergunta, ofereça pelo menos três opções numeradas, seguidas das
 opções numeradas `Escrever outra resposta` e `Avançar`. Não apresente opção sem
@@ -828,7 +826,7 @@ Cada rodada deve conter:
 1. **Síntese:** o que foi entendido.
 2. **Decisões:** o que já foi confirmado.
 3. **Lacunas:** os próximos pontos aplicáveis ainda não definidos.
-4. **Perguntas:** pelo menos três formulações concretas e numeradas.
+4. **Pergunta:** uma formulação concreta e numerada.
 5. **Opções:** no mínimo três sugestões numeradas por pergunta, mais escrita
    livre e avanço.
 6. **Registro:** respostas originais e escolhas normalizadas.
@@ -846,18 +844,18 @@ A hipótese não deve ser incorporada à especificação até ser confirmada.
 
 ### 9.7 Ciclo adaptativo e saída explícita
 
-O refinamento do backlog opera sem limite máximo de rodadas. Depois de cada
+O refinamento do backlog faz no máximo oito perguntas por área. Depois de cada
 rodada, reanalise o contexto acumulado e as novas respostas: entrada original,
 evidências do repositório, escolhas confirmadas, respostas anteriores e
 dependências afetadas. Reclassifique as lacunas e formule a próxima rodada
-enquanto existir lacuna aplicável.
+enquanto existir lacuna aplicável e restarem perguntas no limite.
 Uma fila anterior é apenas uma hipótese de análise e deve ser
 descartada quando a resposta mudar o contexto.
 
 Ofereça `Avançar` em cada pergunta desde a primeira rodada. Na rodada seguinte,
 pergunte se a pessoa quer encerrar definitivamente as perguntas daquela área,
 responder depois ou voltar a responder agora. Inclua essa confirmação entre as
-três perguntas numeradas.
+pergunta numerada da rodada seguinte.
 
 Se a pessoa encerrar a área, registre
 `Área encerrada pelo usuário: <área>` no artefato aplicável e não volte ao
@@ -1178,7 +1176,7 @@ Um assistente que utilize o MCR-10 deve:
 4. marcar toda inferência;
 5. não inventar decisões para completar a especificação;
 6. usar as categorias de forma adaptativa;
-7. fazer pelo menos três perguntas numeradas por rodada;
+7. fazer uma pergunta numerada por rodada e esperar a resposta;
 8. priorizar autorização, propriedade, dados, dinheiro, irreversibilidade e efeito principal;
 9. atualizar a análise incrementalmente;
 10. permitir que o usuário corrija uma definição;
@@ -1187,11 +1185,11 @@ Um assistente que utilize o MCR-10 deve:
 13. gerar uma versão resumida ou completa conforme a necessidade;
 14. tratar categorias não aplicáveis de maneira explícita;
 15. analisar antes de reescrever.
-16. executar o refinamento do backlog sem limite máximo de rodadas;
+16. executar o refinamento do backlog com no máximo oito perguntas por área;
 17. reanalisar o contexto acumulado e as novas respostas depois de cada rodada;
 18. continuar enquanto existir lacuna aplicável;
-19. oferecer pelo menos três opções numeradas, `Escrever outra resposta` e
-    `Avançar` em cada pergunta desde a primeira rodada;
+19. oferecer pelo menos três opções numeradas, `Escrever outra resposta`,
+    `Gere outras opções` e `Avançar` em cada pergunta desde a primeira rodada;
 20. confirmar se a pessoa encerra a área, responde depois ou retoma agora;
 21. registrar e respeitar áreas encerradas ou adiadas.
 
@@ -1218,9 +1216,10 @@ hipótese, decisão, conflito ou questão aberta.
 Recombine os elementos em afirmações com sujeito, condição, ação ou predicado e
 efeito observável. Teste cada afirmação por negação, exceção, falha e limite.
 
-Antes de reescrever a especificação, apresente uma síntese e faça pelo menos
-três perguntas numeradas por rodada. Em cada pergunta, ofereça pelo menos três
-opções numeradas, `Escrever outra resposta` e `Avançar`. Priorize identidade,
+Antes de reescrever a especificação, apresente uma síntese e faça exatamente
+uma pergunta numerada por rodada. Ofereça pelo menos três opções numeradas,
+`Escrever outra resposta`, `Gere outras opções` e `Avançar`. Priorize
+identidade,
 autorização, propriedade, dados, custo, irreversibilidade e efeito principal.
 Depois de `Avançar`, confirme encerramento da área, adiamento ou retomada
 imediata. Registre a escolha e não reabra uma área encerrada sem pedido

@@ -54,9 +54,10 @@ class NumberedQuestionsContractTest(unittest.TestCase):
         contract = (ROOT / "Spec.md").read_text(encoding="utf-8")
         for required in (
             "## Contrato de perguntas numeradas",
-            "pelo menos três perguntas numeradas",
+            "exatamente uma pergunta numerada por rodada",
             "pelo menos três opções numeradas",
             "`Escrever outra resposta`",
+            "`Gere outras opções`",
             "`Avançar`",
             "desde a primeira rodada",
             "Pergunta 1",
@@ -64,13 +65,16 @@ class NumberedQuestionsContractTest(unittest.TestCase):
             "responder depois",
             "Área encerrada pelo usuário",
             "Área adiada pelo usuário",
+            "Português do Brasil",
+            "texto completo da opção",
+            "no máximo oito perguntas por área",
         ):
             self.assertIn(required, contract)
 
     def test_questioning_skills_do_not_keep_the_previous_protocol(self) -> None:
         for name in QUESTIONING_SKILLS:
             source = self.skill_source(name)
-            self.assertNotIn("uma pergunta por vez", source, name)
+            self.assertNotIn("pelo menos três perguntas numeradas", source, name)
             self.assertNotIn("A partir da 11ª pergunta", source, name)
             self.assertNotIn("Antes disso, não ofereça essa saída", source, name)
 

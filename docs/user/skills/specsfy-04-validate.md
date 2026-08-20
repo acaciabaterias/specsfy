@@ -10,9 +10,9 @@ Use para comprovar o Ato I ou quando uma mudança exigir nova validação da
 definição. Também é
 útil para auditar uma spec sem alterar sua intenção.
 
-Quando a validação depender de uma escolha sua, a rodada traz pelo menos três
-perguntas numeradas. Cada pergunta oferece três ou mais respostas sugeridas,
-`Escrever outra resposta` e `Avançar` desde a primeira rodada.
+Quando a validação depender de uma escolha sua, a rodada traz exatamente uma
+pergunta numerada. Ela oferece três ou mais respostas sugeridas, `Escrever
+outra resposta`, `Gere outras opções` e `Avançar` desde a primeira rodada.
 
 ## Como descrever a tarefa
 

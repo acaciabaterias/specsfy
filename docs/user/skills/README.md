@@ -13,19 +13,27 @@ As skills base dividem o método por responsabilidade. Você pode chamar uma
 delas pelo nome ou explicar o resultado esperado. O agente lê o estado da spec,
 seleciona a etapa responsável e anuncia cada transição necessária.
 
+## Nomes exibidos
+
+Os comandos técnicos continuam, por exemplo, como `$specsfy-02-backlog`. Na
+interface, as sete etapas centrais aparecem como `Specsfy - 01 - Inbox` até
+`Specsfy - 07 - Implementar`. As skills adicionais usam `Specsfy - Nome`, e
+as técnicas usam `Specsfy - Especialista - Nome`.
+
 ## Como responder às perguntas
 
 Toda skill que precisa perguntar segue o mesmo formato desde a primeira rodada:
 
-1. apresenta pelo menos três perguntas com os rótulos `Pergunta 1`,
-   `Pergunta 2` e `Pergunta 3`;
-2. oferece pelo menos três respostas sugeridas e numeradas abaixo de cada
-   pergunta;
+1. apresenta uma pergunta com o rótulo `Pergunta 1` e espera sua resposta;
+2. oferece pelo menos três respostas sugeridas e numeradas abaixo dela;
 3. acrescenta `Escrever outra resposta` para você informar seu próprio texto;
-4. acrescenta `Avançar` para abrir a confirmação de encerramento da área,
+4. acrescenta `Gere outras opções` para mostrar alternativas diferentes à mesma
+   pergunta;
+5. acrescenta `Avançar` para abrir a confirmação de encerramento da área,
    adiamento ou retomada imediata.
 
-Você pode responder com combinações como `1.2`, `2.4: meu texto` e `3.5`.
+Você pode responder com combinações como `1.2` ou `1.4: meu texto`. O número
+da opção é convertido no texto completo antes de gerar qualquer contexto.
 Ao escolher `Avançar`, a rodada seguinte pergunta se você quer encerrar
 definitivamente as perguntas daquela área, responder depois ou voltar a
 responder agora. Se encerrar, a skill registra sua escolha e não pergunta sobre

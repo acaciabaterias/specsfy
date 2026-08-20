@@ -46,7 +46,11 @@ descoberta: contém gatilhos observáveis e limites negativos. Se duas skills
 disputam a mesma solicitação, corrija as descrições e os limites antes de
 adicionar mais instruções.
 
-`agents/openai.yaml` fornece o prompt padrão e menciona `$<nome-da-skill>`.
+`agents/openai.yaml` fornece o prompt padrão, menciona `$<nome-da-skill>` e
+define o nome exibido. Os identificadores técnicos permanecem em minúsculas,
+mas o nome exibido segue estes padrões: `Specsfy - 01 - Nome` para as sete
+skills centrais numeradas, `Specsfy - Nome` para as demais skills base e
+`Specsfy - Especialista - Nome` para o catálogo técnico opcional.
 
 ## Corpo e referências
 
@@ -68,10 +72,11 @@ uma segunda fonte normativa.
 
 Cada `SKILL.md` declara `perguntas` ou `sem perguntas`. Uma skill no primeiro
 modo aplica o contrato de `skills/Spec.md` sempre que solicitar escolha,
-confirmação, autorização, runner, arquivo ou próximo passo. A rodada contém no
-mínimo três perguntas numeradas; cada pergunta contém três ou mais opções
-numeradas, `Escrever outra resposta` e `Avançar` desde a primeira rodada.
-Os rótulos começam em `Pergunta 1`, `Pergunta 2` e `Pergunta 3`.
+confirmação, autorização, runner, arquivo ou próximo passo. A rodada contém
+uma pergunta numerada; ela contém três ou mais opções, `Escrever outra resposta`,
+`Gere outras opções` e `Avançar` desde a primeira rodada. Ao
+escolher outras opções, a mesma pergunta retorna com alternativas diferentes.
+O rótulo é `Pergunta 1`.
 Ao receber `Avançar`, a próxima rodada confirma encerramento definitivo da
 área, adiamento ou retomada imediata. A skill registra
 `Área encerrada pelo usuário: <área>` ou `Área adiada pelo usuário: <área>` no
@@ -109,21 +114,23 @@ impede que uma anotação simples se transforme em refinamento implícito.
 `specsfy-mvp-milestone-interviewer` combina conversa e captura: ele lê
 `MVP.md` e `BRAND.md` na raiz do consumidor e, quando o consumidor é um
 submódulo Git sem os arquivos locais, na raiz do superprojeto. O arquivo local
-tem prioridade. Ele importa `MVP.md` em `specs/milestones/M01.md` como
-`Milestone 1.0` sem sobrescrever o arquivo e registra cada fala em uma Inbox
-associada à mesma sessão. O backlog continua responsável por tratar a série e
-produzir material refinável.
+tem prioridade. Ele importa `MVP.md` como `M01`, cria uma Inbox e um backlog
+candidato para cada tema da fonte e orquestra `$specsfy-02-backlog` para
+entrevistar todos os itens. Quando necessário, chama `$specsfy-data-discovery`;
+depois sincroniza milestones e encaminha somente promoções autorizadas, sem
+sobrescrever arquivos existentes.
 
 `specsfy-data-discovery` traduz a conversa de produto em informações a guardar
-no `DATABASE.md`. Ela não escolhe estrutura interna; backlog, importação de MVP
+no `DATABASE.md`. Ela não escolhe estrutura interna; backlog, descoberta de MVP
 e especificação a carregam quando a jornada depender de dados persistidos.
 
 `specsfy-02-backlog` é a responsável exclusiva pelas perguntas de escolha
 material. `specify`, `update-spec` e `validate` fazem handoff para seu ciclo e
-retomam depois. O ciclo reanalisa cada rodada, não possui limite e oferece
-`Avançar` desde a primeira pergunta. A rodada seguinte distingue encerramento
-da área, adiamento e retomada imediata. O encerramento é respeitado até uma
-reabertura explícita; o adiamento preserva a definição pendente.
+retomam depois. O ciclo reanalisa cada rodada, faz no máximo oito perguntas por
+área e oferece `Avançar` desde a primeira pergunta. A rodada seguinte
+distingue encerramento da área, adiamento e retomada imediata. O encerramento
+é respeitado até uma reabertura explícita; o adiamento preserva a definição
+pendente.
 
 ## Relação das skills base
 

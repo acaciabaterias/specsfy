@@ -5,6 +5,10 @@ As skills base conduzem a metodologia. As
 projeto, como Laravel, Astro, Next.js, Postgres ou Redis. Assim, você instala
 somente o conhecimento técnico usado pela aplicação.
 
+Na interface, cada uma usa o padrão `Specsfy - Especialista - Nome`, como
+`Specsfy - Especialista - Laravel`. O identificador de comando continua
+`specsfy-specialist-laravel`.
+
 ## Detectar e instalar
 
 O comando `detect` lê o projeto e mostra recomendações sem instalar arquivos.

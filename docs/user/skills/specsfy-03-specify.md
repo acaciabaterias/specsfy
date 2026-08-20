@@ -12,8 +12,9 @@ Use para promover um backlog refinado ou criar uma spec nova ainda em
 estado Draft. Para mudar uma spec que já foi definida, use update-spec.
 
 Se precisar confirmar arquivo, síntese ou próximo passo, a skill apresenta
-pelo menos três perguntas numeradas. Cada uma inclui três ou mais respostas
-sugeridas, `Escrever outra resposta` e `Avançar` desde a primeira rodada.
+uma pergunta numerada. Ela inclui três ou mais respostas sugeridas,
+`Escrever outra resposta`, `Gere outras opções` e `Avançar` desde a primeira
+rodada.
 
 ## Como descrever a tarefa
 

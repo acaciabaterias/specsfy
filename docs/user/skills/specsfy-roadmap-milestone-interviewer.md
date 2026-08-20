@@ -9,8 +9,8 @@ alterar silenciosamente a jornada central já aprovada.
 
 Use quando o MVP já possui objetivo e condição de saída confirmados.
 
-Cada rodada traz pelo menos três perguntas numeradas. Abaixo de cada pergunta,
-você recebe três ou mais sugestões, `Escrever outra resposta` e `Avançar`
+Cada rodada traz uma pergunta numerada. Abaixo dela, você recebe três ou mais
+sugestões, `Escrever outra resposta`, `Gere outras opções` e `Avançar`
 desde a primeira rodada.
 
 ## Como descrever a tarefa

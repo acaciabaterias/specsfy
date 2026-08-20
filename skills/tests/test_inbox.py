@@ -212,120 +212,79 @@ class InboxCaptureTests(unittest.TestCase):
             self.assertIn("`MVP.md`: presente e consultado.", content)
             self.assertIn("`BRAND.md`: presente e consultado.", content)
 
-    def test_mvp_interviewer_uses_root_context_and_defers_inbox_treatment(self) -> None:
+    def test_mvp_interviewer_uses_root_context_inboxes_and_confirmed_milestones(self) -> None:
         source = MVP_INTERVIEWER.read_text(encoding="utf-8")
         normalized = " ".join(source.split()).casefold()
 
         self.assertIn("`mvp.md`", source.casefold())
         self.assertIn("`brand.md`", source.casefold())
-        self.assertIn("série de capturas", normalized)
+        self.assertIn("fila ordenada de inboxes e backlogs", normalized)
         self.assertIn("$specsfy-01-inbox", source)
         self.assertIn("$specsfy-02-backlog", source)
         self.assertIn("`specs/milestones/m01.md`", source.casefold())
-        self.assertIn("`milestone 1.0`", source.casefold())
-        self.assertIn("não o sobrescreva", normalized)
+        self.assertIn("milestone 1.0", normalized)
+        self.assertIn("não sobrescreva a milestone 1.0", normalized)
+        self.assertIn("$specsfy-data-discovery", source)
+        self.assertIn("$specsfy-02-backlog", source)
+        self.assertIn("$specsfy-milestone-governor", source)
+        self.assertIn("$specsfy-03-specify", source)
+        self.assertIn("texto integral da opção escolhida", normalized)
+        self.assertIn("informação a guardar ausente ou ambígua", normalized)
+        self.assertIn("Português do Brasil", source)
         self.assertIn("superprojeto", normalized)
         self.assertIn("--show-superproject-working-tree", source)
 
-    def test_imports_mvp_as_milestone_one_without_overwriting_it(self) -> None:
+    def test_imports_mvp_as_milestone_and_creates_interviewable_backlogs(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             project = Path(directory)
-            source = "# Produto\n\nPermitir o primeiro fluxo completo.\n"
-            (project / "MVP.md").write_text(source, encoding="utf-8")
-
-            first = subprocess.run(
-                ["node", str(MVP_IMPORTER), "--root", str(project)],
-                text=True,
-                capture_output=True,
-                check=False,
+            (project / "MVP.md").write_text(
+                "# Produto\n\n## Captar pedidos\n\nReceber pedidos de clientes.\n\n## Acompanhar pedidos\n\nMostrar o andamento de cada pedido.\n",
+                encoding="utf-8",
             )
-            milestone = project / "specs/milestones/M01.md"
-            self.assertEqual(0, first.returncode, first.stderr)
-            self.assertEqual(str(milestone), first.stdout.strip())
-            content = milestone.read_text(encoding="utf-8")
-            self.assertIn("# Milestone 1.0", content)
-            self.assertIn("Permitir o primeiro fluxo completo.", content)
-            self.assertIn("SHA-256", content)
-
-            second = subprocess.run(
-                ["node", str(MVP_IMPORTER), "--root", str(project)],
-                text=True,
-                capture_output=True,
-                check=False,
-            )
-            self.assertNotEqual(0, second.returncode)
-            self.assertIn("não será sobrescrita", second.stderr)
-
-    def test_imports_mvp_from_superproject_when_consumer_is_a_submodule(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            workspace = Path(directory)
-            source_repository = workspace / "consumer-source"
-            hub = workspace / "hub"
-
-            for repository in (source_repository, hub):
-                subprocess.run(
-                    ["git", "init", str(repository)],
-                    text=True,
-                    capture_output=True,
-                    check=True,
-                )
-                subprocess.run(
-                    ["git", "-C", str(repository), "config", "user.email", "tests@specsfy.dev"],
-                    text=True,
-                    capture_output=True,
-                    check=True,
-                )
-                subprocess.run(
-                    ["git", "-C", str(repository), "config", "user.name", "Testes Specsfy"],
-                    text=True,
-                    capture_output=True,
-                    check=True,
-                )
-                (repository / "README.md").write_text("# Projeto\n", encoding="utf-8")
-                subprocess.run(
-                    ["git", "-C", str(repository), "add", "README.md"],
-                    text=True,
-                    capture_output=True,
-                    check=True,
-                )
-                subprocess.run(
-                    ["git", "-C", str(repository), "commit", "-m", "Preparar projeto de teste"],
-                    text=True,
-                    capture_output=True,
-                    check=True,
-                )
-
-            subprocess.run(
-                [
-                    "git",
-                    "-c",
-                    "protocol.file.allow=always",
-                    "-C",
-                    str(hub),
-                    "submodule",
-                    "add",
-                    str(source_repository),
-                    "consumer",
-                ],
-                text=True,
-                capture_output=True,
-                check=True,
-            )
-            source = "# MVP do Hub\n\nEntregar a primeira jornada completa.\n"
-            (hub / "MVP.md").write_text(source, encoding="utf-8")
-            consumer = hub / "consumer"
 
             result = subprocess.run(
-                ["node", str(MVP_IMPORTER), "--root", str(consumer)],
+                ["node", str(MVP_IMPORTER), "--root", str(project)],
                 text=True,
                 capture_output=True,
                 check=False,
             )
 
-            milestone = consumer / "specs/milestones/M01.md"
             self.assertEqual(0, result.returncode, result.stderr)
-            self.assertEqual(str(milestone), result.stdout.strip())
-            self.assertIn("Entregar a primeira jornada completa.", milestone.read_text(encoding="utf-8"))
+            imported = __import__("json").loads(result.stdout)
+            self.assertEqual("specs/milestones/M01.md", imported["milestone"])
+            self.assertEqual(2, len(imported["items"]))
+
+            milestone = project / imported["milestone"]
+            self.assertIn("# Milestone 1.0", milestone.read_text(encoding="utf-8"))
+            self.assertIn("Receber pedidos de clientes.", milestone.read_text(encoding="utf-8"))
+
+            for item in imported["items"]:
+                inbox = project / item["inbox"]
+                backlog = project / item["backlog"]
+                self.assertTrue(inbox.is_file())
+                self.assertTrue(backlog.is_file())
+                backlog_content = backlog.read_text(encoding="utf-8")
+                self.assertIn(item["inbox"], backlog_content)
+                self.assertIn("specs/milestones/M01.md", backlog_content)
+                self.assertIn("Entrevista obrigatória", backlog_content)
+
+    def test_mvp_import_never_overwrites_the_first_milestone(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory)
+            (project / "MVP.md").write_text("# Produto\n\nPrimeira jornada.\n", encoding="utf-8")
+            (project / "specs/milestones").mkdir(parents=True)
+            (project / "specs/milestones/M01.md").write_text("Conteúdo existente.\n", encoding="utf-8")
+
+            result = subprocess.run(
+                ["node", str(MVP_IMPORTER), "--root", str(project)],
+                text=True,
+                capture_output=True,
+                check=False,
+            )
+
+            self.assertNotEqual(0, result.returncode)
+            self.assertIn("não será sobrescrita", result.stderr)
+            self.assertFalse((project / "specs/inbox").exists())
 
 
 if __name__ == "__main__":

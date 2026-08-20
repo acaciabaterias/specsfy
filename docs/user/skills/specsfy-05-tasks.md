@@ -9,8 +9,9 @@ Use depois do Definition Gate ou quando uma alteração exigir replanejamento.
 Não use para escrever código nem para marcar uma tarefa como concluída.
 
 Se houver mais de um recorte, ordem ou próximo passo possível, a skill reúne a
-consulta em pelo menos três perguntas numeradas. Cada pergunta oferece três ou
-mais sugestões, `Escrever outra resposta` e `Avançar` desde a primeira rodada.
+consulta em uma pergunta numerada. Ela oferece três ou mais sugestões,
+`Escrever outra resposta`, `Gere outras opções` e `Avançar` desde a primeira
+rodada.
 
 ## Como descrever a tarefa
 

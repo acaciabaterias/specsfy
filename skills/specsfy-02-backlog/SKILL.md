@@ -67,7 +67,8 @@ resultado ou o contexto, repita a busca.
    - pessoa afetada ou beneficiada;
    - resultado ou valor esperado;
    - contexto suficiente para distinguir a entrada de pedidos semelhantes.
-3. Se algo estiver ausente, vago, contraditório ou ambíguo, selecione três lacunas reais de maior impacto e monte uma rodada numerada.
+3. Se algo estiver ausente, vago, contraditório ou ambíguo, selecione a lacuna
+   real de maior impacto e monte exatamente uma pergunta numerada por rodada.
 4. Reavalie as lacunas depois de cada resposta. Não transforme os itens em
    questionário fixo nem repita informação já fornecida.
 5. Não crie nem atualize o arquivo enquanto algum item essencial continuar
@@ -136,23 +137,27 @@ Quando a pessoa pedir aprofundamento, promoção ou criação de uma spec:
 
 ## Conduzir a descoberta adaptativa
 
-Execute um ciclo sem limite máximo de rodadas:
+Execute um ciclo com no máximo oito perguntas por área:
 
 1. Antes de cada rodada, releia a entrada, as decisões confirmadas, o contexto acumulado e as novas respostas, além da evidência aplicável.
-2. Reclassifique lacunas e dependências. Continue enquanto existir lacuna aplicável;
-   encerre quando cada uma estiver decidida, não aplicável ou resolvida por
-   evidência.
-3. Selecione pelo menos três lacunas reais por `impacto × incerteza`,
-   priorizando P1, P2 e P3, e apresente a rodada conforme o contrato central.
+2. Reclassifique lacunas e dependências. Continue enquanto existir lacuna
+   aplicável e restarem perguntas no limite; encerre quando cada uma estiver
+   decidida, não aplicável ou resolvida por evidência.
+3. Selecione a lacuna real com maior `impacto × incerteza` e apresente a rodada
+   conforme o contrato central.
 4. Registre cada resposta original, a decisão normalizada e seus efeitos. Volte ao
    primeiro passo; não reutilize uma fila fixa.
+
+Ao alcançar oito perguntas, apresente síntese, registre as lacunas abertas e
+pare. Só reabra o ciclo quando a pessoa pedir explicitamente mais perguntas e
+informar quantas quer responder.
 
 Inclua `Avançar` em cada pergunta desde a primeira rodada. Se a pessoa escolher
 essa opção:
 
 - na rodada seguinte, confirme se ela encerra definitivamente as perguntas
   daquela área, responde depois ou volta a responder agora;
-- inclua a confirmação entre as três perguntas numeradas da rodada;
+- faça a confirmação como a única pergunta numerada da rodada;
 - ao encerrar, registre `Área encerrada pelo usuário: <área>` e não pergunte
   novamente, salvo reabertura explícita;
 - ao adiar, registre `Área adiada pelo usuário: <área>` e preserve os pontos

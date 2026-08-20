@@ -19,8 +19,8 @@ confirmadas pela pessoa responsável.
 ## Conduzir a conversa
 
 1. Leia a spec, seus gates, tarefas, evidências e o contexto do projeto.
-2. Identifique pelo menos três lacunas reais que mais afetam a próxima etapa e
-   monte uma rodada conforme o contrato central.
+2. Identifique a lacuna real que mais afeta a próxima etapa e monte uma rodada
+   conforme o contrato central.
 3. Reavalie a spec depois de cada rodada. Não repita informação confirmada nem
    use perguntas como ritual.
 4. Atualize a seção adequada da spec após confirmar a resposta. Quando a nova

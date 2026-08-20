@@ -17,7 +17,7 @@ class UpdateSpecTests(unittest.TestCase):
         metadata = (SKILL / "agents" / "openai.yaml").read_text(encoding="utf-8")
 
         self.assertIn("name: specsfy-update-spec", content)
-        self.assertIn('display_name: "Atualizar especificação"', metadata)
+        self.assertIn('display_name: "Specsfy - Atualizar especificação"', metadata)
         self.assertIn("$specsfy-update-spec", metadata)
 
     def test_analyzer_reopens_only_the_acts_invalidated_by_the_change(self) -> None:

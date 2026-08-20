@@ -1,9 +1,10 @@
 # Conversar com uma spec
 
 `specsfy-interviewer` ajuda você a resolver lacunas que podem mudar a próxima
-etapa da spec. Ele lê o estado atual, apresenta pelo menos três perguntas
-numeradas por rodada e só registra respostas que você confirmou. Cada pergunta
-traz três ou mais opções numeradas, `Escrever outra resposta` e `Avançar`.
+etapa da spec. Ele lê o estado atual, apresenta exatamente uma pergunta
+numerada por rodada e só registra respostas que você confirmou. A pergunta traz
+três ou mais opções numeradas, `Escrever outra resposta`, `Gere outras opções`
+e `Avançar`.
 Depois de avançar, você escolhe entre encerrar definitivamente as perguntas da
 área, responder depois ou retomar agora. A skill registra a escolha e respeita
 o encerramento até uma reabertura explícita.

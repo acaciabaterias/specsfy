@@ -23,7 +23,7 @@ class BacklogTests(unittest.TestCase):
         self.assertIn("pessoa afetada ou beneficiada", skill)
         self.assertIn("resultado ou valor esperado", skill)
         self.assertIn("contexto suficiente para distinguir a entrada", skill)
-        self.assertIn("três lacunas reais de maior impacto", skill)
+        self.assertIn("lacuna real de maior impacto", " ".join(skill.split()))
         self.assertIn("Reavalie as lacunas depois de cada resposta", skill)
         self.assertIn(
             "Não crie nem atualize o arquivo enquanto algum item essencial",

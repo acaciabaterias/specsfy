@@ -17,8 +17,8 @@ planejada agora.
 
 ## Conduzir a conversa
 
-1. Reafirme o limite atual do MVP e monte pelo menos três perguntas numeradas
-   sobre aprendizado, necessidade de operação e oportunidade da próxima etapa.
+1. Reafirme o limite atual do MVP e formule uma pergunta numerada sobre
+   aprendizado, necessidade de operação ou oportunidade da próxima etapa.
 2. Reflita cada rodada em uma síntese curta e formule a próxima rodada pelas
    lacunas que ainda impedem identificar um estado demonstrável posterior.
 3. Investigue limitações temporárias do MVP, integrações, automações,

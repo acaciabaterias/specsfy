@@ -13,8 +13,8 @@ Antes de formular qualquer pergunta, leia e aplique o
 
 1. Ler instruções locais, `PROJECT.md` e todo o `RULES.md` existente.
 2. Distinguir regra declarada, inferência e sugestão.
-3. Quando a formulação não estiver confirmada, reunir pelo menos três perguntas
-   reais e aplicar o contrato central de perguntas numeradas.
+3. Quando a formulação não estiver confirmada, selecionar uma pergunta real e
+   aplicar o contrato central de perguntas numeradas.
 4. Formular regras verificáveis, com verbo e limite claros.
 5. Executar:
 

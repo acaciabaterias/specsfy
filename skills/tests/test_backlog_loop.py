@@ -27,12 +27,13 @@ class BacklogLoopContractTests(unittest.TestCase):
             ROOT / "skills" / "specsfy-update-spec" / "SKILL.md"
         ).read_text(encoding="utf-8")
 
-    def test_backlog_reanalyses_every_round_without_limit(self) -> None:
+    def test_backlog_reanalyses_every_round_with_a_finite_limit(self) -> None:
         for source in (self.backlog, self.mcr):
             with self.subTest(source=source[:40]):
-                self.assertIn("sem limite máximo de rodadas", source)
-                self.assertIn("contexto acumulado e as novas respostas", source)
-                self.assertIn("enquanto existir lacuna aplicável", source)
+                normalized = " ".join(source.split())
+                self.assertIn("no máximo oito perguntas por área", normalized)
+                self.assertIn("contexto acumulado e as novas respostas", normalized)
+                self.assertIn("enquanto existir lacuna aplicável", normalized)
 
     def test_advance_is_offered_from_the_first_round(self) -> None:
         for source in (self.backlog, self.mcr):
@@ -53,10 +54,7 @@ class BacklogLoopContractTests(unittest.TestCase):
             "carregue `$specsfy-02-backlog` para executar o ciclo",
             self.specify,
         )
-        self.assertIn(
-            "retome esta skill ao final do ciclo",
-            self.specify,
-        )
+        self.assertIn("retome esta skill ao final do ciclo", " ".join(self.specify.split()))
         self.assertIn(
             "retome esta skill ao final do ciclo",
             self.update_spec,

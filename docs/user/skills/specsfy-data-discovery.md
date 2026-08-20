@@ -7,7 +7,7 @@ você confirmar em `.specsfy/DATABASE.md`.
 
 ## Quando usar
 
-Use durante o backlog, depois de uma Inbox, ao importar `MVP.md` ou antes de
+Use durante o backlog, depois de uma Inbox, durante a descoberta de `MVP.md` ou antes de
 consolidar uma spec. A skill é útil quando ainda não está claro o que cada
 pedido, pessoa, atendimento ou outro item do produto precisa guardar.
 

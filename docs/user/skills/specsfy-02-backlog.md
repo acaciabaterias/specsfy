@@ -53,10 +53,15 @@ continua sendo backlog e não autoriza implementação.
 
 ## Como o ciclo termina
 
-O refinamento funciona sem limite máximo de rodadas. Cada uma traz pelo menos
-três perguntas numeradas. Cada pergunta oferece três ou mais opções numeradas,
-`Escrever outra resposta` e `Avançar`. O agente reconsidera o pedido e as
-respostas antes de montar a próxima rodada.
+O refinamento faz no máximo oito perguntas por área. Cada rodada traz
+exatamente uma pergunta numerada. Ela oferece três ou mais opções numeradas, `Escrever
+outra resposta`, `Gere outras opções` e `Avançar`. Ao escolher outras opções,
+o agente mantém a pergunta e apresenta sugestões diferentes. O agente
+reconsidera o pedido e as respostas antes de montar a próxima rodada.
+
+Ao chegar a oito perguntas, o agente resume o que foi confirmado e o que ficou
+aberto. Ele só continua se você pedir explicitamente mais perguntas e informar
+quantas quer responder.
 
 `Avançar` existe desde a primeira rodada. Na rodada seguinte, você escolhe se
 quer encerrar definitivamente as perguntas daquela área, responder depois ou

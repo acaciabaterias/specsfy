@@ -95,10 +95,11 @@ retomada automaticamente. Handoffs não autorizam instalação, deploy, publica�
 ou ação destrutiva, que continuam exigindo autorização específica.
 
 Dentro de `backlog`, cada resposta provoca nova análise do contexto completo.
-O ciclo continua sem limite enquanto houver lacuna aplicável. Cada rodada
-contém pelo menos três perguntas numeradas, com três ou mais opções numeradas,
-`Escrever outra resposta` e `Avançar` em cada pergunta desde a primeira rodada.
-Depois do avanço, a próxima rodada confirma se a pessoa encerra a área,
+O ciclo faz no máximo oito perguntas por área. Cada rodada
+contém exatamente uma pergunta numerada, com três ou mais opções numeradas,
+`Escrever outra resposta`, `Gere outras opções` e `Avançar` desde a primeira
+rodada. Depois do
+avanço, a próxima rodada confirma se a pessoa encerra a área,
 responde depois ou retoma agora. O fluxo registra áreas encerradas e não volta
 a elas sem reabertura explícita. Áreas adiadas preservam os pontos abertos, que
 continuam impedindo a aprovação do Definition Gate quando forem aplicáveis.

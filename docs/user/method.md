@@ -114,11 +114,11 @@ transforme em código ou em uma especificação extensa.
 que possa ser conferido.
 
 **Sua participação:** você responde apenas às dúvidas que realmente mudam a
-entrega. O agente reaproveita o que já foi informado e apresenta pelo menos
-três perguntas numeradas por rodada. Cada pergunta inclui três ou mais opções
-numeradas, `Escrever outra resposta` e `Avançar` desde a primeira rodada. O
-ciclo segue sem limite máximo: cada conjunto de respostas atualiza a análise,
-e outra rodada aparece enquanto restar uma lacuna aplicável. O avanço mantém
+entrega. O agente reaproveita o que já foi informado e apresenta uma pergunta
+numerada por rodada. Ela inclui três ou mais opções, `Escrever outra resposta`,
+`Gere outras opções` e `Avançar` desde a primeira rodada. O ciclo faz no
+máximo oito perguntas por área: cada conjunto de respostas atualiza a análise.
+O avanço mantém
 uma confirmação para você encerrar a área, responder depois ou retomar agora.
 O encerramento é respeitado até uma reabertura explícita. O adiamento mantém os
 pontos registrados e o Definition Gate pendente até serem resolvidos.

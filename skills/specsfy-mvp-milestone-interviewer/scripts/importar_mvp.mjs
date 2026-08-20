@@ -1,13 +1,20 @@
 #!/usr/bin/env node
-/** Importa a fonte MVP.md como a milestone inicial sem sobrescrever conteúdo existente. */
+/**
+ * Importa o MVP como M01 e cria Inboxes e backlogs candidatos para cada tema
+ * encontrado. Os backlogs permanecem em Captured até a entrevista do usuário.
+ */
 
 import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { join, relative, resolve } from "node:path";
+import { dirname, join, relative, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 
 const execFileAsync = promisify(execFile);
+const skillRoot = dirname(fileURLToPath(import.meta.url));
+const inboxScript = resolve(skillRoot, "../../specsfy-01-inbox/scripts/capturar_inbox.mjs");
+const backlogScript = resolve(skillRoot, "../../specsfy-02-backlog/scripts/iniciar_backlog.mjs");
 
 function fail(message) { throw new Error(message); }
 
@@ -28,27 +35,37 @@ function containsSensitiveData(content) {
   return /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|\b(?:api[_-]?key|secret|token|password)\s*[:=]\s*\S+/iu.test(content);
 }
 
-/**
- * Retorna a raiz do superprojeto apenas quando a raiz consumidora é um
- * submódulo Git. Worktrees e projetos sem superprojeto Git não ampliam a busca.
- */
+function slug(value) {
+  const result = value.normalize("NFKD").replace(/\p{Diacritic}/gu, "").toLowerCase().replace(/[^a-z0-9]+/gu, "-").replace(/^-+|-+$/gu, "");
+  return result || "tema-do-mvp";
+}
+
+function titleFromTheme(theme, index) {
+  const firstLine = theme.split(/\r?\n/u).find((line) => line.trim())?.replace(/^#+\s*/u, "").trim();
+  return firstLine && firstLine.length <= 100 ? firstLine : `Tema ${index} do MVP`;
+}
+
+/** Divide o MVP por seções ou parágrafos sem inventar temas de produto. */
+function themes(content) {
+  const sections = content
+    .split(/(?=^#{2,}\s+)/mu)
+    .map((section) => section.trim())
+    .filter((section) => section && section.replace(/^#\s+.*$/mu, "").trim());
+  if (sections.length > 1) return sections;
+
+  const paragraphs = content.split(/\r?\n\s*\r?\n/gu).map((item) => item.trim()).filter(Boolean);
+  return paragraphs.length ? paragraphs : [content.trim()];
+}
+
 async function resolveSuperprojectRoot(root) {
   try {
-    const { stdout } = await execFileAsync(
-      "git",
-      ["-C", root, "rev-parse", "--show-superproject-working-tree"],
-      { encoding: "utf8" },
-    );
+    const { stdout } = await execFileAsync("git", ["-C", root, "rev-parse", "--show-superproject-working-tree"], { encoding: "utf8" });
     return stdout.trim() || null;
   } catch {
     return null;
   }
 }
 
-/**
- * Lê o MVP local e usa o MVP do superprojeto somente como fallback para um
- * consumidor instalado como submódulo dentro de um Hub.
- */
 async function readMvpSource(root) {
   const localSource = join(root, "MVP.md");
   try {
@@ -56,10 +73,8 @@ async function readMvpSource(root) {
   } catch (error) {
     if (error?.code !== "ENOENT") throw error;
   }
-
   const superprojectRoot = await resolveSuperprojectRoot(root);
   if (!superprojectRoot) fail("MVP.md não encontrado na raiz do projeto");
-
   const source = join(superprojectRoot, "MVP.md");
   try {
     return { content: await readFile(source, "utf8"), source };
@@ -69,15 +84,14 @@ async function readMvpSource(root) {
   }
 }
 
-async function main() {
-  const args = parseArgs(process.argv.slice(2));
-  const root = resolve(args.root ?? process.cwd());
-  const destination = join(root, "specs", "milestones", "M01.md");
-  const { content, source } = await readMvpSource(root);
-  if (!content.trim()) fail("MVP.md não pode estar vazio");
-  if (containsSensitiveData(content)) fail("MVP.md contém dado sensível aparente; remova-o antes de importar");
+async function run(script, args) {
+  const { stdout } = await execFileAsync("node", [script, ...args], { encoding: "utf8" });
+  return stdout.trim();
+}
 
-  await mkdir(resolve(root, "specs", "milestones"), { recursive: true });
+async function createMilestone(root, source, content) {
+  const destination = join(root, "specs", "milestones", "M01.md");
+  await mkdir(dirname(destination), { recursive: true });
   const hash = createHash("sha256").update(content).digest("hex");
   const milestone = [
     "# Milestone 1.0",
@@ -92,9 +106,10 @@ async function main() {
     "",
     content.trim(),
     "",
-    "## Próximo passo",
+    "## Proveniência e próximos passos",
     "",
-    "Preservar a conversa em Inboxes e tratar a sessão com `$specsfy-02-backlog`.",
+    "As Inboxes e os backlogs candidatos derivados desta importação devem ser",
+    "entrevistados com `$specsfy-02-backlog` antes de qualquer promoção para spec.",
     "",
   ].join("\n");
   try {
@@ -103,7 +118,50 @@ async function main() {
     if (error?.code === "EEXIST") fail("a milestone 1.0 já existe e não será sobrescrita");
     throw error;
   }
-  console.log(destination);
+  return destination;
+}
+
+async function main() {
+  const args = parseArgs(process.argv.slice(2));
+  const root = resolve(args.root ?? process.cwd());
+  const { content, source } = await readMvpSource(root);
+  if (!content.trim()) fail("MVP.md não pode estar vazio");
+  if (containsSensitiveData(content)) fail("MVP.md contém dado sensível aparente; remova-o antes de importar");
+
+  const milestone = await createMilestone(root, source, content);
+  const session = `MVP-${new Date().toISOString().slice(0, 10).replaceAll("-", "")}-${slug(source === join(root, "MVP.md") ? "local" : "hub")}`;
+  const sources = `- \`${relative(root, source) || "MVP.md"}\`: importado em \`specs/milestones/M01.md\`.`;
+  const created = [];
+
+  for (const [index, theme] of themes(content).entries()) {
+    const title = titleFromTheme(theme, index + 1);
+    const inbox = await run(inboxScript, [
+      "--input", theme,
+      "--title", title,
+      "--session", session,
+      "--turn", String(index + 1),
+      "--sources", sources,
+      "--root", root,
+    ]);
+    const inboxPath = relative(root, inbox);
+    const backlog = await run(backlogScript, [
+      "--title", title,
+      "--idea", theme,
+      "--problem", `A esclarecer na entrevista a partir de \`${inboxPath}\`.`,
+      "--person", "A esclarecer com a pessoa responsável pelo MVP.",
+      "--result", "A esclarecer na entrevista antes de promover uma spec.",
+      "--context", `Derivado de \`${inboxPath}\` e da milestone \`M01\`.`,
+      "--root", root,
+    ]);
+    const backlogContent = await readFile(backlog, "utf8");
+    await writeFile(backlog, backlogContent.replace(
+      "- Nenhuma referência relevante encontrada.",
+      `- Inbox de origem: \`${inboxPath}\`.\n- Milestone de origem: \`specs/milestones/M01.md\`.\n- Entrevista obrigatória: \`$specsfy-02-backlog\` antes de promoção.`,
+    ), "utf8");
+    created.push({ inbox: inboxPath, backlog: relative(root, backlog) });
+  }
+
+  console.log(JSON.stringify({ milestone: relative(root, milestone), session, items: created }, null, 2));
 }
 
 main().catch((error) => {

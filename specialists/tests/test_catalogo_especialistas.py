@@ -62,6 +62,12 @@ class SpecialistCatalogTests(unittest.TestCase):
         }
         self.assertEqual(EXPECTED_SKILLS, directories)
 
+    def test_display_names_use_the_specialist_pattern(self) -> None:
+        for name in sorted(EXPECTED_SKILLS):
+            with self.subTest(skill=name):
+                metadata = (ROOT / name / "agents/openai.yaml").read_text(encoding="utf-8")
+                self.assertIn('display_name: "Specsfy - Especialista - ', metadata)
+
     def test_each_specialist_is_complete_and_self_consistent(self) -> None:
         for name in sorted(EXPECTED_SKILLS):
             with self.subTest(skill=name):

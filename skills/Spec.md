@@ -125,7 +125,7 @@ input → inbox → backlog → spec → validate → tasks → TDD/BDD → impl
    demonstráveis e `specsfy-roadmap-milestone-interviewer` para evolução após
    o MVP aceito. Use `specsfy-milestone-governor` para manter relações e a
    projeção `specs.md` sem substituir conteúdo humano.
-12. Use `specsfy-data-discovery` quando uma Inbox, backlog, importação de MVP
+12. Use `specsfy-data-discovery` quando uma Inbox, backlog, descoberta de MVP
     ou spec indicar informações que o produto precisa guardar. A conversa usa
     linguagem cotidiana e registra respostas confirmadas em
     `.specsfy/DATABASE.md`.
@@ -139,29 +139,44 @@ Toda skill que formular perguntas usa este contrato desde a primeira rodada,
 inclusive para escolher arquivo, runner, autorização, confirmação ou próximo
 passo.
 
-1. Apresente pelo menos três perguntas numeradas por rodada, com os rótulos
-   `Pergunta 1`, `Pergunta 2`, `Pergunta 3` e assim por diante.
-2. Abaixo de cada pergunta, ofereça pelo menos três opções numeradas e
+1. Apresente exatamente uma pergunta numerada por rodada, com o rótulo
+   `Pergunta 1`. Espere a resposta antes de formular qualquer outra pergunta.
+2. Abaixo da pergunta, ofereça pelo menos três opções numeradas e
    específicas para o assunto apresentado.
 3. Depois das opções sugeridas, acrescente como itens numerados
-   `Escrever outra resposta` e `Avançar`.
-4. Mantenha `Avançar` disponível desde a primeira rodada. Na rodada seguinte,
+   `Escrever outra resposta`, `Gere outras opções` e `Avançar`.
+4. Quando a pessoa escolher `Gere outras opções`, mantenha a mesma pergunta e
+   apresente pelo menos três alternativas materialmente diferentes. Não registre
+   essa escolha como resposta de produto nem avance para outra lacuna.
+5. Mantenha `Avançar` disponível desde a primeira rodada. Na rodada seguinte,
    pergunte se a pessoa quer encerrar definitivamente as perguntas daquela
    área, responder depois ou voltar a responder agora. Inclua essa confirmação
-   entre as três perguntas numeradas da rodada.
-5. Aceite respostas no formato `1.2`, `2. Escrever: <texto>` ou equivalente e
-   releia todas as respostas antes da rodada seguinte.
-6. Se a pessoa encerrar a área, registre
+   como a única pergunta da rodada.
+6. Aceite respostas no formato `1.2`, `1. Escrever: <texto>` ou equivalente e
+   releia a resposta antes da rodada seguinte. Quando a resposta for apenas o
+   número de uma opção, resolva-a para o texto completo da opção antes de
+   registrar contexto, Inbox, milestone, backlog, spec ou dado confirmado. O
+   número pode ficar como rastreabilidade da interação, mas nunca substitui o
+   significado escolhido.
+7. Se a pessoa encerrar a área, registre
    `Área encerrada pelo usuário: <área>` no artefato aplicável e não volte ao
    assunto, salvo se ela o reabrir explicitamente. Se escolher responder
    depois, registre `Área adiada pelo usuário: <área>` e preserve os pontos
    abertos para retomada.
-7. Encerrar ou adiar não autoriza preencher conteúdo por inferência nem aprovar
+8. Encerrar ou adiar não autoriza preencher conteúdo por inferência nem aprovar
    um gate incompleto.
-8. Se restarem menos de três lacunas, complete a rodada com perguntas de
-   confirmação da síntese, do registro e do próximo passo. Não invente outro
-   assunto apenas para aumentar a quantidade.
-9. Não use opções sem número, letras, bullets soltos ou uma pergunta isolada.
+9. Faça no máximo oito perguntas por área de conversa. Ao alcançar o limite,
+   apresente uma síntese, registre o que ficou aberto e pare o ciclo. Só faça
+   perguntas adicionais quando a pessoa pedir explicitamente e informar quantas
+   perguntas quer responder; esse novo pedido define outro limite finito.
+10. Se restarem lacunas dentro do limite, priorize a de maior impacto e faça-a
+    na rodada seguinte. Não antecipe outras perguntas nem complete a rodada com
+    temas distintos.
+11. Não use opções sem número, letras ou bullets soltos.
+12. Produza em Português do Brasil toda pergunta, opção, síntese, orientação e
+    artefato gerado. Uma citação literal de fonte em outro idioma pode ser
+    preservada para proveniência, mas sua interpretação deve ser registrada em
+    Português do Brasil.
 
 Use este formato mínimo:
 
@@ -171,21 +186,8 @@ Pergunta 1. <pergunta>
 2. <opção sugerida>
 3. <opção sugerida>
 4. Escrever outra resposta
-5. Avançar
-
-Pergunta 2. <pergunta>
-1. <opção sugerida>
-2. <opção sugerida>
-3. <opção sugerida>
-4. Escrever outra resposta
-5. Avançar
-
-Pergunta 3. <pergunta>
-1. <opção sugerida>
-2. <opção sugerida>
-3. <opção sugerida>
-4. Escrever outra resposta
-5. Avançar
+5. Gere outras opções
+6. Avançar
 ```
 
 ## Orquestração conversacional
@@ -222,8 +224,8 @@ automaticamente a etapa que a detectou.
 
 Não peça confirmação para o handoff. Se faltar uma decisão material que somente
 a pessoa pode fornecer, carregue `$specsfy-02-backlog`. O refinamento do backlog
-reanalisa o contexto acumulado e as novas respostas antes de cada rodada e
-continua sem limite máximo de rodadas enquanto existir lacuna aplicável.
+reanalisa o contexto acumulado e as novas respostas antes de cada rodada, até
+o máximo de oito perguntas por área.
 `Avançar` permanece disponível em cada pergunta desde a primeira rodada. Antes
 de encerrar o ciclo atual, a rodada seguinte confirma se a pessoa encerra
 definitivamente aquela área, responde depois ou volta a responder agora. A

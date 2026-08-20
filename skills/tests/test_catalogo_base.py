@@ -66,6 +66,15 @@ class BaseCatalogTests(unittest.TestCase):
                 self.assertEqual(name, match.group(1).strip())
                 self.assertIn(f"${name}", metadata)
 
+    def test_core_skill_display_names_use_the_numbered_specsfy_pattern(self) -> None:
+        for number, name in enumerate(sorted(name for name in BASE_SKILLS if name.startswith((
+            "specsfy-01-", "specsfy-02-", "specsfy-03-", "specsfy-04-",
+            "specsfy-05-", "specsfy-06-", "specsfy-07-",
+        ))), start=1):
+            with self.subTest(skill=name):
+                metadata = (ROOT / name / "agents/openai.yaml").read_text(encoding="utf-8")
+                self.assertIn(f'display_name: "Specsfy - {number:02d} - ', metadata)
+
     def test_catalog_contains_no_legacy_skill_references(self) -> None:
         for name in LEGACY_SKILLS:
             with self.subTest(skill=name):

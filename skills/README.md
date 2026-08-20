@@ -87,9 +87,10 @@ publicação ou ação destrutiva, que continuam exigindo autorização específ
 
 Toda decisão material ausente é tratada por `specsfy-02-backlog`. A skill
 reanalisa o contexto depois de cada rodada e pergunta novamente enquanto
-existir lacuna aplicável, sem limite máximo. Cada rodada contém pelo menos três
-perguntas numeradas. Cada pergunta oferece três ou mais opções numeradas,
-`Escrever outra resposta` e `Avançar` desde a primeira rodada. O avanço
+existir lacuna aplicável, até o máximo de oito perguntas por área. Cada rodada
+contém exatamente uma pergunta numerada. Ela oferece três ou mais opções
+numeradas, `Escrever outra resposta`, `Gere outras opções` e `Avançar` desde a
+primeira rodada. O avanço
 preserva as lacunas em Draft e não aprova o Definition Gate.
 
 ## Catálogo

@@ -173,7 +173,7 @@ input → inbox → backlog → spec
    material relacionado, conversa até a captura mínima ficar clara e produz
    `specs/backlog/<NNNN>-<slug>.md`. A mesma skill pode organizar, priorizar e
    refinar o item progressivamente.
-2. A mesma skill apresenta pelo menos três perguntas numeradas por rodada e
+2. A mesma skill apresenta uma pergunta numerada por rodada e
    produz um brief enquanto houver escolhas materiais abertas.
 3. Use `$specsfy-03-specify` somente quando houver intenção explícita de
    promover o material. A fonte normativa é criada em
@@ -212,8 +212,8 @@ perguntas abaixo sem consultar suposições fora do arquivo:
 - O que ficou fora da entrega?
 - Quais dependências ou definições continuam pendentes?
 
-O agente identifica lacunas e as agrupa em rodadas com pelo menos três
-perguntas numeradas. Definições que alteram segurança, escopo, arquitetura ou
+O agente identifica lacunas e pergunta uma por rodada. Definições que alteram
+segurança, escopo, arquitetura ou
 experiência não são inventadas silenciosamente. Esse diagnóstico prepara a
 spec, mas ainda não autoriza desenvolvimento.
 

@@ -108,11 +108,12 @@ def then_backlog_reanalyses_context(context) -> None:
         assert "contexto acumulado e as novas respostas" in source
 
 
-@then("continua sem limite máximo enquanto existir lacuna aplicável")
-def then_backlog_has_no_question_limit(context) -> None:
+@then("faz no máximo oito perguntas por área enquanto existir lacuna aplicável")
+def then_backlog_has_a_finite_question_limit(context) -> None:
     for source in (context.backlog, context.mcr):
-        assert "sem limite máximo de rodadas" in source
-        assert "enquanto existir lacuna aplicável" in source
+        normalized = " ".join(source.split())
+        assert "no máximo oito perguntas por área" in normalized
+        assert "enquanto existir lacuna aplicável" in normalized
 
 
 @then("oferece avançar desde a primeira rodada")

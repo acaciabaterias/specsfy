@@ -197,16 +197,17 @@ Antes de perguntar:
 3. identifique termos ambíguos, equivalentes e derivados;
 4. analise silenciosamente as dez categorias aplicáveis;
 5. separe declaração, inferência, hipótese, decisão, conflito e aberto;
-6. selecione pelo menos três lacunas reais para a rodada numerada.
+6. selecione uma lacuna real de maior impacto para a rodada numerada.
 
 As categorias são lentes adaptativas, não um questionário. Finalidade,
 evidência, privacidade, observabilidade, reversibilidade e consequências de
 falha são preocupações adicionais do método.
 
 Toda skill que formular perguntas aplica o `Contrato de perguntas numeradas`
-de `Spec.md`: pelo menos três perguntas por rodada, três ou mais opções
-numeradas por pergunta, `Escrever outra resposta` e `Avançar` desde a primeira
-rodada. Cada `SKILL.md` declara seu modo de interação.
+de `Spec.md`: exatamente uma pergunta por rodada, três ou mais opções
+numeradas, `Escrever outra resposta`, `Gere outras opções` e `Avançar` desde a
+primeira rodada, até o máximo de oito perguntas por área. Cada `SKILL.md`
+declara seu modo de interação.
 
 ## Validação
 

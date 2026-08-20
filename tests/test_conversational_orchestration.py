@@ -91,10 +91,10 @@ class ConversationalOrchestrationIntegrationTests(unittest.TestCase):
             with self.subTest(path=path):
                 content = path.read_text(encoding="utf-8")
                 normalized = " ".join(content.split()).casefold()
-                self.assertIn("sem limite máximo", normalized)
+                self.assertIn("no máximo oito perguntas por área", normalized)
                 self.assertTrue(
-                    "pelo menos três perguntas numeradas" in normalized
-                    or "pelo menos três lacunas reais" in normalized
+                    "exatamente uma pergunta numerada" in normalized
+                    or "uma pergunta numerada por rodada" in normalized
                 )
                 self.assertIn("`avançar`", normalized)
                 self.assertIn("encerr", normalized)

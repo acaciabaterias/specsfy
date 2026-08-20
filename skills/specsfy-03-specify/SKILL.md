@@ -71,8 +71,9 @@ node <diretório-da-skill>/scripts/iniciar_spec.mjs \
    ação e afecção como lentes adaptativas, não como questionário.
 4. Distinga cada declaração da pessoa de inferência, hipótese, decisão, conflito
    ou questão aberta produzida durante a análise.
-5. Se existir lacuna aplicável, carregue `$specsfy-02-backlog` para executar o ciclo
-   sem limite e retome esta skill ao final do ciclo. Se a pessoa
+5. Se existir lacuna aplicável, carregue `$specsfy-02-backlog` para executar o
+   ciclo limitado a oito perguntas por área e retome esta skill ao final do
+   ciclo. Se a pessoa
    escolher `avançar`, aplique a confirmação e o registro definidos no contrato
    central. Mantenha `Status: Draft` e `Definition Gate: Pending` quando
    restarem pontos aplicáveis; não promova a spec a `Defined` e não reabra o

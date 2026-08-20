@@ -21,22 +21,40 @@ def when_skill_needs_to_ask(context) -> None:
     context.round_contract = context.contract
 
 
-@then("a rodada contém pelo menos três perguntas numeradas")
-def then_round_has_three_numbered_questions(context) -> None:
-    assert "pelo menos três perguntas numeradas" in context.round_contract
+@then("a rodada contém exatamente uma pergunta numerada")
+def then_round_has_one_numbered_question(context) -> None:
+    assert "exatamente uma pergunta numerada por rodada" in context.round_contract
     assert "Pergunta 1" in context.round_contract
 
 
-@then("cada pergunta oferece pelo menos três opções numeradas")
+@then("a pergunta oferece pelo menos três opções numeradas")
 def then_question_has_three_numbered_options(context) -> None:
     assert "pelo menos três opções numeradas" in context.round_contract
 
 
-@then("cada pergunta oferece escrever outra resposta ou avançar")
+@then("a pergunta oferece escrever outra resposta, gerar outras opções ou avançar")
 def then_question_has_free_and_advance_options(context) -> None:
     assert "`Escrever outra resposta`" in context.round_contract
+    assert "`Gere outras opções`" in context.round_contract
     assert "`Avançar`" in context.round_contract
     assert "desde a primeira rodada" in context.round_contract
+
+
+@when("uma área chegar a oito perguntas")
+def when_area_reaches_the_question_limit(context) -> None:
+    context.limit_contract = context.contract
+
+
+@then("o agente apresenta uma síntese e para a conversa daquela área")
+def then_agent_stops_the_area(context) -> None:
+    assert "apresente uma síntese" in context.limit_contract
+    assert "pare o ciclo" in context.limit_contract
+
+
+@then("só continua se a pessoa pedir mais perguntas e informar quantas quer responder")
+def then_agent_requires_a_new_finite_limit(context) -> None:
+    assert "pedir explicitamente" in context.limit_contract
+    assert "quantas perguntas quer responder" in context.limit_contract
 
 
 @when("a pessoa escolhe avançar em uma área")
