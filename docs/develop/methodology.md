@@ -55,6 +55,12 @@ input → specs/inbox/ → specs/backlog/
 refinamento dialogado. Ambas mantêm proveniência, mas somente `spec.md` governa
 o comportamento.
 
+Na descoberta de MVP, `specsfy-mvp-milestone-interviewer` preserva uma sessão
+em várias Inboxes. Se a raiz contiver `MVP.md`, ele importa a fonte para
+`specs/milestones/M01.md` como `Milestone 1.0`; `BRAND.md` orienta a conversa
+quando presente. A série só recebe tratamento pelo backlog quando a pessoa o
+solicitar.
+
 O refinamento do backlog concentra as escolhas materiais. Depois de cada
 rodada, ele recalcula as lacunas usando a entrada original, o contexto acumulado
 e as novas respostas. Não existe teto de rodadas. Cada rodada possui pelo menos

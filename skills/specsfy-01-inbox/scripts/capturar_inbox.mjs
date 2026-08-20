@@ -12,7 +12,19 @@ const sourceTemplate = resolve(dirname(fileURLToPath(import.meta.url)), "../../t
 function fail(message) { throw new Error(message); }
 
 function parseArgs(argv) {
-  const values = { summary: UNKNOWN, problem: UNKNOWN, people: UNKNOWN, value: UNKNOWN, signals: UNKNOWN, risks: UNKNOWN, directions: UNKNOWN, review: "Revisar as lacunas antes da promoção." };
+  const values = {
+    summary: UNKNOWN,
+    problem: UNKNOWN,
+    people: UNKNOWN,
+    value: UNKNOWN,
+    signals: UNKNOWN,
+    risks: UNKNOWN,
+    directions: UNKNOWN,
+    review: "Revisar as lacunas antes da promoção.",
+    session: "Captura avulsa.",
+    turn: "Não se aplica.",
+    sources: "Nenhuma fonte contextual consultada.",
+  };
   for (let index = 0; index < argv.length; index += 1) {
     const key = argv[index];
     if (!key.startsWith("--")) fail(`argumento inválido: ${key}`);
@@ -86,8 +98,11 @@ async function main() {
         "{{INBOX_NAME}}": humanTitle,
         "{{INBOX_SLUG}}": slugValue,
         "{{CAPTURED_AT}}": now.toISOString().replace(/\.\d{3}Z$/u, "Z"),
+        "{{DISCOVERY_SESSION}}": required(args.session, "a sessão de descoberta"),
+        "{{CONVERSATION_TURN}}": required(args.turn, "o turno da conversa"),
         "{{ORIGINAL_INPUT_SHA256}}": createHash("sha256").update(originalInput).digest("hex"),
         "{{ORIGINAL_INPUT}}": originalInput,
+        "{{CONSULTED_SOURCES}}": required(args.sources, "as fontes contextuais consultadas"),
         "{{SUMMARY}}": required(args.summary, "o resumo"),
         "{{PROBLEM_OR_OPPORTUNITY}}": required(args.problem, "o problema ou oportunidade"),
         "{{AFFECTED_PEOPLE}}": required(args.people, "as pessoas afetadas"),

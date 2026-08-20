@@ -17,3 +17,10 @@ Feature: Captura imediata na Inbox
     When o CLI publica os arquivos estruturais no projeto consumidor
     Then .specsfy/templates contém Inbox.md, Backlog.md, Spec.md, Tasks.md, Project.md, Stack.md, Rules.md e Database.md
     And cria .specsfy/templates/custom sem gerenciar seu conteúdo
+
+  Scenario: Preservar uma descoberta de MVP antes do backlog
+    Given um projeto consumidor com MVP.md e BRAND.md na raiz
+    When o entrevistador de MVP inicia a descoberta
+    Then ele importa MVP.md como a Milestone 1.0 sem sobrescrever uma existente
+    And registra a formulação inicial e cada resposta em uma série de Inboxes
+    And trata a série somente quando a pessoa solicitar o backlog

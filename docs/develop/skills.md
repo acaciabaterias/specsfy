@@ -104,6 +104,12 @@ suas próprias pré-condições.
 qualquer handoff, não pergunta e apenas sugere a próxima etapa. Esse limite
 impede que uma anotação simples se transforme em refinamento implícito.
 
+`specsfy-mvp-milestone-interviewer` combina conversa e captura: ele lê
+`MVP.md` e `BRAND.md` da raiz do consumidor quando existirem, importa
+`MVP.md` em `specs/milestones/M01.md` como `Milestone 1.0` sem sobrescrever o
+arquivo e registra cada fala em uma Inbox associada à mesma sessão. O backlog
+continua responsável por tratar a série e produzir material refinável.
+
 `specsfy-02-backlog` é a responsável exclusiva pelas perguntas de escolha
 material. `specify`, `update-spec` e `validate` fazem handoff para seu ciclo e
 retomam depois. O ciclo reanalisa cada rodada, não possui limite e oferece

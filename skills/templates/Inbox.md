@@ -7,6 +7,8 @@
 | Slug | {{INBOX_SLUG}} |
 | Origem | Input do usuário |
 | Processamento | Análise inicial sem perguntas |
+| Sessão de descoberta | {{DISCOVERY_SESSION}} |
+| Turno da conversa | {{CONVERSATION_TURN}} |
 | Integridade do original | SHA-256 `{{ORIGINAL_INPUT_SHA256}}` |
 | Backlog derivado | Nenhum |
 | Spec derivada | Nenhuma |
@@ -14,6 +16,10 @@
 ## Texto original
 
 {{ORIGINAL_INPUT}}
+
+## Contexto consultado
+
+{{CONSULTED_SOURCES}}
 
 ## Resumo processado
 

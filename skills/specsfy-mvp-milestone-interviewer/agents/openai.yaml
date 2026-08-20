@@ -1,4 +1,4 @@
 interface:
   display_name: "Specsfy · Entrevista de MVP"
-  short_description: "Define o MVP e seus milestones"
-  default_prompt: "Use $specsfy-mvp-milestone-interviewer para conduzir uma entrevista adaptativa até definir o MVP, as milestones e suas condições de saída."
+  short_description: "Explora o MVP em Inboxes"
+  default_prompt: "Use $specsfy-mvp-milestone-interviewer para importar o MVP como milestone 1.0, ler BRAND.md quando existir e preservar a conversa em uma série de Inboxes."

@@ -1,9 +1,9 @@
 ---
 name: specsfy-mvp-milestone-interviewer
-description: Use quando uma ideia de produto precisar de uma entrevista adaptativa para definir o MVP, suas milestones, condições de saída, vínculos iniciais com specs e o que ficará para depois. Não use para capturar Inbox sem perguntas, detalhar tarefas técnicas ou planejar a evolução depois do MVP aceito.
+description: Use para explorar o MVP por conversa, preservar cada resposta em uma série de Inboxes e importar `MVP.md` como a milestone 1.0. Leia `BRAND.md` da raiz quando existir. Não use para tratar as capturas como backlog, criar specs, tarefas ou código.
 ---
 
-# Entrevistar para definir o MVP e seus marcos
+# Explorar o MVP em uma série de Inboxes
 
 ## Modo de interação
 
@@ -11,65 +11,98 @@ Modo de interação: `perguntas`.
 Antes de formular qualquer pergunta, leia e aplique o
 `Contrato de perguntas numeradas` de `.specsfy/Spec.md`.
 
-Leia `PROJECT.md`, a Inbox ou backlog que originou a conversa e as specs já
-existentes. Preserve formulações confirmadas. Esta skill conduz a descoberta do
-MVP antes de transformar o material em specs e backlog.
+Esta skill conversa para revelar o MVP sem converter cada fala em requisito ou
+plano. Cada fala da pessoa vira uma Inbox imutável. O backlog trata a série
+depois, com todos os registros como proveniência.
+
+## Carregar o contexto disponível
+
+1. Resolva a raiz do projeto consumidor antes de ler qualquer arquivo.
+2. Leia `MVP.md` se existir como arquivo regular na raiz. Preserve a fonte e
+   use-a como contexto declarado, sem substituir o que a pessoa disser.
+3. Se `MVP.md` foi importado, execute uma vez:
+
+   ```bash
+   node .agents/skills/specsfy-mvp-milestone-interviewer/scripts/importar_mvp.mjs \
+     --root <raiz>
+   ```
+
+   O comando cria `specs/milestones/M01.md` com o título `Milestone 1.0`, a
+   origem e o hash SHA-256 de `MVP.md`. Se `M01.md` existir, não o sobrescreva:
+   registre a divergência na primeira Inbox e siga a conversa.
+4. Leia `BRAND.md` se existir como arquivo regular na raiz. Use-o para manter
+   linguagem, público, proposta e limites de marca coerentes durante as
+   perguntas. Não copie seu conteúdo para as Inboxes.
+5. Registre na primeira captura se `MVP.md` e `BRAND.md` estavam presentes e
+   foram consultados ou se estavam ausentes. Não crie, mova nem altere esses
+   arquivos.
+6. Leia `PROJECT.md`, Inboxes, backlog e specs existentes apenas se ajudarem a
+   evitar repetição ou contradição. Eles continuam separados da formulação
+   recebida nesta sessão.
+
+Antes da importação, faça a mesma triagem de dados sensíveis usada pela Inbox.
+Se a fonte tiver credencial, token, chave privada ou dado pessoal sensível,
+não gere a milestone nem reproduza o valor em mensagens.
+
+## Preservar a sessão
+
+1. Derive uma identificação estável no formato `DESC-AAAAMMDD-<slug>` a partir
+   do primeiro tema recebido.
+2. Antes da primeira rodada, capture a formulação inicial da pessoa usando
+   `$specsfy-01-inbox`, com a identificação em `--session` e o turno `1` em
+   `--turn`.
+3. Depois de cada resposta da pessoa, capture o texto integral em outra Inbox
+   com a mesma sessão e o próximo turno. Nunca edite, reúna ou substitua uma
+   captura anterior.
+4. Informe `--sources` em toda chamada: liste `MVP.md` e `BRAND.md` como
+   presentes e consultados ou ausentes na raiz.
+5. Aplique a triagem de dados sensíveis do `$specsfy-01-inbox` antes de cada
+   escrita. Se ela impedir a captura, interrompa a conversa até receber texto
+   seguro para registrar.
+
+Use o script da Inbox com os campos da captura e acrescente a sessão:
+
+```bash
+node .agents/skills/specsfy-01-inbox/scripts/capturar_inbox.mjs \
+  --input "<texto integral da pessoa>" \
+  --title "<tema da descoberta>" \
+  --session "DESC-AAAAMMDD-<slug>" \
+  --turn "<número sequencial>" \
+  --sources "<situação de MVP.md e BRAND.md>" \
+  [campos de análise da Inbox] [--root <raiz>]
+```
 
 ## Conduzir uma conversa adaptativa
 
-1. Comece pela finalidade, pela pessoa atendida e pelo problema observável.
-2. Após cada rodada, apresente uma síntese curta do que foi entendido e formule
-   pelo menos três perguntas numeradas a partir das lacunas que ainda impedem
-   definir um fluxo utilizável.
-3. Explore somente o assunto necessário: fluxo principal, dados indispensáveis,
+1. Comece por finalidade, pessoa atendida e problema observável.
+2. Releia todas as Inboxes da sessão depois de cada captura. Mostre uma síntese
+   curta que separe formulação recebida e hipótese da conversa.
+3. Monte a rodada conforme o contrato central: pelo menos três perguntas
+   numeradas, opções específicas, `Escrever outra resposta` e `Avançar`.
+4. Explore apenas o necessário para entender jornada, dados indispensáveis,
    papéis, regras, integrações, limites, demonstração e validação. Não aplique
-   formulário fixo nem repita resposta confirmada.
-4. Continue enquanto faltar informação para declarar quem conclui qual jornada,
-   em qual contexto e como a jornada será verificada. Não há máximo de
-   rodadas.
-5. Registre respostas aprovadas em `PROJECT.md` e, quando a pessoa aprovar a
-   síntese, crie ou atualize `specs/milestones/MNN.md`.
+   formulário fixo nem repita uma resposta já preservada.
+5. Quando a pessoa encerrar ou adiar uma área, capture a formulação dela e
+   indique a Inbox correspondente na síntese. Não preencha lacunas por conta
+   própria.
 
-## Propor milestones do MVP
+## Encerrar e tratar depois
 
-Proponha de quatro a oito marcos orientados por estados demonstráveis do
-produto. Cada marco precisa conter:
+Ao encerrar, informe a identificação da sessão, a lista ordenada de Inboxes e
+uma síntese não normativa de finalidade, pessoa, jornada e pontos em aberto.
+Se a pessoa pedir refinamento, anuncie `Transição automática:
+$specsfy-mvp-milestone-interviewer para $specsfy-02-backlog; motivo: tratar a
+série de capturas da descoberta; resultado esperado: backlog com proveniência
+da sessão` e carregue a skill de backlog na mesma conversa.
 
-- `Objetivo`: estado relevante alcançado pelo produto;
-- `Condição de saída`: jornada verificável, não uma lista de tarefas;
-- `Fora de escopo`: capacidades deliberadamente adiadas;
-- `Specs vinculadas`: IDs principais e complementares quando existirem;
-- `Dependências`: marcos anteriores quando houver ordem obrigatória.
-
-Apresente a proposta inteira para confirmação antes de criar ou reorganizar
-arquivos. Marque uma spec com uma milestone principal e inclua marcos
-complementares somente quando a mesma capacidade contribuir de fato para mais
-de um resultado.
-
-## Materializar e manter o mapa
-
-Depois da confirmação:
-
-1. Use `M01`, `M02` e assim por diante, em sequência estável.
-2. Inclua `Milestones | MNN` na tabela de cada spec ou backlog associado.
-3. Execute `specsfy milestones sync --project .` para atualizar `specs.md` e
-   os blocos derivados dos arquivos de milestone.
-4. Encaminhe cada capacidade ainda geral para `$specsfy-02-backlog`; encaminhe
-   uma capacidade suficientemente definida para `$specsfy-03-specify`.
-
-O sincronizador calcula progresso por specs completas e mostra backlog
-relacionado, mas não escreve objetivo, condição de saída ou fora de escopo.
-
-## Condição para encerrar
-
-Encerre esta entrevista somente quando houver uma afirmação verificável no
-formato: "o MVP estará pronto quando [pessoa] conseguir [resultado] por meio
-de [jornada], sob [limites confirmados]". Entregue a síntese, os marcos, as
-lacunas remanescentes e o próximo handoff.
+O backlog escolhe o que será agrupado, aprofundado ou promovido. Só depois do
+refinamento a pessoa pode solicitar specs ou ajustar as relações da milestone.
 
 ## Limites
 
-- Não invente respostas, marcos, condições de saída ou vínculos.
-- Não trate sprint, versão, componente ou tarefa como milestone.
-- Não aprova gates, implementa código nem conclui uma spec.
+- Não invente respostas, objetivo, condição de saída, fora de escopo ou
+  vínculos da milestone importada.
+- Não sobrescreva a milestone 1.0 existente.
+- Não crie ou atualize backlog, specs, tarefas, testes ou código.
+- Não trate Inbox como fonte normativa.
 - Não use o entrevistador de roadmap para ampliar o MVP sem confirmação.

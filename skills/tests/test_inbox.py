@@ -12,6 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "specsfy-01-inbox/scripts/capturar_inbox.mjs"
 SKILL = ROOT / "specsfy-01-inbox/SKILL.md"
 TEMPLATE = ROOT / "templates/Inbox.md"
+MVP_INTERVIEWER = ROOT / "specsfy-mvp-milestone-interviewer/SKILL.md"
+MVP_IMPORTER = ROOT / "specsfy-mvp-milestone-interviewer/scripts/importar_mvp.mjs"
 
 
 class InboxCaptureTests(unittest.TestCase):
@@ -168,6 +170,87 @@ class InboxCaptureTests(unittest.TestCase):
             content = Path(result.stdout.strip()).read_text(encoding="utf-8")
             self.assertIn("# Template customizado:", content)
             self.assertNotIn("# Template padrão:", content)
+
+    def test_registers_conversation_context_for_a_series_of_inboxes(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory)
+            templates = project / ".specsfy/templates"
+            templates.mkdir(parents=True)
+            (templates / "Inbox.md").write_text(
+                TEMPLATE.read_text(encoding="utf-8"),
+                encoding="utf-8",
+            )
+
+            result = subprocess.run(
+                [
+                    "node",
+                    str(SCRIPT),
+                    "--input",
+                    "Quero validar a primeira jornada do produto.",
+                    "--title",
+                    "Descoberta do produto",
+                    "--session",
+                    "DESC-20260820-produto",
+                    "--turn",
+                    "2",
+                    "--sources",
+                    "- `MVP.md`: presente e consultado.\n- `BRAND.md`: presente e consultado.",
+                    "--root",
+                    str(project),
+                ],
+                text=True,
+                capture_output=True,
+                check=False,
+            )
+
+            self.assertEqual(0, result.returncode, result.stderr)
+            content = Path(result.stdout.strip()).read_text(encoding="utf-8")
+            self.assertIn("DESC-20260820-produto", content)
+            self.assertIn("| Turno da conversa | 2 |", content)
+            self.assertIn("`MVP.md`: presente e consultado.", content)
+            self.assertIn("`BRAND.md`: presente e consultado.", content)
+
+    def test_mvp_interviewer_uses_root_context_and_defers_inbox_treatment(self) -> None:
+        source = MVP_INTERVIEWER.read_text(encoding="utf-8")
+        normalized = " ".join(source.split()).casefold()
+
+        self.assertIn("`mvp.md`", source.casefold())
+        self.assertIn("`brand.md`", source.casefold())
+        self.assertIn("série de capturas", normalized)
+        self.assertIn("$specsfy-01-inbox", source)
+        self.assertIn("$specsfy-02-backlog", source)
+        self.assertIn("`specs/milestones/m01.md`", source.casefold())
+        self.assertIn("`milestone 1.0`", source.casefold())
+        self.assertIn("não o sobrescreva", normalized)
+
+    def test_imports_mvp_as_milestone_one_without_overwriting_it(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory)
+            source = "# Produto\n\nPermitir o primeiro fluxo completo.\n"
+            (project / "MVP.md").write_text(source, encoding="utf-8")
+
+            first = subprocess.run(
+                ["node", str(MVP_IMPORTER), "--root", str(project)],
+                text=True,
+                capture_output=True,
+                check=False,
+            )
+            milestone = project / "specs/milestones/M01.md"
+            self.assertEqual(0, first.returncode, first.stderr)
+            self.assertEqual(str(milestone), first.stdout.strip())
+            content = milestone.read_text(encoding="utf-8")
+            self.assertIn("# Milestone 1.0", content)
+            self.assertIn("Permitir o primeiro fluxo completo.", content)
+            self.assertIn("SHA-256", content)
+
+            second = subprocess.run(
+                ["node", str(MVP_IMPORTER), "--root", str(project)],
+                text=True,
+                capture_output=True,
+                check=False,
+            )
+            self.assertNotEqual(0, second.returncode)
+            self.assertIn("não será sobrescrita", second.stderr)
 
 
 if __name__ == "__main__":
