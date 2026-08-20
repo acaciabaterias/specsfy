@@ -3,6 +3,6 @@
   "version": "0.8.1",
   "runtime": "node",
   "minimum_node": ">=22.20.0",
-  "source_sha256": "6efb93fe49c166948f9d31dd58f301ce39259c7b097a456cbb793faef3d3af2a",
-  "binary_sha256": "111a85638bb5447e8da5a386a9972635d8b817c2f31bc37ffe33417732a48f9d"
+  "source_sha256": "65372aec018412781bc48fbe258eb3f4143d73c7e6243584cad866a161ab3eea",
+  "binary_sha256": "9f54670e3ab5b214a69fd094207345b2bc0a46ced629b2836ba4fa097ed5dfa4"
 }

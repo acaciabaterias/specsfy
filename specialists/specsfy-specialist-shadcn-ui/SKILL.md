@@ -1,6 +1,6 @@
 ---
 name: specsfy-specialist-shadcn-ui
-description: Instalar, compor e adaptar shadcn/ui com registry, Radix, theming, formulários, tabelas, gráficos, sidebars e componentes acessíveis. Use quando houver components.json, componentes shadcn já incorporados ou pedido explícito por shadcn; trate sempre o código copiado como código do projeto, nunca como dependência opaca; não use para o sistema de tokens/utilitários em si — combine com a skill Tailwind CSS — nem para uma galeria de componentes alternativa, coberta por react-ui-components.
+description: Instalar, compor e adaptar shadcn/ui com registry, Base UI, Radix, React Aria, theming, formulários, tabelas, gráficos, sidebars e componentes acessíveis. Use quando houver components.json, componentes shadcn já incorporados ou pedido explícito por shadcn; trate sempre o código copiado como código do projeto, nunca como dependência opaca; não use para o sistema de tokens/utilitários em si — combine com a skill Tailwind CSS — nem para uma galeria de componentes alternativa, coberta por react-ui-components.
 ---
 
 # shadcn/ui
@@ -10,8 +10,8 @@ description: Instalar, compor e adaptar shadcn/ui com registry, Radix, theming, 
 - Acionar quando o projeto tem `components.json` ou componentes shadcn já
   incorporados, ou quando a pessoa pede explicitamente um componente
   shadcn/ui (Data Table, Sidebar, Dialog, Form, Chart).
-- Acionar também para decidir quais primitives Radix compõem um padrão
-  (dashboard, formulário, overlay) antes de escrever a UI.
+- Acionar também para identificar se o shadcn/ui do projeto usa Base UI, Radix
+  ou React Aria antes de compor um padrão (dashboard, formulário, overlay).
 - Não acionar para o sistema de tokens/utilitários Tailwind em si; combinar
   com `$specsfy-specialist-tailwind-css` para isso.
 - Não acionar quando o projeto usa uma biblioteca de componentes visual
@@ -26,22 +26,29 @@ description: Instalar, compor e adaptar shadcn/ui com registry, Radix, theming, 
 1. Confirmar framework, versão do shadcn/ui, `components.json` (aliases de
    import, estilo, CSS variables) e o registry configurado antes de adicionar
    qualquer componente.
-2. Auditar os componentes já incorporados no projeto e suas customizações
+2. Identificar a base de primitives em uso: começar pelos imports dos
+   componentes shadcn já incorporados e confirmar no manifest. Classificar
+   `@base-ui/react` como Base UI, `radix-ui` ou `@radix-ui/react-*` como Radix
+   e `react-aria-components` ou `@react-aria/*` como React Aria. Se os
+   componentes usarem mais de uma base ou os sinais não bastarem, registrar a
+   base por arquivo e não adicionar, migrar ou reescrever primitives até
+   esclarecer a divergência.
+3. Auditar os componentes já incorporados no projeto e suas customizações
    locais antes de adicionar um novo, para não duplicar ou divergir de um
    componente equivalente já existente.
-3. Escolher o primitive Radix pelo comportamento e semântica exigidos
-   (diálogo modal vs popover vs sheet lateral), não pela aparência mais
-   próxima do design.
-4. Adicionar o menor conjunto de componentes necessário e revisar o código
+4. Escolher o primitive da base identificada pelo comportamento e semântica
+   exigidos (diálogo modal vs popover vs sheet lateral), não pela aparência
+   mais próxima do design.
+5. Adicionar o menor conjunto de componentes necessário e revisar o código
    gerado linha a linha — ele é copiado para o projeto e passa a ser mantido
    por quem o adicionou.
-5. Adaptar tokens, variantes (`cva`) e composição ao design do projeto sem
-   remover roles, `aria-*`, gestão de foco ou atalhos de teclado que o
-   primitive já resolveu.
-6. Construir todos os estados reais do componente (loading, empty, error,
+6. Adaptar tokens, variantes (`cva`) e composição ao design do projeto sem
+   remover roles, `aria-*`, gestão de foco ou atalhos de teclado oferecidos
+   pela base identificada.
+7. Construir todos os estados reais do componente (loading, empty, error,
    disabled, permission denied), não apenas o estado nominal mostrado na
    documentação.
-7. Testar teclado, foco, responsividade, submissão de formulário e os dois
+8. Testar teclado, foco, responsividade, submissão de formulário e os dois
    temas (claro/escuro) antes de considerar o componente pronto.
 
 ## Padrões
@@ -50,9 +57,12 @@ description: Instalar, compor e adaptar shadcn/ui com registry, Radix, theming, 
   código copiado pertence ao projeto e qualquer bug ou desvio de
   acessibilidade nele é responsabilidade do time, não "responsabilidade da
   lib".
-- Preservar roles ARIA, labels, focus management (foco inicial, trap,
-  retorno ao trigger) e a tecla de escape que o primitive Radix já resolve;
-  customização visual não pode remover esse comportamento.
+- Usar somente APIs, atributos de estado e composição próprios da base
+  identificada. Base UI, Radix e React Aria expõem contratos semelhantes, mas
+  seus imports, props e atributos não são intercambiáveis.
+- Preservar roles ARIA, labels, gestão de foco (foco inicial, trap e retorno
+  ao trigger) e Escape quando a base os oferece; customização visual não pode
+  remover esse comportamento.
 - Centralizar tokens de tema (CSS variables) num único lugar; nunca editar
   dezenas de componentes individualmente para trocar uma cor de marca ou
   ajustar o tema.
@@ -71,6 +81,9 @@ description: Instalar, compor e adaptar shadcn/ui com registry, Radix, theming, 
 
 ## Antipadrões
 
+- Assumir que todo shadcn/ui usa Radix porque o componente tem a mesma API
+  pública. Isso introduz imports e props incompatíveis com Base UI ou React
+  Aria.
 - Importar um Dialog do shadcn/ui e remover o `aria-describedby`/título por
   achar "redundante visualmente" — quebra o anúncio do leitor de tela sobre o
   que o diálogo faz.
@@ -100,7 +113,7 @@ description: Instalar, compor e adaptar shadcn/ui com registry, Radix, theming, 
   após falha preservando valores) e sidebar (colapsada, expandida, rota
   ativa) realmente usados pela tela.
 - Não declarar um componente "acessível" só porque veio do shadcn/ui;
-  qualquer customização precisa da evidência acima antes da afirmação.
+  qualquer customização precisa da comprovação acima antes da afirmação.
 
 ## Skills relacionadas
 
@@ -116,12 +129,13 @@ description: Instalar, compor e adaptar shadcn/ui com registry, Radix, theming, 
   Action — validação e autorização server-side pertencem a essa skill.
 - `$specsfy-specialist-react-ui-components` e `$specsfy-specialist-ui-design`
   quando o projeto precisa de uma galeria de referências visuais mais ampla
-  ou de decisões de composição de página.
-- `$specsfy-specialist-web-accessibility` para auditoria além do que o
-  primitive Radix garante por padrão.
+  ou de definições de composição de página.
+- `$specsfy-specialist-web-accessibility` para auditoria além do que a base
+  instalada oferece por padrão.
 - `$specsfy-specialist-application-security` para validação de formulário no
   servidor e autorização de mutations expostas por Server Actions/endpoints.
 
-Leia [references/standards.md](references/standards.md) para registry,
-padrões de dashboard, Data Table, formulário, overlay e chart, com fontes
-oficiais.
+Leia [references/primitives.md](references/primitives.md) antes de alterar um
+componente shadcn/ui para identificar a base instalada. Leia
+[references/standards.md](references/standards.md) para registry, padrões de
+dashboard, Data Table, formulário, overlay e chart, com fontes oficiais.

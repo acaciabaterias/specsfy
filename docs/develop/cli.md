@@ -9,7 +9,7 @@ não define requisitos nem aprova gates.
 `cli/src/cli.ts` define:
 
 ```text
-specsfy install | specsfy setup
+specsfy install
 specsfy doctor
 specsfy update
 specsfy upgrade
@@ -44,11 +44,11 @@ Sem subcomando, a aplicação abre a TUI.
 ## Instalação
 
 `specsfy doctor` apresenta todos os requisitos do ambiente. Antes de qualquer
-escrita, `specsfy install` e seu alias `specsfy setup` exigem Node.js 22.20 ou
-superior, Git, um projeto legível e gravável e o `skills CLI`. A resolução
-procura `SPECSFY_SKILLS_CLI`, o executável no `PATH`, a dependência incluída no
-pacote npm e, por último, `npx skills`. O diagnóstico também informa a
-disponibilidade do npm, usado por `upgrade`.
+escrita, `specsfy install` exige Node.js 22.20 ou superior, Git, um projeto
+legível e gravável e o `skills CLI`. A resolução procura
+`SPECSFY_SKILLS_CLI`, o executável no `PATH`, a dependência incluída no pacote
+npm e, por último, `npx skills`. O diagnóstico também informa a disponibilidade
+do npm, usado por `upgrade`.
 
 A dependência empacotada é executada com o mesmo Node.js do Specsfy. Essa rota
 permite que launchers gráficos e chamadas por caminho absoluto funcionem mesmo

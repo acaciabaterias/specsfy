@@ -12,6 +12,7 @@ SETUP = ROOT / "specsfy-setup" / "scripts" / "setup_context.mjs"
 STACK = ROOT / "specsfy-aux-stack" / "scripts" / "update_stack.mjs"
 RULES = ROOT / "specsfy-aux-rules" / "scripts" / "add_rule.mjs"
 DATABASE = ROOT / "specsfy-aux-database" / "scripts" / "update_database.mjs"
+DATA_DISCOVERY = ROOT / "specsfy-data-discovery" / "scripts" / "registrar_dados_conversados.mjs"
 MONITOR = ROOT / "specsfy-setup" / "scripts" / "monitor_context.mjs"
 
 
@@ -26,6 +27,61 @@ def run_script(script: Path, *arguments: str) -> subprocess.CompletedProcess[str
 
 
 class AuxiliaryContextTests(unittest.TestCase):
+    def test_routes_data_discovery_from_product_entry_points(self) -> None:
+        entry_points = (
+            ROOT / "specsfy-01-inbox" / "SKILL.md",
+            ROOT / "specsfy-02-backlog" / "SKILL.md",
+            ROOT / "specsfy-mvp-milestone-interviewer" / "SKILL.md",
+            ROOT / "specsfy-03-specify" / "SKILL.md",
+        )
+
+        for entry_point in entry_points:
+            with self.subTest(entry_point=entry_point.parent.name):
+                content = entry_point.read_text(encoding="utf-8")
+                self.assertIn("$specsfy-data-discovery", content)
+                self.assertIn("DATABASE.md", content)
+
+    def test_records_confirmed_data_in_plain_language_without_touching_inventory(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory)
+            database = project / ".specsfy" / "DATABASE.md"
+            database.parent.mkdir()
+            database.write_text(
+                "# Banco de dados\n\n## Inventário detectado\n\nFonte do código.\n",
+                encoding="utf-8",
+            )
+
+            result = run_script(
+                DATA_DISCOVERY,
+                "--project",
+                str(project),
+                "--nome",
+                "Pedido",
+                "--para-que-serve",
+                "Acompanhar o que cada cliente pediu.",
+                "--o-que-guardar",
+                "cliente, itens escolhidos, endereço de entrega e situação",
+                "--formato-sugerido",
+                "escolha entre opções para a situação e texto livre para observações",
+                "--ligacoes",
+                "Um pedido pertence a um cliente.",
+                "--acesso",
+                "A equipe de atendimento consulta; o cliente vê somente os próprios pedidos.",
+                "--ciclo-de-vida",
+                "Manter enquanto houver atendimento e apagar conforme a regra aprovada.",
+                "--fontes",
+                "specs/inbox/2026-08-20-120000-pedidos.md",
+            )
+
+            self.assertEqual(0, result.returncode, result.stderr)
+            content = database.read_text(encoding="utf-8")
+            self.assertIn("## Informações a guardar confirmadas", content)
+            self.assertIn("| Informação | Para que serve | O que guardar | Formato sugerido |", content)
+            self.assertIn("Pedido", content)
+            self.assertIn("cliente, itens escolhidos", content)
+            self.assertIn("escolha entre opções para a situação", content)
+            self.assertIn("Fonte do código.", content)
+
     def test_setup_renders_all_context_files_from_central_templates(self) -> None:
         setup = SETUP.read_text(encoding="utf-8")
         for name in ("Project.md", "Stack.md", "Rules.md", "Database.md"):

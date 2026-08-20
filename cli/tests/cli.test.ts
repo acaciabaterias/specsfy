@@ -14,7 +14,7 @@ describe("CLI público", () => {
     const program = buildProgram();
     expect(
       program.commands.find((command) => command.name() === "install")?.aliases(),
-    ).toContain("setup");
+    ).toEqual([]);
     expect(program.commands.map((command) => command.name())).toEqual([
       "install",
       "doctor",
@@ -34,7 +34,7 @@ describe("CLI público", () => {
       program.commands
         .find((command) => command.name() === "skills")
         ?.commands.map((command) => command.name()),
-    ).toEqual(["list", "detect", "add", "remove", "update"]);
+    ).toEqual(["list", "detect", "install", "remove", "update"]);
     expect(
       program.commands
         .find((command) => command.name() === "config")

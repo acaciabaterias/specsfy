@@ -33,11 +33,11 @@ specsfy install --project . \
   --specialist specsfy-specialist-postgres
 ```
 
-Em um projeto já preparado, use `skills add` para acrescentar somente os
+Em um projeto já preparado, use `skills install` para acrescentar somente os
 especialistas escolhidos:
 
 ```bash
-specsfy skills add specsfy-specialist-laravel --project .
+specsfy skills install specsfy-specialist-laravel --project .
 ```
 
 A detecção usa manifests, dependências e arquivos reconhecidos pelo catálogo.

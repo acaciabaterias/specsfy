@@ -50,6 +50,7 @@ qualquer pergunta para uma etapa conversacional.
 | consultar o estado | [`specsfy-progress`](specsfy-progress.md) | relatório somente leitura |
 | conversar conforme a fase | [`specsfy-interviewer`](specsfy-interviewer.md) | respostas confirmadas e Effort recalibrado |
 | definir o MVP e seus marcos | [`specsfy-mvp-milestone-interviewer`](specsfy-mvp-milestone-interviewer.md) | milestones aprováveis do MVP |
+| descobrir o que o sistema precisa guardar | [`specsfy-data-discovery`](specsfy-data-discovery.md) | respostas confirmadas em `DATABASE.md` |
 | planejar a evolução | [`specsfy-roadmap-milestone-interviewer`](specsfy-roadmap-milestone-interviewer.md) | milestones pós-MVP |
 | manter a projeção | [`specsfy-milestone-governor`](specsfy-milestone-governor.md) | `specs.md` e progresso derivado |
 
@@ -81,6 +82,10 @@ Para organizar um produto inteiro, comece pelo
 `specsfy-roadmap-milestone-interviewer`. O `specsfy-milestone-governor` mantém
 o mapa derivado de specs e backlog. O guia [Milestones](../milestones.md)
 explica arquivos, relações e sincronização.
+
+Quando uma conversa revelar informações que o sistema precisa lembrar, use
+`specsfy-data-discovery`. A skill pergunta em linguagem simples e mantém o
+registro em `.specsfy/DATABASE.md` antes de o backlog ou a spec avançar.
 
 Volte ao [guia completo](../README.md) ou leia [como a metodologia
 funciona](../method.md).

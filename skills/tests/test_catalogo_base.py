@@ -20,6 +20,7 @@ BASE_SKILLS = {
     "specsfy-mvp-milestone-interviewer",
     "specsfy-roadmap-milestone-interviewer",
     "specsfy-milestone-governor",
+    "specsfy-data-discovery",
 }
 CONTEXT_SKILLS = {
     "specsfy-setup",

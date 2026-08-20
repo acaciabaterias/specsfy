@@ -12,7 +12,7 @@ Use o catálogo de especialistas distribuído pelo CLI para aprofundar:
 Quando estiver ausente, proponha este comando e peça autorização específica:
 
 ```bash
-specsfy skills add specsfy-specialist-<nome>
+specsfy skills install specsfy-specialist-<nome>
 ```
 
 Especialista informa padrões; a fonte normativa continua sendo

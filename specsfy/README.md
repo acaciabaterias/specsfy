@@ -357,7 +357,7 @@ specsfy install --project . --detected
 Ou escolher uma explicitamente:
 
 ```bash
-specsfy skills add specsfy-specialist-laravel --project .
+specsfy skills install specsfy-specialist-laravel --project .
 ```
 
 Instalar especialista é uma ação explícita. Uma recomendação do agente não o

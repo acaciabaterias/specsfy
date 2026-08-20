@@ -82,10 +82,12 @@ As skills sem perguntas não improvisam uma entrevista. Elas preservam a
 entrada, atualizam projeções derivadas ou encaminham a lacuna para uma skill
 conversacional.
 
+<!-- markdownlint-disable MD013 -->
 | Modo | Skills |
 | --- | --- |
-| perguntas | `specsfy-02-backlog`, `specsfy-03-specify`, `specsfy-04-validate`, `specsfy-05-tasks`, `specsfy-06-tdd-bdd`, `specsfy-07-implement`, `specsfy-aux-rules`, `specsfy-interviewer`, `specsfy-milestone-governor`, `specsfy-mvp-milestone-interviewer`, `specsfy-roadmap-milestone-interviewer`, `specsfy-setup`, `specsfy-update-spec` |
+| perguntas | `specsfy-02-backlog`, `specsfy-03-specify`, `specsfy-04-validate`, `specsfy-05-tasks`, `specsfy-06-tdd-bdd`, `specsfy-07-implement`, `specsfy-aux-rules`, `specsfy-interviewer`, `specsfy-milestone-governor`, `specsfy-mvp-milestone-interviewer`, `specsfy-data-discovery`, `specsfy-roadmap-milestone-interviewer`, `specsfy-setup`, `specsfy-update-spec` |
 | sem perguntas | `specsfy-01-inbox`, `specsfy-aux-database`, `specsfy-aux-stack`, `specsfy-documentator`, `specsfy-progress` |
+<!-- markdownlint-enable MD013 -->
 
 ## Handoff
 
@@ -109,6 +111,10 @@ impede que uma anotação simples se transforme em refinamento implícito.
 `MVP.md` em `specs/milestones/M01.md` como `Milestone 1.0` sem sobrescrever o
 arquivo e registra cada fala em uma Inbox associada à mesma sessão. O backlog
 continua responsável por tratar a série e produzir material refinável.
+
+`specsfy-data-discovery` traduz a conversa de produto em informações a guardar
+no `DATABASE.md`. Ela não escolhe estrutura interna; backlog, importação de MVP
+e especificação a carregam quando a jornada depender de dados persistidos.
 
 `specsfy-02-backlog` é a responsável exclusiva pelas perguntas de escolha
 material. `specify`, `update-spec` e `validate` fazem handoff para seu ciclo e

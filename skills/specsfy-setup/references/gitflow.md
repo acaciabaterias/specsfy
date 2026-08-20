@@ -19,7 +19,7 @@ que conduz o projeto.
 Instale no projeto consumidor:
 
 ```bash
-specsfy skills add specsfy-specialist-gitflow
+specsfy skills install specsfy-specialist-gitflow
 ```
 
 Se a skill já estiver instalada, anuncie a transição automática e carregue-a

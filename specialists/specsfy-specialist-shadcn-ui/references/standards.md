@@ -33,7 +33,7 @@
 - Estado vazio ("nenhum resultado para os filtros atuais") é diferente de
   estado de carregamento e de erro — os três precisam de UI distinta.
 - Seleção de linha, ações em massa e paginação server-side (quando o volume
-  exige) são decisões independentes; não acople todas por padrão.
+  exige) são escolhas independentes; não acople todas por padrão.
 
 ## Formulários
 
@@ -46,9 +46,9 @@
 
 ## Overlays (Dialog, Sheet, Popover, Dropdown)
 
-- Radix já resolve foco inicial, focus trap e fechamento por `Escape`/clique
-  fora; preserve esse comportamento ao customizar — não sobrescreva handlers
-  de teclado do primitive sem necessidade real.
+- A base instalada pode resolver foco inicial, focus trap e fechamento por
+  `Escape`/clique fora. Preserve o comportamento existente ao customizar e
+  não sobrescreva handlers de teclado do primitive sem necessidade real.
 - Escolha o overlay pelo papel: Dialog para uma tarefa que bloqueia o resto
   da tela, Sheet para um painel lateral não bloqueante, Popover para
   informação contextual leve, Dropdown para lista de ações.
@@ -81,6 +81,7 @@
 - Components: https://ui.shadcn.com/docs/components
 - Theming: https://ui.shadcn.com/docs/theming
 - Registry: https://ui.shadcn.com/docs/registry
+- Bases de primitives: https://ui.shadcn.com/docs/cli
 - Forms: https://ui.shadcn.com/docs/forms
 - Data Table: https://ui.shadcn.com/docs/components/data-table
 - Chart: https://ui.shadcn.com/docs/components/chart

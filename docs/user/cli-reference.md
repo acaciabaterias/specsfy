@@ -43,23 +43,6 @@ specsfy install --project . --specialist specsfy-specialist-laravel
 specsfy install --project . --detected --force --json
 ```
 
-## `specsfy setup`
-
-Executa o mesmo fluxo de `specsfy install`. O alias existe para quem procura um
-comando de preparação do projeto e repete o diagnóstico completo antes de
-escrever templates, regras ou skills. As opções, a saída, as proteções de
-arquivos locais e os códigos de saída são idênticos aos de `install`.
-
-Exemplos:
-
-```bash
-specsfy setup --project .
-specsfy setup --project ./aplicativo --json
-specsfy setup --project . --detected
-specsfy setup --project . --specialist specsfy-specialist-laravel
-specsfy setup --project . --detected --force --json
-```
-
 ## `specsfy doctor`
 
 Verifica Node.js, Git, npm, acesso de leitura e escrita ao projeto e a
@@ -145,7 +128,7 @@ GH_TOKEN="$TOKEN_SPECSFY" specsfy skills detect --project .
 SPECSFY_SPECIALISTS_CATALOG=./catalog.json specsfy skills detect --json
 ```
 
-## `specsfy skills add`
+## `specsfy skills install`
 
 Instala uma ou mais skills informadas por nome e resolve suas dependências.
 Os nomes são obrigatórios. `--force` autoriza substituir arquivos gerenciados
@@ -154,11 +137,11 @@ alterados. A saída textual contém os caminhos modificados.
 Exemplos:
 
 ```bash
-specsfy skills add specsfy-specialist-laravel
-specsfy skills add specsfy-specialist-postgres --project ./api
-specsfy skills add specsfy-specialist-laravel specsfy-specialist-postgres
-specsfy skills add specsfy-specialist-react-ui-components --project .
-specsfy skills add specsfy-specialist-laravel --project . --force
+specsfy skills install specsfy-specialist-laravel
+specsfy skills install specsfy-specialist-postgres --project ./api
+specsfy skills install specsfy-specialist-laravel specsfy-specialist-postgres
+specsfy skills install specsfy-specialist-react-ui-components --project .
+specsfy skills install specsfy-specialist-laravel --project . --force
 ```
 
 ## `specsfy skills remove`

@@ -10,7 +10,7 @@ Proponha especialistas capazes de tornar PREP/EXECUTE/VERIFY/IMPROVE concretos:
 - interface: `-shadcn-ui`, `-ui-design` e `-ux-design`.
 
 ```bash
-specsfy skills add specsfy-specialist-<nome>
+specsfy skills install specsfy-specialist-<nome>
 ```
 
 A skill especialista não cria `tasks.md` nem altera dependências entre tarefas.

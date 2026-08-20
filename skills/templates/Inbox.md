@@ -43,6 +43,10 @@
 
 **Sinais extraídos, não decisões:** {{EXTRACTED_SIGNALS}}
 
+### Informações que talvez precisem ser guardadas
+
+**Sinais para conversar depois, não confirmação:** {{DATA_SIGNALS}}
+
 ### Riscos e dependências
 
 **Análise preliminar:** {{RISKS_AND_DEPENDENCIES}}

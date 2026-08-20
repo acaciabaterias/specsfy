@@ -17,6 +17,7 @@ QUESTIONING_SKILLS = {
     "specsfy-roadmap-milestone-interviewer",
     "specsfy-setup",
     "specsfy-update-spec",
+    "specsfy-data-discovery",
 }
 NON_QUESTIONING_SKILLS = {
     "specsfy-01-inbox",

@@ -56,7 +56,6 @@ export function buildProgram(): Command {
 
   program
     .command("install")
-    .alias("setup")
     .description("instala as skills do framework")
     .addOption(projectOption())
     .option("--force", "substitui arquivos gerenciados alterados")
@@ -153,7 +152,7 @@ export function buildProgram(): Command {
       printCatalog(await catalog.detect(options.project), Boolean(options.json));
     });
   skills
-    .command("add")
+    .command("install")
     .description("instala especialistas")
     .argument("<names...>", "nomes das skills")
     .addOption(projectOption())

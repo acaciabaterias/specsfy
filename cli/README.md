@@ -65,7 +65,6 @@ npm install --global @promovaweb/specsfy@0.8.1
 ```bash
 specsfy
 specsfy doctor --project .
-specsfy setup --project .
 specsfy install --project .
 specsfy install --project . --detected
 specsfy install --project . \
@@ -73,7 +72,7 @@ specsfy install --project . \
   --specialist specsfy-specialist-postgres
 specsfy skills list
 specsfy skills detect --project .
-specsfy skills add specsfy-specialist-laravel --project .
+specsfy skills install specsfy-specialist-laravel --project .
 specsfy skills remove specsfy-specialist-laravel --project .
 specsfy update --project .
 specsfy upgrade
@@ -95,7 +94,7 @@ exemplo, instalar `specsfy-specialist-react-ui-components` também instala
 `specsfy-specialist-ui-design`, tanto pelo comando quanto pela TUI:
 
 ```bash
-specsfy skills add specsfy-specialist-react-ui-components --project .
+specsfy skills install specsfy-specialist-react-ui-components --project .
 ```
 
 Sem subcomando, `specsfy` abre o dashboard TUI no diretório atual. A interface

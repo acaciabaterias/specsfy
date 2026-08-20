@@ -11,7 +11,7 @@ Detecte manifests e arquivos antes de propor:
   arquitetura ou API.
 
 ```bash
-specsfy skills add specsfy-specialist-<nome>
+specsfy skills install specsfy-specialist-<nome>
 ```
 
 Não instalar no `promovaweb/specsfy`, não adicionar pacote e não executar deploy como

@@ -23,6 +23,7 @@ BASE_SKILLS = (
     "specsfy-mvp-milestone-interviewer",
     "specsfy-roadmap-milestone-interviewer",
     "specsfy-milestone-governor",
+    "specsfy-data-discovery",
 )
 class VerifyRepositoryTests(unittest.TestCase):
     def create_skill(self, root: Path, name: str) -> None:
@@ -53,7 +54,7 @@ class VerifyRepositoryTests(unittest.TestCase):
             result = json.loads(completed.stdout)["checks"][0]
 
             self.assertEqual("passed", result["status"])
-            self.assertEqual("20 skills válidas", result["detail"])
+            self.assertEqual("21 skills válidas", result["detail"])
 
     def test_skill_check_accepts_source_checkout_catalog(self) -> None:
         completed = subprocess.run(["node", str(SCRIPT), str(ROOT), "--json"], text=True, capture_output=True, check=False)

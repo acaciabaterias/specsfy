@@ -21,7 +21,9 @@ description: Escolher, compor e adaptar uma biblioteca de componentes React com 
 1. Anunciar o uso conjunto e carregar `$specsfy-specialist-ui-design` antes de
    escolher uma referência.
 2. Inspecionar versão do React, framework, Tailwind, design system, componentes
-   locais, ícones e estratégia de testes do projeto consumidor.
+   locais, ícones e estratégia de testes do projeto consumidor. Se houver
+   shadcn/ui, confirmar com `$specsfy-specialist-shadcn-ui` a base de
+   primitives de cada componente antes de adaptar o asset.
 3. Definir com a skill de UI a tarefa principal, hierarquia, composição,
    densidade, estados e breakpoints.
 4. Escolher a família em [references/catalog.md](references/catalog.md) e listar
@@ -60,7 +62,7 @@ uma escolha incremental, ler
   links `#`; o exemplo deixa de ser referência e vira dívida acoplada.
 - Escolher um asset pela aparência antes de definir tarefa e hierarquia; isso
   faz o catálogo dirigir o produto em vez de servir à intenção da tela.
-- Instalar todas as dependências citadas por um exemplo sem inventariar os
+- Instalar todas as dependências citadas por um exemplo sem mapear os
   primitives locais; cria duas fontes concorrentes de componentes e tokens.
 - Transformar componentes estáticos em Client Components por conveniência;
   aumenta JavaScript enviado e mistura apresentação com estado sem necessidade.
@@ -82,8 +84,9 @@ uma escolha incremental, ler
 
 ## Skills relacionadas
 
-- `$specsfy-specialist-shadcn-ui` fornece primitives adaptáveis; esta skill
-  fornece composições TSX copiáveis, não uma dependência runtime.
+- `$specsfy-specialist-shadcn-ui` identifica a base de primitives e fornece
+  componentes adaptáveis; esta skill fornece composições TSX copiáveis, não
+  uma dependência runtime.
 - `$specsfy-specialist-ui-design` governa composição, hierarquia, densidade e
   coerência visual; esta skill fornece material React adaptável.
 - `$specsfy-specialist-react` governa ownership de estado, effects, concorrência
@@ -95,6 +98,6 @@ uma escolha incremental, ler
 - `$specsfy-specialist-nextjs` ou `$specsfy-specialist-astro` governa a
   fronteira server/client e o roteamento do framework hospedeiro.
 
-Leia [references/standards.md](references/standards.md) para critérios de
-seleção, adaptação, estado, dependências e evidência, e carregue os demais
+Leia [references/standards.md](references/standards.md) para regras de
+seleção, adaptação, estado, dependências e comprovação, e carregue os demais
 arquivos de `references/` somente no passo do Fluxo que os solicita.

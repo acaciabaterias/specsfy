@@ -24,3 +24,9 @@ Feature: Captura de ideias no backlog
     Then ele pesquisa termos do pedido em backlogs, specs e documentação
     And confirma com o usuário antes de criar uma possível duplicata
     And preserva referências relevantes no item
+
+  Scenario: Descobrir o que o produto precisa guardar antes do brief
+    Given uma ideia de backlog que depende de informações lembradas pelo sistema
+    When o agente identifica a necessidade de entender essas informações
+    Then ele transita para specsfy-data-discovery antes de concluir o brief
+    And registra somente respostas confirmadas em .specsfy/DATABASE.md

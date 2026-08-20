@@ -27,7 +27,7 @@ todos os especialistas detectados em uma única execução:
 
 ```bash
 specsfy doctor --project .
-specsfy setup --project . --detected
+specsfy install --project . --detected
 ```
 
 Quando você já souber quais stacks precisam de orientação especializada,
@@ -46,7 +46,7 @@ gerenciadas:
 ```bash
 specsfy skills list
 specsfy skills detect --project .
-specsfy skills add specsfy-specialist-laravel --project .
+specsfy skills install specsfy-specialist-laravel --project .
 specsfy update --project .
 ```
 

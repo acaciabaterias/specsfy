@@ -13,7 +13,7 @@ Especialistas vivem no catálogo distribuído pelo CLI e usam o prefixo
 Instale no projeto consumidor:
 
 ```bash
-specsfy skills add specsfy-specialist-<nome>
+specsfy skills install specsfy-specialist-<nome>
 ```
 
 Se a skill já estiver instalada, anuncie a transição automática e carregue-a na

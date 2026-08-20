@@ -21,8 +21,8 @@ está em [`docs/`](../docs/).
 
 Este módulo possui:
 
-- as instruções operacionais das treze skills base, do setup, do documentador e
-  das três auxiliares.
+- as instruções operacionais das quatorze skills base, do setup, do
+  documentador e das três auxiliares.
 - os templates de ideia, backlog, spec e tarefas em `templates/`.
 - um documento preenchido e não normativo em `examples/Spec.md`.
 - o MCR-10 e referências dos gates.
@@ -106,6 +106,7 @@ preserva as lacunas em Draft e não aprova o Definition Gate.
 | [`specsfy-update-spec`](specsfy-update-spec/SKILL.md) | incorporar pedido tardio e reabrir somente os atos afetados | não cria nova spec nem implementa |
 | [`specsfy-progress`](specsfy-progress/SKILL.md) | projetar o estado global | não altera gates ou checkboxes |
 | [`specsfy-mvp-milestone-interviewer`](specsfy-mvp-milestone-interviewer/SKILL.md) | entrevistar e definir o MVP por milestones | não planeja tarefas ou código |
+| [`specsfy-data-discovery`](specsfy-data-discovery/SKILL.md) | conversar sobre informações que o produto precisa guardar | não escolhe tecnologia ou implementação |
 | [`specsfy-roadmap-milestone-interviewer`](specsfy-roadmap-milestone-interviewer/SKILL.md) | entrevistar a evolução pós-MVP | não altera o núcleo sem confirmação |
 | [`specsfy-milestone-governor`](specsfy-milestone-governor/SKILL.md) | sincronizar a projeção de milestones | não inventa condição de saída |
 | [`specsfy-setup`](specsfy-setup/SKILL.md) | detectar o stack, criar contexto ausente e reconciliar blocos de agentes | não sobrescreve arquivos de contexto existentes |
@@ -170,7 +171,7 @@ Cada skill base possui `references/specialists.md` com condições para recomend
 contexto técnico opcional:
 
 ```bash
-specsfy skills add specsfy-specialist-<nome>
+specsfy skills install specsfy-specialist-<nome>
 ```
 
 As bases podem propor um especialista já instalado e carregá-lo após

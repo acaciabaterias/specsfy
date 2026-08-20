@@ -39,6 +39,10 @@ depois, com todos os registros como proveniência.
 6. Leia `PROJECT.md`, Inboxes, backlog e specs existentes apenas se ajudarem a
    evitar repetição ou contradição. Eles continuam separados da formulação
    recebida nesta sessão.
+7. Quando `MVP.md` ou a conversa indicar informações que o produto precisa
+   guardar, consultar, compartilhar ou apagar, preserve primeiro a Inbox e
+   carregue `$specsfy-data-discovery` para conduzir essa parte da conversa e
+   registrar somente respostas confirmadas em `.specsfy/DATABASE.md`.
 
 Antes da importação, faça a mesma triagem de dados sensíveis usada pela Inbox.
 Se a fonte tiver credencial, token, chave privada ou dado pessoal sensível,

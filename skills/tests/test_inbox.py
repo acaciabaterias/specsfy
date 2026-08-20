@@ -31,6 +31,7 @@ class InboxCaptureTests(unittest.TestCase):
         self.assertIn("## Texto original", template)
         self.assertIn("## Análise inicial", template)
         self.assertIn("## Pontos a revisar no futuro", template)
+        self.assertIn("Informações que talvez precisem ser guardadas", template)
 
     def test_captures_with_timestamp_slug_and_preprocessed_sections(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -88,6 +89,7 @@ class InboxCaptureTests(unittest.TestCase):
             self.assertIn("Reduzir incerteza", content)
             self.assertIn("Canal sugerido", content)
             self.assertIn("Definir gatilho", content)
+            self.assertIn("Não identificado no texto original.", content)
             self.assertIsNotNone(
                 re.search(r"\| Capturada em \| \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}", content)
             )

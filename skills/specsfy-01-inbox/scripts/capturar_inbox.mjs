@@ -24,6 +24,7 @@ function parseArgs(argv) {
     session: "Captura avulsa.",
     turn: "Não se aplica.",
     sources: "Nenhuma fonte contextual consultada.",
+    data: UNKNOWN,
   };
   for (let index = 0; index < argv.length; index += 1) {
     const key = argv[index];
@@ -108,6 +109,7 @@ async function main() {
         "{{AFFECTED_PEOPLE}}": required(args.people, "as pessoas afetadas"),
         "{{EXPECTED_VALUE}}": required(args.value, "o valor esperado"),
         "{{EXTRACTED_SIGNALS}}": required(args.signals, "os sinais extraídos"),
+        "{{DATA_SIGNALS}}": required(args.data, "os sinais sobre informações a guardar"),
         "{{RISKS_AND_DEPENDENCIES}}": required(args.risks, "os riscos e dependências"),
         "{{FUTURE_DIRECTIONS}}": required(args.directions, "as direções futuras"),
         "{{FUTURE_REVIEW}}": required(args.review, "os pontos a revisar"),

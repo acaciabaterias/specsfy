@@ -57,6 +57,11 @@ node <diretório-da-skill>/scripts/iniciar_spec.mjs \
    ou parcial produzido.
 7. Leia `references/mcr-10.md` ao receber relato, história, transcrição ou
    especificação a refinar.
+8. Leia `.specsfy/DATABASE.md` quando existir. Se a jornada depender de
+   informações guardadas e o arquivo não explicar o que o produto precisa
+   lembrar, quem usa essas informações ou quando elas deixam de ser
+   necessárias, carregue `$specsfy-data-discovery` e retome esta skill depois
+   do registro confirmado.
 
 ## Aplicar o MCR-10
 

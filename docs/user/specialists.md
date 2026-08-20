@@ -20,7 +20,7 @@ aplicação. O CLI registra cada instalação no `skills-lock.json`, permitindo
 conferir depois quais arquivos são gerenciados:
 
 ```bash
-specsfy skills add \
+specsfy skills install \
   specsfy-specialist-laravel \
   specsfy-specialist-postgres \
   specsfy-specialist-redis

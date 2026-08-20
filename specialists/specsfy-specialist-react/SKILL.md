@@ -24,7 +24,10 @@ description: Projetar, implementar e revisar interfaces React com composição, 
 ## Fluxo
 
 1. Confirmar versão do React, renderer, framework (se houver), convenções do
-   projeto e estratégia de testes já em uso; nunca assumir de memória.
+   projeto e estratégia de testes já em uso. Quando a tela usar shadcn/ui,
+   identificar antes a base de primitives instalada, seguindo
+   `$specsfy-specialist-shadcn-ui`; nunca deduzir Radix ou Base UI pela
+   aparência do componente.
 2. Modelar os estados visíveis (nominal, loading, empty, error, stale,
    optimistic), os eventos que os produzem e quem é o dono de cada dado.
 3. Projetar a árvore de componentes com responsabilidades e props pequenas;
@@ -38,7 +41,7 @@ description: Projetar, implementar e revisar interfaces React com composição, 
 6. Implementar semântica HTML e navegação por teclado antes do acabamento
    visual; então cobrir com teste de comportamento observável.
 7. Medir performance somente quando houver sintoma real (profiler, métrica de
-   produção); então memoizar ou dividir o componente com evidência, não por
+   produção); então memoizar ou dividir o componente com medição registrada, não por
    precaução.
 
 ## Padrões
@@ -88,15 +91,15 @@ description: Projetar, implementar e revisar interfaces React com composição, 
   atualização de estado após unmount) e por avisos de hydration quando houver
   SSR.
 - Rodar profiling ou bundle analysis somente quando uma hipótese concreta de
-  performance existir; anexar o antes/depois como evidência.
-- Não declarar um componente "acessível" ou "performático" sem a evidência
+  performance existir; anexar a medição antes/depois.
+- Não declarar um componente "acessível" ou "performático" sem a comprovação
   acima; linguagem absoluta sem prova é proibida.
 
 ## Skills relacionadas
 
 - `$specsfy-specialist-astro` governa a fronteira da ilha e
-  `$specsfy-specialist-shadcn-ui` os primitives visuais; esta skill governa o
-  comportamento React dentro deles.
+  `$specsfy-specialist-shadcn-ui` identifica a base de primitives e governa os
+  componentes visuais; esta skill governa o comportamento React dentro deles.
 - `$specsfy-specialist-tailwind-css` estiliza o componente sem assumir
   ownership de estado, effect ou concorrência.
 - `$specsfy-specialist-nextjs` para fronteira server/client, cache de dados e

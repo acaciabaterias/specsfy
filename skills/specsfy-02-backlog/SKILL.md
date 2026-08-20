@@ -175,6 +175,12 @@ Garanta cobertura suficiente de problema, atores, resultado, escopo, jornadas,
 falhas, limites, regras, dados, segurança, privacidade, desempenho,
 acessibilidade, restrições existentes e sinais objetivos de aceite e sucesso.
 
+Quando a jornada depender de informações guardadas, consultadas, compartilhadas
+ou apagadas, anuncie a transição automática para `$specsfy-data-discovery`
+antes de declarar o brief pronto. Retome o backlog com o registro confirmado
+em `.specsfy/DATABASE.md` como contexto, sem converter a conversa em desenho
+técnico.
+
 ## Manter o item
 
 Use exatamente `specs/backlog/<NNNN>-<slug>.md` e mantenha:

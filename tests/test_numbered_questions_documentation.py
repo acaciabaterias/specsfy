@@ -16,6 +16,7 @@ QUESTIONING_SKILLS = (
     "specsfy-interviewer",
     "specsfy-milestone-governor",
     "specsfy-mvp-milestone-interviewer",
+    "specsfy-data-discovery",
     "specsfy-roadmap-milestone-interviewer",
     "specsfy-setup",
     "specsfy-update-spec",

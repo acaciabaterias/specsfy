@@ -1,3 +1,5 @@
+"""Contratos do catálogo e das instruções dos especialistas técnicos."""
+
 from __future__ import annotations
 
 import json
@@ -181,6 +183,36 @@ class SpecialistCatalogTests(unittest.TestCase):
             },
             {path.parent.name for path in component_files},
         )
+
+    def test_react_and_shadcn_identify_the_project_primitive_base(self) -> None:
+        react = (ROOT / "specsfy-specialist-react" / "SKILL.md").read_text(
+            encoding="utf-8"
+        )
+        shadcn = (ROOT / "specsfy-specialist-shadcn-ui" / "SKILL.md").read_text(
+            encoding="utf-8"
+        )
+        primitives = (
+            ROOT
+            / "specsfy-specialist-shadcn-ui"
+            / "references"
+            / "primitives.md"
+        )
+
+        self.assertIn("$specsfy-specialist-shadcn-ui", react)
+        self.assertIn("base de primitives", react.lower())
+        self.assertIn("Base UI", shadcn)
+        self.assertIn("Radix", shadcn)
+        self.assertIn("[references/primitives.md](references/primitives.md)", shadcn)
+        self.assertTrue(primitives.is_file())
+        primitive_content = primitives.read_text(encoding="utf-8")
+        for marker in (
+            "@base-ui/react",
+            "radix-ui",
+            "@radix-ui/react-",
+            "react-aria-components",
+        ):
+            self.assertIn(marker, primitive_content)
+        self.assertIn("não comprova que o componente usa Base UI", primitive_content)
 
     def test_repository_contains_no_reference_to_the_audited_origin(self) -> None:
         for path in ROOT.rglob("*"):

@@ -44,6 +44,11 @@ personalizar um deles, mantenha o mesmo nome em
 `.specsfy/templates/custom/`; essa cópia tem precedência e não é alterada pelo
 CLI.
 
+Use `$specsfy-data-discovery` antes de implementar quando ainda faltar explicar
+o que o produto precisa guardar, quem consulta cada informação e quando ela
+deixa de ser necessária. A skill registra as respostas confirmadas em uma
+seção própria de `DATABASE.md`, separada do que o código detectar depois.
+
 ## Projeto existente com GitHub Spec Kit
 
 O setup reconhece o GitHub Spec Kit pela constituição em

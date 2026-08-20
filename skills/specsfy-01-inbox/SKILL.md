@@ -49,6 +49,8 @@ organiza sinais úteis, mas não decide requisitos nem autoriza implementação.
    - sinais de escopo, regra, restrição, canal ou solução mencionada;
    - riscos, dependências e relações evidentes;
    - possíveis direções de backlog ou spec, sem promovê-las.
+   - informações que o sistema talvez precise guardar, consultar, compartilhar
+     ou apagar, como sinal para conversa futura.
 6. Use `Não identificado no texto original.` quando não houver base. Não
    invente stakeholder, prioridade, prazo, regra, solução ou critério de aceite.
 
@@ -65,6 +67,7 @@ node <diretório-da-skill>/scripts/capturar_inbox.mjs \
   --people "<pessoas afetadas>" \
   --value "<resultado ou valor>" \
   --signals "<sinais extraídos>" \
+  --data "<sinais sobre informações que talvez precisem ser guardadas>" \
   --risks "<riscos ou dependências>" \
   --directions "<direções futuras possíveis>" \
   --review "<pontos a revisar futuramente>" \
@@ -85,6 +88,9 @@ transições. Após escrever, apenas sugira um destes próximos passos:
 
 - manter a entrada na Inbox;
 - usar `$specsfy-02-backlog` para refiná-la ou aprofundá-la.
+- usar `$specsfy-data-discovery` quando a entrada indicar informações que o
+  sistema precisará guardar. Essa conversa posterior registra somente o que
+  for confirmado em `.specsfy/DATABASE.md`.
 
 Somente carregue outra skill se o mesmo pedido também ordenar explicitamente
 esse trabalho. Nesse caso, anuncie

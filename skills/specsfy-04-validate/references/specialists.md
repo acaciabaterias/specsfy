@@ -11,7 +11,7 @@ Selecione pela superfície de risco:
 - revisão independente: `-code-review`.
 
 ```bash
-specsfy skills add specsfy-specialist-<nome>
+specsfy skills install specsfy-specialist-<nome>
 ```
 
 Se estiver instalado, anuncie a transição automática e carregue o especialista

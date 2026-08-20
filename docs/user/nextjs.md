@@ -16,7 +16,7 @@ registrados no plano.
 
 ```bash
 specsfy skills detect --project .
-specsfy skills add specsfy-specialist-nextjs --project .
+specsfy skills install specsfy-specialist-nextjs --project .
 ```
 
 Quando todas as recomendações forem aplicáveis, `--detected` instala as bases e

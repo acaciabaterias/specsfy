@@ -25,5 +25,10 @@ sinalize o campo pendente para a etapa conversacional responsável.
 8. Executar `$specsfy-setup` em modo de monitoramento antes de devolver o
    handoff e exigir que `.specsfy/DATABASE.md` deixe de aparecer como pendência.
 
+Quando `$specsfy-data-discovery` registrar respostas confirmadas, preserve a
+seção `Informações a guardar confirmadas` e compare-a com o que o código
+revela. A conversa descreve o produto; este mapa continua mostrando também o
+que já foi implementado.
+
 Usar tabelas Markdown para permitir busca e comparação. Nunca copiar dados de
 produção, strings de conexão, senhas, tokens ou valores de `.env`.

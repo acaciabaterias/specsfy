@@ -10,7 +10,7 @@ compatíveis. Acrescente conforme o risco:
 - deploy/falhas: `-docker-swarm`, `-ansible` ou `-delivery-engineering`.
 
 ```bash
-specsfy skills add specsfy-specialist-<nome>
+specsfy skills install specsfy-specialist-<nome>
 ```
 
 Nenhum especialista pode substituir RED observado ou inventar comportamento.

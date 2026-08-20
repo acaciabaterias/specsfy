@@ -15,7 +15,7 @@ o output mode, o adapter, as integrações e as fontes de conteúdo.
 
 ```bash
 specsfy skills detect --project .
-specsfy skills add specsfy-specialist-astro --project .
+specsfy skills install specsfy-specialist-astro --project .
 ```
 
 Quando todas as recomendações exibidas forem aplicáveis, `--detected` instala o

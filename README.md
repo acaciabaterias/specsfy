@@ -49,7 +49,7 @@ npm install --global @promovaweb/specsfy
 specsfy --version
 cd caminho/do/projeto
 specsfy doctor --project .
-specsfy setup --project .
+specsfy install --project .
 ```
 
 Depois da instalação, `specsfy update --project .` atualiza as skills do

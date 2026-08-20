@@ -52,17 +52,15 @@ ambiente de desenvolvimento e recusa a operação:
 ```bash
 cd caminho/do/projeto
 specsfy doctor --project .
-specsfy setup --project .
-# Nome compatível para scripts e automações anteriores:
 specsfy install --project .
 ```
 
 O diagnóstico confere Node.js 22.20 ou superior, Git, npm, o diretório do
 projeto e o comando `skills`. A instalação do Specsfy pelo npm já inclui esse
 materializador. Uma instalação global de `skills` e o `npx` continuam
-disponíveis como alternativas. `setup` e seu nome compatível `install` repetem
-as verificações necessárias antes de escrever qualquer arquivo e reúnem todas
-as correções na mesma mensagem.
+disponíveis como alternativas. `install` repete as verificações necessárias
+antes de escrever qualquer arquivo e reúne todas as correções na mesma
+mensagem.
 
 O instalador publica as etapas numeradas a partir de
 `.agents/skills/specsfy-01-inbox`, grava o contrato central em
@@ -74,7 +72,7 @@ Para personalizar um template sem impedir atualizações, copie-o para
 `.specsfy/templates/custom/` com o mesmo nome. Essa versão tem precedência e
 nunca é sobrescrita pelo instalador, inclusive com `--force`.
 
-A instalação inclui as treze skills base, entre elas as quatro de conversa e
+A instalação inclui as quatorze skills base, entre elas as quatro de conversa e
 milestones, além do setup, do documentador do sistema e das três skills
 auxiliares. Ela prepara os arquivos usados pelo agente, mas não cria uma spec
 de produto nem altera o código da aplicação.

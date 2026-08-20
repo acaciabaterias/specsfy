@@ -20,6 +20,7 @@ BASE_SKILLS = (
     "specsfy-progress",
     "specsfy-interviewer",
     "specsfy-mvp-milestone-interviewer",
+    "specsfy-data-discovery",
     "specsfy-roadmap-milestone-interviewer",
     "specsfy-milestone-governor",
 )

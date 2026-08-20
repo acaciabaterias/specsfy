@@ -2,8 +2,8 @@
   "schema_version": 1,
   "version": "1.7.2",
   "edition": "v1.7.2",
-  "generated_at": "2026-08-20T10:59:52Z",
-  "source_sha256": "cb53596d062d35d071c19b91bf3c9311de78fbefc8d4ec91195b5b3820e96598",
+  "generated_at": "2026-08-20T12:46:28Z",
+  "source_sha256": "705d6ed4b4289b6c895993211ff286838ca06ec1bbe5b098a7f893d6a436219e",
   "sources": [
     ".ebook/build-ebook.sh",
     ".ebook/epub.css",
@@ -46,6 +46,7 @@
     "docs/user/skills/specsfy-05-tasks.md",
     "docs/user/skills/specsfy-06-tdd-bdd.md",
     "docs/user/skills/specsfy-07-implement.md",
+    "docs/user/skills/specsfy-data-discovery.md",
     "docs/user/skills/specsfy-interviewer.md",
     "docs/user/skills/specsfy-milestone-governor.md",
     "docs/user/skills/specsfy-mvp-milestone-interviewer.md",
@@ -77,11 +78,11 @@
   "artifacts": {
     "pdf": {
       "file": "Specsfy-Guia-do-Usuario-v1.7.2.pdf",
-      "sha256": "215862324d0c022ffb8eeb62ef04ef9636390e43efd76715047590dd77ad853c"
+      "sha256": "6c7cbef8903bb81959893a116dc5afc18ce3c1d2447a309353af78cef5bd6e8e"
     },
     "epub": {
       "file": "Specsfy-Guia-do-Usuario-v1.7.2.epub",
-      "sha256": "8d99de95de52cea66c75af27075c3382de045c754a6e937324a2d0f73873c123"
+      "sha256": "e34be62c03ebc7555c967aaedee814fdefaa86ad5731cbb751e1794749a5e4e9"
     }
   }
 }

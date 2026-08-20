@@ -18,7 +18,7 @@ Os especialistas são instalados sob demanda no projeto consumidor:
 ```bash
 specsfy skills list
 specsfy skills detect
-specsfy skills add specsfy-specialist-laravel
+specsfy skills install specsfy-specialist-laravel
 ```
 
 Para implementar interfaces React a partir de referências copiáveis, instale e

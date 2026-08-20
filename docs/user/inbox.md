@@ -38,6 +38,11 @@ Declarações, inferências e lacunas permanecem identificadas. Um campo sem bas
 no texto aparece como não identificado, em vez de receber uma resposta
 inventada.
 
+Quando o texto indicar que o sistema precisa guardar, consultar, compartilhar
+ou apagar informações, a Inbox registra o sinal sem perguntar. No backlog,
+`$specsfy-data-discovery` conversa sobre essas informações antes de o item ser
+considerado pronto.
+
 O texto será versionado no Git. Não inclua senhas, tokens, chaves privadas ou
 dados pessoais sensíveis. Se o agente detectar um segredo evidente, ele não
 grava a captura e orienta você a remover o conteúdo sensível antes de reenviar.
