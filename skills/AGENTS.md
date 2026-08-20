@@ -31,8 +31,11 @@ arquivo contém o fluxo, os caminhos canônicos e os gates do framework.
   `.specify/memory/constitution.md` e cada fonte do GitHub Spec Kit listada na
   projeção. Preserve `.specify/` e os artefatos já existentes em `specs/`; o
   Specsfy não os migra nem os substitui.
-- Execute `$specsfy-setup` quando `PROJECT.md`, `STACK.md`, `RULES.md` ou
-  `DATABASE.md` estiver ausente. Execute `$specsfy-documentator` quando
+- Antes de iniciar qualquer skill do framework, execute obrigatoriamente
+  `$specsfy-setup` para verificar e reconciliar o contexto e os blocos
+  reservados. A própria `$specsfy-setup` não se chama recursivamente. Em uma
+  transição automática, execute-a de novo com a mesma raiz já confirmada antes
+  de carregar a skill de destino. Execute `$specsfy-documentator` quando
   `PACKAGES.md` estiver ausente ou desatualizado.
 - Execute o monitor de contexto no início, após cada tarefa e antes de concluir
   a entrega; resolva todo resultado `PENDING`.

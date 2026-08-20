@@ -8,9 +8,9 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL = ROOT / ".agents" / "skills" / "specsfy-release-cli"
+SKILL = ROOT / "cli" / ".agents" / "skills" / "specsfy-release-cli"
 SCRIPT = SKILL / "scripts" / "release_changelog.py"
-CLAUDE_SKILL = ROOT / ".claude" / "skills" / "specsfy-release-cli"
+CLAUDE_SKILL = ROOT / "cli" / ".claude" / "skills" / "specsfy-release-cli"
 
 
 class CliReleaseSkillTests(unittest.TestCase):
@@ -55,10 +55,13 @@ class CliReleaseSkillTests(unittest.TestCase):
             check=False,
         )
 
-    def test_skill_is_local_and_shared_with_claude(self) -> None:
+    def test_skill_pertence_ao_cli_e_nao_ao_framework(self) -> None:
         self.assertTrue((SKILL / "SKILL.md").is_file())
         self.assertTrue(CLAUDE_SKILL.is_symlink())
         self.assertEqual(SKILL.resolve(), CLAUDE_SKILL.resolve())
+        self.assertFalse(
+            (ROOT / ".agents" / "skills" / "specsfy-release-cli").exists()
+        )
         self.assertFalse((ROOT / "skills" / "specsfy-release-cli").exists())
 
     def test_prepare_updates_versions_and_promotes_release_notes(self) -> None:
@@ -216,6 +219,7 @@ class CliReleaseSkillTests(unittest.TestCase):
 
         for source in (workspace_agents, workspace_readme, modules):
             self.assertIn("specsfy-release-cli", source)
+            self.assertIn("cli/.agents/skills/specsfy-release-cli", source)
         for source in (cli_agents, cli_readme, dependencies, flow):
             self.assertIn("CHANGELOG.md", source)
             self.assertIn("GitHub Release", source)

@@ -123,7 +123,10 @@ e não integra o catálogo instalado em consumidores. A skill
 [`specsfy-documentator`](../../skills/specsfy-documentator/) reconstrói
 `<projeto>/docs/` de uma aplicação consumidora.
 
-`$specsfy-release-cli` também é local. Ela versiona os artefatos em `cli/`,
+`$specsfy-release-cli` também é local ao módulo
+[`cli/`](../../cli/), em
+[`cli/.agents/skills/specsfy-release-cli/`](../../cli/.agents/skills/specsfy-release-cli/).
+Ela versiona os artefatos em `cli/`,
 cria uma tag no commit do monorepo e publica a seção correspondente do
 `cli/CHANGELOG.md` no GitHub Release.
 

@@ -5,6 +5,13 @@ description: Use para importar e explorar o MVP, criar a milestone 1.0, Inboxes 
 
 # Explorar o MVP em uma série de Inboxes
 
+## Preparação obrigatória
+
+Antes de executar esta skill, carregue obrigatoriamente `$specsfy-setup` na
+raiz do projeto. Em handoff automático, carregue-o de novo antes desta etapa.
+Reutilize a raiz confirmada na conversa e não prossiga se o setup apontar uma
+pendência.
+
 ## Modo de interação
 
 Modo de interação: `perguntas`.
@@ -35,10 +42,11 @@ cada backlog e somente avança quando cada etapa tiver resultado confirmado.
    ```
 
    O importador cria `specs/milestones/M01.md` a partir de `MVP.md`, uma Inbox
-   para cada tema encontrado e um backlog candidato para cada Inbox. Todos os
-   backlogs mantêm `Status: Captured` e exigem entrevista antes de qualquer
-   promoção. Se `M01.md` existir, não sobrescreva nenhum arquivo e informe a
-   pessoa responsável.
+   para cada tema encontrado e um backlog candidato para cada Inbox. Cada
+   backlog preserva um bloco de registros do trecho importado, mantém
+   `Status: Captured` e passa por refinamento antes de qualquer promoção. Se
+   `M01.md` existir, não sobrescreva nenhum arquivo e informe a pessoa
+   responsável.
 4. Leia `BRAND.md` seguindo a mesma ordem: raiz do consumidor e, somente como
    fallback de submódulo, superprojeto. Use-o para manter linguagem, público,
    proposta e limites de marca coerentes durante as perguntas. Não copie seu
@@ -99,9 +107,11 @@ pular responsabilidades:
    $specsfy-02-backlog; motivo: entrevistar o backlog derivado da Inbox;
    resultado esperado: backlog refinado com respostas confirmadas` e carregue
    `$specsfy-02-backlog` para o caminho do backlog candidato.
-2. Faça a entrevista adaptativa desse backlog. Preserve uma pergunta por rodada,
-   resolva escolhas numéricas no texto da opção e respeite o limite de oito
-   perguntas por área.
+2. Leia primeiro os registros do MVP que acompanham esse backlog e use-os para
+   preencher respostas já declaradas. Faça entrevista adaptativa somente para
+   lacunas, ambiguidades ou contradições restantes. Preserve uma pergunta por
+   rodada, resolva escolhas numéricas no texto da opção e respeite o limite de
+   oito perguntas por área.
 3. Se a Inbox ou a entrevista indicar informação a guardar ausente ou ambígua,
    anuncie a transição para `$specsfy-data-discovery`, conclua a entrevista de
    dados e retome o backlog com `.specsfy/DATABASE.md` como contexto.

@@ -214,8 +214,9 @@ O arquivo global usa permissão `0600`, preserva chaves desconhecidas e separa:
 - `cache.last_checked_at`, tag, versão, commit, ETag e eventual erro recente.
 
 Para publicar uma versão atualizável a partir do workspace de desenvolvimento,
-use a skill local `$specsfy-release-cli`. Ela promove as notas confirmadas para
-o [`CHANGELOG.md`](CHANGELOG.md), atualiza as versões do pacote e o lock,
+use a skill local `$specsfy-release-cli`, em
+[`cli/.agents/skills/specsfy-release-cli/`](.agents/skills/specsfy-release-cli/).
+Ela promove as notas confirmadas para o [`CHANGELOG.md`](CHANGELOG.md), atualiza as versões do pacote e o lock,
 reconstrói os artefatos versionados, cria a tag anotada `v<versão>` no mesmo
 commit e usa exatamente a seção promovida como corpo do GitHub Release. O CI
 valida o build e a correspondência da tag.

@@ -44,9 +44,12 @@ MVP.md → M01 + Inboxes + backlogs candidatos → entrevista de cada backlog
 ## O que esperar
 
 O importador cria `M01`, Inboxes e vários backlogs candidatos, um para cada
-tema do MVP. A própria skill carrega `$specsfy-02-backlog` para entrevistar cada
-item, chama `$specsfy-data-discovery` quando houver dados ambíguos e retorna à
-fila até entrevistar todos. Depois sincroniza os milestones e só chama
+tema do MVP. Cada backlog recebe o trecho que o originou como registro
+confirmado. A própria skill carrega `$specsfy-02-backlog`, que primeiro usa
+esse registro para preencher respostas já declaradas e só pergunta por lacunas,
+ambiguidades ou contradições. Ela chama `$specsfy-data-discovery` quando houver
+dados ambíguos e retorna à fila até entrevistar todos. Depois sincroniza os
+milestones e só chama
 `$specsfy-03-specify` para itens cuja promoção você autorizar. A skill não cria
 código durante a conversa.
 

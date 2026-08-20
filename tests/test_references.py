@@ -168,6 +168,7 @@ class RepositoryReferenceTests(unittest.TestCase):
             ROOT / ".agents/skills",
             ROOT / "skills",
             ROOT / "specialists",
+            ROOT / "cli/.agents/skills",
         )
         available = {
             directory.name

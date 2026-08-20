@@ -45,6 +45,19 @@ class BacklogTests(unittest.TestCase):
         self.assertIn("confirme com o usuário", skill)
         self.assertIn("## Referências relacionadas", template)
 
+    def test_reuses_mvp_answers_before_asking_a_new_question(self) -> None:
+        skill = SKILL.read_text(encoding="utf-8")
+
+        self.assertIn("## Reaproveitar respostas confirmadas no MVP", skill)
+        self.assertIn("specs/milestones/M01.md", skill)
+        self.assertIn("Registros confirmados no MVP", skill)
+        self.assertIn("converta a declaração em resposta normalizada", skill)
+        self.assertIn(
+            "pergunte somente por lacuna real",
+            " ".join(skill.split()).casefold(),
+        )
+        self.assertIn("Não peça confirmação, escolha ou reformulação", skill)
+
     def test_template_starts_with_a_metadata_table_instead_of_a_list(self) -> None:
         template = TEMPLATE.read_text(encoding="utf-8")
         lines = template.splitlines()

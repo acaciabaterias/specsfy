@@ -11,11 +11,13 @@ Modo de interação: `perguntas`.
 Antes de formular qualquer pergunta, leia e aplique o
 `Contrato de perguntas numeradas` de `.specsfy/Spec.md`.
 
-1. Antes de ler ou escrever, confirme o diretório do projeto. Se a pessoa já
-   informou um caminho, resolva-o para um caminho absoluto e repita-o. Quando
-   ela não informou, ofereça exatamente estas opções numeradas e aguarde a
-   resposta: `1. Usar o diretório atual.`, `2. Usar um subdiretório do Hub.` e
-   `3. Informar outro caminho.`. Não deduza o destino pela raiz Git.
+1. Antes de ler ou escrever, confirme o diretório do projeto. Na primeira
+   execução da conversa, se a pessoa já informou um caminho, resolva-o para um
+   caminho absoluto e repita-o. Quando ela não informou, ofereça exatamente
+   estas opções numeradas e aguarde a resposta: `1. Usar o diretório atual.`,
+   `2. Usar um subdiretório do Hub.` e `3. Informar outro caminho.`. Não deduza
+   o destino pela raiz Git. Nas execuções obrigatórias seguintes da mesma
+   conversa, reutilize a raiz confirmada sem repetir a pergunta.
 2. Use a raiz confirmada em cada comando posterior. Ao trabalhar em um Hub,
    execute no subdiretório escolhido ou passe `--project <raiz>` e
    `--root <raiz>` para scripts de contexto e specs. Não crie contexto, specs,

@@ -45,6 +45,10 @@ class FrameworkFileTests(unittest.TestCase):
 
     def test_framework_routes_agents_to_canonical_project_context(self) -> None:
         spec = (ROOT / "Spec.md").read_text(encoding="utf-8")
+        agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        instructions = (
+            ROOT / "specsfy-setup/references/framework-instructions.md"
+        ).read_text(encoding="utf-8")
         for path in (
             "PROJECT.md",
             ".specsfy/STACK.md",
@@ -54,6 +58,30 @@ class FrameworkFileTests(unittest.TestCase):
             self.assertIn(path, spec)
         self.assertIn("$specsfy-setup", spec)
         self.assertIn("$specsfy-aux-database", spec)
+        self.assertIn("Antes de iniciar qualquer skill do framework", spec)
+        self.assertIn("não se chama recursivamente", spec)
+        self.assertIn("transição automática", spec)
+        self.assertIn("Antes de iniciar qualquer skill do framework", agents)
+        self.assertIn("Antes de iniciar qualquer skill do framework", instructions)
+
+    def test_todas_as_skills_operacionais_carregam_o_setup(self) -> None:
+        setup = ROOT / "specsfy-setup" / "SKILL.md"
+        self.assertTrue(setup.is_file())
+
+        skills = sorted(ROOT.glob("specsfy-*/SKILL.md"))
+        self.assertGreater(len(skills), 1)
+        for skill in skills:
+            if skill == setup:
+                continue
+            with self.subTest(skill=skill.parent.name):
+                content = skill.read_text(encoding="utf-8")
+                self.assertIn("## Preparação obrigatória", content)
+                self.assertIn(
+                    "Antes de executar esta skill, carregue obrigatoriamente "
+                    "`$specsfy-setup`",
+                    content,
+                )
+                self.assertIn("Em handoff automático, carregue-o de novo", content)
 
     def test_bdd_runner_contract_is_stack_aware(self) -> None:
         tdd_skill = (

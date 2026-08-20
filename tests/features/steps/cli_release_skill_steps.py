@@ -4,7 +4,7 @@ from behave import given, then, when
 
 
 ROOT = Path(__file__).resolve().parents[3]
-SKILL = ROOT / ".agents" / "skills" / "specsfy-release-cli"
+SKILL = ROOT / "cli" / ".agents" / "skills" / "specsfy-release-cli"
 
 
 @given("a skill local de release do CLI")

@@ -54,6 +54,9 @@ class AuxiliaryContextIntegrationTests(unittest.TestCase):
         self.assertIn("sync_speckit_context.mjs", setup_script)
         self.assertIn("Nunca", setup)
         self.assertIn("escrever, mover, renomear ou remover", setup)
+        self.assertIn("Nas execuções obrigatórias seguintes", setup)
+        self.assertIn("Antes de iniciar qualquer skill do framework", framework)
+        self.assertIn("antes de iniciar cada skill", guide)
 
     def test_setup_reference_matches_agents_publishable_block(self) -> None:
         agents = (SKILLS / "AGENTS.md").read_text(encoding="utf-8")

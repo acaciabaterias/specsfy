@@ -45,6 +45,37 @@ function titleFromTheme(theme, index) {
   return firstLine && firstLine.length <= 100 ? firstLine : `Tema ${index} do MVP`;
 }
 
+function quotedTheme(theme) {
+  return theme.trim().split(/\r?\n/gu).map((line) => `> ${line}`).join("\n");
+}
+
+function initialBacklogFields(theme, inboxPath) {
+  const evidence = `O MVP declara:\n\n${quotedTheme(theme)}`;
+  return {
+    idea: theme,
+    problem: evidence,
+    person: "Não identificada explicitamente no trecho importado do MVP.",
+    result: evidence,
+    context: `Tema derivado de \`${inboxPath}\` e da milestone \`M01\`.`,
+  };
+}
+
+function mvpEvidence(inboxPath, theme) {
+  return [
+    "## Registros confirmados no MVP",
+    "",
+    `- Inbox de origem: \`${inboxPath}\`.`,
+    "- Milestone de origem: `specs/milestones/M01.md`.",
+    "- Use o texto abaixo para preencher respostas já declaradas antes de formular perguntas.",
+    "- Pergunte somente sobre lacuna, ambiguidade ou contradição que permaneça após a leitura.",
+    "",
+    "### Trecho importado",
+    "",
+    quotedTheme(theme),
+    "",
+  ].join("\n");
+}
+
 /** Divide o MVP por seções ou parágrafos sem inventar temas de produto. */
 function themes(content) {
   const sections = content
@@ -144,19 +175,20 @@ async function main() {
       "--root", root,
     ]);
     const inboxPath = relative(root, inbox);
+    const fields = initialBacklogFields(theme, inboxPath);
     const backlog = await run(backlogScript, [
       "--title", title,
-      "--idea", theme,
-      "--problem", `A esclarecer na entrevista a partir de \`${inboxPath}\`.`,
-      "--person", "A esclarecer com a pessoa responsável pelo MVP.",
-      "--result", "A esclarecer na entrevista antes de promover uma spec.",
-      "--context", `Derivado de \`${inboxPath}\` e da milestone \`M01\`.`,
+      "--idea", fields.idea,
+      "--problem", fields.problem,
+      "--person", fields.person,
+      "--result", fields.result,
+      "--context", fields.context,
       "--root", root,
     ]);
     const backlogContent = await readFile(backlog, "utf8");
     await writeFile(backlog, backlogContent.replace(
-      "- Nenhuma referência relevante encontrada.",
-      `- Inbox de origem: \`${inboxPath}\`.\n- Milestone de origem: \`specs/milestones/M01.md\`.\n- Entrevista obrigatória: \`$specsfy-02-backlog\` antes de promoção.`,
+      "## Referências relacionadas\n\n- Nenhuma referência relevante encontrada.",
+      `${mvpEvidence(inboxPath, theme)}\n## Referências relacionadas\n\n- Inbox de origem: \`${inboxPath}\`.\n- Milestone de origem: \`specs/milestones/M01.md\`.\n- Refinamento obrigatório: \`$specsfy-02-backlog\` somente para lacunas, ambiguidades ou contradições antes de promoção.`,
     ), "utf8");
     created.push({ inbox: inboxPath, backlog: relative(root, backlog) });
   }

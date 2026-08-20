@@ -111,7 +111,9 @@ Os módulos possuem verificações focais descritas em seus `AGENTS.md`. Consult
 [`AGENTS.md`](AGENTS.md) antes de contribuir.
 
 As skills locais [`specsfy-monorepo-documentator`][documentator] e
-[`specsfy-release-cli`](.agents/skills/specsfy-release-cli/) mantêm,
-respectivamente, a documentação oficial e as releases estáveis do CLI.
+[`specsfy-release-cli`](cli/.agents/skills/specsfy-release-cli/) mantêm,
+respectivamente, a documentação oficial e as releases estáveis do CLI. A
+segunda pertence ao módulo `cli/` e não integra o framework instalado em
+projetos consumidores.
 
 [documentator]: .agents/skills/specsfy-monorepo-documentator/

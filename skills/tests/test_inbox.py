@@ -258,7 +258,11 @@ class InboxCaptureTests(unittest.TestCase):
             self.assertIn("# Milestone 1.0", milestone.read_text(encoding="utf-8"))
             self.assertIn("Receber pedidos de clientes.", milestone.read_text(encoding="utf-8"))
 
-            for item in imported["items"]:
+            expected_themes = (
+                "Receber pedidos de clientes.",
+                "Mostrar o andamento de cada pedido.",
+            )
+            for item, expected_theme in zip(imported["items"], expected_themes):
                 inbox = project / item["inbox"]
                 backlog = project / item["backlog"]
                 self.assertTrue(inbox.is_file())
@@ -266,7 +270,20 @@ class InboxCaptureTests(unittest.TestCase):
                 backlog_content = backlog.read_text(encoding="utf-8")
                 self.assertIn(item["inbox"], backlog_content)
                 self.assertIn("specs/milestones/M01.md", backlog_content)
-                self.assertIn("Entrevista obrigatória", backlog_content)
+                self.assertIn("## Registros confirmados no MVP", backlog_content)
+                self.assertIn(expected_theme, backlog_content)
+                self.assertIn(
+                    "Pergunte somente sobre lacuna, ambiguidade ou contradição",
+                    backlog_content,
+                )
+                self.assertNotIn(
+                    "A esclarecer na entrevista a partir",
+                    backlog_content,
+                )
+                self.assertNotIn(
+                    "A esclarecer com a pessoa responsável pelo MVP.",
+                    backlog_content,
+                )
 
     def test_mvp_import_never_overwrites_the_first_milestone(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

@@ -7,9 +7,12 @@ mudança. O arquivo `PROJECT.md` explica a finalidade da aplicação, enquanto
 quatro documentos em `.specsfy/` registram a stack, as instruções confirmadas,
 a persistência observada no código e os pacotes instalados.
 
-Execute `$specsfy-setup` depois de instalar o framework ou quando precisar
-verificar os quatro contextos iniciais. A skill detecta Laravel, Next.js e
-Astro pelos manifests e sugere o modelo correspondente.
+Execute `$specsfy-setup` depois de instalar o framework. Depois disso, o
+framework a executa obrigatoriamente antes de iniciar cada skill, inclusive em
+transições automáticas, para verificar e reconciliar os quatro contextos e os
+blocos reservados de agentes. Na mesma conversa, a raiz confirmada é
+reaproveitada sem perguntar de novo. A skill detecta Laravel, Next.js e Astro
+pelos manifests e sugere o modelo correspondente.
 `$specsfy-documentator` acrescenta e atualiza `PACKAGES.md`. Juntas, as skills
 mantêm esta estrutura:
 

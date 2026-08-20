@@ -2,7 +2,9 @@
 
 Este módulo possui o executável Node.js `specsfy`, a TUI e os testes de
 instalação/progresso. Skills pertencem a `skills/` e
-`specialists/`; documentação final pertence a `docs/`.
+`specialists/`; documentação final pertence a `docs/`. A operação local de
+release deste módulo vive em `cli/.agents/skills/specsfy-release-cli/`; ela não
+integra o framework distribuído para projetos consumidores.
 
 ## Regras
 

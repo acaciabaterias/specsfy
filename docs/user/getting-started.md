@@ -39,7 +39,9 @@ specsfy doctor --project apps/portal
 
 Depois, informe `apps/portal` ao `$specsfy-setup`. O agente cria contexto,
 specs, testes e código apenas nesse diretório. Ele não usa a raiz Git do Hub
-como destino por dedução.
+como destino por dedução. Antes de cada skill seguinte, o framework executa o
+setup novamente para verificar essa consistência, reutilizando o caminho já
+confirmado na conversa.
 
 ## Capture uma entrada
 

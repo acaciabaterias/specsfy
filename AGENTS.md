@@ -35,13 +35,14 @@ independentes.
 
 - Esta raiz desenvolve e integra a metodologia, mas não é um projeto consumidor:
   não crie `specs/` nela.
-- `.agents/skills/` e `.claude/skills/` contêm somente as skills locais de
-  documentação do projeto e release do CLI.
+- `.agents/skills/` e `.claude/skills/` contêm somente a skill local de
+  documentação do projeto.
 - Para documentar o próprio Specsfy, leia integralmente
   `.agents/skills/specsfy-monorepo-documentator/SKILL.md` e execute seu coletor.
 - Para lançar ou retomar uma versão do CLI, leia integralmente
-  `.agents/skills/specsfy-release-cli/SKILL.md`. A tag e o GitHub Release
-  pertencem ao monorepo; os artefatos versionados do pacote ficam em `cli/`.
+  `cli/.agents/skills/specsfy-release-cli/SKILL.md`. Essa operação pertence ao
+  módulo `cli/`; a tag e o GitHub Release pertencem ao monorepo e os artefatos
+  versionados do pacote ficam em `cli/`.
 - Projetos consumidores mantêm sua fonte normativa em
   `specs/<estado>/<NNNN>-<slug>/spec.md`; capturas imediatas ficam em
   `specs/inbox/` e itens escolhidos para refinamento ficam em

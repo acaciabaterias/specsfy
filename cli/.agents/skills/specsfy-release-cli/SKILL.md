@@ -35,7 +35,7 @@ artefatos e seção do changelog e retome apenas a etapa ausente.
 
 ```bash
 python3 -B \
-  .agents/skills/specsfy-release-cli/scripts/release_changelog.py prepare \
+  cli/.agents/skills/specsfy-release-cli/scripts/release_changelog.py prepare \
   --cli cli --version X.Y.Z --date YYYY-MM-DD \
   --notes-file /caminho/notas.md
 cd cli
@@ -50,7 +50,7 @@ node dist/main.js --help
 npm publish --dry-run
 cd ..
 python3 -B \
-  .agents/skills/specsfy-release-cli/scripts/release_changelog.py extract \
+  cli/.agents/skills/specsfy-release-cli/scripts/release_changelog.py extract \
   --changelog cli/CHANGELOG.md --version X.Y.Z \
   --output /caminho/release-notes.md
 ```
@@ -100,7 +100,7 @@ gh release view vX.Y.Z --repo promovaweb/specsfy \
 gh release view vX.Y.Z --repo promovaweb/specsfy \
   --json body > /caminho/release-publicado.json
 python3 -B \
-  .agents/skills/specsfy-release-cli/scripts/release_changelog.py verify \
+  cli/.agents/skills/specsfy-release-cli/scripts/release_changelog.py verify \
   --changelog cli/CHANGELOG.md --version X.Y.Z \
   --release-json /caminho/release-publicado.json
 git ls-remote origin "refs/tags/vX.Y.Z^{}"

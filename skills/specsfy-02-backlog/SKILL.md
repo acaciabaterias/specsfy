@@ -5,6 +5,13 @@ description: "Use quando o usuário quer transformar uma captura de `specs/inbox
 
 # Refinar e aprofundar o backlog
 
+## Preparação obrigatória
+
+Antes de executar esta skill, carregue obrigatoriamente `$specsfy-setup` na
+raiz do projeto. Em handoff automático, carregue-o de novo antes desta etapa.
+Reutilize a raiz confirmada na conversa e não prossiga se o setup apontar uma
+pendência.
+
 ## Modo de interação
 
 Modo de interação: `perguntas`.
@@ -57,6 +64,28 @@ específica.
 
 Se uma resposta mudar materialmente os termos, o problema, a pessoa, o
 resultado ou o contexto, repita a busca.
+
+## Reaproveitar respostas confirmadas no MVP
+
+Quando o backlog vier de uma Inbox ou milestone derivada de `MVP.md`, antes de
+formular qualquer pergunta:
+
+1. leia `specs/milestones/M01.md`, a Inbox de origem e a seção
+   `Registros confirmados no MVP` do backlog; abra também o `MVP.md` original
+   quando o caminho registrado estiver disponível;
+2. extraia cada declaração que responde problema, pessoa, resultado, escopo,
+   jornada, regra, dado, integração, limite ou critério de aceite;
+3. converta a declaração em resposta normalizada no campo aplicável do backlog
+   e mantenha o trecho e o caminho de origem como proveniência;
+4. trate como respondida uma questão cuja resposta esteja expressa no MVP,
+   mesmo que o arquivo não use o mesmo rótulo da pergunta;
+5. pergunte somente por lacuna real, ambiguidade relevante ou contradição entre
+   o MVP, as fontes relacionadas e a conversa atual.
+
+Não peça confirmação, escolha ou reformulação para uma resposta que o MVP já
+declara. Uma síntese curta pode informar o que foi reaproveitado, mas não abre
+uma nova rodada. Quando uma leitura razoável admitir mais de um significado,
+apresente apenas essa ambiguidade e cite os trechos que a provocam.
 
 ## Garantir a captura mínima
 
@@ -139,7 +168,7 @@ Quando a pessoa pedir aprofundamento, promoção ou criação de uma spec:
 
 Execute um ciclo com no máximo oito perguntas por área:
 
-1. Antes de cada rodada, releia a entrada, as decisões confirmadas, o contexto acumulado e as novas respostas, além da evidência aplicável.
+1. Antes de cada rodada, releia a entrada, as decisões confirmadas, o contexto acumulado e as novas respostas, junto dos registros do MVP.
 2. Reclassifique lacunas e dependências. Continue enquanto existir lacuna
    aplicável e restarem perguntas no limite; encerre quando cada uma estiver
    decidida, não aplicável ou resolvida por evidência.

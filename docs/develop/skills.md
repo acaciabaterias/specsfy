@@ -116,7 +116,9 @@ impede que uma anotação simples se transforme em refinamento implícito.
 submódulo Git sem os arquivos locais, na raiz do superprojeto. O arquivo local
 tem prioridade. Ele importa `MVP.md` como `M01`, cria uma Inbox e um backlog
 candidato para cada tema da fonte e orquestra `$specsfy-02-backlog` para
-entrevistar todos os itens. Quando necessário, chama `$specsfy-data-discovery`;
+entrevistar todos os itens. Antes de perguntar, o backlog lê o trecho importado
+e preenche as respostas que o MVP já declara; a conversa cobre somente lacunas,
+ambiguidades ou contradições. Quando necessário, chama `$specsfy-data-discovery`;
 depois sincroniza milestones e encaminha somente promoções autorizadas, sem
 sobrescrever arquivos existentes.
 

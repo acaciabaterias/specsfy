@@ -5,6 +5,13 @@ description: "Use quando o usuário pede para validar, revisar, auditar ou checa
 
 # Validar a especificação
 
+## Preparação obrigatória
+
+Antes de executar esta skill, carregue obrigatoriamente `$specsfy-setup` na
+raiz do projeto. Em handoff automático, carregue-o de novo antes desta etapa.
+Reutilize a raiz confirmada na conversa e não prossiga se o setup apontar uma
+pendência.
+
 ## Modo de interação
 
 Modo de interação: `perguntas`.

@@ -386,7 +386,7 @@ class ProjectContextContractTests(unittest.TestCase):
 
     def test_parent_keeps_only_its_local_operational_skills(self) -> None:
         """A raiz dev descobre skills locais sem instalar skills consumidoras."""
-        local_skills = {"specsfy-monorepo-documentator", "specsfy-release-cli"}
+        local_skills = {"specsfy-monorepo-documentator"}
         self.assertEqual(
             local_skills,
             {
@@ -410,7 +410,7 @@ class ProjectContextContractTests(unittest.TestCase):
         ]
         forbidden_invocation = re.compile(
             r"skills/"
-            + r"specsfy-(?!(?:monorepo-documentator|release-cli))[^/\s]+/scripts/"
+            + r"specsfy-(?!monorepo-documentator)[^/\s]+/scripts/"
         )
         for path in executable_contracts:
             with self.subTest(path=path.relative_to(ROOT)):

@@ -363,7 +363,7 @@ def then_root_centralizes_module_gitignore_rules(context) -> None:
 @then("a raiz mantém só as skills locais operacionais e não instala as skills do projeto")
 def then_parent_is_independent_from_project_skills(context) -> None:
     assert not (ROOT / "specs").exists()
-    local_skills = {"specsfy-monorepo-documentator", "specsfy-release-cli"}
+    local_skills = {"specsfy-monorepo-documentator"}
     assert {
         path.name for path in (ROOT / ".agents" / "skills").iterdir()
     } == local_skills
@@ -375,7 +375,7 @@ def then_parent_is_independent_from_project_skills(context) -> None:
         assert claude_skill.resolve() == codex_skill.resolve()
     forbidden = re.compile(
         r"skills/"
-        + r"specsfy-(?!(?:monorepo-documentator|release-cli))[^/\s]+/scripts/"
+        + r"specsfy-(?!monorepo-documentator)[^/\s]+/scripts/"
     )
     for path in (
         ROOT / "AGENTS.md",

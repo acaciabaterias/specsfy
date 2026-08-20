@@ -71,10 +71,14 @@ ou pendente.
   `.specify/memory/constitution.md`. Essa projeção lista a constituição e todos
   os arquivos regulares encontrados em `specs/`, sem alterar as fontes do
   GitHub Spec Kit.
-- Executar `$specsfy-setup` no início e sempre que for necessário reconciliar
-  os quatro contextos iniciais ou os blocos reservados em `AGENTS.md` e
-  `CLAUDE.md`. Em projetos com GitHub Spec Kit, a mesma execução atualiza apenas
-  o bloco gerenciado de `SPECKIT.md` e exige a leitura dos arquivos originais.
+- Antes de iniciar qualquer skill do framework, executar obrigatoriamente
+  `$specsfy-setup` para verificar e reconciliar os quatro contextos iniciais e
+  os blocos reservados em `AGENTS.md` e `CLAUDE.md`. A única exceção é a própria
+  `$specsfy-setup`, que não se chama recursivamente. Em uma transição automática,
+  executar novamente o setup com a mesma raiz já confirmada antes de carregar a
+  skill de destino. Em projetos com GitHub Spec Kit, a mesma execução atualiza
+  apenas o bloco gerenciado de `SPECKIT.md` e exige a leitura dos arquivos
+  originais.
   Executar `$specsfy-documentator` quando `PACKAGES.md` estiver ausente ou
   desatualizado.
 - Executar `$specsfy-aux-stack` após mudanças estruturais de tecnologia,
@@ -105,8 +109,10 @@ input → inbox → backlog → spec → validate → tasks → TDD/BDD → impl
 1. Use `specsfy-01-inbox` para preservar e pré-processar o texto em
    `specs/inbox/`, sem fazer perguntas.
 2. Use `specsfy-02-backlog` para buscar material relacionado, registrar o item
-   e aprofundar decisões por perguntas adaptativas. O refinamento reavalia cada
-   resposta enquanto houver lacuna aplicável.
+   e aprofundar decisões por perguntas adaptativas. Quando a origem for um
+   `MVP.md`, o refinamento lê a milestone, a Inbox e as evidências importadas,
+   registra automaticamente as respostas já declaradas e pergunta somente por
+   lacuna, ambiguidade ou contradição aplicável.
 3. Use `specsfy-03-specify` para criar e consolidar a spec normativa inicial.
 4. Use `specsfy-04-validate` para comprovar a definição.
 5. Use `specsfy-05-tasks` e `specsfy-06-tdd-bdd` para planejar, derivar

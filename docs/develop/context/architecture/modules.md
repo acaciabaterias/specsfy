@@ -46,7 +46,7 @@ releases do monorepo
 | `specialists/specsfy-specialist-*/` | padrões opcionais sob demanda |
 | `cli/src/` | comandos TypeScript, TUI, instalação e runners |
 | `.agents/skills/specsfy-monorepo-documentator/` | documentação oficial |
-| `.agents/skills/specsfy-release-cli/` | publicação de versões do CLI |
+| `cli/.agents/skills/specsfy-release-cli/` | publicação de versões do CLI |
 | `tests/` | contratos integrados |
 | `example/` | validação em aplicação Laravel |
 

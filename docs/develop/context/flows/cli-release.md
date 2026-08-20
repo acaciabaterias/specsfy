@@ -37,7 +37,7 @@ release-cli ──promove──► cli/CHANGELOG.md
                                                      └─ mesma seção
 ```
 
-- A skill local governa a sequência.
+- A skill local do módulo `cli/` governa a sequência.
 - `cli/` contém changelog, versão, lock e executável.
 - A raiz Git contém commit e tag.
 - GitHub hospeda o remoto, CI e release.
@@ -51,8 +51,8 @@ não cria outra versão.
 
 ## Evidência
 
-- `.agents/skills/specsfy-release-cli/SKILL.md`.
-- `.agents/skills/specsfy-release-cli/scripts/release_changelog.py`.
+- `cli/.agents/skills/specsfy-release-cli/SKILL.md`.
+- `cli/.agents/skills/specsfy-release-cli/scripts/release_changelog.py`.
 - `tests/test_cli_release_skill.py`.
 - testes e artefatos em `cli/`.
 

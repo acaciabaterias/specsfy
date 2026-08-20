@@ -5,6 +5,13 @@ description: Monitorar e manter a documentação completa da persistência em .s
 
 # Manter o mapa de dados
 
+## Preparação obrigatória
+
+Antes de executar esta skill, carregue obrigatoriamente `$specsfy-setup` na
+raiz do projeto. Em handoff automático, carregue-o de novo antes desta etapa.
+Reutilize a raiz confirmada na conversa e não prossiga se o setup apontar uma
+pendência.
+
 ## Modo de interação
 
 Modo de interação: `sem perguntas`.
