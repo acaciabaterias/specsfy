@@ -29,7 +29,11 @@ exigindo autorização específica.
 
 ## Gate inicial
 
-1. Leia `specs/planned/<NNNN>-<slug>/spec.md`, evidências indexadas em `research/`, instruções do repositório e código relevante. Não procure `tasks.md`, `plan.md`, `research.md` ou `data-model.md`.
+1. Resolva a raiz pelo caminho confirmado no `$specsfy-setup`. Se a pessoa
+   informar um subdiretório, trate-o como projeto e não o promova para a raiz
+   Git. Leia `<raiz>/specs/planned/<NNNN>-<slug>/spec.md`, evidências indexadas
+   em `research/`, instruções do repositório e código relevante. Não procure
+   `tasks.md`, `plan.md`, `research.md` ou `data-model.md`.
 2. Exija `Formato: Specsfy/2.0`, `Status: Planned` ou `Implementing`,
    `Definition Gate: Passed` e `Plan Gate: Passed`.
 3. Execute os validadores contra `specs/<estado>/<NNNN>-<slug>/spec.md`. Se um gate
@@ -44,7 +48,8 @@ exigindo autorização específica.
 6. Selecione trabalho pronto com:
 
 ```bash
-node .agents/skills/specsfy-07-implement/scripts/next_task.mjs specs/<estado>/<NNNN>-<slug>/spec.md
+node .agents/skills/specsfy-07-implement/scripts/next_task.mjs \
+  <raiz>/specs/<estado>/<NNNN>-<slug>/spec.md
 ```
 
 Se não houver tarefa pronta, diferencie `concluído` de `bloqueado por dependência`.
@@ -66,7 +71,7 @@ Se não houver tarefa pronta, diferencie `concluído` de `bloqueado por dependê
 
 ```bash
 node .agents/skills/specsfy-setup/scripts/monitor_context.mjs \
-  --project . --check
+  --project <raiz> --check
 ```
 
    Para stack pendente, faça handoff a `$specsfy-aux-stack`; para persistência,
@@ -131,10 +136,10 @@ Quando todas as tarefas da seção 14 estiverem marcadas:
 2. execute a rastreabilidade de testes;
 3. compare cada `AC`, `FR`, `NFR` e item da Definition of Done com evidência atual;
 4. procure tarefas abertas, placeholders, testes pulados e falhas conhecidas;
-5. execute novamente `monitor_context.mjs --project . --check` e resolva toda
+5. execute novamente `monitor_context.mjs --project <raiz> --check` e resolva toda
    documentação pendente;
 6. carregue `$specsfy-documentator`, reconstrua `docs/` e exija que o
-   `build_documentation.mjs --project . --check` passe;
+   `build_documentation.mjs --project <raiz> --check` passe;
 7. não declare conclusão se alguma evidência estiver ausente;
 8. altere `Delivery Gate` para `Passed` somente com rastreabilidade completa,
    defina `Status: Reviewing` e execute `specsfy transition <id> review`.

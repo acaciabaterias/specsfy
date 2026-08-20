@@ -68,6 +68,8 @@ para que o backlog trate o conjunto mais tarde sem confundir uma resposta com
 uma conclusão. Quando houver `MVP.md` na raiz, a skill cria a `Milestone 1.0`
 uma única vez e mantém o documento como origem da importação. `BRAND.md`,
 quando existir, orienta as perguntas, mas não é copiado para as capturas.
+Se o projeto estiver em um submódulo Git, a skill procura os dois arquivos na
+raiz do Hub somente quando eles não existirem no projeto.
 
 ## Templates instalados
 

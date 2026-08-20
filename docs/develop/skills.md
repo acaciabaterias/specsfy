@@ -107,10 +107,12 @@ qualquer handoff, não pergunta e apenas sugere a próxima etapa. Esse limite
 impede que uma anotação simples se transforme em refinamento implícito.
 
 `specsfy-mvp-milestone-interviewer` combina conversa e captura: ele lê
-`MVP.md` e `BRAND.md` da raiz do consumidor quando existirem, importa
-`MVP.md` em `specs/milestones/M01.md` como `Milestone 1.0` sem sobrescrever o
-arquivo e registra cada fala em uma Inbox associada à mesma sessão. O backlog
-continua responsável por tratar a série e produzir material refinável.
+`MVP.md` e `BRAND.md` na raiz do consumidor e, quando o consumidor é um
+submódulo Git sem os arquivos locais, na raiz do superprojeto. O arquivo local
+tem prioridade. Ele importa `MVP.md` em `specs/milestones/M01.md` como
+`Milestone 1.0` sem sobrescrever o arquivo e registra cada fala em uma Inbox
+associada à mesma sessão. O backlog continua responsável por tratar a série e
+produzir material refinável.
 
 `specsfy-data-discovery` traduz a conversa de produto em informações a guardar
 no `DATABASE.md`. Ela não escolhe estrutura interna; backlog, importação de MVP
@@ -165,6 +167,11 @@ O script não escreve nas árvores do GitHub Spec Kit. Texto fora do bloco
 gerenciado em `SPECKIT.md` permanece intacto. O bloco publicado em `AGENTS.md`
 obriga o agente a abrir a constituição e as fontes listadas, mantendo os
 artefatos anteriores sem conversão para a estrutura nativa do Specsfy.
+
+O setup recebe a raiz do consumidor por `--project`. Esse caminho pode ser um
+subdiretório de um Hub e se torna a raiz obrigatória para contexto, specs,
+testes e implementação. O framework publicado em `AGENTS.md` proíbe promover
+o trabalho para a raiz Git do Hub.
 
 ## Alterar uma skill
 

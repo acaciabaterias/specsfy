@@ -27,6 +27,20 @@ o agente na raiz do projeto consumidor e rode a suíte Pest existente:
 - o agente está aberto na raiz do projeto consumidor.
 - o repositório possui um runner Pest funcional.
 
+## Escolha o diretório do projeto
+
+Você pode começar a conversa na raiz de um Hub e indicar o subdiretório do
+projeto. Instale e execute o setup com o mesmo caminho:
+
+```bash
+specsfy install --project apps/portal
+specsfy doctor --project apps/portal
+```
+
+Depois, informe `apps/portal` ao `$specsfy-setup`. O agente cria contexto,
+specs, testes e código apenas nesse diretório. Ele não usa a raiz Git do Hub
+como destino por dedução.
+
 ## Capture uma entrada
 
 Use `$specsfy-01-inbox` para guardar a formulação original em

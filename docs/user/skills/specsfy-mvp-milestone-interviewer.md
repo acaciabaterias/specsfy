@@ -2,8 +2,10 @@
 
 Use `$specsfy-mvp-milestone-interviewer` (`specsfy-mvp-milestone-interviewer`)
 para explorar o menor produto utilizável sem perder o caminho da conversa. A
-skill lê `MVP.md` e `BRAND.md` da raiz quando eles existem e preserva cada
-resposta em uma Inbox da mesma sessão.
+skill lê `MVP.md` e `BRAND.md` da raiz do projeto. Quando o projeto é um
+submódulo Git e esses arquivos não estão nele, ela os procura na raiz do Hub
+que contém o submódulo. Cada resposta fica preservada em uma Inbox da mesma
+sessão.
 
 ## Quando usar
 
@@ -11,6 +13,10 @@ Use antes de criar um conjunto de specs para um produto novo ou quando o MVP
 ainda não tem uma jornada confirmada. Se `MVP.md` existir, a skill o importa
 uma vez como `specs/milestones/M01.md`, com o título `Milestone 1.0`. Ela nunca
 substitui um marco que já exista.
+
+Um arquivo no projeto tem prioridade. O Hub só entra na busca quando o projeto
+é um submódulo Git e o arquivo local está ausente. Assim, um `MVP.md` ou
+`BRAND.md` específico do projeto não é trocado pelo contexto compartilhado.
 
 Cada rodada traz pelo menos três perguntas numeradas. Abaixo de cada pergunta,
 você recebe três ou mais sugestões, `Escrever outra resposta` e `Avançar`

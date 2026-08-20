@@ -62,6 +62,10 @@ disponíveis como alternativas. `install` repete as verificações necessárias
 antes de escrever qualquer arquivo e reúne todas as correções na mesma
 mensagem.
 
+Quando o projeto estiver em um Hub, use o subdiretório escolhido pela pessoa em
+`--project`, como `specsfy install --project apps/portal`. O setup confirma o
+mesmo caminho e mantém nele os contextos, as specs e o trabalho de código.
+
 O instalador publica as etapas numeradas a partir de
 `.agents/skills/specsfy-01-inbox`, grava o contrato central em
 `.specsfy/Spec.md` e adiciona templates, exemplos e registros técnicos em

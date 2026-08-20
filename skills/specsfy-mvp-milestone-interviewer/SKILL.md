@@ -17,24 +17,31 @@ depois, com todos os registros como proveniência.
 
 ## Carregar o contexto disponível
 
-1. Resolva a raiz do projeto consumidor antes de ler qualquer arquivo.
-2. Leia `MVP.md` se existir como arquivo regular na raiz. Preserve a fonte e
+1. Resolva a raiz do projeto consumidor antes de ler qualquer arquivo. Se ela
+   for um submódulo Git, descubra o superprojeto com
+   `git -C <raiz> rev-parse --show-superproject-working-tree`. A saída não
+   vazia acrescenta somente essa raiz pai à busca. Não percorra outros pais.
+2. Leia `MVP.md` se existir como arquivo regular na raiz do consumidor. Quando
+   ele estiver ausente e a raiz for um submódulo, leia `MVP.md` no
+   superprojeto. O arquivo local tem prioridade. Preserve a fonte consultada e
    use-a como contexto declarado, sem substituir o que a pessoa disser.
 3. Se `MVP.md` foi importado, execute uma vez:
 
    ```bash
-   node .agents/skills/specsfy-mvp-milestone-interviewer/scripts/importar_mvp.mjs \
+   node \
+     .agents/skills/specsfy-mvp-milestone-interviewer/scripts/importar_mvp.mjs \
      --root <raiz>
    ```
 
    O comando cria `specs/milestones/M01.md` com o título `Milestone 1.0`, a
    origem e o hash SHA-256 de `MVP.md`. Se `M01.md` existir, não o sobrescreva:
    registre a divergência na primeira Inbox e siga a conversa.
-4. Leia `BRAND.md` se existir como arquivo regular na raiz. Use-o para manter
-   linguagem, público, proposta e limites de marca coerentes durante as
-   perguntas. Não copie seu conteúdo para as Inboxes.
-5. Registre na primeira captura se `MVP.md` e `BRAND.md` estavam presentes e
-   foram consultados ou se estavam ausentes. Não crie, mova nem altere esses
+4. Leia `BRAND.md` seguindo a mesma ordem: raiz do consumidor e, somente como
+   fallback de submódulo, superprojeto. Use-o para manter linguagem, público,
+   proposta e limites de marca coerentes durante as perguntas. Não copie seu
+   conteúdo para as Inboxes.
+5. Registre na primeira captura o caminho de `MVP.md` e `BRAND.md` consultados
+   ou informe que cada arquivo estava ausente. Não crie, mova nem altere esses
    arquivos.
 6. Leia `PROJECT.md`, Inboxes, backlog e specs existentes apenas se ajudarem a
    evitar repetição ou contradição. Eles continuam separados da formulação
@@ -58,8 +65,9 @@ não gere a milestone nem reproduza o valor em mensagens.
 3. Depois de cada resposta da pessoa, capture o texto integral em outra Inbox
    com a mesma sessão e o próximo turno. Nunca edite, reúna ou substitua uma
    captura anterior.
-4. Informe `--sources` em toda chamada: liste `MVP.md` e `BRAND.md` como
-   presentes e consultados ou ausentes na raiz.
+4. Informe `--sources` em toda chamada: liste o caminho de `MVP.md` e
+   `BRAND.md` consultados, inclusive quando vierem do superprojeto, ou indique
+   que estavam ausentes.
 5. Aplique a triagem de dados sensíveis do `$specsfy-01-inbox` antes de cada
    escrita. Se ela impedir a captura, interrompa a conversa até receber texto
    seguro para registrar.

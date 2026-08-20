@@ -89,6 +89,24 @@ class AuxiliaryContextTests(unittest.TestCase):
                 self.assertTrue((ROOT / "templates" / name).is_file())
                 self.assertIn(f'join(project, ".specsfy", "templates", name)', setup)
 
+    def test_setup_keeps_the_user_selected_subdirectory_as_project_root(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            hub = Path(directory)
+            project = hub / "apps" / "portal"
+            project.mkdir(parents=True)
+
+            result = run_script(SETUP, "--project", str(project))
+
+            self.assertEqual(0, result.returncode, result.stderr)
+            self.assertTrue((project / "PROJECT.md").is_file())
+            self.assertTrue((project / ".specsfy" / "STACK.md").is_file())
+            self.assertFalse((hub / "PROJECT.md").exists())
+            self.assertFalse((hub / "specs").exists())
+            agents = (project / "AGENTS.md").read_text(encoding="utf-8")
+            normalized = " ".join(agents.casefold().split())
+            self.assertIn("diretório do projeto", normalized)
+            self.assertIn("não promova", normalized)
+
     def test_monitor_requires_stack_and_database_docs_in_same_change(self) -> None:
         paths = [
             "package.json",

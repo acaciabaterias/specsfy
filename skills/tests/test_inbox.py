@@ -224,6 +224,8 @@ class InboxCaptureTests(unittest.TestCase):
         self.assertIn("`specs/milestones/m01.md`", source.casefold())
         self.assertIn("`milestone 1.0`", source.casefold())
         self.assertIn("não o sobrescreva", normalized)
+        self.assertIn("superprojeto", normalized)
+        self.assertIn("--show-superproject-working-tree", source)
 
     def test_imports_mvp_as_milestone_one_without_overwriting_it(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -253,6 +255,77 @@ class InboxCaptureTests(unittest.TestCase):
             )
             self.assertNotEqual(0, second.returncode)
             self.assertIn("não será sobrescrita", second.stderr)
+
+    def test_imports_mvp_from_superproject_when_consumer_is_a_submodule(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            workspace = Path(directory)
+            source_repository = workspace / "consumer-source"
+            hub = workspace / "hub"
+
+            for repository in (source_repository, hub):
+                subprocess.run(
+                    ["git", "init", str(repository)],
+                    text=True,
+                    capture_output=True,
+                    check=True,
+                )
+                subprocess.run(
+                    ["git", "-C", str(repository), "config", "user.email", "tests@specsfy.dev"],
+                    text=True,
+                    capture_output=True,
+                    check=True,
+                )
+                subprocess.run(
+                    ["git", "-C", str(repository), "config", "user.name", "Testes Specsfy"],
+                    text=True,
+                    capture_output=True,
+                    check=True,
+                )
+                (repository / "README.md").write_text("# Projeto\n", encoding="utf-8")
+                subprocess.run(
+                    ["git", "-C", str(repository), "add", "README.md"],
+                    text=True,
+                    capture_output=True,
+                    check=True,
+                )
+                subprocess.run(
+                    ["git", "-C", str(repository), "commit", "-m", "Preparar projeto de teste"],
+                    text=True,
+                    capture_output=True,
+                    check=True,
+                )
+
+            subprocess.run(
+                [
+                    "git",
+                    "-c",
+                    "protocol.file.allow=always",
+                    "-C",
+                    str(hub),
+                    "submodule",
+                    "add",
+                    str(source_repository),
+                    "consumer",
+                ],
+                text=True,
+                capture_output=True,
+                check=True,
+            )
+            source = "# MVP do Hub\n\nEntregar a primeira jornada completa.\n"
+            (hub / "MVP.md").write_text(source, encoding="utf-8")
+            consumer = hub / "consumer"
+
+            result = subprocess.run(
+                ["node", str(MVP_IMPORTER), "--root", str(consumer)],
+                text=True,
+                capture_output=True,
+                check=False,
+            )
+
+            milestone = consumer / "specs/milestones/M01.md"
+            self.assertEqual(0, result.returncode, result.stderr)
+            self.assertEqual(str(milestone), result.stdout.strip())
+            self.assertIn("Entregar a primeira jornada completa.", milestone.read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

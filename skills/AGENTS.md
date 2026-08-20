@@ -20,6 +20,10 @@ backlogs, refinamentos do backlog, especificações, tarefas, testes ou implemen
 arquivo contém o fluxo, os caminhos canônicos e os gates do framework.
 
 - Preserve as instruções próprias deste projeto.
+- O diretório do projeto é o caminho informado durante `$specsfy-setup`. Use-o
+  em toda leitura e escrita posterior. Se ele estiver dentro de um Hub, não
+  promova o trabalho para a raiz Git nem crie contexto, specs ou código fora
+  desse caminho.
 - Leia `PROJECT.md`, `.specsfy/STACK.md`, `.specsfy/RULES.md`,
   `.specsfy/DATABASE.md` e `.specsfy/PACKAGES.md` como contexto persistente
   antes de planejar mudanças.

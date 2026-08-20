@@ -24,3 +24,10 @@ Feature: Captura imediata na Inbox
     Then ele importa MVP.md como a Milestone 1.0 sem sobrescrever uma existente
     And registra a formulação inicial e cada resposta em uma série de Inboxes
     And trata a série somente quando a pessoa solicitar o backlog
+
+  Scenario: Usar o contexto do Hub para um projeto em submódulo
+    Given um projeto consumidor instalado como submódulo Git de um Hub
+    And MVP.md e BRAND.md estão somente na raiz do Hub
+    When o entrevistador de MVP inicia a descoberta
+    Then ele consulta os arquivos da raiz do Hub
+    And importa o MVP como a Milestone 1.0 no projeto consumidor
