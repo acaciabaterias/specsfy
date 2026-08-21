@@ -2,7 +2,14 @@
 
 Todas as mudanças relevantes do Specsfy CLI são registradas neste arquivo.
 
-## [Unreleased]
+## [0.9.0] - 2026-08-21
+
+- Adiciona especialistas essenciais ao setup e amplia o catálogo de
+  especialistas do Specsfy.
+- Torna a descoberta de MVP contextual e preserva seu resultado em inboxes.
+- Suporta projetos em subdiretórios do Hub e padroniza interfaces React com
+  ReUI.
+- Publica aliases estáveis do ebook e amplia o contexto auxiliar do CLI.
 
 ## [0.8.1] - 2026-08-13
 
