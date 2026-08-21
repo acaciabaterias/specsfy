@@ -74,6 +74,15 @@ das seções `14. Tarefas` e `15. Ordem de execução` em
 - Preserve IDs existentes ao atualizar; não renumere tarefas concluídas.
 - Organize em setup mínimo, fundação indispensável, histórias em prioridade e fechamento.
 - Mantenha histórias como fatias verticais independentemente demonstráveis.
+- Quando `Interface para pessoas` for `Sim`, crie tarefas explícitas para as
+  telas, formulário e ações descritos na seção 10, além da camada de dados ou
+  API. Inclua testes de comportamento da interface para navegação, envio,
+  validação, recuperação de erro e o padrão de abertura escolhido, como painel
+  lateral ou modal. Use somente os componentes, convenções e runners da stack
+  de interface registrada; cada tarefa aponta os componentes ou rotas reais.
+  Agrupe-as na subseção obrigatória `#### Fase de interface` da seção 14. Cada
+  tela registrada recebe ao menos uma tarefa própria; não esconda essa entrega
+  dentro de uma tarefa genérica de backend.
 - Para cada `AC`, crie uma tarefa `[TEST] [TDD]` distinta cujo desenho usa o
   Gherkin mantido na spec como referência. O conjunto dessas tarefas materializa pelo
   menos três casos TDD distintos para a feature inteira e para cada `US`, `FR`
@@ -126,6 +135,12 @@ Execute:
 
 ```bash
 node .agents/skills/specsfy-05-tasks/scripts/validate_tasks.mjs specs/<estado>/<NNNN>-<slug>/spec.md --allow-draft
+```
+
+Quando houver interface para pessoas, execute também:
+
+```bash
+node .agents/skills/specsfy-05-tasks/scripts/validate_interface_tasks.mjs specs/<estado>/<NNNN>-<slug>/spec.md
 ```
 
 Corrija IDs duplicados, dependências inválidas/cíclicas, referências inexistentes,

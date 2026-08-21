@@ -172,13 +172,16 @@ Cada skill base possui `references/specialists.md` com condições para recomend
 contexto técnico opcional:
 
 ```bash
-specsfy skills install specsfy-specialist-<nome>
+npx skills add https://github.com/promovaweb/specsfy \
+  --skill specsfy-specialist-<nome> --agent universal --copy --full-depth
 ```
 
-As bases podem propor um especialista já instalado e carregá-lo após
-confirmação. Instalação recebe confirmação específica e nunca ocorre como
-efeito implícito do handoff. O workspace `promovaweb/specsfy` não é projeto consumidor
-e não recebe nenhuma categoria.
+As bases informam o nome, a finalidade e as dependências do especialista. Se
+ele já estiver instalado, carregam-no na mesma conversa. Se estiver ausente,
+avisam que executarão o comando acima, pedem autorização específica e só então
+executam `npx skills add`. Instalação nunca ocorre como efeito implícito do
+handoff. O workspace `promovaweb/specsfy` não é projeto consumidor e não
+recebe nenhuma categoria.
 
 ## Estrutura
 

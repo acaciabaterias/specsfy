@@ -23,24 +23,32 @@ description: Projetar, implementar e revisar interfaces React com composição, 
 
 ## Fluxo
 
-1. Confirmar versão do React, renderer, framework (se houver), convenções do
+1. Para uma tela ou formulário, ler a seção de interface da spec antes do
+   código. Confirmar telas, fluxo de informação, campos, validações, padrão de
+   abertura e estados. Se o material não existir, retornar ao
+   `$specsfy-specialist-ux-design` e `$specsfy-specialist-ui-design`; não
+   trocar uma interface pedida por endpoint ou componente vazio.
+2. Confirmar versão do React, renderer, framework (se houver), convenções do
    projeto e estratégia de testes já em uso. Quando a tela usar shadcn/ui,
    identificar antes a base de primitives instalada, seguindo
    `$specsfy-specialist-shadcn-ui`; nunca deduzir Radix ou Base UI pela
    aparência do componente.
-2. Modelar os estados visíveis (nominal, loading, empty, error, stale,
+   Se `.specsfy/STACK.md` não declarar React ou o projeto não tiver essa
+   dependência, não inicie esta implementação: encaminhe ao especialista da
+   stack observada.
+3. Modelar os estados visíveis (nominal, loading, empty, error, stale,
    optimistic), os eventos que os produzem e quem é o dono de cada dado.
-3. Projetar a árvore de componentes com responsabilidades e props pequenas;
+4. Projetar a árvore de componentes com responsabilidades e props pequenas;
    preferir composição (`children`, slots) a um componente com dezenas de
    flags booleanas.
-4. Manter cada estado no dono mais próximo capaz de resolvê-lo; derivar
+5. Manter cada estado no dono mais próximo capaz de resolvê-lo; derivar
    valores durante o render em vez de sincronizar com `useEffect`.
-5. Usar effects apenas para sincronizar com um sistema externo (DOM,
+6. Usar effects apenas para sincronizar com um sistema externo (DOM,
    subscription, rede, storage) — nunca para computar algo a partir de props
    e state já disponíveis.
-6. Implementar semântica HTML e navegação por teclado antes do acabamento
+7. Implementar semântica HTML e navegação por teclado antes do acabamento
    visual; então cobrir com teste de comportamento observável.
-7. Medir performance somente quando houver sintoma real (profiler, métrica de
+8. Medir performance somente quando houver sintoma real (profiler, métrica de
    produção); então memoizar ou dividir o componente com medição registrada, não por
    precaução.
 

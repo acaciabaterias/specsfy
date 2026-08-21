@@ -46,9 +46,9 @@ specsfy install --project . --detected --force --json
 ## `specsfy doctor`
 
 Verifica Node.js, Git, npm, acesso de leitura e escrita ao projeto e a
-disponibilidade do `skills CLI`. A resolução usa, nesta ordem, o override
-`SPECSFY_SKILLS_CLI`, uma instalação no `PATH`, a dependência incluída no pacote
-npm e `npx skills`. `--json` retorna cada item, seu estado e o comando
+disponibilidade do `npx`. A resolução usa `npx` encontrado no `PATH` ou o
+override técnico `SPECSFY_NPX_COMMAND`; a instalação materializa skills por
+`npx skills add`. `--json` retorna cada item, seu estado e o comando
 encontrado. Qualquer requisito ausente produz exit code 1.
 
 Exemplos:
@@ -130,9 +130,9 @@ SPECSFY_SPECIALISTS_CATALOG=./catalog.json specsfy skills detect --json
 
 ## `specsfy skills install`
 
-Instala uma ou mais skills informadas por nome e resolve suas dependências.
-Os nomes são obrigatórios. `--force` autoriza substituir arquivos gerenciados
-alterados. A saída textual contém os caminhos modificados.
+Depois de revisar a recomendação e autorizar a instalação, este comando usa
+`npx skills add` com o repositório oficial e somente os nomes necessários. Ele
+materializa a skill no projeto atual; não instale o catálogo inteiro por padrão.
 
 Exemplos:
 
@@ -141,7 +141,7 @@ specsfy skills install specsfy-specialist-laravel
 specsfy skills install specsfy-specialist-postgres --project ./api
 specsfy skills install specsfy-specialist-laravel specsfy-specialist-postgres
 specsfy skills install specsfy-specialist-react-ui-components --project .
-specsfy skills install specsfy-specialist-laravel --project . --force
+specsfy skills install specsfy-specialist-interface-experience --project .
 ```
 
 ## `specsfy skills remove`

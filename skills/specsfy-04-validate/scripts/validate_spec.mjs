@@ -29,6 +29,40 @@ function minimumBddErrors(body) {
   return errors;
 }
 
+function interfaceErrors(body, status) {
+  const value = field(body, "Interface para pessoas");
+  if (!value) return status === "Draft" ? [] : ["O cabeçalho deve informar se há Interface para pessoas."];
+  if (status === "Draft" && /^A definir$/i.test(value)) return [];
+  if (!/^(Sim|Não|Nao)\b/i.test(value)) {
+    return ["Interface para pessoas deve começar com Sim, Não ou Nao."];
+  }
+  if (!/^Sim\b/i.test(value)) return [];
+
+  const required = [
+    "Interface para pessoas",
+    "Stack e convenções de interface",
+    "Telas e responsabilidades",
+    "Fluxo de informação e navegação",
+    "Formulários e ações",
+    "Composição e disposição",
+    "Estados e acessibilidade",
+  ];
+  const errors = [];
+  for (const title of required) {
+    const match = body.match(new RegExp(`^####\\s+${escape(title)}\\s*$`, "im"));
+    if (!match) {
+      errors.push(`Interface para pessoas: heading obrigatório ausente: ${title}.`);
+      continue;
+    }
+    const next = body.slice(match.index + match[0].length).search(/^####\s+|^###\s+/m);
+    const content = body.slice(match.index + match[0].length, next < 0 ? undefined : match.index + match[0].length + next);
+    if (/\[(?:Tela|Como|Campos|Hierarquia|Loading|Sim ou Não)/i.test(content) || !content.trim()) {
+      errors.push(`Interface para pessoas: ${title} precisa descrever o comportamento real.`);
+    }
+  }
+  return errors;
+}
+
 if (!input || !existsSync(input)) {
   console.error(`ERRO: Arquivo não encontrado: ${input ?? ""}`);
   process.exitCode = 1;
@@ -52,6 +86,7 @@ if (!input || !existsSync(input)) {
   errors.push(...minimumBddErrors(body));
   if (status === "Complete" && /^\s*-\s+\[ \]\s+T\d{3,}/m.test(body)) errors.push("Status Complete não permite tarefas abertas na seção 14.");
   if (/\b(?:TODO|TBD|FIXME)\b|\[NEEDS CLARIFICATION/im.test(body) && !(status === "Draft" && draft)) errors.push("Marcadores não resolvidos.");
+  errors.push(...interfaceErrors(body, status));
   const result = { path, format: field(body, "Formato"), slug, status, gates, counts: Object.fromEntries(Object.entries(ids).map(([key, value]) => [key, value.length])), errors, warnings };
   if (asJson) console.log(JSON.stringify(result, null, 2));
   else { console.log(`Spec: ${path}`); errors.forEach((error) => console.log(`ERRO: ${error}`)); console.log(errors.length ? "RESULTADO: NOT READY" : status === "Draft" ? "RESULTADO: VALID DRAFT" : "RESULTADO: READY"); }

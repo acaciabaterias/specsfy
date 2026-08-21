@@ -56,9 +56,8 @@ specsfy install --project .
 ```
 
 O diagnóstico confere Node.js 22.20 ou superior, Git, npm, o diretório do
-projeto e o comando `skills`. A instalação do Specsfy pelo npm já inclui esse
-materializador. Uma instalação global de `skills` e o `npx` continuam
-disponíveis como alternativas. `install` repete as verificações necessárias
+projeto e o `npx`. Toda materialização usa `npx skills add`, inclusive quando
+o CLI foi instalado pelo npm. `install` repete as verificações necessárias
 antes de escrever qualquer arquivo e reúne todas as correções na mesma
 mensagem.
 
@@ -142,9 +141,8 @@ descarta a customização protegida no arquivo indicado.
 - **Permissão negada:** execute novamente
   `chmod +x "$HOME/.local/bin/specsfy"` quando usar o download. Em instalações
   pelo npm, configure um diretório global gravável pelo seu usuário.
-- **Mensagem `skills CLI não encontrado`:** reinstale a versão atual do pacote
-  com `npm install --global @promovaweb/specsfy@latest`. No executável avulso,
-  disponibilize `skills` ou `npx` no `PATH`.
+- **Mensagem `npx não encontrado`:** instale ou repare o npm e disponibilize
+  `npx` no `PATH`.
 - **Arquivo gerenciado customizado:** preserve sua versão ou compare as
   mudanças oficiais e só então repita o comando com `--force`.
 

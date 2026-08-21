@@ -28,11 +28,12 @@ framework for encontrada:
 specsfy skills detect --project .
 ```
 
-Quando o nome já estiver confirmado, `skills install` instala somente o
+Quando o nome já estiver confirmado, `npx skills add` instala somente o
 especialista Laravel e registra os arquivos gerenciados:
 
 ```bash
-specsfy skills install specsfy-specialist-laravel --project .
+npx skills add https://github.com/promovaweb/specsfy \
+  --skill specsfy-specialist-laravel --agent universal --copy --full-depth
 ```
 
 ## Aplicar na spec

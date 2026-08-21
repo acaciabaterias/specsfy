@@ -19,7 +19,7 @@ que conduz o projeto.
 Instale no projeto consumidor:
 
 ```bash
-specsfy skills install specsfy-specialist-gitflow
+npx skills add https://github.com/promovaweb/specsfy --skill specsfy-specialist-gitflow --agent universal --copy --full-depth
 ```
 
 Se a skill já estiver instalada, anuncie a transição automática e carregue-a

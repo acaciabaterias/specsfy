@@ -74,6 +74,13 @@ class ConversationalOrchestrationTests(unittest.TestCase):
                 self.assertIn("transição automática", normalized)
                 self.assertIn("mesma conversa", normalized)
                 self.assertIn("instal", normalized)
+                self.assertIn("npx skills add", normalized)
+
+    def test_missing_specialist_requires_authorization_and_uses_npx(self) -> None:
+        framework = " ".join((ROOT / "Spec.md").read_text(encoding="utf-8").split())
+
+        self.assertIn("autorização específica", framework)
+        self.assertIn("npx skills add https://github.com/promovaweb/specsfy", framework)
 
     def test_missing_red_reopens_the_plan_before_automatic_tdd(self) -> None:
         framework = " ".join((ROOT / "Spec.md").read_text(encoding="utf-8").split())

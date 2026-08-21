@@ -31,7 +31,7 @@ import {
   ensureSkillsLock,
   installedSkillNames,
 } from "./skill-lock.js";
-import { resolveSkillsCommand } from "./prerequisites.js";
+import { resolveNpxSkillsCommand } from "./prerequisites.js";
 
 const execFileAsync = promisify(execFile);
 
@@ -666,11 +666,11 @@ async function installWithSkillsCli(
   names: string[],
   project: string,
 ): Promise<void> {
-  const command = await resolveSkillsCommand();
+  const command = await resolveNpxSkillsCommand();
   if (!command) {
     throw new Error(
-      "skills CLI não encontrado. Reinstale @promovaweb/specsfy pelo npm para " +
-        "receber a dependência incluída ou disponibilize skills ou npx no PATH",
+      "npx não encontrado. Instale o npm e disponibilize `npx` no PATH para " +
+        "executar `npx skills add`.",
     );
   }
   const arguments_ = [...command.slice(1), "add", resolve(source)];
@@ -683,11 +683,11 @@ async function removeWithSkillsCli(
   names: string[],
   project: string,
 ): Promise<void> {
-  const command = await resolveSkillsCommand();
+  const command = await resolveNpxSkillsCommand();
   if (!command) {
     throw new Error(
-      "skills CLI não encontrado. Reinstale @promovaweb/specsfy pelo npm para " +
-        "receber a dependência incluída ou disponibilize skills ou npx no PATH",
+      "npx não encontrado. Instale o npm e disponibilize `npx` no PATH para " +
+        "gerenciar as skills instaladas.",
     );
   }
   await runSkillsCommand(

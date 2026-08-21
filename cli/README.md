@@ -72,7 +72,8 @@ specsfy install --project . \
   --specialist specsfy-specialist-postgres
 specsfy skills list
 specsfy skills detect --project .
-specsfy skills install specsfy-specialist-laravel --project .
+npx skills add https://github.com/promovaweb/specsfy \
+  --skill specsfy-specialist-laravel --agent universal --copy --full-depth
 specsfy skills remove specsfy-specialist-laravel --project .
 specsfy update --project .
 specsfy upgrade
@@ -94,7 +95,8 @@ exemplo, instalar `specsfy-specialist-react-ui-components` também instala
 `specsfy-specialist-ui-design`, tanto pelo comando quanto pela TUI:
 
 ```bash
-specsfy skills install specsfy-specialist-react-ui-components --project .
+npx skills add https://github.com/promovaweb/specsfy \
+  --skill specsfy-specialist-react-ui-components --agent universal --copy --full-depth
 ```
 
 Sem subcomando, `specsfy` abre o dashboard TUI no diretório atual. A interface

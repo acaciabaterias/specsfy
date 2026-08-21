@@ -24,8 +24,9 @@ description: Escolher, compor e adaptar uma biblioteca de componentes React com 
    locais, ícones e estratégia de testes do projeto consumidor. Se houver
    shadcn/ui, confirmar com `$specsfy-specialist-shadcn-ui` a base de
    primitives de cada componente antes de adaptar o asset.
-3. Definir com a skill de UI a tarefa principal, hierarquia, composição,
-   densidade, estados e breakpoints.
+3. Confirmar com UX e UI a tarefa principal, telas, fluxo de informação,
+   formulário, padrão de abertura, hierarquia, composição, densidade, estados
+   e breakpoints. O catálogo não escolhe esses pontos.
 4. Escolher a família em [references/catalog.md](references/catalog.md) e listar
    somente os assets candidatos em `assets/components/<familia>/`.
 5. Ler a menor quantidade de arquivos TSX capaz de comparar variantes.

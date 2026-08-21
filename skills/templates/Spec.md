@@ -15,6 +15,7 @@
 | Plan Gate | Pending |
 | Delivery Gate | Pending |
 | Evidence Contract | 1 |
+| Interface para pessoas | A definir |
 | Atualizada em | {{CURRENT_DATE}} |
 
 ## Ato I — Definir
@@ -213,6 +214,34 @@ tests/
 
 ### 10. Interfaces e contratos
 
+#### Interface para pessoas
+
+- **Há interface para pessoas**: [Sim ou Não, com justificativa quando Não.]
+
+#### Stack e convenções de interface
+
+- [Framework, roteamento, componentes, estilos, formulários, testes, telas atuais afetadas e fontes locais observadas. Explique “A confirmar” quando a stack não definir a camada.]
+
+#### Telas e responsabilidades
+
+- [Tela, pessoa que a usa, tarefa principal, entrada e saída, ou “Não aplicável”.]
+
+#### Fluxo de informação e navegação
+
+- [Como a pessoa chega, consulta, altera, confirma, retorna ou recupera o contexto.]
+
+#### Formulários e ações
+
+- [Campos, agrupamentos, obrigatoriedade, ajuda, validações, erros, ação principal e padrão: página, painel lateral, modal, área expandida ou outro.]
+
+#### Composição e disposição
+
+- [Hierarquia, navegação, regiões da tela, densidade, responsividade e componentes existentes.]
+
+#### Estados e acessibilidade
+
+- [Loading, vazio, erro, sucesso, permissão insuficiente, teclado, foco e tecnologia assistiva.]
+
 #### APIs expostas
 
 - [Método/rota ou evento, autenticação, request, response, erros e versionamento.]
@@ -333,9 +362,19 @@ Cada tarefa possui exatamente este checklist, atualizado durante a execução:
 
 **Checkpoint**: [como demonstrar a história isoladamente].
 
+#### Fase de interface
+
+- [ ] T005 [CODE] [US-001] Implementar a tela de [responsabilidade] em src/features/recurso/ListaRecurso.tsx — Refs: US-001, FR-001, NFR-001, AC-001, AC-002, AC-003 — Depends: T001, T002, T003
+  - [ ] **PREP**: Confirmar stack, tela atual, fluxo, formulário e estados definidos na seção 10.
+  - [ ] **EXECUTE**: Implementar a tela, ações e formulário conforme a composição acordada.
+  - [ ] **VERIFY**: Exercitar navegação, validações, feedback e teclado.
+  - [ ] **EVIDENCE**: Registrar arquivos, comando e resultado da interação.
+  - [ ] **IMPROVE**: Aplicar melhoria de interface ou justificar nenhuma.
+  <!-- specsfy:evidence {"task":"T005","refs":["US-001","FR-001","NFR-001","AC-001","AC-002","AC-003"],"files":["src/features/recurso/ListaRecurso.tsx"],"commands":[{"run":"comando focal","exit":0}]} -->
+
 #### Fase final — Qualidade
 
-- [ ] T005 [TEST] Executar regressão e rastreabilidade em tests/Feature/RecursoTest.php — Refs: US-001, FR-001, NFR-001, AC-001, AC-002, AC-003 — Depends: T004
+- [ ] T006 [TEST] Executar regressão e rastreabilidade em tests/Feature/RecursoTest.php — Refs: US-001, FR-001, NFR-001, AC-001, AC-002, AC-003 — Depends: T004, T005
   - [ ] **PREP**: Identificar suites, checks e gates.
   - [ ] **EXECUTE**: Executar regressão e rastreabilidade.
   - [ ] **VERIFY**: Confirmar ausência de gaps.
@@ -344,7 +383,7 @@ Cada tarefa possui exatamente este checklist, atualizado durante a execução:
 
 ### 15. Ordem de execução
 
-- Caminho crítico: T001/T002/T003 → T004 → T005.
+- Caminho crítico: T001/T002/T003 → T004 → T005 → T006.
 - Tarefas paralelas: [IDs e motivo, ou “Nenhuma”.]
 - Estratégia de MVP: [menor conjunto de histórias entregável].
 

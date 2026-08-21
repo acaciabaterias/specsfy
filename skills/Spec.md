@@ -136,6 +136,54 @@ input → inbox → backlog → spec → validate → tasks → TDD/BDD → impl
     linguagem cotidiana e registra respostas confirmadas em
     `.specsfy/DATABASE.md`.
 
+## Contrato de experiência de interface
+
+Quando a entrega criar ou mudar uma interface usada por pessoas, a descoberta
+não pode tratar a tela como detalhe de implementação. Antes de aprovar a
+definição, a conversa deve esclarecer, somente nas lacunas reais:
+
+1. quais telas existem e qual tarefa principal cada uma permite concluir;
+2. como a informação entra, é consultada, muda e leva à próxima tela;
+3. quais campos, agrupamentos, ajuda, validações, ações e recuperação de erro
+   compõem cada formulário;
+4. onde a ação acontece: página, painel lateral, modal, área expandida ou
+   outra composição proposta pela pessoa;
+5. como conteúdo, ações e dados se distribuem na tela em desktop e mobile;
+6. como aparecem loading, vazio, erro, sucesso, permissão insuficiente e
+   acessibilidade por teclado.
+
+Antes da primeira pergunta dessa área, leia `.specsfy/STACK.md`,
+`.specsfy/PACKAGES.md` quando existir, manifests, configurações e telas já
+publicadas. Execute `node .agents/skills/specsfy-setup/scripts/inspect_interface.mjs --project <raiz>` e use a saída para localizar as fontes relevantes. Quando houver sistema atual, percorra os fluxos e telas afetados,
+incluindo navegação, conteúdo, componentes, permissões, estados e limites já
+visíveis. Analise antes de sugerir ou escrever: descreva o que cada tela atual
+permite fazer, o que precisa ser preservado e o que a entrega vai mudar.
+Registre a camada de interface observada, incluindo framework,
+roteamento, componentes, estilos, formulários e testes quando essas fontes
+existirem. Proponha caminhos que respeitem e sigam a stack, o sistema atual e
+os padrões locais; não introduza React, Tailwind, shadcn/ui ou outra biblioteca
+por suposição. Quando as fontes não definirem uma escolha, informe a lacuna e
+pergunte à pessoa antes de sugerir uma base nova.
+
+Use o `Contrato de perguntas numeradas`: uma pergunta por rodada, opções
+textuais, `Escrever outra resposta`, `Gere outras opções` e `Avançar`. Faça no
+máximo oito perguntas na área `Interface`; material já presente no pedido,
+MVP, backlog ou produto existente não deve ser perguntado outra vez.
+
+Registre a resposta textual, não apenas o número da opção. A spec declara no
+cabeçalho se há interface para pessoas. Quando houver, a seção 10 precisa
+conter telas, fluxo de informação, formulários e ações, composição, estados e
+acessibilidade. Um CRUD com interface inclui suas telas e formulários: não se
+resume a rota, serviço ou persistência.
+
+Orquestre `$specsfy-specialist-interface-experience` para analisar o sistema
+atual e conduzir a descoberta; depois use `$specsfy-specialist-ux-design` para jornada e fluxo,
+`$specsfy-specialist-ui-design` para composição e estados e o especialista da
+stack de interface detectada, como `$specsfy-specialist-react` somente em
+projetos React, para materializar o que foi especificado. Esses especialistas
+não substituem a conversa com a pessoa.
+O resultado deve ser simples, funcional e completo para a tarefa proposta.
+
 Um backlog não autoriza implementação nem cria uma segunda fonte normativa. A
 promoção para spec exige intenção explícita do usuário.
 
@@ -244,8 +292,11 @@ transforma a escolha da próxima skill em decisão do usuário.
 O handoff não autoriza ações destrutivas, publicação, deploy, instalação de
 especialista ou outras mudanças externas: cada ação sensível continua exigindo
 autorização específica. Carregue automaticamente um especialista já instalado;
-se estiver ausente, anuncie a dependência antes de solicitar autorização para
-instalá-lo. Nunca altere gates para contornar a etapa responsável. Após cada
+se estiver ausente, informe nome, finalidade e dependências, avise que usará
+`npx skills add`, peça autorização específica e só então execute
+`npx skills add https://github.com/promovaweb/specsfy --skill
+specsfy-specialist-<nome> --agent universal --copy --full-depth`. Nunca altere
+gates para contornar a etapa responsável. Após cada
 handoff, reavalie o estado canônico; se origem, destino e pendência se repetirem
 sem mudança observável, pare o ciclo e relate o impasse.
 

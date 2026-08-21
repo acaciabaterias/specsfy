@@ -1,12 +1,12 @@
 /** Contratos do diagnóstico executado antes de setup e atualização. */
-import { chmod, mkdir, symlink, writeFile } from "node:fs/promises";
+import { chmod, mkdir, writeFile } from "node:fs/promises";
 import { delimiter, join } from "node:path";
 import { describe, expect, test } from "vitest";
 import {
   assertPrerequisites,
   checkPrerequisites,
   nodeVersionSupported,
-  resolveSkillsCommand,
+  resolveNpxSkillsCommand,
 } from "../src/prerequisites.js";
 import { temporaryDirectory } from "./helpers.js";
 
@@ -17,13 +17,13 @@ describe("pré-requisitos", () => {
     expect(nodeVersionSupported("24.1.0")).toBe(true);
   });
 
-  test("aceita skills instalado e registra todos os requisitos do setup", async () => {
+  test("exige npx e registra todos os requisitos do setup", async () => {
     const root = await temporaryDirectory();
     const bin = join(root, "bin");
     const project = join(root, "project");
     await mkdir(bin);
     await mkdir(project);
-    for (const name of ["git", "npm", "skills"]) {
+    for (const name of ["git", "npm", "npx"]) {
       const executable = join(bin, name);
       await writeFile(executable, "#!/bin/sh\nexit 0\n");
       await chmod(executable, 0o755);
@@ -43,7 +43,7 @@ describe("pré-requisitos", () => {
     ]);
     expect(checks.every(({ ok }) => ok)).toBe(true);
     expect(checks.find(({ name }) => name === "skills")?.detail).toContain(
-      join(bin, "skills"),
+      join(bin, "npx"),
     );
   });
 
@@ -63,39 +63,15 @@ describe("pré-requisitos", () => {
 
     expect(checks.find(({ name }) => name === "skills")).toMatchObject({
       ok: true,
-      command: [npx, "--yes", "skills"],
+      command: [npx, "skills"],
     });
     expect(() => assertPrerequisites(checks)).toThrow(
       /Node\.js 22\.20.*Git.*npm.*projeto/s,
     );
   });
 
-  test("usa o skills incluído no pacote quando o PATH está reduzido", async () => {
+  test("exige npx quando o PATH não o disponibiliza", async () => {
     const root = await temporaryDirectory();
-    const launcher = join(root, "package", "bin", "specsfy.cjs");
-    const linkedLauncher = join(root, "global", "bin", "specsfy");
-    const skills = join(
-      root,
-      "package",
-      "node_modules",
-      "skills",
-      "bin",
-      "cli.mjs",
-    );
-    await mkdir(join(skills, ".."), { recursive: true });
-    await mkdir(join(launcher, ".."), { recursive: true });
-    await mkdir(join(linkedLauncher, ".."), { recursive: true });
-    await writeFile(launcher, "#!/usr/bin/env node\n");
-    await symlink(launcher, linkedLauncher);
-    await writeFile(skills, "#!/usr/bin/env node\n");
-    await writeFile(
-      join(root, "package", "node_modules", "skills", "package.json"),
-      JSON.stringify({ name: "skills", version: "1.5.22", type: "module" }),
-    );
-
-    expect(await resolveSkillsCommand("", undefined, linkedLauncher)).toEqual([
-      process.execPath,
-      skills,
-    ]);
+    expect(await resolveNpxSkillsCommand("", undefined, join(root, "specsfy"))).toBeUndefined();
   });
 });

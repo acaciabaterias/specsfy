@@ -18,21 +18,36 @@ description: Investigar, estruturar e validar experiências com pesquisa, arquit
 
 ## Fluxo
 
-1. Formular a decisão de produto e a hipótese de comportamento antes de
+1. Quando a entrega criar ou mudar uma interface para pessoas, conduzir a
+   descoberta antes de propor a solução. Perguntar, pelo contrato central, que
+   telas existem, como a informação percorre o fluxo, quais campos e
+   validações entram no formulário e como cada ação abre: página, painel
+   lateral, modal, área expandida ou outro formato. Reaproveitar contexto já
+   confirmado e perguntar somente o que falta.
+2. Ler a stack, o design system e as telas existentes antes de sugerir um fluxo
+   visual. A jornada deve usar a tecnologia e os padrões observados; se a
+   camada de interface não estiver clara, encaminhar a pergunta para a pessoa.
+   Examinar o sistema atual para identificar o que a pessoa já vê, faz e espera
+   em cada tela afetada antes de propor uma alteração.
+3. Formular a escolha de produto e a hipótese de comportamento antes de
    escolher método; definir público, contexto, frequência e risco.
-2. Inventariar evidência existente e marcar separadamente fato observado,
+4. Mapear material existente e marcar separadamente fato observado,
    inferência, hipótese e preferência interna.
-3. Selecionar método proporcional à pergunta e ao risco usando
+5. Selecionar método proporcional à pergunta e ao risco usando
    [references/standards.md](references/standards.md); definir recrutamento,
    consentimento, roteiro e critério de parada.
-4. Mapear jornada atual com entradas, decisões, esperas, erros, canais,
+6. Mapear jornada atual com entradas, escolhas, esperas, erros, canais,
    dependências e handoffs; não apagar exceções críticas.
-5. Prototipar na fidelidade mínima que torne a hipótese testável sem simular
+7. Prototipar na fidelidade mínima que torne a hipótese testável sem simular
    comportamento que altere o resultado.
-6. Conduzir sessões com tarefas e prompts neutros, registrando sucesso, erro,
+8. Conduzir sessões com tarefas e prompts neutros, registrando sucesso, erro,
    tempo, hesitação, compreensão e citações relevantes.
-7. Sintetizar achados por evidência, severidade, alcance e impacto; separar
+9. Sintetizar achados por comprovação, severidade, alcance e impacto; separar
    claramente achado, interpretação, recomendação e questão aberta.
+
+Não escolher painel lateral, modal ou outro padrão por preferência interna.
+Registrar a resposta textual da pessoa e encaminhar a composição para
+`$specsfy-specialist-ui-design`.
 
 ## Padrões
 

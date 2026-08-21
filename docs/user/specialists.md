@@ -9,6 +9,11 @@ Na interface, cada uma usa o padrão `Specsfy - Especialista - Nome`, como
 `Specsfy - Especialista - Laravel`. O identificador de comando continua
 `specsfy-specialist-laravel`.
 
+Para criar ou alterar interfaces, use
+`specsfy-specialist-interface-experience` antes dos especialistas de UX e UI.
+Ela examina a stack e o sistema atual, organiza as perguntas sobre telas e
+garante uma fase específica de interface nas tarefas.
+
 ## Detectar e instalar
 
 O comando `detect` lê o projeto e mostra recomendações sem instalar arquivos.
@@ -19,21 +24,54 @@ retornados:
 specsfy skills detect
 ```
 
-Depois da revisão, informe ao comando `add` apenas os especialistas usados pela
-aplicação. O CLI registra cada instalação no `skills-lock.json`, permitindo
-conferir depois quais arquivos são gerenciados:
+Depois da revisão, instale apenas os especialistas usados pela aplicação. A
+instalação sempre usa `npx skills add` e registra cada escolha no
+`skills-lock.json`, permitindo conferir depois quais arquivos são gerenciados:
 
 ```bash
-specsfy skills install \
-  specsfy-specialist-laravel \
-  specsfy-specialist-postgres \
-  specsfy-specialist-redis
+npx skills add https://github.com/promovaweb/specsfy \
+  --skill specsfy-specialist-laravel \
+  --skill specsfy-specialist-postgres \
+  --skill specsfy-specialist-redis \
+  --agent universal --copy --full-depth
 ```
 
 As skills base podem sugerir um especialista. Quando ele já estiver instalado,
 a transição é anunciada e continua na mesma conversa. Quando estiver ausente, o
-agente precisa de autorização específica para instalar. A transição entre
+agente informa o especialista, a finalidade e as dependências, avisa que usará
+`npx skills add` e pede autorização específica para instalar. A transição entre
 skills nunca instala o catálogo inteiro automaticamente.
+
+## Instalação no setup
+
+Ao iniciar o setup, você autoriza o Specsfy a detectar e instalar os
+especialistas diretamente ligados à stack encontrada, além de um núcleo comum
+para modelar dados, domínio e arquitetura. Ele mostra os itens e usa `npx
+skills add` no projeto atual. Tecnologias sem sinal no código não entram na
+instalação.
+
+| Stack encontrada | Especialista |
+| --- | --- |
+| Laravel, Supabase, PostgreSQL ou Redis | Laravel, Supabase, PostgreSQL ou Redis correspondente |
+| React, Astro, Next.js ou TypeScript | especialista correspondente |
+| Tailwind CSS ou shadcn/ui | Tailwind CSS ou shadcn/ui correspondente |
+| Docker, Swarm ou Ansible | especialista de plataforma correspondente |
+| OpenAPI, OpenTelemetry, Prometheus ou CI/CD | API, observabilidade ou entrega correspondente |
+| Todo projeto | Modelagem de Dados, Modelagem de Domínio e Arquitetura de Software |
+
+## Instalação manual
+
+Você pode instalar qualquer especialista do catálogo fora do setup. Essa opção
+serve para uma necessidade pontual que a stack ainda não revela, como revisão,
+acessibilidade ou pesquisa técnica:
+
+```bash
+npx skills add https://github.com/promovaweb/specsfy \
+  --skill specsfy-specialist-web-accessibility --agent universal --copy --full-depth
+```
+
+O setup não remove especialistas instalados manualmente. Eles permanecem no
+projeto e podem ser usados quando a entrega precisar deles.
 
 ## Catálogo por domínio
 
@@ -41,7 +79,7 @@ skills nunca instala o catálogo inteiro automaticamente.
 | --- | --- |
 | backend e dados | Laravel, Supabase, Postgres, Redis e APIs web |
 | frontend | React, Astro, Next.js, TypeScript e Tailwind CSS |
-| interface | shadcn/ui, UI, UX e acessibilidade web |
+| interface | experiência de interface, shadcn/ui, UI, UX e acessibilidade web |
 | plataforma | Docker, Docker Swarm, Ansible e engenharia de entrega |
 | qualidade | segurança, observabilidade e performance |
 | design técnico | arquitetura e modelagem de domínio |

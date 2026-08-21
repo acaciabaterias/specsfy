@@ -15,7 +15,8 @@ o output mode, o adapter, as integrações e as fontes de conteúdo.
 
 ```bash
 specsfy skills detect --project .
-specsfy skills install specsfy-specialist-astro --project .
+npx skills add https://github.com/promovaweb/specsfy \
+  --skill specsfy-specialist-astro --agent universal --copy --full-depth
 ```
 
 Quando todas as recomendações exibidas forem aplicáveis, `--detected` instala o

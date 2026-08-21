@@ -43,7 +43,7 @@ describe("instalador", () => {
   let log: string;
 
   beforeEach(async () => {
-    previousCommand = process.env.SPECSFY_SKILLS_CLI;
+    previousCommand = process.env.SPECSFY_NPX_COMMAND;
     previousLog = process.env.SPECSFY_SKILLS_LOG;
     const commandRoot = await temporaryDirectory();
     log = join(commandRoot, "skills.jsonl");
@@ -52,7 +52,7 @@ describe("instalador", () => {
       command,
       "#!/usr/bin/env node\n" +
         "const fs=require('node:fs');const p=require('node:path');\n" +
-        "const a=process.argv.slice(2);fs.appendFileSync(process.env.SPECSFY_SKILLS_LOG,JSON.stringify(a)+'\\n');\n" +
+        "const a=process.argv.slice(2);if(a[0]==='skills')a.shift();fs.appendFileSync(process.env.SPECSFY_SKILLS_LOG,JSON.stringify(a)+'\\n');\n" +
         "const lp=p.join(process.cwd(),'skills-lock.json');const l=fs.existsSync(lp)?JSON.parse(fs.readFileSync(lp,'utf8')):{version:1,skills:{}};\n" +
         "if(a[0]==='remove'){for(const n of a.slice(1,a.indexOf('--agent'))){delete l.skills[n];}fs.writeFileSync(lp,JSON.stringify(l));process.exit(0);}\n" +
         "if(a[0]!=='add')process.exit(0);const s=a[1];const d=p.join(process.cwd(),'.agents','skills');fs.mkdirSync(d,{recursive:true});\n" +
@@ -60,13 +60,13 @@ describe("instalador", () => {
         "fs.writeFileSync(lp,JSON.stringify(l));\n",
     );
     await chmod(command, 0o755);
-    process.env.SPECSFY_SKILLS_CLI = command;
+    process.env.SPECSFY_NPX_COMMAND = command;
     process.env.SPECSFY_SKILLS_LOG = log;
   });
 
   afterEach(() => {
-    if (previousCommand === undefined) delete process.env.SPECSFY_SKILLS_CLI;
-    else process.env.SPECSFY_SKILLS_CLI = previousCommand;
+    if (previousCommand === undefined) delete process.env.SPECSFY_NPX_COMMAND;
+    else process.env.SPECSFY_NPX_COMMAND = previousCommand;
     if (previousLog === undefined) delete process.env.SPECSFY_SKILLS_LOG;
     else process.env.SPECSFY_SKILLS_LOG = previousLog;
   });

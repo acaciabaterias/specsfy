@@ -54,9 +54,19 @@ O comentário é obrigatório para tarefa `[CODE]` concluída quando a spec decl
 
 **Checkpoint**: [como demonstrar a história isoladamente].
 
+#### Fase de interface
+
+- [ ] T005 [CODE] [US-001] Implementar a tela de [responsabilidade] em src/features/recurso/ListaRecurso.tsx — Refs: US-001, FR-001, NFR-001, AC-001, AC-002, AC-003 — Depends: T001, T002, T003
+  - [ ] **PREP**: Confirmar stack, tela atual, fluxo, formulário e estados definidos na seção 10.
+  - [ ] **EXECUTE**: Implementar a tela, ações e formulário conforme a composição acordada.
+  - [ ] **VERIFY**: Exercitar navegação, validações, feedback e teclado.
+  - [ ] **EVIDENCE**: Registrar arquivos, comando e resultado da interação.
+  - [ ] **IMPROVE**: Aplicar melhoria de interface ou justificar nenhuma.
+  <!-- specsfy:evidence {"task":"T005","refs":["US-001","FR-001","NFR-001","AC-001","AC-002","AC-003"],"files":["src/features/recurso/ListaRecurso.tsx"],"commands":[{"run":"comando focal","exit":0}]} -->
+
 #### Fase final — Qualidade
 
-- [ ] T005 [TEST] Executar regressão e rastreabilidade em tests/Feature/RecursoTest.php — Refs: US-001, FR-001, NFR-001, AC-001, AC-002, AC-003 — Depends: T004
+- [ ] T006 [TEST] Executar regressão e rastreabilidade em tests/Feature/RecursoTest.php — Refs: US-001, FR-001, NFR-001, AC-001, AC-002, AC-003 — Depends: T004, T005
   - [ ] **PREP**: Identificar suites, checks e gates.
   - [ ] **EXECUTE**: Executar regressão e rastreabilidade.
   - [ ] **VERIFY**: Confirmar ausência de gaps.
@@ -65,6 +75,6 @@ O comentário é obrigatório para tarefa `[CODE]` concluída quando a spec decl
 
 ### 15. Ordem de execução
 
-- Caminho crítico: T001/T002/T003 → T004 → T005.
+- Caminho crítico: T001/T002/T003 → T004 → T005 → T006.
 - Tarefas paralelas: [IDs e motivo, ou “Nenhuma”.]
 - Estratégia de MVP: [menor conjunto de histórias entregável].

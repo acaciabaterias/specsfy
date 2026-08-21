@@ -16,7 +16,8 @@ registrados no plano.
 
 ```bash
 specsfy skills detect --project .
-specsfy skills install specsfy-specialist-nextjs --project .
+npx skills add https://github.com/promovaweb/specsfy \
+  --skill specsfy-specialist-nextjs --agent universal --copy --full-depth
 ```
 
 Quando todas as recomendações forem aplicáveis, `--detected` instala as bases e

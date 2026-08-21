@@ -6,13 +6,15 @@ Use o catálogo de especialistas distribuído pelo CLI para aprofundar:
 - segurança e APIs: `-application-security` e `-web-api-design`;
 - arquitetura e operação: `-software-architecture`, `-observability`,
   `-performance-engineering` e `-delivery-engineering`;
-- experiência: `-ui-design`, `-ux-design` e `-web-accessibility`;
+- experiência: `-interface-experience`, `-ui-design`, `-ux-design`,
+  `-web-accessibility` e o
+  especialista da stack de interface, como `-react`;
 - stack: o especialista com o nome da tecnologia detectada.
 
 Quando estiver ausente, proponha este comando e peça autorização específica:
 
 ```bash
-specsfy skills install specsfy-specialist-<nome>
+npx skills add https://github.com/promovaweb/specsfy --skill specsfy-specialist-<nome> --agent universal --copy --full-depth
 ```
 
 Especialista informa padrões; a fonte normativa continua sendo

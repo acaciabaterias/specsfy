@@ -26,6 +26,11 @@ use `specsfy-specialist-react-ui-components` em conjunto com
 `specsfy-specialist-ui-design`. O CLI resolve e instala essa dependência
 declarada no catálogo automaticamente.
 
+Para criar ou alterar uma interface de sistema, use primeiro
+`specsfy-specialist-interface-experience`. Ela examina o sistema e a stack já
+existentes, conduz as perguntas sobre telas e encaminha UX, UI e a tecnologia
+correta para a entrega.
+
 O catálogo cobre a stack Promovaweb, design de interfaces, qualidade,
 arquitetura, operação e disciplinas de engenharia. A referência completa de
 instalação e uso pertence à

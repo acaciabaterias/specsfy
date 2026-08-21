@@ -62,6 +62,9 @@ validadores devem seguir a spec.
 - formato `Specsfy/2.0`.
 - IDs rastreáveis para histórias, requisitos e condições de aceite.
 - cenários que cobrem sucesso, variação e falha.
+- para interfaces, telas, fluxo de informação, formulários, composição, estados
+  e acessibilidade na seção 10.
+- a stack e as telas atuais analisadas, com o que será preservado e alterado.
 - uma única fonte normativa.
 - status Draft ou Defined conforme a evidência real.
 
@@ -71,6 +74,8 @@ validadores devem seguir a spec.
 - copiar uma fonte externa como requisito sem confirmação.
 - aprovar gates com campos incompletos.
 - misturar várias entregas grandes na mesma spec.
+- descrever um CRUD apenas com API, serviço ou banco, sem a experiência que a
+  pessoa precisa usar.
 
 ## Próximo passo
 

@@ -46,7 +46,8 @@ gerenciadas:
 ```bash
 specsfy skills list
 specsfy skills detect --project .
-specsfy skills install specsfy-specialist-laravel --project .
+npx skills add https://github.com/promovaweb/specsfy \
+  --skill specsfy-specialist-laravel --agent universal --copy --full-depth
 specsfy update --project .
 ```
 

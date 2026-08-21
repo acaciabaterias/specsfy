@@ -159,9 +159,25 @@ Quando a pessoa pedir aprofundamento, promoção ou criação de uma spec:
    dados, testes ou arquitetura.
 4. Leia `references/discovery-map.md` para selecionar perguntas relevantes;
    não percorra o mapa mecanicamente.
-5. Leia `../specsfy-03-specify/references/mcr-10.md` e faça a análise categorial
+5. Quando a entrega tiver interface para pessoas, leia o `Contrato de
+   experiência de interface` de `.specsfy/Spec.md` e trate `Interface` como
+   área própria da descoberta. Pergunte sobre telas, fluxo de informação,
+   formulário, padrão de ação como painel lateral ou modal e composição. Não
+   escolha o padrão no lugar da pessoa quando houver alternativas reais.
+   Antes da pergunta, leia a stack e as telas existentes indicadas pelo
+   contrato central. Quando já houver sistema, percorra a área afetada e
+   registre navegação, componentes, conteúdo, permissões e estados que a nova
+   entrega preserva ou altera. Use isso para oferecer opções compatíveis em vez
+   de sugerir uma biblioteca nova por padrão. Pedido de criar ou alterar tela,
+   dashboard, lista, formulário, fluxo visual ou CRUD ativa essa área, mesmo
+   que a pessoa não use a palavra “interface”.
+   Carregue `$specsfy-specialist-interface-experience` antes de fechar essa
+   área; ele coordena a análise do sistema atual e os especialistas seguintes.
+   Carregue `$specsfy-specialist-ux-design` antes de fechar a jornada e
+   `$specsfy-specialist-ui-design` antes de fechar a composição.
+6. Leia `../specsfy-03-specify/references/mcr-10.md` e faça a análise categorial
    silenciosamente antes da primeira pergunta.
-6. Leia `references/specialists.md` somente quando tecnologia ou disciplina
+7. Leia `references/specialists.md` somente quando tecnologia ou disciplina
    exigir contexto adicional.
 
 ## Conduzir a descoberta adaptativa
@@ -208,6 +224,12 @@ Durante a conversa:
 Garanta cobertura suficiente de problema, atores, resultado, escopo, jornadas,
 falhas, limites, regras, dados, segurança, privacidade, desempenho,
 acessibilidade, restrições existentes e sinais objetivos de aceite e sucesso.
+
+Para interface usada por pessoas, também cubra telas, navegação, fluxo de
+informação, campos e validações do formulário, padrão de abertura de cada ação,
+disposição dos elementos, estados e uso por teclado. Registre as respostas
+textuais e a stack observada no backlog para que a spec não reduza um CRUD a
+endpoints nem troque a tecnologia usada pelo projeto.
 
 Quando a jornada depender de informações guardadas, consultadas, compartilhadas
 ou apagadas, anuncie a transição automática para `$specsfy-data-discovery`

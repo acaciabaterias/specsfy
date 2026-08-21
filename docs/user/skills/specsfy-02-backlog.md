@@ -51,6 +51,16 @@ specs/backlog/0003-idioma-da-interface.md
 O item registra problema, público, resultado esperado e dúvidas abertas. Ele
 continua sendo backlog e não autoriza implementação.
 
+Quando a entrega incluir interface, o refinamento também pergunta somente o
+que ainda não foi dito sobre telas, fluxo de informação, formulário, padrão de
+abertura da ação e disposição dos elementos. Você pode pedir alternativas para
+uma página, painel lateral ou modal. As respostas ficam registradas em texto
+para orientar a spec.
+
+Antes disso, o agente analisa o sistema existente. Rotas, telas, componentes,
+conteúdo, permissões, estados, testes e stack indicam o que deve ser preservado
+e evitam sugestões incompatíveis com o projeto.
+
 ## Como o ciclo termina
 
 O refinamento faz no máximo oito perguntas por área. Cada rodada traz

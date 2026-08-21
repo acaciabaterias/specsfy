@@ -43,6 +43,16 @@ Task` existe na spec, a skill da etapa sincroniza a projeção remota.
 Transições não são meras etiquetas. Cada uma depende da evidência registrada na
 spec e nos testes.
 
+## Leitura integral do consumidor
+
+`specsfy-setup` executa `scripts/inspect_project.mjs` antes das demais skills.
+O relatório agrupa todas as fontes textuais relevantes fora de dependências e
+artefatos gerados: instruções, manifests, configuração, aplicação, rotas,
+persistência, integrações, interface, testes e documentação. A skill lê os
+grupos retornados antes de sugerir stack, especialista ou alteração. Em base
+grande, ela relata o conjunto lido por grupo e preserva convenções ainda não
+afetadas pela entrega.
+
 ## Ato I — Definir
 
 Antes do Ato I, a entrada possui duas camadas não normativas:
@@ -74,6 +84,16 @@ encerra definitivamente as perguntas da área, responde depois ou retoma agora.
 O encerramento ou adiamento fica registrado. Uma área encerrada não volta ao
 roteiro sem reabertura explícita; uma área adiada preserva seus pontos para
 retomada. Lacunas aplicáveis mantêm a definição em Draft com o gate pendente.
+
+Para uma entrega com interface para pessoas, o refinamento cria uma área de
+interface. Ela esclarece telas, fluxo de informação, formulário, padrão de
+abertura das ações, composição, estados e acessibilidade, sem repetir material
+já confirmado. A seção 10 de `spec.md` recebe essas respostas. O validador
+rejeita uma interface declarada como presente sem essas partes, e o plano deve
+gerar tarefas de tela, formulário e testes de interação além de API ou dados.
+Antes da descoberta, o framework inspeciona a stack e o sistema existente,
+incluindo rotas, telas, componentes, conteúdo, permissões e estados. A seção
+14 precisa conter `Fase de interface`, com uma tarefa por tela registrada.
 
 Responsabilidades:
 

@@ -13,6 +13,12 @@ A metodologia existe para responder, durante todo o trabalho, a três perguntas:
 Você não precisa decorar comandos nem escolher cada skill. O agente identifica a
 etapa atual, anuncia as transições e mantém o trabalho na mesma conversa.
 
+Antes de iniciar uma descoberta, o setup lê o sistema que já existe. Ele reúne
+instruções do projeto, manifests, configuração, código, rotas, dados,
+integrações, interfaces, testes e documentação. Essa leitura evita sugestões
+desconectadas da aplicação e registra o que precisa continuar igual antes de
+propor uma mudança.
+
 ## Uma única especificação
 
 Cada mudança escolhida possui uma única fonte normativa. O caminho permite que
@@ -64,6 +70,28 @@ plano e a execução ganham forma. A Inbox continua sem perguntas.
 
 A [Referência do método](method-reference.md) detalha a escala de Effort, os
 perfis exibidos pelo progresso, os estados e os gates apresentados neste guia.
+
+## Interfaces fazem parte da definição
+
+Quando a entrega cria ou muda uma tela usada por pessoas, o Specsfy pergunta
+antes do código como a experiência deve funcionar. A conversa cobre as telas,
+o fluxo de informação, os campos e validações do formulário, a composição e o
+formato de cada ação, como página, painel lateral, modal ou outra alternativa.
+As opções usam texto completo, e você sempre pode escolher `Escrever outra
+resposta`, `Gere outras opções` ou `Avançar`.
+
+Antes das perguntas, o Specsfy analisa a stack e o sistema atual quando ele
+existe. Ele observa rotas, telas, componentes, conteúdo, permissões, estados e
+testes para preservar o que já funciona e sugerir uma continuação coerente. O
+agente não troca React, Tailwind, shadcn/ui ou outra tecnologia por suposição.
+
+Um CRUD com interface não é considerado pronto apenas por ter banco, serviço
+ou API. A spec registra telas, formulário, navegação, estados de carregamento,
+vazio, erro e sucesso, além do uso por teclado. O plano gera tarefas e testes
+para essa interface antes da implementação.
+
+Essas tarefas aparecem em uma `Fase de interface` própria na seção 14 da spec.
+Cada tela tem uma tarefa com caminho, comportamento e teste de interação.
 
 ## Da ideia até o código
 

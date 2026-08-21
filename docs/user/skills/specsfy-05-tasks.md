@@ -41,6 +41,13 @@ T002 [ ] Criar caso TDD para e-mail desconhecido — cobre AC-002
 T003 [ ] Implementar solicitação sem revelar existência do cadastro
 ```
 
+Quando a spec declara uma interface, o plano inclui tarefas para telas,
+formulário, ações e seus testes de navegação, validação e recuperação de erro.
+Uma tarefa de API ou persistência não substitui essas tarefas.
+
+Essas tarefas ficam em uma `Fase de interface` dedicada. Há uma tarefa por tela
+registrada, usando os componentes e a stack já existentes no projeto.
+
 Depois de registrar as tarefas, a skill chama `specsfy-06-tdd-bdd` para
 materializar os testes. O Plan Gate só pode ser aprovado quando todos os
 predecessores exigidos possuem RED válido.

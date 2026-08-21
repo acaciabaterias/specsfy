@@ -43,16 +43,23 @@ exigindo autorização específica.
    `tasks.md`, `plan.md`, `research.md` ou `data-model.md`.
 2. Exija `Formato: Specsfy/2.0`, `Status: Planned` ou `Implementing`,
    `Definition Gate: Passed` e `Plan Gate: Passed`.
-3. Execute os validadores contra `specs/<estado>/<NNNN>-<slug>/spec.md`. Se um gate
+3. Se `Interface para pessoas` for `Sim`, leia a seção 10 e confirme que o
+   plano contém tarefas para stack local, telas, formulários, ações, estados e
+   testes de interação. Compare a stack, as telas e os fluxos atuais com o
+   projeto antes de alterar código. Preserve componentes, rotas, conteúdo,
+   permissões e comportamentos existentes fora do alcance registrado. Se faltar
+   algum deles ou a tecnologia proposta divergir sem confirmação, retorne automaticamente para
+   `$specsfy-05-tasks`; não implemente um CRUD somente como API ou persistência.
+4. Execute os validadores contra `specs/<estado>/<NNNN>-<slug>/spec.md`. Se um gate
    falhar por tarefa, predecessor TDD ou RED ausente em um plano antes aprovado,
    anuncie a pendência e retorne automaticamente para
    `$specsfy-05-tasks`; não altere produção. Essa skill reabre o Ato II, chama
    TDD/BDD e retoma esta implementação depois de validar novamente o plano. Para
    outra falha, carregue automaticamente a skill responsável pelo gate.
-4. Execute a suite base relevante. Registre falhas preexistentes e não as atribua à nova mudança.
-5. Antes da primeira alteração de produção, defina `Status: Implementing`,
+5. Execute a suite base relevante. Registre falhas preexistentes e não as atribua à nova mudança.
+6. Antes da primeira alteração de produção, defina `Status: Implementing`,
    `Delivery Gate: In Progress` e execute `specsfy transition <id> in-progress`.
-6. Selecione trabalho pronto com:
+7. Selecione trabalho pronto com:
 
 ```bash
 node .agents/skills/specsfy-07-implement/scripts/next_task.mjs \
@@ -74,6 +81,9 @@ Se não houver tarefa pronta, diferencie `concluído` de `bloqueado por dependê
    `$specsfy-05-tasks`, que reabre o plano, chama `$specsfy-06-tdd-bdd` e
    retoma esta skill depois do novo `Plan Gate: Passed`.
 4. Escreva a menor mudança de produção que torna o teste TDD verde.
+   Para uma tarefa de interface, implemente a tela, o formulário e a interação
+   definidos na spec com os estados descritos; não substitua o fluxo por uma
+   rota de API, um componente vazio ou um atalho sem a tela acordada.
 5. Depois de alterar produção e antes de marcar `EXECUTE`, monitore o contexto:
 
 ```bash
