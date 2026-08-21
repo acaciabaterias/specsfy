@@ -36,10 +36,11 @@ Antes de formular qualquer pergunta, leia e aplique o
    ausente antes de preparar o contexto. O diagnóstico confere Node.js, Git,
    npm, acesso ao projeto e o `npx`.
 6. Executar `node scripts/setup_context.mjs --project <raiz>`.
-   Renderizar `PROJECT.md`, `STACK.md`, `RULES.md` e `DATABASE.md` a partir de
+   Renderizar `PROJECT.md`, `STACK.md`, `RULES.md`, `DATABASE.md` e
+   `INTERFACE.md` a partir de
    `.specsfy/templates/custom/<Nome>.md` quando existir ou dos arquivos
    gerenciados `.specsfy/templates/Project.md`, `Stack.md`, `Rules.md` e
-   `Database.md` caso contrário; não manter modelos paralelos embutidos no
+   `Database.md` e `Interface.md` caso contrário; não manter modelos paralelos embutidos no
    script. O mesmo comando deve ler a constituição e todos os arquivos
    regulares em `specs/` quando detectar GitHub Spec Kit, depois atualizar o
    bloco gerenciado de `.specsfy/SPECKIT.md`.
@@ -49,7 +50,7 @@ Antes de formular qualquer pergunta, leia e aplique o
    node scripts/monitor_context.mjs --project <raiz> --check
    ```
 
-8. Inspecionar os quatro arquivos iniciais, `.specsfy/PACKAGES.md` quando
+8. Inspecionar os cinco arquivos iniciais, `.specsfy/PACKAGES.md` quando
    gerado e a fonte de stack usada pelo script. Quando `.specsfy/SPECKIT.md`
    existir, abrir a constituição e cada fonte original listada na projeção.
    Antes de qualquer descoberta de interface, executar também
@@ -68,7 +69,9 @@ Antes de formular qualquer pergunta, leia e aplique o
 10. Depois de ler a stack, instale primeiro o núcleo essencial do Specsfy:
    `specsfy-specialist-data-modeling`,
    `specsfy-specialist-domain-modeling` e
-   `specsfy-specialist-software-architecture`. Em seguida, executar
+   `specsfy-specialist-software-architecture`, `specsfy-specialist-shadcn-ui`
+   e `specsfy-specialist-reui`.
+   Em seguida, executar
    `specsfy skills detect --project <raiz>`. Apresente a tabela de
    correspondência abaixo com o núcleo e os especialistas detectados, avisando
    quais serão instalados. A pessoa já autorizou este comportamento ao iniciar
@@ -106,7 +109,7 @@ ou finalidade, registrar essa avaliação nas fontes da tarefa e repetir com
 `--acknowledge-rules-no-change`; nunca usar o reconhecimento para ocultar uma
 mudança documental real.
 
-Manter `PROJECT.md` na raiz. Manter `STACK.md`, `RULES.md`, `DATABASE.md`,
+Manter `PROJECT.md` e `INTERFACE.md` na raiz. Manter `STACK.md`, `RULES.md`, `DATABASE.md`,
 `PACKAGES.md` e a projeção opcional `SPECKIT.md` em `.specsfy/`. Tratar esses
 documentos como contexto derivado do projeto, não como spec, gate ou
 autorização de implementação.
@@ -142,3 +145,14 @@ pendente.
 | `specsfy-specialist-data-modeling` | dados, entidades, relações e ciclo de vida |
 | `specsfy-specialist-domain-modeling` | linguagem, regras e limites de domínio |
 | `specsfy-specialist-software-architecture` | módulos, dependências e estrutura técnica |
+| `specsfy-specialist-reui` | base ReUI para interfaces e CRUDs React/Tailwind |
+| `specsfy-specialist-shadcn-ui` | primitives, tema e registry para o ReUI |
+
+Para todo projeto Laravel com React, o setup instala shadcn/ui e ReUI juntos.
+Não trate essa dupla como opcional: shadcn/ui prepara a base e ReUI cria CRUDs
+e interfaces sobre ela.
+
+Depois de instalar a dupla, o setup registra em `INTERFACE.md` que telas React
+são compostas por componentes. Cada nova tela deve consultar o mapa, reutilizar
+o que já existe e registrar componentes próprios, primitives shadcn/ui e
+composições ReUI com arquivos e consumidores reais.

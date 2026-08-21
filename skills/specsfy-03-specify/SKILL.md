@@ -127,15 +127,19 @@ node <diretório-da-skill>/scripts/iniciar_spec.mjs \
   material para ampliar contexto sem duplicar cenários equivalentes.
 - Inclua fora de escopo, erros, limites, segurança e acessibilidade quando relevantes.
 - Quando o cabeçalho declarar `Interface para pessoas: Sim`, preencha na seção
-  10 as sete partes do template com stack e convenções locais, telas, fluxo de
-  informação, formulários e ações, composição, estados e acessibilidade. Use
-  `.specsfy/STACK.md`, manifests, telas e código existente como fonte da stack
+  10 as oito partes do template com stack e convenções locais, telas, fluxo de
+  informação, formulários e ações, composição, blocos React e componentes
+  shadcn/ui/ReUI, estados e acessibilidade. Use
+  `INTERFACE.md`, `.specsfy/STACK.md`, manifests, telas e código existente como fonte da stack
   e do sistema atual; registre o que será preservado e alterado. Não proponha
   biblioteca incompatível nem reestruture uma tela existente sem esse exame.
   Carregue
   `$specsfy-specialist-ux-design`, `$specsfy-specialist-ui-design` e o
   especialista da stack de interface. Não aceite uma descrição de CRUD que
   tenha somente API, banco ou serviço.
+  Em Laravel com React, registre explicitamente shadcn/ui e ReUI, todos os
+  blocos React previstos, suas responsabilidades, arquivos, componentes de
+  origem e regra de reuso. A página apenas compõe esses blocos.
 - Quando não houver interface, declare `Interface para pessoas: Não` e explique
   por que a entrega não será usada por uma pessoa em uma tela.
 - Mantenha a seção técnica concreta o bastante para permitir tarefas com caminhos de arquivo, sem confundir escolha interna com resultado do usuário.

@@ -58,7 +58,7 @@ O comentário é obrigatório para tarefa `[CODE]` concluída quando a spec decl
 
 - [ ] T005 [CODE] [US-001] Implementar a tela de [responsabilidade] em src/features/recurso/ListaRecurso.tsx — Refs: US-001, FR-001, NFR-001, AC-001, AC-002, AC-003 — Depends: T001, T002, T003
   - [ ] **PREP**: Confirmar stack, tela atual, fluxo, formulário e estados definidos na seção 10.
-  - [ ] **EXECUTE**: Implementar a tela, ações e formulário conforme a composição acordada.
+  - [ ] **EXECUTE**: Implementar os blocos React, tela, ações e formulário conforme a composição acordada; registrar cada bloco e componente em `INTERFACE.md`.
   - [ ] **VERIFY**: Exercitar navegação, validações, feedback e teclado.
   - [ ] **EVIDENCE**: Registrar arquivos, comando e resultado da interação.
   - [ ] **IMPROVE**: Aplicar melhoria de interface ou justificar nenhuma.

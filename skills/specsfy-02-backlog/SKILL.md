@@ -175,6 +175,10 @@ Quando a pessoa pedir aprofundamento, promoção ou criação de uma spec:
    área; ele coordena a análise do sistema atual e os especialistas seguintes.
    Carregue `$specsfy-specialist-ux-design` antes de fechar a jornada e
    `$specsfy-specialist-ui-design` antes de fechar a composição.
+   Quando a stack React e Tailwind usar ReUI, todo CRUD declarado na descoberta
+   deve registrar Data Grid ou List, Filters, Form, Dialog ou Sheet e os
+   estados ReUI aplicáveis; carregue `$specsfy-specialist-reui` antes de fechar
+   a área.
 6. Leia `../specsfy-03-specify/references/mcr-10.md` e faça a análise categorial
    silenciosamente antes da primeira pergunta.
 7. Leia `references/specialists.md` somente quando tecnologia ou disciplina

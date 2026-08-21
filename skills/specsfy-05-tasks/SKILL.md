@@ -79,7 +79,10 @@ das seções `14. Tarefas` e `15. Ordem de execução` em
   API. Inclua testes de comportamento da interface para navegação, envio,
   validação, recuperação de erro e o padrão de abertura escolhido, como painel
   lateral ou modal. Use somente os componentes, convenções e runners da stack
-  de interface registrada; cada tarefa aponta os componentes ou rotas reais.
+  de interface registrada; cada tarefa aponta os blocos React, componentes
+  shadcn/ui e ReUI ou rotas reais. Inclua uma tarefa para atualizar
+  `INTERFACE.md` com finalidade, arquivo, API, estados, consumidores e regra
+  de reaproveitamento de todos os blocos criados ou alterados.
   Agrupe-as na subseção obrigatória `#### Fase de interface` da seção 14. Cada
   tela registrada recebe ao menos uma tarefa própria; não esconda essa entrega
   dentro de uma tarefa genérica de backend.

@@ -5,6 +5,11 @@ description: Instalar, compor e adaptar shadcn/ui com registry, Base UI, Radix, 
 
 # shadcn/ui
 
+Para interfaces React e Tailwind da Promovaweb, esta skill prepara as
+primitives, `components.json`, aliases e tema. Quando a tela precisar de CRUD
+ou composição de produto, carregue `$specsfy-specialist-reui` em conjunto: ela
+instala primeiro componentes gratuitos ReUI sobre esta base.
+
 ## Quando usar
 
 - Acionar quando o projeto tem `components.json` ou componentes shadcn já
@@ -50,6 +55,9 @@ description: Instalar, compor e adaptar shadcn/ui com registry, Base UI, Radix, 
    documentação.
 8. Testar teclado, foco, responsividade, submissão de formulário e os dois
    temas (claro/escuro) antes de considerar o componente pronto.
+9. Atualizar `INTERFACE.md` para cada primitive ou bloco criado, alterado ou
+   reaproveitado, incluindo arquivo, origem, finalidade, API, estados,
+   acessibilidade, consumidores e orientação de extensão.
 
 ## Padrões
 
@@ -66,6 +74,9 @@ description: Instalar, compor e adaptar shadcn/ui com registry, Base UI, Radix, 
 - Centralizar tokens de tema (CSS variables) num único lugar; nunca editar
   dezenas de componentes individualmente para trocar uma cor de marca ou
   ajustar o tema.
+- Em projetos React da Promovaweb, usar shadcn/ui junto do ReUI: o primeiro
+  atende primitives e o segundo atende composições gratuitas de produto.
+  Toda tela é uma composição de componentes React, não um arquivo monolítico.
 - Compor um Data Table para o caso de uso real (colunas, ordenação, filtro,
   seleção, paginação necessários) em vez de importar um componente universal
   com todas as capacidades possíveis "por garantia".

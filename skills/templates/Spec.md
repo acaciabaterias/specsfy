@@ -238,6 +238,18 @@ tests/
 
 - [Hierarquia, navegação, regiões da tela, densidade, responsividade e componentes existentes.]
 
+#### Blocos React e componentes selecionados
+
+| Tela | Bloco React | Responsabilidade | Arquivo previsto | Componente ou composição | Origem | Reuso ou extensão |
+| --- | --- | --- | --- | --- | --- |
+| [Tela] | [Bloco] | [O que concentra] | [Caminho] | [Nome] | [shadcn/ui, ReUI ou próprio] | [Bloco existente ou novo, com motivo] |
+
+- [Para Laravel com React, shadcn/ui e ReUI são obrigatórios: escolha as
+  primitives shadcn/ui e as composições ReUI gratuitas `@reui/c-*` desta
+  entrega. Registre também cada bloco próprio que compõe a tela.]
+- [A lista deve corresponder a `INTERFACE.md`; não usar somente nomes de
+  bibliotecas sem informar os componentes selecionados.]
+
 #### Estados e acessibilidade
 
 - [Loading, vazio, erro, sucesso, permissão insuficiente, teclado, foco e tecnologia assistiva.]
@@ -366,7 +378,7 @@ Cada tarefa possui exatamente este checklist, atualizado durante a execução:
 
 - [ ] T005 [CODE] [US-001] Implementar a tela de [responsabilidade] em src/features/recurso/ListaRecurso.tsx — Refs: US-001, FR-001, NFR-001, AC-001, AC-002, AC-003 — Depends: T001, T002, T003
   - [ ] **PREP**: Confirmar stack, tela atual, fluxo, formulário e estados definidos na seção 10.
-  - [ ] **EXECUTE**: Implementar a tela, ações e formulário conforme a composição acordada.
+  - [ ] **EXECUTE**: Implementar os blocos React, tela, ações e formulário conforme a composição acordada; registrar cada bloco e componente em `INTERFACE.md`.
   - [ ] **VERIFY**: Exercitar navegação, validações, feedback e teclado.
   - [ ] **EVIDENCE**: Registrar arquivos, comando e resultado da interação.
   - [ ] **IMPROVE**: Aplicar melhoria de interface ou justificar nenhuma.

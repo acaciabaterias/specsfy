@@ -23,7 +23,7 @@ description: Projetar, implementar e revisar interfaces React com composição, 
 
 ## Fluxo
 
-1. Para uma tela ou formulário, ler a seção de interface da spec antes do
+1. Para uma tela ou formulário, ler `INTERFACE.md` e a seção de interface da spec antes do
    código. Confirmar telas, fluxo de informação, campos, validações, padrão de
    abertura e estados. Se o material não existir, retornar ao
    `$specsfy-specialist-ux-design` e `$specsfy-specialist-ui-design`; não
@@ -51,11 +51,18 @@ description: Projetar, implementar e revisar interfaces React com composição, 
 8. Medir performance somente quando houver sintoma real (profiler, métrica de
    produção); então memoizar ou dividir o componente com medição registrada, não por
    precaução.
+9. Registrar em `INTERFACE.md` cada bloco criado, alterado ou reaproveitado:
+   responsabilidade, arquivo, props, eventos, estados, acessibilidade e telas
+   consumidoras.
 
 ## Padrões
 
 - Preferir composição a um componente genérico com muitas props de
   configuração; dividir quando a árvore de decisão interna cresce.
+- Em Laravel com React, usar shadcn/ui para primitives e ReUI para composições
+  gratuitas. Página e rota compõem blocos React; grade, formulário, filtros,
+  overlays e cartões reutilizáveis são componentes próprios e documentados em
+  `INTERFACE.md`.
 - Nunca copiar uma prop para `state` só para "guardar o valor inicial"; isso
   cria dessincronia — leia a prop diretamente ou derive durante o render.
 - Não usar `useEffect` para computar um valor derivável de props/state

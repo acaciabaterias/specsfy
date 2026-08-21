@@ -80,6 +80,12 @@ class InterfaceContractTests(unittest.TestCase):
 
 - Filtros ficam acima da tabela e a ação principal fica no cabeçalho.
 
+#### Blocos React e componentes selecionados
+
+| Tela | Bloco React | Componente ou composição | Origem |
+| --- | --- | --- | --- |
+| Lista de clientes | ClientList | Data Grid | ReUI |
+
 #### Estados e acessibilidade
 
 - Há loading, vazio, erro, sucesso, foco inicial e navegação por teclado.
@@ -113,11 +119,17 @@ class InterfaceContractTests(unittest.TestCase):
 
 - Lista de clientes.
 
+#### Blocos React e componentes selecionados
+
+| Tela | Bloco React | Componente ou composição | Origem |
+| --- | --- | --- | --- |
+| Lista de clientes | ClientList | Data Grid | ReUI |
+
 ### 14. Tarefas
 
 #### Fase de interface
 
-- [ ] T001 [CODE] Criar a lista em src/clients/List.tsx — Refs: FR-001 — Depends: none
+- [ ] T001 [CODE] Criar a lista em src/clients/List.tsx e atualizar INTERFACE.md — Refs: FR-001 — Depends: none
 
 ### 15. Ordem de execução
 """
@@ -127,7 +139,7 @@ class InterfaceContractTests(unittest.TestCase):
             complete = subprocess.run(["node", str(VALIDATE_INTERFACE_TASKS), str(spec)], text=True, capture_output=True, check=False)
             self.assertEqual(0, complete.returncode, complete.stderr)
 
-            spec.write_text(base.replace("#### Fase de interface\n\n- [ ] T001 [CODE] Criar a lista em src/clients/List.tsx — Refs: FR-001 — Depends: none\n\n", ""), encoding="utf-8")
+            spec.write_text(base.replace("#### Fase de interface\n\n- [ ] T001 [CODE] Criar a lista em src/clients/List.tsx e atualizar INTERFACE.md — Refs: FR-001 — Depends: none\n\n", ""), encoding="utf-8")
             incomplete = subprocess.run(["node", str(VALIDATE_INTERFACE_TASKS), str(spec)], text=True, capture_output=True, check=False)
             self.assertEqual(1, incomplete.returncode)
             self.assertIn("Fase de interface", incomplete.stderr)
@@ -187,7 +199,33 @@ class InterfaceContractTests(unittest.TestCase):
         self.assertIn("specsfy-specialist-data-modeling", setup)
         self.assertIn("specsfy-specialist-domain-modeling", setup)
         self.assertIn("specsfy-specialist-software-architecture", setup)
+        self.assertIn("specsfy-specialist-reui", setup)
         self.assertIn("## Stack e especialistas instalados pelo setup", setup)
+
+    def test_reui_specialist_documents_free_registry_setup(self) -> None:
+        reui = (ROOT.parent / "specialists" / "specsfy-specialist-reui" / "SKILL.md").read_text(encoding="utf-8")
+        setup = (ROOT.parent / "specialists" / "specsfy-specialist-reui" / "references" / "setup.md").read_text(encoding="utf-8")
+
+        self.assertIn("componentes gratuitos", reui)
+        self.assertIn("references/setup.md", reui)
+        self.assertIn("npx shadcn@latest add", setup)
+        self.assertIn("Laravel", setup)
+        self.assertIn("@reui", setup)
+        self.assertIn("starter kit React oficial", setup)
+        self.assertIn("Form Requests", setup)
+
+    def test_reui_is_the_crud_base_for_compatible_interfaces(self) -> None:
+        reui = (ROOT.parent / "specialists" / "specsfy-specialist-reui" / "SKILL.md").read_text(encoding="utf-8")
+        catalog = (ROOT.parent / "specialists" / "specsfy-specialist-reui" / "references" / "catalog-free.md").read_text(encoding="utf-8")
+
+        self.assertIn("Todo CRUD com interface React e Tailwind usa ReUI", reui)
+        self.assertIn("## Mapa obrigatório para CRUDs", catalog)
+        self.assertIn("Data Grid", catalog)
+        self.assertIn("Filters", catalog)
+        families = (ROOT.parent / "specialists" / "specsfy-specialist-reui" / "references" / "components-free.md").read_text(encoding="utf-8")
+        self.assertIn("# Componentes gratuitos ReUI", families)
+        self.assertIn("Comércio", families)
+        self.assertIn("Planejamento", families)
 
 
 if __name__ == "__main__":

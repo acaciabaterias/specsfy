@@ -44,12 +44,16 @@ exigindo autorização específica.
 2. Exija `Formato: Specsfy/2.0`, `Status: Planned` ou `Implementing`,
    `Definition Gate: Passed` e `Plan Gate: Passed`.
 3. Se `Interface para pessoas` for `Sim`, leia a seção 10 e confirme que o
-   plano contém tarefas para stack local, telas, formulários, ações, estados e
+   plano contém tarefas para stack local, telas, formulários, ações, blocos
+   React, componentes shadcn/ui/ReUI, estados e
    testes de interação. Compare a stack, as telas e os fluxos atuais com o
    projeto antes de alterar código. Preserve componentes, rotas, conteúdo,
    permissões e comportamentos existentes fora do alcance registrado. Se faltar
    algum deles ou a tecnologia proposta divergir sem confirmação, retorne automaticamente para
    `$specsfy-05-tasks`; não implemente um CRUD somente como API ou persistência.
+   Antes de programar, confirme os itens escolhidos na tabela da seção 10 e em
+   `INTERFACE.md`; depois de programar, atualize `INTERFACE.md` com todos os
+   blocos criados, alterados ou reaproveitados.
 4. Execute os validadores contra `specs/<estado>/<NNNN>-<slug>/spec.md`. Se um gate
    falhar por tarefa, predecessor TDD ou RED ausente em um plano antes aprovado,
    anuncie a pendência e retorne automaticamente para

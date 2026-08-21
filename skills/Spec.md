@@ -65,6 +65,9 @@ ou pendente.
 - `.specsfy/RULES.md` mantém regras explícitas confirmadas pela pessoa
   responsável.
 - `.specsfy/DATABASE.md` mantém o quadro tabular completo de persistência.
+- `INTERFACE.md`, na raiz, é o mapa canônico do design system: stack de
+  interface, tokens, primitives shadcn/ui, composições ReUI, arquivos-fonte,
+  componentes reutilizáveis e telas que os consomem.
 - `.specsfy/PACKAGES.md` mantém o inventário npm e Composer derivado dos
   manifests, lockfiles e metadados locais, com uma finalidade curta por pacote.
 - `.specsfy/SPECKIT.md` aparece quando o projeto possui
@@ -72,7 +75,7 @@ ou pendente.
   os arquivos regulares encontrados em `specs/`, sem alterar as fontes do
   GitHub Spec Kit.
 - Antes de iniciar qualquer skill do framework, executar obrigatoriamente
-  `$specsfy-setup` para verificar e reconciliar os quatro contextos iniciais e
+  `$specsfy-setup` para verificar e reconciliar os cinco contextos iniciais e
   os blocos reservados em `AGENTS.md` e `CLAUDE.md`. A única exceção é a própria
   `$specsfy-setup`, que não se chama recursivamente. Em uma transição automática,
   executar novamente o setup com a mesma raiz já confirmada antes de carregar a
@@ -175,6 +178,15 @@ cabeçalho se há interface para pessoas. Quando houver, a seção 10 precisa
 conter telas, fluxo de informação, formulários e ações, composição, estados e
 acessibilidade. Um CRUD com interface inclui suas telas e formulários: não se
 resume a rota, serviço ou persistência.
+
+Em projeto React, toda interface deve ser composta por componentes React.
+shadcn/ui fornece as primitives e ReUI fornece as composições gratuitas; para
+Laravel com React, a dupla é obrigatória. A página ou rota limita-se a obter
+dados e compor componentes de domínio. Formulários, tabelas, filtros, ações em
+lote, diálogos, painéis laterais, estados visuais e partes repetidas ficam em
+componentes próprios. Antes de criar uma peça, leia `INTERFACE.md`, localize
+algo reutilizável e registre nela cada arquivo criado ou reaproveitado, sua
+origem, seus consumidores e o componente shadcn/ui ou ReUI correspondente.
 
 Orquestre `$specsfy-specialist-interface-experience` para analisar o sistema
 atual e conduzir a descoberta; depois use `$specsfy-specialist-ux-design` para jornada e fluxo,

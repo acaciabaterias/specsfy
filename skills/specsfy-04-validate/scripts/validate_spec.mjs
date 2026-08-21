@@ -45,6 +45,7 @@ function interfaceErrors(body, status) {
     "Fluxo de informação e navegação",
     "Formulários e ações",
     "Composição e disposição",
+    "Blocos React e componentes selecionados",
     "Estados e acessibilidade",
   ];
   const errors = [];
