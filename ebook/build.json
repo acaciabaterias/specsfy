@@ -2,8 +2,8 @@
   "schema_version": 1,
   "version": "1.7.14",
   "edition": "v1.7.14",
-  "generated_at": "2026-08-22T11:06:59Z",
-  "source_sha256": "909dff488d448480b49660dcb0d9803fb7120b438f2ad8b22e146d56dca97efa",
+  "generated_at": "2026-08-22T11:34:35Z",
+  "source_sha256": "efbf318ea6450ad1f5ca3c3caee2deb137fd7e80d7d315655413375d7daa8160",
   "sources": [
     ".ebook/build-ebook.sh",
     ".ebook/epub.css",
@@ -78,11 +78,11 @@
   "artifacts": {
     "pdf": {
       "file": "Specsfy-Guia-do-Usuario-v1.7.14.pdf",
-      "sha256": "a9373d498502fcf2dc7eb53ad469ecb84fdb57bf2b527cb821e7fa034ecb3a2e"
+      "sha256": "c2f0c009f04667741172b3935e6ba0793ea49c38e49cdd08d447272a1cb5dbba"
     },
     "epub": {
       "file": "Specsfy-Guia-do-Usuario-v1.7.14.epub",
-      "sha256": "f0f4d2d28aa819939c2d76ffa804bf431ce19ce1b7789e73a8112adb20c8a4c9"
+      "sha256": "286e00a9b425270ea566629aa791c1de2427e6da0670e94e781e8b3f7b155e2e"
     }
   }
 }
