@@ -4,6 +4,16 @@ Todas as mudanças relevantes do Specsfy CLI são registradas neste arquivo.
 
 ## [Unreleased]
 
+## [0.9.2] - 2026-08-22
+
+- Evita repetir a mesma oferta de atualização depois de uma recusa ou falha,
+  respeitando o intervalo configurado e mantendo `specsfy upgrade` como
+  consulta forçada.
+- Atualiza corretamente executáveis avulsos expostos por symlink, substituindo
+  o arquivo real sem remover o caminho usado no `PATH`.
+- Adiciona regressões para adiamento, bypass explícito, fluxo de inicialização
+  e atualização de symlink.
+
 ## [0.9.1] - 2026-08-22
 
 - Corrige a navegação da TUI, o foco após fechar telas, o fechamento por
