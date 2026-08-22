@@ -53,8 +53,9 @@ def then_agent_stops_the_area(context) -> None:
 
 @then("só continua se a pessoa pedir mais perguntas e informar quantas quer responder")
 def then_agent_requires_a_new_finite_limit(context) -> None:
-    assert "pedir explicitamente" in context.limit_contract
-    assert "quantas perguntas quer responder" in context.limit_contract
+    normalized = " ".join(context.limit_contract.split())
+    assert "pedir explicitamente" in normalized
+    assert "quantas perguntas quer responder" in normalized
 
 
 @when("a pessoa escolhe avançar em uma área")

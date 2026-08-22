@@ -82,7 +82,8 @@ def when_agent_checks_minimum(context) -> None:
 
 @then("ele apresenta exatamente uma pergunta numerada por rodada")
 def then_asks_one_numbered_question(context) -> None:
-    assert "lacuna real de maior impacto" in context.minimum_section
+    normalized = " ".join(context.minimum_section.split())
+    assert "lacuna real de maior impacto" in normalized
 
 
 @then("reavalia o que falta depois de cada resposta")
@@ -138,3 +139,29 @@ def then_confirms_possible_duplicate(context) -> None:
 @then("preserva referências relevantes no item")
 def then_preserves_references(context) -> None:
     assert "Referências relacionadas" in context.search_section
+
+
+@given("uma ideia de backlog que depende de informações lembradas pelo sistema")
+def given_backlog_needing_data_discovery(context) -> None:
+    context.data_discovery_skill = (
+        ROOT / "specsfy-data-discovery" / "SKILL.md"
+    ).read_text(encoding="utf-8")
+
+
+@when("o agente identifica a necessidade de entender essas informações")
+def when_agent_identifies_data_discovery(context) -> None:
+    context.backlog_skill = SKILL.read_text(encoding="utf-8")
+
+
+@then("ele transita para specsfy-data-discovery antes de concluir o brief")
+def then_transitions_to_data_discovery(context) -> None:
+    normalized = " ".join(context.backlog_skill.split()).casefold()
+    assert "$specsfy-data-discovery" in normalized
+    assert "retome o backlog com o registro confirmado" in normalized
+
+
+@then("registra somente respostas confirmadas em .specsfy/DATABASE.md")
+def then_registers_only_confirmed_data(context) -> None:
+    normalized = " ".join(context.data_discovery_skill.split()).casefold()
+    assert "somente respostas confirmadas" in normalized
+    assert ".specsfy/database.md" in normalized

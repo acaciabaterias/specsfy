@@ -93,9 +93,10 @@ registrar_dados_conversados.mjs \
   --fontes "<caminhos de Inbox, backlog, MVP ou spec>"
 ```
 
-O arquivo mantém a seção `Informações a guardar confirmadas` separada do que
-foi observado no código. Não altere o trecho detectado automaticamente e não
-copie dados reais, credenciais ou informações pessoais sensíveis.
+Registre somente respostas confirmadas na seção `Informações a guardar
+confirmadas`. Mantenha essa seção separada do que foi observado no código. Não
+altere o trecho detectado automaticamente e não copie dados reais, credenciais
+ou informações pessoais sensíveis.
 
 ## Handoffs
 

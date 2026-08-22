@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+import shutil
 import subprocess
 import tempfile
 from pathlib import Path
@@ -9,6 +11,15 @@ from behave import given, then, when
 
 
 ROOT = Path(__file__).resolve().parents[3]
+MVP_IMPORTER = (
+    ROOT / "specsfy-mvp-milestone-interviewer" / "scripts" / "importar_mvp.mjs"
+)
+
+
+def run_git(*args: str, cwd: Path) -> None:
+    subprocess.run(
+        ["git", *args], cwd=cwd, text=True, capture_output=True, check=True
+    )
 FRAMEWORK_TEMPLATE_NAMES = (
     "Inbox.md",
     "Backlog.md",
@@ -150,3 +161,115 @@ def then_custom_template_directory_is_unmanaged(context) -> None:
     custom = context.project / ".specsfy" / "templates" / "custom"
     assert custom.is_dir()
     assert custom not in context.changed
+
+
+@given("um projeto consumidor com MVP.md e BRAND.md na raiz")
+def given_consumer_with_mvp_and_brand(context) -> None:
+    context.project = temporary_project(context)
+    (context.project / "MVP.md").write_text(
+        "# Produto\n\n## Cadastro de clientes\n\nO sistema deve permitir cadastrar clientes.\n",
+        encoding="utf-8",
+    )
+    (context.project / "BRAND.md").write_text(
+        "# Marca\n\nLinguagem clara para equipes de atendimento.\n",
+        encoding="utf-8",
+    )
+    context.mvp_skill = (
+        ROOT / "specsfy-mvp-milestone-interviewer" / "SKILL.md"
+    ).read_text(encoding="utf-8")
+
+
+@when("o entrevistador de MVP inicia a descoberta")
+def when_mvp_interviewer_starts(context) -> None:
+    context.result = subprocess.run(
+        ["node", str(MVP_IMPORTER), "--root", str(context.project)],
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert context.result.returncode == 0, context.result.stderr
+    context.imported = json.loads(context.result.stdout)
+
+
+@then("ele importa MVP.md como a Milestone 1.0 sem sobrescrever uma existente")
+def then_imports_first_milestone(context) -> None:
+    milestone = context.project / "specs/milestones/M01.md"
+    assert milestone.is_file()
+    assert "# Milestone 1.0" in milestone.read_text(encoding="utf-8")
+    assert "não sobrescreva a milestone 1.0" in context.mvp_skill.casefold()
+
+
+@then("registra cada tema em uma série de Inboxes e cria um backlog candidato por Inbox")
+def then_registers_inboxes_and_candidate_backlogs(context) -> None:
+    items = context.imported["items"]
+    assert items
+    assert all((context.project / item["inbox"]).is_file() for item in items)
+    developable = [item for item in items if item["developable"]]
+    assert all(item["backlog"] for item in developable)
+    assert all((context.project / item["backlog"]).is_file() for item in developable)
+
+
+@then("entrevista cada backlog antes de qualquer promoção")
+def then_interviews_each_backlog_before_promotion(context) -> None:
+    normalized = " ".join(context.mvp_skill.split()).casefold()
+    assert "entrevistar cada backlog" in normalized
+    assert "somente avança quando cada etapa tiver resultado confirmado" in normalized
+    for item in context.imported["items"]:
+        if item["backlog"]:
+            content = (context.project / item["backlog"]).read_text(encoding="utf-8")
+            assert "$specsfy-02-backlog" in content
+
+
+@given("um projeto consumidor instalado como submódulo Git de um Hub")
+def given_consumer_submodule_of_hub(context) -> None:
+    temporary_root = Path(tempfile.mkdtemp(prefix="specsfy-hub-"))
+    context.add_cleanup(shutil.rmtree, temporary_root, ignore_errors=True)
+    context.parent = temporary_root / "hub"
+    source = temporary_root / "consumer-source"
+    context.parent.mkdir()
+    source.mkdir()
+    run_git("init", cwd=source)
+    run_git("config", "user.email", "tests@example.com", cwd=source)
+    run_git("config", "user.name", "Specsfy tests", cwd=source)
+    (source / "README.md").write_text("# Consumidor\n", encoding="utf-8")
+    run_git("add", "README.md", cwd=source)
+    run_git("commit", "-m", "init consumidor", cwd=source)
+    run_git("init", cwd=context.parent)
+    run_git("config", "user.email", "tests@example.com", cwd=context.parent)
+    run_git("config", "user.name", "Specsfy tests", cwd=context.parent)
+    run_git("-c", "protocol.file.allow=always", "submodule", "add", str(source), "consumer", cwd=context.parent)
+    run_git("commit", "-m", "adiciona consumidor", cwd=context.parent)
+    context.project = context.parent / "consumer"
+
+
+@given("MVP.md e BRAND.md estão somente na raiz do Hub")
+def given_mvp_and_brand_only_in_hub(context) -> None:
+    (context.parent / "MVP.md").write_text(
+        "# Produto\n\n## Consultar clientes\n\nO sistema deve consultar clientes.\n",
+        encoding="utf-8",
+    )
+    (context.parent / "BRAND.md").write_text(
+        "# Marca\n\nComunicação direta.\n",
+        encoding="utf-8",
+    )
+    run_git("add", "MVP.md", "BRAND.md", cwd=context.parent)
+    run_git("commit", "-m", "adiciona contexto do hub", cwd=context.parent)
+    context.mvp_skill = (
+        ROOT / "specsfy-mvp-milestone-interviewer" / "SKILL.md"
+    ).read_text(encoding="utf-8")
+
+
+@then("ele consulta os arquivos da raiz do Hub")
+def then_consults_hub_context(context) -> None:
+    normalized = " ".join(context.mvp_skill.split()).casefold()
+    assert "superprojeto" in normalized
+    assert "mvp.md" in normalized
+    assert "brand.md" in normalized
+
+
+@then("importa o MVP como a Milestone 1.0 e registra Inboxes no projeto consumidor")
+def then_imports_hub_mvp_into_consumer(context) -> None:
+    milestone = context.project / "specs/milestones/M01.md"
+    assert milestone.is_file()
+    assert "MVP.md" in milestone.read_text(encoding="utf-8")
+    assert list((context.project / "specs/inbox").glob("*.md"))
