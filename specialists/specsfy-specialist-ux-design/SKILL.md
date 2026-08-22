@@ -87,6 +87,10 @@ Registrar a resposta textual da pessoa e encaminhar a composição para
 
 ## Skills relacionadas
 
+- `$specsfy-specialist-reui` para a composição React depois de validar jornada
+  e tarefas.
+- `$specsfy-specialist-interface-experience` para organizar telas, ações e
+  estados da interface durante a descoberta.
 - `$specsfy-specialist-ui-design` materializa hierarquia visual e estados
   depois que tarefa e fluxo estão definidos.
 - `$specsfy-specialist-prototyping` cria o artefato mínimo para testar uma

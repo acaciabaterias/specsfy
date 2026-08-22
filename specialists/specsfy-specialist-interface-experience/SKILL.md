@@ -47,6 +47,18 @@ sistema existente. O plano mostra as telas e formulários a criar ou alterar,
 seus componentes e seus testes. A implementação preserva tudo fora do alcance
 registrado.
 
+## Padrões
+
+- Mapear cada tela, ação, formulário, estado e retorno no plano.
+- Preservar a stack, os componentes e os padrões de navegação já observados.
+- Registrar teclado, foco, responsividade e mensagens junto da tela afetada.
+
+## Antipadrões
+
+- Propor uma tela sem ler as rotas e os componentes atuais.
+- Tratar CRUD como endpoint sem descrever a interação da pessoa.
+- Validar somente o estado feliz e ignorar vazio, erro ou permissão.
+
 ## Validação
 
 - Confirmar que a pessoa recebeu pergunta sobre as telas em toda entrega que
@@ -56,3 +68,11 @@ registrado.
   `validate_interface_tasks.mjs` conforme a etapa.
 - Verificar mobile e desktop, loading, vazio, erro, sucesso, permissão,
   teclado e foco antes de concluir a interface.
+
+## Skills relacionadas
+
+- `$specsfy-specialist-ux-design` para jornada, tarefas e conteúdo.
+- `$specsfy-specialist-ui-design` para composição visual e estados.
+
+Leia [references/standards.md](references/standards.md) para fontes de
+acessibilidade e inspeção de interfaces.

@@ -97,6 +97,8 @@ description: Modelar, consultar, migrar e operar PostgreSQL com integridade, ín
 
 ## Skills relacionadas
 
+- `$specsfy-specialist-data-modeling` para entidades, relações e ciclo de vida
+  antes dos detalhes específicos do Postgres.
 - `$specsfy-specialist-application-security` define ameaça, autorização e
   isolamento que constraints, roles e RLS materializam no banco.
 - `$specsfy-specialist-supabase` quando o Postgres for gerenciado por

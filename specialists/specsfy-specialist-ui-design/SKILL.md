@@ -86,6 +86,10 @@ exemplos.
 
 ## Skills relacionadas
 
+- `$specsfy-specialist-reui` para composições React e Tailwind já definidas no
+  catálogo gratuito.
+- `$specsfy-specialist-interface-experience` para mapear telas, ações e estados
+  antes da composição visual.
 - `$specsfy-specialist-nextjs` governa a fronteira server/client e o roteamento
   da interface; esta skill governa composição e estados visuais.
 - `$specsfy-specialist-prototyping` testa alternativas de composição no menor

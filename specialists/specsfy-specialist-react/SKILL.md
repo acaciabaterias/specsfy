@@ -112,6 +112,8 @@ description: Projetar, implementar e revisar interfaces React com composição, 
 
 ## Skills relacionadas
 
+- `$specsfy-specialist-reui` para composições React e Tailwind do catálogo
+  gratuito.
 - `$specsfy-specialist-astro` governa a fronteira da ilha e
   `$specsfy-specialist-shadcn-ui` identifica a base de primitives e governa os
   componentes visuais; esta skill governa o comportamento React dentro deles.

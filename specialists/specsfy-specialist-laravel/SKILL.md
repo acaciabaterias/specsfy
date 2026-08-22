@@ -101,6 +101,10 @@ description: Implementar, revisar e operar aplicações Laravel — HTTP, Eloque
 
 ## Skills relacionadas
 
+- `$specsfy-specialist-reui` para interfaces React e Tailwind em projetos
+  Laravel com Inertia.
+- `$specsfy-specialist-data-modeling` para entidades, relações e ciclo de vida
+  antes de criar migrations ou models.
 - `$specsfy-specialist-postgres` para modelagem de schema, índice e plano de
   query por trás do Eloquent.
 - `$specsfy-specialist-supabase` quando o Postgres do projeto for gerenciado

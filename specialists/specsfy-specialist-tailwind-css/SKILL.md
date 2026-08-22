@@ -105,6 +105,8 @@ description: Implementar e revisar Tailwind CSS com tokens, variantes, responsiv
 
 ## Skills relacionadas
 
+- `$specsfy-specialist-reui` para composições React e Tailwind do catálogo
+  gratuito.
 - `$specsfy-specialist-shadcn-ui` para o sistema de componentes construído
   sobre Tailwind + Radix; este especialista cobre o token/utilitário que o
   sustenta.
