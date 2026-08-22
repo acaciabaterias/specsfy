@@ -346,6 +346,30 @@ describe("renderização e interação em terminal real", () => {
     expect(screenText(screen)).toContain("21 visível(is)");
   });
 
+  test("refresh preserva seleção de skills ainda não aplicada", async () => {
+    const { screen } = await mountedTui();
+    press(screen, "k", true);
+    press(screen, "space");
+    await settle();
+    expect(screenText(screen)).toContain("3 selecionada(s)");
+    findWidgetByContent(screen, "Atualizar  ^R").emit("press");
+    await settle();
+    await settle();
+    expect(screenText(screen)).toContain("3 selecionada(s)");
+  });
+
+  test("fechar uma spec devolve o foco à lista e mantém a navegação", async () => {
+    const { screen, tui } = await mountedTui();
+    press(screen, "s", true);
+    press(screen, "space");
+    expect(screenText(screen)).toContain("Esc: voltar para a lista de specs");
+    press(screen, "escape");
+    expect(tui.activeTab).toBe("specs");
+    expect(screen.focused?.detached).not.toBe(true);
+    press(screen, "g", true);
+    expect(tui.activeTab).toBe("backlogs");
+  });
+
   test("alterna, limpa e marca novamente a seleção por teclado", async () => {
     const { screen } = await mountedTui();
     press(screen, "k", true);
@@ -419,6 +443,14 @@ describe("renderização e interação em terminal real", () => {
     const afterTab = screen.focused;
     press(screen, "tab", false, true);
     expect(screen.focused).not.toBe(afterTab);
+  });
+
+  test("Ctrl+Q encerra a tela sem deixar o processo pendurado", async () => {
+    const { screen } = await mountedTui();
+    press(screen, "q", true);
+    expect(
+      (screen as blessed.Widgets.Screen & { destroyed?: boolean }).destroyed,
+    ).toBe(true);
   });
 });
 

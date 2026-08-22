@@ -230,6 +230,10 @@ tests/
 
 - [Como a pessoa chega, consulta, altera, confirma, retorna ou recupera o contexto.]
 
+#### Menus e navegação principal
+
+- [Menu principal e menus secundários, seus itens, destinos ou rotas, permissões e comportamento responsivo. Se não houver menu, declare como a pessoa chega às telas e por que a navegação direta é suficiente.]
+
 #### Formulários e ações
 
 - [Campos, agrupamentos, obrigatoriedade, ajuda, validações, erros, ação principal e padrão: página, painel lateral, modal, área expandida ou outro.]

@@ -86,8 +86,9 @@ global:
 specsfy upgrade
 ```
 
-Quando a instalação usa o executável Node oficial, substitua-o pelo download
-mais recente e restaure a permissão:
+Quando a instalação usa o executável Node oficial, `specsfy upgrade` pode
+substituí-lo automaticamente. Para fazer a troca manual, use o download e
+restaure a permissão:
 
 ```bash
 curl -fL get.specsfy.dev -o "$HOME/.local/bin/specsfy"

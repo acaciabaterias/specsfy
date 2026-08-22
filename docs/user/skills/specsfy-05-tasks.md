@@ -42,7 +42,7 @@ T003 [ ] Implementar solicitação sem revelar existência do cadastro
 ```
 
 Quando a spec declara uma interface, o plano inclui tarefas para telas,
-formulário, ações e seus testes de navegação, validação e recuperação de erro.
+menus, navegação, formulário, ações e seus testes de navegação, validação e recuperação de erro.
 Uma tarefa de API ou persistência não substitui essas tarefas.
 
 Essas tarefas ficam em uma `Fase de interface` dedicada. Há uma tarefa por tela

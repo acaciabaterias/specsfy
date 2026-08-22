@@ -34,7 +34,7 @@ import {
 import {
   checkForUpdate,
   offerStartupUpdate,
-  upgradeWithNpm,
+  upgradeCurrentInstallation,
 } from "./updater.js";
 import { VERSION } from "./version.js";
 
@@ -123,7 +123,7 @@ export function buildProgram(): Command {
         printUpgrade({ upgraded: false, current_version: VERSION }, Boolean(options.json));
         return;
       }
-      await upgradeWithNpm();
+      await upgradeCurrentInstallation(update.latest_version);
       printUpgrade(
         {
           upgraded: true,

@@ -10,9 +10,9 @@
 
 ## Papel
 
-Definir como o CLI descobre tags publicadas, oferece uma atualização e delega
-ao npm o gerenciamento do pacote global sem tornar rede ou GitHub requisitos
-para abrir a aplicação.
+Definir como o CLI descobre a versão distribuída, oferece uma atualização e
+escolhe entre npm e executável avulso sem tornar rede ou GitHub requisitos para
+abrir a aplicação.
 
 ## Como usar
 
@@ -33,20 +33,22 @@ prompt inicial, o intervalo de consulta ou a forma de publicação.
 
 ## Fonte da verdade e precedência
 
-O código e os testes de `cli/` implementam esta política. Tags selecionam
-versões publicadas. O npm resolve e instala o pacote global. O cache apenas
-reduz consultas e nunca autoriza uma instalação.
+O código e os testes de `cli/` implementam esta política. O registro npm
+define a versão distribuída. Tags selecionam a proveniência quando coincidem
+com essa versão. O cache apenas reduz consultas e nunca autoriza uma
+instalação.
 
 ## Fluxo
 
 1. Ao abrir a TUI interativa, o CLI lê ou cria `~/.specsfy/cli.json`.
-2. Se o intervalo venceu, obtém credencial de `GH_TOKEN`, `GITHUB_TOKEN` ou
-   `gh auth token` e consulta as tags de `cli/` com timeout curto.
-3. Considera somente tags estáveis `vMAJOR.MINOR.PATCH` e registra o SHA
-   apontado como evidência da consulta.
+2. Se o intervalo venceu, consulta a versão `latest` do registro npm com
+   timeout curto.
+3. Consulta as tags estáveis `vMAJOR.MINOR.PATCH` do GitHub para associar a
+   versão publicada ao SHA quando houver correspondência.
 4. Se a versão for superior, pede consentimento no terminal.
-5. Ao aceitar, executa
-   `npm install --global @promovaweb/specsfy@latest`.
+5. Ao aceitar, executa `npm install --global @promovaweb/specsfy@latest` quando
+   o processo veio do npm. Para um executável avulso, baixa
+   `https://get.specsfy.dev`, valida `--version` e substitui o arquivo atual.
 6. Depois que o npm conclui, o CLI encerra para que a próxima abertura use o
    ambiente atualizado.
 7. Recusa ou falha abre a aplicação atual normalmente.
@@ -55,7 +57,7 @@ reduz consultas e nunca autoriza uma instalação.
 
 O JSON global tem permissão `0600`, preserva chaves desconhecidas e separa
 configurações de dados efêmeros. Ele pode guardar habilitação, intervalo,
-horário, ETag, tag, versão, commit e erro recente. Não guarda credenciais,
+horário, ETags, versão publicada, tag, commit e erro recente. Não guarda credenciais,
 telemetria nem conteúdo do projeto.
 
 A credencial existe somente no ambiente do processo ou no armazenamento
@@ -67,12 +69,10 @@ O pacote instalável é definido por `cli/package.json`, expõe o comando
 `specsfy` e inclui suas dependências no lockfile. O download público do
 executável usa `get.specsfy.dev`. A instalação gerenciada usa
 `npm install --global @promovaweb/specsfy` e a atualização usa
-`specsfy upgrade`, que delega ao npm somente quando encontra uma versão estável
-superior. Uma tag atualizável aponta para o
+`specsfy upgrade`, que escolhe npm ou o executável avulso e só prossegue quando
+encontra uma versão publicada superior. Uma tag atualizável aponta para o
 commit cuja versão do pacote corresponde ao nome `v<versão>`, verificado pelo
-CI antes da publicação no npm. A proveniência é acrescentada quando o
-repositório estiver público, porque o registro exige uma origem pública para
-essa atestação.
+CI antes da publicação no npm.
 
 O executável Node versionado continua sendo um artefato de distribuição e
 validação do repositório. Ele contém as dependências do CLI e usa o runtime

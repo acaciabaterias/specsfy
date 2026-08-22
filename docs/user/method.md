@@ -75,7 +75,7 @@ perfis exibidos pelo progresso, os estados e os gates apresentados neste guia.
 
 Quando a entrega cria ou muda uma tela usada por pessoas, o Specsfy pergunta
 antes do código como a experiência deve funcionar. A conversa cobre as telas,
-o fluxo de informação, os campos e validações do formulário, a composição e o
+o fluxo de informação, os menus e a navegação principal, os campos e validações do formulário, a composição e o
 formato de cada ação, como página, painel lateral, modal ou outra alternativa.
 As opções usam texto completo, e você sempre pode escolher `Escrever outra
 resposta`, `Gere outras opções` ou `Avançar`.
@@ -86,7 +86,7 @@ testes para preservar o que já funciona e sugerir uma continuação coerente. O
 agente não troca React, Tailwind, shadcn/ui ou outra tecnologia por suposição.
 
 Um CRUD com interface não é considerado pronto apenas por ter banco, serviço
-ou API. A spec registra telas, formulário, navegação, estados de carregamento,
+ou API. A spec registra telas, menus, formulário, navegação, estados de carregamento,
 vazio, erro e sucesso, além do uso por teclado. O plano gera tarefas e testes
 para essa interface antes da implementação.
 

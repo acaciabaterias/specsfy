@@ -75,7 +75,8 @@ das seções `14. Tarefas` e `15. Ordem de execução` em
 - Organize em setup mínimo, fundação indispensável, histórias em prioridade e fechamento.
 - Mantenha histórias como fatias verticais independentemente demonstráveis.
 - Quando `Interface para pessoas` for `Sim`, crie tarefas explícitas para as
-  telas, formulário e ações descritos na seção 10, além da camada de dados ou
+  telas, menus e navegação principal, formulário e ações descritos na seção 10,
+  além da camada de dados ou
   API. Inclua testes de comportamento da interface para navegação, envio,
   validação, recuperação de erro e o padrão de abertura escolhido, como painel
   lateral ou modal. Use somente os componentes, convenções e runners da stack

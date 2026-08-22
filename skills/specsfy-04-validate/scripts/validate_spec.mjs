@@ -32,7 +32,7 @@ function minimumBddErrors(body) {
 function interfaceErrors(body, status) {
   const value = field(body, "Interface para pessoas");
   if (!value) return status === "Draft" ? [] : ["O cabeçalho deve informar se há Interface para pessoas."];
-  if (status === "Draft" && /^A definir$/i.test(value)) return [];
+  if (status === "Draft" && /^(?:A definir|Pendente)\b/i.test(value)) return [];
   if (!/^(Sim|Não|Nao)\b/i.test(value)) {
     return ["Interface para pessoas deve começar com Sim, Não ou Nao."];
   }
@@ -43,6 +43,7 @@ function interfaceErrors(body, status) {
     "Stack e convenções de interface",
     "Telas e responsabilidades",
     "Fluxo de informação e navegação",
+    "Menus e navegação principal",
     "Formulários e ações",
     "Composição e disposição",
     "Blocos React e componentes selecionados",
@@ -57,8 +58,11 @@ function interfaceErrors(body, status) {
     }
     const next = body.slice(match.index + match[0].length).search(/^####\s+|^###\s+/m);
     const content = body.slice(match.index + match[0].length, next < 0 ? undefined : match.index + match[0].length + next);
-    if (/\[(?:Tela|Como|Campos|Hierarquia|Loading|Sim ou Não)/i.test(content) || !content.trim()) {
+    if (/\[(?:Tela|Como|Menu|Campos|Hierarquia|Loading|Sim ou Não)/i.test(content) || !content.trim()) {
       errors.push(`Interface para pessoas: ${title} precisa descrever o comportamento real.`);
+    }
+    if (title === "Menus e navegação principal" && (!/\bmenus?\b/i.test(content) || !/\b(?:item|rota|destino|tela|navega)/i.test(content))) {
+      errors.push("Interface para pessoas: Menus e navegação principal precisa mapear menus, itens e destinos, ou declarar por que não há menu.");
     }
   }
   return errors;

@@ -147,12 +147,14 @@ definição, a conversa deve esclarecer, somente nas lacunas reais:
 
 1. quais telas existem e qual tarefa principal cada uma permite concluir;
 2. como a informação entra, é consultada, muda e leva à próxima tela;
-3. quais campos, agrupamentos, ajuda, validações, ações e recuperação de erro
+3. quais menus, itens, destinos, permissões e comportamentos responsivos
+   orientam a navegação principal;
+4. quais campos, agrupamentos, ajuda, validações, ações e recuperação de erro
    compõem cada formulário;
-4. onde a ação acontece: página, painel lateral, modal, área expandida ou
+5. onde a ação acontece: página, painel lateral, modal, área expandida ou
    outra composição proposta pela pessoa;
-5. como conteúdo, ações e dados se distribuem na tela em desktop e mobile;
-6. como aparecem loading, vazio, erro, sucesso, permissão insuficiente e
+6. como conteúdo, ações e dados se distribuem na tela em desktop e mobile;
+7. como aparecem loading, vazio, erro, sucesso, permissão insuficiente e
    acessibilidade por teclado.
 
 Antes da primeira pergunta dessa área, leia `.specsfy/STACK.md`,
@@ -175,9 +177,9 @@ MVP, backlog ou produto existente não deve ser perguntado outra vez.
 
 Registre a resposta textual, não apenas o número da opção. A spec declara no
 cabeçalho se há interface para pessoas. Quando houver, a seção 10 precisa
-conter telas, fluxo de informação, formulários e ações, composição, estados e
-acessibilidade. Um CRUD com interface inclui suas telas e formulários: não se
-resume a rota, serviço ou persistência.
+conter telas, fluxo de informação, menus e navegação principal, formulários e
+ações, composição, estados e acessibilidade. Uma entrega com interface inclui
+suas telas e formulários: não se resume a rota, serviço ou persistência.
 
 Em projeto React, toda interface deve ser composta por componentes React.
 shadcn/ui fornece as primitives e ReUI fornece as composições gratuitas; para
@@ -197,7 +199,12 @@ não substituem a conversa com a pessoa.
 O resultado deve ser simples, funcional e completo para a tarefa proposta.
 
 Um backlog não autoriza implementação nem cria uma segunda fonte normativa. A
-promoção para spec exige intenção explícita do usuário.
+importação de `MVP.md` é uma exceção operacional: depois de gerar e refinar
+automaticamente cada backlog, ela pode criar uma spec em `Draft` para cada
+item, sempre preservando `Definition Gate: Pending` e marcando lacunas como
+`Pendente`. Essa geração não implementa código, não executa tarefas e não
+passa gates; qualquer promoção posterior continua exigindo intenção explícita
+do usuário.
 
 ## Contrato de perguntas numeradas
 

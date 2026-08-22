@@ -12,8 +12,9 @@ da opção escolhida, e não somente `1`, `2` ou `3`.
 
 Use antes de criar um conjunto de specs para um produto novo ou quando o MVP
 ainda não tem uma jornada confirmada. Se `MVP.md` existir, a skill o importa
-como `specs/milestones/M01.md`, separa seus temas em Inboxes e cria um backlog
-candidato para cada Inbox. Nenhum desses arquivos existentes é substituído.
+como `specs/milestones/M01.md`, preserva todos os temas em Inboxes e cria
+backlog e spec somente para os temas que descrevem algo a ser desenvolvido.
+Nenhum desses arquivos existentes é substituído.
 
 Um arquivo no projeto tem prioridade. O Hub só entra na busca quando o projeto
 é um submódulo Git e o arquivo local está ausente. Assim, um `MVP.md` ou
@@ -37,27 +38,35 @@ leads”.
 ## Exemplo passo a passo
 
 ```text
-MVP.md → M01 + Inboxes + backlogs candidatos → entrevista de cada backlog
+MVP.md → M01 + Inboxes → filtro de desenvolvimento → backlogs e specs Draft
 → milestones sincronizadas
 ```
 
 ## O que esperar
 
-O importador cria `M01`, Inboxes e vários backlogs candidatos, um para cada
-tema do MVP. Cada backlog recebe o trecho que o originou como registro
-confirmado. A própria skill carrega `$specsfy-02-backlog`, que primeiro usa
-esse registro para preencher respostas já declaradas e só pergunta por lacunas,
-ambiguidades ou contradições. Ela chama `$specsfy-data-discovery` quando houver
-dados ambíguos e retorna à fila até entrevistar todos. Depois sincroniza os
-milestones e só chama
-`$specsfy-03-specify` para itens cuja promoção você autorizar. A skill não cria
-código durante a conversa.
+O importador cria `M01` e uma Inbox para cada tema do MVP. Ele só cria backlog
+e spec Draft para temas que representam capacidades ou comportamentos a serem
+desenvolvidos. Visão, público, princípios e contexto ficam preservados na
+Inbox, mas não viram trabalho de desenvolvimento. Antes de perguntar, ele
+aplica defaults seguros quando encontra
+um rótulo explícito ou uma formulação inequívoca, registra o campo preenchido,
+a base usada e a lacuna que ficou aberta. Cada backlog também recebe o trecho
+que o originou como registro confirmado. A própria skill carrega
+`$specsfy-02-backlog`, que reaproveita os defaults e só pergunta por lacunas,
+ambiguidades, contradições ou escolhas reais. Ela chama
+`$specsfy-data-discovery` quando houver dados ambíguos e retorna à fila até
+entrevistar todos. Depois sincroniza os milestones e só chama
+`$specsfy-03-specify` para gerar uma spec Draft para cada backlog. Os campos
+sem resposta confiável ficam marcados como `Pendente`. A seção 10 de cada spec
+Draft também registra menus e navegação principal, usando o que o MVP informar
+ou `Pendente` quando essa parte não existir. A skill não implementa código,
+não executa tarefas e não passa os gates durante a conversa.
 
 ## Erros comuns
 
 - pedir tarefas técnicas antes de entrevistar todos os backlogs gerados;
 - misturar uma hipótese da conversa com o texto que foi registrado;
-- esperar que um backlog candidato seja promovido sem entrevista.
+- esperar que a importação implemente código ou aprove uma spec com lacunas.
 
 ## Próximo passo
 

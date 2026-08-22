@@ -62,8 +62,8 @@ validadores devem seguir a spec.
 - formato `Specsfy/2.0`.
 - IDs rastreáveis para histórias, requisitos e condições de aceite.
 - cenários que cobrem sucesso, variação e falha.
-- para interfaces, telas, fluxo de informação, formulários, composição, estados
-  e acessibilidade na seção 10.
+- para interfaces, telas, fluxo de informação, menus e navegação principal,
+  formulários, composição, estados e acessibilidade na seção 10.
 - a stack e as telas atuais analisadas, com o que será preservado e alterado.
 - uma única fonte normativa.
 - status Draft ou Defined conforme a evidência real.

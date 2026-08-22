@@ -69,10 +69,14 @@ Na descoberta de MVP, `specsfy-mvp-milestone-interviewer` preserva uma sessão
 em várias Inboxes. Ele procura `MVP.md` e `BRAND.md` na raiz do consumidor. Se
 o consumidor for um submódulo Git e os arquivos locais estiverem ausentes,
 consulta a raiz do superprojeto uma única vez. `MVP.md` cria a milestone
-`M01`, uma série de Inboxes e um backlog candidato por Inbox. A skill
-orquestradora entrevista cada backlog e chama descoberta de dados quando
-necessário. `BRAND.md` orienta a conversa quando presente. Só depois de cada
-entrevista a pessoa pode autorizar a promoção para spec.
+`M01` e uma Inbox por tema. A skill orquestradora classifica quais temas
+representam entregas de software, cria backlog somente para esses temas,
+aplica defaults sustentados por rótulo explícito ou formulação inequívoca,
+preserva a base no backlog e na Inbox, entrevista cada backlog, gera uma spec
+Draft por backlog e chama descoberta de dados quando necessário.
+`BRAND.md` orienta a conversa quando presente. Campos sem resposta confiável
+ficam marcados como `Pendente`; a importação não implementa código nem passa
+gates.
 
 O refinamento do backlog concentra as escolhas materiais. Depois de cada
 rodada, ele recalcula as lacunas usando a entrada original, o contexto acumulado
@@ -86,11 +90,13 @@ roteiro sem reabertura explícita; uma área adiada preserva seus pontos para
 retomada. Lacunas aplicáveis mantêm a definição em Draft com o gate pendente.
 
 Para uma entrega com interface para pessoas, o refinamento cria uma área de
-interface. Ela esclarece telas, fluxo de informação, formulário, padrão de
-abertura das ações, composição, estados e acessibilidade, sem repetir material
+interface. Ela esclarece telas, fluxo de informação, menus e navegação
+principal, formulário, padrão de abertura das ações, composição, estados e
+acessibilidade, sem repetir material
 já confirmado. A seção 10 de `spec.md` recebe essas respostas. O validador
 rejeita uma interface declarada como presente sem essas partes, e o plano deve
-gerar tarefas de tela, formulário e testes de interação além de API ou dados.
+gerar tarefas de tela, menu, formulário e testes de interação além de API ou
+dados.
 Antes da descoberta, o framework inspeciona a stack e o sistema existente,
 incluindo rotas, telas, componentes, conteúdo, permissões e estados. A seção
 14 precisa conter `Fase de interface`, com uma tarefa por tela registrada.

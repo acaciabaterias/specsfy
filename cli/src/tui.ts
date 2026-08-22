@@ -167,6 +167,7 @@ export class SpecsfyTui {
   #status?: blessed.Widgets.BoxElement;
   #projectInput?: blessed.Widgets.TextboxElement;
   #modal: blessed.Widgets.BoxElement | undefined;
+  #modalFocus: blessed.Widgets.BlessedElement | undefined;
   #lastBackAt = 0;
   #tabButtons = new Map<Tab, blessed.Widgets.ButtonElement>();
   #activeTab: Tab = "home";
@@ -177,6 +178,8 @@ export class SpecsfyTui {
   #catalogError = "";
   #installed = new Set<string>();
   #selected = new Set<string>();
+  #selectionDirty = false;
+  #loaded = false;
   #detected = new Set<string>();
   #skillFilter: SkillFilter = "all";
   #skillQuery = "";
@@ -184,10 +187,13 @@ export class SpecsfyTui {
   #suppressSkillToggleUntil = 0;
   #fingerprints = { specs: "", backlogs: "", lock: "" };
   #poller: NodeJS.Timeout | undefined;
+  #refreshPromise: Promise<void> | undefined;
   #testRunning = false;
   #testResultTab: "summary" | "output" = "summary";
   #testSummary = "Nenhuma execução nesta sessão.";
   #testOutput: string[] = [];
+  #testSummaryPanel: blessed.Widgets.BoxElement | undefined;
+  #testOutputPanel: blessed.Widgets.BoxElement | undefined;
 
   constructor(project = process.cwd()) {
     this.project = resolvePath(project);
@@ -209,6 +215,10 @@ export class SpecsfyTui {
     });
     await this.start({ screen });
     await new Promise<void>((resolve) => {
+      if (screenDestroyed(screen)) {
+        resolve();
+        return;
+      }
       screen.once("destroy", () => {
         resolve();
       });
@@ -222,6 +232,9 @@ export class SpecsfyTui {
    * terminais virtuais, sem manter um processo pendurado durante os testes.
    */
   async start(options: TuiStartOptions = {}): Promise<void> {
+    if (this.#screen && !screenDestroyed(this.#screen)) {
+      throw new Error("a TUI já foi iniciada nesta instância");
+    }
     const screen =
       options.screen ??
       blessed.screen({
@@ -239,14 +252,20 @@ export class SpecsfyTui {
     screen.once("destroy", () => {
       if (this.#poller) clearInterval(this.#poller);
       this.#poller = undefined;
+      this.#refreshPromise = undefined;
+      this.#modal = undefined;
+      this.#modalFocus = undefined;
     });
     this.showStatus("Carregando projeto…");
     await this.refreshAll(!options.catalog);
     this.showTab("home");
     if (options.watch !== false) {
       const config = await loadConfig(this.project);
+      if (screenDestroyed(screen)) return;
       this.#poller = setInterval(
-        () => void this.refreshIfChanged(),
+        () => void this.refreshIfChanged().catch((error) => {
+          this.showStatus(`Erro ao atualizar automaticamente: ${errorMessage(error)}`);
+        }),
         config.watch_interval * 1000,
       );
     }
@@ -431,13 +450,30 @@ export class SpecsfyTui {
       button.style.bold = id === tab;
     }
     for (const child of [...body.children]) child.destroy();
+    this.#testSummaryPanel = undefined;
+    this.#testOutputPanel = undefined;
     if (tab === "home") this.renderHome(body);
     else if (tab === "backlogs") this.renderBacklogs(body);
     else if (tab === "specs") this.renderSpecs(body);
     else if (tab === "tests") this.renderTests(body);
     else if (tab === "skills") this.renderSkills(body);
     else this.renderAbout(body);
-    this.#screen.render();
+    this.focusActiveTab();
+    if (!screenDestroyed(this.#screen)) this.#screen.render();
+  }
+
+  /** Recupera um alvo navegável quando um painel foi recriado ou fechado. */
+  private focusActiveTab(): void {
+    const screen = this.#screen;
+    if (!screen || screenDestroyed(screen)) return;
+    const focused = screen.focused;
+    if (focused && !focused.detached && focused.visible) return;
+    this.#tabButtons.get(this.#activeTab)?.focus();
+  }
+
+  /** Renderiza somente enquanto a tela ainda pertence ao ciclo atual. */
+  private renderScreen(): void {
+    if (this.#screen && !screenDestroyed(this.#screen)) this.#screen.render();
   }
 
   /**
@@ -453,7 +489,11 @@ export class SpecsfyTui {
     if (this.#modal) {
       this.#modal.destroy();
       this.#modal = undefined;
-      this.#screen?.render();
+      const focus = this.#modalFocus;
+      this.#modalFocus = undefined;
+      if (focus && !focus.detached && focus.visible) focus.focus();
+      else this.focusActiveTab();
+      this.renderScreen();
       return;
     }
     if (this.#activeTab === "skills" && this.#skillQuery) {
@@ -573,7 +613,7 @@ export class SpecsfyTui {
           ? renderMarkdown(formatBacklogPreview(item.content))
           : "Crie arquivos em specs/backlog/<NNNN>-<slug>.md para visualizá-los aqui.",
       );
-      this.#screen?.render();
+      this.renderScreen();
     };
     list.on("select item", updatePreview);
     list.on("keypress", updatePreview);
@@ -672,7 +712,9 @@ export class SpecsfyTui {
         border: { fg: TUI_THEME.focusBackground },
       },
     });
+    this.#modalFocus = screen.focused;
     this.#modal = modal;
+    screen.focusPush(modal);
     modal.focus();
     screen.render();
   }
@@ -736,7 +778,7 @@ export class SpecsfyTui {
       this.showTab("tests");
     });
     if (this.#testResultTab === "summary") {
-      blessed.box({
+      this.#testSummaryPanel = blessed.box({
         parent: body,
         top: 6,
         left: 1,
@@ -756,7 +798,7 @@ export class SpecsfyTui {
       // O blessed.log agenda a rolagem depois de setContent e acessa widgets
       // destruídos quando a saída ao vivo recria a aba. A caixa preserva a
       // rolagem sem deixar callbacks pendentes entre duas renderizações.
-      blessed.box({
+      this.#testOutputPanel = blessed.box({
         parent: body,
         top: 6,
         left: 1,
@@ -779,8 +821,8 @@ export class SpecsfyTui {
   }
 
   private async runTests(): Promise<void> {
+    if (this.#modal || this.#testRunning) return;
     this.showTab("tests");
-    if (this.#testRunning) return;
     this.#testRunning = true;
     this.#testResultTab = "output";
     this.#testOutput = [];
@@ -790,27 +832,30 @@ export class SpecsfyTui {
     try {
       const result = await runProjectTests(this.project, (line) => {
         this.#testOutput.push(line);
+        this.#testOutputPanel?.setContent(this.#testOutput.join("\n"));
         if (this.#activeTab === "tests" && this.#testResultTab === "output") {
-          this.showTab("tests");
+          this.renderScreen();
         }
       });
       this.#testSummary = formatTestRun(result);
+      this.#testSummaryPanel?.setContent(this.#testSummary);
       this.#testResultTab = "summary";
       this.showStatus(
         `${result.exit_code === 0 ? "Testes passaram" : "Testes falharam"} · ` +
           `${result.duration_seconds.toFixed(2)}s · exit code ${result.exit_code}`,
       );
-      this.showTab("tests");
+      if (this.#activeTab === "tests") this.showTab("tests");
     } catch (error) {
       const message = `Erro ao executar testes: ${errorMessage(error)}`;
       this.#testSummary = message;
+      this.#testSummaryPanel?.setContent(message);
       this.#testOutput.push(message);
       this.#testResultTab = "summary";
       this.showStatus(message);
-      this.showTab("tests");
+      if (this.#activeTab === "tests") this.showTab("tests");
     } finally {
       this.#testRunning = false;
-      this.#screen?.render();
+      this.renderScreen();
     }
   }
 
@@ -980,7 +1025,7 @@ export class SpecsfyTui {
             )
           : "Nenhuma skill visível.\n\nAjuste a busca ou os filtros para continuar.",
       );
-      this.#screen?.render();
+      this.renderScreen();
     };
     list.on("select item", updateDetail);
     list.on("keypress", () => setImmediate(updateDetail));
@@ -1035,7 +1080,17 @@ export class SpecsfyTui {
     });
   }
 
-  private async refreshAll(reloadCatalog: boolean): Promise<void> {
+  private refreshAll(reloadCatalog: boolean): Promise<void> {
+    if (this.#refreshPromise) return this.#refreshPromise;
+    const promise = this.refreshAllInternal(reloadCatalog);
+    const tracked = promise.finally(() => {
+      if (this.#refreshPromise === tracked) this.#refreshPromise = undefined;
+    });
+    this.#refreshPromise = tracked;
+    return tracked;
+  }
+
+  private async refreshAllInternal(reloadCatalog: boolean): Promise<void> {
     try {
       const [specs, backlogs, lock] = await Promise.all([
         scanSpecs(this.project),
@@ -1044,20 +1099,24 @@ export class SpecsfyTui {
       ]);
       this.#specs = specs;
       this.#backlogs = backlogs;
-      this.#installed = new Set(
-        Object.keys(lock.skills).filter(isSpecsfySkill),
-      );
-      this.#selected = new Set(this.#installed);
+      const installed = new Set(Object.keys(lock.skills).filter(isSpecsfySkill));
+      this.#installed = installed;
       if (reloadCatalog || !this.#catalog) {
         try {
           this.#catalog = await Catalog.fetch();
           this.#catalogEntries = this.#catalog.entries;
           this.#catalogError = "";
         } catch (error) {
-          this.#catalogEntries = [];
           this.#catalogError = errorMessage(error);
         }
       }
+      const available = new Set(
+        buildSkillOptions(this.#catalogEntries, installed).map((option) => option.name),
+      );
+      this.#selected = this.#loaded && this.#selectionDirty
+        ? new Set([...this.#selected].filter((name) => available.has(name)))
+        : new Set(installed);
+      this.#loaded = true;
       this.#fingerprints = {
         specs: await specsFingerprint(this.project),
         backlogs: await backlogsFingerprint(this.project),
@@ -1113,6 +1172,7 @@ export class SpecsfyTui {
 
   private selectFramework(): void {
     this.#selected = new Set([...this.#selected, ...FRAMEWORK_SKILLS]);
+    this.#selectionDirty = true;
     this.showStatus(
       "As skills do framework foram selecionadas. Use ^A para aplicar.",
     );
@@ -1120,20 +1180,23 @@ export class SpecsfyTui {
   }
 
   private async detectSkills(): Promise<void> {
+    if (this.#modal) return;
     this.showTab("skills");
+    const startedOnSkills = this.#activeTab === "skills";
     try {
       this.#catalog ??= await Catalog.fetch();
       this.#catalogEntries = this.#catalog.entries;
       const entries = await this.#catalog.detect(this.project);
       this.#detected = new Set(entries.map((entry) => entry.name));
       this.#selected = new Set([...this.#selected, ...this.#detected]);
+      this.#selectionDirty = true;
       this.#skillFilter = "detected";
       this.showStatus(
         `Skills detectadas e selecionadas: ${
           [...this.#detected].sort().join(", ") || "nenhuma skill"
         }`,
       );
-      this.showTab("skills");
+      if (startedOnSkills && this.#activeTab === "skills") this.showTab("skills");
     } catch (error) {
       this.showStatus(`Erro: ${errorMessage(error)}`);
     }
@@ -1147,12 +1210,14 @@ export class SpecsfyTui {
     } else {
       this.#selected.add(this.#selectedSkill);
     }
+    this.#selectionDirty = true;
     this.showTab("skills");
   }
 
   private selectVisible(): void {
     this.#suppressSkillToggleUntil = Date.now() + 100;
     for (const option of this.visibleSkills()) this.#selected.add(option.name);
+    this.#selectionDirty = true;
     this.showTab("skills");
   }
 
@@ -1160,10 +1225,12 @@ export class SpecsfyTui {
     this.#suppressSkillToggleUntil = Date.now() + 100;
     for (const option of this.visibleSkills())
       this.#selected.delete(option.name);
+    this.#selectionDirty = true;
     this.showTab("skills");
   }
 
   private async applySkills(): Promise<void> {
+    if (this.#modal) return;
     this.showTab("skills");
     try {
       const selected = new Set([...this.#selected].filter(isSpecsfySkill));
@@ -1201,6 +1268,7 @@ export class SpecsfyTui {
       }
       if (toRemove.length)
         changed.push(...(await installer.remove(toRemove.sort())));
+      this.#selectionDirty = false;
       await this.refreshAll(false);
       this.showStatus(
         changed.length
@@ -1213,6 +1281,7 @@ export class SpecsfyTui {
   }
 
   private async updateSkills(): Promise<void> {
+    if (this.#modal) return;
     this.showTab("skills");
     try {
       const changed = await (
@@ -1231,7 +1300,7 @@ export class SpecsfyTui {
 
   private showStatus(message: string): void {
     this.#status?.setContent(message);
-    this.#screen?.render();
+    this.renderScreen();
   }
 }
 
@@ -1462,4 +1531,11 @@ function terminalScrollbar(): NonNullable<
     track: { bg: TUI_THEME.surfaceRaised },
     style: { bg: TUI_THEME.focusBackground },
   };
+}
+
+/** Detecta o estado encerrado sem depender da tipagem incompleta do blessed. */
+function screenDestroyed(screen: blessed.Widgets.Screen): boolean {
+  return Boolean(
+    (screen as blessed.Widgets.Screen & { destroyed?: boolean }).destroyed,
+  );
 }

@@ -59,6 +59,11 @@ class InterfaceContractTests(unittest.TestCase):
 
         self.assertNotIn("Interface para pessoas deve começar com Sim, Não ou Nao.", errors)
 
+        errors = self.validate(
+            "| Status | Draft |\n| Interface para pessoas | Pendente: o MVP não informa. |\n"
+        )
+        self.assertNotIn("Interface para pessoas deve começar com Sim, Não ou Nao.", errors)
+
     def test_accepts_a_complete_interface_description(self) -> None:
         content = """#### Telas e responsabilidades
 
@@ -71,6 +76,10 @@ class InterfaceContractTests(unittest.TestCase):
 #### Fluxo de informação e navegação
 
 - A lista abre o cadastro, salva e retorna com o novo cliente visível.
+
+#### Menus e navegação principal
+
+- O menu principal tem os itens Clientes, com destino para /clientes, e Novo cliente, com destino para o painel de cadastro.
 
 #### Formulários e ações
 
@@ -98,16 +107,117 @@ class InterfaceContractTests(unittest.TestCase):
             errors,
         )
 
+    def test_rejects_interface_without_menu_mapping(self) -> None:
+        content = """#### Interface para pessoas
+
+- Há uma interface para pessoas.
+
+#### Stack e convenções de interface
+
+- React e componentes existentes.
+
+#### Telas e responsabilidades
+
+- Lista de clientes.
+
+#### Fluxo de informação e navegação
+
+- A lista leva ao cadastro.
+
+#### Formulários e ações
+
+- O cadastro valida nome.
+
+#### Composição e disposição
+
+- A tabela fica acima das ações.
+
+#### Blocos React e componentes selecionados
+
+| Tela | Bloco React | Componente ou composição | Origem |
+| --- | --- | --- | --- |
+| Lista | ClientList | Data Grid | ReUI |
+
+#### Estados e acessibilidade
+
+- Loading, vazio, erro e teclado.
+"""
+
+        errors = self.validate(self.interface(content))
+
+        self.assertIn(
+            "Interface para pessoas: heading obrigatório ausente: Menus e navegação principal.",
+            errors,
+        )
+
+    def test_accepts_explicit_direct_navigation_without_menu(self) -> None:
+        content = """#### Interface para pessoas
+
+- Há uma interface para pessoas.
+
+#### Stack e convenções de interface
+
+- React e componentes existentes.
+
+#### Telas e responsabilidades
+
+- A tela inicial permite consultar o resultado.
+
+#### Fluxo de informação e navegação
+
+- Não há menu; a pessoa chega à tela por uma rota direta e segue pelos links contextuais.
+
+#### Menus e navegação principal
+
+- Não há menu principal; a rota direta e os links de tela são suficientes para a navegação.
+
+#### Formulários e ações
+
+- Não há formulário.
+
+#### Composição e disposição
+
+- O conteúdo ocupa a área principal.
+
+#### Blocos React e componentes selecionados
+
+| Tela | Bloco React | Componente ou composição | Origem |
+| --- | --- | --- | --- |
+| Inicial | Result | Card | Próprio |
+
+#### Estados e acessibilidade
+
+- Loading, vazio, erro e teclado.
+"""
+
+        errors = self.validate(self.interface(content))
+
+        self.assertNotIn(
+            "Interface para pessoas: Menus e navegação principal precisa mapear menus, itens e destinos, ou declarar por que não há menu.",
+            errors,
+        )
+
     def test_core_skills_require_interface_discovery_and_delivery(self) -> None:
         sources = {
             name: (ROOT / name / "SKILL.md").read_text(encoding="utf-8")
-            for name in ("specsfy-02-backlog", "specsfy-03-specify", "specsfy-05-tasks", "specsfy-07-implement")
+            for name in (
+                "specsfy-02-backlog",
+                "specsfy-03-specify",
+                "specsfy-04-validate",
+                "specsfy-05-tasks",
+                "specsfy-07-implement",
+            )
         }
 
         self.assertIn("telas, fluxo de informação", sources["specsfy-02-backlog"])
+        self.assertIn("menus e navegação principal", sources["specsfy-02-backlog"])
         self.assertIn("stack e as telas existentes", sources["specsfy-02-backlog"])
         self.assertIn("Interface para pessoas: Sim", sources["specsfy-03-specify"])
-        self.assertIn("telas, formulário e ações", sources["specsfy-05-tasks"])
+        self.assertIn("menus e navegação principal", sources["specsfy-03-specify"])
+        self.assertIn("telas, menus e navegação principal", sources["specsfy-05-tasks"])
+        self.assertIn("menus e navegação principal", sources["specsfy-05-tasks"])
+        self.assertIn("menus e navegação principal", sources["specsfy-04-validate"])
+        self.assertIn("menus e navegação principal", sources["specsfy-07-implement"])
         self.assertIn("CRUD somente como API", sources["specsfy-07-implement"])
 
     def test_requires_an_interface_phase_when_the_spec_declares_screens(self) -> None:

@@ -29,7 +29,7 @@ Implemente T003 da spec 0004 e valide a regressão.
 ## Exemplo passo a passo
 
 1. A skill confirma Definition Gate e Plan Gate aprovados.
-2. Para uma interface, confere as telas, formulário, ações e estados definidos.
+2. Para uma interface, confere as telas, menus, formulário, ações e estados definidos.
 3. Verifica a tarefa predecessora e o RED atual.
 4. Faz a menor mudança de produção, incluindo a tela e a interação previstas.
 5. Executa o teste focal até obter GREEN.
@@ -58,7 +58,7 @@ consumidor. A execução só continua quando `docs/` estiver atualizado.
 - implementar com gate pendente.
 - aceitar um RED causado por dependência ausente.
 - ampliar o escopo sem atualizar a spec.
-- implementar um CRUD como API sem as telas e o formulário aprovados.
+- implementar um CRUD como API sem os menus, as telas e o formulário aprovados.
 - marcar conclusão sem regressão.
 - deixar `docs/`, `PROJECT.md` ou os arquivos `.specsfy/` incompatíveis com o
   código alterado.

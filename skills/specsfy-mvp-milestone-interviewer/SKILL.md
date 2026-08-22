@@ -41,12 +41,22 @@ cada backlog e somente avança quando cada etapa tiver resultado confirmado.
      --root <raiz>
    ```
 
-   O importador cria `specs/milestones/M01.md` a partir de `MVP.md`, uma Inbox
-   para cada tema encontrado e um backlog candidato para cada Inbox. Cada
-   backlog preserva um bloco de registros do trecho importado, mantém
-   `Status: Captured` e passa por refinamento antes de qualquer promoção. Se
-   `M01.md` existir, não sobrescreva nenhum arquivo e informe a pessoa
-   responsável.
+   O importador cria `specs/milestones/M01.md` a partir de `MVP.md` e uma Inbox
+   para cada tema encontrado. Ele só cria backlog e spec para temas
+   classificáveis como entregas de software desenvolvíveis. Visão, público,
+   princípios, contexto, métricas e outros registros sem comportamento a
+   construir permanecem na milestone e na Inbox, com o motivo da exclusão.
+   Antes de escrever os arquivos de desenvolvimento, ele aplica defaults
+   somente quando encontra um rótulo explícito ou uma formulação inequívoca no
+   trecho, como `Problema`,
+   `Público`, `Resultado`, `Contexto` ou uma frase objetiva de capacidade.
+   Registre esses defaults no backlog, na Inbox e no JSON de saída com sua
+   base. Quando o trecho não sustentar uma resposta, preserve a lacuna em vez
+   de criar um valor plausível. Cada backlog preserva um bloco de registros do
+   trecho importado. O backlog fica `Captured` durante a criação, recebe a
+   spec Draft ao final e passa a apontar para ela como `Promoted`; a spec
+   mantém `Definition Gate: Pending`. Se `M01.md` existir, não sobrescreva
+   nenhum arquivo e informe a pessoa responsável.
 4. Leia `BRAND.md` seguindo a mesma ordem: raiz do consumidor e, somente como
    fallback de submódulo, superprojeto. Use-o para manter linguagem, público,
    proposta e limites de marca coerentes durante as perguntas. Não copie seu
@@ -57,7 +67,9 @@ cada backlog e somente avança quando cada etapa tiver resultado confirmado.
    evitar repetição ou contradição. Eles continuam separados da formulação
    recebida nesta sessão.
 7. Trate o JSON retornado pelo importador como a fila ordenada de Inboxes e
-   backlogs da sessão. Não descarte, reagrupe ou pule um item dessa fila.
+   backlogs da sessão. Itens contextuais terão `backlog: null`, `spec: null` e
+   um motivo; itens desenvolvíveis terão os três caminhos. Não descarte,
+   reagrupe ou pule um item dessa fila.
 
 Antes da importação, faça a mesma triagem de dados sensíveis usada pela Inbox.
 Se a fonte tiver credencial, token, chave privada ou dado pessoal sensível,
@@ -95,8 +107,50 @@ node .agents/skills/specsfy-01-inbox/scripts/capturar_inbox.mjs \
   --session "DESC-AAAAMMDD-<slug>" \
   --turn "<número sequencial>" \
   --sources "<situação de MVP.md e BRAND.md>" \
-  [campos de análise da Inbox] [--root <raiz>]
+    [campos de análise da Inbox] [--root <raiz>]
 ```
+
+## Resolver defaults antes de perguntar
+
+Depois da importação, trate cada tema com esta ordem:
+
+1. Releia o trecho original, os `Defaults aplicados automaticamente`, a Inbox
+   e a milestone `M01`.
+2. Mantenha como resposta confirmada todo campo preenchido por declaração
+   explícita do MVP ou por formulação inequívoca registrada pelo importador.
+3. Se existir somente uma opção materialmente compatível com o MVP, aplique-a
+   como default óbvio e registre a formulação normalizada e a fonte. Não peça
+   confirmação para uma resposta que já está clara.
+4. Se houver mais de uma leitura razoável, conflito entre fontes ou ausência de
+   informação, não escolha em silêncio. Transforme somente esse ponto na
+   próxima pergunta numerada, com a sugestão mais compatível primeiro.
+5. Depois de cada resposta, reavalie todos os campos. Não repita pergunta já
+   respondida nem abra uma pergunta para confirmar um default sustentado.
+
+A pergunta só aparece quando o MVP não responde, quando a resposta exige uma
+escolha real ou quando há ambiguidade ou contradição. O resultado da importação
+deve deixar claro o que foi resolvido automaticamente e o que ainda precisa da
+pessoa.
+
+## Filtrar o que será desenvolvido
+
+Antes de carregar `$specsfy-02-backlog`, classifique o tema:
+
+1. `Desenvolvível`: descreve uma capacidade, tela, fluxo, integração, dado,
+   automação, regra executável ou comportamento do sistema. Crie Inbox,
+   backlog e spec Draft.
+2. `Contextual`: descreve visão, público, posicionamento, princípio, problema,
+   métrica, premissa, contexto ou limite sem declarar uma entrega de software.
+   Preserve a Inbox e a proveniência, mas não crie backlog nem spec.
+3. Se houver dúvida entre os dois, só classifique como desenvolvível quando o
+   próprio trecho trouxer verbo ou objeto de construção verificável, como
+   `desenvolver`, `implementar`, `criar`, `permitir`, `cadastrar`, `consultar`
+   ou `integrar`. Caso contrário, mantenha o tema contextual e registre o
+   motivo.
+
+Não transforme uma descrição de produto em backlog apenas porque ela pode
+ajudar uma futura implementação. O backlog representa uma entrega que será
+desenvolvida nesta importação.
 
 ## Orquestrar as skills da descoberta
 
@@ -116,12 +170,18 @@ pular responsabilidades:
    anuncie a transição para `$specsfy-data-discovery`, conclua a entrevista de
    dados e retome o backlog com `.specsfy/DATABASE.md` como contexto.
 4. Após cada backlog, retome esta skill, registre a situação do item na síntese
-   da sessão e prossiga para o próximo backlog da fila. Não promova um backlog
-   sem as respostas necessárias nem o deixe sem entrevista.
-5. Quando a fila terminar, execute `specsfy milestones sync --project <raiz>` e
-   carregue `$specsfy-milestone-governor` para conferir vínculos e progresso de
-   `M01`. Só então carregue `$specsfy-03-specify` para os backlogs que a pessoa
-   tenha autorizado promover.
+   da sessão e prossiga para o próximo backlog da fila. Como esta skill foi
+   chamada para importar o MVP, carregue `$specsfy-03-specify` ao terminar o
+   refinamento automático de cada backlog e crie uma spec Draft baseada nele.
+   A seção 10 deve manter a área de menus e navegação principal: use o que o
+   MVP declarar e marque `Pendente` quando essa informação não existir. Não
+   implemente código, não execute tarefas e não promova o Definition Gate.
+5. Quando a fila terminar, confirme que cada tema desenvolvível possui Inbox,
+   backlog e spec Draft, enquanto temas contextuais possuem somente Inbox.
+   Execute `specsfy milestones sync --project <raiz>` e carregue
+   `$specsfy-milestone-governor` para conferir vínculos e progresso de `M01`.
+   A geração automática de Drafts não autoriza implementação nem validação
+   final.
 
 ## Conduzir uma conversa adaptativa
 
@@ -142,9 +202,10 @@ pular responsabilidades:
 ## Encerrar e tratar depois
 
 Ao encerrar, informe a identificação da sessão, `M01`, a lista ordenada de
-Inboxes, todos os backlogs entrevistados, as respostas confirmadas e os pontos
-abertos. Backlog só entra em `$specsfy-03-specify` quando a pessoa autorizar a
-promoção depois da entrevista.
+Inboxes, todos os backlogs e todas as specs Draft geradas, as respostas
+confirmadas e os pontos marcados como `Pendente`. A geração de specs encerra a
+importação; implementação, validação final e promoção de gate ficam para outra
+etapa autorizada.
 
 ## Limites
 
@@ -152,6 +213,6 @@ promoção depois da entrevista.
   vínculos de uma milestone.
 - Não sobrescreva a milestone 1.0, Inboxes ou backlogs existentes.
 - Não pule a entrevista de nenhum backlog gerado pelo importador.
-- Não promova backlog para spec sem autorização explícita.
+- Não implemente código durante a importação nem marque um gate como Passed.
 - Não trate Inbox como fonte normativa.
 - Não use o entrevistador de roadmap para ampliar o MVP sem confirmação.

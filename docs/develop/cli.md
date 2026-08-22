@@ -50,7 +50,8 @@ especialista, usa `npx skills add`; o diagnóstico também informa a
 disponibilidade do npm, usado por `upgrade`.
 
 `SkillInstaller` valida que o destino é um projeto consumidor, obtém `skills/`
-do monorepo e instala o conjunto `FRAMEWORK_SKILLS` por `npx skills add`. Esse conjunto inclui setup,
+do monorepo e instala o conjunto `FRAMEWORK_SKILLS` por `npx skills add`. Esse
+conjunto inclui setup,
 três auxiliares, documentador e skills base, incluindo as entrevistas de MVP,
 roadmap e governança de milestones.
 
@@ -114,16 +115,21 @@ aba.
 `specsfy skills update` usa a mesma função para preservar compatibilidade.
 Ambos executam o preflight do instalador antes de baixar as origens.
 
-`specsfy upgrade` força uma nova consulta de tags e só executa o npm quando a
-versão estável encontrada supera `VERSION`. Assim, uma versão de desenvolvimento
-mais recente que a publicação disponível não sofre downgrade.
+`specsfy upgrade` força uma nova consulta ao registro npm e só atualiza quando a
+versão publicada supera `VERSION`. Assim, uma tag de desenvolvimento mais
+recente que a publicação disponível não provoca downgrade.
 
-`updater.ts` consulta tags semânticas estáveis, respeita intervalo e ETag,
-oferece consentimento e delega a instalação a:
+`updater.ts` consulta o registro npm, usa tags semânticas estáveis apenas para
+proveniência, respeita intervalo e ETag, oferece consentimento e atualiza a
+instalação detectada:
 
 ```text
 npm install --global @promovaweb/specsfy@latest
 ```
+
+Quando o processo atual é o executável avulso `bin/specsfy`, o updater baixa
+`https://get.specsfy.dev`, confirma a versão com `--version` e substitui o
+arquivo atomicamente.
 
 Falha de rede não impede a abertura. Configurações e metadados ficam em
 `~/.specsfy/cli.json` com permissão `0600`. Credenciais não são persistidas.

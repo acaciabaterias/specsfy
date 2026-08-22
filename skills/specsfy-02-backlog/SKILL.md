@@ -87,6 +87,14 @@ declara. Uma síntese curta pode informar o que foi reaproveitado, mas não abre
 uma nova rodada. Quando uma leitura razoável admitir mais de um significado,
 apresente apenas essa ambiguidade e cite os trechos que a provocam.
 
+Se a importação registrar um `Default aplicado automaticamente`, considere-o
+confirmado quando a base indicada for explícita ou inequívoca. Se uma pergunta
+tiver uma única opção compatível com o MVP, aplique essa opção, registre a
+normalização e siga para a próxima lacuna. Só mostre opções quando houver uma
+escolha real, mais de uma interpretação compatível ou uma sugestão que a fonte
+não permita confirmar. A entrevista deve perguntar apenas o que o MVP não
+conseguiu responder ou sugerir com segurança.
+
 ## Garantir a captura mínima
 
 1. Preserve a formulação original recebida na conversa ou em
@@ -162,6 +170,7 @@ Quando a pessoa pedir aprofundamento, promoção ou criação de uma spec:
 5. Quando a entrega tiver interface para pessoas, leia o `Contrato de
    experiência de interface` de `.specsfy/Spec.md` e trate `Interface` como
    área própria da descoberta. Pergunte sobre telas, fluxo de informação,
+   menus e navegação principal,
    formulário, padrão de ação como painel lateral ou modal e composição. Não
    escolha o padrão no lugar da pessoa quando houver alternativas reais.
    Antes da pergunta, leia a stack e as telas existentes indicadas pelo
@@ -230,8 +239,9 @@ falhas, limites, regras, dados, segurança, privacidade, desempenho,
 acessibilidade, restrições existentes e sinais objetivos de aceite e sucesso.
 
 Para interface usada por pessoas, também cubra telas, navegação, fluxo de
-informação, campos e validações do formulário, padrão de abertura de cada ação,
-disposição dos elementos, estados e uso por teclado. Registre as respostas
+informação, menus e navegação principal, campos e validações do formulário,
+padrão de abertura de cada ação, disposição dos elementos, estados e uso por
+teclado. Registre as respostas
 textuais e a stack observada no backlog para que a spec não reduza um CRUD a
 endpoints nem troque a tecnologia usada pelo projeto.
 

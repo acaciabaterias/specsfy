@@ -171,8 +171,8 @@ O gate do Ato I exige problema e resultado observável, escopo incluído e fora
 de escopo, atores, regras, histórias, requisitos funcionais e não funcionais,
 três cenários BDD distintos para cada item principal e nenhuma lacuna P1 que
 impeça o planejamento. Quando a entrega tem interface para pessoas, ele exige
-também telas, fluxo de informação, formulário, composição, estados e
-acessibilidade descritos na seção 10. Um CRUD sem telas e formulário mantém o
+também telas, fluxo de informação, menus e navegação principal, formulário,
+composição, estados e acessibilidade descritos na seção 10. Um CRUD sem telas e formulário mantém o
 gate pendente. Termo ambíguo, requisito sem forma de teste, história
 sem aceite ou conflito entre seções mantêm o gate pendente.
 
@@ -241,7 +241,7 @@ história vaga, requisito sem teste e cenário que não representa valor.
 | --- | --- | --- |
 | 8. Plano técnico | tornar a implementação compreensível antes da execução | quais módulos, dados, contratos, arquivos e compatibilidades serão afetados? |
 | 9. Modelo de dados | explicar persistência e ciclo de vida da informação | quais entidades, estados, transições, retenção e migrações existem? |
-| 10. Interfaces e contratos | registrar superfícies de integração e a experiência para pessoas | quais telas, formulários, fluxos, ações, APIs, eventos, entradas, saídas e falhas importam? |
+| 10. Interfaces e contratos | registrar superfícies de integração e a experiência para pessoas | quais telas, menus, formulários, fluxos, ações, APIs, eventos, entradas, saídas e falhas importam? |
 | 11. Estratégia TDD | derivar testes executáveis do BDD | qual caso falha primeiro, por qual motivo e como ficará verde? |
 | 12. Plano de testes e rastreabilidade | ligar requisito à comprovação | qual cenário, nível, arquivo ou comando cobre cada item? |
 | 13. Validações | registrar os gates e achados | qual comando foi executado, qual resultado produziu e o que falta? |
@@ -255,9 +255,10 @@ aplicável” com a razão, em vez de deixar uma lacuna que pareça esquecimento
 
 Quando o cabeçalho declara `Interface para pessoas: Sim`, a seção 10 também
 registra a stack e o sistema atual observados, a responsabilidade de cada tela,
-como a pessoa avança e retorna no fluxo, os campos e validações dos formulários,
-o padrão de abertura de ações, a disposição dos elementos e os estados de
-interface. O Specsfy analisa rotas, telas, componentes, conteúdo, permissões e
+os menus, seus itens e destinos, como a pessoa avança e retorna no fluxo, os
+campos e validações dos formulários, o padrão de abertura de ações, a
+disposição dos elementos e os estados de interface. O Specsfy analisa rotas,
+telas, componentes, conteúdo, permissões e
 testes antes de perguntar as lacunas reais. Assim, painel lateral, modal,
 página ou outro padrão não vira uma escolha escondida do agente nem substitui
 o que já existe sem confirmação.

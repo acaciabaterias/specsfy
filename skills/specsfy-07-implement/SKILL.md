@@ -44,8 +44,8 @@ exigindo autorização específica.
 2. Exija `Formato: Specsfy/2.0`, `Status: Planned` ou `Implementing`,
    `Definition Gate: Passed` e `Plan Gate: Passed`.
 3. Se `Interface para pessoas` for `Sim`, leia a seção 10 e confirme que o
-   plano contém tarefas para stack local, telas, formulários, ações, blocos
-   React, componentes shadcn/ui/ReUI, estados e
+   plano contém tarefas para stack local, telas, menus e navegação principal,
+   formulários, ações, blocos React, componentes shadcn/ui/ReUI, estados e
    testes de interação. Compare a stack, as telas e os fluxos atuais com o
    projeto antes de alterar código. Preserve componentes, rotas, conteúdo,
    permissões e comportamentos existentes fora do alcance registrado. Se faltar
@@ -85,7 +85,7 @@ Se não houver tarefa pronta, diferencie `concluído` de `bloqueado por dependê
    `$specsfy-05-tasks`, que reabre o plano, chama `$specsfy-06-tdd-bdd` e
    retoma esta skill depois do novo `Plan Gate: Passed`.
 4. Escreva a menor mudança de produção que torna o teste TDD verde.
-   Para uma tarefa de interface, implemente a tela, o formulário e a interação
+   Para uma tarefa de interface, implemente a tela, os menus, o formulário e a interação
    definidos na spec com os estados descritos; não substitua o fluxo por uma
    rota de API, um componente vazio ou um atalho sem a tela acordada.
 5. Depois de alterar produção e antes de marcar `EXECUTE`, monitore o contexto:

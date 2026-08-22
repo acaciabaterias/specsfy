@@ -11,7 +11,7 @@ Na interface, cada uma usa o padrão `Specsfy - Especialista - Nome`, como
 
 Para criar ou alterar interfaces, use
 `specsfy-specialist-interface-experience` antes dos especialistas de UX e UI.
-Ela examina a stack e o sistema atual, organiza as perguntas sobre telas e
+Ela examina a stack e o sistema atual, organiza as perguntas sobre telas, menus e
 garante uma fase específica de interface nas tarefas.
 
 ## Detectar e instalar

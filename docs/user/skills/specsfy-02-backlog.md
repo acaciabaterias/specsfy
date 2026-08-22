@@ -52,8 +52,9 @@ O item registra problema, público, resultado esperado e dúvidas abertas. Ele
 continua sendo backlog e não autoriza implementação.
 
 Quando a entrega incluir interface, o refinamento também pergunta somente o
-que ainda não foi dito sobre telas, fluxo de informação, formulário, padrão de
-abertura da ação e disposição dos elementos. Você pode pedir alternativas para
+que ainda não foi dito sobre telas, fluxo de informação, menus e navegação
+principal, formulário, padrão de abertura da ação e disposição dos elementos.
+Você pode pedir alternativas para
 uma página, painel lateral ou modal. As respostas ficam registradas em texto
 para orientar a spec.
 

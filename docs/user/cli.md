@@ -53,24 +53,29 @@ specsfy update --project .
 
 ## Atualização automática
 
-Ao abrir `specsfy` ou `specsfy tui` em um terminal interativo, o CLI verifica
-as tags semânticas estáveis de
-[`cli/`](../../cli/). O cache e as configurações
-globais ficam em `~/.specsfy/cli.json`, com permissão restrita ao usuário e
-intervalo padrão de 24 horas entre consultas.
+Ao abrir `specsfy` ou `specsfy tui` em um terminal interativo, o CLI verifica a
+versão realmente publicada no registro npm. As tags semânticas de
+[`cli/`](../../cli/) servem para registrar a origem da versão quando o GitHub
+responde. O cache e as configurações globais ficam em
+`~/.specsfy/cli.json`, com permissão restrita ao usuário e intervalo padrão de
+24 horas entre consultas.
 
-Quando uma tag aponta para uma versão superior, o CLI apresenta a versão atual
-e pergunta se deve atualizar. Recusar abre o dashboard normalmente. Aceitar
-executa `npm install --global @promovaweb/specsfy@latest` e encerra o CLI. A
-versão nova entra em uso na próxima abertura.
+Quando existe uma versão publicada superior, o CLI apresenta a versão atual e
+pergunta se deve atualizar. Recusar abre o dashboard normalmente. Em uma
+instalação npm, aceitar executa `npm install --global
+@promovaweb/specsfy@latest`. Em um executável avulso, o CLI baixa
+`get.specsfy.dev`, valida a versão e substitui o arquivo atual. O processo
+encerra e a versão nova entra em uso na próxima abertura.
 
 O arquivo global separa `settings`, incluindo habilitação e intervalo da
-consulta, de `cache`, que registra horário, tag, versão, commit, ETag e erro
-recente. Chaves desconhecidas são preservadas. A aplicação continua abrindo
+consulta, de `cache`, que registra horário, versão publicada, tag, commit,
+ETags e erro recente. Chaves desconhecidas são preservadas. A aplicação
+continua abrindo
 quando a rede está indisponível, a resposta é inválida ou a escrita falha, e o
 aviso fica para a próxima consulta.
 
-Como o monorepo é privado, catálogo e tags são consultados com `GH_TOKEN`,
+Como o monorepo é privado, o catálogo e a proveniência das tags são consultados
+com `GH_TOKEN`,
 `GITHUB_TOKEN` ou, na ausência dessas variáveis, com a sessão de
 `gh auth token`. O token não é copiado para `~/.specsfy/cli.json`.
 
@@ -86,10 +91,10 @@ Não confunda os dois fluxos: `specsfy update --project .` atualiza as skills do
 projeto; `specsfy upgrade` atualiza o programa global. O comando anterior
 `specsfy skills update` permanece como alias compatível.
 
-Se você instalou o executável Node com `curl -fL get.specsfy.dev`, repita o
-download descrito no [guia de instalação](installation.md). Nesse caso, a
-oferta automática exige o npm disponível. Uma falha preserva a versão atual e
-abre a TUI normalmente.
+Se você instalou o executável Node com `curl -fL get.specsfy.dev`, a oferta
+automática também atualiza esse arquivo diretamente. O download só substitui o
+executável depois de confirmar a versão esperada. Uma falha preserva a versão
+atual e abre a TUI normalmente.
 
 ## Dashboard e progresso
 

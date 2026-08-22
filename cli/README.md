@@ -192,33 +192,37 @@ vez todas as skills Specsfy instaladas. O comando equivalente é
 `specsfy skills update --project .` permanece compatível. Customizações locais
 continuam protegidas e só podem ser substituídas explicitamente com `--force`.
 
-## Atualização do CLI gerenciada pelo npm
+## Atualização automática do CLI
 
 `specsfy update` atualiza as skills do projeto. `specsfy upgrade` consulta a
-versão estável mais recente e atualiza o próprio pacote global. O segundo
-comando só chama o npm quando encontra uma versão superior à atual.
+versão estável publicada no registro npm e atualiza o próprio CLI. O segundo
+comando só instala quando encontra uma versão superior à atual.
 
 Ao abrir `specsfy` ou `specsfy tui` em um terminal interativo, o CLI consulta
-as tags semânticas estáveis do monorepo. A consulta é limitada pelo cache
-global `~/.specsfy/cli.json`, cujo intervalo padrão é de 24 horas. Falha de rede
-ou do GitHub nunca impede a abertura do dashboard.
+o registro npm. As tags semânticas do GitHub são consultadas apenas para
+associar a versão publicada ao commit de origem. A consulta é limitada pelo
+cache global `~/.specsfy/cli.json`, cujo intervalo padrão é de 24 horas. Falha
+de rede, do npm ou do GitHub nunca impede a abertura do dashboard.
 
 Quando existe versão mais recente, o CLI mostra as versões atual e disponível e
 pergunta antes de atualizar. Uma resposta negativa abre a aplicação normalmente.
-Uma resposta positiva delega a atualização ao npm, que instala a versão mais
-recente de `@promovaweb/specsfy` no escopo global. O processo então fecha. Abra
+Uma resposta positiva usa npm para uma instalação global e baixa o executável
+oficial quando o processo atual é um binário avulso. O download é validado com
+`--version` e substituído atomicamente. O processo então fecha. Abra o
 `specsfy` novamente para iniciar a versão instalada.
 
 O arquivo global usa permissão `0600`, preserva chaves desconhecidas e separa:
 
 - `settings.check_updates_on_startup`.
 - `settings.check_interval_seconds`.
-- `cache.last_checked_at`, tag, versão, commit, ETag e eventual erro recente.
+- `cache.last_checked_at`, versão publicada, tag, commit, ETags e eventual erro
+  recente.
 
 Para publicar uma versão atualizável a partir do workspace de desenvolvimento,
 use a skill local `$specsfy-release-cli`, em
 [`cli/.agents/skills/specsfy-release-cli/`](.agents/skills/specsfy-release-cli/).
-Ela promove as notas confirmadas para o [`CHANGELOG.md`](CHANGELOG.md), atualiza as versões do pacote e o lock,
+Ela promove as notas confirmadas para o [`CHANGELOG.md`](CHANGELOG.md), atualiza
+as versões do pacote e o lock,
 reconstrói os artefatos versionados, cria a tag anotada `v<versão>` no mesmo
 commit e usa exatamente a seção promovida como corpo do GitHub Release. O CI
 valida o build e a correspondência da tag.

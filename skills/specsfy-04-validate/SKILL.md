@@ -48,8 +48,9 @@ node .agents/skills/specsfy-04-validate/scripts/validate_spec.mjs specs/<estado>
 5. Leia `references/quality-gates.md` e faça a revisão semântica.
 6. Confira o campo `Interface para pessoas`. Se for `Sim`, exija na seção 10
    stack e convenções observadas, telas e responsabilidades, fluxo de
-   informação e navegação, formulários e ações, composição e disposição,
-   estados e acessibilidade. Confira se a tecnologia proposta segue as fontes
+   informação e navegação, menus e navegação principal, formulários e ações,
+   composição e disposição, estados e acessibilidade. Confira se a tecnologia
+   proposta segue as fontes
    da stack ou se a lacuna foi registrada para a pessoa. Um CRUD sem telas e
    formulário é `BLOCKER`; retorne automaticamente ao
    `$specsfy-02-backlog` para esclarecer a lacuna.

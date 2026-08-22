@@ -1,11 +1,11 @@
 /**
- * Verificação consentida de versões e atualização do pacote npm global.
+ * Verificação consentida de versões e atualização do pacote ou executável.
  */
 
 import { execFile } from "node:child_process";
-import { chmod, mkdir } from "node:fs/promises";
+import { chmod, mkdir, rename, rm, writeFile } from "node:fs/promises";
 import { homedir } from "node:os";
-import { dirname, join } from "node:path";
+import { basename, dirname, extname, join } from "node:path";
 import { promisify } from "node:util";
 import { apiHeaders } from "./github.js";
 import { isFile, readJson, writeTextAtomic } from "./filesystem.js";
@@ -14,8 +14,12 @@ const execFileAsync = promisify(execFile);
 
 export const TAGS_API_URL =
   "https://api.github.com/repos/promovaweb/specsfy/tags?per_page=100";
+export const NPM_REGISTRY_URL =
+  "https://registry.npmjs.org/@promovaweb%2fspecsfy/latest";
+export const EXECUTABLE_DOWNLOAD_URL = "https://get.specsfy.dev";
 export const NPM_PACKAGE_NAME = "@promovaweb/specsfy";
 export const DEFAULT_CHECK_INTERVAL_SECONDS = 86_400;
+const EXECUTABLE_DOWNLOAD_TIMEOUT_MS = 15_000;
 const SEMANTIC_TAG = /^v?(\d+)\.(\d+)\.(\d+)$/;
 const COMMIT_SHA = /^[0-9a-f]{40,64}$/;
 
@@ -24,7 +28,7 @@ export interface UpdateInfo {
   current_version: string;
   latest_version: string;
   tag: string;
-  commit_sha: string;
+  commit_sha?: string;
 }
 
 interface GlobalConfig {
@@ -36,6 +40,8 @@ interface GlobalConfig {
   cache: Record<string, unknown>;
   [key: string]: unknown;
 }
+
+export type UpgradeTarget = "npm" | "executable";
 
 /** Retorna o caminho global do cache do CLI. */
 export function globalConfigPath(home = homedir()): string {
@@ -78,7 +84,7 @@ export async function ensureGlobalConfig(
   return payload as GlobalConfig;
 }
 
-/** Consulta tags com cache e retorna somente atualização estável válida. */
+/** Consulta a versão publicada e retorna somente atualização distribuída. */
 export async function checkForUpdate(
   currentVersion: string,
   options: {
@@ -100,36 +106,72 @@ export async function checkForUpdate(
     typeof checkedAt === "number" &&
     typeof interval === "number" &&
     interval > 0 &&
-    timestamp - checkedAt < interval
+    timestamp - checkedAt < interval &&
+    typeof cache.latest_distribution_version === "string"
   ) {
     return cachedUpdate(currentVersion, cache);
   }
-  const headers = await apiHeaders(`specsfy-cli/${currentVersion}`);
-  if (typeof cache.etag === "string" && cache.etag) {
-    headers["If-None-Match"] = cache.etag;
-  }
+  const fetcher = options.fetcher ?? fetch;
   try {
-    const response = await (options.fetcher ?? fetch)(TAGS_API_URL, {
-      headers,
+    const registryHeaders: Record<string, string> = {
+      Accept: "application/json",
+      "User-Agent": `specsfy-cli/${currentVersion}`,
+    };
+    if (typeof cache.registry_etag === "string" && cache.registry_etag) {
+      registryHeaders["If-None-Match"] = cache.registry_etag;
+    }
+    const registryResponse = await fetcher(NPM_REGISTRY_URL, {
+      headers: registryHeaders,
       signal: AbortSignal.timeout(4_000),
     });
+    let publishedVersion: string;
+    if (registryResponse.status === 304) {
+      const cachedVersion = cache.latest_distribution_version;
+      if (typeof cachedVersion !== "string") {
+        throw new Error("cache do registro npm sem versão publicada");
+      }
+      publishedVersion = cachedVersion;
+    } else {
+      if (!registryResponse.ok) throw new Error(`HTTP ${registryResponse.status}`);
+      publishedVersion = latestPublishedVersion(
+        (await registryResponse.json()) as unknown,
+      );
+      const registryEtag = registryResponse.headers.get("etag");
+      if (registryEtag) cache.registry_etag = registryEtag;
+    }
+
+    let taggedVersion: ReturnType<typeof latestSemanticTag>;
+    try {
+      const headers = await apiHeaders(`specsfy-cli/${currentVersion}`);
+      if (typeof cache.etag === "string" && cache.etag) {
+        headers["If-None-Match"] = cache.etag;
+      }
+      const tagResponse = await fetcher(TAGS_API_URL, {
+        headers,
+        signal: AbortSignal.timeout(4_000),
+      });
+      if (tagResponse.status === 304) {
+        taggedVersion = cachedTag(cache);
+      } else if (tagResponse.ok) {
+        taggedVersion = latestSemanticTag((await tagResponse.json()) as unknown);
+        const tagEtag = tagResponse.headers.get("etag");
+        if (tagEtag) cache.etag = tagEtag;
+      }
+    } catch {
+      taggedVersion = cachedTag(cache);
+    }
+
     cache.last_checked_at = timestamp;
     delete cache.last_error;
-    if (response.status === 304) {
-      await writeGlobalConfig(target, payload);
-      return cachedUpdate(currentVersion, cache);
-    }
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const latest = latestSemanticTag((await response.json()) as unknown);
-    const etag = response.headers.get("etag");
-    if (etag) cache.etag = etag;
-    if (latest) {
-      cache.latest_version = latest.version;
-      cache.latest_tag = latest.tag;
-      cache.latest_commit = latest.commit;
+    cache.latest_distribution_version = publishedVersion;
+    cache.latest_version = publishedVersion;
+    cache.latest_tag =
+      taggedVersion?.version === publishedVersion
+        ? taggedVersion.tag
+        : `v${publishedVersion}`;
+    if (taggedVersion?.version === publishedVersion) {
+      cache.latest_commit = taggedVersion.commit;
     } else {
-      delete cache.latest_version;
-      delete cache.latest_tag;
       delete cache.latest_commit;
     }
     await writeGlobalConfig(target, payload);
@@ -150,6 +192,72 @@ export function npmUpgradeArguments(): string[] {
 /** Atualiza o pacote pelo npm encontrado no PATH. */
 export async function upgradeWithNpm(): Promise<void> {
   await execFileAsync("npm", npmUpgradeArguments(), { encoding: "utf8" });
+}
+
+/** Retorna a entrada quando o CLI está rodando como executável avulso. */
+export function standaloneExecutablePath(
+  argv = process.argv,
+): string | undefined {
+  const entry = argv[1];
+  if (!entry || extname(entry)) return undefined;
+  return entry;
+}
+
+/** Baixa, valida e substitui atomicamente o executável avulso em uso. */
+export async function upgradeWithExecutable(
+  executablePath: string,
+  expectedVersion: string,
+  fetcher: typeof fetch = fetch,
+): Promise<void> {
+  const response = await fetcher(EXECUTABLE_DOWNLOAD_URL, {
+    headers: { "User-Agent": `specsfy-cli/${expectedVersion}` },
+    signal: AbortSignal.timeout(EXECUTABLE_DOWNLOAD_TIMEOUT_MS),
+  });
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+  const temporary = join(
+    dirname(executablePath),
+    `.${basename(executablePath)}.${process.pid}.tmp`,
+  );
+  try {
+    await writeFile(temporary, Buffer.from(await response.arrayBuffer()), {
+      mode: 0o755,
+    });
+    await chmod(temporary, 0o755);
+    const result = await execFileAsync(temporary, ["--version"], {
+      encoding: "utf8",
+    });
+    if (result.stdout.trim() !== expectedVersion) {
+      throw new Error(
+        `executável baixado informa ${result.stdout.trim() || "versão vazia"}; esperado ${expectedVersion}`,
+      );
+    }
+    await rename(temporary, executablePath);
+    await chmod(executablePath, 0o755);
+  } finally {
+    await rm(temporary, { force: true });
+  }
+}
+
+/** Atualiza a instalação real detectada no processo atual. */
+export async function upgradeCurrentInstallation(
+  expectedVersion: string,
+  options: {
+    executablePath?: string;
+    fetcher?: typeof fetch;
+  } = {},
+): Promise<UpgradeTarget> {
+  const executablePath = options.executablePath ?? standaloneExecutablePath();
+  if (executablePath) {
+    await upgradeWithExecutable(
+      executablePath,
+      expectedVersion,
+      options.fetcher ?? fetch,
+    );
+    return "executable";
+  }
+  await upgradeWithNpm();
+  return "npm";
 }
 
 /** Conduz o prompt de consentimento e informa se o processo deve encerrar. */
@@ -180,8 +288,9 @@ export async function offerStartupUpdate(
     output("Atualização adiada. Abrindo a aplicação normalmente.");
     return false;
   }
+  let target: UpgradeTarget;
   try {
-    await upgradeWithNpm();
+    target = await upgradeCurrentInstallation(update.latest_version);
   } catch (error) {
     output(
       `Falha ao atualizar: ${
@@ -191,7 +300,7 @@ export async function offerStartupUpdate(
     return false;
   }
   output(
-    `O npm atualizou o Specsfy CLI para ${update.latest_version}. ` +
+    `${target === "executable" ? "O executável" : "O npm"} atualizou o Specsfy CLI para ${update.latest_version}. ` +
       "O CLI será fechado; abra-o novamente para usar a nova versão.",
   );
   return true;
@@ -201,8 +310,9 @@ async function writeGlobalConfig(
   path: string,
   payload: GlobalConfig,
 ): Promise<void> {
-  await mkdir(dirname(path), { recursive: true, mode: 0o700 });
-  await chmod(dirname(path), 0o700);
+  const directory = dirname(path);
+  await mkdir(directory, { recursive: true, mode: 0o700 });
+  if (basename(directory) === ".specsfy") await chmod(directory, 0o700);
   await writeTextAtomic(path, `${JSON.stringify(payload, null, 2)}\n`, 0o600);
   await chmod(path, 0o600);
 }
@@ -242,6 +352,36 @@ function latestSemanticTag(
   return candidates[0];
 }
 
+/** Extrai a versão estável realmente publicada no registro npm. */
+function latestPublishedVersion(payload: unknown): string {
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+    throw new Error("resposta de versão publicada inválida");
+  }
+  const version = (payload as Record<string, unknown>).version;
+  if (typeof version !== "string" || !SEMANTIC_TAG.test(version)) {
+    throw new Error("versão publicada inválida");
+  }
+  return versionTuple(version).join(".");
+}
+
+/** Recupera a tag em cache quando a API do GitHub responde com 304. */
+function cachedTag(
+  cache: Record<string, unknown>,
+): { version: string; tag: string; commit: string } | undefined {
+  const version = cache.latest_version;
+  const tag = cache.latest_tag;
+  const commit = cache.latest_commit;
+  if (
+    typeof version !== "string" ||
+    typeof tag !== "string" ||
+    typeof commit !== "string" ||
+    !COMMIT_SHA.test(commit)
+  ) {
+    return undefined;
+  }
+  return { version, tag, commit };
+}
+
 function cachedUpdate(
   currentVersion: string,
   cache: Record<string, unknown>,
@@ -252,8 +392,7 @@ function cachedUpdate(
   if (
     typeof latest !== "string" ||
     typeof tag !== "string" ||
-    typeof commit !== "string" ||
-    !COMMIT_SHA.test(commit)
+    cache.latest_distribution_version !== latest
   ) {
     return undefined;
   }
@@ -266,12 +405,15 @@ function cachedUpdate(
   ) {
     return undefined;
   }
-  return {
+  const update: UpdateInfo = {
     current_version: currentVersion,
     latest_version: latest,
     tag,
-    commit_sha: commit,
   };
+  if (typeof commit === "string" && COMMIT_SHA.test(commit)) {
+    update.commit_sha = commit;
+  }
+  return update;
 }
 
 function versionTuple(version: string): [number, number, number] {
