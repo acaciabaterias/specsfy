@@ -81,10 +81,11 @@ specsfy update --project ./api --force --json
 
 ## `specsfy upgrade`
 
-Consulta novamente as tags estáveis e atualiza o próprio CLI pelo pacote
-`@promovaweb/specsfy@latest`. O npm só é executado quando a versão encontrada é
-superior à versão atual, o que impede downgrade. `--json` informa se houve
-atualização e as versões envolvidas. O projeto não é alterado.
+Consulta novamente a versão publicada no npm e atualiza o próprio CLI pelo
+pacote `@promovaweb/specsfy@latest`. O npm só é executado quando a versão
+encontrada é superior à versão atual, o que impede downgrade e ignora um
+adiamento anterior. `--json` informa se houve atualização e as versões
+envolvidas. O projeto não é alterado.
 
 Exemplos:
 

@@ -67,10 +67,16 @@ instalação npm, aceitar executa `npm install --global
 `get.specsfy.dev`, valida a versão e substitui o arquivo atual. O processo
 encerra e a versão nova entra em uso na próxima abertura.
 
+Depois de recusar ou de uma tentativa que falhou, a mesma versão fica adiada
+até o próximo intervalo configurado. Isso evita a repetição do aviso a cada
+abertura. O comando explícito `specsfy upgrade` consulta novamente e ignora o
+adiamento. Se o executável for um symlink, o arquivo apontado é atualizado e o
+symlink continua disponível no `PATH`.
+
 O arquivo global separa `settings`, incluindo habilitação e intervalo da
 consulta, de `cache`, que registra horário, versão publicada, tag, commit,
-ETags e erro recente. Chaves desconhecidas são preservadas. A aplicação
-continua abrindo
+ETags, versão adiada e erro recente. Chaves desconhecidas são preservadas. A
+aplicação continua abrindo
 quando a rede está indisponível, a resposta é inválida ou a escrita falha, e o
 aviso fica para a próxima consulta.
 

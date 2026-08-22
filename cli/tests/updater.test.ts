@@ -1,13 +1,23 @@
 /** Regressões da consulta, do cache e da atualização pelo npm. */
-import { readFile, stat, writeFile } from "node:fs/promises";
+import {
+  lstat,
+  mkdir,
+  readFile,
+  stat,
+  symlink,
+  writeFile,
+} from "node:fs/promises";
 import { join } from "node:path";
 import { describe, expect, test, vi } from "vitest";
 import {
   checkForUpdate,
+  clearStartupUpdateDeferral,
+  deferStartupUpdate,
   ensureGlobalConfig,
   EXECUTABLE_DOWNLOAD_URL,
   NPM_REGISTRY_URL,
   npmUpgradeArguments,
+  offerStartupUpdate,
   standaloneExecutablePath,
   upgradeWithExecutable,
 } from "../src/updater.js";
@@ -98,6 +108,122 @@ describe("atualizador", () => {
     expect(await readFile(path, "utf8")).toContain("preservar");
   });
 
+  test("não repete o aviso depois de adiar a mesma versão", async () => {
+    const root = await temporaryDirectory();
+    const path = join(root, "cli.json");
+    const fetcher = vi.fn(async (url: RequestInfo | URL) =>
+      url === NPM_REGISTRY_URL
+        ? new Response(JSON.stringify({ version: "0.9.0" }), { status: 200 })
+        : new Response(
+            JSON.stringify([
+              { name: "v0.9.0", commit: { sha: "9".repeat(40) } },
+            ]),
+            { status: 200 },
+          ),
+    );
+
+    const update = await checkForUpdate("0.8.0", {
+      cachePath: path,
+      now: 1_000,
+      fetcher,
+    });
+    expect(update?.latest_version).toBe("0.9.0");
+
+    await deferStartupUpdate("0.9.0", { cachePath: path, now: 1_001 });
+    expect(
+      await checkForUpdate("0.8.0", {
+        cachePath: path,
+        now: 1_002,
+        fetcher,
+      }),
+    ).toBeUndefined();
+    expect(
+      await checkForUpdate("0.8.0", {
+        cachePath: path,
+        now: 1_002,
+        force: true,
+        fetcher,
+      }),
+    ).toMatchObject({ latest_version: "0.9.0" });
+    expect(
+      await checkForUpdate("0.8.0", {
+        cachePath: path,
+        now: 87_402,
+        fetcher,
+      }),
+    ).toMatchObject({ latest_version: "0.9.0" });
+
+    await clearStartupUpdateDeferral(path);
+    const cache = JSON.parse(await readFile(path, "utf8")) as {
+      cache: Record<string, unknown>;
+    };
+    expect(cache.cache).not.toHaveProperty("startup_snoozed_version");
+  });
+
+  test("a oferta de inicialização pergunta uma vez e depois abre normalmente", async () => {
+    const root = await temporaryDirectory();
+    const path = join(root, "cli.json");
+    const fetcher = vi.fn(async (url: RequestInfo | URL) =>
+      url === NPM_REGISTRY_URL
+        ? new Response(JSON.stringify({ version: "0.9.0" }), { status: 200 })
+        : new Response(
+            JSON.stringify([
+              { name: "v0.9.0", commit: { sha: "9".repeat(40) } },
+            ]),
+            { status: 200 },
+          ),
+    );
+    const inputDescriptor = Object.getOwnPropertyDescriptor(
+      process.stdin,
+      "isTTY",
+    );
+    const outputDescriptor = Object.getOwnPropertyDescriptor(
+      process.stdout,
+      "isTTY",
+    );
+    Object.defineProperty(process.stdin, "isTTY", {
+      configurable: true,
+      value: true,
+    });
+    Object.defineProperty(process.stdout, "isTTY", {
+      configurable: true,
+      value: true,
+    });
+    try {
+      const ask = vi.fn(async () => "n");
+      const output = vi.fn();
+      expect(
+        await offerStartupUpdate("0.8.0", ask, output, {
+          cachePath: path,
+          now: 1_000,
+          fetcher,
+        }),
+      ).toBe(false);
+      expect(
+        await offerStartupUpdate("0.8.0", ask, output, {
+          cachePath: path,
+          now: 1_001,
+          fetcher,
+        }),
+      ).toBe(false);
+      expect(ask).toHaveBeenCalledOnce();
+      expect(output).toHaveBeenCalledWith(
+        "Atualização adiada. Abrindo a aplicação normalmente.",
+      );
+    } finally {
+      if (inputDescriptor) {
+        Object.defineProperty(process.stdin, "isTTY", inputDescriptor);
+      } else {
+        delete (process.stdin as { isTTY?: boolean }).isTTY;
+      }
+      if (outputDescriptor) {
+        Object.defineProperty(process.stdout, "isTTY", outputDescriptor);
+      } else {
+        delete (process.stdout as { isTTY?: boolean }).isTTY;
+      }
+    }
+  });
+
   test("usa o pacote npm oficial no upgrade", () => {
     expect(npmUpgradeArguments()).toEqual([
       "install",
@@ -131,6 +257,31 @@ describe("atualizador", () => {
 
     expect(await readFile(executable)).toEqual(downloaded);
     expect(fetcher).toHaveBeenCalledOnce();
+  });
+
+  test("atualiza o arquivo apontado sem remover o symlink do executável", async () => {
+    const root = await temporaryDirectory();
+    const target = join(root, "releases/specsfy");
+    const link = join(root, "bin/specsfy");
+    await mkdir(join(root, "releases"), { recursive: true });
+    await mkdir(join(root, "bin"), { recursive: true });
+    await writeFile(target, "#!/usr/bin/env node\nconsole.log(\"0.8.0\")\n", {
+      mode: 0o755,
+    });
+    await symlink(target, link);
+    const downloaded = Buffer.from(
+      "#!/usr/bin/env node\n" +
+        'if (process.argv[2] === "--version") console.log("0.9.0");\n',
+    );
+
+    await upgradeWithExecutable(
+      link,
+      "0.9.0",
+      async () => new Response(downloaded, { status: 200 }),
+    );
+
+    expect((await lstat(link)).isSymbolicLink()).toBe(true);
+    expect(await readFile(target)).toEqual(downloaded);
   });
 
   test("não oferece downgrade quando a versão local é mais recente", async () => {

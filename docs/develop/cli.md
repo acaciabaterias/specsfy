@@ -129,10 +129,16 @@ npm install --global @promovaweb/specsfy@latest
 
 Quando o processo atual é o executável avulso `bin/specsfy`, o updater baixa
 `https://get.specsfy.dev`, confirma a versão com `--version` e substitui o
-arquivo atomicamente.
+arquivo atomicamente. Se o caminho for um symlink, resolve o arquivo apontado
+antes da troca para preservar o comando exposto no `PATH`. A recusa ou uma
+falha de atualização registra a versão adiada no cache; o aviso reaparece
+somente depois do intervalo configurado. `specsfy upgrade` usa consulta forçada
+e ignora esse adiamento.
 
 Falha de rede não impede a abertura. Configurações e metadados ficam em
-`~/.specsfy/cli.json` com permissão `0600`. Credenciais não são persistidas.
+`~/.specsfy/cli.json` com permissão `0600`. O cache inclui a versão e o horário
+do último adiamento, além das versões e ETags consultadas. Credenciais não são
+persistidas.
 
 ## Artefato versionado
 

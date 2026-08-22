@@ -3,9 +3,17 @@
  */
 
 import { execFile } from "node:child_process";
-import { chmod, mkdir, rename, rm, writeFile } from "node:fs/promises";
+import {
+  chmod,
+  lstat,
+  mkdir,
+  realpath,
+  rename,
+  rm,
+  writeFile,
+} from "node:fs/promises";
 import { homedir } from "node:os";
-import { basename, dirname, extname, join } from "node:path";
+import { basename, dirname, extname, join, resolve } from "node:path";
 import { promisify } from "node:util";
 import { apiHeaders } from "./github.js";
 import { isFile, readJson, writeTextAtomic } from "./filesystem.js";
@@ -29,6 +37,14 @@ export interface UpdateInfo {
   latest_version: string;
   tag: string;
   commit_sha?: string;
+}
+
+/** Dependências substituíveis para testar o aviso sem rede ou disco global. */
+export interface StartupUpdateOptions {
+  cachePath?: string;
+  now?: number;
+  fetcher?: typeof fetch;
+  upgrade?: (version: string) => Promise<UpgradeTarget>;
 }
 
 interface GlobalConfig {
@@ -109,7 +125,11 @@ export async function checkForUpdate(
     timestamp - checkedAt < interval &&
     typeof cache.latest_distribution_version === "string"
   ) {
-    return cachedUpdate(currentVersion, cache);
+    return cachedUpdate(currentVersion, cache, {
+      force: Boolean(options.force),
+      now: timestamp,
+      interval,
+    });
   }
   const fetcher = options.fetcher ?? fetch;
   try {
@@ -175,12 +195,20 @@ export async function checkForUpdate(
       delete cache.latest_commit;
     }
     await writeGlobalConfig(target, payload);
-    return cachedUpdate(currentVersion, cache);
+    return cachedUpdate(currentVersion, cache, {
+      force: Boolean(options.force),
+      now: timestamp,
+      interval,
+    });
   } catch (error) {
     cache.last_checked_at = timestamp;
     cache.last_error = error instanceof Error ? error.message : String(error);
     await writeGlobalConfig(target, payload);
-    return cachedUpdate(currentVersion, cache);
+    return cachedUpdate(currentVersion, cache, {
+      force: Boolean(options.force),
+      now: timestamp,
+      interval,
+    });
   }
 }
 
@@ -200,7 +228,7 @@ export function standaloneExecutablePath(
 ): string | undefined {
   const entry = argv[1];
   if (!entry || extname(entry)) return undefined;
-  return entry;
+  return resolve(entry);
 }
 
 /** Baixa, valida e substitui atomicamente o executável avulso em uso. */
@@ -215,9 +243,10 @@ export async function upgradeWithExecutable(
   });
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
+  const target = await executableReplacementPath(executablePath);
   const temporary = join(
-    dirname(executablePath),
-    `.${basename(executablePath)}.${process.pid}.tmp`,
+    dirname(target),
+    `.${basename(target)}.${process.pid}.tmp`,
   );
   try {
     await writeFile(temporary, Buffer.from(await response.arrayBuffer()), {
@@ -232,8 +261,8 @@ export async function upgradeWithExecutable(
         `executável baixado informa ${result.stdout.trim() || "versão vazia"}; esperado ${expectedVersion}`,
       );
     }
-    await rename(temporary, executablePath);
-    await chmod(executablePath, 0o755);
+    await rename(temporary, target);
+    await chmod(target, 0o755);
   } finally {
     await rm(temporary, { force: true });
   }
@@ -260,16 +289,43 @@ export async function upgradeCurrentInstallation(
   return "npm";
 }
 
+/** Registra o adiamento da mesma versão até o próximo intervalo de consulta. */
+export async function deferStartupUpdate(
+  version: string,
+  options: { cachePath?: string; now?: number } = {},
+): Promise<void> {
+  const target = options.cachePath ?? globalConfigPath();
+  const payload = await ensureGlobalConfig(target);
+  payload.cache.startup_snoozed_version = version;
+  payload.cache.startup_snoozed_at = options.now ?? Date.now() / 1000;
+  await writeGlobalConfig(target, payload);
+}
+
+/** Remove o adiamento anterior depois de uma atualização concluída. */
+export async function clearStartupUpdateDeferral(
+  path = globalConfigPath(),
+): Promise<void> {
+  const payload = await ensureGlobalConfig(path);
+  delete payload.cache.startup_snoozed_version;
+  delete payload.cache.startup_snoozed_at;
+  await writeGlobalConfig(path, payload);
+}
+
 /** Conduz o prompt de consentimento e informa se o processo deve encerrar. */
 export async function offerStartupUpdate(
   currentVersion: string,
   ask: (prompt: string) => Promise<string>,
   output: (line: string) => void = console.log,
+  options: StartupUpdateOptions = {},
 ): Promise<boolean> {
   if (!process.stdin.isTTY || !process.stdout.isTTY) return false;
   let update: UpdateInfo | undefined;
   try {
-    update = await checkForUpdate(currentVersion);
+    update = await checkForUpdate(currentVersion, {
+      ...(options.cachePath === undefined ? {} : { cachePath: options.cachePath }),
+      ...(options.now === undefined ? {} : { now: options.now }),
+      ...(options.fetcher === undefined ? {} : { fetcher: options.fetcher }),
+    });
   } catch (error) {
     output(
       `Aviso: não foi possível verificar atualizações: ${
@@ -285,13 +341,35 @@ export async function offerStartupUpdate(
   );
   const answer = (await ask("Deseja atualizar agora? [s/N] ")).trim().toLowerCase();
   if (!["s", "sim", "y", "yes"].includes(answer)) {
+    await rememberStartupDeferral(
+      update.latest_version,
+      {
+        ...(options.cachePath === undefined
+          ? {}
+          : { cachePath: options.cachePath }),
+        ...(options.now === undefined ? {} : { now: options.now }),
+      },
+      output,
+    );
     output("Atualização adiada. Abrindo a aplicação normalmente.");
     return false;
   }
   let target: UpgradeTarget;
   try {
-    target = await upgradeCurrentInstallation(update.latest_version);
+    target = await (options.upgrade ?? upgradeCurrentInstallation)(
+      update.latest_version,
+    );
   } catch (error) {
+    await rememberStartupDeferral(
+      update.latest_version,
+      {
+        ...(options.cachePath === undefined
+          ? {}
+          : { cachePath: options.cachePath }),
+        ...(options.now === undefined ? {} : { now: options.now }),
+      },
+      output,
+    );
     output(
       `Falha ao atualizar: ${
         error instanceof Error ? error.message : String(error)
@@ -299,11 +377,39 @@ export async function offerStartupUpdate(
     );
     return false;
   }
+  await clearStartupUpdateDeferral(options.cachePath);
   output(
     `${target === "executable" ? "O executável" : "O npm"} atualizou o Specsfy CLI para ${update.latest_version}. ` +
       "O CLI será fechado; abra-o novamente para usar a nova versão.",
   );
   return true;
+}
+
+/** Resolve o alvo real quando a instalação foi exposta por um link simbólico. */
+async function executableReplacementPath(path: string): Promise<string> {
+  try {
+    if ((await lstat(path)).isSymbolicLink()) return await realpath(path);
+  } catch {
+    // A validação do executável baixado produzirá o erro acionável ao final.
+  }
+  return path;
+}
+
+/** Evita que uma falha secundária de cache impeça a abertura normal do CLI. */
+async function rememberStartupDeferral(
+  version: string,
+  options: { cachePath?: string; now?: number },
+  output: (line: string) => void,
+): Promise<void> {
+  try {
+    await deferStartupUpdate(version, options);
+  } catch (error) {
+    output(
+      `Aviso: não foi possível registrar o adiamento da atualização: ${
+        error instanceof Error ? error.message : String(error)
+      }`,
+    );
+  }
 }
 
 async function writeGlobalConfig(
@@ -385,6 +491,7 @@ function cachedTag(
 function cachedUpdate(
   currentVersion: string,
   cache: Record<string, unknown>,
+  options: { force: boolean; now: number; interval: unknown },
 ): UpdateInfo | undefined {
   const latest = cache.latest_version;
   const tag = cache.latest_tag;
@@ -393,6 +500,16 @@ function cachedUpdate(
     typeof latest !== "string" ||
     typeof tag !== "string" ||
     cache.latest_distribution_version !== latest
+  ) {
+    return undefined;
+  }
+  if (
+    !options.force &&
+    cache.startup_snoozed_version === latest &&
+    typeof cache.startup_snoozed_at === "number" &&
+    typeof options.interval === "number" &&
+    options.interval > 0 &&
+    options.now - cache.startup_snoozed_at < options.interval
   ) {
     return undefined;
   }

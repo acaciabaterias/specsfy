@@ -51,14 +51,17 @@ instalação.
    `https://get.specsfy.dev`, valida `--version` e substitui o arquivo atual.
 6. Depois que o npm conclui, o CLI encerra para que a próxima abertura use o
    ambiente atualizado.
-7. Recusa ou falha abre a aplicação atual normalmente.
+7. Recusa ou falha registra o adiamento da versão no cache e abre a aplicação
+   atual normalmente; a mesma versão só volta a ser oferecida depois do
+   intervalo configurado.
 
 ## Cache e privacidade
 
 O JSON global tem permissão `0600`, preserva chaves desconhecidas e separa
 configurações de dados efêmeros. Ele pode guardar habilitação, intervalo,
-horário, ETags, versão publicada, tag, commit e erro recente. Não guarda credenciais,
-telemetria nem conteúdo do projeto.
+horário, ETags, versão publicada, tag, commit, versão adiada, horário do
+adiamento e erro recente. Não guarda credenciais, telemetria nem conteúdo do
+projeto.
 
 A credencial existe somente no ambiente do processo ou no armazenamento
 governado pelo GitHub CLI. O Specsfy não a imprime nem a copia para seu cache.

@@ -211,12 +211,18 @@ oficial quando o processo atual é um binário avulso. O download é validado co
 `--version` e substituído atomicamente. O processo então fecha. Abra o
 `specsfy` novamente para iniciar a versão instalada.
 
+Depois de recusar uma versão, o CLI registra o adiamento dessa mesma versão no
+cache e não repete a pergunta durante o intervalo configurado. `specsfy upgrade`
+ignora esse adiamento por ser uma ação explícita. Quando o executável
+foi instalado por symlink, a atualização substitui o arquivo apontado e
+preserva o caminho usado no `PATH`.
+
 O arquivo global usa permissão `0600`, preserva chaves desconhecidas e separa:
 
 - `settings.check_updates_on_startup`.
 - `settings.check_interval_seconds`.
-- `cache.last_checked_at`, versão publicada, tag, commit, ETags e eventual erro
-  recente.
+- `cache.last_checked_at`, versão publicada, tag, commit, ETags, adiamento da
+  versão exibida e eventual erro recente.
 
 Para publicar uma versão atualizável a partir do workspace de desenvolvimento,
 use a skill local `$specsfy-release-cli`, em
