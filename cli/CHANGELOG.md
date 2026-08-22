@@ -2,6 +2,19 @@
 
 Todas as mudanças relevantes do Specsfy CLI são registradas neste arquivo.
 
+## [Unreleased]
+
+## [0.9.1] - 2026-08-22
+
+- Corrige a navegação da TUI, o foco após fechar telas, o fechamento por
+  `Ctrl+Q` e a atualização de painéis durante a execução de testes.
+- Preserva seleções de skills durante refresh e impede que operações
+  assíncronas devolvam a pessoa para uma aba antiga.
+- Faz o updater comparar a versão publicada no npm, evita avisos repetidos e
+  atualiza executáveis avulsos com validação e substituição atômica.
+- Completa a importação de MVP com defaults óbvios, pendências explícitas,
+  backlogs somente para desenvolvimento e specs derivadas desses backlogs.
+
 ## [0.9.0] - 2026-08-21
 
 - Adiciona especialistas essenciais ao setup e amplia o catálogo de
