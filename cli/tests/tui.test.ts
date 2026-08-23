@@ -370,6 +370,37 @@ describe("renderização e interação em terminal real", () => {
     expect(tui.activeTab).toBe("backlogs");
   });
 
+  test("fecha a spec pelo byte real de Escape e restaura o foco para a lista", async () => {
+    const { screen, tui, input } = await mountedTui();
+    press(screen, "s", true);
+    press(screen, "space");
+    expect(screenText(screen)).toContain("Esc: voltar para a lista de specs");
+
+    input.write("\u001b");
+    await settle();
+
+    expect(tui.activeTab).toBe("specs");
+    expect(screenText(screen)).not.toContain(
+      "Esc: voltar para a lista de specs",
+    );
+    expect(screen.focused?.type).toBe("list");
+  });
+
+  test("mantém o foco dentro do modal e permite fechá-lo pelo controle visível", async () => {
+    const { screen, tui } = await mountedTui();
+    press(screen, "s", true);
+    press(screen, "space");
+
+    press(screen, "tab");
+    expect(screen.focused?.getContent().trim()).toBe("Fechar  Esc");
+    press(screen, "tab");
+    expect(screen.focused?.type).toBe("box");
+
+    findWidgetByContent(screen, "Fechar  Esc").emit("press");
+    expect(tui.activeTab).toBe("specs");
+    expect(screen.focused?.type).toBe("list");
+  });
+
   test("alterna, limpa e marca novamente a seleção por teclado", async () => {
     const { screen } = await mountedTui();
     press(screen, "k", true);

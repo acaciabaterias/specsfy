@@ -159,6 +159,10 @@ teclado e mouse conferem foco, filtros, busca, seleção de skills e o modal de
 spec. Os atalhos de controle também são enviados como bytes de terminal. Essa
 cobertura inclui os nomes `linefeed` e `backspace`, usados pelo neo-blessed para
 `Ctrl+J` e `Ctrl+H`, e impede combinações indistinguíveis de `Tab` e `Enter`.
+O modal mantém o foco entre seu conteúdo e o botão **Fechar Esc**. No
+fechamento, a implementação remove os controles do overlay da pilha de foco do
+neo-blessed antes de destruir os widgets e devolve o foco à lista de specs.
+As regressões usam também o byte Escape enviado por um TTY real.
 
 `TUI_THEME`, em `tui.ts`, centraliza cores semânticas derivadas da paleta dark
 de `brand/tokens.json`. A suíte calcula a razão de contraste dos pares usados

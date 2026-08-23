@@ -107,7 +107,9 @@ possui seis abas:
   direita.
 - **Specs**: tabela detalhada com gates e progresso de cada especificação.
   destaque uma linha e pressione `Espaço` para abrir a spec completa em um
-  modal Markdown rolável, retornando à listagem com `Esc`.
+  modal Markdown rolável. Use `Esc` ou o botão **Fechar Esc**; `Tab` e
+  `Shift+Tab` permanecem entre a leitura e esse botão, retornando à lista
+  destacada quando o modal fecha.
 - **Testes**: executa o Pest do projeto e separa o resultado entre as subabas
   **Resumo** e **Testes**, mantendo a saída detalhada rolável.
 - **Skills**: catálogo tabular com plano, nome, categoria e estado, acompanhado
@@ -277,11 +279,14 @@ token do registro e sem essa atestação.
 - `Esc`: fecha o modal da spec, limpa a busca de Skills ou volta para Home.
 
 Cada botão mostra seu atalho no próprio rótulo. `Tab` e `Shift+Tab` percorrem
-os controles e as setas navegam as tabelas. Na aba Skills, `Enter` ou `Espaço`
-alternam o plano entre instalar, manter, remover e ignorar. Na aba Specs, abrem
-o modal da linha destacada. O campo de projeto entra em edição com `Enter` ou
-com um clique e atualiza o dashboard depois da confirmação. `Esc` retorna, e o
-mouse opera abas, linhas e botões. Nada é instalado ou removido antes de
+os controles e as setas navegam as tabelas. No modal de Specs, essas teclas
+circulam somente entre a leitura e **Fechar Esc**, para impedir que o foco saia
+da visualização. Na aba Skills, `Enter` ou `Espaço` alternam o plano entre
+instalar, manter, remover e ignorar. Na aba Specs, abrem o modal da linha
+destacada. Ao fechá-lo por `Esc` ou pelo botão, a seleção e o foco retornam à
+lista da mesma aba. O campo de projeto entra em edição com `Enter` ou com um
+clique e atualiza o dashboard depois da confirmação. `Esc` retorna, e o mouse
+opera abas, linhas e botões. Nada é instalado ou removido antes de
 `Aplicar`.
 
 A documentação completa está no

@@ -178,7 +178,10 @@ sem abandonar o dashboard.
 
 A aba Specs compara status, gates, tarefas, checklists e porcentagem por
 especificação. A linha destacada pode ser aberta com `Espaço` para consultar a
-spec completa em um modal Markdown.
+spec completa em um modal Markdown. Use `Esc` ou o botão **Fechar Esc** para
+voltar à lista. Dentro do modal, `Tab` e `Shift+Tab` alternam apenas entre a
+leitura e o fechamento, sem levar o foco aos controles que estão atrás da
+visualização.
 
 #### Skills: planejar antes de aplicar
 
@@ -252,6 +255,10 @@ inteira também aceita:
 
 O campo de projeto entra em edição com `Enter` ou com um clique. A confirmação
 recarrega backlogs, specs e skills a partir do caminho informado.
+
+Ao fechar uma spec, a TUI restaura a seleção e o foco da lista que a abriu.
+Você pode continuar com as setas, abrir outra linha ou trocar de aba sem
+precisar pressionar `Tab` até encontrar um controle válido.
 
 A TUI usa a paleta escura oficial do Specsfy. O turquesa identifica o foco e a
 aba ativa, o violeta marca a linha selecionada e as ações primárias usam fundo

@@ -167,8 +167,8 @@ export class SpecsfyTui {
   #status?: blessed.Widgets.BoxElement;
   #projectInput?: blessed.Widgets.TextboxElement;
   #modal: blessed.Widgets.BoxElement | undefined;
+  #modalCloseButton: blessed.Widgets.ButtonElement | undefined;
   #modalFocus: blessed.Widgets.BlessedElement | undefined;
-  #lastBackAt = 0;
   #tabButtons = new Map<Tab, blessed.Widgets.ButtonElement>();
   #activeTab: Tab = "home";
   #specs: SpecProgress[] = [];
@@ -254,6 +254,7 @@ export class SpecsfyTui {
       this.#poller = undefined;
       this.#refreshPromise = undefined;
       this.#modal = undefined;
+      this.#modalCloseButton = undefined;
       this.#modalFocus = undefined;
     });
     this.showStatus("Carregando projeto…");
@@ -427,6 +428,10 @@ export class SpecsfyTui {
     screen.key(["C-c"], () => this.setSkillFilter("detected"));
     screen.on("keypress", (_character, key) => {
       if (key.name !== "tab") return;
+      if (this.#modal) {
+        this.moveModalFocus(key.shift);
+        return;
+      }
       if (!screen.focused || !screen.keyable.includes(screen.focused)) {
         this.#projectInput?.focus();
       } else if (key.shift) {
@@ -483,17 +488,8 @@ export class SpecsfyTui {
    * o contexto da aba enquanto o usuário fecha uma visualização.
    */
   private goBack(): void {
-    const now = Date.now();
-    if (now - this.#lastBackAt < 50) return;
-    this.#lastBackAt = now;
     if (this.#modal) {
-      this.#modal.destroy();
-      this.#modal = undefined;
-      const focus = this.#modalFocus;
-      this.#modalFocus = undefined;
-      if (focus && !focus.detached && focus.visible) focus.focus();
-      else this.focusActiveTab();
-      this.renderScreen();
+      this.closeModal();
       return;
     }
     if (this.#activeTab === "skills" && this.#skillQuery) {
@@ -684,7 +680,7 @@ export class SpecsfyTui {
 
   private openSpec(spec: SpecProgress): void {
     const screen = this.#screen;
-    if (!screen) return;
+    if (!screen || this.#modal) return;
     const modal = blessed.box({
       parent: screen,
       top: "4%",
@@ -714,8 +710,65 @@ export class SpecsfyTui {
     });
     this.#modalFocus = screen.focused;
     this.#modal = modal;
+    const closeButton = blessed.button({
+      parent: modal,
+      top: 0,
+      right: 1,
+      width: 13,
+      height: 1,
+      content: "Fechar  Esc",
+      align: "center",
+      mouse: true,
+      keys: true,
+      style: buttonStyle(),
+    });
+    closeButton.on("press", () => this.closeModal());
+    this.#modalCloseButton = closeButton;
     screen.focusPush(modal);
-    modal.focus();
+    screen.render();
+  }
+
+  /**
+   * Fecha o overlay sem manter widgets destruídos no histórico de foco.
+   *
+   * O neo-blessed registra cada mudança de foco em uma pilha. Um modal pode
+   * receber foco no conteúdo e no botão de fechar; ambos precisam sair da
+   * pilha antes da destruição para que Tab, setas e atalhos retornem à lista
+   * de specs, sem apontar para um elemento destacado que já não existe.
+   */
+  private closeModal(): void {
+    const modal = this.#modal;
+    if (!modal) return;
+    const screen = this.#screen;
+    this.#modal = undefined;
+    this.#modalCloseButton = undefined;
+    if (screen && !screenDestroyed(screen)) {
+      while (screen.focused && isDescendantOf(screen.focused, modal)) {
+        screen.focusPop();
+      }
+    }
+    modal.destroy();
+    const focus = this.#modalFocus;
+    this.#modalFocus = undefined;
+    if (focus && !focus.detached && focus.visible) {
+      if (screen?.focused !== focus) focus.focus();
+    } else {
+      this.focusActiveTab();
+    }
+    this.renderScreen();
+  }
+
+  /** Alterna Tab e Shift+Tab apenas entre conteúdo e fechamento do modal. */
+  private moveModalFocus(backward: boolean): void {
+    const modal = this.#modal;
+    const closeButton = this.#modalCloseButton;
+    const screen = this.#screen;
+    if (!modal || !closeButton || !screen || screenDestroyed(screen)) return;
+    const targets = [modal, closeButton];
+    const current = targets.indexOf(screen.focused as typeof modal);
+    const offset = backward ? -1 : 1;
+    const next = targets[(current + offset + targets.length) % targets.length]!;
+    next.focus();
     screen.render();
   }
 
@@ -1478,6 +1531,19 @@ function errorMessage(error: unknown): string {
 
 function selectedIndex(list: blessed.Widgets.ListElement): number {
   return (list as blessed.Widgets.ListElement & { selected: number }).selected;
+}
+
+/** Retorna se um elemento é o modal ou um de seus controles filhos. */
+function isDescendantOf(
+  element: blessed.Widgets.BlessedElement,
+  ancestor: blessed.Widgets.BlessedElement,
+): boolean {
+  let current: blessed.Widgets.Node | undefined = element;
+  while (current) {
+    if (current === ancestor) return true;
+    current = current.parent;
+  }
+  return false;
 }
 
 function renderMarkdown(content: string): string {
