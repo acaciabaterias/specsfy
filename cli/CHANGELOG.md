@@ -4,6 +4,14 @@ Todas as mudanças relevantes do Specsfy CLI são registradas neste arquivo.
 
 ## [Unreleased]
 
+## [0.9.3] - 2026-08-23
+
+### Corrigido
+
+- Corrige o modal de leitura de specs: `Esc` e o botão **Fechar Esc** encerram a visualização, removem seus controles da pilha de foco e devolvem a seleção à lista de origem.
+- Mantém `Tab` e `Shift+Tab` no conteúdo do modal e no fechamento, sem levar o foco para controles ocultos atrás da visualização.
+- Adiciona regressões com byte Escape de TTY, foco após o fechamento e controle de mouse, além de atualizar os guias e o ebook.
+
 ## [0.9.2] - 2026-08-22
 
 - Evita repetir a mesma oferta de atualização depois de uma recusa ou falha,

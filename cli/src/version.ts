@@ -4,4 +4,4 @@
  * A release atualiza este valor junto do `package.json`.
  */
 
-export const VERSION = "0.9.2";
+export const VERSION = "0.9.3";
