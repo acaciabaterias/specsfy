@@ -84,10 +84,39 @@ class AuxiliaryContextTests(unittest.TestCase):
 
     def test_setup_renders_all_context_files_from_central_templates(self) -> None:
         setup = SETUP.read_text(encoding="utf-8")
-        for name in ("Project.md", "Stack.md", "Rules.md", "Database.md"):
+        for name in (
+            "Project.md",
+            "Stack.md",
+            "Rules.md",
+            "Database.md",
+            "UserProfile.md",
+        ):
             with self.subTest(template=name):
                 self.assertTrue((ROOT / "templates" / name).is_file())
                 self.assertIn(f'join(project, ".specsfy", "templates", name)', setup)
+
+    def test_setup_creates_and_preserves_user_profile(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            project = Path(directory)
+
+            first = run_script(SETUP, "--project", str(project))
+
+            self.assertEqual(0, first.returncode, first.stderr)
+            profile = project / ".specsfy/USER-PROFILE.md"
+            self.assertTrue(profile.is_file())
+            profile.write_text(
+                profile.read_text(encoding="utf-8").replace(
+                    "| Nível atual | A confirmar |",
+                    "| Nível atual | experiente |",
+                ),
+                encoding="utf-8",
+            )
+            before = profile.read_text(encoding="utf-8")
+
+            second = run_script(SETUP, "--project", str(project))
+
+            self.assertEqual(0, second.returncode, second.stderr)
+            self.assertEqual(before, profile.read_text(encoding="utf-8"))
 
     def test_setup_keeps_the_user_selected_subdirectory_as_project_root(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -344,6 +373,7 @@ class AuxiliaryContextTests(unittest.TestCase):
                     project / ".specsfy/STACK.md",
                     rules,
                     project / ".specsfy/DATABASE.md",
+                    project / ".specsfy/USER-PROFILE.md",
                 )
                 for path in expected_paths:
                     self.assertTrue(path.is_file(), path)

@@ -24,12 +24,12 @@ implementação do framework para seguir esse percurso.
 
 ## Leia online ou como ebook
 
-Este mesmo percurso compõe a edição portátil **v1.7.13**. Use o PDF para leitura
+Este mesmo percurso compõe a edição portátil **v1.7.16**. Use o PDF para leitura
 e impressão ou o EPUB em leitores que permitem ajustar fonte e tamanho:
 
-- [PDF](../../ebook/Specsfy-Guia-do-Usuario-v1.7.13.pdf), para leitura,
+- [PDF](../../ebook/Specsfy-Guia-do-Usuario-v1.7.16.pdf), para leitura,
   compartilhamento e impressão.
-- [EPUB](../../ebook/Specsfy-Guia-do-Usuario-v1.7.13.epub), para leitores
+- [EPUB](../../ebook/Specsfy-Guia-do-Usuario-v1.7.16.epub), para leitores
   digitais com fonte e tamanho ajustáveis.
 
 Os dois formatos são reconstruídos a partir destas páginas. O
@@ -113,6 +113,10 @@ Depois de avançar, você informa se quer encerrar definitivamente as perguntas
 daquela área, responder depois ou retomar agora. O encerramento é respeitado
 até você reabrir a área; o adiamento preserva os pontos para retomada.
 
+No setup, o perfil persistente em `.specsfy/USER-PROFILE.md` registra o nível
+de conhecimento e as respostas já confirmadas. O agente consulta esse arquivo,
+a conversa e as fontes do projeto antes de perguntar novamente.
+
 ### 5. Opere o projeto no dia a dia
 
 Depois da primeira entrega, escolha os guias ligados à sua rotina:
@@ -122,6 +126,8 @@ Depois da primeira entrega, escolha os guias ligados à sua rotina:
   exemplos do CLI.
 - [Informações permanentes do projeto](project-context.md): stack, regras,
   banco e convenções.
+- [Design system de interface](design-system.md): regras macro, padrões CRUD,
+  estados e exceções com alcance.
 - [Documentação do sistema](system-documentation.md): documentação técnica
   derivada da aplicação.
 - [Mudanças posteriores](update-spec.md): como incorporar um novo requisito à

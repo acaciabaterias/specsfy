@@ -17,6 +17,9 @@ description: Analisar o sistema atual e orientar a descoberta, o plano e a entre
 
 1. Carregar `$specsfy-setup` e ler `.specsfy/STACK.md`,
    `.specsfy/PACKAGES.md`, manifests, instruções locais e documentação atual.
+   Carregar `$specsfy-specialist-design-system` e ler `DESIGNSYSTEM.MD` antes
+   de propor qualquer tela. Se o arquivo não existir, criar a fonte a partir de
+   `.specsfy/templates/DESIGNSYSTEM.MD`.
    Executar `node .agents/skills/specsfy-setup/scripts/inspect_interface.mjs
    --project <raiz>` para localizar rotas, componentes e tecnologias antes da
    leitura detalhada.
@@ -26,13 +29,21 @@ description: Analisar o sistema atual e orientar a descoberta, o plano e a entre
 3. Identificar framework, roteamento, primitives, estilos, formulários e runner
    de testes usados pelo projeto. Seguir essas fontes e não trocar tecnologia
    ou biblioteca sem confirmação da pessoa.
-4. Aplicar o contrato central de perguntas: perguntar uma lacuna por rodada
-   sobre telas, fluxo de informação, formulário, formato de ação e composição.
+4. Aplicar o contrato central de perguntas somente para lacunas reais:
+   perguntar uma lacuna por rodada sobre telas, fluxo de informação, formulário,
+   formato de ação e composição. Quando a pessoa não informa direção visual,
+   aplicar os defaults de `DESIGNSYSTEM.MD` e registrar a direção padrão. Só
+   perguntar sobre composição quando o pedido contrariar uma regra existente.
    Oferecer opções textuais compatíveis com o sistema atual, `Escrever outra
    resposta`, `Gere outras opções` e `Avançar`.
 5. Registrar na seção 10 da spec a stack observada, cada tela, o fluxo, os
    formulários, a composição, os estados e a acessibilidade. Um CRUD não pode
-   ficar restrito a API, banco ou serviço.
+   ficar restrito a API, banco ou serviço. Para CRUD, mapear sempre lista com
+   `PageHeader` e `DataGrid` com detalhe clicável por linha, detalhe com
+   `PageHeader` e `DetailLists`, e criar ou editar com `PageHeader` e seções de
+   formulário em duas colunas responsivas. Toda tela também deve mapear
+   `Breadcrumb` com equipe, módulo e tela atual; em Laravel, reaproveitar o
+   componente já usado pelo layout.
 6. Criar na seção 14 a `Fase de interface`, com uma tarefa por tela e testes
    para navegação, formulário, validações, feedback e teclado.
 7. Chamar `$specsfy-specialist-ux-design` para jornada,
@@ -42,16 +53,27 @@ description: Analisar o sistema atual e orientar a descoberta, o plano e a entre
 
 ## Resultado esperado
 
-Uma interface simples, funcional e completa para a tarefa, coerente com o
-sistema existente. O plano mostra as telas e formulários a criar ou alterar,
-seus componentes e seus testes. A implementação preserva tudo fora do alcance
-registrado.
+Uma interface informativa, funcional e reconhecível para a tarefa, coerente com
+o sistema existente e com a personalidade do produto. O plano mostra telas,
+formulários, estados, regras de negócio, componentes e testes. A implementação
+preserva tudo fora do alcance registrado.
 
 ## Padrões
 
 - Mapear cada tela, ação, formulário, estado e retorno no plano.
 - Preservar a stack, os componentes e os padrões de navegação já observados.
 - Registrar teclado, foco, responsividade e mensagens junto da tela afetada.
+- Renderizar `Breadcrumb` em todas as telas, mantendo o nome da equipe ativa
+  visível. Em Laravel, reutilizar `Breadcrumb` ou `Breadcrumbs` existente e sua
+  tipagem de itens.
+- Aplicar `DESIGNSYSTEM.MD` como fonte macro e `INTERFACE.md` como registro local.
+- Usar `DataGrid`, `DetailLists` e `PageHeader` nas superfícies CRUD definidas;
+  a linha abre o detalhe e controles internos permanecem independentes.
+- Organizar criar e editar em seções com coluna de contexto, painel em duas
+  colunas nos breakpoints largos e uma coluna no mobile.
+- Mostrar erro de campo em vermelho, com mensagem abaixo do campo e foco útil.
+- Projetar a hierarquia pelos dados, linguagem e estados do produto, sem cair em
+  uma composição visual genérica.
 
 ## Antipadrões
 
@@ -64,6 +86,8 @@ registrado.
 - Confirmar que a pessoa recebeu pergunta sobre as telas em toda entrega que
   cria ou altera uma interface.
 - Conferir que a seção 10 registra a stack e o sistema atual antes da proposta.
+- Confirmar que `DESIGNSYSTEM.MD` foi lido ou criado e que a direção padrão ou
+  exceção está registrada com alcance.
 - Executar `validate_spec.mjs`, `validate_tasks.mjs` e
   `validate_interface_tasks.mjs` conforme a etapa.
 - Verificar mobile e desktop, loading, vazio, erro, sucesso, permissão,
@@ -73,6 +97,8 @@ registrado.
 
 - `$specsfy-specialist-ux-design` para jornada, tarefas e conteúdo.
 - `$specsfy-specialist-ui-design` para composição visual e estados.
+- `$specsfy-specialist-design-system` para regras macro, defaults e cenários
+  CRUD.
 
 Leia [references/standards.md](references/standards.md) para fontes de
 acessibilidade e inspeção de interfaces.

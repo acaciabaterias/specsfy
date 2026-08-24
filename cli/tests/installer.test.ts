@@ -22,7 +22,9 @@ async function writeFramework(source: string): Promise<void> {
     "Stack.md": "# Stack\n{{STACK_ROWS}}\n",
     "Rules.md": "# Regras {{STACK_LABEL}}\n{{STACK_GUIDANCE}}\n",
     "Database.md": "# Banco {{STACK_LABEL}}\n{{STACK_GUIDANCE}}\n",
+    "UserProfile.md": "# Perfil de interação\n",
     "Interface.md": "# Interface {{STACK_LABEL}}\n{{STACK_GUIDANCE}}\n",
+    "DESIGNSYSTEM.MD": "# Design system\n",
   };
   await Promise.all(
     Object.entries(templates).map(([name, content]) =>
@@ -179,6 +181,12 @@ describe("instalador", () => {
     ).toBe(true);
     expect(
       await pathExists(join(project, ".specsfy/templates/Interface.md")),
+    ).toBe(true);
+    expect(
+      await pathExists(join(project, ".specsfy/templates/DESIGNSYSTEM.MD")),
+    ).toBe(true);
+    expect(
+      await pathExists(join(project, ".specsfy/templates/UserProfile.md")),
     ).toBe(true);
   });
 

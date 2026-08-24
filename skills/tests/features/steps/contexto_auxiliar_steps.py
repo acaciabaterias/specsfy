@@ -50,9 +50,9 @@ def then_project_exists(context) -> None:
     assert (context.project / "PROJECT.md").is_file()
 
 
-@then("STACK.md, RULES.md e DATABASE.md existem sob .specsfy")
+@then("STACK.md, RULES.md, DATABASE.md e USER-PROFILE.md existem sob .specsfy")
 def then_context_files_exist(context) -> None:
-    for name in ("STACK.md", "RULES.md", "DATABASE.md"):
+    for name in ("STACK.md", "RULES.md", "DATABASE.md", "USER-PROFILE.md"):
         assert (context.project / ".specsfy" / name).is_file()
 
 
@@ -86,6 +86,12 @@ def given_human_context(context) -> None:
         "# Instruções humanas\n",
         encoding="utf-8",
     )
+    profile = context.project / ".specsfy" / "USER-PROFILE.md"
+    profile.parent.mkdir(parents=True, exist_ok=True)
+    profile.write_text(
+        "# Perfil de interação\n\n| Nível atual | experiente |\n",
+        encoding="utf-8",
+    )
 
 
 @when("setup ou uma skill specsfy-aux é executada novamente")
@@ -113,6 +119,12 @@ def then_existing_content_remains(context) -> None:
     assert "Nota humana preservada." in (
         context.project / "PROJECT.md"
     ).read_text(encoding="utf-8")
+
+
+@then("o perfil de interação existente permanece com nível confirmado")
+def then_user_profile_remains(context) -> None:
+    profile = context.project / ".specsfy" / "USER-PROFILE.md"
+    assert "| Nível atual | experiente |" in profile.read_text(encoding="utf-8")
 
 
 @then("somente observações novas e ausentes são acrescentadas")

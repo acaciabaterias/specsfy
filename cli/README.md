@@ -148,7 +148,8 @@ conversa e as de milestones,
 `specsfy-setup`,
 `specsfy-documentator` e as três skills `specsfy-aux-*`, publica as regras em
 `.specsfy/Spec.md`, os templates `Inbox.md`, `Backlog.md`, `Spec.md`, `Tasks.md`,
-`Project.md`, `Stack.md`, `Rules.md` e `Database.md` em
+`Project.md`, `Stack.md`, `Rules.md`, `Database.md`, `UserProfile.md`, `Interface.md` e
+`DESIGNSYSTEM.MD` em
 `.specsfy/templates/`, cria o diretório não gerenciado
 `.specsfy/templates/custom/`, publica um exemplo em
 `.specsfy/examples/Spec.md` e mescla blocos gerenciados em `AGENTS.md` e

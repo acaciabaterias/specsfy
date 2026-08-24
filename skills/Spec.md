@@ -68,14 +68,19 @@ ou pendente.
 - `INTERFACE.md`, na raiz, é o mapa canônico do design system: stack de
   interface, tokens, primitives shadcn/ui, composições ReUI, arquivos-fonte,
   componentes reutilizáveis e telas que os consomem.
+- `DESIGNSYSTEM.MD`, na raiz, mantém os defaults macro de interface, padrões
+  comuns de CRUD e dashboard, estados e exceções com alcance.
 - `.specsfy/PACKAGES.md` mantém o inventário npm e Composer derivado dos
   manifests, lockfiles e metadados locais, com uma finalidade curta por pacote.
+- `.specsfy/USER-PROFILE.md` mantém o nível de conhecimento confirmado, as
+  respostas já dadas durante o setup e as fontes dessas respostas. O setup lê
+  esse arquivo antes de perguntar e não repete assuntos já confirmados.
 - `.specsfy/SPECKIT.md` aparece quando o projeto possui
   `.specify/memory/constitution.md`. Essa projeção lista a constituição e todos
   os arquivos regulares encontrados em `specs/`, sem alterar as fontes do
   GitHub Spec Kit.
 - Antes de iniciar qualquer skill do framework, executar obrigatoriamente
-  `$specsfy-setup` para verificar e reconciliar os cinco contextos iniciais e
+  `$specsfy-setup` para verificar e reconciliar os contextos iniciais e
   os blocos reservados em `AGENTS.md` e `CLAUDE.md`. A única exceção é a própria
   `$specsfy-setup`, que não se chama recursivamente. Em uma transição automática,
   executar novamente o setup com a mesma raiz já confirmada antes de carregar a

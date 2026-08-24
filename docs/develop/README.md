@@ -56,6 +56,7 @@ O diretório [`context/`](context/README.md) contém unidades normativas pequena
 - arquitetura, módulos, dependências e integrações.
 - stack, pacotes, convenções e testes.
 - persistência, privacidade e retenção.
+- design system, padrões CRUD e owners de interface.
 - fluxos que atravessam módulos.
 - glossário e finalidade do produto.
 

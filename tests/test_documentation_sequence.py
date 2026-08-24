@@ -33,6 +33,7 @@ PEDAGOGICAL_ORDER = (
     "docs/user/cli.md",
     "docs/user/cli-reference.md",
     "docs/user/project-context.md",
+    "docs/user/design-system.md",
     "docs/user/system-documentation.md",
     "docs/user/update-spec.md",
     "docs/user/specialists.md",

@@ -15,7 +15,7 @@ Feature: Captura imediata na Inbox
   Scenario: Instalar todos os templates documentais do framework
     Given uma instalação base do Specsfy
     When o CLI publica os arquivos estruturais no projeto consumidor
-    Then .specsfy/templates contém Inbox.md, Backlog.md, Spec.md, Tasks.md, Project.md, Stack.md, Rules.md e Database.md
+    Then .specsfy/templates contém Inbox.md, Backlog.md, Spec.md, Tasks.md, Project.md, Stack.md, Rules.md, Database.md e UserProfile.md
     And cria .specsfy/templates/custom sem gerenciar seu conteúdo
 
   Scenario: Preservar uma descoberta de MVP antes do backlog

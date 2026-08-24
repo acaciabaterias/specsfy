@@ -1,8 +1,10 @@
 # Padrões de UI para sistemas e dashboards
 
+<!-- markdownlint-disable MD013 -->
+
 ## Escolha de shell
 
-| Necessidade dominante | Estrutura inicial | Evidência para escolher |
+| Necessidade dominante | Estrutura inicial | Comprovação para escolher |
 | --- | --- | --- |
 | alternar entre áreas estáveis | sidebar + header contextual | cinco ou mais destinos recorrentes |
 | comparar coleção e item | master-detail ou rotas ligadas | retorno frequente ao mesmo recorte |
@@ -13,16 +15,31 @@
 Não use dashboard como sinônimo de home autenticada. Se não houver perguntas,
 comparações ou exceções explícitas, escolha navegação orientada à tarefa.
 
+## Design system e CRUD
+
+Antes da composição, leia `DESIGNSYSTEM.MD` e aplique seus defaults. Para uma
+superfície CRUD, use `PageHeader` em todas as páginas, `DataGrid` na lista,
+`DetailLists` no detalhe e formulários em seções com duas colunas responsivas em
+criar e editar. Labels ficam acima dos campos e a mensagem de erro aparece em
+vermelho abaixo do campo. O shell renderiza `Breadcrumb` em toda tela, com a
+equipe ativa, o módulo e a tela atual; em Laravel, reutilize o componente
+existente.
+
 ## Hierarquia e densidade
 
-- Ordene por tarefa e risco, não pelo tamanho disponível do componente.
+- Ordene por tarefa e consequência de falha, não pelo tamanho disponível do
+  componente.
 - Use proximidade para formar grupos, alinhamento para comparação e contraste
   para prioridade; não dependa apenas de escala tipográfica.
 - Mantenha a ação primária única por região. Ações secundárias podem coexistir
   quando não competem visualmente nem têm consequência semelhante.
 - Em superfícies operacionais frequentes, privilegie escaneamento e comparação;
-  em onboarding e decisões raras, privilegie explicação e prevenção de erro.
+  em onboarding e escolhas raras, privilegie explicação e prevenção de erro.
 - Permita que densidade altere espaço, não significado ou conjunto de ações.
+- Separe cada seção de formulário em coluna de contexto e painel de campos;
+  use duas colunas nos breakpoints largos e uma no mobile.
+- Faça a linha do DataGrid abrir o detalhe por clique e teclado; reserve ações
+  internas para uma camada acima do link da linha.
 
 ## Dados e componentes
 
@@ -78,16 +95,20 @@ existentes e registre por que composição não resolve.
 | offline | separa dado local, stale e ação que exige rede? |
 | permission denied | evita vazar existência e mostra caminho autorizado? |
 
-## Evidência de revisão
+## Comprovação de revisão
 
 - screenshots comparáveis dos estados críticos em viewport estreito e largo;
-- inventário de tokens/componentes novos e justificativa de variantes;
+- mapa de tokens/componentes novos e justificativa de variantes;
 - conteúdo curto, longo, traduzido e números extremos sem truncamento destrutivo;
 - percurso completo por teclado com foco visível;
 - zoom, reflow, contraste, forced colors e reduced motion quando aplicáveis;
 - ação principal e consequência compreensíveis sem depender de cor ou posição.
 
+<!-- markdownlint-enable MD013 -->
+
 ## Fontes oficiais
+
+<!-- markdownlint-disable MD034 -->
 
 - Material Design 3: https://m3.material.io/
 - Carbon Design System: https://carbondesignsystem.com/
@@ -96,3 +117,5 @@ existentes e registre por que composição não resolve.
 - GOV.UK Design System: https://design-system.service.gov.uk/
 - WAI-ARIA APG patterns: https://www.w3.org/WAI/ARIA/apg/patterns/
 - Web Content Accessibility Guidelines 2.2: https://www.w3.org/TR/WCAG22/
+
+<!-- markdownlint-enable MD034 -->

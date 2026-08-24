@@ -23,13 +23,24 @@ specsfy skills install specsfy-specialist-laravel
 
 Para implementar interfaces React a partir de referências copiáveis, instale e
 use `specsfy-specialist-react-ui-components` em conjunto com
-`specsfy-specialist-ui-design`. O CLI resolve e instala essa dependência
-declarada no catálogo automaticamente.
+`specsfy-specialist-design-system` e `specsfy-specialist-ui-design`. O CLI
+resolve e instala essas dependências declaradas no catálogo automaticamente.
 
 Para criar ou alterar uma interface de sistema, use primeiro
-`specsfy-specialist-interface-experience`. Ela examina o sistema e a stack já
-existentes, conduz as perguntas sobre telas e encaminha UX, UI e a tecnologia
-correta para a entrega.
+`specsfy-specialist-interface-experience`. Ela carrega o
+`specsfy-specialist-design-system`, examina o sistema e a stack já existentes,
+conduz as perguntas sobre telas e encaminha UX, UI e a tecnologia correta para
+a entrega.
+
+`specsfy-specialist-design-system` mantém `DESIGNSYSTEM.MD` no projeto
+consumidor. O `$specsfy-setup` cria o arquivo a partir do template quando ele
+está ausente. Quando a pessoa não informa direção visual, a skill aplica
+defaults para SaaS: `DataGrid` em listas com detalhe clicável por linha,
+`DetailLists` em detalhes, `PageHeader` nas superfícies e seções de formulário
+em duas colunas responsivas em criar e editar, com `Breadcrumb` em todas as
+telas e o nome da equipe ativa visível. Primitives shadcn/ui e
+blocos gratuitos ReUI podem acelerar a composição; o registro local de
+componentes e telas continua em `INTERFACE.md`.
 
 O catálogo cobre a stack Promovaweb, design de interfaces, qualidade,
 arquitetura, operação e disciplinas de engenharia. A referência completa de

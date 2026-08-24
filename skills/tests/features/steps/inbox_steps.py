@@ -29,6 +29,7 @@ FRAMEWORK_TEMPLATE_NAMES = (
     "Stack.md",
     "Rules.md",
     "Database.md",
+    "UserProfile.md",
 )
 
 
@@ -143,7 +144,7 @@ def when_cli_publishes_structural_files(context) -> None:
 
 @then(
     ".specsfy/templates contém Inbox.md, Backlog.md, Spec.md, Tasks.md, "
-    "Project.md, Stack.md, Rules.md e Database.md"
+    "Project.md, Stack.md, Rules.md, Database.md e UserProfile.md"
 )
 def then_all_framework_templates_are_installed(context) -> None:
     installed = context.project / ".specsfy" / "templates"

@@ -96,7 +96,9 @@ const FRAMEWORK_TEMPLATE_NAMES = [
   "Stack.md",
   "Rules.md",
   "Database.md",
+  "UserProfile.md",
   "Interface.md",
+  "DESIGNSYSTEM.MD",
 ] as const;
 const CONSUMER_EXAMPLE_PATH = ".specsfy/examples/Spec.md";
 

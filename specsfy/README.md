@@ -67,9 +67,16 @@ specsfy install --project .
 O comando instala as skills base, setup, documentação e contexto auxiliar em
 `.agents/skills/`, publica o contrato em `.specsfy/Spec.md` e reconcilia blocos
 gerenciados em `AGENTS.md` e `CLAUDE.md`. Os templates ficam juntos em
-`.specsfy/templates/`. Personalizações homônimas ficam em
+`.specsfy/templates/`, inclusive `DESIGNSYSTEM.MD` para regras macro de
+interface e `UserProfile.md` para o perfil de interação. Personalizações homônimas ficam em
 `.specsfy/templates/custom/`, têm precedência e não são sobrescritas pelo CLI.
 Ele não cria uma spec de produto.
+
+Ao executar `$specsfy-setup`, o agente consulta o perfil, a conversa e os
+arquivos do projeto antes de perguntar. Ele registra o nível de conhecimento e
+as respostas confirmadas em `.specsfy/USER-PROFILE.md`, não repete assuntos já
+respondidos e adapta a explicação: iniciantes recebem mais contexto, enquanto
+pessoas experientes podem responder diretamente com detalhes técnicos.
 
 ### 4. Verifique o projeto
 
@@ -370,6 +377,7 @@ instala automaticamente.
 - [Atualizar uma especificação](../docs/user/update-spec.md)
 - [Uso avançado](../docs/user/advanced-usage.md)
 - [CLI, TUI e atualização](../docs/user/cli.md)
+- [Design system de interface](../docs/user/design-system.md)
 - [Módulos do monorepo](../docs/develop/modules.md)
 - [Documentação completa](../docs/)
 

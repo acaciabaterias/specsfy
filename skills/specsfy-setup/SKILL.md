@@ -11,6 +11,93 @@ Modo de interação: `perguntas`.
 Antes de formular qualquer pergunta, leia e aplique o
 `Contrato de perguntas numeradas` de `.specsfy/Spec.md`.
 
+## Perfil de conhecimento e memória de respostas
+
+O setup conduz uma conversa adaptativa curta. Ele não aplica um questionário
+fixo nem pergunta novamente algo que já esteja confirmado.
+
+Antes de formular qualquer pergunta, leia, nesta ordem:
+
+1. `.specsfy/USER-PROFILE.md`, quando existir;
+2. a conversa atual e as respostas já dadas;
+3. `PROJECT.md`, `DESIGNSYSTEM.MD`, `.specsfy/STACK.md`,
+   `.specsfy/RULES.md`, `.specsfy/DATABASE.md` e `.specsfy/PACKAGES.md`;
+4. `AGENTS.md`, `CLAUDE.md`, `.specsfy/SPECKIT.md` e as fontes relacionadas
+   listadas por ele, quando existirem;
+5. Inbox, backlog e specs aplicáveis, sem alterar esses arquivos.
+
+Monte mentalmente um mapa de assuntos respondidos. Uma declaração explícita da
+pessoa ou uma informação inequívoca nas fontes responde ao assunto, mesmo que
+use palavras diferentes da pergunta. Não peça confirmação, escolha ou
+reformulação de algo já claro. Pergunte somente por lacuna, conflito ou
+informação que mudou desde a última confirmação.
+
+Quando o nível geral ainda não estiver registrado no perfil nem na conversa,
+faça esta primeira rodada:
+
+```text
+Pergunta 1. Como você prefere receber as orientações deste setup?
+1. Iniciante: explique os termos técnicos e o efeito de cada escolha antes de prosseguir.
+2. Intermediário: conheço os fundamentos e prefiro explicações curtas junto das escolhas.
+3. Experiente: posso responder com detalhes de stack, arquitetura, comandos e integrações.
+4. Escrever outra resposta
+5. Gere outras opções
+6. Avançar
+```
+
+Normalize a resposta para `iniciante`, `intermediário` ou `experiente` e grave-a
+em `.specsfy/USER-PROFILE.md`, com a fonte e a data. Se o perfil já tiver um
+nível confirmado, use-o sem perguntar. Se a conversa ou o perfil apresentarem
+níveis diferentes, faça somente uma pergunta para resolver esse conflito e
+registre a atualização.
+
+Adapte a profundidade por rodada:
+
+- `iniciante`: explique cada termo técnico na própria pergunta, diga por que a
+  informação é necessária e descreva o efeito prático das opções;
+- `intermediário`: use os nomes técnicos conhecidos e acrescente uma explicação
+  curta somente quando a escolha puder ser confundida;
+- `experiente`: pergunte diretamente por versões, fronteiras de framework,
+  autenticação, persistência, testes, interface, deploy ou integrações quando
+  esse assunto ainda estiver aberto.
+
+O nível ajusta a linguagem, não autoriza presumir respostas. Se a pessoa
+demonstrar experiência diferente por área, adapte aquela área sem alterar o
+nível geral sem confirmação. Depois de cada resposta, atualize o perfil, retire
+o assunto do mapa de lacunas e só então selecione a próxima pergunta. Respeite
+o limite de oito perguntas por área e o restante do contrato numerado.
+
+## Roteiro adaptativo do setup
+
+Depois de confirmar o diretório e ler o projeto, selecione o primeiro assunto
+necessário ainda sem resposta confirmada:
+
+1. objetivo do produto e resultado principal;
+2. pessoas usuárias, equipes e papéis;
+3. acesso, autenticação e permissões;
+4. dados principais, relações e tempo de retenção;
+5. telas, navegação e estados da interface;
+6. testes, observabilidade e deploy;
+7. integrações externas e serviços dependentes.
+
+Consulte o mapa de assuntos antes de cada rodada. Se a fonte já informar o
+assunto com clareza, registre a origem no perfil e passe ao próximo. Se duas
+fontes divergirem, pergunte somente para resolver a diferença. Se todos os
+assuntos aplicáveis estiverem confirmados, informe que o setup seguirá para a
+reconciliação dos arquivos e não crie perguntas artificiais.
+
+Adapte a formulação ao nível confirmado. Para iniciantes, explique o termo na
+pergunta, diga por que a resposta será usada e mostre o efeito prático de cada
+opção. Para pessoas intermediárias, use o nome técnico e uma explicação breve.
+Para pessoas experientes, pergunte diretamente por versões, fronteiras de
+framework, estratégia de autenticação, persistência, testes, observabilidade,
+deploy e contratos de integração ainda ausentes.
+
+Cada rodada apresenta uma pergunta, opções numeradas, `Escrever outra resposta`,
+`Gere outras opções` e `Avançar`, conforme o contrato de `.specsfy/Spec.md`.
+Após a resposta, normalize o conteúdo, registre área, assunto, resposta, fonte,
+data e alcance em `.specsfy/USER-PROFILE.md`, e só então avance.
+
 1. Antes de ler ou escrever, confirme o diretório do projeto. Na primeira
    execução da conversa, se a pessoa já informou um caminho, resolva-o para um
    caminho absoluto e repita-o. Quando ela não informou, ofereça exatamente
@@ -36,12 +123,15 @@ Antes de formular qualquer pergunta, leia e aplique o
    ausente antes de preparar o contexto. O diagnóstico confere Node.js, Git,
    npm, acesso ao projeto e o `npx`.
 6. Executar `node scripts/setup_context.mjs --project <raiz>`.
-   Renderizar `PROJECT.md`, `STACK.md`, `RULES.md`, `DATABASE.md` e
-   `INTERFACE.md` a partir de
+   Renderizar `PROJECT.md`, `STACK.md`, `RULES.md`, `DATABASE.md`,
+   `INTERFACE.md`, `DESIGNSYSTEM.MD` e `.specsfy/USER-PROFILE.md` a partir de
    `.specsfy/templates/custom/<Nome>.md` quando existir ou dos arquivos
-   gerenciados `.specsfy/templates/Project.md`, `Stack.md`, `Rules.md` e
-   `Database.md` e `Interface.md` caso contrário; não manter modelos paralelos embutidos no
-   script. O mesmo comando deve ler a constituição e todos os arquivos
+   gerenciados `.specsfy/templates/Project.md`, `Stack.md`, `Rules.md`,
+   `Database.md`, `Interface.md`, `DESIGNSYSTEM.MD` e `UserProfile.md` caso
+   contrário; não manter
+   modelos paralelos embutidos no script. O `DESIGNSYSTEM.MD` fica na raiz do
+   projeto, nasce com defaults de interface comuns e é criado somente quando
+   ainda não existir. O mesmo comando deve ler a constituição e todos os arquivos
    regulares em `specs/` quando detectar GitHub Spec Kit, depois atualizar o
    bloco gerenciado de `.specsfy/SPECKIT.md`.
 7. No início e no fim de cada mudança, executar:
@@ -50,7 +140,8 @@ Antes de formular qualquer pergunta, leia e aplique o
    node scripts/monitor_context.mjs --project <raiz> --check
    ```
 
-8. Inspecionar os cinco arquivos iniciais, `.specsfy/PACKAGES.md` quando
+8. Inspecionar os arquivos iniciais, incluindo `.specsfy/USER-PROFILE.md`, e
+   `.specsfy/PACKAGES.md` quando
    gerado e a fonte de stack usada pelo script. Quando `.specsfy/SPECKIT.md`
    existir, abrir a constituição e cada fonte original listada na projeção.
    Antes de qualquer descoberta de interface, executar também
@@ -109,8 +200,9 @@ ou finalidade, registrar essa avaliação nas fontes da tarefa e repetir com
 `--acknowledge-rules-no-change`; nunca usar o reconhecimento para ocultar uma
 mudança documental real.
 
-Manter `PROJECT.md` e `INTERFACE.md` na raiz. Manter `STACK.md`, `RULES.md`, `DATABASE.md`,
-`PACKAGES.md` e a projeção opcional `SPECKIT.md` em `.specsfy/`. Tratar esses
+Manter `PROJECT.md`, `INTERFACE.md` e `DESIGNSYSTEM.MD` na raiz. Manter
+`STACK.md`, `RULES.md`, `DATABASE.md`, `PACKAGES.md`, `USER-PROFILE.md` e a
+projeção opcional `SPECKIT.md` em `.specsfy/`. Tratar esses
 documentos como contexto derivado do projeto, não como spec, gate ou
 autorização de implementação.
 

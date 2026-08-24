@@ -1,5 +1,7 @@
 # Skills especialistas
 
+<!-- markdownlint-disable MD013 -->
+
 As skills base conduzem a metodologia. As
 `specsfy-specialist-*` acrescentam orientação para a tecnologia encontrada no
 projeto, como Laravel, Astro, Next.js, Postgres ou Redis. Assim, você instala
@@ -9,10 +11,12 @@ Na interface, cada uma usa o padrão `Specsfy - Especialista - Nome`, como
 `Specsfy - Especialista - Laravel`. O identificador de comando continua
 `specsfy-specialist-laravel`.
 
-Para criar ou alterar interfaces, use
-`specsfy-specialist-interface-experience` antes dos especialistas de UX e UI.
-Ela examina a stack e o sistema atual, organiza as perguntas sobre telas, menus e
-garante uma fase específica de interface nas tarefas.
+Para criar ou alterar interfaces, `specsfy-specialist-interface-experience`
+coordena a entrega e carrega `specsfy-specialist-design-system` antes dos
+especialistas de UX, UI e componentes. O design system mantém as regras macro,
+defaults e cenários CRUD; a experiência examina a stack e o sistema atual,
+organiza as perguntas sobre telas e menus e garante uma fase específica de
+interface nas tarefas.
 
 ## Detectar e instalar
 
@@ -58,7 +62,6 @@ instalação.
 | ReUI solicitado para React e Tailwind | ReUI, React, Tailwind CSS e shadcn/ui |
 | Docker, Swarm ou Ansible | especialista de plataforma correspondente |
 | OpenAPI, OpenTelemetry, Prometheus ou CI/CD | API, observabilidade ou entrega correspondente |
-| Todo projeto | Modelagem de Dados, Modelagem de Domínio, Arquitetura de Software e ReUI |
 
 ## Instalação manual
 
@@ -84,9 +87,10 @@ npx skills add https://github.com/promovaweb/specsfy \
 
 Ele prepara o registry ReUI para React 19, Tailwind CSS v4 e shadcn/ui, atende
 Laravel com Inertia e Vite e preserva o padrão de outros frameworks React.
-Nos CRUDs compatíveis, ReUI é a base para consulta, filtros, formulários,
-ações contextuais, anexos e mensagens de retorno. A skill consulta o catálogo
-gratuito antes de permitir a criação de componente manual equivalente.
+Nos CRUDs e dashboards compatíveis, ReUI é a base para consulta, filtros,
+formulários, indicadores, ações contextuais, anexos e mensagens de retorno. A
+skill consulta o catálogo gratuito antes de permitir a criação de componente
+manual equivalente.
 
 ## Contrato de interfaces React
 
@@ -96,13 +100,25 @@ componentes React. A rota ou página coordena dados e compõe blocos; não reún
 grade, formulário, filtros, diálogos, painel lateral e cartões reutilizáveis
 no mesmo arquivo.
 
-O setup cria `INTERFACE.md` na raiz do projeto. O arquivo registra o design
-system, tokens, registries, telas e todos os blocos criados ou reaproveitados.
+O setup cria `INTERFACE.md` e `DESIGNSYSTEM.MD` na raiz do projeto quando eles
+estão ausentes. O primeiro registra tokens,
+registries, telas e todos os blocos criados ou reaproveitados. O arquivo
+`DESIGNSYSTEM.MD` guarda as regras macro, defaults, padrões de CRUD e dashboard,
+estados e exceções com alcance; a skill especialista o mantém.
 Para cada bloco, informe arquivo, origem, finalidade, props e eventos, estados,
 acessibilidade, consumidores e como reaproveitar ou estender. A seção 10 de
 cada spec com interface usa a mesma relação para declarar os blocos React e os
 componentes shadcn/ui e ReUI escolhidos. As tarefas de interface atualizam o
 mapa antes de serem concluídas.
+
+Nas superfícies CRUD, a regra padrão é `PageHeader` e `DataGrid` para listas,
+com a linha inteira abrindo o detalhe por clique ou teclado; `PageHeader` e
+`DetailLists` para detalhes; e `PageHeader` com seções de formulário em duas
+colunas responsivas para criar e editar. Botões, checkboxes e menus internos
+ficam independentes da navegação da linha. Erros de campo ficam vermelhos e
+recebem mensagem abaixo do campo. Toda tela também exibe `Breadcrumb` com a
+equipe ativa, o módulo e o título atual. Em Laravel, o padrão reaproveita o
+`Breadcrumb` ou `Breadcrumbs` existente no layout.
 
 ## Catálogo por domínio
 
@@ -110,7 +126,7 @@ mapa antes de serem concluídas.
 | --- | --- |
 | backend e dados | Laravel, Supabase, Postgres, Redis e APIs web |
 | frontend | React, Astro, Next.js, TypeScript e Tailwind CSS |
-| interface | experiência de interface, shadcn/ui, UI, UX e acessibilidade web |
+| interface | design system, experiência de interface, shadcn/ui, UI, UX e acessibilidade web |
 | plataforma | Docker, Docker Swarm, Ansible e engenharia de entrega |
 | qualidade | segurança, observabilidade e performance |
 | design técnico | arquitetura e modelagem de domínio |
@@ -137,6 +153,7 @@ manual quando a entrega pedir aquele domínio.
 | Modelagem de Dados | Entidades, relações, ciclos de vida e contratos persistentes. |
 | Modelagem de Domínio | Linguagem do negócio, invariantes e limites entre módulos. |
 | Arquitetura de Software | Módulos, dependências, atributos de qualidade e fronteiras técnicas. |
+| Design System | Regras macro, defaults, estados, padrões CRUD e exceções com alcance. |
 | React | Componentes, estado, efeitos, acessibilidade e testes de interface. |
 | Tailwind CSS | Tokens, responsividade, variantes e CSS do design system. |
 | shadcn/ui | Primitives, registry, tema e padrões acessíveis de aplicação. |
@@ -184,3 +201,5 @@ detecção está em `specialists/catalog.json` no repositório do Specsfy.
 A presença de um especialista não aprova gates. O Plan Gate ainda exige um RED
 válido, e o Delivery Gate depende dos testes e das evidências registradas na
 spec.
+
+<!-- markdownlint-enable MD013 -->

@@ -23,7 +23,7 @@ Este módulo possui:
 
 - as instruções operacionais das quatorze skills base, do setup, do
   documentador e das três auxiliares.
-- os templates de ideia, backlog, spec e tarefas em `templates/`.
+- os templates de ideia, backlog, spec, tarefas e interface em `templates/`.
 - um documento preenchido e não normativo em `examples/Spec.md`.
 - o MCR-10 e referências dos gates.
 - scripts de validação, rastreabilidade, evidência e progresso.
@@ -93,6 +93,12 @@ numeradas, `Escrever outra resposta`, `Gere outras opções` e `Avançar` desde 
 primeira rodada. O avanço
 preserva as lacunas em Draft e não aprova o Definition Gate.
 
+No setup, o agente lê `.specsfy/USER-PROFILE.md`, a conversa e os contextos do
+projeto antes de perguntar. Respostas já confirmadas não voltam para a rodada.
+O perfil registra o nível de conhecimento e orienta a profundidade: iniciantes
+recebem explicações dos termos e efeitos práticos, enquanto pessoas experientes
+podem responder diretamente sobre versões, arquitetura, testes e integrações.
+
 ## Catálogo
 
 | Skill | Responsabilidade | Limite principal |
@@ -110,15 +116,17 @@ preserva as lacunas em Draft e não aprova o Definition Gate.
 | [`specsfy-data-discovery`](specsfy-data-discovery/SKILL.md) | conversar sobre informações que o produto precisa guardar | não escolhe tecnologia ou implementação |
 | [`specsfy-roadmap-milestone-interviewer`](specsfy-roadmap-milestone-interviewer/SKILL.md) | entrevistar a evolução pós-MVP | não altera o núcleo sem confirmação |
 | [`specsfy-milestone-governor`](specsfy-milestone-governor/SKILL.md) | sincronizar a projeção de milestones | não inventa condição de saída |
-| [`specsfy-setup`](specsfy-setup/SKILL.md) | detectar o stack, criar contexto ausente e reconciliar blocos de agentes | não sobrescreve arquivos de contexto existentes |
+| [`specsfy-setup`](specsfy-setup/SKILL.md) | detectar o stack, criar contexto ausente, preparar `DESIGNSYSTEM.MD`, manter o perfil de interação e reconciliar blocos de agentes | não sobrescreve arquivos de contexto existentes |
 | [`specsfy-documentator`](specsfy-documentator/SKILL.md) | reconstruir `docs/` e o inventário `.specsfy/PACKAGES.md` | não inventa decisões, relações, finalidades ou referências |
 | [`specsfy-aux-stack`](specsfy-aux-stack/SKILL.md) | manter `.specsfy/STACK.md` a partir de evidência executável | não inventa nem copia toda dependência |
 | [`specsfy-aux-rules`](specsfy-aux-rules/SKILL.md) | ajudar a registrar regras confirmadas em `.specsfy/RULES.md` | não decide regras pela pessoa |
 | [`specsfy-aux-database`](specsfy-aux-database/SKILL.md) | manter `.specsfy/DATABASE.md` após toda mudança persistente | não copia dados ou segredos |
 
-`PROJECT.md` fica na raiz do projeto consumidor. `STACK.md`, `RULES.md`,
-`DATABASE.md` e `PACKAGES.md` ficam em `.specsfy/`. O setup pode ser executado
-novamente para garantir os quatro contextos iniciais; o documentador garante o
+`PROJECT.md`, `INTERFACE.md` e `DESIGNSYSTEM.MD` ficam na raiz do projeto
+consumidor. `STACK.md`, `RULES.md`, `DATABASE.md`, `PACKAGES.md` e
+`USER-PROFILE.md` ficam em
+`.specsfy/`. O setup pode ser executado
+novamente para garantir os contextos iniciais; o documentador garante o
 inventário de pacotes. Ambos preservam arquivos existentes e todo conteúdo fora
 dos blocos gerenciados.
 
@@ -188,7 +196,7 @@ recebe nenhuma categoria.
 ```text
 templates/
 ├── Inbox.md, Backlog.md, Spec.md e Tasks.md
-└── Project.md, Stack.md, Rules.md e Database.md
+└── Project.md, Stack.md, Rules.md, Database.md, UserProfile.md, Interface.md e DESIGNSYSTEM.MD
 examples/
 └── Spec.md        # fixture preenchida para agentes, CLI e testes
 specsfy-{base-<responsabilidade>|setup|documentator|aux-<responsabilidade>}/
@@ -209,6 +217,8 @@ specsfy-{base-<responsabilidade>|setup|documentator|aux-<responsabilidade>}/
 - Uma regra normativa possui uma única fonte. Outros arquivos apontam para ela.
 - O CLI publica os templates e o exemplo sob `.specsfy/`. Somente uma spec
   criada a partir do template se torna normativa para uma feature.
+- `DESIGNSYSTEM.MD` orienta regras macro de interface no projeto consumidor;
+  `INTERFACE.md` mantém o registro local de componentes e telas.
 
 ## Disponibilizar as skills
 

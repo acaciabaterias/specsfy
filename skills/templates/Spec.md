@@ -228,7 +228,7 @@ tests/
 
 #### Fluxo de informação e navegação
 
-- [Como a pessoa chega, consulta, altera, confirma, retorna ou recupera o contexto.]
+- [Como a pessoa chega, consulta, altera, confirma, retorna ou recupera o contexto. Registre o `Breadcrumb` de cada tela com equipe, módulo e tela atual.]
 
 #### Menus e navegação principal
 
@@ -240,7 +240,8 @@ tests/
 
 #### Composição e disposição
 
-- [Hierarquia, navegação, regiões da tela, densidade, responsividade e componentes existentes.]
+- [Hierarquia, navegação, `Breadcrumb` no shell, regiões da tela, densidade,
+  responsividade e componentes existentes.]
 
 #### Blocos React e componentes selecionados
 
@@ -257,6 +258,8 @@ tests/
 #### Estados e acessibilidade
 
 - [Loading, vazio, erro, sucesso, permissão insuficiente, teclado, foco e tecnologia assistiva.]
+- [O `Breadcrumb` mantém a equipe visível, usa links válidos nos itens
+  anteriores e marca a tela atual com semântica de página.]
 
 #### APIs expostas
 
@@ -383,7 +386,7 @@ Cada tarefa possui exatamente este checklist, atualizado durante a execução:
 - [ ] T005 [CODE] [US-001] Implementar a tela de [responsabilidade] em src/features/recurso/ListaRecurso.tsx — Refs: US-001, FR-001, NFR-001, AC-001, AC-002, AC-003 — Depends: T001, T002, T003
   - [ ] **PREP**: Confirmar stack, tela atual, fluxo, formulário e estados definidos na seção 10.
   - [ ] **EXECUTE**: Implementar os blocos React, tela, ações e formulário conforme a composição acordada; registrar cada bloco e componente em `INTERFACE.md`.
-  - [ ] **VERIFY**: Exercitar navegação, validações, feedback e teclado.
+  - [ ] **VERIFY**: Exercitar Breadcrumb, navegação, validações, feedback e teclado.
   - [ ] **EVIDENCE**: Registrar arquivos, comando e resultado da interação.
   - [ ] **IMPROVE**: Aplicar melhoria de interface ou justificar nenhuma.
   <!-- specsfy:evidence {"task":"T005","refs":["US-001","FR-001","NFR-001","AC-001","AC-002","AC-003"],"files":["src/features/recurso/ListaRecurso.tsx"],"commands":[{"run":"comando focal","exit":0}]} -->

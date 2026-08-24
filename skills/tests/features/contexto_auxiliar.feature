@@ -9,7 +9,7 @@ Feature: Contexto auxiliar persistente do projeto
     Given um projeto Laravel, Next ou Astro ainda sem contexto auxiliar
     When a skill specsfy-setup é executada
     Then PROJECT.md existe na raiz do projeto
-    And STACK.md, RULES.md e DATABASE.md existem sob .specsfy
+    And STACK.md, RULES.md, DATABASE.md e USER-PROFILE.md existem sob .specsfy
     And os modelos refletem o stack observado
     And AGENTS.md e CLAUDE.md reservam um bloco para as diretrizes do framework
 
@@ -18,6 +18,7 @@ Feature: Contexto auxiliar persistente do projeto
     Given arquivos auxiliares com dados adicionados pela pessoa
     When setup ou uma skill specsfy-aux é executada novamente
     Then o conteúdo existente permanece no arquivo
+    And o perfil de interação existente permanece com nível confirmado
     And somente observações novas e ausentes são acrescentadas
     And instruções do usuário fora do bloco Specsfy permanecem intactas
 

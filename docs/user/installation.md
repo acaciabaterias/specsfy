@@ -68,8 +68,19 @@ mesmo caminho e mantém nele os contextos, as specs e o trabalho de código.
 O instalador publica as etapas numeradas a partir de
 `.agents/skills/specsfy-01-inbox`, grava o contrato central em
 `.specsfy/Spec.md` e adiciona templates, exemplos e registros técnicos em
-`.specsfy/`. Ele também insere blocos gerenciados em `AGENTS.md` e `CLAUDE.md`,
-preservando o conteúdo que já existe fora desses blocos.
+`.specsfy/`, inclusive `.specsfy/templates/DESIGNSYSTEM.MD` para as regras
+macro de interface. Ele também insere blocos gerenciados em `AGENTS.md` e
+`CLAUDE.md`, preservando o conteúdo que já existe fora desses blocos.
+
+Ao executar `$specsfy-setup`, o template também gera `DESIGNSYSTEM.MD` na raiz
+do projeto quando o arquivo ainda não existe. O setup preserva um arquivo local
+existente e deixa a aplicação pronta para registrar seus padrões de CRUD,
+dashboard e interface.
+
+O mesmo setup gera `.specsfy/USER-PROFILE.md` quando esse arquivo ainda não
+existe. Na conversa, ele identifica o nível de conhecimento, consulta respostas
+já registradas e adapta a explicação das próximas perguntas. O arquivo local e
+as respostas confirmadas são preservados entre execuções.
 
 Para personalizar um template sem impedir atualizações, copie-o para
 `.specsfy/templates/custom/` com o mesmo nome. Essa versão tem precedência e

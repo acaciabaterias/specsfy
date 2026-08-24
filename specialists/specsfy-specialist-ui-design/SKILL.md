@@ -18,12 +18,13 @@ description: Projetar e revisar interfaces visuais de sistemas, dashboards e apl
 
 ## Fluxo
 
-1. Confirmar que a jornada e o fluxo de informação foram definidos com a
-   pessoa. Para tela ou formulário novo, registrar a tarefa principal, as
-   telas, os campos, as validações e o padrão de abertura escolhido. Se faltar
-   resposta, retornar a `$specsfy-specialist-ux-design`; não preencher essa
-   parte por gosto visual.
-2. Ler a stack observada, o design system, tokens, componentes, breakpoints e
+1. Carregar `$specsfy-specialist-design-system` e ler `DESIGNSYSTEM.MD` antes
+   da composição. Confirmar que a jornada e o fluxo de informação foram
+   definidos com a pessoa. Para tela ou formulário novo, registrar a tarefa
+   principal, as telas, os campos, as validações e o padrão de abertura
+   escolhido. Se não houver direção visual, aplicar os defaults do documento e
+   só retornar à UX quando faltar uma resposta sobre comportamento ou tarefa.
+2. Ler a stack observada, tokens, componentes, breakpoints e
    screenshots atuais antes de propor uma linguagem nova.
    Quando o sistema já existir, inspecionar também as telas e fluxos afetados,
    sua navegação, conteúdo, permissões e estados antes de mudar a composição.
@@ -31,21 +32,26 @@ description: Projetar e revisar interfaces visuais de sistemas, dashboards e apl
    nova biblioteca quando a pessoa confirmar a mudança ou quando a stack não
    oferecer uma base identificável.
 3. Identificar pessoa, tarefa principal, frequência, dispositivo, densidade e
-   custo do erro; ordenar conteúdo e ações por essa prioridade.
-4. Mapear dados, unidades, permissões e estados nominal, loading, empty,
+   consequência do erro; ordenar conteúdo e ações por essa prioridade.
+4. Para CRUD, aplicar a matriz macro: lista com `PageHeader` e `DataGrid`,
+   detalhe com `PageHeader` e `DetailLists`, criar e editar com `PageHeader` e
+   seções de formulário em duas colunas responsivas. Cada seção tem coluna de
+   contexto e painel de campos; registrar a justificativa apenas para uma
+   exceção explícita.
+5. Mapear dados, unidades, permissões e estados nominal, loading, empty,
    partial, error, offline e permission denied antes do layout.
-5. Escolher shell, navegação e grid coerentes com a arquitetura da informação;
+6. Escolher shell, navegação e grid coerentes com a arquitetura da informação;
    usar a matriz em [references/standards.md](references/standards.md).
-6. Definir hierarquia por agrupamento, contraste, escala e espaço e mapear cada
+7. Definir hierarquia por agrupamento, contraste, escala e espaço e mapear cada
    escolha para tokens semânticos.
-7. Implementar ou especificar componentes e casos extremos em todos os
+8. Implementar ou especificar componentes e casos extremos em todos os
    breakpoints sem criar variantes equivalentes às já existentes.
-8. Validar conteúdo real, legibilidade, responsividade, acessibilidade e
-   consistência com evidência visual e comportamental.
+9. Validar conteúdo real, legibilidade, responsividade, acessibilidade e
+   consistência com comprovação visual e comportamental.
 
 Quando a implementação usar React, carregar
 `$specsfy-specialist-react-ui-components` depois de definir a composição para
-escolher referências TSX sem transferir a decisão visual para o catálogo de
+escolher referências TSX sem transferir a escolha visual para o catálogo de
 exemplos.
 
 ## Padrões
@@ -57,6 +63,16 @@ exemplos.
 - Exibir unidade, período, origem, atualização e vazio nos dados.
 - Manter ação destrutiva distinta, explicada e reversível quando possível.
 - Definir tokens semânticos e uma escala limitada de spacing/tipografia.
+- Construir personalidade por dados, linguagem, tokens, ritmo e estados, não por
+  uma pilha genérica de cards.
+- Exibir labels acima dos campos e erro de campo em vermelho abaixo do campo.
+- Usar duas colunas para campos relacionados nos breakpoints largos, uma coluna
+  no mobile e largura total para campos longos, ajuda, upload e erros.
+- Tornar a linha inteira do `DataGrid` a navegação do detalhe; manter botões,
+  checkboxes e menus internos acima do link da linha.
+- Manter `Breadcrumb` em todas as telas, com a equipe ativa, o módulo e a tela
+  atual. Em Laravel, adaptar o `Breadcrumb` ou `Breadcrumbs` já renderizado
+  pelo shell existente.
 
 ## Antipadrões
 
@@ -68,11 +84,19 @@ exemplos.
   estado; o significado desaparece conforme interação e acessibilidade.
 - Esconder ações frequentes em menus para obter uma tela “limpa”; aumenta custo
   operacional e reduz descoberta sem diminuir complexidade real.
+- Usar cards para uma lista que pede comparação ou substituir `PageHeader` por
+  um título solto.
 
 ## Validação
 
 - Comparar cenários nominal, loading, empty, partial, error, offline e
   permission denied na mesma composição.
+- Conferir `DataGrid`, `DetailLists`, `PageHeader` e formulários em seções com
+  duas colunas responsivas conforme a superfície CRUD.
+- Conferir `Breadcrumb` em cada tela, com o nome da equipe visível e o item atual
+  marcado como página. Em Laravel, confirmar o reaproveitamento do componente
+  já existente.
+- Conferir que uma exceção ao `DESIGNSYSTEM.MD` tem alcance registrado.
 - Exercitar conteúdo curto/longo, números extremos, tradução expandida e
   preferências de data, moeda e timezone.
 - Verificar viewport mínimo suportado, zoom 200%, reflow, contraste, teclado,
@@ -100,10 +124,12 @@ exemplos.
   informação e validação de tarefas.
 - `$specsfy-specialist-react-ui-components` fornece exemplos TSX depois que a
   composição e a hierarquia estão definidas.
+- `$specsfy-specialist-design-system` fornece regras macro, defaults e cenários
+  canônicos antes da composição visual.
 - `$specsfy-specialist-web-accessibility` conduz auditoria WCAG, teclado e
   tecnologia assistiva.
 - `$specsfy-specialist-tailwind-css` traduz tokens e variantes para utilitários
   quando essa é a stack observada.
 
 Leia [references/standards.md](references/standards.md) para matrizes de layout,
-densidade, dados, tokens, estados e critérios de revisão visual.
+densidade, dados, tokens, estados e regras de revisão visual.

@@ -59,7 +59,7 @@ Conteúdo gerenciado recebe fingerprints. Se a cópia local divergir do último
 fingerprint registrado, atualização e remoção recusam a operação sem `--force`.
 
 O instalador publica `Inbox.md`, `Backlog.md`, `Spec.md`, `Tasks.md`,
-`Project.md`, `Stack.md`, `Rules.md` e `Database.md` em
+`Project.md`, `Stack.md`, `Rules.md`, `Database.md` e `UserProfile.md` em
 `.specsfy/templates/`. Cada template possui digest próprio. Assim, uma
 customização local em qualquer um deles impede somente uma substituição
 explicitamente forçada.

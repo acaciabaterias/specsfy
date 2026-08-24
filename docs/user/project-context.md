@@ -4,12 +4,15 @@
 
 O Specsfy separa a descrição durável do sistema das especificações de cada
 mudança. O arquivo `PROJECT.md` explica a finalidade da aplicação, enquanto
-quatro documentos em `.specsfy/` registram a stack, as instruções confirmadas,
-a persistência observada no código e os pacotes instalados.
+cinco documentos em `.specsfy/` registram a stack, as instruções confirmadas,
+a persistência observada no código, os pacotes instalados e o perfil de
+interação do setup.
+As regras macro de interface ficam em `DESIGNSYSTEM.MD`, na raiz do projeto, e
+seguem um ciclo próprio com a skill especialista de design system.
 
 Execute `$specsfy-setup` depois de instalar o framework. Depois disso, o
 framework a executa obrigatoriamente antes de iniciar cada skill, inclusive em
-transições automáticas, para verificar e reconciliar os quatro contextos e os
+transições automáticas, para verificar e reconciliar os contextos iniciais e os
 blocos reservados de agentes. Na mesma conversa, a raiz confirmada é
 reaproveitada sem perguntar de novo. A skill detecta Laravel, Next.js e Astro
 pelos manifests e sugere o modelo correspondente.
@@ -19,11 +22,13 @@ mantêm esta estrutura:
 ```text
 <projeto>/
 ├── PROJECT.md
+├── DESIGNSYSTEM.MD
 └── .specsfy/
     ├── STACK.md
     ├── RULES.md
     ├── DATABASE.md
     ├── PACKAGES.md
+    ├── USER-PROFILE.md
     └── SPECKIT.md      # somente quando GitHub Spec Kit for detectado
 ```
 
@@ -39,13 +44,22 @@ preservado. A referência publicável das diretrizes vive em
 | `.specsfy/RULES.md` | regras explícitas confirmadas | `$specsfy-aux-rules` |
 | `.specsfy/DATABASE.md` | persistência e relações | `$specsfy-aux-database` |
 | `.specsfy/PACKAGES.md` | pacotes npm e Composer com finalidade | `$specsfy-documentator` |
+| `.specsfy/USER-PROFILE.md` | nível de conhecimento, respostas confirmadas e fontes do setup | `$specsfy-setup` |
 | `.specsfy/SPECKIT.md` | constituição e fontes preservadas do GitHub Spec Kit | `$specsfy-setup` |
+| `DESIGNSYSTEM.MD` | defaults comuns de interface, CRUD, dashboards, estados e exceções | `$specsfy-setup` cria; `$specsfy-specialist-design-system` mantém |
 
-Os quatro modelos ficam em `.specsfy/templates/Project.md`, `Stack.md`,
-`Rules.md` e `Database.md`, junto dos demais templates do framework. Para
+Os modelos ficam em `.specsfy/templates/Project.md`, `Stack.md`, `Rules.md`,
+`Database.md` e `UserProfile.md`, junto dos demais templates do framework. Para
 personalizar um deles, mantenha o mesmo nome em
 `.specsfy/templates/custom/`; essa cópia tem precedência e não é alterada pelo
 CLI.
+
+Durante o setup, `.specsfy/USER-PROFILE.md` guarda o nível de conhecimento
+confirmado e as respostas já fornecidas. O agente consulta esse arquivo, a
+conversa e as fontes do projeto antes de perguntar. Assuntos já respondidos
+ficam fora da próxima rodada; perguntas técnicas recebem mais contexto para
+iniciantes e podem usar versões, arquitetura e integrações diretamente para
+pessoas experientes.
 
 Use `$specsfy-data-discovery` antes de implementar quando ainda faltar explicar
 o que o produto precisa guardar, quem consulta cada informação e quando ela
@@ -107,6 +121,10 @@ Veja a topologia e o `--check` no guia de
 ## Preservação e atualização
 
 - O setup cria um arquivo de informações somente quando ele ainda não existe.
+  Isso inclui `DESIGNSYSTEM.MD` e `.specsfy/USER-PROFILE.md`: os templates
+  iniciais apresentam padrões comuns de interface, CRUD, dashboard e registro
+  da conversa. Os arquivos continuam humanos e qualquer conteúdo existente é
+  preservado.
 - As auxiliares atualizam apenas blocos detectados delimitados e preservam
   seções humanas.
 - Uma nova varredura nunca autoriza remover silenciosamente uma definição
@@ -119,7 +137,7 @@ Veja a topologia e o `--check` no guia de
 
 O estado implementado é comprovado pelas fontes do próprio projeto. Os
 manifests e lockfiles mostram a stack, enquanto schemas e migrations mostram a
-persistência. Os cinco documentos resumem essas evidências e as definições
+persistência. Os documentos resumem essas evidências e as definições
 humanas que precisam permanecer entre mudanças. Eles não substituem a
 `spec.md`, não registram gates e nunca devem copiar segredos, valores de `.env`
 ou registros de produção.

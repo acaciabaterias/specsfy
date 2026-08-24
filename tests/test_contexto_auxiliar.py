@@ -33,6 +33,8 @@ class AuxiliaryContextIntegrationTests(unittest.TestCase):
             self.assertIn(f"${name}", guide)
         for path in (
             "PROJECT.md",
+            "DESIGNSYSTEM.MD",
+            ".specsfy/USER-PROFILE.md",
             ".specsfy/STACK.md",
             ".specsfy/RULES.md",
             ".specsfy/DATABASE.md",
@@ -52,9 +54,14 @@ class AuxiliaryContextIntegrationTests(unittest.TestCase):
             SKILLS / "specsfy-setup/scripts/setup_context.mjs"
         ).read_text(encoding="utf-8")
         self.assertIn("sync_speckit_context.mjs", setup_script)
+        self.assertIn('join(project, "DESIGNSYSTEM.MD")', setup_script)
+        self.assertIn('join(project, ".specsfy", "USER-PROFILE.md")', setup_script)
         self.assertIn("Nunca", setup)
         self.assertIn("escrever, mover, renomear ou remover", setup)
         self.assertIn("Nas execuções obrigatórias seguintes", setup)
+        self.assertIn("pergunta novamente", setup.casefold())
+        self.assertIn("iniciante", setup.casefold())
+        self.assertIn("experiente", setup.casefold())
         self.assertIn("Antes de iniciar qualquer skill do framework", framework)
         self.assertIn("antes de iniciar cada skill", guide)
 
@@ -87,6 +94,7 @@ class AuxiliaryContextIntegrationTests(unittest.TestCase):
             ".specsfy/STACK.md",
             ".specsfy/RULES.md",
             ".specsfy/DATABASE.md",
+            ".specsfy/USER-PROFILE.md",
             "PROJECT.md",
         ):
             self.assertIn(document, content)
