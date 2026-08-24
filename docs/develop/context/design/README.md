@@ -1,5 +1,14 @@
 # Design de interface
 
+<!-- markdownlint-disable MD033 -->
+<p align="center">
+  <picture>
+    <source srcset="../../../../brand/logo/icon.svg" type="image/svg+xml">
+    <img src="../../../../brand/logo/icon.png" alt="Logo do Specsfy" width="128">
+  </picture>
+</p>
+<!-- markdownlint-enable MD033 -->
+
 <!-- markdownlint-disable MD013 -->
 
 ## Classificação
