@@ -4,6 +4,16 @@ Todas as mudanças relevantes do Specsfy CLI são registradas neste arquivo.
 
 ## [Unreleased]
 
+## [0.10.2] - 2026-08-24
+
+### Corrigido
+
+- Atualiza o cenário BDD de composição React para reconhecer o Design System
+  como requisito do especialista de componentes e inclui essa skill no grupo
+  de interface do catálogo.
+- Mantém testes unitários, cenários BDD, metadados e requisitos do catálogo
+  alinhados com o conjunto publicado de especialistas.
+
 ## [0.10.1] - 2026-08-24
 
 ### Corrigido
