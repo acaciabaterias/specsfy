@@ -20,6 +20,7 @@ STACK = {
     "specsfy-specialist-nextjs",
 }
 DESIGN = {
+    "specsfy-specialist-design-system",
     "specsfy-specialist-shadcn-ui",
     "specsfy-specialist-ui-design",
     "specsfy-specialist-ux-design",
@@ -160,8 +161,9 @@ def then_no_origin_reference(context) -> None:
 @then("a skill de componentes React e a skill de UI orientam uso conjunto")
 def then_react_components_and_ui_are_paired(context) -> None:
     component_name = "specsfy-specialist-react-ui-components"
+    design_system_name = "specsfy-specialist-design-system"
     ui_name = "specsfy-specialist-ui-design"
-    assert {component_name, ui_name} <= context.names
+    assert {component_name, design_system_name, ui_name} <= context.names
     component_content = (ROOT / component_name / "SKILL.md").read_text(
         encoding="utf-8"
     )
@@ -172,8 +174,9 @@ def then_react_components_and_ui_are_paired(context) -> None:
         if entry["name"] == component_name
     )
     assert f"${ui_name}" in component_content
+    assert f"${design_system_name}" in component_content
     assert f"${component_name}" in ui_content
-    assert component_entry["requires"] == [ui_name]
+    assert component_entry["requires"] == [design_system_name, ui_name]
 
 
 @then("as famílias de componentes React estão disponíveis como assets copiáveis")
