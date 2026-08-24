@@ -4,6 +4,29 @@ Todas as mudanças relevantes do Specsfy CLI são registradas neste arquivo.
 
 ## [Unreleased]
 
+## [0.10.0] - 2026-08-24
+
+### Adicionado
+
+- Cria o template `UserProfile.md` e faz `$specsfy-setup` materializar
+  `.specsfy/USER-PROFILE.md` para registrar o nível de conhecimento, respostas
+  confirmadas, fonte, data e alcance.
+- Adapta as perguntas do setup ao nível `iniciante`, `intermediário` ou
+  `experiente`, consultando a conversa e os arquivos do projeto para não
+  repetir assuntos já respondidos.
+- Define defaults de interface para CRUD, dashboard, Breadcrumb, navegação por
+  equipe e formulários responsivos em duas colunas, com documentação e
+  especialistas correspondentes.
+
+### Corrigido
+
+- Torna as linhas do DataGrid clicáveis por inteiro, preservando ações internas
+  e a navegação por teclado.
+- Reaproveita o Breadcrumb existente em aplicações Laravel e garante a equipe
+  atual no contexto das telas autenticadas.
+- Atualiza o CLI, os templates, os testes, a documentação e o ebook para o
+  fluxo de contexto e interface publicado nesta versão.
+
 ## [0.9.3] - 2026-08-23
 
 ### Corrigido
