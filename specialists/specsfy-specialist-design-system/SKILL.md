@@ -5,7 +5,7 @@ description: Criar e manter o DESIGNSYSTEM.MD com regras macro de interface SaaS
 
 # Specsfy Specialist Design System
 
-## Finalidade
+## Quando usar
 
 Esta skill governa o documento `DESIGNSYSTEM.MD` do projeto consumidor. Ela
 define linguagem visual, shell, composição de superfícies, estados e regras de
@@ -49,7 +49,9 @@ genérico.
 7. Retorne os arquivos lidos, a regra aplicada, as exceções registradas e os
    cenários cobertos.
 
-## Defaults obrigatórios para SaaS
+## Padrões
+
+### Defaults obrigatórios para SaaS
 
 Quando não houver direção visual contrária, aplique estas composições:
 
@@ -178,8 +180,9 @@ Antes do handoff, confira:
 Execute os testes e validadores da stack quando houver implementação. Para a
 skill do Specsfy, execute `quick_validate.py` e a suíte do monorepo.
 
-## Fontes relacionadas
+## Skills relacionadas
 
+- [references/standards.md](references/standards.md)
 - `skills/templates/DESIGNSYSTEM.MD`
 - `skills/templates/Interface.md`
 - `specsfy-specialist-interface-experience`

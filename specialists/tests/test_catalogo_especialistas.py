@@ -20,6 +20,7 @@ EXPECTED_SKILLS = {
     "specsfy-specialist-docker",
     "specsfy-specialist-docker-swarm",
     "specsfy-specialist-domain-modeling",
+    "specsfy-specialist-design-system",
     "specsfy-specialist-gitflow",
     "specsfy-specialist-interface-experience",
     "specsfy-specialist-laravel",
@@ -168,7 +169,10 @@ class SpecialistCatalogTests(unittest.TestCase):
             if entry["name"] == "specsfy-specialist-react-ui-components"
         )
         self.assertEqual(
-            ["specsfy-specialist-ui-design"],
+            [
+                "specsfy-specialist-design-system",
+                "specsfy-specialist-ui-design",
+            ],
             component_entry["requires"],
         )
 
