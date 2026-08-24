@@ -4,6 +4,16 @@ Todas as mudanças relevantes do Specsfy CLI são registradas neste arquivo.
 
 ## [Unreleased]
 
+## [0.10.1] - 2026-08-24
+
+### Corrigido
+
+- Alinha o catálogo, os metadados e o contrato de qualidade do especialista de
+  Design System, incluindo seus padrões de referência e os requisitos dos
+  componentes de interface.
+- Mantém a suíte de especialistas compatível com o catálogo publicado e
+  recompõe o executável com a versão `0.10.1`.
+
 ## [0.10.0] - 2026-08-24
 
 ### Adicionado
