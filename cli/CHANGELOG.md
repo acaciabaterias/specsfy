@@ -4,6 +4,14 @@ Todas as mudanças relevantes do Specsfy CLI são registradas neste arquivo.
 
 ## [Unreleased]
 
+## [0.10.3] - 2026-08-27
+
+### Adicionado
+
+- Expande o contrato de Design System, a composição de interfaces e os
+  especialistas disponíveis, com documentação, testes e templates alinhados.
+- Publica o guia do usuário do Specsfy na edição `v1.7.18`.
+
 ## [0.10.2] - 2026-08-24
 
 ### Corrigido

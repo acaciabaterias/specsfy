@@ -93,6 +93,43 @@ class InterfaceDesignSystemContractTests(unittest.TestCase):
         self.assertIn("z-0", cell)
         self.assertIn("relative z-10", asset)
 
+    def test_crud_contract_reuses_components_and_exposes_required_row_actions(self) -> None:
+        content = TEMPLATE.read_text(encoding="utf-8")
+        for term in (
+            "PageHeader",
+            "reutiliz",
+            "component",
+            "DataGrid",
+            "largura total",
+            "ID",
+            "detalhe",
+            "editar",
+            "apagar",
+        ):
+            with self.subTest(term=term):
+                self.assertIn(term.casefold(), content.casefold())
+
+    def test_implementation_requires_visual_review_without_user_request(self) -> None:
+        sources = "\n".join(
+            path.read_text(encoding="utf-8")
+            for path in (
+                ROOT / "skills" / "Spec.md",
+                ROOT / "skills" / "templates" / "Tasks.md",
+                ROOT / "skills" / "specsfy-07-implement" / "SKILL.md",
+            )
+        )
+        for term in (
+            "Revisão visual obrigatória",
+            "mesmo sem pedido",
+            "bordas",
+            "espaçamentos",
+            "margens",
+            "padding",
+            "tipografia",
+        ):
+            with self.subTest(term=term):
+                self.assertIn(term, sources)
+
     def test_create_and_update_forms_use_sections_and_two_columns(self) -> None:
         content = TEMPLATE.read_text(encoding="utf-8")
         specialist = SKILL.read_text(encoding="utf-8")

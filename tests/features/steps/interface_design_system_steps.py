@@ -85,6 +85,54 @@ def then_inner_actions_do_not_navigate(context) -> None:
     assert "data-row-action" in context.row_navigation
 
 
+@then("todas as telas CRUD reutilizam o mesmo PageHeader componentizado")
+def then_crud_pages_reuse_page_header(context) -> None:
+    assert "PageHeader" in context.crud
+    assert "reutiliz" in context.crud
+    assert "component" in context.crud
+
+
+@then("a listagem usa DataGrid em largura total com a coluna ID visível")
+def then_crud_list_has_full_width_id(context) -> None:
+    assert "DataGrid" in context.crud
+    assert "largura total" in context.crud
+    assert "ID" in context.crud
+
+
+@then("cada linha leva ao detalhe e oferece editar e apagar")
+def then_crud_row_has_actions(context) -> None:
+    assert "linha" in context.crud
+    assert "detalhe" in context.crud
+    assert "editar" in context.crud.casefold()
+    assert "apagar" in context.crud.casefold()
+
+
+@given("o contrato de implementação visual do Specsfy")
+def given_visual_implementation_contract(context) -> None:
+    context.visual_contract = (
+        (ROOT / "skills" / "Spec.md").read_text(encoding="utf-8")
+        + (ROOT / "skills" / "templates" / "Tasks.md").read_text(encoding="utf-8")
+        + (ROOT / "skills" / "specsfy-07-implement" / "SKILL.md").read_text(encoding="utf-8")
+    )
+
+
+@when("a revisão de desenvolvimento é lida")
+def when_visual_development_review_is_read(context) -> None:
+    context.visual_review = context.visual_contract
+
+
+@then("a conferência visual é obrigatória mesmo sem pedido da pessoa")
+def then_visual_review_is_mandatory(context) -> None:
+    assert "obrigat" in context.visual_review
+    assert "mesmo sem" in context.visual_review
+
+
+@then("ela verifica bordas espaçamentos margens padding e tipografia do sistema")
+def then_visual_review_checks_system_tokens(context) -> None:
+    for term in ("bordas", "espaçamentos", "margens", "padding", "tipografia"):
+        assert term in context.visual_review
+
+
 @given("o contrato de navegação contextual do Specsfy")
 def given_context_navigation_contract(context) -> None:
     context.context_navigation = (

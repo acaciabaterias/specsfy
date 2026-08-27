@@ -295,18 +295,21 @@ tests/features/directory_users.feature
   - [x] **PREP**: Cenário, IDs e runner Behave confirmados.
   - [x] **EXECUTE**: Feature e steps da jornada autenticada criados.
   - [x] **VERIFY**: Behave exit 1 pela rota ausente comprovou RED válido.
+  - [x] **VISUAL**: Não aplicável; a tarefa materializa somente o caso de teste.
   - [x] **EVIDENCE**: Comando e causa registrados na seção 11.
   - [x] **IMPROVE**: Cenário passou a proteger privacidade e paginação.
 - [x] T002 [TEST] [US-001] Criar integração RED em tests/Feature/Directory/UserDirectoryTest.php — Refs: US-001, FR-001, FR-002, FR-003, NFR-001, NFR-002, AC-001 — Depends: T001
   - [x] **PREP**: Contrato Inertia e baseline de 82 testes confirmados.
   - [x] **EXECUTE**: Testes de autenticação, campos e paginação criados.
   - [x] **VERIFY**: Pest exit 2 pela rota ausente comprovou RED válido.
+  - [x] **VISUAL**: Não aplicável; a tarefa materializa somente o caso de teste.
   - [x] **EVIDENCE**: Saída focal e IDs registrados na seção 11.
   - [x] **IMPROVE**: Asserção negativa de e-mail foi incluída.
 - [x] T003 [CODE] [US-001] Implementar diretório em app/Http/Controllers/Directory/UserDirectoryController.php — Refs: US-001, FR-001, FR-002, FR-003, NFR-001, NFR-002, AC-001 — Depends: T001, T002
   - [x] **PREP**: Dois REDs e contrato aprovado foram confirmados.
   - [x] **EXECUTE**: Rota, controller, tipos, página e navegação foram criados.
   - [x] **VERIFY**: Pest focal, Behave, Pint, tipos, lint e Prettier passaram.
+  - [x] **VISUAL**: Bordas, espaçamentos, margens, padding e tipografia conferidos nos estados e viewports da tela.
   - [x] **EVIDENCE**: GREEN e arquivos foram registrados nas seções 11–13.
   - [x] **IMPROVE**: Query usa colunas explícitas, contagem agregada e ordem estável.
   <!-- specsfy:evidence {"task":"T003","refs":["US-001","FR-001","FR-002","FR-003","NFR-001","NFR-002","AC-001"],"files":["routes/web.php","app/Http/Controllers/Directory/UserDirectoryController.php","resources/js/types/directory.ts","resources/js/pages/directory/users/index.tsx","resources/js/components/app-sidebar.tsx"],"commands":[{"run":"php artisan test --compact tests/Feature/Directory/UserDirectoryTest.php","exit":0}]} -->
@@ -314,6 +317,7 @@ tests/features/directory_users.feature
   - [x] **PREP**: Suites, checks e gates do repositório foram identificados.
   - [x] **EXECUTE**: Pest, Behave, lint, tipos, formatter, build e rastreabilidade executaram.
   - [x] **VERIFY**: 100 testes, 11 cenários e todos os checks passaram sem gaps.
+  - [x] **VISUAL**: Bordas, espaçamentos, margens, padding e tipografia da entrega conferidos nos estados e viewports aplicáveis.
   - [x] **EVIDENCE**: Contagens e comandos finais foram registrados.
   - [x] **IMPROVE**: A tipagem do pivot e a lista do paginador foram fortalecidas.
 

@@ -245,5 +245,5 @@ Não crie caches ou artefatos transitórios durante as validações.
 - ausência de placeholders, caches e links quebrados;
 - RED válido nos testes TDD informados pelo BDD, com GREEN atual;
 - regressão completa e rastreabilidade aprovadas;
-- tarefas e cinco itens de checklist concluídos;
+- tarefas e seis itens de checklist concluídos, incluindo a revisão `VISUAL`;
 - nenhum arquivo pertencente a outro repositório no diff.

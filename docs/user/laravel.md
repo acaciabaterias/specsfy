@@ -36,6 +36,29 @@ npx skills add https://github.com/promovaweb/specsfy \
   --skill specsfy-specialist-laravel --agent universal --copy --full-depth
 ```
 
+Para adotar um pacote Laravel a partir de um repositório GitHub, instale também
+o gestor de pacotes:
+
+```bash
+npx skills add https://github.com/promovaweb/specsfy \
+  --skill specsfy-specialist-laravel-package-manager --agent universal --copy --full-depth
+```
+
+Depois, peça ao agente:
+
+```text
+Use $specsfy-specialist-laravel-package-manager com https://github.com/organizacao/pacote.
+Leia a documentação, confira se o pacote já está instalado e, com autorização,
+instale-o e documente seu uso.
+```
+
+O especialista lê `composer.json`, `composer.lock`, `.specsfy/PACKAGES.md` e
+as fichas atuais antes de executar Composer. Para cada dependência direta, ele
+mantém uma ficha em `docs/packages/<vendor>-<nome>.md` e atualiza
+`docs/packages/README.md` com versão, finalidade e links. Pacotes já instalados
+são reaproveitados; dependências transitivas continuam relacionadas em
+`.specsfy/PACKAGES.md`.
+
 ## Aplicar na spec
 
 1. Capture ou promova a ideia pelo [primeiro projeto](getting-started.md).
@@ -64,6 +87,8 @@ exit code. Ele não recebe uma string arbitrária de shell.
 - jobs idempotentes, tentativas, backoff e tratamento de falha.
 - migrations compatíveis com volume, locks, rollback e deploy misto.
 - verificação de queues, scheduler, cache, configuração e ambiente.
+- leitura, instalação autorizada e documentação de pacotes Composer recebidos
+  por URL GitHub.
 
 ## Resultado esperado
 

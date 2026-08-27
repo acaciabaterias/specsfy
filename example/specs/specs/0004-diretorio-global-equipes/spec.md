@@ -282,18 +282,21 @@ tests/features/directory_teams.feature
   - [x] **PREP**: Cenários e runner confirmados.
   - [x] **EXECUTE**: Feature e steps do diretório criados.
   - [x] **VERIFY**: Behave exit 1 pela rota ausente comprovou RED válido.
+  - [x] **VISUAL**: Não aplicável; a tarefa materializa somente o caso de teste.
   - [x] **EVIDENCE**: Comando e causa registrados.
   - [x] **IMPROVE**: Tipo, contagem e vazio foram cobertos.
 - [x] T002 [TEST] [US-001] Criar integração RED em tests/Feature/Directory/TeamDirectoryTest.php — Refs: US-001, FR-001, FR-002, FR-003, NFR-001, NFR-002, AC-001 — Depends: T001
   - [x] **PREP**: Query e props confirmadas.
   - [x] **EXECUTE**: Testes de auth, listagem, contagem e paginação criados.
   - [x] **VERIFY**: Pest exit 2 pela rota ausente comprovou RED válido.
+  - [x] **VISUAL**: Não aplicável; a tarefa materializa somente o caso de teste.
   - [x] **EVIDENCE**: Saída focal e IDs registrados.
   - [x] **IMPROVE**: Cobertura de equipe pessoal e soft delete foi incluída.
 - [x] T003 [CODE] [US-001] Implementar diretório em app/Http/Controllers/Directory/TeamDirectoryController.php — Refs: US-001, FR-001, FR-002, FR-003, NFR-001, NFR-002, AC-001 — Depends: T001, T002
   - [x] **PREP**: REDs e contrato foram confirmados.
   - [x] **EXECUTE**: Rota, controller, tipos, página e navegação foram criados.
   - [x] **VERIFY**: Pest focal, Behave, Pint e checks frontend passaram.
+  - [x] **VISUAL**: Bordas, espaçamentos, margens, padding e tipografia conferidos nos estados e viewports da tela.
   - [x] **EVIDENCE**: GREEN e arquivos foram registrados.
   - [x] **IMPROVE**: Query passou a usar `withCount`, whitelist e ordem estável.
   <!-- specsfy:evidence {"task":"T003","refs":["US-001","FR-001","FR-002","FR-003","NFR-001","NFR-002","AC-001"],"files":["routes/web.php","app/Http/Controllers/Directory/TeamDirectoryController.php","resources/js/types/directory.ts","resources/js/pages/directory/teams/index.tsx","resources/js/components/app-sidebar.tsx"],"commands":[{"run":"php artisan test --compact tests/Feature/Directory/TeamDirectoryTest.php","exit":0}]} -->
@@ -301,6 +304,7 @@ tests/features/directory_teams.feature
   - [x] **PREP**: Suites e checks foram identificados.
   - [x] **EXECUTE**: Pest, Behave, lint, tipos, formatter, build e rastreabilidade executaram.
   - [x] **VERIFY**: 100 testes, 11 cenários e cobertura completa passaram.
+  - [x] **VISUAL**: Bordas, espaçamentos, margens, padding e tipografia da entrega conferidos nos estados e viewports aplicáveis.
   - [x] **EVIDENCE**: Comandos e contagens foram registrados.
   - [x] **IMPROVE**: A paginação expõe uma lista tipada e estável.
 

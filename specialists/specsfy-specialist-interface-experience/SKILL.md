@@ -43,7 +43,10 @@ description: Analisar o sistema atual e orientar a descoberta, o plano e a entre
    `PageHeader` e `DetailLists`, e criar ou editar com `PageHeader` e seções de
    formulário em duas colunas responsivas. Toda tela também deve mapear
    `Breadcrumb` com equipe, módulo e tela atual; em Laravel, reaproveitar o
-   componente já usado pelo layout.
+   componente já usado pelo layout. O `PageHeader` é um único componente
+   reutilizável entre essas telas. A listagem ocupa a largura disponível,
+   mostra o `ID` em coluna própria e oferece editar e apagar na linha, além do
+   link para o detalhe.
 6. Criar na seção 14 a `Fase de interface`, com uma tarefa por tela e testes
    para navegação, formulário, validações, feedback e teclado.
 7. Chamar `$specsfy-specialist-ux-design` para jornada,
@@ -69,6 +72,11 @@ preserva tudo fora do alcance registrado.
 - Aplicar `DESIGNSYSTEM.MD` como fonte macro e `INTERFACE.md` como registro local.
 - Usar `DataGrid`, `DetailLists` e `PageHeader` nas superfícies CRUD definidas;
   a linha abre o detalhe e controles internos permanecem independentes.
+- Reutilizar o mesmo `PageHeader` componentizado em todas as telas CRUD; manter
+  `DataGrid` em largura total com `ID`, editar e apagar visíveis na linha.
+- Conferir bordas, espaçamentos, margens, padding e tipografia durante o
+  desenvolvimento, mesmo sem pedido da pessoa, e registrar o resultado no
+  item `VISUAL` da tarefa.
 - Organizar criar e editar em seções com coluna de contexto, painel em duas
   colunas nos breakpoints largos e uma coluna no mobile.
 - Mostrar erro de campo em vermelho, com mensagem abaixo do campo e foco útil.

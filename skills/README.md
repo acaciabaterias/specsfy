@@ -66,6 +66,12 @@ Draft → Defined → Planned → Implementing → Complete
 Nenhum `Definition Gate`, `Plan Gate` ou `Delivery Gate` passa sem evidência
 compatível com o ato correspondente.
 
+Tarefas de implementação usam o checklist `PREP`, `EXECUTE`, `VERIFY`,
+`VISUAL`, `EVIDENCE` e `IMPROVE`. A etapa `VISUAL` é obrigatória para toda
+tarefa que possa alterar a interface, mesmo sem pedido específico, e registra a
+conferência de bordas, espaçamentos, margens, padding e tipografia. Tarefas sem
+interface registram o motivo concreto da não aplicação.
+
 ## Orquestração conversacional
 
 As skills fazem handoff dentro da mesma conversa. Quando uma responsabilidade
@@ -162,6 +168,7 @@ development sem instalar outro runtime ou criar fontes paralelas:
 | Gates de qualidade | `specsfy-04-validate` |
 | Proteção de CI | `specsfy-04-validate` |
 | Verificação de tarefas | `specsfy-07-implement` |
+| Revisão visual da interface | `specsfy-07-implement` e especialistas de interface |
 | Rastreabilidade da spec | `specsfy-06-tdd-bdd` |
 | Carregamento de referências da spec | `specsfy-03-specify` |
 | Estrutura de pesquisa | `specsfy-03-specify` |

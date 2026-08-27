@@ -190,3 +190,36 @@ def then_react_component_assets_are_available(context) -> None:
     components = list(assets.glob("*/*.tsx"))
     assert len(components) == 231
     assert len({component.parent.name for component in components}) == 11
+
+
+@then("o gestor de pacotes Laravel está disponível")
+def then_laravel_package_manager_is_available(context) -> None:
+    name = "specsfy-specialist-laravel-package-manager"
+    assert name in context.names
+    assert (ROOT / name / "SKILL.md").is_file()
+    assert (ROOT / name / "agents/openai.yaml").is_file()
+    assert (ROOT / name / "references/standards.md").is_file()
+
+
+@then("ele define instalação e documentação em docs/packages")
+def then_package_manager_documents_the_package_context(context) -> None:
+    content = (
+        ROOT
+        / "specsfy-specialist-laravel-package-manager"
+        / "SKILL.md"
+    ).read_text(encoding="utf-8")
+    assert "URL do GitHub" in content
+    assert "composer require" in content
+    assert "docs/packages/README.md" in content
+    assert "docs/packages/" in content
+
+
+@then("specify e implement consultam os pacotes já instalados")
+def then_base_skills_consult_existing_packages(context) -> None:
+    for path in (
+        ROOT / "../skills/specsfy-03-specify/SKILL.md",
+        ROOT / "../skills/specsfy-07-implement/SKILL.md",
+    ):
+        content = path.read_text(encoding="utf-8")
+        assert "specsfy-specialist-laravel-package-manager" in content
+        assert ".specsfy/PACKAGES.md" in content

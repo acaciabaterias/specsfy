@@ -335,13 +335,14 @@ definido.
 ## Tarefas, pesquisa e progresso
 
 Uma tarefa registra ID, tipo, história relacionada, ação, caminho, referências
-e dependências. O checklist abaixo dela deixa cinco movimentos auditáveis:
+e dependências. O checklist abaixo dela deixa seis movimentos auditáveis:
 
 | Movimento | Pergunta respondida |
 | --- | --- |
 | `PREP` | escopo, referências, dependências e baseline estão claros? |
 | `EXECUTE` | qual entrega foi produzida no caminho declarado? |
 | `VERIFY` | qual verificação focal confirmou o resultado? |
+| `VISUAL` | a interface respeita bordas, espaçamentos, margens, padding e tipografia, ou por que a revisão não se aplica? |
 | `EVIDENCE` | qual comando, resultado e IDs permitem conferir o trabalho? |
 | `IMPROVE` | houve melhoria de processo ou há motivo registrado para não aplicá-la? |
 

@@ -46,8 +46,12 @@ description: Projetar e revisar interfaces visuais de sistemas, dashboards e apl
    escolha para tokens semânticos.
 8. Implementar ou especificar componentes e casos extremos em todos os
    breakpoints sem criar variantes equivalentes às já existentes.
-9. Validar conteúdo real, legibilidade, responsividade, acessibilidade e
-   consistência com comprovação visual e comportamental.
+9. Durante o desenvolvimento, conferir bordas, espaçamentos, margens, padding
+   e tipografia do sistema, mesmo sem pedido da pessoa. Compare renderização,
+   inspeção DOM ou outra forma equivalente nos estados e viewports relevantes.
+10. Validar conteúdo real, legibilidade, responsividade, acessibilidade e
+   consistência com comprovação visual e comportamental. Registrar o resultado
+   no item `VISUAL` da tarefa.
 
 Quando a implementação usar React, carregar
 `$specsfy-specialist-react-ui-components` depois de definir a composição para
@@ -73,6 +77,11 @@ exemplos.
 - Manter `Breadcrumb` em todas as telas, com a equipe ativa, o módulo e a tela
   atual. Em Laravel, adaptar o `Breadcrumb` ou `Breadcrumbs` já renderizado
   pelo shell existente.
+- Usar um único `PageHeader` componentizado e reutilizável em lista, detalhe,
+  criação e edição do CRUD.
+- Usar `DataGrid` em largura total na lista, mostrar sempre a coluna `ID`,
+  transformar a linha em link para o detalhe e manter botões de editar e apagar
+  independentes dentro da linha.
 
 ## Antipadrões
 
@@ -86,6 +95,8 @@ exemplos.
   operacional e reduz descoberta sem diminuir complexidade real.
 - Usar cards para uma lista que pede comparação ou substituir `PageHeader` por
   um título solto.
+- Duplicar o markup do `PageHeader` por tela, esconder o `ID`, estreitar o
+  `DataGrid` ou deixar editar e apagar fora da linha do registro.
 
 ## Validação
 
@@ -103,6 +114,9 @@ exemplos.
   foco e reduced motion.
 - Auditar tokens e componentes novos contra os já publicados e justificar
   qualquer duplicação.
+- Conferir bordas, espaçamentos, margens, padding e tipografia nos estados e
+  viewports relevantes durante a implementação, registrando o resultado no
+  item `VISUAL`.
 - Revisão final conjunta com `$specsfy-specialist-react-ui-components` quando
   algum asset React tiver sido adaptado.
 - Não declarar a interface consistente ou responsiva sem screenshots ou

@@ -281,18 +281,21 @@ tests/features/directory_user_search.feature
   - [x] **PREP**: Cenários e runner Behave confirmados.
   - [x] **EXECUTE**: Feature e steps de busca criados.
   - [x] **VERIFY**: Behave exit 1 pela rota ausente comprovou RED válido.
+  - [x] **VISUAL**: Não aplicável; a tarefa materializa somente o caso de teste.
   - [x] **EVIDENCE**: Comando e falha registrados na seção 11.
   - [x] **IMPROVE**: Limites e estado vazio foram cobertos.
 - [x] T002 [TEST] [US-001] Criar integração RED em tests/Feature/Directory/UserSearchTest.php — Refs: US-001, FR-001, FR-002, FR-003, NFR-001, NFR-002, AC-001 — Depends: T001
   - [x] **PREP**: Contrato de filtro e paginação confirmado.
   - [x] **EXECUTE**: Testes de match, normalização e ausência criados.
   - [x] **VERIFY**: Pest exit 2 pela rota ausente comprovou RED válido.
+  - [x] **VISUAL**: Não aplicável; a tarefa materializa somente o caso de teste.
   - [x] **EVIDENCE**: Saída focal e IDs registrados.
   - [x] **IMPROVE**: Cobertura de caixa, persistência e vazio foi incluída.
 - [x] T003 [CODE] [US-001] Implementar busca em app/Http/Controllers/Directory/UserDirectoryController.php — Refs: US-001, FR-001, FR-002, FR-003, NFR-001, NFR-002, AC-001 — Depends: T001, T002
   - [x] **PREP**: RED BDD/TDD e dependências foram confirmados.
   - [x] **EXECUTE**: Filtro, props e controles React foram implementados.
   - [x] **VERIFY**: Pest focal, Behave, tipos, lint e Prettier passaram.
+  - [x] **VISUAL**: Bordas, espaçamentos, margens, padding e tipografia conferidos nos estados e viewports da tela.
   - [x] **EVIDENCE**: GREEN e arquivos foram registrados.
   - [x] **IMPROVE**: Normalização ficou limitada, estável e refletida na URL.
   <!-- specsfy:evidence {"task":"T003","refs":["US-001","FR-001","FR-002","FR-003","NFR-001","NFR-002","AC-001"],"files":["app/Http/Controllers/Directory/UserDirectoryController.php","resources/js/pages/directory/users/index.tsx"],"commands":[{"run":"php artisan test --compact tests/Feature/Directory/UserSearchTest.php","exit":0}]} -->
@@ -300,6 +303,7 @@ tests/features/directory_user_search.feature
   - [x] **PREP**: Suites e rastreabilidade foram identificadas.
   - [x] **EXECUTE**: Pest, Behave, checks frontend e build executaram.
   - [x] **VERIFY**: 100 testes, 11 cenários e todos os requisitos passaram.
+  - [x] **VISUAL**: Bordas, espaçamentos, margens, padding e tipografia da entrega conferidos nos estados e viewports aplicáveis.
   - [x] **EVIDENCE**: Comandos e contagens foram registrados.
   - [x] **IMPROVE**: A busca passou a preservar query e limitar entrada.
 

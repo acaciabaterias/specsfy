@@ -103,6 +103,8 @@ description: Implementar, revisar e operar aplicações Laravel — HTTP, Eloque
 
 - `$specsfy-specialist-reui` para interfaces React e Tailwind em projetos
   Laravel com Inertia.
+- `$specsfy-specialist-laravel-package-manager` para receber um pacote GitHub,
+  instalar a dependência Composer e manter suas fichas em `docs/packages/`.
 - `$specsfy-specialist-data-modeling` para entidades, relações e ciclo de vida
   antes de criar migrations ou models.
 - `$specsfy-specialist-postgres` para modelagem de schema, índice e plano de

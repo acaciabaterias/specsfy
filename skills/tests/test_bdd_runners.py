@@ -110,6 +110,7 @@ class BddRunnerTests(unittest.TestCase):
                 "  - [ ] **PREP**: Confirmar baseline.\n"
                 "  - [ ] **EXECUTE**: Produzir teste.\n"
                 "  - [ ] **VERIFY**: Observar RED.\n"
+                "  - [ ] **VISUAL**: Conferir bordas, espaçamentos, margens, padding e tipografia; Não aplicável porque a tarefa só produz teste.\n"
                 "  - [ ] **EVIDENCE**: Registrar resultado.\n"
                 "  - [ ] **IMPROVE**: Revisar aprendizado.\n"
             )
@@ -143,6 +144,44 @@ class BddRunnerTests(unittest.TestCase):
             self.assertEqual([], result["errors"])
             self.assertEqual(3, result["counts"]["tdd"])
 
+    def test_tasks_require_visual_review_before_evidence(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            spec = Path(temporary) / "spec.md"
+            checklist = (
+                "  - [ ] **PREP**: Confirmar baseline.\n"
+                "  - [ ] **EXECUTE**: Produzir entrega.\n"
+                "  - [ ] **VERIFY**: Executar verificação.\n"
+                "  - [ ] **EVIDENCE**: Registrar resultado.\n"
+                "  - [ ] **IMPROVE**: Revisar aprendizado.\n"
+            )
+            spec.write_text(
+                "| Formato | Specsfy/2.0 |\n"
+                "| Status | Defined |\n"
+                "| Definition Gate | Passed |\n"
+                "| Plan Gate | Pending |\n"
+                "#### US-001 — Example\n"
+                "#### AC-001 — Example\n"
+                "#### AC-002 — Boundary\n"
+                "#### AC-003 — Failure\n"
+                "- **FR-001**: Example.\n"
+                "- **NFR-001**: Example.\n"
+                "### 14. Tarefas\n"
+                "- [ ] T001 [TEST] [TDD] [US-001] Caso feliz em tests/ExampleTest.php — Refs: US-001, FR-001, NFR-001, AC-001 — Depends: none\n"
+                + checklist
+                + "- [ ] T002 [TEST] [TDD] [US-001] Caso limite em tests/ExampleTest.php — Refs: US-001, FR-001, NFR-001, AC-002 — Depends: none\n"
+                + checklist
+                + "- [ ] T003 [TEST] [TDD] [US-001] Caso de falha em tests/ExampleTest.php — Refs: US-001, FR-001, NFR-001, AC-003 — Depends: none\n"
+                + checklist,
+                encoding="utf-8",
+            )
+
+            result = validate_tasks(spec)
+
+            self.assertTrue(
+                any("VISUAL" in error for error in result["errors"]),
+                result["errors"],
+            )
+
     def test_plan_rejects_fewer_than_three_tdd_predecessors(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             spec = Path(temporary) / "spec.md"
@@ -150,6 +189,7 @@ class BddRunnerTests(unittest.TestCase):
                 "  - [ ] **PREP**: Confirmar baseline.\n"
                 "  - [ ] **EXECUTE**: Produzir teste.\n"
                 "  - [ ] **VERIFY**: Observar RED.\n"
+                "  - [ ] **VISUAL**: Conferir bordas, espaçamentos, margens, padding e tipografia; Não aplicável porque a tarefa só produz teste.\n"
                 "  - [ ] **EVIDENCE**: Registrar resultado.\n"
                 "  - [ ] **IMPROVE**: Revisar aprendizado.\n"
             )

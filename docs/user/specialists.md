@@ -56,7 +56,8 @@ instalação.
 
 | Stack encontrada | Especialista |
 | --- | --- |
-| Laravel, Supabase, PostgreSQL ou Redis | Laravel, Supabase, PostgreSQL ou Redis correspondente |
+| Laravel | Laravel e gestor de pacotes Laravel |
+| Supabase, PostgreSQL ou Redis | Supabase, PostgreSQL ou Redis correspondente |
 | React, Astro, Next.js ou TypeScript | especialista correspondente |
 | Tailwind CSS ou shadcn/ui | Tailwind CSS ou shadcn/ui correspondente |
 | ReUI solicitado para React e Tailwind | ReUI, React, Tailwind CSS e shadcn/ui |
@@ -91,6 +92,27 @@ Nos CRUDs e dashboards compatíveis, ReUI é a base para consulta, filtros,
 formulários, indicadores, ações contextuais, anexos e mensagens de retorno. A
 skill consulta o catálogo gratuito antes de permitir a criação de componente
 manual equivalente.
+
+## Gestor de pacotes Laravel
+
+`specsfy-specialist-laravel-package-manager` recebe a URL de um repositório
+GitHub, lê seu contrato Composer e sua documentação e compara o pacote com o
+que já existe no projeto. Quando a solicitação autoriza a instalação, executa
+`composer require` na raiz Laravel e confere o lockfile atualizado.
+
+O resultado documental fica em `docs/packages/`:
+
+- `README.md` é o índice dos pacotes Composer diretos, com versão, finalidade e
+  link para cada ficha;
+- `<vendor>-<nome>.md` explica instalação, configuração, uso local, testes e
+  fontes consultadas;
+- `.specsfy/PACKAGES.md` continua sendo a relação completa, incluindo
+  dependências transitivas.
+
+O especialista não repete uma instalação quando o pacote já aparece no
+manifest, no lockfile ou em `vendor/`. Se o repositório não expuser um pacote
+Composer compatível com Laravel, ele registra a lacuna e não altera os
+arquivos.
 
 ## Contrato de interfaces React
 
@@ -147,6 +169,7 @@ manual quando a entrega pedir aquele domínio.
 | Especialista | Quando usar |
 | --- | --- |
 | Laravel | Domínio PHP, HTTP, filas, autorização, persistência e testes Laravel. |
+| Gestor de pacotes Laravel | Pacotes Composer recebidos por URL GitHub, instalação e fichas em `docs/packages/`. |
 | Supabase | Postgres gerenciado, Auth, RLS, Storage, Realtime e Edge Functions. |
 | PostgreSQL | Modelagem relacional, SQL, índices, migrations e operação do banco. |
 | Redis | Cache, filas, locks, rate limiting e estruturas de dados em memória. |

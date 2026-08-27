@@ -98,12 +98,72 @@ class InterfaceContractTests(unittest.TestCase):
 #### Estados e acessibilidade
 
 - Há loading, vazio, erro, sucesso, foco inicial e navegação por teclado.
+
+#### Revisão visual durante o desenvolvimento
+
+- A conferência durante o desenvolvimento verifica bordas, espaçamentos,
+  margens, padding e tipografia nos estados e viewports relevantes.
 """
 
         errors = self.validate(self.interface(content))
 
         self.assertFalse(
             [error for error in errors if error.startswith("Interface para pessoas:")],
+            errors,
+        )
+
+    def test_requires_visual_and_crud_contracts_when_datagrid_is_declared(self) -> None:
+        content = """#### Telas e responsabilidades
+
+- A tela de CRUD lista registros.
+
+#### Stack e convenções de interface
+
+- React e componentes existentes.
+
+#### Fluxo de informação e navegação
+
+- A lista leva ao detalhe.
+
+#### Menus e navegação principal
+
+- O menu tem o item Registros, com destino para /registros.
+
+#### Formulários e ações
+
+- O formulário valida os campos.
+
+#### Composição e disposição
+
+- O DataGrid ocupa a área principal.
+
+#### Blocos React e componentes selecionados
+
+| Tela | Bloco React | Componente ou composição | Origem |
+| --- | --- | --- | --- |
+| Lista | RecordList | DataGrid | local |
+
+#### Estados e acessibilidade
+
+- Há loading, vazio, erro e teclado.
+
+#### Revisão visual durante o desenvolvimento
+
+- A revisão confere bordas.
+
+#### Contrato CRUD
+
+- O PageHeader reutilizado mostra ID e permite editar.
+"""
+
+        errors = self.validate(self.interface(content))
+
+        self.assertIn(
+            "Interface para pessoas: Revisão visual durante o desenvolvimento precisa conferir bordas, espaçamentos, margens, padding e tipografia.",
+            errors,
+        )
+        self.assertIn(
+            "Interface para pessoas: Contrato CRUD precisa declarar PageHeader, DataGrid, ID, editar e apagar.",
             errors,
         )
 

@@ -19,9 +19,12 @@ Use antes de finalizar uma tela ou componente.
   reutiliza o componente existente do shell.
 - Toda superfície CRUD tem `PageHeader` com contexto, título e ação principal
   quando aplicável.
-- Listas usam `DataGrid` para comparação, filtros, ordenação e paginação.
-- A linha inteira do `DataGrid` abre o detalhe por clique e teclado; ações
-  internas permanecem independentes.
+- Todas as telas CRUD reutilizam o mesmo `PageHeader`, variando props ou
+  configuração sem duplicar a marcação.
+- Listas usam `DataGrid` em largura total, com a coluna `ID` visível, para
+  comparação, filtros, ordenação e paginação.
+- A linha inteira do `DataGrid` abre o detalhe por clique e teclado; as ações de
+  editar e apagar permanecem independentes dentro da linha.
 - Detalhes usam `DetailLists` para organizar atributos e status.
 - Criar e editar usam seções com coluna de contexto e painel em duas colunas
   responsivas; no mobile, os campos refluem para uma coluna.
@@ -61,6 +64,8 @@ Use antes de finalizar uma tela ou componente.
 
 ## Visual
 
+- Durante o desenvolvimento, a revisão visual ocorre mesmo sem pedido
+  específico e confere bordas, espaçamentos, margens, padding e tipografia.
 - O modo escuro foi preservado quando existia na referência.
 - As cores não formam uma paleta monótona sem contraste.
 - CTAs principais usam uma cor consistente.

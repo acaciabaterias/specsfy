@@ -33,14 +33,23 @@ Implemente T003 da spec 0004 e valide a regressão.
 3. Verifica a tarefa predecessora e o RED atual.
 4. Faz a menor mudança de produção, incluindo a tela e a interação previstas.
 5. Executa o teste focal até obter GREEN.
-6. Refatora sem alterar o comportamento.
-7. Executa a regressão e atualiza evidências:
+6. Faz a revisão visual obrigatória quando a tarefa puder alterar a interface,
+   mesmo sem pedido específico. Confere bordas, espaçamentos, margens, padding,
+   tipografia, alinhamento, largura, overflow, foco, zoom e conteúdo curto ou
+   longo nos viewports e estados aplicáveis.
+7. Refatora sem alterar o comportamento.
+8. Executa a regressão e atualiza evidências:
 
 ```text
 T003 [x] Implementar solicitação sem revelar existência do cadastro
 Teste focal: passou
+Revisão visual: Não aplicável; a tarefa altera somente a regra de serviço.
 Regressão: passou
 ```
+
+O checklist normativo da tarefa segue `PREP`, `EXECUTE`, `VERIFY`, `VISUAL`,
+`EVIDENCE` e `IMPROVE`. O item `VISUAL` registra a inspeção da interface ou o
+motivo concreto para sua não aplicação.
 
 Depois de cada tarefa de código, a skill chama o documentador do projeto
 consumidor. A execução só continua quando `docs/` estiver atualizado.

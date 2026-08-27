@@ -32,6 +32,7 @@ input ─► inbox ─► backlog ─► spec.md
 spec.md ─► tarefas + testes ─► entrega
 pedido tardio ─► update-spec ─► spec.md
 implement ─► documentator ─► <projeto>/docs/ + <projeto>/.specsfy/PACKAGES.md
+package-manager ─► Composer autorizado ─► <projeto>/docs/packages/
 fontes dos módulos ─► monorepo-documentator ─► docs/
 release-cli ─► cli/CHANGELOG.md + versão + binário ─► tag + npm + GitHub Release
 ```

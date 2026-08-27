@@ -44,6 +44,10 @@ transversal.
 - Regressão completa antes de concluir o Delivery Gate.
 - Verificação manual somente quando o resultado não puder ser automatizado,
   com justificativa.
+- Revisão visual durante o desenvolvimento para toda tarefa que possa alterar
+  a interface, mesmo sem pedido específico. Ela confere bordas, espaçamentos,
+  margens, padding, tipografia, alinhamento, largura, overflow, foco, zoom e
+  conteúdo curto ou longo nos viewports e estados aplicáveis.
 
 ## Cobertura mínima de contexto
 
@@ -155,6 +159,9 @@ comandos. Esses contratos não substituem a suíte Pest do produto.
 - Registre comando, exit code e causa observada.
 - Execute novamente após GREEN e refactor.
 - Não avance gate ou checkbox sem resultado atual.
+- O checklist de implementação registra `VISUAL` entre `VERIFY` e `EVIDENCE`,
+  com método, viewports, estados, ajustes e resultado; tarefas sem interface
+  registram o motivo concreto da não aplicação.
 - Mudança em `example/` atualiza seus testes e sua documentação aplicável na
   mesma entrega.
 - Em mudança transversal, registre os comandos focais, a regressão integrada e

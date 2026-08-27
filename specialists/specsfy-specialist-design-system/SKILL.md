@@ -49,6 +49,11 @@ genérico.
 7. Retorne os arquivos lidos, a regra aplicada, as exceções registradas e os
    cenários cobertos.
 
+Em toda entrega visual, faça a revisão durante o desenvolvimento mesmo sem
+pedido da pessoa. Confira bordas, espaçamentos, margens, padding e tipografia
+do sistema nos viewports e estados relevantes. Registre o método, o resultado e
+os ajustes no item `VISUAL` da tarefa.
+
 ## Padrões
 
 ### Defaults obrigatórios para SaaS
@@ -74,6 +79,12 @@ Quando não houver direção visual contrária, aplique estas composições:
   `Breadcrumb` ou `Breadcrumbs` existente no layout e seus tipos de rota.
 - DataGrid: linha inteira clicável para abrir o detalhe, com equivalente de
   teclado e controles internos protegidos por `TableRowAction` ou equivalente.
+- CRUD: todas as telas reutilizam o mesmo `PageHeader` componentizado; a lista
+  usa `DataGrid` em largura total, exibe a coluna `ID` e oferece botões de editar
+  e apagar na linha. O link da linha leva ao detalhe sem capturar os botões.
+- Componentes recorrentes de cabeçalho, tabela, linha, ações, formulário,
+  estados e feedback entram em `INTERFACE.md` e são reaproveitados antes de uma
+  nova implementação.
 
 Esses defaults não significam aparência genérica. A personalidade vem da
 hierarquia dos dados, linguagem do domínio, tipografia, tokens, ritmo, estados,
@@ -154,6 +165,8 @@ mensagem e próximo passo.
   permissões e tokens do produto.
 - Novo token ou componente criado sem verificar o documento e `INTERFACE.md`.
 - Exceção visual local registrada como regra global sem alcance explícito.
+- CRUD com cabeçalhos duplicados, DataGrid estreito, ID oculto ou sem ações de
+  editar e apagar na linha.
 
 ## Validação
 
@@ -176,6 +189,9 @@ Antes do handoff, confira:
   alternativa acessível para visualizações e investigação detalhada.
 - Primitives shadcn/ui e blocos ReUI têm origem, estados e consumidores
   registrados em `INTERFACE.md`.
+- Cada tarefa possui o item `VISUAL` concluído antes de `EVIDENCE`, com a
+  conferência de bordas, espaçamentos, margens, padding e tipografia ou a
+  justificativa concreta de que não há interface.
 
 Execute os testes e validadores da stack quando houver implementação. Para a
 skill do Specsfy, execute `quick_validate.py` e a suíte do monorepo.

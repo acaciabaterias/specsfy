@@ -94,6 +94,8 @@ description: Investigar questões técnicas em fontes primárias, código-fonte,
   descartável com hipótese e critério de parada.
 - `$specsfy-specialist-software-architecture` quando a pesquisa embasar uma
   decisão estrutural registrável em ADR.
+- `$specsfy-specialist-laravel-package-manager` quando a pesquisa precisar
+  confirmar documentação, versão ou instalação de um pacote Composer Laravel.
 - `$specsfy-specialist-debugging` quando a "pesquisa" for, na verdade,
   investigar por que um comportamento observado diverge do documentado —
   nesse caso o diagnóstico de causa raiz é o objetivo, não a comparação de

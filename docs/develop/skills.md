@@ -219,6 +219,13 @@ contrato de atualização de `docs/`.
 lockfiles para o documentador. O inventário é derivado e não substitui os
 manifests nem autoriza instalar, atualizar ou remover dependências.
 
+Em projetos Laravel, `specsfy-specialist-laravel-package-manager` amplia esse
+fluxo para pacotes recebidos por URL GitHub. Ele consulta os pacotes atuais,
+instala somente após autorização e mantém `docs/packages/README.md` mais uma
+ficha por pacote. `specsfy-03-specify` consulta essas fontes antes de registrar
+uma dependência na spec; `specsfy-07-implement` faz a mesma leitura antes de
+alterar Composer e carrega o especialista quando a tarefa envolve pacote.
+
 ## Validação
 
 O validador verifica frontmatter, nome, metadata e estrutura. Testes focais

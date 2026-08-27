@@ -45,9 +45,13 @@ macro.
 
 ## Padrões CRUD
 
-- Listas usam `PageHeader` e `DataGrid`.
+- Lista, detalhe, criação e edição reutilizam o mesmo `PageHeader`, configurado
+  por props ou configuração. A marcação do cabeçalho não é duplicada.
+- Listas usam `DataGrid` em toda a largura disponível e exibem sempre uma
+  coluna `ID`.
 - A linha do `DataGrid` abre o detalhe inteiro por clique e teclado; controles
-  internos ficam acima do link da linha.
+  internos ficam acima do link da linha. Cada linha também oferece `Editar` e
+  `Apagar` como ações independentes.
 - Todas as telas exibem `Breadcrumb` com a equipe ativa, o módulo e a tela
   atual. Em Laravel, a implementação existente do layout é reaproveitada.
 - Detalhes usam `PageHeader` e `DetailLists`.
@@ -58,6 +62,16 @@ macro.
   semântica e foco no primeiro erro.
 - Estados de loading, vazio, erro, sucesso, permissão, parcial e não salvo são
   tratados quando o fluxo os possuir.
+
+## Revisão visual durante o desenvolvimento
+
+Toda tarefa que puder alterar a interface passa por revisão visual durante o
+desenvolvimento, mesmo sem pedido específico. A conferência cobre bordas,
+espaçamentos, margens, padding, tipografia, alinhamento, largura, overflow,
+foco, zoom e conteúdo curto ou longo nos viewports e estados aplicáveis. O
+resultado, o método, os viewports, os estados e os ajustes ficam no item
+`VISUAL` da tarefa. Para tarefa sem interface, registre `Não aplicável` com o
+motivo concreto.
 
 ## Padrões de dashboard e catálogo
 

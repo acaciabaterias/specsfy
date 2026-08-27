@@ -174,6 +174,13 @@ Status: Reviewing
 `specsfy-04-validate` confirma o aceite em `review/` e conclui a transição para
 `completed/`.
 
+Quando a tarefa puder alterar a interface, a entrega inclui uma revisão visual
+durante o desenvolvimento, mesmo sem pedido específico. O agente confere
+bordas, espaçamentos, margens, padding e tipografia, além dos estados,
+viewports, alinhamento, largura, overflow, foco, zoom e conteúdo curto ou
+longo. O método, o resultado e os ajustes ficam no item `VISUAL`, entre
+`VERIFY` e `EVIDENCE`; tarefas sem interface registram o motivo concreto.
+
 ## Cobertura e rastreabilidade
 
 Cada feature, `US`, `FR` e `NFR` possui pelo menos três cenários BDD distintos.

@@ -43,10 +43,20 @@ regras macro.
 
 | Tela | Composição padrão |
 | --- | --- |
-| Lista | `PageHeader` + resumo útil + `DataGrid` |
-| Detalhe | `PageHeader` + `DetailLists` |
-| Criar | `PageHeader` + seções de formulário em duas colunas responsivas |
-| Editar | `PageHeader` + seções de formulário em duas colunas responsivas |
+| Lista | `PageHeader` compartilhado + resumo útil + `DataGrid` em largura total |
+| Detalhe | `PageHeader` compartilhado + `DetailLists` |
+| Criar | `PageHeader` compartilhado + seções de formulário em duas colunas responsivas |
+| Editar | `PageHeader` compartilhado + seções de formulário em duas colunas responsivas |
+
+O `PageHeader` é um componente único, configurado por props ou configuração
+para título, descrição, breadcrumb e ações. Lista, detalhe, criação e edição
+reutilizam essa mesma implementação; não duplicam sua marcação.
+
+A lista sempre mostra o `ID` em uma coluna visível do `DataGrid`. Cada linha
+inteira é o link para o detalhe, com suporte a mouse e teclado. Os botões
+`Editar` e `Apagar` ficam na própria linha como ações independentes e não
+disparam a navegação do detalhe. A permissão e a confirmação da ação destrutiva
+também fazem parte do contrato.
 
 Formulários usam labels visíveis acima dos campos. Quando um campo falha, ele
 fica com estado visual vermelho e mostra a mensagem abaixo do campo. O foco vai
@@ -93,6 +103,19 @@ Uma entrega de interface registra o recorte aplicável dos cenários do template
 Para cada cenário, descreva pré-condição, ação, resposta, estado visual, foco,
 mensagem e próximo passo. A personalidade do produto vem dos dados, da
 linguagem, dos tokens, do ritmo e da hierarquia, não de uma decoração genérica.
+
+## Revisão visual durante o desenvolvimento
+
+Toda tarefa que altera interface passa por uma revisão visual durante o
+desenvolvimento, mesmo sem pedido específico. Confira bordas, espaçamentos,
+margens, padding e tipografia, incluindo família, peso, tamanho, altura de
+linha, espaçamento entre letras, hierarquia e quebra de texto. Confira também
+alinhamento, largura, overflow, foco, zoom e conteúdo curto ou longo nos
+viewports e estados aplicáveis.
+
+Registre no item `VISUAL` da tarefa o método usado, os viewports, os estados,
+os ajustes feitos e o resultado. Quando a tarefa não tem interface, registre
+`Não aplicável` e o motivo concreto.
 
 ## Quando não usar
 

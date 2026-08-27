@@ -24,6 +24,7 @@ EXPECTED_SKILLS = {
     "specsfy-specialist-gitflow",
     "specsfy-specialist-interface-experience",
     "specsfy-specialist-laravel",
+    "specsfy-specialist-laravel-package-manager",
     "specsfy-specialist-merge-conflict-resolution",
     "specsfy-specialist-nextjs",
     "specsfy-specialist-observability",
@@ -226,6 +227,34 @@ class SpecialistCatalogTests(unittest.TestCase):
         ):
             self.assertIn(marker, primitive_content)
         self.assertIn("não comprova que o componente usa Base UI", primitive_content)
+
+    def test_laravel_package_manager_publishes_the_package_context_contract(self) -> None:
+        name = "specsfy-specialist-laravel-package-manager"
+        content = (ROOT / name / "SKILL.md").read_text(encoding="utf-8")
+        catalog = json.loads((ROOT / "catalog.json").read_text(encoding="utf-8"))
+        entry = next(item for item in catalog["skills"] if item["name"] == name)
+        self.assertEqual(["specsfy-specialist-laravel"], entry["requires"])
+        self.assertIn("artisan", entry["detect"]["files"])
+        self.assertIn("laravel/framework", entry["detect"]["dependencies"])
+        specify = (ROOT / "../skills/specsfy-03-specify/SKILL.md").read_text(
+            encoding="utf-8"
+        )
+        implement = (ROOT / "../skills/specsfy-07-implement/SKILL.md").read_text(
+            encoding="utf-8"
+        )
+        for term in (
+            "URL do GitHub",
+            "composer.json",
+            "composer.lock",
+            "composer require",
+            "docs/packages/README.md",
+            "docs/packages/",
+        ):
+            self.assertIn(term, content)
+        self.assertIn("specsfy-specialist-laravel-package-manager", specify)
+        self.assertIn("specsfy-specialist-laravel-package-manager", implement)
+        self.assertIn(".specsfy/PACKAGES.md", content)
+        self.assertIn("pacotes já instalados", content)
 
     def test_repository_contains_no_reference_to_the_audited_origin(self) -> None:
         for path in ROOT.rglob("*"):

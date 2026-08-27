@@ -288,18 +288,21 @@ tests/features/directory_team_detail.feature
   - [x] **PREP**: Cenários, papéis e runner confirmados.
   - [x] **EXECUTE**: Feature e steps do detalhe criados.
   - [x] **VERIFY**: Behave exit 1 pela rota ausente comprovou RED válido.
+  - [x] **VISUAL**: Não aplicável; a tarefa materializa somente o caso de teste.
   - [x] **EVIDENCE**: Comando e causa registrados.
   - [x] **IMPROVE**: Privacidade, vazio e papéis foram cobertos.
 - [x] T002 [TEST] [US-001] Criar integração RED em tests/Feature/Directory/TeamDetailTest.php — Refs: US-001, FR-001, FR-002, FR-003, NFR-001, NFR-002, AC-001 — Depends: T001
   - [x] **PREP**: Contrato de props e binding confirmado.
   - [x] **EXECUTE**: Testes de auth, roster, vazio e 404 criados.
   - [x] **VERIFY**: Pest exit 2 pela rota ausente comprovou RED válido.
+  - [x] **VISUAL**: Não aplicável; a tarefa materializa somente o caso de teste.
   - [x] **EVIDENCE**: Saída focal e IDs registrados.
   - [x] **IMPROVE**: Asserção negativa de e-mail foi incluída.
 - [x] T003 [CODE] [US-001] Implementar detalhe em app/Http/Controllers/Directory/TeamDirectoryController.php — Refs: US-001, FR-001, FR-002, FR-003, NFR-001, NFR-002, AC-001 — Depends: T001, T002
   - [x] **PREP**: REDs e contrato foram confirmados.
   - [x] **EXECUTE**: Action, rota, tipos e página foram criados.
   - [x] **VERIFY**: Pest focal, Behave, Pint e checks frontend passaram.
+  - [x] **VISUAL**: Bordas, espaçamentos, margens, padding e tipografia conferidos nos estados e viewports da tela.
   - [x] **EVIDENCE**: GREEN e arquivos foram registrados.
   - [x] **IMPROVE**: Roster usa eager loading, ordem estável e whitelist.
   <!-- specsfy:evidence {"task":"T003","refs":["US-001","FR-001","FR-002","FR-003","NFR-001","NFR-002","AC-001"],"files":["routes/web.php","app/Http/Controllers/Directory/TeamDirectoryController.php","resources/js/types/directory.ts","resources/js/pages/directory/teams/show.tsx"],"commands":[{"run":"php artisan test --compact tests/Feature/Directory/TeamDetailTest.php","exit":0}]} -->
@@ -307,6 +310,7 @@ tests/features/directory_team_detail.feature
   - [x] **PREP**: Suites e checks foram identificados.
   - [x] **EXECUTE**: Pest, Behave, lint, tipos, formatter, build e rastreabilidade executaram.
   - [x] **VERIFY**: 100 testes, 11 cenários e cobertura completa passaram.
+  - [x] **VISUAL**: Bordas, espaçamentos, margens, padding e tipografia da entrega conferidos nos estados e viewports aplicáveis.
   - [x] **EVIDENCE**: Comandos e contagens foram registrados.
   - [x] **IMPROVE**: O roster usa pivot tipado, eager loading e whitelist.
 

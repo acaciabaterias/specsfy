@@ -55,6 +55,8 @@ seguintes arquivos e preserva o texto humano externo:
 | `docs/testing.md` | runners, comandos, inventário e resumo |
 | `docs/frontend.md` | views, páginas, componentes, React e Tailwind |
 | `docs/packages.md` | runtime, framework, nativos, integrados e terceiros |
+| `docs/packages/README.md` | índice Laravel de pacotes Composer diretos e fichas de uso |
+| `docs/packages/<vendor>-<nome>.md` | instalação, configuração, uso local e testes de um pacote |
 | `docs/integrations.md` | serviços externos e nomes de configuração |
 | `docs/decisions.md` | escolhas explícitas e suas fontes |
 | `.specsfy/PACKAGES.md` | pacotes npm e Composer, versão, finalidade e fonte |

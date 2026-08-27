@@ -39,6 +39,19 @@ Feature: Governança de interface do Specsfy
     Then toda a linha abre o detalhe por clique e teclado
     And ações internas não disparam a navegação da linha
 
+  Scenario: Aplicar o contrato CRUD compartilhado
+    Given o template global de design system do Specsfy
+    When os padrões de CRUD são lidos
+    Then todas as telas CRUD reutilizam o mesmo PageHeader componentizado
+    And a listagem usa DataGrid em largura total com a coluna ID visível
+    And cada linha leva ao detalhe e oferece editar e apagar
+
+  Scenario: Conferir a qualidade visual durante o desenvolvimento
+    Given o contrato de implementação visual do Specsfy
+    When a revisão de desenvolvimento é lida
+    Then a conferência visual é obrigatória mesmo sem pedido da pessoa
+    And ela verifica bordas espaçamentos margens padding e tipografia do sistema
+
   Scenario: Exibir o contexto da equipe em todas as telas
     Given o contrato de navegação contextual do Specsfy
     When o breadcrumb global é lido

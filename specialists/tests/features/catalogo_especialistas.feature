@@ -33,3 +33,9 @@ Feature: Catálogo de especialistas sob demanda
     Given o catálogo versionado de especialistas
     Then a skill de componentes React e a skill de UI orientam uso conjunto
     And as famílias de componentes React estão disponíveis como assets copiáveis
+
+  Scenario: Gerenciar pacotes Laravel a partir do GitHub
+    Given o catálogo versionado de especialistas
+    Then o gestor de pacotes Laravel está disponível
+    And ele define instalação e documentação em docs/packages
+    And specify e implement consultam os pacotes já instalados

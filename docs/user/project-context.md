@@ -23,6 +23,10 @@ mantêm esta estrutura:
 <projeto>/
 ├── PROJECT.md
 ├── DESIGNSYSTEM.MD
+├── docs/
+│   └── packages/
+│       ├── README.md
+│       └── <vendor>-<nome>.md
 └── .specsfy/
     ├── STACK.md
     ├── RULES.md
@@ -44,6 +48,8 @@ preservado. A referência publicável das diretrizes vive em
 | `.specsfy/RULES.md` | regras explícitas confirmadas | `$specsfy-aux-rules` |
 | `.specsfy/DATABASE.md` | persistência e relações | `$specsfy-aux-database` |
 | `.specsfy/PACKAGES.md` | pacotes npm e Composer com finalidade | `$specsfy-documentator` |
+| `docs/packages/README.md` | índice dos pacotes Composer diretos e links para fichas de uso | `$specsfy-specialist-laravel-package-manager` |
+| `docs/packages/<vendor>-<nome>.md` | instalação, configuração, uso local e testes do pacote | `$specsfy-specialist-laravel-package-manager` |
 | `.specsfy/USER-PROFILE.md` | nível de conhecimento, respostas confirmadas e fontes do setup | `$specsfy-setup` |
 | `.specsfy/SPECKIT.md` | constituição e fontes preservadas do GitHub Spec Kit | `$specsfy-setup` |
 | `DESIGNSYSTEM.MD` | defaults comuns de interface, CRUD, dashboards, estados e exceções | `$specsfy-setup` cria; `$specsfy-specialist-design-system` mantém |

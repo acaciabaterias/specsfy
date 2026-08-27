@@ -70,3 +70,16 @@ aplicativo, não um catálogo de pacotes obrigatórios para usar o Specsfy.
   atualização de sua documentação operacional na mesma entrega.
 - Alterar pacote do CLI somente no repositório `cli/`, com lockfile,
   teste da TUI e build da distribuição.
+
+## Pacotes Laravel no projeto consumidor
+
+Quando uma tarefa receber uma URL GitHub de pacote Laravel, o especialista
+`specsfy-specialist-laravel-package-manager` lê a documentação e compara o
+nome e a versão com `composer.json`, `composer.lock`, `vendor/` e as fontes de
+contexto do projeto. Pacote já instalado é reutilizado; pacote novo só entra
+após autorização para executar `composer require`.
+
+O especialista mantém uma ficha por dependência direta em
+`docs/packages/<vendor>-<nome>.md` e o índice `docs/packages/README.md`. O
+documentador continua responsável por `.specsfy/PACKAGES.md`, que inclui as
+dependências transitivas e permanece derivado dos manifests e lockfiles.

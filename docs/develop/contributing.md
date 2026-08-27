@@ -50,8 +50,11 @@ Exemplos:
 
 ## 5. Obtenha GREEN e refatore
 
-Execute o teste focal até GREEN, refatore e repita. Depois rode a regressão do
-owner.
+Execute o teste focal até GREEN, refatore e repita. Quando a tarefa puder
+alterar a interface, faça também a revisão visual durante o desenvolvimento,
+mesmo sem pedido específico. Confira bordas, espaçamentos, margens, padding e
+tipografia nos estados e viewports aplicáveis e registre o resultado no item
+`VISUAL`. Depois rode a regressão do owner.
 
 Skills:
 
@@ -86,6 +89,8 @@ uv run --quiet --with behave behave tests/features --no-capture
 - mudanças de uso atualizam `docs/user/`.
 - decisões e arquitetura atualizam `docs/develop/`.
 - mudanças que afetam ambos atualizam os dois percursos.
+- mudanças no contrato visual atualizam o design system, os especialistas e a
+  documentação de uso e desenvolvimento aplicável.
 - detalhes internos de `example/` permanecem em `example/README.md`.
 
 Não copie inventários extensos de manifests, rotas ou schemas para a
