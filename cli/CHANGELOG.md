@@ -4,6 +4,16 @@ Todas as mudanças relevantes do Specsfy CLI são registradas neste arquivo.
 
 ## [Unreleased]
 
+## [0.10.5] - 2026-08-27
+
+## Correções
+
+- Alinha os testes automatizados da importação de `MVP.md` ao fluxo atual: somente requisitos desenvolvíveis criam backlog e spec Draft; a milestone mantém proveniência e triagem, sem Inboxes ou cópia de contexto de negócio.
+
+## Validação
+
+- Testes unitários e cenários BDD da biblioteca de skills executados com sucesso.
+
 ## [0.10.4] - 2026-08-27
 
 ## Corrigido

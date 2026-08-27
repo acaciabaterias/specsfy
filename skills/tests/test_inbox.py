@@ -218,7 +218,7 @@ class InboxCaptureTests(unittest.TestCase):
 
         self.assertIn("`mvp.md`", source.casefold())
         self.assertIn("`brand.md`", source.casefold())
-        self.assertIn("fila ordenada de inboxes e backlogs", normalized)
+        self.assertIn("fila ordenada de backlogs", normalized)
         self.assertIn("$specsfy-01-inbox", source)
         self.assertIn("$specsfy-02-backlog", source)
         self.assertIn("`specs/milestones/m01.md`", source.casefold())
@@ -234,7 +234,7 @@ class InboxCaptureTests(unittest.TestCase):
         self.assertIn("superprojeto", normalized)
         self.assertIn("--show-superproject-working-tree", source)
 
-    def test_imports_mvp_as_milestone_and_creates_interviewable_backlogs(self) -> None:
+    def test_imports_mvp_as_milestone_and_creates_interviewable_backlogs_without_inboxes(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             project = Path(directory)
             (project / "MVP.md").write_text(
@@ -255,20 +255,20 @@ class InboxCaptureTests(unittest.TestCase):
             self.assertEqual(2, len(imported["items"]))
 
             milestone = project / imported["milestone"]
-            self.assertIn("# Milestone 1.0", milestone.read_text(encoding="utf-8"))
-            self.assertIn("Receber pedidos de clientes.", milestone.read_text(encoding="utf-8"))
+            milestone_content = milestone.read_text(encoding="utf-8")
+            self.assertIn("# Milestone 1.0", milestone_content)
+            self.assertIn("Requisitos de desenvolvimento importados: 2.", milestone_content)
+            self.assertNotIn("Receber pedidos de clientes.", milestone_content)
+            self.assertFalse((project / "specs/inbox").exists())
 
             expected_themes = (
                 "Receber pedidos de clientes.",
                 "Mostrar o andamento de cada pedido.",
             )
             for item, expected_theme in zip(imported["items"], expected_themes):
-                inbox = project / item["inbox"]
                 backlog = project / item["backlog"]
-                self.assertTrue(inbox.is_file())
                 self.assertTrue(backlog.is_file())
                 backlog_content = backlog.read_text(encoding="utf-8")
-                self.assertIn(item["inbox"], backlog_content)
                 self.assertIn("specs/milestones/M01.md", backlog_content)
                 self.assertIn("## Registros confirmados no MVP", backlog_content)
                 self.assertIn(expected_theme, backlog_content)

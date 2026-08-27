@@ -44,7 +44,7 @@ Resultado: consultar registros.
                 set((project / "specs/draft").glob("*/spec.md")),
             )
 
-    def test_imports_mvp_into_inbox_backlog_and_draft_spec_with_obvious_defaults(self) -> None:
+    def test_imports_developable_mvp_theme_directly_into_backlog_and_draft_spec(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             project = Path(directory)
             (project / "MVP.md").write_text(
@@ -76,21 +76,17 @@ Menus: menu principal com Clientes para /clientes.
             output = json.loads(result.stdout)
             self.assertEqual(1, len(output["items"]))
             item = output["items"][0]
-            inbox = project / item["inbox"]
             backlog = project / item["backlog"]
             spec = project / item["spec"]
 
-            self.assertTrue(inbox.is_file())
             self.assertTrue(backlog.is_file())
             self.assertTrue(spec.is_file())
-            self.assertEqual(1, len(list((project / "specs/inbox").glob("*.md"))))
+            self.assertFalse((project / "specs/inbox").exists())
             self.assertEqual(1, len(list((project / "specs/backlog").glob("*.md"))))
             self.assertEqual(1, len(list((project / "specs/draft").glob("*/spec.md"))))
 
-            inbox_content = inbox.read_text(encoding="utf-8")
             backlog_content = backlog.read_text(encoding="utf-8")
             spec_content = spec.read_text(encoding="utf-8")
-            self.assertIn("a equipe perde tempo procurando dados espalhados", inbox_content)
             self.assertIn("## Defaults aplicados automaticamente", backlog_content)
             self.assertIn("| Status | Promoted |", backlog_content)
             self.assertIn(f"| Spec promovida | `{item['spec']}` |", backlog_content)
@@ -102,6 +98,9 @@ Menus: menu principal com Clientes para /clientes.
             self.assertIn("| Status | Draft |", spec_content)
             self.assertIn("| Definition Gate | Pending |", spec_content)
             self.assertIn("Pendente:", spec_content)
+            milestone_content = (project / output["milestone"]).read_text(encoding="utf-8")
+            self.assertIn("## Triagem da importação", milestone_content)
+            self.assertNotIn("a equipe perde tempo procurando dados espalhados", milestone_content)
             self.assertFalse((project / "src").exists())
             validation = subprocess.run(
                 [
@@ -170,16 +169,14 @@ O sistema deve permitir cadastrar clientes.
 
             self.assertEqual(0, result.returncode, result.stderr)
             items = json.loads(result.stdout)["items"]
-            self.assertEqual(3, len(items))
-            self.assertEqual(2, sum(item["developable"] is False for item in items))
-            self.assertEqual(1, sum(item["developable"] is True for item in items))
+            self.assertEqual(1, len(items))
+            self.assertEqual("Cadastro de clientes", items[0]["title"])
             self.assertEqual(1, len(list((project / "specs/backlog").glob("*.md"))))
             self.assertEqual(1, len(list((project / "specs/draft").glob("*/spec.md"))))
-            skipped = [item for item in items if not item["developable"]]
-            self.assertTrue(all(item["backlog"] is None and item["spec"] is None for item in skipped))
-            inboxes = list((project / "specs/inbox").glob("*.md"))
-            self.assertEqual(3, len(inboxes))
-            self.assertTrue(any("Não criar backlog nem spec" in path.read_text(encoding="utf-8") for path in inboxes))
+            self.assertFalse((project / "specs/inbox").exists())
+            milestone_content = (project / "specs/milestones/M01.md").read_text(encoding="utf-8")
+            self.assertNotIn("Uma solução simples para organizar o trabalho.", milestone_content)
+            self.assertNotIn("Equipes pequenas.", milestone_content)
 
 
 if __name__ == "__main__":
