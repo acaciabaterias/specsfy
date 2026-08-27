@@ -200,14 +200,15 @@ def then_imports_first_milestone(context) -> None:
     assert "não sobrescreva a milestone 1.0" in context.mvp_skill.casefold()
 
 
-@then("registra cada tema em uma série de Inboxes e cria um backlog candidato por Inbox")
-def then_registers_inboxes_and_candidate_backlogs(context) -> None:
+@then("cria backlog e spec Draft apenas para cada requisito de desenvolvimento")
+def then_registers_only_development_backlogs(context) -> None:
     items = context.imported["items"]
     assert items
-    assert all((context.project / item["inbox"]).is_file() for item in items)
-    developable = [item for item in items if item["developable"]]
-    assert all(item["backlog"] for item in developable)
-    assert all((context.project / item["backlog"]).is_file() for item in developable)
+    assert not (context.project / "specs/inbox").exists()
+    assert all(item["backlog"] for item in items)
+    assert all(item["spec"] for item in items)
+    assert all((context.project / item["backlog"]).is_file() for item in items)
+    assert all((context.project / item["spec"]).is_file() for item in items)
 
 
 @then("entrevista cada backlog antes de qualquer promoção")
@@ -268,9 +269,9 @@ def then_consults_hub_context(context) -> None:
     assert "brand.md" in normalized
 
 
-@then("importa o MVP como a Milestone 1.0 e registra Inboxes no projeto consumidor")
+@then("importa o MVP como a Milestone 1.0 sem criar Inboxes no projeto consumidor")
 def then_imports_hub_mvp_into_consumer(context) -> None:
     milestone = context.project / "specs/milestones/M01.md"
     assert milestone.is_file()
     assert "MVP.md" in milestone.read_text(encoding="utf-8")
-    assert list((context.project / "specs/inbox").glob("*.md"))
+    assert not (context.project / "specs/inbox").exists()

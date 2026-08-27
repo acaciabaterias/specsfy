@@ -65,15 +65,17 @@ input → specs/inbox/ → specs/backlog/
 refinamento dialogado. Ambas mantêm proveniência, mas somente `spec.md` governa
 o comportamento.
 
-Na descoberta de MVP, `specsfy-mvp-milestone-interviewer` preserva uma sessão
-em várias Inboxes. Ele procura `MVP.md` e `BRAND.md` na raiz do consumidor. Se
-o consumidor for um submódulo Git e os arquivos locais estiverem ausentes,
-consulta a raiz do superprojeto uma única vez. `MVP.md` cria a milestone
-`M01` e uma Inbox por tema. A skill orquestradora classifica quais temas
-representam entregas de software, cria backlog somente para esses temas,
-aplica defaults sustentados por rótulo explícito ou formulação inequívoca,
-preserva a base no backlog e na Inbox, entrevista cada backlog, gera uma spec
-Draft por backlog e chama descoberta de dados quando necessário.
+Na descoberta de MVP, `specsfy-mvp-milestone-interviewer` preserva `MVP.md`
+como fonte de negócio e produto. Ele procura `MVP.md` e `BRAND.md` na raiz do
+consumidor. Se o consumidor for um submódulo Git e os arquivos locais estiverem
+ausentes, consulta a raiz do superprojeto uma única vez. `MVP.md` cria a
+milestone `M01`, que registra proveniência e resultado da triagem sem copiar o
+texto de origem. A skill classifica as entregas de software, cria backlog e
+spec Draft somente para esses requisitos e não cria Inboxes durante a
+importação. Visão, público, princípios e contexto sem comportamento executável
+permanecem exclusivamente em `MVP.md`. Os backlogs recebem defaults sustentados
+por rótulo explícito ou formulação inequívoca, preservam o trecho técnico de
+origem e chamam descoberta de dados quando necessário.
 `BRAND.md` orienta a conversa quando presente. Campos sem resposta confiável
 ficam marcados como `Pendente`; a importação não implementa código nem passa
 gates.

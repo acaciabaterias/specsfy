@@ -118,7 +118,7 @@ input → inbox → backlog → spec → validate → tasks → TDD/BDD → impl
    `specs/inbox/`, sem fazer perguntas.
 2. Use `specsfy-02-backlog` para buscar material relacionado, registrar o item
    e aprofundar decisões por perguntas adaptativas. Quando a origem for um
-   `MVP.md`, o refinamento lê a milestone, a Inbox e as evidências importadas,
+   `MVP.md`, o refinamento lê a milestone, o backlog e as evidências importadas,
    registra automaticamente as respostas já declaradas e pergunta somente por
    lacuna, ambiguidade ou contradição aplicável.
 3. Use `specsfy-03-specify` para criar e consolidar a spec normativa inicial.

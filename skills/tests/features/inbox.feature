@@ -22,7 +22,7 @@ Feature: Captura imediata na Inbox
     Given um projeto consumidor com MVP.md e BRAND.md na raiz
     When o entrevistador de MVP inicia a descoberta
     Then ele importa MVP.md como a Milestone 1.0 sem sobrescrever uma existente
-    And registra cada tema em uma série de Inboxes e cria um backlog candidato por Inbox
+    And cria backlog e spec Draft apenas para cada requisito de desenvolvimento
     And entrevista cada backlog antes de qualquer promoção
 
   Scenario: Usar o contexto do Hub para um projeto em submódulo
@@ -30,4 +30,4 @@ Feature: Captura imediata na Inbox
     And MVP.md e BRAND.md estão somente na raiz do Hub
     When o entrevistador de MVP inicia a descoberta
     Then ele consulta os arquivos da raiz do Hub
-    And importa o MVP como a Milestone 1.0 e registra Inboxes no projeto consumidor
+    And importa o MVP como a Milestone 1.0 sem criar Inboxes no projeto consumidor

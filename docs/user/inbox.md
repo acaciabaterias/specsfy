@@ -62,15 +62,14 @@ use `$specsfy-02-backlog` com o caminho do arquivo.
 
 ## Sessões de descoberta do MVP
 
-`$specsfy-mvp-milestone-interviewer` pode registrar uma conversa inteira em
-várias Inboxes. As capturas preservam a mesma sessão e o turno da conversa,
-para que o backlog trate o conjunto mais tarde sem confundir uma resposta com
-uma conclusão. Quando houver `MVP.md` na raiz, a skill cria `M01`, transforma
-cada tema em Inbox e cria um backlog candidato para cada captura. O backlog
-reaproveita as respostas declaradas no trecho do MVP e pergunta somente o que
-permanece ausente, ambíguo ou contraditório antes de uma promoção. `BRAND.md`,
-quando existir, orienta
-as perguntas, mas não é copiado para as capturas.
+`$specsfy-mvp-milestone-interviewer` pode usar Inboxes para capturar respostas
+novas durante a conversa. Isso não se aplica à importação de `MVP.md`: nela a
+skill cria `M01` e seleciona somente requisitos de desenvolvimento para gerar
+backlog e spec Draft diretamente. Os temas de negócio e produto permanecem no
+`MVP.md`, sem Inbox. O backlog reaproveita as respostas declaradas no trecho
+técnico e pergunta somente o que permanece ausente, ambíguo ou contraditório
+antes de uma promoção. `BRAND.md`, quando existir, orienta as perguntas, mas
+não é copiado para as capturas.
 Se o projeto estiver em um submódulo Git, a skill procura os dois arquivos na
 raiz do Hub somente quando eles não existirem no projeto.
 

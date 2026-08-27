@@ -4,6 +4,21 @@ Todas as mudanças relevantes do Specsfy CLI são registradas neste arquivo.
 
 ## [Unreleased]
 
+## [0.10.4] - 2026-08-27
+
+## Corrigido
+
+- Importa do `MVP.md` somente requisitos de desenvolvimento, criando backlogs
+  e specs Draft sem gerar Inboxes automáticas.
+- Mantém contexto de negócio, público, métricas e posicionamento no arquivo de
+  origem, enquanto `M01` registra apenas a proveniência e a triagem.
+
+## Validação
+
+- `python3 -B -m unittest discover -s tests -p 'test_*.py'`
+- `uv run --quiet --with behave behave tests/features --no-capture`
+- `make verify-ebook`
+
 ## [0.10.3] - 2026-08-27
 
 ### Adicionado

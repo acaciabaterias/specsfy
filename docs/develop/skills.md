@@ -114,10 +114,11 @@ impede que uma anotação simples se transforme em refinamento implícito.
 `specsfy-mvp-milestone-interviewer` combina conversa e captura: ele lê
 `MVP.md` e `BRAND.md` na raiz do consumidor e, quando o consumidor é um
 submódulo Git sem os arquivos locais, na raiz do superprojeto. O arquivo local
-tem prioridade. Ele importa `MVP.md` como `M01`, cria uma Inbox para cada tema,
-classifica o que representa desenvolvimento e só então cria backlog para esses
-itens. Visão, público, princípios e contexto sem comportamento executável não
-viram backlog. Antes de perguntar, o backlog lê o trecho importado, aplica
+tem prioridade. Ele importa `MVP.md` como `M01`, classifica o que representa
+desenvolvimento e cria backlog apenas para esses itens, sem criar Inboxes.
+Visão, público, princípios e contexto sem comportamento executável permanecem
+somente no `MVP.md` e não viram artefato do Specsfy. Antes de perguntar, o
+backlog lê o trecho importado, aplica
 respostas já declaradas e defaults inequívocos e cobre somente lacunas,
 ambiguidades ou contradições. Ao terminar cada backlog, a skill cria sua spec
 Draft, marca o que não foi respondido como `Pendente` e não implementa código
